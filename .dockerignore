@@ -1,0 +1,131 @@
+# flyctl launch added from .gitignore
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+**/dist
+**/tmp
+out-tsc
+
+# dependencies
+**/node_modules
+
+# IDEs and editors
+.idea
+**/.project
+**/.classpath
+**/.c9
+**/*.launch
+**/.settings
+**/*.sublime-workspace
+
+# IDE - VSCode
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/tasks.json
+!**/.vscode/launch.json
+!**/.vscode/extensions.json
+
+# misc
+.sass-cache
+connect.lock
+coverage
+libpeerconnection.log
+**/npm-debug.log
+**/yarn-error.log
+**/testem.log
+typings
+
+# System Files
+**/.DS_Store
+**/Thumbs.db
+
+# Env
+**/.env
+**/.env.development.local
+**/.env.production.local
+
+# Generated
+**/prisma/generated
+
+# Next.js
+**/.next
+
+# flyctl launch added from .husky/_/.gitignore
+.husky/_/**/*
+
+# flyctl launch added from node_modules/minipass-sized/.gitignore
+# ignore most things, include some others
+node_modules/minipass-sized/*
+node_modules/minipass-sized/.*
+
+!node_modules/minipass-sized/**/bin
+!node_modules/minipass-sized/**/lib
+!node_modules/minipass-sized/**/docs
+!node_modules/minipass-sized/**/package.json
+!node_modules/minipass-sized/**/package-lock.json
+!node_modules/minipass-sized/**/README.md
+!node_modules/minipass-sized/**/CONTRIBUTING.md
+!node_modules/minipass-sized/**/LICENSE
+!node_modules/minipass-sized/**/CHANGELOG.md
+!node_modules/minipass-sized/**/example
+!node_modules/minipass-sized/**/scripts
+!node_modules/minipass-sized/**/tap-snapshots
+!node_modules/minipass-sized/**/test
+!node_modules/minipass-sized/**/.travis.yml
+!node_modules/minipass-sized/**/.gitignore
+!node_modules/minipass-sized/**/.gitattributes
+!node_modules/minipass-sized/**/coverage-map.js
+!node_modules/minipass-sized/**/index.js
+
+# flyctl launch added from node_modules/npm-normalize-package-bin/.gitignore
+# ignore most things, include some others
+node_modules/npm-normalize-package-bin/*
+node_modules/npm-normalize-package-bin/.*
+
+!node_modules/npm-normalize-package-bin/**/bin
+!node_modules/npm-normalize-package-bin/**/lib
+!node_modules/npm-normalize-package-bin/**/docs
+!node_modules/npm-normalize-package-bin/**/package.json
+!node_modules/npm-normalize-package-bin/**/package-lock.json
+!node_modules/npm-normalize-package-bin/**/README.md
+!node_modules/npm-normalize-package-bin/**/CONTRIBUTING.md
+!node_modules/npm-normalize-package-bin/**/LICENSE
+!node_modules/npm-normalize-package-bin/**/CHANGELOG.md
+!node_modules/npm-normalize-package-bin/**/example
+!node_modules/npm-normalize-package-bin/**/scripts
+!node_modules/npm-normalize-package-bin/**/tap-snapshots
+!node_modules/npm-normalize-package-bin/**/test
+!node_modules/npm-normalize-package-bin/**/.github
+!node_modules/npm-normalize-package-bin/**/.travis.yml
+!node_modules/npm-normalize-package-bin/**/.gitignore
+!node_modules/npm-normalize-package-bin/**/.gitattributes
+!node_modules/npm-normalize-package-bin/**/coverage-map.js
+!node_modules/npm-normalize-package-bin/**/map.js
+!node_modules/npm-normalize-package-bin/**/index.js
+
+# flyctl launch added from node_modules/promise-all-reject-late/.gitignore
+# ignore most things, include some others
+node_modules/promise-all-reject-late/*
+node_modules/promise-all-reject-late/.*
+
+!node_modules/promise-all-reject-late/**/bin
+!node_modules/promise-all-reject-late/**/lib
+!node_modules/promise-all-reject-late/**/docs
+!node_modules/promise-all-reject-late/**/package.json
+!node_modules/promise-all-reject-late/**/package-lock.json
+!node_modules/promise-all-reject-late/**/README.md
+!node_modules/promise-all-reject-late/**/CONTRIBUTING.md
+!node_modules/promise-all-reject-late/**/LICENSE
+!node_modules/promise-all-reject-late/**/CHANGELOG.md
+!node_modules/promise-all-reject-late/**/example
+!node_modules/promise-all-reject-late/**/scripts
+!node_modules/promise-all-reject-late/**/tap-snapshots
+!node_modules/promise-all-reject-late/**/test
+!node_modules/promise-all-reject-late/**/.github
+!node_modules/promise-all-reject-late/**/.travis.yml
+!node_modules/promise-all-reject-late/**/.gitignore
+!node_modules/promise-all-reject-late/**/.gitattributes
+!node_modules/promise-all-reject-late/**/coverage-map.js
+!node_modules/promise-all-reject-late/**/map.js
+!node_modules/promise-all-reject-late/**/index.js
+fly.toml

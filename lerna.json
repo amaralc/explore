@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "packages": [".", "apps/service-mfe", "apps/service-consumer", "apps/service-rest-api", "libs/*"],
+  "version": "independent",
+  "command": {
+    "version": {
+      "message": "chore(release): [skip ci]"
+    }
+  }
+}

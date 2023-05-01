@@ -1,0 +1,3 @@
+table:
+  name: plan_subscriptions
+  schema: public

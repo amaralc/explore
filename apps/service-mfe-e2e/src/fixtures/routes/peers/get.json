@@ -1,0 +1,16 @@
+{
+  "peers": [
+    {
+      "id": "1",
+      "name": "John",
+      "username": "john",
+      "subjects": ["typescript", "rust", "wasm"]
+    },
+    {
+      "id": "2",
+      "name": "Jane",
+      "username": "jane",
+      "subjects": ["python", "machine-learning", "wasm", "rust"]
+    }
+  ]
+}

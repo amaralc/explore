@@ -1,0 +1,9 @@
+{
+  "name": "service-rest-api",
+  "version": "0.2.2",
+  "license": "MIT",
+  "author": {
+    "name": "Calil Amaral",
+    "email": "amaral.calil@gmail.com"
+  }
+}
