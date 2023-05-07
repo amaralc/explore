@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.16](https://github.com/amaralc/peerlab/compare/service-rest-api@0.2.15...service-rest-api@0.2.16) (2023-05-07)
+
+**Note:** Version bump only for package service-rest-api
+
 ## [0.2.15](https://github.com/amaralc/peerlab/compare/service-rest-api@0.2.14...service-rest-api@0.2.15) (2023-05-07)
 
 **Note:** Version bump only for package service-rest-api

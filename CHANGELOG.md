@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.13](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.12...micro-applications-template@0.6.13) (2023-05-07)
+
+### Bug Fixes
+
+- adjust fly url and remove steps ([cd2b32a](https://github.com/amaralc/peerlab/commit/cd2b32ab73be7703f4e33992798c8a68b9a22ac2))
+- discard changes ([3f2007b](https://github.com/amaralc/peerlab/commit/3f2007bf08508fd2fb965532f9851cacf1c8e411))
+
 ## [0.6.12](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.11...micro-applications-template@0.6.12) (2023-05-07)
 
 ### Bug Fixes

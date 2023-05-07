@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.14](https://github.com/amaralc/peerlab/compare/adapters@0.2.13...adapters@0.2.14) (2023-05-07)
+
+**Note:** Version bump only for package adapters
+
 ## [0.2.13](https://github.com/amaralc/peerlab/compare/adapters@0.2.12...adapters@0.2.13) (2023-05-07)
 
 **Note:** Version bump only for package adapters
