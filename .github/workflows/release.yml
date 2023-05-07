@@ -7,33 +7,40 @@
 
 name: Release
 
+# Trigger the workflow when pushing to the bugfix branch
 on:
   push:
     branches:
       - trunk
 
+# Set environment variable to disable Husky
 env:
   HUSKY: 0
 
 jobs:
   trunk:
+    # Run the job on Ubuntu latest version
     runs-on: ubuntu-latest
+
+    # Set the working directory for this job
     defaults:
       run:
         working-directory: ${{ github.workspace }}
+
+    # Define the strategy for this job
     strategy:
       matrix:
         node-version: [18]
         npm-version: [8]
         yarn-version: ["1.22.x"]
         pnpm-version: [7]
+
     steps:
       - name: Checkout [Default Branch]
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
           token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-          # token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
@@ -116,10 +123,10 @@ jobs:
             npm ci
           fi
 
-      # - run: | # npx nx format:check
-      #     npx nx affected --target lint --parallel 3
-      #     npx nx affected --target test --parallel 3 --ci --code-coverage
-      #     # npx nx affected --target build --parallel 3
+      - run: | # npx nx format:check
+          npx nx affected --target lint --parallel 3
+          npx nx affected --target test --parallel 3 --ci --code-coverage
+          # npx nx affected --target build --parallel 3
 
       # - name: Release Libs
       #   if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
@@ -132,10 +139,10 @@ jobs:
       #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       #     yarn publish:libs
 
-      # - name: Set Remote URL
-      #   run: |
-      #     git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
-      #     git remote -v
+      - name: Set Remote URL
+        run: |
+          git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
+          git remote -v
 
       - name: Release Step
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
@@ -143,7 +150,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
         run: |
+          git status
+          git diff
           yarn git:discard:all
+          git status
+          git diff
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
           # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
