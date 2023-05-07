@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.17](https://github.com/amaralc/peerlab/compare/service-rest-api@0.2.16...service-rest-api@0.2.17) (2023-05-07)
+
+### Bug Fixes
+
+- **DIS-522:** configure terraform state storage and retrieval ([#4](https://github.com/amaralc/peerlab/issues/4)) ([d4a54a9](https://github.com/amaralc/peerlab/commit/d4a54a9e46f7c538c73bf6ad161c60fb040ce1d7))
+
 ## [0.2.16](https://github.com/amaralc/peerlab/compare/service-rest-api@0.2.15...service-rest-api@0.2.16) (2023-05-07)
 
 **Note:** Version bump only for package service-rest-api

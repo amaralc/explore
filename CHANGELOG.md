@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.15](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.14...micro-applications-template@0.6.15) (2023-05-07)
+
+### Bug Fixes
+
+- **DIS-522:** configure terraform state storage and retrieval ([#4](https://github.com/amaralc/peerlab/issues/4)) ([d4a54a9](https://github.com/amaralc/peerlab/commit/d4a54a9e46f7c538c73bf6ad161c60fb040ce1d7))
+
 ## [0.6.14](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.13...micro-applications-template@0.6.14) (2023-05-07)
 
 ### Bug Fixes
