@@ -191,13 +191,17 @@ jobs:
       - name: Terraform plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}"
+          terraform plan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
         working-directory: apps/service-iac
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       - name: Terraform apply
         run: |
           echo "Running terraform apply..."
-          terraform apply -auto-approve -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}"
+          terraform apply -auto-approve -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
         working-directory: apps/service-iac
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
