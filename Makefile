@@ -127,8 +127,8 @@ terraform-apply:
 # terraform-apply-auto-approve:
 # 	cd apps/service-iac && terraform apply -auto-approve
 
-terraform-apply-auto-approve:
-	cd apps/service-iac && terraform plan
+terraform-plan-out:
+	cd apps/service-iac && terraform plan -out=tfplan
 
 terraform-destroy:
 	cd apps/service-iac && terraform destroy

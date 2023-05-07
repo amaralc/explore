@@ -159,15 +159,23 @@ jobs:
           mkdir -p ~/.fly
           echo "api_key = \"$FLY_API_TOKEN\"" > ~/.fly/config.toml
 
-      - name: Terraform Init and Apply
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           TF_VAR_database_url: ${{ secrets.TF_VAR_database_url }}
           TF_VAR_direct_url: ${{ secrets.TF_VAR_direct_url }}
-        run: |
-          # Configure Fly CLI with the API token
-          echo "api_key = \"$FLY_API_TOKEN\"" > ~/.fly/config.toml
 
-          # Run the make commands for Terraform init and apply
-          make terraform-init
-          make terraform-apply-auto-approve
+      - name: Terraform Apply
+        if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+        run: terraform apply -auto-approve tfplan
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          TF_VAR_database_url: ${{ secrets.TF_VAR_database_url }}
+          TF_VAR_direct_url: ${{ secrets.TF_VAR_direct_url }}
