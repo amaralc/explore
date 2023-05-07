@@ -9,6 +9,7 @@
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "yarn test:unit",
+    "git:discard:all": "git checkout -- .",
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "consumer-with-api:serve": "make consumer-with-api-serve",
