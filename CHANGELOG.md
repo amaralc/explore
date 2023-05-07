@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.0...micro-applications-template@0.6.1) (2023-05-07)
+
+### Bug Fixes
+
+- configure fly cli ([b62902e](https://github.com/amaralc/peerlab/commit/b62902e0ae6c5bb30f9b08aedeac7318044bf780))
+
 ## 0.6.0 (2023-05-07)
 
 ### Features
