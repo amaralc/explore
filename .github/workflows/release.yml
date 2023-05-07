@@ -131,6 +131,11 @@ jobs:
       #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       #     yarn publish:libs
 
+      - name: Set Remote URL
+        run: |
+          git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
+          git remote -v
+
       - name: Release
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
         env:
@@ -140,8 +145,7 @@ jobs:
           yarn git:discard:all
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
-          git remote set-url origin https://{{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git
-          # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
+          # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
           yarn release
 
       - name: Setup Terraform
