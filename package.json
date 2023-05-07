@@ -10,7 +10,7 @@
     "prepare": "husky install",
     "pre-commit": "yarn test:unit",
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
-    "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
+    "release": "git restore --staged package.json && git checkout package.json && lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "consumer-with-api:serve": "make consumer-with-api-serve",
     "test:unit": "yarn nx run-many --target=test --all=true",
     "env:setup": "cp .env.example .env",
