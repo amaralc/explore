@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.0](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.16...micro-applications-template@0.7.0) (2023-05-07)
+
+### Features
+
+- use providers in image ([f1cf49e](https://github.com/amaralc/peerlab/commit/f1cf49e8fa77e885167d2df2ba92559acd9c2952))
+
+### Reverts
+
+- Revert "fix(DIS-522): configure terraform state storage and retrieval (#4)" ([80fb322](https://github.com/amaralc/peerlab/commit/80fb322fea95157dc49a738f9b084115ea75ec07)), closes [#4](https://github.com/amaralc/peerlab/issues/4)
+- Revert "fix: remove fixed env vars in image" ([4b6c1d5](https://github.com/amaralc/peerlab/commit/4b6c1d52f18eeb043917cca41131a12316667424))
+
 ## [0.6.16](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.15...micro-applications-template@0.6.16) (2023-05-07)
 
 ### Bug Fixes
