@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.16](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.15...micro-applications-template@0.6.16) (2023-05-07)
+
+### Bug Fixes
+
+- remove fixed env vars in image ([66bb027](https://github.com/amaralc/peerlab/commit/66bb0277c542268d17173241de27433874bac82d))
+
 ## [0.6.15](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.14...micro-applications-template@0.6.15) (2023-05-07)
 
 ### Bug Fixes
