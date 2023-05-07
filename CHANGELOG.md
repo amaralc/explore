@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.6](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.5...micro-applications-template@0.6.6) (2023-05-07)
+
+### Bug Fixes
+
+- move to iac app ([e549fc2](https://github.com/amaralc/peerlab/commit/e549fc2a598e121de38d3ef5a6a46e9fae3e8701))
+
 ## [0.6.5](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.4...micro-applications-template@0.6.5) (2023-05-07)
 
 ### Bug Fixes
