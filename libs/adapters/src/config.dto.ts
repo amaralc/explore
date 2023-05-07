@@ -12,7 +12,7 @@ class ConfigDto {
   // Events
   nestJsMicroservicesOptions?: NestApplicationContextOptions & MicroserviceOptions;
   eventsConsumerPort = 3000; // Specify process to avoid conflicts with rest-api port (nestjs default port is 3000)
-  eventsProvider = (process.env['EVENTS_PROVIDER'] as IEventsProvider) || 'in-memory';
+  eventsProvider = (process.env['EVENTS_PROVIDER'] as IEventsProvider) || 'kafka';
   eventsTransporter = (process.env['EVENTS_TRANSPORTER'] as ITransporter) || 'simple-kafka-transporter';
   kafkaBroker = process.env['KAFKA_BROKER'] || 'localhost:9092';
   kafkaClientId = process.env['KAFKA_CLIENT_ID'] || 'micro-applications-template-client-id';
