@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.11](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.10...micro-applications-template@0.6.11) (2023-05-07)
+
+### Bug Fixes
+
+- add variable ([b97354d](https://github.com/amaralc/peerlab/commit/b97354dd4d0deee33b10b4e01ffcf7dda5cd5e73))
+
 ## [0.6.10](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.9...micro-applications-template@0.6.10) (2023-05-07)
 
 ### Bug Fixes
