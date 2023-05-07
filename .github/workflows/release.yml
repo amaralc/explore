@@ -29,10 +29,11 @@ jobs:
         pnpm-version: [7]
     steps:
       - name: Checkout [Default Branch]
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          # token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
@@ -135,11 +136,6 @@ jobs:
         run: |
           git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
           git remote -v
-
-      # Checkout that works with "push" and "pull_request" trigger event
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
 
       - name: Release Step
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
