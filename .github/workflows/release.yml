@@ -144,11 +144,13 @@ jobs:
 
       - name: Release Step
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-        with:
-          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
         run: |
           yarn git:discard:all
           git config --global user.name "${{ github.actor }}"
