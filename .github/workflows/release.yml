@@ -136,11 +136,19 @@ jobs:
           git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
           git remote -v
 
-      - name: Release
+      # Checkout that works with "push" and "pull_request" trigger event
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+
+      - name: Release Step
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+        with:
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
         run: |
           yarn git:discard:all
           git config --global user.name "${{ github.actor }}"
