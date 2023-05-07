@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.10](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.9...micro-applications-template@0.6.10) (2023-05-07)
+
+### Bug Fixes
+
+- add terraform variables ([eb98774](https://github.com/amaralc/peerlab/commit/eb987746fd86ea0299507d6baf6599e6a68338ce))
+
 ## [0.6.9](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.8...micro-applications-template@0.6.9) (2023-05-07)
 
 ### Bug Fixes
