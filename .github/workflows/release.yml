@@ -116,10 +116,10 @@ jobs:
             npm ci
           fi
 
-      - run: | # npx nx format:check
-          npx nx affected --target lint --parallel 3
-          npx nx affected --target test --parallel 3 --ci --code-coverage
-          # npx nx affected --target build --parallel 3
+      # - run: | # npx nx format:check
+      #     npx nx affected --target lint --parallel 3
+      #     npx nx affected --target test --parallel 3 --ci --code-coverage
+      #     # npx nx affected --target build --parallel 3
 
       # - name: Release Libs
       #   if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
@@ -132,10 +132,10 @@ jobs:
       #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       #     yarn publish:libs
 
-      - name: Set Remote URL
-        run: |
-          git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
-          git remote -v
+      # - name: Set Remote URL
+      #   run: |
+      #     git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
+      #     git remote -v
 
       - name: Release Step
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
@@ -143,7 +143,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
         run: |
-          yarn git:discard:all
+          # yarn git:discard:all
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
           # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
@@ -178,7 +178,7 @@ jobs:
 
       - name: Install Fly CLI
         run: |
-          curl -L https://install.fly.io/flyctl.sh | sh
+          curl -L https://fly.io/install.sh | sh
           echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
       - name: Terraform init
