@@ -166,6 +166,7 @@ jobs:
           TF_VAR_database_url: ${{ secrets.TF_VAR_database_url }}
           TF_VAR_direct_url: ${{ secrets.TF_VAR_direct_url }}
         run: |
+          cd apps/service-iac
           terraform init
           terraform validate
           terraform plan -out=tfplan
