@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.6.0 (2023-05-07)
+
+### Features
+
+- **DIS-512:** add deploy pipeline to github actions ([27f19f4](https://github.com/amaralc/peerlab/commit/27f19f4f2462cf00895742fc7dae04aeccc0cfed))
+
+### Bug Fixes
+
+- add global ([2508f85](https://github.com/amaralc/peerlab/commit/2508f85ce1e6e796c55c02109962fc313ffed6d2))
+- add token ([60be0f9](https://github.com/amaralc/peerlab/commit/60be0f9857154ba8473a9cd5ed9a8f8ee39ebcd9))
+- add token using with ([77d69c0](https://github.com/amaralc/peerlab/commit/77d69c0bf5f995dc4e660dc03d4716a001111774))
+- add uses ([889501d](https://github.com/amaralc/peerlab/commit/889501d1ccd272c99dd89b3ea35dc4b666ad830b))
+- adjust existing step ([2232788](https://github.com/amaralc/peerlab/commit/2232788e7266e8fed520727216119d1d904bce52))
+- adjust token ([91d0f27](https://github.com/amaralc/peerlab/commit/91d0f2715637fa4ef37fcd6aaf9a1f08f725a6f6))
+- adjust with order ([ff4df76](https://github.com/amaralc/peerlab/commit/ff4df76951d25e78c12ed11788f40f193fd33e1e))
+- debug release step: ([8262e77](https://github.com/amaralc/peerlab/commit/8262e771a8ec8e32cb2ed303129b979a847efb6e))
+- **DIS-512:** add token to release step ([fca2985](https://github.com/amaralc/peerlab/commit/fca298589cc1e9f7f345a2bec81455f52d2aa379))
+- **DIS-512:** adjust branch name in github action ([3e8a0e7](https://github.com/amaralc/peerlab/commit/3e8a0e7f550d2f29bfdedb9afd0cef02b5111c8f))
+- **DIS-512:** adjust permissions ([d2559f7](https://github.com/amaralc/peerlab/commit/d2559f78324dae2cb645b39fdda7e1c828e4eba9))
+- **DIS-512:** adjust pipeline ([6455cc6](https://github.com/amaralc/peerlab/commit/6455cc65778022a83e9cd463dc3f11ef34b648f8))
+- **DIS-512:** adjust token and address ([bff9ebe](https://github.com/amaralc/peerlab/commit/bff9ebe17693d835314dbf6a0ef306b44dc4c18f))
+- **DIS-512:** change release command in pipeline ([89596d9](https://github.com/amaralc/peerlab/commit/89596d908094d91c61bdedb77290680b4c581cc7))
+- **DIS-512:** discard package json changes prior to lerna command ([b5c6ec6](https://github.com/amaralc/peerlab/commit/b5c6ec665672a3d63d52182a0bb158c35f447661))
+- separate steps and adjust set-url command ([14887e0](https://github.com/amaralc/peerlab/commit/14887e0d99505127fbb4556917c0eebf48448410))
+- use personal token ([ac067ff](https://github.com/amaralc/peerlab/commit/ac067ff50d2774f814b9b061d12589deb0a45d70))
+- use token ([08e88ac](https://github.com/amaralc/peerlab/commit/08e88ac8586752c1db75a696ff2d7856f2940f92))
+- use token ([38793ab](https://github.com/amaralc/peerlab/commit/38793ab267613b8dcfec06bdbb04c0aeff068a11))
+
 ## [0.5.1](https://github.com/amaralc/micro-applications-template/compare/micro-applications-template@0.5.0...micro-applications-template@0.5.1) (2023-05-01)
 
 ### Bug Fixes

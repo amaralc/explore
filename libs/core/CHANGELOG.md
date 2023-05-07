@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.2 (2023-05-07)
+
+**Note:** Version bump only for package core
+
 ## [0.1.1](https://github.com/amaralc/micro-applications-template/compare/core@0.1.0...core@0.1.1) (2023-04-29)
 
 ### Bug Fixes
