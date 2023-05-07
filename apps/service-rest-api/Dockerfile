@@ -70,17 +70,6 @@ FROM base
 
 ENV PORT="8080"
 ENV NODE_ENV="production"
-## Database provider ("mongodb-mongoose-orm" | "postgresql-prisma-orm" | "postgresql-type-orm" |  "in-memory")
-ENV DATABASE_PROVIDER=postgresql-prisma-orm
-
-## Events provider ('kafka' | 'in-memory')
-ENV EVENTS_PROVIDER=in-memory
-
-## Transporter ('nestjs-default-kafka-transporter' | 'nestjs-custom-kafka-transporter' | 'simple-kafka-transporter')
-ENV EVENTS_TRANSPORTER=nestjs-default-kafka-transporter
-
-## Auth
-ENV API_KEY=my-secret-api-key
 
 WORKDIR /app/
 COPY package.json yarn.lock ./

@@ -1,10 +1,3 @@
-terraform {
-  backend "gcs" {
-    bucket = "peerlab-terraform-state"
-    prefix = "terraform/state"
-  }
-}
-
 # Configure the Fly provider
 provider "fly" {
   useinternaltunnel    = true
@@ -97,9 +90,6 @@ resource "fly_machine" "micro_app_machine_01" {
   region = each.value
   name   = "${local.app_name}-${each.value}"
   image  = "registry.fly.io/${local.app_name}:${local.image_tag}"
-  # env = {
-  #   DATABASE_PROVIDER = "value"
-  # }
   services = [
     {
       ports = [
