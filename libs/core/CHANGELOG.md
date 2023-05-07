@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.9](https://github.com/amaralc/peerlab/compare/core@0.1.8...core@0.1.9) (2023-05-07)
+
+**Note:** Version bump only for package core
+
 ## [0.1.8](https://github.com/amaralc/peerlab/compare/core@0.1.7...core@0.1.8) (2023-05-07)
 
 **Note:** Version bump only for package core
