@@ -138,7 +138,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "${{ github.actor }}"
-          git config user.email "amaral.calil@gmail.com"
+          git config user.email "${{ github.actor}}@users.noreply.github.com"
           # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
           yarn release
 
