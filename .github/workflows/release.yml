@@ -180,25 +180,25 @@ jobs:
         run: |
           echo "Running terraform init..."
           terraform init
-        working-directory: path/to/your/terraform/directory
+        working-directory: apps/service-iac
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: path/to/your/terraform/directory
+        working-directory: apps/service-iac
 
       - name: Terraform plan
         run: |
           echo "Running terraform plan..."
           terraform plan
-        working-directory: path/to/your/terraform/directory
+        working-directory: apps/service-iac
 
       - name: Terraform apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve
-        working-directory: path/to/your/terraform/directory
+        working-directory: apps/service-iac
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
