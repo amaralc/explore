@@ -10,13 +10,13 @@ name: Release
 on:
   push:
     branches:
-      - production
+      - trunk
 
 env:
   HUSKY: 0
 
 jobs:
-  production:
+  trunk:
     runs-on: ubuntu-latest
     defaults:
       run:
