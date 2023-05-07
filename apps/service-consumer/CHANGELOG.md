@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.6](https://github.com/amaralc/peerlab/compare/service-consumer@0.1.5...service-consumer@0.1.6) (2023-05-07)
+
+**Note:** Version bump only for package service-consumer
+
 ## [0.1.5](https://github.com/amaralc/peerlab/compare/service-consumer@0.1.4...service-consumer@0.1.5) (2023-05-07)
 
 **Note:** Version bump only for package service-consumer
