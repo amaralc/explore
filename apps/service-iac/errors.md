@@ -17,4 +17,8 @@ Error: local-exec provisioner error
 │ `fly deploy` will update machines with the metadata based on your fly.toml app configuration
 ```
 
-test.
+- (fly)
+
+```
+Error: found 2 machines that are unmanaged. `fly deploy` only updates machines with fly_platform_version=v2 in their metadata. Use `fly machine list` to list machines and `fly machine update --metadata fly_platform_version=v2 <machine id>` to update individual machines with the metadata. Once done, `fly deploy` will update machines with the metadata based on your fly.toml app configuration
+```

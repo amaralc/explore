@@ -88,6 +88,21 @@ resource "null_resource" "build_and_push_docker_image" {
   }
 }
 
+# Update machine metadata to use fly platform v2
+resource "null_resource" "update_unmanaged_machines" {
+  triggers = {
+    image_tag = local.image_tag
+  }
+
+  provisioner "local-exec" {
+    command = <<EOF
+      for machine_id in $(fly machine list --json | jq -r '.[] | select(.metadata.fly_platform_version != "v2") | .id'); do
+        fly machine update --metadata fly_platform_version=v2 $machine_id
+      done
+    EOF
+  }
+}
+
 # Create and run machine with that image
 resource "fly_machine" "micro_app_machine_01" {
   // Regions where the app will be deployed
@@ -122,5 +137,5 @@ resource "fly_machine" "micro_app_machine_01" {
   ]
   cpus       = 1
   memorymb   = 256
-  depends_on = [fly_app.micro_app_rest_api, null_resource.build_and_push_docker_image]
+  depends_on = [fly_app.micro_app_rest_api, null_resource.build_and_push_docker_image, null_resource.update_unmanaged_machines]
 }
