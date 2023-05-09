@@ -47,6 +47,8 @@ resource "fly_app" "micro_app_rest_api" {
 resource "null_resource" "set_fly_secrets" {
   provisioner "local-exec" {
     command = <<EOF
+      echo "Commit hash:"
+      echo ${local.commit_hash_file}
       echo "Settings fly secrets..."
       cd ../service-rest-api/
       fly secrets set DATABASE_URL=${var.database_url}
