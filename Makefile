@@ -124,8 +124,8 @@ terraform-plan:
 terraform-apply:
 	cd apps/service-iac && terraform apply
 
-# terraform-apply-auto-approve:
-# 	cd apps/service-iac && terraform apply -auto-approve
+terraform-apply-auto-approve:
+	cd apps/service-iac && terraform apply -auto-approve
 
 terraform-plan-out:
 	cd apps/service-iac && terraform plan -out=tfplan

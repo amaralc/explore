@@ -1,4 +1,4 @@
-POST https://crimson-meadow-60.fly.dev/peers HTTP/1.1
+POST https://micro-applications-template-rest-api.fly.dev/peers HTTP/1.1
 content-type: application/json
 Authorization: my-secret-api-key
 

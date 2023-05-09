@@ -139,62 +139,66 @@ jobs:
       #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
       #     yarn publish:libs
 
-      - name: Set Remote URL
-        run: |
-          git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
-          git remote -v
+      # - name: Set Remote URL
+      #   run: |
+      #     git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
+      #     git remote -v
 
-      - name: Release Step
-        if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-        run: |
-          git status
-          git diff
-          yarn git:discard:all
-          git status
-          git diff
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor}}@users.noreply.github.com"
-          # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
-          yarn release
+      # - name: Release Step
+      #   if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+      #     NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+      #   run: |
+      #     git status
+      #     git diff
+      #     yarn git:discard:all
+      #     git status
+      #     git diff
+      #     git config --global user.name "${{ github.actor }}"
+      #     git config --global user.email "${{ github.actor}}@users.noreply.github.com"
+      #     # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
+      #     yarn release
 
       - name: Configure Fly CLI
         run: |
           mkdir -p ~/.fly
           echo "api_key = \"$FLY_API_TOKEN\"" > ~/.fly/config.toml
 
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v1
-      #   with:
-      #     terraform_version: 1.3.9 # Update this to the desired Terraform version
+      - name: Install Fly CLI
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
-      # - name: Terraform Apply
-      #   if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
-      #   env:
-      #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      #     TF_VAR_database_url: ${{ secrets.TF_VAR_database_url }}
-      #     TF_VAR_direct_url: ${{ secrets.TF_VAR_direct_url }}
-      #   run: |
-      #     cd apps/service-iac
-      #     terraform init
-      #     terraform validate
-      #     terraform plan -out=tfplan
+      - name: Install jq
+        run: sudo apt-get install jq
+
+      - name: Save GCP credentials to file
+        # Use single quotes to ensure double quotes inside the file are considered as literals
+        run: |
+          echo '${{ secrets.GCP_STORAGE_SERVICE_ACCOUNT_KEYS }}' > apps/service-iac/credentials.json
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          # https://github.com/google-github-actions/setup-gcloud
+          # https://stackoverflow.com/questions/74388673/cant-authenticate-google-cloud-with-service-key-on-github-actions-unexpected
+          # credentials_json: ${{ secrets.GCP_STORAGE_SERVICE_ACCOUNT_KEYS }}
+          credentials_json: ${{ secrets.GCP_STORAGE_SERVICE_ACCOUNT_KEYS }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.3.9
 
-      - name: Install Fly CLI
-        run: |
-          curl -L https://fly.io/install.sh | sh
-          echo "$HOME/.fly/bin" >> $GITHUB_PATH
-
       - name: Terraform init
         run: |
           echo "Running terraform init..."
+          echo ""
           terraform init
         working-directory: apps/service-iac
 
@@ -204,20 +208,20 @@ jobs:
           terraform validate
         working-directory: apps/service-iac
 
-      - name: Terraform plan
+      - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
+          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
         working-directory: apps/service-iac
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
-      - name: Terraform apply
+      - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
-          terraform apply -auto-approve -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
+          terraform apply -auto-approve tfplan
         working-directory: apps/service-iac
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

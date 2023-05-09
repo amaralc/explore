@@ -32,6 +32,11 @@ export class PeersRestController {
     return { peers };
   }
 
+  @Get('/mock')
+  async getMock() {
+    return { peers: [{ id: 'mock-peer', name: 'mock-peer', url: 'mock-peer', isMock: true }] };
+  }
+
   @Delete()
   async deleteAll() {
     // TODO: Require highest level of authorization
