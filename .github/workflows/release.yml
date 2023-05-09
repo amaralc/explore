@@ -208,20 +208,20 @@ jobs:
           terraform validate
         working-directory: apps/service-iac
 
-      # - name: Terraform Plan
-      #   run: |
-      #     echo "Running terraform plan..."
-      #     terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
-      #   working-directory: apps/service-iac
-      #   env:
-      #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      #     DIRECT_URL: ${{ secrets.DIRECT_URL }}
+      - name: Terraform Plan
+        run: |
+          echo "Running terraform plan..."
+          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "fly_api_token=${{ secrets.FLY_API_TOKEN }}"
+        working-directory: apps/service-iac
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
-          terraform apply -auto-approve
+          terraform apply -auto-approve tfplan
         working-directory: apps/service-iac
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
