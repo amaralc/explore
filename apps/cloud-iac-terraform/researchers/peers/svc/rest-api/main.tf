@@ -155,7 +155,7 @@ resource "google_cloudbuild_trigger" "apps_researchers_peers" {
     # Configuration for triggering on a push to a specific branch
     push {
       # Regex pattern for the branch name to trigger on
-      branch = "^refactor/separate-files$"
+      branch = "^staging$"
     }
   }
 
