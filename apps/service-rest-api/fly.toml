@@ -1,8 +1,0 @@
-app = "micro-applications-template-rest-api"
-primary_region = "gru"
-
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true

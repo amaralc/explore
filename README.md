@@ -23,7 +23,7 @@ The primary use case I had in mind, was manage my books. I often lend books to f
 ## Infrastructure Setup
 
 - (github) Fork this repository;
-- (terminal) Clone repository: `git clone git@github.com:<your-username>/where-is-my-stuff.git`;
+- (terminal) Clone repository: `git clone git@github.com:<your-username>/peerlab.git`;
 - (terminal) Set up persistence layer: `make infra-setup`;
 - (terminal) Verify that all containers are running: `docker ps`;
 - (terminal) You should see 5 containers up and running:
@@ -87,6 +87,8 @@ References:
 # Consumer
 
 - Consume 'plan-subscription-created' topic and add a new user to the database;
+
+# Infrastructure as Code (IaC)
 
 # Lessons Learned
 

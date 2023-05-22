@@ -1,0 +1,9 @@
+{
+  "name": "cloud-iac-terraform",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/researchers/peers/iac",
+  "projectType": "application",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}

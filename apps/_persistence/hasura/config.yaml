@@ -1,6 +1,0 @@
-version: 3
-endpoint: HASURA_GRAPHQL_ENDPOINT
-metadata_directory: metadata
-actions:
-  kind: synchronous
-  handler_webhook_baseurl: HANDLER_WEBHOOK_BASE_URL

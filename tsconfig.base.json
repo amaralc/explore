@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@adapters/*": ["libs/adapters/src/*"],
-      "@core/*": ["libs/core/src/*"]
+      "@peerlab/researchers/peers/adapters/*": ["libs/researchers/peers/adapters/src/*"],
+      "@peerlab/researchers/peers/core/*": ["libs/researchers/peers/core/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

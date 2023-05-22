@@ -1,7 +1,11 @@
 {
   "version": 2,
-  "builds": [{ "src": "apps/service-rest-api/src/main.ts", "use": "@vercel/node" }],
+  "builds": [{ "src": "apps/researchers-peers-svc-rest-api/src/main.ts", "use": "@vercel/node" }],
   "routes": [
-    { "src": "/(.*)", "dest": "apps/service-rest-api/src/main.ts", "methods": ["GET", "POST", "PUT", "DELETE"] }
+    {
+      "src": "/(.*)",
+      "dest": "apps/researchers-peers-svc-rest-api/src/main.ts",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    }
   ]
 }

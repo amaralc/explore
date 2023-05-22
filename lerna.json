@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "packages": [".", "apps/service-mfe", "apps/service-consumer", "apps/service-rest-api", "libs/*"],
+  "packages": ["."],
   "version": "independent",
   "command": {
     "version": {
