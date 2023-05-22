@@ -11,7 +11,7 @@ name: Terraform Apply Staging
 on:
   push:
     branches:
-      - refactor/separate-files
+      - staging
 
 # Set environment variable to disable Husky
 env:
