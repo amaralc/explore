@@ -1,0 +1,109 @@
+# References:
+
+# - https://github.com/guysenpai/nx-workspace-core
+# - https://medium.com/@guysenpai89/nx-monorepo-publish-libraries-to-github-packages-with-github-actions-semantic-release-970883f2786a
+# - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
+# - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
+
+name: Terraform Apply Staging
+
+# Trigger the workflow when pushing to the staging branch and changes are made in specific paths
+on:
+  push:
+    branches:
+      - staging
+    paths:
+      - "apps/researchers/peers/svc/**"
+      - "libs/researchers/peers/**"
+      - "package.json"
+      - "yarn.lock"
+
+env:
+  HUSKY: 0
+  APP_NAME: researchers-peers-svc
+
+jobs:
+  terraform-apply-staging:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout [Default Branch]
+        uses: actions/checkout@v3
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
+
+      - name: Build and push Docker image (latest tag)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./apps/researchers/peers/svc/Dockerfile
+          push: true
+          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
+
+      - name: Build and push Docker image (commit SHA tag)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./apps/researchers/peers/svc/Dockerfile
+          push: true
+          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:${{ github.sha }}
+
+      - name: Save GCP credentials to file
+        run: |
+          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/cloud-iac-terraform/credentials.json
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.3.9
+
+      - name: Terraform init
+        run: |
+          echo "Running terraform init..."
+          echo ""
+          terraform init
+        working-directory: apps/cloud-iac-terraform
+
+      - name: Terraform validate
+        run: |
+          echo "Running terraform validate..."
+          terraform validate
+        working-directory: apps/cloud-iac-terraform
+
+      - name: Terraform Plan
+        run: |
+          echo "Running terraform plan..."
+          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "environment=${{ secrets.GCP_ENVIRONMENT }}"
+        working-directory: apps/cloud-iac-terraform
+        env:
+          GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_REGION: ${{ secrets.GCP_REGION }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+
+      - name: Terraform Apply
+        run: |
+          echo "Running terraform apply..."
+           terraform apply -auto-approve tfplan
+        working-directory: apps/cloud-iac-terraform
+        env:
+          GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_REGION: ${{ secrets.GCP_REGION }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
