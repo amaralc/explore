@@ -5,7 +5,7 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
-name: Terraform Apply Staging
+name: Build and deploy researchers-peers-svc to staging
 
 # Trigger the workflow when pushing to the staging branch and changes are made in specific paths
 on:
