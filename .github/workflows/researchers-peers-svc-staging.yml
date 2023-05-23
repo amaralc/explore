@@ -38,16 +38,6 @@ jobs:
           token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./apps/researchers/peers/svc/Dockerfile
-          push: true
-          tags: |
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:${{ github.sha }}
-
       - name: Save GCP credentials to file
         run: |
           echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/cloud-iac-terraform/credentials.json
@@ -57,6 +47,16 @@ jobs:
         uses: "google-github-actions/auth@v1"
         with:
           credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./apps/researchers/peers/svc/Dockerfile
+          push: true
+          tags: |
+            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
+            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:${{ github.sha }}
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
