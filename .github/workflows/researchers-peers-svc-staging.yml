@@ -7,7 +7,6 @@
 
 name: Build and deploy researchers-peers-svc to staging
 
-# Trigger the workflow when pushing to the staging branch and changes are made in specific paths
 on:
   push:
     branches:
@@ -47,6 +46,11 @@ jobs:
         uses: "google-github-actions/auth@v1"
         with:
           credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
+
+      - name: Configure Docker to use gcloud for authentication
+        run: |
+          echo "Configuring Docker to use gcloud for authentication..."
+          gcloud auth configure-docker
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
@@ -94,7 +98,7 @@ jobs:
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
-           terraform apply -auto-approve tfplan
+          terraform apply -auto-approve tfplan
         working-directory: apps/cloud-iac-terraform
         env:
           GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
