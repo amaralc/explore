@@ -38,21 +38,15 @@ jobs:
           token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
 
-      - name: Build and push Docker image (latest tag)
+      - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./apps/researchers/peers/svc/Dockerfile
           push: true
-          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
-
-      - name: Build and push Docker image (commit SHA tag)
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./apps/researchers/peers/svc/Dockerfile
-          push: true
-          tags: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:${{ github.sha }}
+          tags: |
+            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
+            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Save GCP credentials to file
         run: |
