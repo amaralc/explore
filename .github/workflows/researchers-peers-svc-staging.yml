@@ -17,6 +17,7 @@ on:
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
+      - ".github/workflows/researchers-peers-svc-staging.yml"
 
 env:
   HUSKY: 0
