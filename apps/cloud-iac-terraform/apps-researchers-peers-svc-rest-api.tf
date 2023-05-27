@@ -181,7 +181,7 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
       # The Docker image to use for the service
       containers {
         # The docker image is pulled from GCR using the project ID, app name and the image tag which corresponds to the commit hash
-        image = "gcr.io/${var.project_id}/${local.app_name}:latest"
+        image = "gcr.io/${var.project_id}/${local.app_name}:${var.commit_hash}"
 
         # Set the ENTRYPOINT_PATH environment variable (check the Dockerfile for more details)
         env {

@@ -42,3 +42,8 @@ variable "direct_url" {
   type        = string
   sensitive   = true
 }
+
+variable "commit_hash" {
+  description = "The commit hash of the source code to deploy"
+  type        = string
+}
