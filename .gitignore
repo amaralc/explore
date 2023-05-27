@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# temporary files
+.commit_hash
+.terraform.lock.hcl
+
 # compiled output
 dist
 tmp
