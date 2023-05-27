@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, ForbiddenException, Get, Post, Query } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreatePeerDto } from '@peerlab/researchers/peers/core/domains/peers/services/create-peer.dto';
 import { CreatePeerService } from '@peerlab/researchers/peers/core/domains/peers/services/create-peer.service';
 import { DeleteAllPeersService } from '@peerlab/researchers/peers/core/domains/peers/services/delete-all-peers.service';
@@ -7,7 +8,9 @@ import { PaginationQueryDto } from '@peerlab/researchers/peers/core/shared/dto/p
 import { GlobalAppHttpException } from '@peerlab/researchers/peers/core/shared/errors/global-app-http-exception';
 import { configDto } from '../../../../config.dto';
 import { GetPeersResponseDto } from './get-peers-response.dto';
+import { postMethodDocs } from './swagger';
 
+@ApiTags('Peers')
 @Controller('peers')
 export class PeersRestController {
   constructor(
@@ -17,6 +20,7 @@ export class PeersRestController {
   ) {}
 
   @Post()
+  @ApiOperation(postMethodDocs)
   async create(@Body() createPeerDto: CreatePeerDto) {
     try {
       const peer = await this.createPeerService.execute(createPeerDto);
