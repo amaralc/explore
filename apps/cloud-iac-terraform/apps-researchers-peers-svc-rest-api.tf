@@ -1,8 +1,9 @@
 # Define local variables
 locals {
-  service_folder_path = "apps/researchers/peers/svc"     # The path to the Dockerfile from the root of the repository
-  app_name            = "researchers-peers-svc-rest-api" # The name of the application
-  commit_hash_file    = "${path.module}/.commit_hash"    # The file where the commit hash will be stored
+  service_folder_path = "apps/researchers/peers/svc"  # The path to the Dockerfile from the root of the repository
+  app_name            = "researchers-peers-svc"       # The name of the application
+  app_component_name  = "rest-api"                    # The name of the application component
+  commit_hash_file    = "${path.module}/.commit_hash" # The file where the commit hash will be stored
 }
 
 # Fetch the current commit hash and write it to a file
@@ -26,7 +27,7 @@ locals {
 # This block creates a new service account
 resource "google_service_account" "researchers-peers-svc" {
   # The service account's identifier within the project
-  account_id = local.app_name
+  account_id = "${local.app_name}-${local.app_component_name}"
 
   # The display name for the service account (optional)
   display_name = "Researchers Peers Service Account"
@@ -185,7 +186,7 @@ resource "google_secret_manager_secret_iam_member" "direct_url_secret_accessor" 
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
 resource "google_cloud_run_service" "apps_researchers_peers" {
   # Name of the service
-  name = local.app_name
+  name = "${local.app_name}-${local.app_component_name}"
 
   # The region where the service will be located
   location = var.region
@@ -204,7 +205,7 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
         # Set the ENTRYPOINT_PATH environment variable (check the Dockerfile for more details)
         env {
           name  = "ENTRYPOINT_PATH"
-          value = "entrypoints/run-researchers-peers-svc-rest-api.sh"
+          value = "entrypoints/run-${local.app_name}-${local.app_component_name}.sh"
         }
 
         # Set the DATABASE_URL environment variable from the database URL secret
