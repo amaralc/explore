@@ -12,6 +12,7 @@ on:
     branches:
       - staging
     paths:
+      - "apps/cloud-iac-terraform/**"
       - "apps/researchers/peers/svc/**"
       - "libs/researchers/peers/**"
       - "package.json"
