@@ -47,19 +47,29 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
 
-      - name: Configure Docker to use gcloud for authentication
-        run: |
-          echo "Configuring Docker to use gcloud for authentication..."
-          gcloud auth configure-docker
+      # - name: Configure Docker to use gcloud for authentication
+      #   run: |
+      #     echo "Configuring Docker to use gcloud for authentication..."
+      #     gcloud auth configure-docker
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Google Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: gcr.io # Or your Artifact Registry URL
+          username: _json_key
+          password: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/researchers/peers/svc/Dockerfile
+          dockerfile: apps/researchers/peers/svc/Dockerfile
           push: true
           tags: |
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
