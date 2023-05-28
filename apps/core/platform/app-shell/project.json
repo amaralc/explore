@@ -1,7 +1,7 @@
 {
-  "name": "core-peerlab-app-shell",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/peerlab-app-shell",
+  "name": "core-platform-app-shell",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform/app-shell",
   "projectType": "application",
   "implicitDependencies": ["researchers-peers-svc-rest-api"],
   "targets": {
@@ -10,12 +10,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/core/peerlab-app-shell",
-        "outputPath": "dist/apps/core/peerlab-app-shell"
+        "root": "apps/core/platform/app-shell",
+        "outputPath": "dist/apps/core/platform/app-shell"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/core/peerlab-app-shell"
+          "outputPath": "apps/core/platform/app-shell"
         },
         "production": {}
       }
@@ -24,17 +24,17 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "core-peerlab-app-shell:build",
+        "buildTarget": "core-platform-app-shell:build",
         "dev": true,
         "port": 4200
       },
       "configurations": {
         "development": {
-          "buildTarget": "core-peerlab-app-shell:build:development",
+          "buildTarget": "core-platform-app-shell:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "core-peerlab-app-shell:build:production",
+          "buildTarget": "core-platform-app-shell:build:production",
           "dev": false
         }
       }
@@ -42,14 +42,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "core-peerlab-app-shell:build:production"
+        "buildTarget": "core-platform-app-shell:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/core/peerlab-app-shell/jest.config.ts",
+        "jestConfig": "apps/core/platform/app-shell/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -63,19 +63,19 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/core/peerlab-app-shell/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/core/platform/app-shell/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/core/peerlab-app-shell/cypress.config.ts",
+        "cypressConfig": "apps/core/platform/app-shell/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "core-peerlab-app-shell:serve"
+        "devServerTarget": "core-platform-app-shell:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "core-peerlab-app-shell:serve:production"
+          "devServerTarget": "core-platform-app-shell:serve:production"
         }
       }
     }
