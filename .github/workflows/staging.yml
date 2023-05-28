@@ -172,6 +172,7 @@ jobs:
           GCP_REGION: ${{ secrets.GCP_REGION }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
+          VERCEL_API_TOKEN: ${{ secrets.VERCEL_API_TOKEN }}
 
       - name: Terraform Apply
         run: |
