@@ -35,6 +35,7 @@ module "researchers-peers-svc-rest-api" {
   commit_hash  = var.commit_hash   # The commit hash of the source code to deploy
 }
 
+
 resource "vercel_project" "core_platform_app_shell" {
   provider  = vercel
   name      = "core-platform-app-shell"
@@ -48,13 +49,20 @@ resource "vercel_project" "core_platform_app_shell" {
   dev_command      = "yarn nx serve core-platform-app-shell"
   install_command  = "yarn install"
   build_command    = "yarn nx build core-platform-app-shell --prod"
-  output_directory = "dist/apps/core/platform/app-shell"
+  output_directory = "dist/apps/core/platform/app-shell/.next"
 }
 
 resource "vercel_deployment" "core_platform_app_shell_production" {
-  project_id = vercel_project.core_platform_app_shell.id
-  ref        = "trunk" # or a git branch
-  production = true
+  project_id        = vercel_project.core_platform_app_shell.id
+  ref               = "trunk" # or a git branch
+  production        = true
+  delete_on_destroy = true
+  # project_settings = {
+  #   build_command    = "yarn nx build core-platform-app-shell --prod"
+  #   framework        = "nextjs"
+  #   install_command  = "yarn install"
+  #   output_directory = "dist/apps/core/platform/app-shell/.next"
+  # }
 }
 
 # resource "vercel_deployment" "core_platform_app_shell_staging" {
