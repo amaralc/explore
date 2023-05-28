@@ -22,7 +22,7 @@ on:
 
 env:
   HUSKY: 0
-  APP_NAME: researchers-peers-svc
+  APP_NAME: researchers-peers # Must match configuration in main.tf for that app
 
 jobs:
   researchers-peers-svc-staging:
