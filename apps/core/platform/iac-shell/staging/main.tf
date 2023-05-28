@@ -36,6 +36,7 @@ module "researchers-peers-svc-rest-api" {
 }
 
 resource "vercel_project" "core_platform_app_shell" {
+  provider  = vercel
   name      = "core-platform-app-shell"
   framework = "nextjs"
   git_repository = {
@@ -44,6 +45,7 @@ resource "vercel_project" "core_platform_app_shell" {
     production_branch = "production"
   }
 
+  dev_command      = "yarn nx serve core-platform-app-shell"
   install_command  = "yarn install"
   build_command    = "yarn nx build core-platform-app-shell --prod"
   output_directory = "dist/apps/core/platform/app-shell"
@@ -53,10 +55,11 @@ resource "vercel_deployment" "core_platform_app_shell_production" {
   project_id = vercel_project.core_platform_app_shell.id
   ref        = "trunk" # or a git branch
   production = true
+
 }
 
-resource "vercel_deployment" "core_platform_app_shell_staging" {
-  project_id = vercel_project.core_platform_app_shell.id
-  ref        = "staging" # or a git branch
-  production = false
-}
+# resource "vercel_deployment" "core_platform_app_shell_staging" {
+#   project_id = vercel_project.core_platform_app_shell.id
+#   ref        = "staging" # or a git branch
+#   production = false
+# }
