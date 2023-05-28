@@ -26,7 +26,7 @@ env:
 jobs:
   researchers-peers-svc-staging:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || (github.event_name == 'push' && !github.event.workflow_run) }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' || (github.event_name == 'push' && !github.event.workflow_run) }}
     defaults:
       run:
         working-directory: ${{ github.workspace }}
