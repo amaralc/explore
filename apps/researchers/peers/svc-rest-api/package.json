@@ -1,6 +1,6 @@
 {
-  "name": "@peerlab/researchers/peers/fe-browser",
-  "version": "0.1.14",
+  "name": "@peerlab/researchers/peers/svc-rest-api",
+  "version": "0.3.0",
   "license": "MIT",
   "author": {
     "name": "Calil Amaral",

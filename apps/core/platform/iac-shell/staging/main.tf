@@ -19,7 +19,7 @@ provider "google-beta" {
 
 # The module name is the name of the directory containing the module
 module "researchers-peers-svc-rest-api" {
-  source       = "../../modules/researchers-peers-svc-rest-api"
+  source       = "../../../../researchers/peers/svc-rest-api/iac"
   environment  = local.environment # The deployment environment (staging | production)
   project_id   = var.project_id    # The Google Cloud project ID
   region       = var.region        # The region where resources will be created
