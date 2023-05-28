@@ -48,3 +48,15 @@ resource "vercel_project" "core_platform_app_shell" {
   build_command    = "yarn nx build core-platform-app-shell --prod"
   output_directory = "dist/apps/core/platform/app-shell"
 }
+
+resource "vercel_deployment" "core_platform_app_shell_production" {
+  project_id = vercel_project.core_platform_app_shell.id
+  ref        = "trunk" # or a git branch
+  production = true
+}
+
+resource "vercel_deployment" "core_platform_app_shell_staging" {
+  project_id = vercel_project.core_platform_app_shell.id
+  ref        = "staging" # or a git branch
+  production = false
+}
