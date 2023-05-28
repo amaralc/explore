@@ -44,7 +44,6 @@ resource "vercel_project" "core_platform_app_shell" {
     production_branch = "production"
   }
 
-  root_directory   = "."
   install_command  = "yarn install"
   build_command    = "yarn nx build core-platform-app-shell --prod"
   output_directory = "dist/apps/core/platform/app-shell"
