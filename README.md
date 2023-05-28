@@ -96,6 +96,8 @@ References:
 
 # CI / CD
 
+## Overview
+
 ```mermaid
 sequenceDiagram
     loop
@@ -117,6 +119,10 @@ sequenceDiagram
         svc ->> client: response to client
     end
 ```
+
+## GitHub actions environments
+
+https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment
 
 # Lessons Learned
 

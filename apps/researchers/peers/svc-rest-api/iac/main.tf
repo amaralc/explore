@@ -1,8 +1,8 @@
 # Define local variables
 locals {
   service_folder_path = "apps/researchers/peers/svc" # The path to the Dockerfile from the root of the repository
-  app_name            = "researchers-peers-svc"      # The name of the application
-  app_component_name  = "rest-api"                   # The name of the application component
+  app_name            = "researchers-peers"          # The name of the application
+  app_component_name  = "svc-rest-api"               # The name of the application component
 }
 
 # This block creates a new service account

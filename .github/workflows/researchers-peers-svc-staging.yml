@@ -13,7 +13,8 @@ on:
       - staging
     paths:
       - "apps/core/platform/iac-shell/**"
-      - "apps/researchers/peers/svc/**"
+      - "apps/researchers/peers/svc-rest-api/**"
+      - "apps/researchers/peers/Dockerfile"
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
@@ -65,7 +66,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/researchers/peers/svc/Dockerfile
+          file: ./apps/researchers/peers/Dockerfile
           push: true
           tags: |
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
