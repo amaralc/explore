@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - staging
+    # Only run workflow when these files change
     paths:
       - ".github/workflows/researchers-peers-svc-staging.yml"
       - "package.json"
