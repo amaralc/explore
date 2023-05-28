@@ -31,7 +31,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
-      - name: Checkout [Default Branch]
+      - name: Checkout staging branch
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
@@ -79,6 +79,26 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v3
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
+
+      - name: Save GCP credentials to file
+        run: |
+          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/cloud-iac-terraform/environments/staging/credentials.json
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
