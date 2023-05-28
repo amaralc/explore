@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'researchers-peers-e2e',
+  displayName: 'researchers-peers-svc-e2e',
   preset: '../../jest.preset.js',
   globals: {},
   globalSetup: '<rootDir>/src/support/global-setup.ts',

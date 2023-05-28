@@ -1,7 +1,7 @@
 {
-  "name": "researchers-peers-e2e",
+  "name": "researchers-peers-svc-e2e",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/researchers/peers/e2e",
+  "sourceRoot": "apps/researchers/peers/svc-e2e",
   "projectType": "application",
   "implicitDependencies": ["researchers-peers-rest-api-svc", "researchers-peers-consumer-svc"],
   "targets": {},
