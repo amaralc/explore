@@ -1,5 +1,5 @@
 {
-  "name": "@peerlab/researchers/peers/fe-browser",
+  "name": "@peerlab/core/peerlab-app-shell",
   "version": "0.1.14",
   "license": "MIT",
   "author": {

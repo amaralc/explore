@@ -1,5 +1,5 @@
 {
-  "extends": "../../../../tsconfig.base.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
     "allowJs": true,
@@ -24,8 +24,8 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts",
-    "../../../../apps/service-mfe/.next/types/**/*.ts",
-    "../../../../dist/apps/service-mfe/.next/types/**/*.ts"
+    "../../../apps/service-mfe/.next/types/**/*.ts",
+    "../../../dist/apps/service-mfe/.next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }
