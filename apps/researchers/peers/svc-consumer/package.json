@@ -1,5 +1,5 @@
 {
-  "name": "@peerlab/researchers/peers/consumer-svc",
+  "name": "@peerlab/researchers/peers/svc-consumer",
   "version": "0.1.14",
   "license": "MIT",
   "author": {
