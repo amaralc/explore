@@ -36,37 +36,23 @@ module "researchers-peers-svc-rest-api" {
 }
 
 
-resource "vercel_project" "core_platform_app_shell" {
-  provider  = vercel
-  name      = "core-platform-app-shell"
-  framework = "nextjs"
-  git_repository = {
-    type              = "github"
-    repo              = "amaralc/peerlab"
-    production_branch = "trunk"
-  }
+# resource "vercel_project" "core_platform_app_shell" {
+#   name      = "core-platform-app-shell"
+#   framework = "nextjs"
+#   # install_command  = "yarn install"
+#   # build_command    = "yarn nx build core-platform-app-shell --prod"
+#   # output_directory = "dist/apps/core/platform/app-shell/.next"
 
-  dev_command      = "yarn nx serve core-platform-app-shell"
-  install_command  = "yarn install"
-  build_command    = "yarn nx build core-platform-app-shell --prod"
-  output_directory = "dist/apps/core/platform/app-shell/.next"
-}
+#   git_repository = {
+#     type              = "github"
+#     repo              = "amaralc/peerlab"
+#     production_branch = "trunk"
+#   }
+# }
 
-resource "vercel_deployment" "core_platform_app_shell_production" {
-  project_id        = vercel_project.core_platform_app_shell.id
-  ref               = "trunk" # or a git branch
-  production        = true
-  delete_on_destroy = true
-  # project_settings = {
-  #   build_command    = "yarn nx build core-platform-app-shell --prod"
-  #   framework        = "nextjs"
-  #   install_command  = "yarn install"
-  #   output_directory = "dist/apps/core/platform/app-shell/.next"
-  # }
-}
-
-# resource "vercel_deployment" "core_platform_app_shell_staging" {
-#   project_id = vercel_project.core_platform_app_shell.id
-#   ref        = "staging" # or a git branch
-#   production = false
+# resource "vercel_deployment" "core_platform_app_shell_production" {
+#   project_id        = vercel_project.core_platform_app_shell.id
+#   ref               = "trunk" # or a git branch
+#   production        = true
+#   delete_on_destroy = true
 # }
