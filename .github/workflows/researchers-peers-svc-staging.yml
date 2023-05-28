@@ -24,7 +24,7 @@ env:
   APP_NAME: researchers-peers-svc
 
 jobs:
-  terraform-apply-staging:
+  build-and-push:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,11 +48,6 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
 
-      # - name: Configure Docker to use gcloud for authentication
-      #   run: |
-      #     echo "Configuring Docker to use gcloud for authentication..."
-      #     gcloud auth configure-docker
-
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
 
@@ -62,7 +57,7 @@ jobs:
       - name: Log in to Google Container Registry
         uses: docker/login-action@v2
         with:
-          registry: gcr.io # Or your Artifact Registry URL
+          registry: gcr.io
           username: _json_key
           password: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
 
@@ -76,6 +71,14 @@ jobs:
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:${{ github.sha }}
 
+  terraform-apply-staging:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    steps:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
