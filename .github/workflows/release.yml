@@ -11,14 +11,14 @@ name: Release
 on:
   push:
     branches:
-      - trunk
+      - production
 
 # Set environment variable to disable Husky
 env:
   HUSKY: 0
 
 jobs:
-  trunk:
+  production:
     # Run the job on Ubuntu latest version
     runs-on: ubuntu-latest
 

@@ -1,6 +1,6 @@
 # Local variables
 locals {
-  environment = "staging"
+  environment = "production"
 }
 
 # Configure the Google Cloud Provider for Terraform
