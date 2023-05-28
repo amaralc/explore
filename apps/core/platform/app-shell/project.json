@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/core/platform/app-shell",
   "projectType": "application",
-  "implicitDependencies": ["researchers-peers-svc-rest-api"],
+  "implicitDependencies": ["researchers-peers-rest-api-svc"],
   "targets": {
     "build": {
       "executor": "@nx/next:build",
