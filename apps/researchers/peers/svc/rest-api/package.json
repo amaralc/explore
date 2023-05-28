@@ -1,9 +1,0 @@
-{
-  "name": "@peerlab/researchers/peers/svc/rest-api",
-  "version": "0.3.0",
-  "license": "MIT",
-  "author": {
-    "name": "Calil Amaral",
-    "email": "amaral.calil@gmail.com"
-  }
-}

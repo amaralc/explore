@@ -12,8 +12,9 @@ on:
     branches:
       - staging
     paths:
-      - "apps/cloud-iac-terraform/**"
-      - "apps/researchers/peers/svc/**"
+      - "apps/core/platform/iac-shell/**"
+      - "apps/researchers/peers/svc-rest-api/**"
+      - "apps/researchers/peers/Dockerfile"
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
@@ -24,14 +25,14 @@ env:
   APP_NAME: researchers-peers-svc
 
 jobs:
-  terraform-apply-staging:
+  researchers-peers-svc-staging:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ${{ github.workspace }}
 
     steps:
-      - name: Checkout [Default Branch]
+      - name: Checkout staging branch
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
@@ -40,18 +41,13 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/cloud-iac-terraform/environments/staging/credentials.json
+          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/staging/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v1"
         with:
           credentials_json: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
-
-      # - name: Configure Docker to use gcloud for authentication
-      #   run: |
-      #     echo "Configuring Docker to use gcloud for authentication..."
-      #     gcloud auth configure-docker
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
@@ -62,7 +58,7 @@ jobs:
       - name: Log in to Google Container Registry
         uses: docker/login-action@v2
         with:
-          registry: gcr.io # Or your Artifact Registry URL
+          registry: gcr.io
           username: _json_key
           password: ${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}
 
@@ -70,7 +66,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/researchers/peers/svc/Dockerfile
+          file: ./apps/researchers/peers/Dockerfile
           push: true
           tags: |
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
@@ -86,19 +82,19 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/cloud-iac-terraform/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/cloud-iac-terraform/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}"
-        working-directory: apps/cloud-iac-terraform/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
         env:
           GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -110,7 +106,7 @@ jobs:
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/cloud-iac-terraform/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
         env:
           GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}

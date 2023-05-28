@@ -1,0 +1,9 @@
+{
+  "name": "core-platform-iac-shell",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform/iac-shell",
+  "projectType": "application",
+  "implicitDependencies": ["researchers-peers-svc-rest-api"],
+  "targets": {},
+  "tags": []
+}
