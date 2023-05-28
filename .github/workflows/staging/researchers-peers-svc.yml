@@ -11,9 +11,8 @@ on:
   push:
     branches:
       - staging
-    # Only run workflow when these files change
     paths:
-      - ".github/workflows/researchers-peers-svc-staging.yml"
+      - ".github/workflows/staging/researchers-peers-svc.yml"
       - "package.json"
       - "yarn.lock"
       - "libs/researchers/peers/svc-rest-api/**"
