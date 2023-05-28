@@ -5,18 +5,18 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
-name: staging-core-platform-iac-shell
+name: core-platform-iac-shell-staging
 
 on:
   workflow_run:
-    workflows: ["staging-researchers-peers-svc"]
+    workflows: ["researchers-peers-svc-staging"]
     types:
       - completed
   push:
     branches:
       - staging
     paths:
-      - ".github/workflows/staging/apps/core-platform-iac-shell.yml"
+      - ".github/workflows/core-platform-iac-shell.yml"
       - "**.tf"
 
 env:

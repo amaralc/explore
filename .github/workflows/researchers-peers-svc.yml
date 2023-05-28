@@ -5,27 +5,26 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
-name: Build and deploy researchers-peers-svc to staging
+name: researchers-peers-svc-staging
 
 on:
   push:
     branches:
       - staging
     paths:
-      - "apps/core/platform/iac-shell/**"
-      - "apps/researchers/peers/svc-rest-api/**"
-      - "apps/researchers/peers/Dockerfile"
-      - "libs/researchers/peers/**"
+      - ".github/workflows/researchers-peers-svc-staging.yml"
       - "package.json"
       - "yarn.lock"
-      - ".github/workflows/researchers-peers-svc-staging.yml"
+      - "libs/researchers/peers/svc-rest-api/**"
+      - "libs/researchers/peers/svc-consumer/**"
+      - "apps/researchers/peers/**"
 
 env:
   HUSKY: 0
   DOCKER_IMAGE_NAME: researchers-peers # Must match configuration in main.tf for that app
 
 jobs:
-  researchers-peers-svc-staging:
+  build-and-push-image:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -71,45 +70,3 @@ jobs:
           tags: |
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.3.9
-
-      - name: Terraform init
-        run: |
-          echo "Running terraform init..."
-          echo ""
-          terraform init
-        working-directory: apps/core/platform/iac-shell/staging
-
-      - name: Terraform validate
-        run: |
-          echo "Running terraform validate..."
-          terraform validate
-        working-directory: apps/core/platform/iac-shell/staging
-
-      - name: Terraform Plan
-        run: |
-          echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}"
-        working-directory: apps/core/platform/iac-shell/staging
-        env:
-          GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          GCP_REGION: ${{ secrets.GCP_REGION }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
-
-      - name: Terraform Apply
-        run: |
-          echo "Running terraform apply..."
-          terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform/iac-shell/staging
-        env:
-          GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          GCP_REGION: ${{ secrets.GCP_REGION }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
