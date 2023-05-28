@@ -42,7 +42,7 @@ resource "vercel_project" "core_platform_app_shell" {
   git_repository = {
     type              = "github"
     repo              = "amaralc/peerlab"
-    production_branch = "production"
+    production_branch = "trunk"
   }
 
   dev_command      = "yarn nx serve core-platform-app-shell"
@@ -55,7 +55,6 @@ resource "vercel_deployment" "core_platform_app_shell_production" {
   project_id = vercel_project.core_platform_app_shell.id
   ref        = "trunk" # or a git branch
   production = true
-
 }
 
 # resource "vercel_deployment" "core_platform_app_shell_staging" {

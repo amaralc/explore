@@ -67,3 +67,4 @@ secrets.auto.tfvars
 # GCP
 credentials.json
 
+.vercel
