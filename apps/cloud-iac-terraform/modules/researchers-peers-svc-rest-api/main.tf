@@ -7,33 +7,22 @@ locals {
 
 # This block creates a new service account
 resource "google_service_account" "researchers-peers-svc" {
-  # The service account's identifier within the project
-  account_id = "${local.app_name}-${local.app_component_name}"
-
-  # The display name for the service account (optional)
-  display_name = "Researchers Peers Service Account"
-
-  # The ID of the project that the service account will be created in
-  project = var.project_id
+  account_id   = "${local.app_name}-${local.app_component_name}" # The service account's identifier within the project
+  display_name = "Researchers Peers Service Account"             # The display name for the service account (optional)
+  project      = var.project_id                                  # The ID of the project that the service account will be created in
 }
 
 # This block adds the Secret Manager Secret Accessor role to the service account
 resource "google_project_iam_binding" "secret_accessor" {
-  # The ID of the project
-  project = var.project_id
-
-  # The role to be granted. "roles/secretmanager.secretAccessor" allows read access to Secret Manager secrets
-  role = "roles/secretmanager.secretAccessor"
-
-  # List of members (users, groups, service accounts, etc) that will be granted the role
-  members = [
-    # The service account to which the role will be granted
-    "serviceAccount:${google_service_account.researchers-peers-svc.email}",
+  project = var.project_id                                                  # The ID of the project
+  role    = "roles/secretmanager.secretAccessor"                            # The role to be granted. "roles/secretmanager.secretAccessor" allows read access to Secret Manager secrets
+  members = [                                                               # List of members (users, groups, service accounts, etc) that will be granted the role
+    "serviceAccount:${google_service_account.researchers-peers-svc.email}", # The service account to which the role will be granted
   ]
-
-  depends_on = [google_service_account.researchers-peers-svc]
+  depends_on = [google_service_account.researchers-peers-svc] # This ensures the service account is created before the role is granted
 }
 
+# This block grants the 'Service Account User' role to the service account
 resource "google_project_iam_member" "service_account_user" {
   project    = var.project_id
   role       = "roles/iam.serviceAccountUser"
