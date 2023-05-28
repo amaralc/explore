@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.0 (2023-05-28)
+
+### Features
+
+- add basic docs ([4a30287](https://github.com/amaralc/peerlab/commit/4a302875c4f04cb2723d2c7a7766f6e3b850cebf))
+- add iac to vercel app ([ebac8ab](https://github.com/amaralc/peerlab/commit/ebac8ab614632c5fbd289e8cc260931e7465baf9))
+- **CODEOWNERS:** add codeowners file ([376c498](https://github.com/amaralc/peerlab/commit/376c4983b8de5a57e2e8fa1c3ca2360a223b58c8))
+- **DIS-512:** add deploy pipeline to github actions ([27f19f4](https://github.com/amaralc/peerlab/commit/27f19f4f2462cf00895742fc7dae04aeccc0cfed))
+- **DIS-522:** move to gcp ([#7](https://github.com/amaralc/peerlab/issues/7)) ([39dc570](https://github.com/amaralc/peerlab/commit/39dc57020df159557966fc511c7ee9ff91b29431))
+- use providers in image ([f1cf49e](https://github.com/amaralc/peerlab/commit/f1cf49e8fa77e885167d2df2ba92559acd9c2952))
+
+### Bug Fixes
+
+- add global ([2508f85](https://github.com/amaralc/peerlab/commit/2508f85ce1e6e796c55c02109962fc313ffed6d2))
+- add logs ([daec367](https://github.com/amaralc/peerlab/commit/daec36788dd14fb6de49c745972e9f7e1d36ea30))
+- add terraform variables ([eb98774](https://github.com/amaralc/peerlab/commit/eb987746fd86ea0299507d6baf6599e6a68338ce))
+- add token ([60be0f9](https://github.com/amaralc/peerlab/commit/60be0f9857154ba8473a9cd5ed9a8f8ee39ebcd9))
+- add token using with ([77d69c0](https://github.com/amaralc/peerlab/commit/77d69c0bf5f995dc4e660dc03d4716a001111774))
+- add uses ([889501d](https://github.com/amaralc/peerlab/commit/889501d1ccd272c99dd89b3ea35dc4b666ad830b))
+- add variable ([b97354d](https://github.com/amaralc/peerlab/commit/b97354dd4d0deee33b10b4e01ffcf7dda5cd5e73))
+- adjust existing step ([2232788](https://github.com/amaralc/peerlab/commit/2232788e7266e8fed520727216119d1d904bce52))
+- adjust fly url and remove steps ([cd2b32a](https://github.com/amaralc/peerlab/commit/cd2b32ab73be7703f4e33992798c8a68b9a22ac2))
+- adjust makefile separator ([c4befda](https://github.com/amaralc/peerlab/commit/c4befda1ccf9679724c7f1c194597b4956c6aa85))
+- adjust path ([117af57](https://github.com/amaralc/peerlab/commit/117af57236f1ad7017344ee7dab2c88072cd9b1b))
+- adjust terraform ([5a7d4a2](https://github.com/amaralc/peerlab/commit/5a7d4a29e080406528e9c3ffdbcce40e2a6d2940))
+- adjust terraform steps ([1564508](https://github.com/amaralc/peerlab/commit/15645086e603f1a3fe7c95c62caa29199498f1f9))
+- adjust token ([91d0f27](https://github.com/amaralc/peerlab/commit/91d0f2715637fa4ef37fcd6aaf9a1f08f725a6f6))
+- adjust with order ([ff4df76](https://github.com/amaralc/peerlab/commit/ff4df76951d25e78c12ed11788f40f193fd33e1e))
+- configure fly cli ([b62902e](https://github.com/amaralc/peerlab/commit/b62902e0ae6c5bb30f9b08aedeac7318044bf780))
+- debug release step: ([8262e77](https://github.com/amaralc/peerlab/commit/8262e771a8ec8e32cb2ed303129b979a847efb6e))
+- **DIS-512:** add token to release step ([fca2985](https://github.com/amaralc/peerlab/commit/fca298589cc1e9f7f345a2bec81455f52d2aa379))
+- **DIS-512:** adjust branch name in github action ([3e8a0e7](https://github.com/amaralc/peerlab/commit/3e8a0e7f550d2f29bfdedb9afd0cef02b5111c8f))
+- **DIS-512:** adjust permissions ([d2559f7](https://github.com/amaralc/peerlab/commit/d2559f78324dae2cb645b39fdda7e1c828e4eba9))
+- **DIS-512:** adjust pipeline ([6455cc6](https://github.com/amaralc/peerlab/commit/6455cc65778022a83e9cd463dc3f11ef34b648f8))
+- **DIS-512:** adjust token and address ([bff9ebe](https://github.com/amaralc/peerlab/commit/bff9ebe17693d835314dbf6a0ef306b44dc4c18f))
+- **DIS-512:** change release command in pipeline ([89596d9](https://github.com/amaralc/peerlab/commit/89596d908094d91c61bdedb77290680b4c581cc7))
+- **DIS-512:** discard package json changes prior to lerna command ([b5c6ec6](https://github.com/amaralc/peerlab/commit/b5c6ec665672a3d63d52182a0bb158c35f447661))
+- **DIS-521:** debug unecessary tags ([#3](https://github.com/amaralc/peerlab/issues/3)) ([20b166f](https://github.com/amaralc/peerlab/commit/20b166f64697ecda2375e3a781682949923f4d62))
+- **DIS-522:** use gcp storage for terraform state ([#6](https://github.com/amaralc/peerlab/issues/6)) ([346b858](https://github.com/amaralc/peerlab/commit/346b858ab35a7787c9094c7b69054d920f293a70)), closes [#4](https://github.com/amaralc/peerlab/issues/4)
+- discard changes ([3f2007b](https://github.com/amaralc/peerlab/commit/3f2007bf08508fd2fb965532f9851cacf1c8e411))
+- install fly cli ([afb00dd](https://github.com/amaralc/peerlab/commit/afb00dddba49ef6de61a062bd29cbffece2b1955))
+- move to iac app ([e549fc2](https://github.com/amaralc/peerlab/commit/e549fc2a598e121de38d3ef5a6a46e9fae3e8701))
+- remove apply ([ff19a5b](https://github.com/amaralc/peerlab/commit/ff19a5beba813ae1d69a115b1fb695b53aeea18f))
+- separate steps and adjust set-url command ([14887e0](https://github.com/amaralc/peerlab/commit/14887e0d99505127fbb4556917c0eebf48448410))
+- test terraform plan ([ab0d918](https://github.com/amaralc/peerlab/commit/ab0d9183af4b31edf2802759fe3f407c2e48bb03))
+- update unmanaged machines ([34fdfec](https://github.com/amaralc/peerlab/commit/34fdfec508af8ea44b384f124b0b2ba094301263))
+- use personal token ([ac067ff](https://github.com/amaralc/peerlab/commit/ac067ff50d2774f814b9b061d12589deb0a45d70))
+- use plan and apply ([b6ce5ee](https://github.com/amaralc/peerlab/commit/b6ce5ee303a3353333cd29429519c08f39fe12be))
+- use terraform apply ([ae1d643](https://github.com/amaralc/peerlab/commit/ae1d643de5d42800dc0621578e71d1ac6082ab3b))
+- use token ([08e88ac](https://github.com/amaralc/peerlab/commit/08e88ac8586752c1db75a696ff2d7856f2940f92))
+- use token ([38793ab](https://github.com/amaralc/peerlab/commit/38793ab267613b8dcfec06bdbb04c0aeff068a11))
+
+### Reverts
+
+- Revert "adjust: split workflows" ([79b513f](https://github.com/amaralc/peerlab/commit/79b513f37ef6457d9a6866888b25930148f96ef6))
+- Revert "refactor: rename jobs" ([810398f](https://github.com/amaralc/peerlab/commit/810398fef2fa8fa9a9e7747238297485928fb920))
+- Revert "adjust: remove condition" ([cdc122e](https://github.com/amaralc/peerlab/commit/cdc122e4cb2c2812b680a0b753c41ae8da0f6c0e))
+- Revert "adjust: force trigger" ([aac70fc](https://github.com/amaralc/peerlab/commit/aac70fc831f4cbf4df10024d092ded368768abb6))
+- Revert "adjust: move workflows" ([4bb65a4](https://github.com/amaralc/peerlab/commit/4bb65a40e4a4a5840b4520533e35377ee63e89d3))
+- Revert "adjust: move to workflows" ([400851d](https://github.com/amaralc/peerlab/commit/400851d4b3adbbb3776a4db3c4c3b8f74fb1d917))
+- Revert "refactor: move consumer" ([2cb7ec3](https://github.com/amaralc/peerlab/commit/2cb7ec3de56e2b47dbc25166b9ac774af50265e0))
+- Revert "refactor: move rest api" ([b2464bd](https://github.com/amaralc/peerlab/commit/b2464bda72fa2c41f776d57edd3f42e80229642e))
+- Revert "refactor: move e2e" ([ed0f0b3](https://github.com/amaralc/peerlab/commit/ed0f0b341be896324b42429668abd1703560ebd6))
+- Revert "adjust: split in more jobs" ([85383da](https://github.com/amaralc/peerlab/commit/85383da893433df471e5e3708fa375aad093e254))
+- Revert "fix(DIS-522): configure terraform state storage and retrieval (#4)" ([80fb322](https://github.com/amaralc/peerlab/commit/80fb322fea95157dc49a738f9b084115ea75ec07)), closes [#4](https://github.com/amaralc/peerlab/issues/4)
+- Revert "fix(DIS-512): add email" ([0a83817](https://github.com/amaralc/peerlab/commit/0a838170f95b830de37a8bc860f1e4ac7284948e))
+
 ## [0.7.0](https://github.com/amaralc/peerlab/compare/micro-applications-template@0.6.16...micro-applications-template@0.7.0) (2023-05-07)
 
 ### Features

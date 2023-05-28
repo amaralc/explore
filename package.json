@@ -1,6 +1,6 @@
 {
   "name": "peerlab",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "MIT",
   "author": {
     "name": "Calil Amaral",
@@ -39,7 +39,15 @@
     "@faker-js/faker": "^7.6.0",
     "@nestjs/schematics": "9.2.0",
     "@nestjs/testing": "9.4.1",
+    "@nx/cypress": "16.2.1",
+    "@nx/eslint-plugin": "16.2.1",
+    "@nx/jest": "16.2.1",
+    "@nx/js": "16.2.1",
+    "@nx/linter": "16.2.1",
+    "@nx/node": "16.2.1",
     "@nx/react": "16.2.1",
+    "@nx/webpack": "16.2.1",
+    "@nx/workspace": "16.2.1",
     "@testing-library/react": "14.0.0",
     "@types/jest": "29.4.4",
     "@types/node": "18.14.2",
@@ -65,15 +73,7 @@
     "prettier": "^2.6.2",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "5.0.4",
-    "@nx/cypress": "16.2.1",
-    "@nx/js": "16.2.1",
-    "@nx/linter": "16.2.1",
-    "@nx/workspace": "16.2.1",
-    "@nx/eslint-plugin": "16.2.1",
-    "@nx/node": "16.2.1",
-    "@nx/jest": "16.2.1",
-    "@nx/webpack": "16.2.1"
+    "typescript": "5.0.4"
   },
   "dependencies": {
     "@commitlint/cli": "^17.4.2",
@@ -89,6 +89,8 @@
     "@nestjs/mongoose": "^9.2.1",
     "@nestjs/platform-express": "9.4.1",
     "@nestjs/swagger": "6.3.0",
+    "@nx/nest": "16.2.1",
+    "@nx/next": "16.2.1",
     "@prisma/client": "^4.10.1",
     "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.0.0",
@@ -105,9 +107,7 @@
     "redux": "^4.2.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
-    "tslib": "^2.3.0",
-    "@nx/next": "16.2.1",
-    "@nx/nest": "16.2.1"
+    "tslib": "^2.3.0"
   },
   "volta": {
     "node": "18.16.0",
