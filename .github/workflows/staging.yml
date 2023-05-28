@@ -164,7 +164,7 @@ jobs:
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}"
+          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform/iac-shell/staging
         env:
           GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
