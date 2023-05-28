@@ -1,4 +1,8 @@
-# Define the variables that will be used within the configuration
+variable "environment" {
+  description = "Environment name (staging | production)"
+  type        = string
+}
+
 variable "project_id" {
   description = "The Google Cloud project ID"
   type        = string
@@ -9,26 +13,10 @@ variable "region" {
   type        = string
 
 }
-variable "repo_owner" {
-  description = "The GitHub owner's username"
-  type        = string
-  default     = "amaralc"
-}
-variable "repo_name" {
-  description = "The name of the source repository"
-  type        = string
-  default     = "peerlab"
-}
-
 variable "credentials_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
   default     = "credentials.json"
-}
-
-variable "environment" {
-  description = "The deployment environment (staging, production, etc.)"
-  type        = string
 }
 
 variable "database_url" {
