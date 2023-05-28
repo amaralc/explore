@@ -22,7 +22,7 @@ on:
 
 env:
   HUSKY: 0
-  APP_NAME: researchers-peers # Must match configuration in main.tf for that app
+  DOCKER_IMAGE_NAME: researchers-peers # Must match configuration in main.tf for that app
 
 jobs:
   researchers-peers-svc-staging:
@@ -69,8 +69,8 @@ jobs:
           file: ./apps/researchers/peers/Dockerfile
           push: true
           tags: |
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:latest
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.APP_NAME }}:${{ github.sha }}
+            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
