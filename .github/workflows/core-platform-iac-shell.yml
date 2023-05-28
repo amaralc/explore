@@ -12,6 +12,12 @@ on:
     workflows: ["researchers-peers-svc-staging"]
     types:
       - completed
+  push:
+    branches:
+      - staging
+    paths:
+      - ".github/workflows/core-platform-iac-shell.yml"
+      - "**.tf"
 
 env:
   HUSKY: 0
