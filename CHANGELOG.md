@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.0](https://github.com/amaralc/peerlab/compare/peerlab@0.8.0...peerlab@0.9.0) (2023-05-28)
+
+### Features
+
+- add vercel deployments ([832d795](https://github.com/amaralc/peerlab/commit/832d795c1e4b5031aeeb7b2586d2623e8f4d7c58))
+
+### Bug Fixes
+
+- adjust production branch in vercel ([0e5ee67](https://github.com/amaralc/peerlab/commit/0e5ee6755ae8a8b4b862a8bc28fb4a1f78ad1e8a))
+- adjust root path ([edab065](https://github.com/amaralc/peerlab/commit/edab06573971e55197849f3cd2bccd5d3f7a01d6))
+
 ## 0.8.0 (2023-05-28)
 
 ### Features
