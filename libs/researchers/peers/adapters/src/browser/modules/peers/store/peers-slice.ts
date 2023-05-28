@@ -9,8 +9,6 @@ import {
 import { RootState } from '../../../data';
 
 import { PeerEntity } from '@peerlab/researchers/peers/core/domains/peers/entities/peer/entity';
-import axios from 'axios';
-import { GetPeersResponseDto } from '../../../../controllers/rest-api/routes/peers/get-peers-response.dto';
 
 export const PEERS_FEATURE_KEY = 'peers';
 
@@ -25,14 +23,17 @@ export const peersAdapter = createEntityAdapter<PeerEntity>({
 });
 
 export const fetchPeers = createAsyncThunk<PeerEntity[]>('peers/fetchStatus', async (_, thunkAPI) => {
-  const getPeersResponse = await axios.request<GetPeersResponseDto>({
-    baseURL: 'http://localhost:8080',
-    method: 'GET',
-    url: `/peers?page=${1}&limit=${10}`,
-    headers: { Authorization: 'my-secret-api-key' },
-  });
+  // TODO: replace with real API call
+  // const getPeersResponse = await axios.request<GetPeersResponseDto>({
+  //   baseURL: 'http://localhost:8080',
+  //   method: 'GET',
+  //   url: `/peers?page=${1}&limit=${10}`,
+  //   headers: { Authorization: 'my-secret-api-key' },
+  // });
 
-  return getPeersResponse.data.peers;
+  // const peers = getPeersResponse.data.peers;
+
+  return [{ id: 'id-1', name: 'name-1', subjects: [], username: 'username-1' }];
 });
 
 export const initialPeersState: PeersState = peersAdapter.getInitialState({

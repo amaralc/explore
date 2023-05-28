@@ -9,5 +9,10 @@ terraform {
       source  = "hashicorp/google-beta"
       version = "4.65.2" # Adjust the version to match the latest release
     }
+
+    vercel = {
+      source  = "vercel/vercel"
+      version = "~> 0.3"
+    }
   }
 }
