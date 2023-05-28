@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'researchers-peers-rest-api-svc',
+  displayName: 'researchers-peers-svc-rest-api',
   preset: '../../../../jest.preset.js',
   globals: {},
   testEnvironment: 'node',
@@ -13,5 +13,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/apps/researchers/peers/rest-api-svc',
+  coverageDirectory: '../../../../coverage/apps/researchers/peers/svc-rest-api',
 };
