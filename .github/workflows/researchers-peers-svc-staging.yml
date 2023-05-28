@@ -40,7 +40,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/environments/staging/credentials.json
+          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/staging/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -81,19 +81,19 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/core/platform/iac-shell/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/core/platform/iac-shell/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}"
-        working-directory: apps/core/platform/iac-shell/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
         env:
           GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -105,7 +105,7 @@ jobs:
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform/iac-shell/environments/staging
+        working-directory: apps/core/platform/iac-shell/staging
         env:
           GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
