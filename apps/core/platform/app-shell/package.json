@@ -1,0 +1,9 @@
+{
+  "name": "@peerlab/core/platform/app-shell",
+  "version": "0.1.14",
+  "license": "MIT",
+  "author": {
+    "name": "Calil Amaral",
+    "email": "amaral.calil@gmail.com"
+  }
+}

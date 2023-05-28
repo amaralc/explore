@@ -1,134 +1,62 @@
 # Persistence
-persistence-setup-postgresql:
+setup:
 	cp .env.example .env \
-	&& cp .env.example ./apps/_persistence/.env \
-	&& cd apps/_persistence && docker-compose -f docker-compose-postgresql.yml up -d && echo 'Finish setting up containers...' && sleep 2
+	&& docker-compose -f docker-compose.yml up -d && echo 'Finish setting up containers...' && sleep 2
 
-persistence-cleanup-postgresql:
-	cd apps/_persistence && docker-compose -f docker-compose-postgresql.yml down
+cleanup:
+	docker-compose -f docker-compose.yml down
 
-persistence-prune-postgresql:
-	cd apps/_persistence && docker-compose -f docker-compose-postgresql.yml down -v
-
-persistence-setup-mongodb:
-	cp .env.example .env \
-	&& cp .env.example ./apps/_persistence/.env \
-	&& cd apps/_persistence && docker-compose -f docker-compose-mongodb.yml up -d && echo 'Finish setting up containers...' && sleep 2
-
-persistence-cleanup-mongodb:
-	cd apps/_persistence && docker-compose -f docker-compose-mongodb.yml down
-
-persistence-prune-mongodb:
-	cd apps/_persistence && docker-compose -f docker-compose-mongodb.yml down -v
-
-# Hasura (Dev Tool)
-hasura-console:
-	cd apps/_persistence && cp .env ./hasura/.env && cd hasura && hasura console --envfile .env
-
-hasura-setup:
-	echo 'Setting up Hasura...' \
-	&& cd apps/_persistence && cp .env ./hasura/.env \
-	&& cd hasura \
-	&& hasura metadata apply --envfile .env \
-	&& hasura migrate apply --envfile .env \
-	&& hasura metadata reload --envfile .env
-
-# Infra
-infra-setup:
-	make persistence-setup && make hasura-setup
+prune:
+	docker-compose -f docker-compose.yml down -v
 
 # Docker
+config:
+	docker-compose -f docker-compose.yml config
 
-sudo-docker-image-build-rest-api:
-#	sudo docker build -t micro-applications-template:latest --build-arg SSH_PEM_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
-	sudo docker build -t micro-applications-template:latest -f apps/service-rest-api/Dockerfile .
+researchers-peers-svc-docker-build:
+#	sudo docker build -t researchers-peers-svc:latest --build-arg SSH_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
+	sudo docker build -t researchers-peers-svc:latest -f apps/researchers/peers/svc/Dockerfile .
 
-sudo-docker-image-build-rest-api-no-cache:
-#	sudo docker build -t micro-applications-template:latest --build-arg SSH_PEM_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
-	sudo docker build -t micro-applications-template:latest -f apps/service-rest-api/Dockerfile --no-cache .
+researchers-peers-svc-docker-build-no-cache:
+#	sudo docker build -t researchers-peers-svc:latest --build-arg SSH_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
+	sudo docker build -t researchers-peers-svc:latest -f apps/researchers/peers/svc/Dockerfile --no-cache .
 
-docker-run:
-	docker run -it --rm -p 8080:8080 micro-applications-template:latest
+researchers-peers-svc-rest-api-docker-run:
+	docker run -it --rm -p 8080:8080 researchers-peers-svc:latest bash apps/researchers/peers/svc/rest-api/run-build.sh
 
-docker-prune:
-	make persistence-cleanup \
-	&& docker volume prune \
-	&& docker system prune
-
-docker-config:
-	cp .env.example ./apps/_persistence/.env \
-	&& cd apps/_persistence && docker-compose config
+researchers-peers-svc-consumer-docker-run:
+	docker run -it --rm -p 8080:8080 researchers-peers-svc:latest bash apps/researchers/peers/svc/consumer/run-build.sh
 
 # Application
-auth-prisma-postgresql-setup:
-	yarn prisma generate --schema prisma/postgresql.schema.prisma
+researchers-peers-svc-prisma-postgresql-setup:
+	yarn prisma generate --schema libs/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
 
-service-rest-api-serve:
+researchers-peers-svc-rest-api-serve:
 	# The .env in root folder make it possible to use env variables within .env file
-	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve service-rest-api
+	cp .env.example apps/researchers/peers/svc-rest-api/.env && make researchers-peers-svc-prisma-postgresql-setup && yarn nx serve researchers-peers-svc-rest-api
 
-consumer-with-api-serve:
+researchers-peers-svc-consumer-with-api-serve:
 	# The .env in root folder make it possible to use env variables within .env file
 	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve consumer-with-api
 
-service-consumer-serve:
+researchers-peers-svc-consumer-serve:
 	# The .env in root folder make it possible to use env variables within .env file
 	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve service-consumer
 
-# Fly
-fly-launch:
-	cd apps/service-rest-api && fly launch
+terraform-init-staging:
+	cd apps/core/platform/iac-shell/staging && terraform init -upgrade
 
-fly-deploy:
-	cd apps/service-rest-api && fly deploy
+terraform-plan-staging:
+	cd apps/core/platform/iac-shell/staging && terraform plan -var-file=env.tfvars
 
-fly-logs:
-	cd apps/service-rest-api && fly logs
+terraform-apply-staging:
+	cd apps/core/platform/iac-shell/staging && terraform apply -var-file=env.tfvars
 
-fly-status:
-	cd apps/service-rest-api && fly status
+terraform-apply-staging-auto-approve:
+	cd apps/core/platform/iac-shell/staging && terraform apply -var-file=env.tfvars -auto-approve
 
-fly-status-watch:
-	cd apps/service-rest-api && fly status --watch
+terraform-plan-staging-out:
+	cd apps/core/platform/iac-shell/staging && terraform plan -var-file=env.tfvars -out=tfplan
 
-fly-open:
-	cd apps/service-rest-api && fly open
-
-fly-volume-create-data:
-	cd apps/service-rest-api && fly vol create data --region gru --size 1
-
-fly-volumes-list:
-	cd apps/service-rest-api && fly volumes list
-
-fly-apps-list:
-	cd apps/service-rest-api && fly apps list
-
-fly-apps-destroy:
-	cd apps/service-rest-api && fly apps destroy black-fog-4181
-
-fly-mount-volume:
-	cd apps/service-rest-api && fly m run . -v vol_xme149kwxy3vowpl:/data
-
-fly-secrets-set:
-	cd apps/service-rest-api && fly secrets set
-
-fly-secrets-list:
-	fly secrets list
-
-terraform-init:
-	cd apps/service-iac && terraform init
-
-terraform-plan:
-	cd apps/service-iac && terraform plan
-
-terraform-apply:
-	cd apps/service-iac && terraform apply
-
-terraform-apply-auto-approve:
-	cd apps/service-iac && terraform apply -auto-approve
-
-terraform-plan-out:
-	cd apps/service-iac && terraform plan -out=tfplan
-
-terraform-destroy:
-	cd apps/service-iac && terraform destroy
+terraform-destroy-staging:
+	cd apps/core/platform/iac-shell/staging && terraform destroy -var-file=env.tfvars
