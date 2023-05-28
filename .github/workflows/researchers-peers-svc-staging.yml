@@ -40,7 +40,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/cloud-iac-terraform/credentials.json
+          echo '${{ secrets.GCP_STAGING_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/cloud-iac-terraform/environments/staging/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
