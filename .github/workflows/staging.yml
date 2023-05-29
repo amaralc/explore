@@ -80,8 +80,8 @@ jobs:
       GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
       GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       GCP_REGION: ${{ secrets.GCP_REGION }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      DIRECT_URL: ${{ secrets.DIRECT_URL }}
+      POSTGRES_POOLED_CONNECTION_DATABASE_URL: ${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}
+      POSTGRES_DIRECT_CONNECTION_DATABASE_URL: ${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}
       VERCEL_API_TOKEN: ${{ secrets.VERCEL_API_TOKEN }}
     defaults:
       run:
@@ -129,7 +129,7 @@ jobs:
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "database_url=${{ secrets.DATABASE_URL }}" -var "direct_url=${{ secrets.DIRECT_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform/iac-shell/staging
 
       - name: Terraform Apply

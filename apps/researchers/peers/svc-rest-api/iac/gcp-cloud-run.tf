@@ -23,9 +23,9 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
           value = "entrypoints/run-${var.app_name}-${var.app_component_name}.sh"
         }
 
-        # Set the DATABASE_URL environment variable from the database URL secret
+        # Set the POSTGRES_POOLED_CONNECTION_DATABASE_URL environment variable from the database URL secret
         env {
-          name = "DATABASE_URL"
+          name = "POSTGRES_POOLED_CONNECTION_DATABASE_URL"
           value_from {
             secret_key_ref {
               name = google_secret_manager_secret.database_url_secret.secret_id # Reference the secret
@@ -34,9 +34,9 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
           }
         }
 
-        # Set the DIRECT_URL environment variable from the direct URL secret
+        # Set the POSTGRES_DIRECT_CONNECTION_DATABASE_URL environment variable from the direct URL secret
         env {
-          name = "DIRECT_URL"
+          name = "POSTGRES_DIRECT_CONNECTION_DATABASE_URL"
           value_from {
             secret_key_ref {
               name = google_secret_manager_secret.direct_url_secret.secret_id # Reference the secret
