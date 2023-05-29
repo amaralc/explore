@@ -5,12 +5,12 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
-name: Build and Deploy to Staging
+name: Build and Deploy to Production
 
 on:
   push:
     branches:
-      - staging
+      - production
     paths:
       - "apps/core/platform/iac-shell/**"
       - "apps/researchers/peers/svc-rest-api/**"
@@ -19,7 +19,7 @@ on:
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
-      - ".github/workflows/staging.yml"
+      - ".github/workflows/production.yml"
 
 env:
   HUSKY: 0
@@ -33,7 +33,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
-      - name: Checkout staging branch
+      - name: Checkout production branch
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
@@ -42,7 +42,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/staging/credentials.json
+          echo '${{ secrets.GCP_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/production/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -73,11 +73,11 @@ jobs:
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
             gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
 
-  deploy-to-staging:
+  deploy-to-production:
     needs: [build-researchers-peers-svc]
     runs-on: ubuntu-latest
     environment:
-      name: peerlab-staging
+      name: peerlab-production
     env:
       GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
       GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -90,7 +90,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
-      - name: Checkout staging branch
+      - name: Checkout production branch
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
@@ -99,7 +99,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/staging/credentials.json
+          echo '${{ secrets.GCP_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/production/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -120,22 +120,22 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/core/platform/iac-shell/staging
+        working-directory: apps/core/platform/iac-shell/production
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/core/platform/iac-shell/staging
+        working-directory: apps/core/platform/iac-shell/production
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_REGION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-        working-directory: apps/core/platform/iac-shell/staging
+        working-directory: apps/core/platform/iac-shell/production
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform/iac-shell/staging
+        working-directory: apps/core/platform/iac-shell/production

@@ -1,5 +1,5 @@
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
-resource "google_cloud_run_service" "apps_researchers_peers" {
+resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
   # Name of the service
   name = "${var.app_name}-${var.app_component_name}"
 
@@ -23,9 +23,9 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
           value = "entrypoints/run-${var.app_name}-${var.app_component_name}.sh"
         }
 
-        # Set the DATABASE_URL environment variable from the database URL secret
+        # Set the POSTGRES_POOLED_CONNECTION_DATABASE_URL environment variable from the database URL secret
         env {
-          name = "DATABASE_URL"
+          name = "POSTGRES_POOLED_CONNECTION_DATABASE_URL"
           value_from {
             secret_key_ref {
               name = google_secret_manager_secret.database_url_secret.secret_id # Reference the secret
@@ -34,9 +34,9 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
           }
         }
 
-        # Set the DIRECT_URL environment variable from the direct URL secret
+        # Set the POSTGRES_DIRECT_CONNECTION_DATABASE_URL environment variable from the direct URL secret
         env {
-          name = "DIRECT_URL"
+          name = "POSTGRES_DIRECT_CONNECTION_DATABASE_URL"
           value_from {
             secret_key_ref {
               name = google_secret_manager_secret.direct_url_secret.secret_id # Reference the secret
@@ -60,8 +60,8 @@ resource "google_cloud_run_service" "apps_researchers_peers" {
 
 # This block defines a Cloud Run IAM member. This sets the permissions for who can access the Cloud Run service.
 resource "google_cloud_run_service_iam_member" "public" {
-  service  = google_cloud_run_service.apps_researchers_peers.name     # The name of the service to which the IAM policy will be applied
-  location = google_cloud_run_service.apps_researchers_peers.location # The location of the service to which the IAM policy will be applied
-  role     = "roles/run.invoker"                                      # The role to be granted
-  member   = "allUsers"                                               # The user, group, or service account who will have the role granted. In this case, all users.
+  service  = google_cloud_run_service.apps_researchers_peers_rest_api.name     # The name of the service to which the IAM policy will be applied
+  location = google_cloud_run_service.apps_researchers_peers_rest_api.location # The location of the service to which the IAM policy will be applied
+  role     = "roles/run.invoker"                                               # The role to be granted
+  member   = "allUsers"                                                        # The user, group, or service account who will have the role granted. In this case, all users.
 }
