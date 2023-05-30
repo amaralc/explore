@@ -28,6 +28,8 @@ env:
 jobs:
   build-researchers-peers-svc:
     runs-on: ubuntu-latest
+    environment:
+      name: peerlab-staging
     defaults:
       run:
         working-directory: ${{ github.workspace }}
