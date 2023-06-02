@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# How to call this script:
-# bash ./filename.sh my-service-account "My new service account" "My Service Account" my-project-id
+# How to call this script: bash ./file/path/filename.sh
 
 SERVICE_ACCOUNT_NAME="my-service-account"
 DESCRIPTION="my-service-account-description"
