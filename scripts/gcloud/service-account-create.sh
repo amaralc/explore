@@ -3,7 +3,7 @@
 # Creating a service account
 
 # 1. Set the environment variables
-# 2. Call this script with the following command: bash ./scripts/gcloud/create-service-account.sh
+# 2. Call this script with the following command: bash ./scripts/gcloud/service-account-create.sh
 
 SERVICE_ACCOUNT_NAME="my-service-account"
 DESCRIPTION="my-service-account-description"
