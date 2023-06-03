@@ -2,7 +2,9 @@
 
 # This script accepts named arguments and assigns necessary roles to a service account for managing GCP resources with Terraform
 
-# Variables
+# Expected named arguments:
+# --project-id
+# --service-account-email
 
 # Parse command line arguments
 # The loop iterates over all arguments
@@ -13,11 +15,11 @@ for i in "$@"                       # This starts a loop that iterates over each
 do                                  # This is the start of the loop block.
 case $i in                          # This starts a case statement, which checks the current argument ($i) against several patterns.
     --project-id=*)                 # This starts a new case statement pattern.
-    PROJECT_ID="${i#*=}"            # This pattern matches any argument that starts with "--project-id=". The ${i#*=} syntax removes the prefix "--project-id=" from the argument.
+    PROJECT_ID="${i#*=}"            # Assign the value after the equal sign, to a variable. This pattern matches any argument that starts with "--project-id=". The ${i#*=} syntax removes the prefix "--project-id=" from the argument.
     shift                           # This removes the current argument from the list of arguments. This is necessary because the argument is no longer needed.
     ;;                              # This ends the case statement pattern.
     --service-account-name=*)       # This starts a new case statement pattern.
-    SERVICE_ACCOUNT_NAME="${i#*=}"  # This pattern matches any argument that starts with "--service-account-name=". The ${i#*=} syntax removes the prefix "--service-account-name=" from the argument.
+    SERVICE_ACCOUNT_NAME="${i#*=}"  # Assign the value after the equal sign, to a variable. This pattern matches any argument that starts with "--service-account-name=". The ${i#*=} syntax removes the prefix "--service-account-name=" from the argument.
     shift                           # This removes the current argument from the list of arguments. This is necessary because the argument is no longer needed.
     ;;                              # This ends the case statement pattern.
 esac                                # This ends the case statement.
@@ -25,8 +27,7 @@ done                                # This ends the loop block.
 
 SERVICE_ACCOUNT_EMAIL="$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com"
 
-
-# gcloud cli commands
+# CLI commands
 
 # Assign the Secret Manager Secret Accessor role
 # This role allows the service account to access secrets in Secret Manager
