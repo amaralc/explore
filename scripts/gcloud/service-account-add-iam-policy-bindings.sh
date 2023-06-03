@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Variables
-PROJECT_ID="my-project-id"
-SERVICE_ACCOUNT_NAME="my-service-account"
+PROJECT_ID=$1
+SERVICE_ACCOUNT_NAME=$2
 SERVICE_ACCOUNT_EMAIL="$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com"
 
 # This script assigns necessary roles to a service account for managing GCP resources with Terraform
