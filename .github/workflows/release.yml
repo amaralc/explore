@@ -57,7 +57,7 @@ jobs:
   release:
     # Run the job on Ubuntu latest version
     runs-on: ubuntu-latest
-    needs: [verify-commit-message]
+    needs: [check-commit-message]
 
     # Set the working directory for this job
     defaults:
