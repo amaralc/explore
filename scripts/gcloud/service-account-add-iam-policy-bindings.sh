@@ -4,7 +4,7 @@
 
 # Expected named arguments:
 # --project-id
-# --service-account-email
+# --service-account-name
 
 # Parse command line arguments
 # The loop iterates over all arguments
