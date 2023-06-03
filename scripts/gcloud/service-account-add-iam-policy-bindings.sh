@@ -2,7 +2,8 @@
 
 # Variables
 PROJECT_ID="my-project-id"
-SERVICE_ACCOUNT_EMAIL="my-service-account@my-project-id.iam.gserviceaccount.com"
+SERVICE_ACCOUNT_NAME="my-service-account"
+SERVICE_ACCOUNT_EMAIL="$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com"
 
 # This script assigns necessary roles to a service account for managing GCP resources with Terraform
 
