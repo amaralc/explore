@@ -19,7 +19,7 @@ on:
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
-      - ".github/workflows/staging.yml"
+      - ".github/workflows/deploy-to-staging.yml"
 
 env:
   HUSKY: 0

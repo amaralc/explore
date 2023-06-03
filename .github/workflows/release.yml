@@ -14,7 +14,7 @@ name: Automated Release
 on:
   push:
     branches:
-      - staging
+      - production
 
 # Set environment variable to disable Husky
 env:
@@ -24,7 +24,7 @@ jobs:
   check-commit-message:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout staging branch
+      - name: Checkout production branch
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:

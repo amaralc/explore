@@ -19,7 +19,7 @@ on:
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
-      - ".github/workflows/production.yml"
+      - ".github/workflows/deploy-to-production.yml"
 
 env:
   HUSKY: 0
