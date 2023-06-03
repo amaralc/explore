@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.2](https://github.com/amaralc/peerlab/compare/peerlab@0.11.1...peerlab@0.11.2) (2023-06-03)
+
+**Note:** Version bump only for package peerlab
+
+## [0.11.1](https://github.com/amaralc/peerlab/compare/peerlab@0.11.0...peerlab@0.11.1) (2023-06-03)
+
+**Note:** Version bump only for package peerlab
+
+## [0.11.0](https://github.com/amaralc/peerlab/compare/peerlab@0.10.2...peerlab@0.11.0) (2023-06-03)
+
+### Features
+
+- **PEER-540:** configure gh actions for staging and prod env ([63a99d1](https://github.com/amaralc/peerlab/commit/63a99d1e22d54317bbd00fb84cb72d5d036aafbc))
+- **PEER-543:** add script for creating iam bidings ([3100c8f](https://github.com/amaralc/peerlab/commit/3100c8f1baa930da092ea9b394fc576ee43924a8))
+- **PEER-543:** create service account script ([e75b276](https://github.com/amaralc/peerlab/commit/e75b276d83de4e20089113846cadcd7fed783e49))
+- **PEER-543:** create storage bucket script ([df2661d](https://github.com/amaralc/peerlab/commit/df2661d9147b9a5a651457c502054f06a3acb2b9))
+- **PEER-543:** enable logging ([99004eb](https://github.com/amaralc/peerlab/commit/99004ebba4e94aced44c66d001a37c006727bf9f))
+- **PEER-544:** add automated release step poc ([1b1d815](https://github.com/amaralc/peerlab/commit/1b1d815436630df4eb8e8cd19c0731f2c821caa6))
+
 ## [0.10.2](https://github.com/amaralc/peerlab/compare/peerlab@0.10.1...peerlab@0.10.2) (2023-05-29)
 
 **Note:** Version bump only for package peerlab

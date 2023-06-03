@@ -8,9 +8,9 @@
 name: Build and Deploy to production
 
 on:
-  push:
-    branches:
-      - production
+  create:
+    tags:
+      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
     paths:
       - "apps/core/platform/iac-shell/**"
       - "apps/researchers/peers/svc-rest-api/**"
@@ -19,15 +19,28 @@ on:
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
-      - ".github/workflows/production.yml"
+      - ".github/workflows/deploy-to-production.yml"
 
 env:
   HUSKY: 0
   DOCKER_IMAGE_NAME: researchers-peers # Must match configuration in main.tf for that app
 
 jobs:
-  build-researchers-peers-svc:
+  check-branch:
     runs-on: ubuntu-latest
+    steps:
+      - name: Check branch
+        run: |
+          BRANCHES=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }}/branches-where-head)
+          if [[ $BRANCHES != *"production"* ]]; then
+            echo "Tag is not on the production branch, cancelling workflow."
+            exit 1
+          fi
+  build-researchers-peers-svc:
+    needs: [check-branch]
+    runs-on: ubuntu-latest
+    environment:
+      name: peerlab-production
     defaults:
       run:
         working-directory: ${{ github.workspace }}
@@ -79,7 +92,6 @@ jobs:
     environment:
       name: peerlab-production
     env:
-      GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
       GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       GCP_REGION: ${{ secrets.GCP_REGION }}
       POSTGRES_POOLED_CONNECTION_DATABASE_URL: ${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}

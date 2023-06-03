@@ -5,7 +5,10 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
-name: Release
+# This workflow checks if the commit message contains the string 'skip-github-pipeline' and if it does not
+# then it use lerna to version the repo and publish the packages to GitHub Packages.
+
+name: Automated Release
 
 # Trigger the workflow when pushing to the bugfix branch
 on:
@@ -18,9 +21,32 @@ env:
   HUSKY: 0
 
 jobs:
-  production:
+  check-commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v3
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
+
+      - name: Check commit message
+        id: check_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
+          if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
+            echo "Commit message contains 'skip-github-pipeline', canceling workflow."
+            exit 1
+          else
+            echo "Commit message dos not contain 'skip-github-pipeline', proceeding with workflow."
+            exit 0
+          fi
+
+  release:
     # Run the job on Ubuntu latest version
     runs-on: ubuntu-latest
+    needs: [check-commit-message]
 
     # Set the working directory for this job
     defaults:
@@ -144,18 +170,18 @@ jobs:
       #     git remote set-url origin "https://${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}@github.com/amaralc/peerlab.git"
       #     git remote -v
 
-      # - name: Release Step
-      #   if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-      #     NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
-      #   run: |
-      #     git status
-      #     git diff
-      #     yarn git:discard:all
-      #     git status
-      #     git diff
-      #     git config --global user.name "${{ github.actor }}"
-      #     git config --global user.email "${{ github.actor}}@users.noreply.github.com"
-      #     # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
-      #     yarn release
+      - name: Release Step
+        if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+          # NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
+        run: |
+          git status
+          git diff
+          yarn git:discard:all
+          git status
+          git diff
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor}}@users.noreply.github.com"
+          # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
+          yarn release

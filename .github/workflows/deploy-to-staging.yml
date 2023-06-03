@@ -5,7 +5,7 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
-name: Build and Deploy to Staging
+name: Build and Deploy to staging
 
 on:
   push:
@@ -19,7 +19,7 @@ on:
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
-      - ".github/workflows/staging.yml"
+      - ".github/workflows/deploy-to-staging.yml"
 
 env:
   HUSKY: 0
@@ -28,6 +28,8 @@ env:
 jobs:
   build-researchers-peers-svc:
     runs-on: ubuntu-latest
+    environment:
+      name: peerlab-staging
     defaults:
       run:
         working-directory: ${{ github.workspace }}
@@ -79,7 +81,6 @@ jobs:
     environment:
       name: peerlab-staging
     env:
-      GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
       GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       GCP_REGION: ${{ secrets.GCP_REGION }}
       POSTGRES_POOLED_CONNECTION_DATABASE_URL: ${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}
