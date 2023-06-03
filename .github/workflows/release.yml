@@ -5,6 +5,9 @@
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-5f2c3fdffaa0
 # - https://medium.com/@guysenpai89/nx-monorepo-publish-your-libraries-to-github-packages-with-github-actions-semantic-release-fa9822467b24
 
+# This workflow checks if the commit message contains the string 'skip-github-pipeline' and if it does not
+# then it use lerna to version the repo and publish the packages to GitHub Packages.
+
 name: Automated Release
 
 # Trigger the workflow when pushing to the bugfix branch
