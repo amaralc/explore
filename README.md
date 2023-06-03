@@ -128,6 +128,13 @@ https://docs.github.com/en/actions/deployment/targeting-different-environments/u
 
 - Use nx migrate; Use commit prefix option; It is worth it.
 
+# Set up new environment
+
+- Create new project on GCP;
+- Create service account in gcp: `bash ./scripts/gcloud/service-account-create.sh`;
+- Create storage bucket in gcp for terraform state: `bash ./scripts/gcloud/storage-bucket-create.sh`;
+- Enable versioning on storage bucket: `bash ./scripts/gcloud/storage-bucket-versioning-enable.sh`;
+
 # References
 
 - https://github.com/devfullcycle/imersao-12-esquenta-kafka
