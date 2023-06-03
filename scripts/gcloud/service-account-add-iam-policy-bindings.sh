@@ -25,6 +25,21 @@ case $i in                          # This starts a case statement, which checks
 esac                                # This ends the case statement.
 done                                # This ends the loop block.
 
+# Check if PROJECT_ID is set
+if [ -z "$PROJECT_ID" ]
+then
+    echo "Error: --project-id flag is required"
+    exit 1
+fi
+
+# Check if SERVICE_ACCOUNT_NAME is set
+if [ -z "$SERVICE_ACCOUNT_NAME" ]
+then
+    echo "Error: --service-account-name flag is required"
+    exit 1
+fi
+
+# Set SERVICE_ACCOUNT_EMAIL
 SERVICE_ACCOUNT_EMAIL="$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com"
 
 # CLI commands
