@@ -32,14 +32,14 @@ jobs:
         id: check_commit_message
         run: |
           COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
-          if [[ $COMMIT_MESSAGE == *"skip-github-ci"* ]]; then
-            echo "Commit message contains 'skip-github-ci', canceling workflow."
+          if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
+            echo "Commit message contains 'skip-github-pipeline', canceling workflow."
             echo "::set-output name=cancel::true"
           else
             echo "::set-output name=cancel::false"
           fi
 
-      - name: Cancel workflow if commit message contains 'skip-github-ci'
+      - name: Cancel workflow if commit message contains 'skip-github-pipeline'
         if: steps.check_commit_message.outputs.cancel == 'true'
         uses: actions/github-script@v4
         with:
