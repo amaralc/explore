@@ -81,7 +81,6 @@ jobs:
     environment:
       name: peerlab-staging
     env:
-      GCP_ENVIRONMENT: ${{ secrets.GCP_ENVIRONMENT }}
       GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       GCP_REGION: ${{ secrets.GCP_REGION }}
       POSTGRES_POOLED_CONNECTION_DATABASE_URL: ${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}
