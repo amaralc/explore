@@ -34,25 +34,11 @@ jobs:
           COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
           if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
             echo "Commit message contains 'skip-github-pipeline', canceling workflow."
-            echo "::set-output name=cancel::true"
+            exit 1
           else
-            echo "::set-output name=cancel::false"
+            echo "Commit message dos not contain 'skip-github-pipeline', proceeding with workflow."
+            exit 0
           fi
-
-      - name: Cancel workflow if commit message contains 'skip-github-pipeline'
-        if: steps.check_commit_message.outputs.cancel == 'true'
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { context } = require('@actions/github');
-            const octokit = context.octokit;
-
-            octokit.actions.cancelWorkflowRun({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: context.runId
-            });
 
   release:
     # Run the job on Ubuntu latest version
