@@ -9,9 +9,12 @@
 name: Build and Deploy to production
 
 on:
-  create:
-    tags:
-      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+  push:
+    branches:
+      - "production"
+    # create:
+    #   tags:
+    #     - "peerlab@[0-9]+.[0-9]+.[0-9]+"
     paths:
       - "apps/core/platform/iac-shell/**"
       - "apps/researchers/peers/svc-rest-api/**"
