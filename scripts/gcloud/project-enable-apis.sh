@@ -34,10 +34,13 @@ fi
 gcloud services enable iam.googleapis.com --project $PROJECT_ID
 
 # Enable Container Registry API
-gcloud services enable containerregistry.googleapis.com --project $PROJECT_ID
+# gcloud services enable containerregistry.googleapis.com --project $PROJECT_ID # This is not necessary since we will use artifact registry instead
 
 # Enable Secret Manager API
 gcloud services enable secretmanager.googleapis.com --project $PROJECT_ID
 
 # Enable Cloud Run API
 gcloud services enable run.googleapis.com --project $PROJECT_ID
+
+# Enable Artifact Registry API
+gcloud services enable artifactregistry.googleapis.com --project $PROJECT_ID
