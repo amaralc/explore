@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.0](https://github.com/amaralc/peerlab/compare/peerlab@0.11.5...peerlab@0.12.0) (2023-06-03)
+
+### Features
+
+- **PEER-544:** enable apis and add index script shell ([cdd71d6](https://github.com/amaralc/peerlab/commit/cdd71d6a4a69bc344557e5904f03ca163b8d15e1))
+
+## [0.11.5](https://github.com/amaralc/peerlab/compare/peerlab@0.11.4...peerlab@0.11.5) (2023-06-03)
+
+**Note:** Version bump only for package peerlab
+
+## [0.11.4](https://github.com/amaralc/peerlab/compare/peerlab@0.11.3...peerlab@0.11.4) (2023-06-03)
+
+**Note:** Version bump only for package peerlab
+
 ## [0.11.3](https://github.com/amaralc/peerlab/compare/peerlab@0.11.2...peerlab@0.11.3) (2023-06-03)
 
 **Note:** Version bump only for package peerlab
