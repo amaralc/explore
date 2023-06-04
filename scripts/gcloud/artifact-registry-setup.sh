@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# This script accepts named arguments and assigns necessary roles to a service account for managing GCP resources with Terraform
+# This script accepts named arguments and create a storage bucket with versioning and logging enabled
 
 # Expected named arguments:
 # --project-id
+# --location (https://cloud.google.com/storage/docs/locations, ex.: europe-west3)
+# --repository-format (ex.: docker)
+# --repository-name
 
-# Call this script with the following command: bash ./scripts/gcloud/project-enable-apis.sh --project-id=PROJECT_ID
+# Call this script with the following command: bash ./scripts/gcloud/artifact-registry-setup.sh --project-id=PROJECT_ID --location=LOCATION --repository-name=REPOSITORY_NAME --repository-description=REPOSITORY_DESCRIPTION --repository-format=REPOSITORY_FORMAT
 # Obs.: this script assumes that the user has already authenticated with gcloud CLI and set the default project with gcloud config set project PROJECT_ID
 
 # Parse command line arguments
 # The loop iterates over all arguments
-# For each argument, it checks if it matches one of the expected argument formats (--project-id=*)
+# For each argument, it checks if it matches one of the expected argument formats (--project-id=*, --location=*)
 # If an argument matches, it removes the prefix (e.g., --project-id=) and assigns the rest of the argument to a variable
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
@@ -20,6 +23,18 @@ case $i in                          # This starts a case statement, which checks
     PROJECT_ID="${i#*=}"            # Assign the value after the equal sign, to a variable. This pattern matches any argument that starts with "--project-id=". The ${i#*=} syntax removes the prefix "--project-id=" from the argument.
     shift                           # This removes the current argument from the list of arguments. This is necessary because the argument is no longer needed.
     ;;                              # This ends the case statement pattern.
+    --location=*)
+    LOCATION="${i#*=}"
+    shift
+    ;;
+    --repository-name=*)
+    REPOSITORY_NAME="${i#*=}"
+    shift
+    ;;
+    --repository-format=*)
+    REPOSITORY_FORMAT="${i#*=}"
+    shift
+    ;;
 esac                                # This ends the case statement.
 done                                # This ends the loop block.
 
@@ -30,17 +45,26 @@ then
     exit 1
 fi
 
-# Enable IAM API
-gcloud services enable iam.googleapis.com --project $PROJECT_ID
+# Check if LOCATION is set
+if [ -z "$LOCATION" ]
+then
+    echo "Error: --location flag is required"
+    exit 1
+fi
 
-# Enable Container Registry API
-# gcloud services enable containerregistry.googleapis.com --project $PROJECT_ID # This is not necessary since we will use artifact registry instead
+# Check if REPOSITORY_FORMAT is set
+if [ -z "$REPOSITORY_FORMAT" ]
+then
+    echo "Error: --repository-format flag is required"
+    exit 1
+fi
 
-# Enable Secret Manager API
-gcloud services enable secretmanager.googleapis.com --project $PROJECT_ID
+# Check if REPOSITORY_NAME is set
+if [ -z "$REPOSITORY_NAME" ]
+then
+    echo "Error: --repository-name flag is required"
+    exit 1
+fi
 
-# Enable Cloud Run API
-gcloud services enable run.googleapis.com --project $PROJECT_ID
-
-# Enable Artifact Registry API
-gcloud services enable artifactregistry.googleapis.com --project $PROJECT_ID
+# Create an artifact registry repository
+gcloud artifacts repositories create $REPOSITORY_NAME --repository-format=$REPOSITORY_FORMAT --location=$LOCATION --project=$PROJECT_ID
