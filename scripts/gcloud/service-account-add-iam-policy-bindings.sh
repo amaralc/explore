@@ -47,30 +47,50 @@ SERVICE_ACCOUNT_EMAIL="$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
 
 # CLI commands
 
-# # Assign the Secret Manager Secret Accessor role
-# # This role allows the service account to access secrets in Secret Manager
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/secretmanager.secretAccessor"
-
-# # Assign the IAM Service Account User role
-# # This role allows the service account to act as other service accounts
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountUser"
-
-# # Assign the Cloud Run Admin role
-# # This role allows the service account to administer Cloud Run services
+# Assign the Cloud Run Admin role
+# This role allows the service account to create and manage Cloud Run services
 gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/run.admin"
 
-# # Assign the Cloud Run Invoker role
-# # This role allows the service account to invoke Cloud Run services
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/run.invoker"
+# # Assign the Compute Admin role
+# # This role allows the service account to create and manage compute resources
+# gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/compute.admin"
 
-# # Assign the Storage Admin role
-# # This role allows the service account to administer Cloud Storage resources
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/storage.admin"
+# # Assign the Project IAM Admin role
+# # This role allows the service account to manage IAM policies of the project
+# gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectIamAdmin"
 
-# # Assign the Service Account Key Admin role
-# # This role allows the service account to create and manage service account keys
+# # Assign the Pub/Sub Subscriber role
+# # This role allows the service account to subscribe to Pub/Sub topics
+# gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/pubsub.subscriber"
+
+# Assign the Secret Manager Admin role
+# This role allows the service account to manage secret resources
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/secretmanager.admin"
+
+# # Assign the Security Admin role
+# # This role allows the service account to manage security settings
+# gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin"
+
+# Assign the Service Account Admin role
+# This role allows the service account to create and manage service accounts
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountAdmin"
+
+# Assign the Service Account Key Admin role
+# This role allows the service account to manage service account keys
 gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountKeyAdmin"
 
-# # Assign the IAM Role Admin role
-# # This role allows the service account to create and manage IAM roles
-gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/iam.roleAdmin"
+# Assign the Service Account User role
+# This role allows the service account to act as other service accounts
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountUser"
+
+# # Assign the Service Networking Admin role
+# # This role allows the service account to manage service networking settings
+# gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/servicenetworking.networksAdmin"
+
+# Assign the Storage Admin role
+# This role allows the service account to manage storage resources
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/storage.admin"
+
+# # Assign the Storage Object Admin role
+# # This role allows the service account to manage storage objects
+# gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT_EMAIL" --role="roles/storage.objectAdmin"
