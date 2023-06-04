@@ -86,21 +86,21 @@ jobs:
       #     username: _json_key
       #     password: ${{ secrets.GCP_PEERLAB_TF_SERVICE_ACCOUNT }}
 
-      # - name: Build and push Docker image
-      #   run: |
-      #     docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} -f ./apps/researchers/peers/Dockerfile .
-      #     docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-      #     docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
-
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./apps/researchers/peers/Dockerfile
-          push: true
-          tags: |
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-            gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} -f ./apps/researchers/peers/Dockerfile .
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: ./apps/researchers/peers/Dockerfile
+      #     push: true
+      #     tags: |
+      #       gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+      #       gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
 
   deploy-to-production:
     needs: [build-researchers-peers-svc]
