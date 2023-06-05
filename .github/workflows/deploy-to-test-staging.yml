@@ -56,8 +56,8 @@ jobs:
 
       - name: Push docker image to container registry
         run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+          gcloud docker -- push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          gcloud docker -- push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
 
       # - id: "auth"
       #   name: "Authenticate to Google Cloud"
