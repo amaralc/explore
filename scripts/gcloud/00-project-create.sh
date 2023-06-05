@@ -3,7 +3,7 @@
 # Expected named arguments:
 # --project-id
 
-# Call this script with the following command: bash ./scripts/gcloud/00-create-project.sh --project-id=PROJECT_ID
+# Call this script with the following command: bash ./scripts/gcloud/00-project-create.sh --project-id=PROJECT_ID
 # Obs.: this script assumes that you are already authenticated with gcloud CLI.
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
