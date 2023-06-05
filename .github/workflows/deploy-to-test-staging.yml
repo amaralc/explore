@@ -46,18 +46,20 @@ jobs:
         run: |
           echo '${{ secrets.GCP_PEERLAB_TF_SERVICE_ACCOUNT }}' > apps/core/platform/iac-shell/test-staging/credentials.json
 
-      - name: Build docker image
+      - name: Build and Push images
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} -f ./apps/researchers/peers/Dockerfile .
+          gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
+          docker build -t europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-images/${{ env.DOCKER_IMAGE_NAME }}:latest -t europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-images/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} -f ./apps/researchers/peers/Dockerfile .
+          docker push europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-images/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker push europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-images/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Configure docker client
-        run: |
-          gcloud auth configure-docker --quiet
+      # - name: Build docker image
+      #   run: |
 
-      - name: Push docker image to container registry
-        run: |
-          gcloud docker -- push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          gcloud docker -- push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+      # - name: Push docker image to container registry
+      #   run: |
+      #     gcloud docker -- push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+      #     gcloud docker -- push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
 
       # - id: "auth"
       #   name: "Authenticate to Google Cloud"
