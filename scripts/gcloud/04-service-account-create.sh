@@ -8,7 +8,7 @@
 # --description
 # --display-name
 
-# Call this script with the following command: bash ./scripts/gcloud/service-account-create.sh --project-id=PROJECT_ID --service-account-name=SERVICE_ACCOUNT_NAME --description=DESCRIPTION --display-name=DISPLAY_NAME
+# Call this script with the following command: bash ./scripts/gcloud/04-service-account-create.sh --project-id=PROJECT_ID --service-account-name=SERVICE_ACCOUNT_NAME --description=DESCRIPTION --display-name=DISPLAY_NAME
 # Obs.: this script assumes that the user has already authenticated with gcloud CLI and set the default project with gcloud config set project PROJECT_ID
 
 # Parse command line arguments

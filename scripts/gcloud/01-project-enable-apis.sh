@@ -5,7 +5,7 @@
 # Expected named arguments:
 # --project-id
 
-# Call this script with the following command: bash ./scripts/gcloud/project-enable-apis.sh --project-id=PROJECT_ID
+# Call this script with the following command: bash ./scripts/gcloud/01-project-enable-apis.sh --project-id=PROJECT_ID
 # Obs.: this script assumes that the user has already authenticated with gcloud CLI and set the default project with gcloud config set project PROJECT_ID
 
 # Parse command line arguments
