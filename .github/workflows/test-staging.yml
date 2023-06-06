@@ -3,7 +3,7 @@ name: Build and Push Docker image
 on:
   push:
     branches:
-      - xxx
+      - staging
 
 jobs:
   build:
@@ -25,14 +25,11 @@ jobs:
           username: _json_key
           password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
-      - name: Build and push Docker image
+      - name: Build and push nginx Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/researchers/peers/Dockerfile
           push: true
-          tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          tags: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
         env:
-          IMAGE_NAME: researchers-peers
+          IMAGE_NAME: my-image
