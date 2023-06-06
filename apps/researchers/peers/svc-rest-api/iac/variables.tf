@@ -23,7 +23,11 @@ variable "project_id" {
 variable "region" {
   description = "The region where resources will be created"
   type        = string
+}
 
+variable "gcp_docker_artifact_repository_name" {
+  description = "The name of the Docker repository"
+  type        = string
 }
 
 variable "database_url" {

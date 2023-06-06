@@ -6,7 +6,7 @@
 # --project-id
 # --service-account-name
 
-# Call this script with the following command: bash ./scripts/gcloud/service-account-add-iam-policy-bindings.sh --project-id=PROJECT_ID --service-account-name=SERVICE_ACCOUNT_NAME
+# Call this script with the following command: bash ./scripts/gcloud/05-service-account-add-iam-policy-bindings.sh --project-id=PROJECT_ID --service-account-name=SERVICE_ACCOUNT_NAME
 # Obs.: this script assumes that the user has already authenticated with gcloud CLI and set the default project with gcloud config set project PROJECT_ID
 
 # Parse command line arguments
