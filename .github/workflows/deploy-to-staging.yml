@@ -10,7 +10,7 @@ name: Build and Deploy to staging ##
 on:
   push:
     branches:
-      - staging
+      - old-staging
     paths:
       - "apps/core/platform/iac-shell/**"
       - "apps/researchers/peers/svc-rest-api/**"
