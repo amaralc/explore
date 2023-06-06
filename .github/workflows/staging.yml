@@ -3,7 +3,7 @@ name: Build and Push Docker image
 on:
   push:
     branches:
-      - xxx
+      - staging
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
           file: ./apps/researchers/peers/Dockerfile
           push: true
           tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
         env:
           IMAGE_NAME: researchers-peers

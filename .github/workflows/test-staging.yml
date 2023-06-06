@@ -3,13 +3,13 @@ name: Build and Push Docker image
 on:
   push:
     branches:
-      - staging
+      - xxx
 
 jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: staging
+      name: xxx
 
     steps:
       - name: Checkout code
