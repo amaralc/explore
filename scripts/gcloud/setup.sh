@@ -15,7 +15,8 @@ GCP_DOCKER_ARTIFACT_REPOSITORY_NAME="docker-repository"
 # Service account name
 GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME="terraform-admin"
 
-
+# Set SERVICE_ACCOUNT_EMAIL
+GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com"
 
 
 # Create project
@@ -37,10 +38,14 @@ GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME="terraform-admin"
 # gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
 
 # Grant artifact registry permissions to the service account
-# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member=serviceAccount:$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com --role=roles/artifactregistry.writer
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member=serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL --role=roles/artifactregistry.writer
+
+# Grant storage permissions to the service account (terraform backend)
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.objectAdmin"
 
 # Create a key for the service account
 # gcloud iam service-accounts keys create ./key.json --iam-account $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
+
 
 # Create a secret in github
 # ... -> Settings -> Secrets -> New repository secret -> Name: GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY -> Value: content of ~/key.json
