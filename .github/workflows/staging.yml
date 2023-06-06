@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - staging
+    paths:
+      - "apps/core/platform/iac-shell/**"
+      - "apps/researchers/peers/svc-rest-api/**"
+      - "apps/researchers/peers/svc-consumer/**"
+      - "apps/researchers/peers/Dockerfile"
+      - "libs/researchers/peers/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".github/workflows/staging.yml"
 
 jobs:
   build:

@@ -4,6 +4,15 @@ on:
   create:
     tags:
       - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+    paths:
+      - "apps/core/platform/iac-shell/**"
+      - "apps/researchers/peers/svc-rest-api/**"
+      - "apps/researchers/peers/svc-consumer/**"
+      - "apps/researchers/peers/Dockerfile"
+      - "libs/researchers/peers/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".github/workflows/production.yml"
 
 jobs:
   check-branch:
