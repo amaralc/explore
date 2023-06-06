@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: main
 
     steps:
       - name: Checkout code
@@ -19,13 +21,15 @@ jobs:
       - name: Login to Google Container Registry
         uses: docker/login-action@v1
         with:
-          registry: europe-west3-docker.pkg.dev
+          registry: ${{ secrets.PROJECT_LOCATION }}-docker.pkg.dev
           username: _json_key
           password: ${{ secrets.GCR_JSON_KEY }}
 
-      - name: Build and push Docker image
+      - name: Build and push nginx Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: europe-west3-docker.pkg.dev/my-pl-test-project/my-docker-repo/my-image:latest
+          tags: ${{ secrets.PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.PROJECT_ID }}/${{ secrets.DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
+        env:
+          IMAGE_NAME: my-image
