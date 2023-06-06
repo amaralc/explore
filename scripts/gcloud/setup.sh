@@ -1,7 +1,7 @@
 # Run this script: bash scripts/gcloud/setup.sh
 
 # Define project name
-GCP_PROJECT_ID="project-id"
+GCP_PROJECT_ID="peerlab-platform-staging"
 
 # Define billing account id
 GCP_BILLING_ACCOUNT_ID="billing-account-id"
@@ -18,6 +18,11 @@ GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME="terraform-admin"
 # Set SERVICE_ACCOUNT_EMAIL
 GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com"
 
+# Define terraform bucket name
+GCP_TERRAFORM_STATE_BUCKET_NAME="peerlab-platform-staging-tfstate"
+
+
+# BASIC SETUP
 
 # Create project
 # gcloud projects create $GCP_PROJECT_ID
@@ -40,12 +45,13 @@ GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.ia
 # Grant artifact registry permissions to the service account
 # gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member=serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL --role=roles/artifactregistry.writer
 
-# Grant storage permissions to the service account (terraform backend)
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.objectAdmin"
-
 # Create a key for the service account
 # gcloud iam service-accounts keys create ./key.json --iam-account $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
 
+
+
+
+# FIRST IMAGE CREATION
 
 # Create a secret in github
 # ... -> Settings -> Secrets -> New repository secret -> Name: GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY -> Value: content of ~/key.json
@@ -98,6 +104,24 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 
 # Verify that the docker image was created after github action
 # gcloud artifacts docker images list $GCP_PROJECT_LOCATION.pkg.dev/$GCP_PROJECT_ID/$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME
+
+
+# TERRAFORM SETUP
+
+# # Create a bucket
+# gsutil mb -p $GCP_PROJECT_ID -l ${GCP_PROJECT_LOCATION} gs://${GCP_TERRAFORM_STATE_BUCKET_NAME}
+
+# # Enable versioning
+# # This will keep a version history of your state files, which can help you recover from both accidental deletions and unintended modifications.
+# gsutil versioning set on gs://${GCP_TERRAFORM_STATE_BUCKET_NAME}
+
+# # Enable bucket logging
+# # This will log all access to your bucket, which can help you monitor who is accessing your state files and when
+# gsutil logging set on -b gs://${GCP_TERRAFORM_STATE_BUCKET_NAME} -o AccessLog gs://${GCP_TERRAFORM_STATE_BUCKET_NAME}
+
+# Add write permissions to the service account
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.objectAdmin"
+
 
 # Delete project
 # gcloud projects delete $GCP_PROJECT_ID
