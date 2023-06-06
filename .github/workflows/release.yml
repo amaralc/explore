@@ -14,7 +14,7 @@ name: Automated Release
 on:
   push:
     branches:
-      - production-release
+      - production
 
 # Set environment variable to disable Husky
 env:
