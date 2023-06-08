@@ -94,6 +94,7 @@ jobs:
           echo "::set-output name=name::$([[ -f ./yarn.lock ]] && echo "yarn" || ([[ -f ./pnpm-lock.yaml ]] && echo "pnpm") || echo "npm")"
 
       - name: Set node/npm/yarn versions using volta
+        if: steps.check_commit_message.outputs.skip == 'false'
         uses: volta-cli/action@v3
         with:
           node-version: "${{ matrix.node-version }}"
@@ -189,7 +190,7 @@ jobs:
       #     git remote -v
 
       - name: Release Step
-        if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
+        if: ${{ success() && steps.check_commit_message.outputs.skip == 'false' && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           # NPM_TOKEN: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
