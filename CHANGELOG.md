@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.4](https://github.com/amaralc/peerlab/compare/peerlab@0.13.3...peerlab@0.13.4) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** add token reference ([3ca75cf](https://github.com/amaralc/peerlab/commit/3ca75cf6903ea2fb005308e0f48dba171bf533ef))
+
 ## [0.13.3](https://github.com/amaralc/peerlab/compare/peerlab@0.13.2...peerlab@0.13.3) (2023-06-08)
 
 ### Bug Fixes
