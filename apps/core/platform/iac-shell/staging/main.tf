@@ -17,10 +17,10 @@ provider "google-beta" {
   region      = var.region                 # The region where resources will be created
 }
 
-# # The Vercel provider is only used in the terraform production environment since the module already deals with other environments by itself
-# provider "vercel" {
-#   api_token = var.vercel_api_token
-# }
+# The Vercel provider is only used in the terraform production environment since the module already deals with other environments by itself
+provider "vercel" {
+  api_token = var.vercel_api_token
+}
 
 # Peers Service
 module "researchers-peers-svc-rest-api" {
