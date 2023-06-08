@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.2](https://github.com/amaralc/peerlab/compare/peerlab@0.16.1...peerlab@0.16.2) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** prevent public access ([abd7e4f](https://github.com/amaralc/peerlab/commit/abd7e4f57dd150db51f3ff80688ac712cae4167e))
+- **PEER-542:** use image tagged with environment name instead of commit hash ([68d1203](https://github.com/amaralc/peerlab/commit/68d12032eedb973e8fdfcab16f76aaff2e95b51e))
+
 ## [0.16.1](https://github.com/amaralc/peerlab/compare/peerlab@0.16.0...peerlab@0.16.1) (2023-06-08)
 
 ### Bug Fixes
