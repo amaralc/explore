@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.0](https://github.com/amaralc/peerlab/compare/peerlab@0.16.2...peerlab@0.17.0) (2023-06-08)
+
+### Features
+
+- **PEER-542:** add nx ignore ([766a001](https://github.com/amaralc/peerlab/commit/766a00149d6cd128a29286a6d88c56d4db09fe15))
+
+### Bug Fixes
+
+- **PEER-542:** remove hash from name ([52ba176](https://github.com/amaralc/peerlab/commit/52ba176e8408818c5c54c6d0da2cd7574e46b5c5))
+
 ## [0.16.2](https://github.com/amaralc/peerlab/compare/peerlab@0.16.1...peerlab@0.16.2) (2023-06-08)
 
 ### Bug Fixes
