@@ -98,17 +98,17 @@ gsutil logging set on -b gs://$GCP_TERRAFORM_STATE_BUCKET_NAME -o AccessLog gs:/
 # #         uses: actions/checkout@v2
 
 # #       - name: Set up Docker Buildx
-# #         uses: docker/setup-buildx-action@v1
+# #         uses: docker/setup-buildx-action@v2
 
 # #       - name: Login to Google Container Registry
-# #         uses: docker/login-action@v1
+# #         uses: docker/login-action@v2
 # #         with:
 # #           registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
 # #           username: _json_key
 # #           password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
 # #       - name: Build and push nginx Docker image
-# #         uses: docker/build-push-action@v2
+# #         uses: docker/build-push-action@v4
 # #         with:
 # #           context: .
 # #           push: true
