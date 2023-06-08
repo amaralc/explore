@@ -1,70 +1,67 @@
 name: Build and Push Docker image
 
 on:
-  push:
-    branches:
-      - production
-  # create:
-  #   tags:
-  #     - "peerlab@[0-9]+.[0-9]+.[0-9]+"
-  #   paths:
-  #     - "apps/core/platform/iac-shell/**"
-  #     - "apps/researchers/peers/svc-rest-api/**"
-  #     - "apps/researchers/peers/svc-consumer/**"
-  #     - "apps/researchers/peers/Dockerfile"
-  #     - "libs/researchers/peers/**"
-  #     - "package.json"
-  #     - "yarn.lock"
-  #     - ".github/workflows/production.yml"
+  create:
+    tags:
+      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+    paths:
+      - "apps/core/platform/iac-shell/**"
+      - "apps/researchers/peers/svc-rest-api/**"
+      - "apps/researchers/peers/svc-consumer/**"
+      - "apps/researchers/peers/Dockerfile"
+      - "libs/researchers/peers/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".github/workflows/production.yml"
 
 jobs:
-  # check-branch:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check branch
-  #       run: |
-  #         BRANCHES=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }}/branches-where-head)
-  #         if [[ $BRANCHES != *"production"* ]]; then
-  #           echo "Tag is not on the production branch, cancelling workflow."
-  #           exit 1
-  #         fi
-  # build:
-  #   runs-on: ubuntu-latest
-  #   needs: [check-branch]
-  #   environment:
-  #     name: production
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch
+        run: |
+          BRANCHES=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }}/branches-where-head)
+          if [[ $BRANCHES != *"production"* ]]; then
+            echo "Tag is not on the production branch, cancelling workflow."
+            exit 1
+          fi
+  build:
+    runs-on: ubuntu-latest
+    needs: [check-branch]
+    environment:
+      name: production
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #       if: ${{ github.event_name != 'pull_request' }}
-  #       with:
-  #         ref: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          ref: production
 
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-  #     - name: Login to Google Container Registry
-  #       uses: docker/login-action@v1
-  #       with:
-  #         registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
-  #         username: _json_key
-  #         password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+      - name: Login to Google Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
-  #     - name: Build and push Docker image
-  #       uses: docker/build-push-action@v2
-  #       with:
-  #         context: .
-  #         file: ./apps/researchers/peers/Dockerfile
-  #         push: true
-  #         tags: |
-  #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
-  #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-  #       env:
-  #         IMAGE_NAME: researchers-peers
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./apps/researchers/peers/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        env:
+          IMAGE_NAME: researchers-peers
 
   deploy:
-    # needs: [build]
+    needs: [build]
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -92,29 +89,29 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.3.9
+          terraform_version: 1.4.6
 
       - name: Terraform init
         run: |
           echo "Running terraform init..."
           echo ""
-          terraform init -upgrade
+          terraform init
         working-directory: apps/core/platform/iac-shell/production
 
-      # - name: Terraform validate
-      #   run: |
-      #     echo "Running terraform validate..."
-      #     terraform validate
-      #   working-directory: apps/core/platform/iac-shell/production
+      - name: Terraform validate
+        run: |
+          echo "Running terraform validate..."
+          terraform validate
+        working-directory: apps/core/platform/iac-shell/production
 
-      # - name: Terraform Plan
-      #   run: |
-      #     echo "Running terraform plan..."
-      #     terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-      #   working-directory: apps/core/platform/iac-shell/production
+      - name: Terraform Plan
+        run: |
+          echo "Running terraform plan..."
+          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+        working-directory: apps/core/platform/iac-shell/production
 
-      # - name: Terraform Apply
-      #   run: |
-      #     echo "Running terraform apply..."
-      #     terraform apply -auto-approve tfplan
-      #   working-directory: apps/core/platform/iac-shell/production
+      - name: Terraform Apply
+        run: |
+          echo "Running terraform apply..."
+          terraform apply -auto-approve tfplan
+        working-directory: apps/core/platform/iac-shell/production
