@@ -78,7 +78,7 @@ jobs:
             echo "::set-output name=skip::true"
           else
             echo "Commit message dos not contain 'skip-github-pipeline', setting skip to false."
-            echo "::set-output name=skip::false"
+            echo "::set-output name=skip::true"
           fi
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
