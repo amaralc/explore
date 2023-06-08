@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.3](https://github.com/amaralc/peerlab/compare/peerlab@0.13.2...peerlab@0.13.3) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** add versions to module ([8430cd8](https://github.com/amaralc/peerlab/commit/8430cd8ced987172a2f613979e14599ee8ae7a5f))
+
 ## [0.13.2](https://github.com/amaralc/peerlab/compare/peerlab@0.13.1...peerlab@0.13.2) (2023-06-08)
 
 **Note:** Version bump only for package peerlab
