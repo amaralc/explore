@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.6](https://github.com/amaralc/peerlab/compare/peerlab@0.13.5...peerlab@0.13.6) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** add first deployment ([672c8ff](https://github.com/amaralc/peerlab/commit/672c8fff168a86a52cd275439e067f34c30f02f8))
+
+### Reverts
+
+- Revert "adjust: destroy app shell" ([b404673](https://github.com/amaralc/peerlab/commit/b4046730fb733da22dd7d9033215166ef809e427))
+
 ## [0.13.5](https://github.com/amaralc/peerlab/compare/peerlab@0.13.4...peerlab@0.13.5) (2023-06-08)
 
 **Note:** Version bump only for package peerlab
