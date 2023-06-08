@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.0](https://github.com/amaralc/peerlab/compare/peerlab@0.15.0...peerlab@0.16.0) (2023-06-08)
+
+### Features
+
+- **ci:** upgrade actions ([3c59f36](https://github.com/amaralc/peerlab/commit/3c59f36ddb641078a900bb7c47f8df5363488d2e))
+
+### Bug Fixes
+
+- **ci:** use gh env instead of set-output ([f619ffa](https://github.com/amaralc/peerlab/commit/f619ffaa03ede29df49c8d5cf89189c68e7ba43b))
+- **ci:** use github env instead of set-output which is deprecated ([f4e6af2](https://github.com/amaralc/peerlab/commit/f4e6af2d9dfce0f1735636021145466306469dc9))
+
 ## [0.15.0](https://github.com/amaralc/peerlab/compare/peerlab@0.14.0...peerlab@0.15.0) (2023-06-08)
 
 ### Features
