@@ -43,6 +43,10 @@ jobs:
             echo "::set-output name=skip::true"
           fi
 
+      - name: Continue workflow
+        if: steps.check_commit_message.outputs.skip == 'false'
+        run: echo "Continuing workflow..."
+
   release:
     # Run the job on Ubuntu latest version
     runs-on: ubuntu-latest
