@@ -1,7 +1,7 @@
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
 resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
   # Name of the service
-  name = "${var.app_name}-${var.app_component_name}-${var.commit_hash}" # Use the commit hash to force a new revision to be created
+  name = "${var.app_name}-${var.app_component_name}" # Use the commit hash to force a new revision to be created
 
   # The region where the service will be located
   location = var.region
