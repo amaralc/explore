@@ -36,15 +36,16 @@ jobs:
         run: |
           COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
           if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
-            echo "Commit message contains 'skip-github-pipeline', canceling workflow."
-            exit 1
+            echo "Commit message contains 'skip-github-pipeline', setting skip to true."
+            echo "::set-output name=skip::true"
           else
-            echo "Commit message dos not contain 'skip-github-pipeline', proceeding with workflow."
-            exit 0
+            echo "Commit message dos not contain 'skip-github-pipeline', setting skip to false."
+            echo "::set-output name=skip::true"
           fi
 
   release:
     # Run the job on Ubuntu latest version
+    if: steps.check_commit_message.outputs.skip == 'true'
     runs-on: ubuntu-latest
     needs: [check-commit-message]
 
