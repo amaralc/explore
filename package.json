@@ -1,6 +1,6 @@
 {
   "name": "peerlab",
-  "version": "0.13.6",
+  "version": "0.14.0",
   "license": "MIT",
   "author": {
     "name": "Calil Amaral",
@@ -115,4 +115,3 @@
     "yarn": "1.22.19"
   }
 }
-
