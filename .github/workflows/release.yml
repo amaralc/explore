@@ -37,14 +37,14 @@ jobs:
           COMMIT_MESSAGE=$(git log --format=%B -n 1 ${{ github.sha }})
           if [[ $COMMIT_MESSAGE == *"skip-github-pipeline"* ]]; then
             echo "Commit message contains 'skip-github-pipeline', workflow should be canceled."
-            echo "::set-output name=should_cancel::true"
+            echo "should_cancel=true" >> $GITHUB_ENV
           else
             echo "Commit message dos not contain 'skip-github-pipeline', workflow should proceed."
-            echo "::set-output name=should_cancel::false"
+            echo "should_cancel=true" >> $GITHUB_ENV
           fi
 
       - name: Cancel workflow
-        if: steps.check_commit_message.outputs.should_cancel == 'true'
+        if: env.should_cancel == 'true'
         run: |
           curl -X POST \
           -H "Authorization: token ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" \
