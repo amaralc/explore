@@ -7,8 +7,8 @@ resource "vercel_project" "core-platform-app-shell" {
     production_branch = "production"
   }
 
-  build_command    = "npx nx build core-platform-app-shell --prod"
-  output_directory = "dist/apps/core-platform-app-shell/.next"
+  build_command    = "npx nx build core-platform-app-shell --prod" # Check the project.json file to check the name of the app
+  output_directory = "dist/apps/core/platform/app-shell/.next"     # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
   dev_command      = "npx nx serve core-platform-app-shell"
 }
 
