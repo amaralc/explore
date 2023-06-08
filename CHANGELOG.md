@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/amaralc/peerlab/compare/peerlab@0.14.0...peerlab@0.15.0) (2023-06-08)
+
+### Features
+
+- **ci:** cancel step ([970c8e8](https://github.com/amaralc/peerlab/commit/970c8e80a4ec9daf0675040a9bacc69d8ad775a4))
+
+### Bug Fixes
+
+- **ci:** adjust workflow conditions ([6b8b902](https://github.com/amaralc/peerlab/commit/6b8b9021479e01767a9e86151a5832e11fb81ab8))
+- **ci:** cancel job conditionally ([4e3a9f1](https://github.com/amaralc/peerlab/commit/4e3a9f1528f9f067a03e0406537cbba0c4e0d9c5))
+- **ci:** use different token ([73d8e16](https://github.com/amaralc/peerlab/commit/73d8e162d3a691de085e4395e3aeabe7f801646c))
+
 ## [0.14.0](https://github.com/amaralc/peerlab/compare/peerlab@0.13.6...peerlab@0.14.0) (2023-06-08)
 
 ### Features
