@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/amaralc/peerlab/compare/peerlab@0.13.0...peerlab@0.13.1) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** move provider back to main ([9c74790](https://github.com/amaralc/peerlab/commit/9c74790cb48a8fda58c325ec6b2074725b3f7395))
+
 ## [0.13.0](https://github.com/amaralc/peerlab/compare/peerlab@0.12.8...peerlab@0.13.0) (2023-06-08)
 
 ### Features
