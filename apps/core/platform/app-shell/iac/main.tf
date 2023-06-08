@@ -30,3 +30,11 @@ resource "vercel_project_environment_variable" "core-platform-app-shell-staging-
   target     = ["preview", "development"]
   # git_branch = "staging" # Use this if you wish to specify a preview branch
 }
+
+# Add a production deployment
+resource "vercel_deployment" "first-production-deployment" {
+  project_id        = vercel_project.core-platform-app-shell.id
+  production        = true
+  delete_on_destroy = true
+  ref               = "production"
+}
