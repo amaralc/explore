@@ -76,6 +76,10 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
+      - name: Get short SHA
+        id: sha
+        run: echo "short_commit_sha=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+
       - name: Checkout production branch
         uses: actions/checkout@v3
 
