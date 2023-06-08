@@ -9,7 +9,6 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/nextjs-app",
         "outputPath": "dist/apps/nextjs-app"
       },
       "configurations": {
