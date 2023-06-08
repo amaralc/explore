@@ -27,10 +27,6 @@ jobs:
         with:
           ref: staging
 
-      - name: Get short SHA
-        id: sha
-        run: echo "short_commit_sha=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -49,7 +45,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
         env:
           IMAGE_NAME: researchers-peers
 
@@ -100,7 +96,7 @@ jobs:
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ github.sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform/iac-shell/staging
 
       - name: Terraform Apply
