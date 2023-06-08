@@ -48,7 +48,7 @@ jobs:
         run: echo "Continuing workflow..."
 
   release:
-    if: needs.check-commit-message.result == 'success' && steps.check_commit_message.outputs.skip == 'false'
+    if: needs.check-commit-message.result == 'success'
     # Run the job on Ubuntu latest version
     runs-on: ubuntu-latest
     needs: [check-commit-message]
