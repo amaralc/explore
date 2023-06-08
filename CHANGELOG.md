@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/amaralc/peerlab/compare/peerlab@0.16.0...peerlab@0.16.1) (2023-06-08)
+
+### Bug Fixes
+
+- **ci:** remove set-output from pr-checks workflow ([af64aef](https://github.com/amaralc/peerlab/commit/af64aefb2616be61798cac181aed75342ddbf757))
+
 ## [0.16.0](https://github.com/amaralc/peerlab/compare/peerlab@0.15.0...peerlab@0.16.0) (2023-06-08)
 
 ### Features
