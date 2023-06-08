@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.0](https://github.com/amaralc/peerlab/compare/peerlab@0.13.6...peerlab@0.14.0) (2023-06-08)
+
+### Features
+
+- **PEER-542:** add vercel deployment ([46c84a5](https://github.com/amaralc/peerlab/commit/46c84a541154d144abb442cfd922ec6843c65ae4))
+
+### Bug Fixes
+
+- **PEER-542:** adjust output directory for the app-shell app ([0131c64](https://github.com/amaralc/peerlab/commit/0131c649d4b0067ede5e83f02bb06c348db76300))
+- **PEER-542:** remove vercel.json ([0d2b6bd](https://github.com/amaralc/peerlab/commit/0d2b6bd62332a97ade8d7ea76bc5f2c51a417524))
+
 ## [0.13.6](https://github.com/amaralc/peerlab/compare/peerlab@0.13.5...peerlab@0.13.6) (2023-06-08)
 
 ### Bug Fixes
