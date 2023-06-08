@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.0](https://github.com/amaralc/peerlab/compare/peerlab@0.12.8...peerlab@0.13.0) (2023-06-08)
+
+### Features
+
+- **PEER-542:** add terraform and refactor files ([ec42956](https://github.com/amaralc/peerlab/commit/ec42956e86a3581417846462f914ed8e99fe8431))
+
 ## [0.12.8](https://github.com/amaralc/peerlab/compare/peerlab@0.12.7...peerlab@0.12.8) (2023-06-06)
 
 **Note:** Version bump only for package peerlab
