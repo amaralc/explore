@@ -4,6 +4,16 @@
   "sourceRoot": "apps/core/platform/iac-shell",
   "projectType": "application",
   "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-app-shell"],
-  "targets": {},
+  "targets": {
+    "production:init": {
+      "command": "cd apps/core/platform/iac-shell/production && terraform init"
+    },
+    "production:plan": {
+      "command": "cd apps/core/platform/iac-shell/production && terraform plan -var-file=env.tfvars"
+    },
+    "production:apply": {
+      "command": "cd apps/core/platform/iac-shell/production && terraform apply -var-file=env.tfvars -auto-approve"
+    }
+  },
   "tags": []
 }

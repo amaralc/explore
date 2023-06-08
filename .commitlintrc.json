@@ -29,7 +29,8 @@
         "release",
         "chore",
         "config",
-        "adjust"
+        "adjust",
+        "debug"
       ]
     ]
   }
