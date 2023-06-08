@@ -7,15 +7,15 @@ resource "vercel_project" "nextjs-app" {
   name      = "nextjs-app"
   framework = "nextjs"
   git_repository = {
-    type = "github"
-    repo = "amaralc/nx-next-terraform-vercel"
+    type              = "github"
+    repo              = "amaralc/peerlab"
     production_branch = "production"
   }
 
 
-  build_command = "npx nx build nextjs-app --prod"
+  build_command    = "npx nx build nextjs-app --prod"
   output_directory = "dist/apps/nextjs-app/.next"
-  dev_command = "npx nx serve nextjs-app"
+  dev_command      = "npx nx serve nextjs-app"
 }
 
 # An environment variable that will be created
@@ -37,8 +37,8 @@ resource "vercel_project_environment_variable" "my-env-var-preview" {
 }
 
 resource "vercel_deployment" "nextjs-app-production" {
-  project_id = vercel_project.nextjs-app.id
-  production = true
+  project_id        = vercel_project.nextjs-app.id
+  production        = true
   delete_on_destroy = true
-  ref = "production"
+  ref               = "production"
 }
