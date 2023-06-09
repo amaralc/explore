@@ -3,6 +3,155 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.8](https://github.com/amaralc/peerlab/compare/peerlab@0.17.7...peerlab@0.17.8) (2023-06-09)
+
+### Bug Fixes
+
+- **PEER-542:** enable resources ([03e4614](https://github.com/amaralc/peerlab/commit/03e46140d70b6a31cdc280600f24e2449b7f6fdd))
+
+## [0.17.7](https://github.com/amaralc/peerlab/compare/peerlab@0.17.6...peerlab@0.17.7) (2023-06-09)
+
+### Bug Fixes
+
+- **PEER-542:** get short commit hash ([9296a29](https://github.com/amaralc/peerlab/commit/9296a29c2ecf1c2441a54c4b62923e11bfbfeac0))
+
+## [0.17.6](https://github.com/amaralc/peerlab/compare/peerlab@0.17.5...peerlab@0.17.6) (2023-06-09)
+
+### Bug Fixes
+
+- **PEER-543:** get commit hash ([fb2548f](https://github.com/amaralc/peerlab/commit/fb2548f20666fe89c7865b297329e0339bbec5de))
+
+## [0.17.5](https://github.com/amaralc/peerlab/compare/peerlab@0.17.4...peerlab@0.17.5) (2023-06-09)
+
+### Bug Fixes
+
+- **PEER-542:** adjust git commit ([57a2d89](https://github.com/amaralc/peerlab/commit/57a2d89f1e32bed370205d4e4b5a1649cd53bcc4))
+
+## [0.17.4](https://github.com/amaralc/peerlab/compare/peerlab@0.17.3...peerlab@0.17.4) (2023-06-09)
+
+### Bug Fixes
+
+- **PEER-542:** adjust github sha ([fee2088](https://github.com/amaralc/peerlab/commit/fee2088b808615aa6c335e540cf21fd5e57cb8c9))
+
+## [0.17.3](https://github.com/amaralc/peerlab/compare/peerlab@0.17.2...peerlab@0.17.3) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** get short commit sha in release step ([f8e227f](https://github.com/amaralc/peerlab/commit/f8e227f148645793bc2d3162d8d22f12c103bdf8))
+
+## [0.17.2](https://github.com/amaralc/peerlab/compare/peerlab@0.17.1...peerlab@0.17.2) (2023-06-08)
+
+**Note:** Version bump only for package peerlab
+
+## [0.17.1](https://github.com/amaralc/peerlab/compare/peerlab@0.17.0...peerlab@0.17.1) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** use latest ([5e6b044](https://github.com/amaralc/peerlab/commit/5e6b0440208cc4ce2a6b6c3c871d205d83c5235c))
+
+## [0.17.0](https://github.com/amaralc/peerlab/compare/peerlab@0.16.2...peerlab@0.17.0) (2023-06-08)
+
+### Features
+
+- **PEER-542:** add nx ignore ([766a001](https://github.com/amaralc/peerlab/commit/766a00149d6cd128a29286a6d88c56d4db09fe15))
+
+### Bug Fixes
+
+- **PEER-542:** remove hash from name ([52ba176](https://github.com/amaralc/peerlab/commit/52ba176e8408818c5c54c6d0da2cd7574e46b5c5))
+
+## [0.16.2](https://github.com/amaralc/peerlab/compare/peerlab@0.16.1...peerlab@0.16.2) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** prevent public access ([abd7e4f](https://github.com/amaralc/peerlab/commit/abd7e4f57dd150db51f3ff80688ac712cae4167e))
+- **PEER-542:** use image tagged with environment name instead of commit hash ([68d1203](https://github.com/amaralc/peerlab/commit/68d12032eedb973e8fdfcab16f76aaff2e95b51e))
+
+## [0.16.1](https://github.com/amaralc/peerlab/compare/peerlab@0.16.0...peerlab@0.16.1) (2023-06-08)
+
+### Bug Fixes
+
+- **ci:** remove set-output from pr-checks workflow ([af64aef](https://github.com/amaralc/peerlab/commit/af64aefb2616be61798cac181aed75342ddbf757))
+
+## [0.16.0](https://github.com/amaralc/peerlab/compare/peerlab@0.15.0...peerlab@0.16.0) (2023-06-08)
+
+### Features
+
+- **ci:** upgrade actions ([3c59f36](https://github.com/amaralc/peerlab/commit/3c59f36ddb641078a900bb7c47f8df5363488d2e))
+
+### Bug Fixes
+
+- **ci:** use gh env instead of set-output ([f619ffa](https://github.com/amaralc/peerlab/commit/f619ffaa03ede29df49c8d5cf89189c68e7ba43b))
+- **ci:** use github env instead of set-output which is deprecated ([f4e6af2](https://github.com/amaralc/peerlab/commit/f4e6af2d9dfce0f1735636021145466306469dc9))
+
+## [0.15.0](https://github.com/amaralc/peerlab/compare/peerlab@0.14.0...peerlab@0.15.0) (2023-06-08)
+
+### Features
+
+- **ci:** cancel step ([970c8e8](https://github.com/amaralc/peerlab/commit/970c8e80a4ec9daf0675040a9bacc69d8ad775a4))
+
+### Bug Fixes
+
+- **ci:** adjust workflow conditions ([6b8b902](https://github.com/amaralc/peerlab/commit/6b8b9021479e01767a9e86151a5832e11fb81ab8))
+- **ci:** cancel job conditionally ([4e3a9f1](https://github.com/amaralc/peerlab/commit/4e3a9f1528f9f067a03e0406537cbba0c4e0d9c5))
+- **ci:** use different token ([73d8e16](https://github.com/amaralc/peerlab/commit/73d8e162d3a691de085e4395e3aeabe7f801646c))
+
+## [0.14.0](https://github.com/amaralc/peerlab/compare/peerlab@0.13.6...peerlab@0.14.0) (2023-06-08)
+
+### Features
+
+- **PEER-542:** add vercel deployment ([46c84a5](https://github.com/amaralc/peerlab/commit/46c84a541154d144abb442cfd922ec6843c65ae4))
+
+### Bug Fixes
+
+- **PEER-542:** adjust output directory for the app-shell app ([0131c64](https://github.com/amaralc/peerlab/commit/0131c649d4b0067ede5e83f02bb06c348db76300))
+- **PEER-542:** remove vercel.json ([0d2b6bd](https://github.com/amaralc/peerlab/commit/0d2b6bd62332a97ade8d7ea76bc5f2c51a417524))
+
+## [0.13.6](https://github.com/amaralc/peerlab/compare/peerlab@0.13.5...peerlab@0.13.6) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** add first deployment ([672c8ff](https://github.com/amaralc/peerlab/commit/672c8fff168a86a52cd275439e067f34c30f02f8))
+
+### Reverts
+
+- Revert "adjust: destroy app shell" ([b404673](https://github.com/amaralc/peerlab/commit/b4046730fb733da22dd7d9033215166ef809e427))
+
+## [0.13.5](https://github.com/amaralc/peerlab/compare/peerlab@0.13.4...peerlab@0.13.5) (2023-06-08)
+
+**Note:** Version bump only for package peerlab
+
+## [0.13.4](https://github.com/amaralc/peerlab/compare/peerlab@0.13.3...peerlab@0.13.4) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** add token reference ([3ca75cf](https://github.com/amaralc/peerlab/commit/3ca75cf6903ea2fb005308e0f48dba171bf533ef))
+
+## [0.13.3](https://github.com/amaralc/peerlab/compare/peerlab@0.13.2...peerlab@0.13.3) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** add versions to module ([8430cd8](https://github.com/amaralc/peerlab/commit/8430cd8ced987172a2f613979e14599ee8ae7a5f))
+
+## [0.13.2](https://github.com/amaralc/peerlab/compare/peerlab@0.13.1...peerlab@0.13.2) (2023-06-08)
+
+**Note:** Version bump only for package peerlab
+
+## [0.13.1](https://github.com/amaralc/peerlab/compare/peerlab@0.13.0...peerlab@0.13.1) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** move provider back to main ([9c74790](https://github.com/amaralc/peerlab/commit/9c74790cb48a8fda58c325ec6b2074725b3f7395))
+
+## [0.13.0](https://github.com/amaralc/peerlab/compare/peerlab@0.12.8...peerlab@0.13.0) (2023-06-08)
+
+### Features
+
+- **PEER-542:** add terraform and refactor files ([ec42956](https://github.com/amaralc/peerlab/commit/ec42956e86a3581417846462f914ed8e99fe8431))
+
+## [0.12.8](https://github.com/amaralc/peerlab/compare/peerlab@0.12.7...peerlab@0.12.8) (2023-06-06)
+
+**Note:** Version bump only for package peerlab
+
 ## [0.12.7](https://github.com/amaralc/peerlab/compare/peerlab@0.12.6...peerlab@0.12.7) (2023-06-06)
 
 **Note:** Version bump only for package peerlab
