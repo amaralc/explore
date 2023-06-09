@@ -5,16 +5,16 @@
   "projectType": "application",
   "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-app-shell"],
   "targets": {
-    "terraform:init:production": {
+    "production:terraform:init": {
       "command": "cd apps/core/platform/iac-shell/production && terraform init"
     },
-    "terraform:validate:production": {
+    "production:terraform:validate": {
       "command": "cd apps/core/platform/iac-shell/production && terraform validate"
     },
-    "terraform:plan:production": {
+    "production:terraform:plan": {
       "command": "cd apps/core/platform/iac-shell/production && terraform plan -var-file=env.tfvars"
     },
-    "terraform:apply:production": {
+    "production:terraform:apply": {
       "command": "cd apps/core/platform/iac-shell/production && terraform apply -var-file=env.tfvars -auto-approve"
     }
   },
