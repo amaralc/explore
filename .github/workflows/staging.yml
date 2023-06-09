@@ -33,7 +33,7 @@ jobs:
 
       - name: Check if app was affected
         run: |
-          APP_WAS_AFFECTED=${{ apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false' }}
+          APP_WAS_AFFECTED=$(apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false')
           echo "app_was_affected=${APP_WAS_AFFECTED}" >> $GITHUB_ENV
 
       # - name: Get last merge commit before HEAD
