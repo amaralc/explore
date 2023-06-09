@@ -15,9 +15,22 @@ on:
       - ".github/workflows/staging.yml"
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if job should run
+        id: check
+        run: |
+          echo "::set-output name=should_run::$(bash apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false')"
+
   build:
-    # If app was affected, run the job on Ubuntu latest version
-    if: ${{ bash apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false' == 'true' }}
+    needs: setup
+    if: needs.setup.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     environment:
       name: staging
