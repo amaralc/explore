@@ -53,7 +53,7 @@ jobs:
           fi
 
       - name: Get short commit hash
-        if: ${{ env.affected == 'true' }}}
+        if: ${{ env.affected == 'true' }}
         run: |
           X=${{ env.affected}}
           echo "X=${X}"
@@ -61,11 +61,11 @@ jobs:
           echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
-        if: ${{ env.affected == 'true' }}}
+        if: ${{ env.affected == 'true' }}
         uses: docker/setup-buildx-action@v2
 
       - name: Login to Google Container Registry
-        if: ${{ env.affected == 'true' }}}
+        if: ${{ env.affected == 'true' }}
         uses: docker/login-action@v2
         with:
           registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
@@ -73,7 +73,7 @@ jobs:
           password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
       - name: Build and push Docker image
-        if: ${{ env.affected == 'true' }}}
+        if: ${{ env.affected == 'true' }}
         uses: docker/build-push-action@v4
         with:
           context: .
