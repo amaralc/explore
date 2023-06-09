@@ -29,12 +29,7 @@ jobs:
           yarn install
           echo "Running nx affected..."
           echo ""
-          npx nx affected:apps --plain --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
-          echo ""
-          echo "Running nx affected..."
-          echo ""
-          npx nx affected:libs --plain --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
-          echo ""
+          npx nx print-affected --type=app --select=projects --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
 
   # build:
   #   runs-on: ubuntu-latest
