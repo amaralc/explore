@@ -15,102 +15,122 @@ on:
       - ".github/workflows/staging.yml"
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
-    environment:
-      name: staging
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        # if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name != 'pull_request' }}
         with:
           ref: staging
 
-      - name: Get short commit hash
+      - name: Print affected
         run: |
-          SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to Google Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
-          username: _json_key
-          password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./apps/researchers/peers/Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
-        env:
-          IMAGE_NAME: researchers-peers
-
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    environment:
-      name: staging
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
-
-    steps:
-      - name: Checkout staging branch
-        uses: actions/checkout@v3
-
-      - name: Get short commit hash
-        run: |
-          SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
-
-      - name: Save GCP credentials to file
-        run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform/iac-shell/staging/credentials.json
-
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
-        with:
-          credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
-
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.3.9
-
-      - name: Terraform init
-        run: |
-          echo "Running terraform init..."
+          echo "Running nx affected..."
           echo ""
-          terraform init
-        working-directory: apps/core/platform/iac-shell/staging
+          npx nx affected:apps --plain --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
+          echo ""
+          echo "Running nx affected..."
+          echo ""
+          npx nx affected:libs --plain --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
+          echo ""
 
-      - name: Terraform validate
-        run: |
-          echo "Running terraform validate..."
-          terraform validate
-        working-directory: apps/core/platform/iac-shell/staging
+  # build:
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: staging
 
-      - name: Terraform Plan
-        run: |
-          echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-        working-directory: apps/core/platform/iac-shell/staging
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #       # if: ${{ github.event_name != 'pull_request' }}
+  #       with:
+  #         ref: staging
 
-      - name: Terraform Apply
-        run: |
-          echo "Running terraform apply..."
-          terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform/iac-shell/staging
+  #     - name: Get short commit hash
+  #       run: |
+  #         SHORT_SHA=${{ github.sha }}
+  #         echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+
+  #     - name: Login to Google Container Registry
+  #       uses: docker/login-action@v2
+  #       with:
+  #         registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
+  #         username: _json_key
+  #         password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+  #     - name: Build and push Docker image
+  #       uses: docker/build-push-action@v4
+  #       with:
+  #         context: .
+  #         file: ./apps/researchers/peers/Dockerfile
+  #         push: true
+  #         tags: |
+  #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
+  #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+  #       env:
+  #         IMAGE_NAME: researchers-peers
+
+  # deploy:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: staging
+  #   defaults:
+  #     run:
+  #       working-directory: ${{ github.workspace }}
+
+  #   steps:
+  #     - name: Checkout staging branch
+  #       uses: actions/checkout@v3
+
+  #     - name: Get short commit hash
+  #       run: |
+  #         SHORT_SHA=${{ github.sha }}
+  #         echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+
+  #     - name: Save GCP credentials to file
+  #       run: |
+  #         echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform/iac-shell/staging/credentials.json
+
+  #     - id: "auth"
+  #       name: "Authenticate to Google Cloud"
+  #       uses: "google-github-actions/auth@v1"
+  #       with:
+  #         credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+  #     - name: "Set up Cloud SDK"
+  #       uses: "google-github-actions/setup-gcloud@v1"
+
+  #     - name: Set up Terraform
+  #       uses: hashicorp/setup-terraform@v1
+  #       with:
+  #         terraform_version: 1.3.9
+
+  #     - name: Terraform init
+  #       run: |
+  #         echo "Running terraform init..."
+  #         echo ""
+  #         terraform init
+  #       working-directory: apps/core/platform/iac-shell/staging
+
+  #     - name: Terraform validate
+  #       run: |
+  #         echo "Running terraform validate..."
+  #         terraform validate
+  #       working-directory: apps/core/platform/iac-shell/staging
+
+  #     - name: Terraform Plan
+  #       run: |
+  #         echo "Running terraform plan..."
+  #         terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+  #       working-directory: apps/core/platform/iac-shell/staging
+
+  #     - name: Terraform Apply
+  #       run: |
+  #         echo "Running terraform apply..."
+  #         terraform apply -auto-approve tfplan
+  #       working-directory: apps/core/platform/iac-shell/staging
