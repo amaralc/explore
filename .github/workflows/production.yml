@@ -87,7 +87,7 @@ jobs:
 
       - name: Log
         # run: echo "Commit Hash ${{ env.short_commit_sha }}"
-        run: echo "Commit Hash ${{ env.short_"short_commit_sha }}"
+        run: echo "Commit Hash ${{ env.short_commit_sha }}"
 
       # - name: Checkout production branch
       #   uses: actions/checkout@v3
