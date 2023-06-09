@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.0](https://github.com/amaralc/peerlab/compare/peerlab@0.17.8...peerlab@0.18.0) (2023-06-09)
+
+### Features
+
+- **PEER-542:** avoid building unecessary images ([d8f851a](https://github.com/amaralc/peerlab/commit/d8f851a4f712e98098cc5dc75ac84b16c21965e2))
+
+### Bug Fixes
+
+- **PEER-542:** build if affected ([8b76193](https://github.com/amaralc/peerlab/commit/8b7619346e5f5b8317f2dfd6ec0583f1e9b31486))
+- **PEER-542:** make script executable ([ead4c6f](https://github.com/amaralc/peerlab/commit/ead4c6fae1f65a3f600b6dbf69e3bae9be639919))
+- **PEER-542:** remove log ([9fb501e](https://github.com/amaralc/peerlab/commit/9fb501e354a837159772da9da1554342b5149505))
+
+### Reverts
+
+- Revert "adjust: adjust command" ([0eb2a05](https://github.com/amaralc/peerlab/commit/0eb2a05e70c71ecb46038421e762eeca86e5481c))
+- Revert "adjust: check step" ([1950558](https://github.com/amaralc/peerlab/commit/1950558aa2a3d773ebf0c0cfb165ebdea3adaea1))
+- Revert "adjust: adjust affected command" ([d078bfa](https://github.com/amaralc/peerlab/commit/d078bfa5f6793465ae4a99766f96bb99df2dd83c))
+
 ## [0.17.8](https://github.com/amaralc/peerlab/compare/peerlab@0.17.7...peerlab@0.17.8) (2023-06-09)
 
 ### Bug Fixes
