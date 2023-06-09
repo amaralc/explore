@@ -26,6 +26,7 @@ jobs:
 
       - name: Print affected
         run: |
+          yarn install
           echo "Running nx affected..."
           echo ""
           npx nx affected:apps --plain --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
