@@ -23,16 +23,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-        with:
-          main-branch-name: ${{ github.base_ref }}
-
       - name: Check if job should run
         id: check
         run: |
-          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects)
-          should_run=$($AFFECTED_APPS == *$PROJECT_NAME* && echo 'true' || echo 'false')
           echo "::set-output name=should_run::$(bash apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false')"
 
   build:
