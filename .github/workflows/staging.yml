@@ -55,8 +55,6 @@ jobs:
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}
         run: |
-          X=${{ env.affected}}
-          echo "X=${X}"
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
 
