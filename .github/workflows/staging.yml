@@ -34,6 +34,7 @@ jobs:
 
       - name: Check if app was affected
         run: |
+          chmod +x apps/researchers/peers/svc-rest-api/scripts/affected.sh # Make script executable
           AFFECTED=$(apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false')
           echo "affected=${AFFECTED}" >> $GITHUB_ENV
           echo ${{ env.affected }}
