@@ -66,6 +66,10 @@ jobs:
       - name: Checkout staging branch
         uses: actions/checkout@v3
 
+      - name: Get short SHA
+        id: sha
+        run: echo "short_commit_sha=$(echo $(git rev-parse HEAD) | cut -c1-7)" >> $GITHUB_ENV
+
       - name: Save GCP credentials to file
         run: |
           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform/iac-shell/staging/credentials.json
