@@ -31,10 +31,13 @@ jobs:
           fetch-depth: 0
           ref: staging
 
-      - name: Get last merge commit before HEAD
-        run: |
-          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
-          echo "Last merge commit before HEAD: $LAST_MERGE_COMMIT_BEFORE_HEAD"
+      - name: App was affected
+        run: apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false'
+
+      # - name: Get last merge commit before HEAD
+      #   run: |
+      #     LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
+      #     echo "Last merge commit before HEAD: $LAST_MERGE_COMMIT_BEFORE_HEAD"
 
       # - name: Derive appropriate SHAs for base and head for `nx affected` commands
       #   uses: nrwl/nx-set-shas@v2
