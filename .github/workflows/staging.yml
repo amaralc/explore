@@ -36,6 +36,7 @@ jobs:
         run: |
           AFFECTED=$(apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false')
           echo "affected=${AFFECTED}" >> $GITHUB_ENV
+          echo ${{ env.affected }}
 
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}}
