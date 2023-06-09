@@ -16,6 +16,8 @@ on:
 
 jobs:
   build:
+    # If app was affected, run the job on Ubuntu latest version
+    if: $(bash apps/researchers/peers/svc-rest-api/scripts/affected.sh > /dev/null && echo 'true' || echo 'false') == 'true'
     runs-on: ubuntu-latest
     environment:
       name: staging
