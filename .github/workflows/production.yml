@@ -86,11 +86,17 @@ jobs:
       #   # run: echo "short_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
       #   run: echo $(github.sha)
 
-      - name: Get short SHA
-        run: echo "SHA_SHORT=${{ substr(github.sha, 0, 7) }}" >> $GITHUB_ENV
+      # - name: Get short SHA
+      #   run: echo "SHA_SHORT=${{ substr(github.sha, 0, 7) }}" >> $GITHUB_ENV
 
-      - name: Use short SHA
-        run: echo "The short SHA is $SHA_SHORT"
+      # - name: Use short SHA
+      #   run: echo "The short SHA is $SHA_SHORT"
+
+      - name: Get short commit hash
+        run: |
+          SHORT_SHA=${{ github.sha }}
+          SHORT_SHA=${SHORT_SHA:0:7}
+          echo "SHA_SHORT=$SHORT_SHA"
 
       # - name: Log
       #   # run: echo "Commit Hash ${{ env.short_commit_sha }}"
