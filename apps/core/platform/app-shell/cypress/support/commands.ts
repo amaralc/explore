@@ -12,7 +12,7 @@
 
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+  // console.log('Log user in');
 });
 //
 // -- This is a child command --
