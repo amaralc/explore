@@ -83,11 +83,11 @@ jobs:
       - name: Get short SHA
         id: sha
         # run: echo "short_commit_sha=$(echo $(git rev-parse HEAD) | cut -c1-7)" >> $GITHUB_ENV
-        run: echo "should_cancel=true" >> $GITHUB_ENV
+        run: echo "short_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Log
         # run: echo "Commit Hash ${{ env.short_commit_sha }}"
-        run: echo "Commit Hash ${{ env.should_cancel }}"
+        run: echo "Commit Hash ${{ env.short_"short_commit_sha }}"
 
       # - name: Checkout production branch
       #   uses: actions/checkout@v3
