@@ -84,7 +84,7 @@ jobs:
         id: sha
         # run: echo "short_commit_sha=$(echo $(git rev-parse HEAD) | cut -c1-7)" >> $GITHUB_ENV
         # run: echo "short_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV
-        run: echo $(git rev-parse --short HEAD)
+        run: echo $(github.sha)
 
       # - name: Log
       #   # run: echo "Commit Hash ${{ env.short_commit_sha }}"
