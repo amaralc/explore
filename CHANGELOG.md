@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.3](https://github.com/amaralc/peerlab/compare/peerlab@0.17.2...peerlab@0.17.3) (2023-06-08)
+
+### Bug Fixes
+
+- **PEER-542:** get short commit sha in release step ([f8e227f](https://github.com/amaralc/peerlab/commit/f8e227f148645793bc2d3162d8d22f12c103bdf8))
+
 ## [0.17.2](https://github.com/amaralc/peerlab/compare/peerlab@0.17.1...peerlab@0.17.2) (2023-06-08)
 
 **Note:** Version bump only for package peerlab
