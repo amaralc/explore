@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.8](https://github.com/amaralc/peerlab/compare/peerlab@0.17.7...peerlab@0.17.8) (2023-06-09)
+
+### Bug Fixes
+
+- **PEER-542:** enable resources ([03e4614](https://github.com/amaralc/peerlab/commit/03e46140d70b6a31cdc280600f24e2449b7f6fdd))
+
 ## [0.17.7](https://github.com/amaralc/peerlab/compare/peerlab@0.17.6...peerlab@0.17.7) (2023-06-09)
 
 ### Bug Fixes
