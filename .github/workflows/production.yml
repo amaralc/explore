@@ -87,8 +87,7 @@ jobs:
       #   run: echo $(github.sha)
 
       - name: Get short SHA
-        id: sha
-        run: echo "SHA_SHORT=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+        run: echo "SHA_SHORT=${{ substr(github.sha, 0, 7) }}" >> $GITHUB_ENV
 
       - name: Use short SHA
         run: echo "The short SHA is $SHA_SHORT"
