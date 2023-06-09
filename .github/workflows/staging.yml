@@ -24,12 +24,17 @@ jobs:
         with:
           ref: staging
 
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: ${{ github.base_ref }}
+
       - name: Print affected
         run: |
           yarn install
           echo "Running nx affected..."
           echo ""
-          npx nx print-affected --type=app --select=projects --base=$GITHUB_BASE_REF --head=$GITHUB_HEAD_REF
+          npx nx print-affected --type=app --select=projects --base=${{ github.base_ref }} --head=${{ github.head_ref }}
 
   # build:
   #   runs-on: ubuntu-latest
