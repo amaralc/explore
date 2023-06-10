@@ -29,7 +29,9 @@
     {
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "warn"
+      }
     },
     {
       "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
@@ -42,6 +44,6 @@
       "files": "*.json",
       "parser": "jsonc-eslint-parser",
       "rules": {}
-    }
+    },
   ]
 }
