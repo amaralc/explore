@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "$schema": "http://json-schema.org/schema",
+  "outputCapture": "direct-nodejs",
+  "cli": "nx",
+  "title": "Serve executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "port": {
+      "type": "number",
+      "description": "Use specified port.",
+      "default": 3000
+    },
+    "host": {
+      "type": "string",
+      "description": "Use specified host.",
+      "default": "localhost"
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Open page in the browser.",
+      "default": false
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The full path for the new output directory, relative to the current workspace."
+    }
+  },
+  "required": ["outputPath"]
+}
