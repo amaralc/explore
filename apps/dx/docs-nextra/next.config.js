@@ -25,7 +25,7 @@ const nextConfig = {
   },
 };
 
-//@ts-ignore
+// @ts-ignore: TODO - Add types for nextra
 const withNextra = require('nextra')({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
