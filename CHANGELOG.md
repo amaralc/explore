@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.0](https://github.com/amaralc/peerlab/compare/peerlab@0.19.0...peerlab@0.20.0) (2023-06-10)
+
+### Features
+
+- **PEER-546:** add empty post ([f186e45](https://github.com/amaralc/peerlab/commit/f186e45a5513fed73ff5e4c773d74520bd646a9c))
+- **PEER-546:** add search to docs ([c94feb8](https://github.com/amaralc/peerlab/commit/c94feb80eb955f8367daaf57ec62acbc15805a3c))
+- **PEER-546:** create serve production executor ([93b2cfb](https://github.com/amaralc/peerlab/commit/93b2cfb60282ebb2061a68e36877e04c88062d54))
+
 ## [0.19.0](https://github.com/amaralc/peerlab/compare/peerlab@0.18.0...peerlab@0.19.0) (2023-06-10)
 
 ### Features
