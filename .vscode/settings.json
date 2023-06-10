@@ -10,12 +10,8 @@
     "CODEOWNERS": "no-auto-format"
   },
   "[no-auto-format]": {
-      "editor.formatOnSave": false
+    "editor.formatOnSave": false
   },
-  "cSpell.words": [
-    "kafkajs",
-    "nestjs",
-    "Partitioner",
-    "Partitioners"
-  ]
+  "cSpell.words": ["kafkajs", "nestjs", "Partitioner", "Partitioners"],
+  "eslint.validate": ["json"]
 }
