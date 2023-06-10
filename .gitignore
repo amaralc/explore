@@ -68,3 +68,7 @@ secrets.auto.tfvars
 credentials.json
 
 .vercel
+
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/

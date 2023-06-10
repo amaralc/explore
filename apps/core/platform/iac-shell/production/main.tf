@@ -11,6 +11,14 @@ module "core-platform-app-shell" {
   vercel_api_token = var.vercel_api_token                      # The Vercel API token
 }
 
+# Application Shell
+# This module is only used the terraform production environment since
+# Vercel environments are used within the module to create deploy previews and other environments
+module "dx-docs-docusaurus" {
+  source           = "../../../../dx/docs-docusaurus/iac" # The path to the module
+  vercel_api_token = var.vercel_api_token                 # The Vercel API token
+}
+
 # Peers Service
 module "researchers-peers-svc-rest-api" {
   source                              = "../../../../researchers/peers/svc-rest-api/iac" # The path to the module
