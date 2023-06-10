@@ -1,0 +1,22 @@
+{
+  "name": "dx-docs-docusaurus",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": ["docusaurus"],
+  "sourceRoot": "apps/dx/docs-docusaurus/src",
+  "targets": {
+    "build": {
+      "executor": "@peerlab/docusaurus:browser",
+      "options": {
+        "outputPath": "dist/apps/dx/docs-docusaurus"
+      }
+    },
+    "serve": {
+      "executor": "@peerlab/docusaurus:dev-server",
+      "options": {
+        "port": 4300
+      }
+    }
+  },
+  "tags": []
+}
