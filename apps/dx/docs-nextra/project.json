@@ -1,7 +1,7 @@
 {
-  "name": "docs",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/docs",
+  "name": "dx-docs-nextra",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dx/docs-nextra",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/docs"
+        "outputPath": "dist/apps/dx/docs-nextra"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/docs"
+          "outputPath": "apps/dx/docs-nextra"
         },
         "production": {}
       }
@@ -22,16 +22,16 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "docs:build",
+        "buildTarget": "dx-docs-nextra:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "docs:build:development",
+          "buildTarget": "dx-docs-nextra:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "docs:build:production",
+          "buildTarget": "dx-docs-nextra:build:production",
           "dev": false
         }
       }
@@ -39,14 +39,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "docs:build:production"
+        "buildTarget": "dx-docs-nextra:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/docs/jest.config.ts",
+        "jestConfig": "apps/dx/docs-nextra/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -60,7 +60,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/docs/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/dx/docs-nextra/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

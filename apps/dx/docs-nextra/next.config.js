@@ -15,20 +15,20 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-      hostname: 'github.com',
+        hostname: 'github.com',
       },
       {
         hostname: 'avatars.githubusercontent.com',
-      }
+      },
     ],
     domains: ['github.com', 'avatars.githubusercontent.com'],
-  }
+  },
 };
 
 //@ts-ignore
-const withNextra = require("nextra")({
-  theme: "nextra-theme-docs",
-  themeConfig: "./theme.config.tsx",
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.tsx',
   // options
   flexsearch: true,
   staticImage: true,
@@ -40,7 +40,5 @@ const plugins = [
   withNx,
   // Add more Next.js plugins to this list if needed.
 ];
-
-
 
 module.exports = composePlugins(...plugins)(nextConfig);
