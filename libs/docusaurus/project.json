@@ -40,7 +40,11 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/docusaurus/**/*.ts", "libs/docusaurus/package.json"]
+        "lintFilePatterns": [
+          "libs/docusaurus/**/*.ts",
+          "libs/docusaurus/package.json",
+          "libs/docusaurus/executors.json"
+        ]
       }
     },
     "test": {
