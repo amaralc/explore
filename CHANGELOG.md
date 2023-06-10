@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.0](https://github.com/amaralc/peerlab/compare/peerlab@0.18.0...peerlab@0.19.0) (2023-06-10)
+
+### Features
+
+- **PEER-542:** update schema.json for executors ([5c9ff8f](https://github.com/amaralc/peerlab/commit/5c9ff8f6823ea4a71708a2a96fa0a454f16c8634))
+- **PEER-546:** add docs to iac ([949018f](https://github.com/amaralc/peerlab/commit/949018f186fd5d6a628a8ea34173d79e270b8074))
+- **PEER-546:** add english pr template ([3884fd4](https://github.com/amaralc/peerlab/commit/3884fd49f7c19c562e3830522baf997d745e311a))
+- **PEER-546:** bootstrap browser executor ([0cf7cd5](https://github.com/amaralc/peerlab/commit/0cf7cd55deb63937abf982020b47ea49ce5ce28f))
+- **PEER-546:** bootstrap docusaurus docs using plugin ([b898606](https://github.com/amaralc/peerlab/commit/b898606c2974ce35671ee4f8719bf4457b78a3f6))
+- **PEER-546:** bootstrap plugin ([1e12193](https://github.com/amaralc/peerlab/commit/1e12193aedddaa329ca7bf34b4faabf5d8be17f5))
+- **PEER-546:** bring executor from nx-plus ([7ab8fd2](https://github.com/amaralc/peerlab/commit/7ab8fd2230c599589d774ec2611f6c6116e7bc82))
+- **PEER-546:** use local executor and update libs ([8838e8a](https://github.com/amaralc/peerlab/commit/8838e8a874e0494f6626e6611b12fd5fb79c1c87))
+
+### Bug Fixes
+
+- **PEER-543:** adjust eslint rule ([e82cd94](https://github.com/amaralc/peerlab/commit/e82cd94c14abbb04c59dc54f5aa5f7bdddf0bf42))
+- **PEER-546:** adjust eslint rule ([713b5c2](https://github.com/amaralc/peerlab/commit/713b5c25342873419572b5143d153732848eaa1a))
+- **PEER-546:** switch eslint rule to warn ([a1ca2f9](https://github.com/amaralc/peerlab/commit/a1ca2f969e64f0c83c10db9ee9606686128f4d3c))
+
 ## [0.18.0](https://github.com/amaralc/peerlab/compare/peerlab@0.17.8...peerlab@0.18.0) (2023-06-09)
 
 ### Features
