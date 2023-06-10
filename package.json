@@ -47,6 +47,7 @@
     "@nx/js": "16.3.2",
     "@nx/linter": "16.3.2",
     "@nx/node": "16.3.2",
+    "@nx/plugin": "^16.3.2",
     "@nx/react": "16.3.2",
     "@nx/webpack": "16.3.2",
     "@nx/workspace": "16.3.2",
