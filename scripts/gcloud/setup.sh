@@ -24,6 +24,9 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 
 # BASIC GCP SETUP
 
+# Authenticate with Google Cloud
+gcloud auth login
+
 # Create project
 gcloud projects create $GCP_PROJECT_ID
 
@@ -68,6 +71,10 @@ gsutil versioning set on gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
 
 # Enable bucket logging
 gsutil logging set on -b gs://$GCP_TERRAFORM_STATE_BUCKET_NAME -o AccessLog gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
+
+# Setup a Github environment
+
+# Setup secrets in the GitHub environment
 
 # FIRST IMAGE CREATION
 
