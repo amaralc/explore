@@ -5,17 +5,20 @@
   "projectType": "application",
   "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-app-shell"],
   "targets": {
-    "production:terraform:init": {
-      "command": "cd apps/core/platform/iac-shell/production && terraform init"
+    "terraform:init": {
+      "command": "cd apps/core/platform/iac-shell && terraform init"
     },
-    "production:terraform:validate": {
-      "command": "cd apps/core/platform/iac-shell/production && terraform validate"
+    "terraform:validate": {
+      "command": "cd apps/core/platform/iac-shell && terraform validate"
     },
-    "production:terraform:plan": {
-      "command": "cd apps/core/platform/iac-shell/production && terraform plan -var-file=env.tfvars"
+    "terraform:plan": {
+      "command": "cd apps/core/platform/iac-shell && terraform plan -var-file=env.tfvars"
     },
-    "production:terraform:apply": {
-      "command": "cd apps/core/platform/iac-shell/production && terraform apply -var-file=env.tfvars -auto-approve"
+    "terraform:apply": {
+      "command": "cd apps/core/platform/iac-shell && terraform apply -var-file=env.tfvars -auto-approve"
+    },
+    "terraform:destroy": {
+      "command": "cd apps/core/platform/iac-shell && terraform destroy -var-file=env.tfvars -auto-approve"
     }
   },
   "tags": []

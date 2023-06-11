@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "The preview environment unique name (e.g. branch-name, commit-hash, etc.)"
+  type        = string
+}
+
 variable "project_id" {
   description = "The Google Cloud project ID"
   type        = string
@@ -43,3 +48,8 @@ variable "gcp_docker_artifact_repository_name" {
   default     = "docker-repository"
 }
 
+variable "neon_api_key" {
+  description = "Neon API key"
+  type        = string
+  sensitive   = true
+}
