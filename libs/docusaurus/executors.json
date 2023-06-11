@@ -9,6 +9,11 @@
       "implementation": "./src/executors/dev-server/executor",
       "schema": "./src/executors/dev-server/schema.json",
       "description": "dev-server executor"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/executor",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "serve executor"
     }
   }
 }

@@ -16,6 +16,13 @@
       "options": {
         "port": 4300
       }
+    },
+    "serve:production": {
+      "executor": "@peerlab/docusaurus:serve",
+      "options": {
+        "port": 4300,
+        "outputPath": "dist/apps/dx/docs-docusaurus"
+      }
     }
   },
   "tags": []
