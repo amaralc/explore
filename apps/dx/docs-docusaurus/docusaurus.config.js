@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 // Ref:https://github.com/easyops-cn/docusaurus-search-local/issues/328
 /** @type {import('@docusaurus/types').PluginConfig} */
 const searchLocalPluging = [
-  require.resolve('@easyops-cn/docusaurus-search-local'),
+  require.resolve("@easyops-cn/docusaurus-search-local"),
   /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
   //@ts-ignore: Wait for docusaurus typescript support
   ({
