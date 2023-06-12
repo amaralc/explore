@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 // Ref:https://github.com/easyops-cn/docusaurus-search-local/issues/328
 /** @type {import('@docusaurus/types').PluginConfig} */
 const searchLocalPluging = [
-  require.resolve("@easyops-cn/docusaurus-search-local"),
+  require.resolve('@easyops-cn/docusaurus-search-local'),
   /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
   //@ts-ignore: Wait for docusaurus typescript support
   ({
@@ -42,12 +42,12 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/docs-docusaurus/',
+          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/dev-docs-app/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/docs-docusaurus/',
+          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/dev-docs-app/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
