@@ -1,24 +1,20 @@
 {
-  "name": "core-platform-app-shell",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/platform/app-shell",
+  "name": "core-platform-shell-app",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-shell-app",
   "projectType": "application",
-  "implicitDependencies": [
-    "researchers-peers-svc-rest-api"
-  ],
+  "implicitDependencies": ["researchers-peers-svc-rest-api"],
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/core/platform/app-shell"
+        "outputPath": "dist/apps/core/platform-shell-app"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/core/platform/app-shell"
+          "outputPath": "apps/core/platform-shell-app"
         },
         "production": {}
       }
@@ -27,17 +23,17 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "core-platform-app-shell:build",
+        "buildTarget": "core-platform-shell-app:build",
         "dev": true,
         "port": 4200
       },
       "configurations": {
         "development": {
-          "buildTarget": "core-platform-app-shell:build:development",
+          "buildTarget": "core-platform-shell-app:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "core-platform-app-shell:build:production",
+          "buildTarget": "core-platform-shell-app:build:production",
           "dev": false
         }
       }
@@ -45,16 +41,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "core-platform-app-shell:build:production"
+        "buildTarget": "core-platform-shell-app:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/core/platform/app-shell/jest.config.ts",
+        "jestConfig": "apps/core/platform-shell-app/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -66,25 +60,21 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/core/platform/app-shell/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/core/platform-shell-app/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/core/platform/app-shell/cypress.config.ts",
+        "cypressConfig": "apps/core/platform-shell-app/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "core-platform-app-shell:serve"
+        "devServerTarget": "core-platform-shell-app:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "core-platform-app-shell:serve:production"
+          "devServerTarget": "core-platform-shell-app:serve:production"
         }
       }
     }

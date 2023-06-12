@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/core/platform/iac-shell",
   "projectType": "application",
-  "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-app-shell"],
+  "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-shell-app"],
   "targets": {
     "terraform:init": {
       "command": "cd apps/core/platform/iac-shell && terraform init"

@@ -1,5 +1,5 @@
 {
-  "name": "@peerlab/core/platform/app-shell",
+  "name": "@peerlab/core/platform-shell-app",
   "version": "0.1.14",
   "license": "MIT",
   "author": {

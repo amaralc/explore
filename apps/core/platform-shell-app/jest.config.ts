@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'core-platform-app-shell',
-  preset: '../../../../jest.preset.js',
+  displayName: 'core-platform-shell-app',
+  preset: '../../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/apps/core/platform/app-shell',
+  coverageDirectory: '../../../coverage/apps/core/platform-shell-app',
 };
