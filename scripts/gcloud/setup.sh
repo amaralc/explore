@@ -61,7 +61,7 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud iam service-accounts keys create ./key.json --iam-account $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
 
 # Create artifact registry repository
-gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --repository-format=docker --location=$GCP_PROJECT_LOCATION --description="Docker repository"
+gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION  --repository-format=docker --description="Docker repository"
 
 # Create a bucket
 gsutil mb -p $GCP_PROJECT_ID -l $GCP_PROJECT_LOCATION gs://$GCP_TERRAFORM_STATE_BUCKET_NAME

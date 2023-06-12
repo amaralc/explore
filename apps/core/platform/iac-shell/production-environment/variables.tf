@@ -1,4 +1,4 @@
-variable "environment" {
+variable "environment_name" {
   description = "The preview environment unique name (e.g. branch-name, commit-hash, etc.)"
   type        = string
 }
@@ -13,28 +13,23 @@ variable "region" {
   type        = string
 }
 
-variable "neon_project_location" {
-  description = "The Neon project region"
-  type        = string
-}
+# variable "credentials_path" {
+#   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
+#   type        = string
+#   default     = "credentials.json"
+# }
 
-variable "credentials_path" {
-  description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
-  type        = string
-  default     = "credentials.json"
-}
+# variable "database_url" {
+#   description = "The database URL connection string"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "database_url" {
-  description = "The database URL connection string"
-  type        = string
-  sensitive   = true
-}
-
-variable "direct_url" {
-  description = "The direct URL string"
-  type        = string
-  sensitive   = true
-}
+# variable "direct_url" {
+#   description = "The direct URL string"
+#   type        = string
+#   sensitive   = true
+# }
 
 variable "commit_hash" {
   description = "The commit hash of the source code to deploy"
@@ -57,4 +52,9 @@ variable "neon_api_key" {
   description = "Neon API key"
   type        = string
   sensitive   = true
+}
+
+variable "neon_project_location" {
+  description = "The Neon project region"
+  type        = string
 }

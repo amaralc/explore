@@ -1,16 +1,16 @@
-# resource "vercel_project" "dx-docs-docusaurus" {
-#   name      = "dx-docs-docusaurus"
-#   framework = "docusaurus"
-#   git_repository = {
-#     type              = "github"
-#     repo              = "amaralc/peerlab"
-#     production_branch = "production"
-#   }
+resource "vercel_project" "dx-docs-docusaurus" {
+  name      = "dx-docs-docusaurus"
+  framework = "docusaurus"
+  git_repository = {
+    type              = "github"
+    repo              = "amaralc/peerlab"
+    production_branch = "production"
+  }
 
-#   build_command    = "npx nx build dx-docs-docusaurus --prod" # Check the project.json file to check the name of the app
-#   output_directory = "dist/apps/dx/docs-docusaurus"           # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
-#   dev_command      = "npx nx serve dx-docs-docusaurus"
-# }
+  build_command    = "npx nx build dx-docs-docusaurus --prod" # Check the project.json file to check the name of the app
+  output_directory = "dist/apps/dx/docs-docusaurus"           # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
+  dev_command      = "npx nx serve dx-docs-docusaurus"
+}
 
 # # An environment variable that will be created
 # # for this project for the "production" environment.
