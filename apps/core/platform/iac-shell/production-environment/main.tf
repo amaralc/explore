@@ -9,14 +9,16 @@ resource "neon_project" "peerlab-platform" {
 # Application Shell
 module "core-platform-app-shell-production" {
   source           = "../../../../core/platform/app-shell/iac/production" # The path to the module
+  environment_name = "production"                                         # The deployment environment (branch-name, commit-hash, etc.)
   vercel_api_token = var.vercel_api_token                                 # The Vercel API token
 }
 
-# # Documentation with Docusaurus
-# module "dx-docs-docusaurus-production" {
-#   source           = "../../../../dx/docs-docusaurus/iac/production" # The path to the module
-#   vercel_api_token = var.vercel_api_token                            # The Vercel API token
-# }
+# Documentation with Docusaurus
+module "dx-docs-docusaurus-production" {
+  source           = "../../../../dx/docs-docusaurus/iac/production" # The path to the module
+  environment_name = "production"                                    # The deployment environment (branch-name, commit-hash, etc.)
+  vercel_api_token = var.vercel_api_token                            # The Vercel API token
+}
 
 # # Peers Service
 # module "researchers-peers-svc-rest-api" {

@@ -4,12 +4,21 @@ resource "vercel_project" "dx-docs-docusaurus" {
   git_repository = {
     type              = "github"
     repo              = "amaralc/peerlab"
-    production_branch = "production"
+    production_branch = var.environment_name
   }
 
-  build_command    = "npx nx build dx-docs-docusaurus --prod" # Check the project.json file to check the name of the app
-  output_directory = "dist/apps/dx/docs-docusaurus"           # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
-  dev_command      = "npx nx serve dx-docs-docusaurus"
+  build_command    = "npx nx build dx-docs-docusaurus --prod"                           # Check the project.json file to check the name of the app
+  output_directory = "dist/apps/dx/docs-docusaurus"                                     # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
+  dev_command      = "npx nx serve dx-docs-docusaurus"                                  # Vercel dev command
+  ignore_command   = "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" # Prevent Vercel from deploying the preview environment
+}
+
+# Add a production deployment
+resource "vercel_deployment" "dx-docs-docusaurus-first-production-deployment" {
+  project_id        = vercel_project.dx-docs-docusaurus.id
+  production        = true
+  delete_on_destroy = true
+  ref               = var.environment_name
 }
 
 # # An environment variable that will be created
@@ -31,10 +40,4 @@ resource "vercel_project" "dx-docs-docusaurus" {
 #   # git_branch = "staging" # Use this if you wish to specify a preview branch
 # }
 
-# # Add a production deployment
-# resource "vercel_deployment" "dx-docs-docusaurus-first-production-deployment" {
-#   project_id        = vercel_project.dx-docs-docusaurus.id
-#   production        = true
-#   delete_on_destroy = true
-#   ref               = "production"
-# }
+

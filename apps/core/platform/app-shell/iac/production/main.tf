@@ -4,21 +4,21 @@ resource "vercel_project" "core-platform-app-shell" {
   git_repository = {
     type              = "github"
     repo              = "amaralc/peerlab"
-    production_branch = "production"
+    production_branch = var.environment_name
   }
 
   build_command    = "npx nx build core-platform-app-shell --prod" # Check the project.json file to check the name of the app
   output_directory = "dist/apps/core/platform/app-shell/.next"     # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
   dev_command      = "npx nx serve core-platform-app-shell"
-  # ignore_command   = "if [ '$VERCEL_ENV' == 'production' ]; then exit 1; else exit 0; fi"
+  ignore_command   = "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi"
 }
 
 # Add a production deployment
 resource "vercel_deployment" "first-production-deployment" {
   project_id        = vercel_project.core-platform-app-shell.id
+  ref               = var.environment_name
   production        = true
   delete_on_destroy = true
-  ref               = "production"
 }
 
 # # An environment variable that will be created

@@ -4,7 +4,7 @@ variable "vercel_api_token" {
   sensitive   = true
 }
 
-variable "environment" {
+variable "environment_name" {
   description = "Name of the environment (e.g. branch-name, commit-hash, etc.)"
   type        = string
 }
