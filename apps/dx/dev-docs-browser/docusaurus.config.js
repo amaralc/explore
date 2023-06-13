@@ -42,12 +42,12 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/dev-docs-app/',
+          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/dev-docs-browser/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/dev-docs-app/',
+          editUrl: 'https://github.com/amaralc/peerlab/edit/production/apps/dx/dev-docs-browser/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

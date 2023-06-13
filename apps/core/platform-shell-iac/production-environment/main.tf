@@ -14,10 +14,10 @@ module "core-platform-shell-browser-production" {
 }
 
 # Documentation with Docusaurus
-module "dx-dev-docs-app-production" {
-  source           = "../../../../dx/dev-docs-app/iac/production" # The path to the module
-  environment_name = "production"                                 # The deployment environment (branch-name, commit-hash, etc.)
-  vercel_api_token = var.vercel_api_token                         # The Vercel API token
+module "dx-dev-docs-browser-production" {
+  source           = "../../../../dx/dev-docs-browser/iac/production" # The path to the module
+  environment_name = "production"                                     # The deployment environment (branch-name, commit-hash, etc.)
+  vercel_api_token = var.vercel_api_token                             # The Vercel API token
 }
 
 # # Peers Service

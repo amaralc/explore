@@ -1,14 +1,14 @@
 {
-  "name": "dx-dev-docs-app",
+  "name": "dx-dev-docs-browser",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "implicitDependencies": ["docusaurus"],
-  "sourceRoot": "apps/dx/dev-docs-app/src",
+  "sourceRoot": "apps/dx/dev-docs-browser/src",
   "targets": {
     "build": {
       "executor": "@peerlab/docusaurus:browser",
       "options": {
-        "outputPath": "dist/apps/dx/dev-docs-app"
+        "outputPath": "dist/apps/dx/dev-docs-browser"
       }
     },
     "serve": {
@@ -21,7 +21,7 @@
       "executor": "@peerlab/docusaurus:serve",
       "options": {
         "port": 4300,
-        "outputPath": "dist/apps/dx/dev-docs-app"
+        "outputPath": "dist/apps/dx/dev-docs-browser"
       }
     }
   },
