@@ -6,8 +6,7 @@ on:
       - "peerlab@[0-9]+.[0-9]+.[0-9]+"
     paths:
       - "apps/core/platform-shell-iac/**"
-      - "apps/researchers/peers/svc-rest-api/**"
-      - "apps/researchers/peers/svc-consumer/**"
+      - "apps/researchers/peers-svc-rest-api/**"
       - "libs/researchers/peers/**"
       - "package.json"
       - "yarn.lock"
@@ -81,7 +80,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/researchers/peers/svc-rest-api/Dockerfile
+          file: ./apps/researchers/peers-svc-rest-api/Dockerfile
           push: true
           tags: |
             ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
