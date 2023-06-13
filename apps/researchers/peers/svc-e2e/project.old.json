@@ -1,6 +1,6 @@
 {
   "name": "core-peers-svc-e2e",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["core-peers-svc-rest-api", "core-peers-svc-consumer"],
   "targets": {
     "serve-back-end": {
