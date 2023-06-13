@@ -22,7 +22,7 @@ module "dx-dev-docs-browser-production" {
 
 # # Peers Service
 # module "researchers-peers-svc-rest-api" {
-#   source                              = "../../../../researchers/peers-svc-rest-api/iac" # The path to the module
+#   source                              = "../../../../researchers/peers/svc-rest-api/iac" # The path to the module
 #   environment                         = var.environment                                  # The deployment environment (staging | production)
 #   project_id                          = var.project_id                                   # The Google Cloud project ID
 #   region                              = var.region                                       # The region where resources will be created
