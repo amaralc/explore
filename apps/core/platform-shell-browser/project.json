@@ -1,7 +1,7 @@
 {
-  "name": "core-platform-shell-app",
+  "name": "core-platform-shell-browser",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/platform-shell-app",
+  "sourceRoot": "apps/core/platform-shell-browser",
   "projectType": "application",
   "implicitDependencies": ["researchers-peers-svc-rest-api"],
   "targets": {
@@ -10,11 +10,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/core/platform-shell-app"
+        "outputPath": "dist/apps/core/platform-shell-browser"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/core/platform-shell-app"
+          "outputPath": "apps/core/platform-shell-browser"
         },
         "production": {}
       }
@@ -23,17 +23,17 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "core-platform-shell-app:build",
+        "buildTarget": "core-platform-shell-browser:build",
         "dev": true,
         "port": 4200
       },
       "configurations": {
         "development": {
-          "buildTarget": "core-platform-shell-app:build:development",
+          "buildTarget": "core-platform-shell-browser:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "core-platform-shell-app:build:production",
+          "buildTarget": "core-platform-shell-browser:build:production",
           "dev": false
         }
       }
@@ -41,14 +41,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "core-platform-shell-app:build:production"
+        "buildTarget": "core-platform-shell-browser:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/core/platform-shell-app/jest.config.ts",
+        "jestConfig": "apps/core/platform-shell-browser/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -62,19 +62,19 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/core/platform-shell-app/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/core/platform-shell-browser/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/core/platform-shell-app/cypress.config.ts",
+        "cypressConfig": "apps/core/platform-shell-browser/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "core-platform-shell-app:serve"
+        "devServerTarget": "core-platform-shell-browser:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "core-platform-shell-app:serve:production"
+          "devServerTarget": "core-platform-shell-browser:serve:production"
         }
       }
     }

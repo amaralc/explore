@@ -7,10 +7,10 @@ resource "neon_project" "peerlab-platform" {
 }
 
 # Application Shell
-module "core-platform-shell-app-production" {
-  source           = "../../../../core/platform/platform-shell-app/iac/production" # The path to the module
-  environment_name = "production"                                                  # The deployment environment (branch-name, commit-hash, etc.)
-  vercel_api_token = var.vercel_api_token                                          # The Vercel API token
+module "core-platform-shell-browser-production" {
+  source           = "../../../../core/platform/platform-shell-browser/iac/production" # The path to the module
+  environment_name = "production"                                                      # The deployment environment (branch-name, commit-hash, etc.)
+  vercel_api_token = var.vercel_api_token                                              # The Vercel API token
 }
 
 # Documentation with Docusaurus
