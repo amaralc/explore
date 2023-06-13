@@ -44,19 +44,19 @@ researchers-peers-svc-consumer-serve:
 	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve service-consumer
 
 terraform-init-staging:
-	cd apps/core/platform/iac-shell/staging && terraform init -upgrade
+	cd apps/core/platform-shell-iac/staging && terraform init -upgrade
 
 terraform-plan-staging:
-	cd apps/core/platform/iac-shell/staging && terraform plan -var-file=env.tfvars
+	cd apps/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars
 
 terraform-apply-staging:
-	cd apps/core/platform/iac-shell/staging && terraform apply -var-file=env.tfvars
+	cd apps/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars
 
 terraform-apply-staging-auto-approve:
-	cd apps/core/platform/iac-shell/staging && terraform apply -var-file=env.tfvars -auto-approve
+	cd apps/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars -auto-approve
 
 terraform-plan-staging-out:
-	cd apps/core/platform/iac-shell/staging && terraform plan -var-file=env.tfvars -out=tfplan
+	cd apps/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
 
 terraform-destroy-staging:
-	cd apps/core/platform/iac-shell/staging && terraform destroy -var-file=env.tfvars
+	cd apps/core/platform-shell-iac/staging && terraform destroy -var-file=env.tfvars

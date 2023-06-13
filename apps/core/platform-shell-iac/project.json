@@ -1,0 +1,25 @@
+{
+  "name": "core-platform-shell-iac",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-shell-iac",
+  "projectType": "application",
+  "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-shell-app"],
+  "targets": {
+    "terraform:init": {
+      "command": "cd apps/core/platform-shell-iac && terraform init"
+    },
+    "terraform:validate": {
+      "command": "cd apps/core/platform-shell-iac && terraform validate"
+    },
+    "terraform:plan": {
+      "command": "cd apps/core/platform-shell-iac && terraform plan -var-file=env.tfvars"
+    },
+    "terraform:apply": {
+      "command": "cd apps/core/platform-shell-iac && terraform apply -var-file=env.tfvars -auto-approve"
+    },
+    "terraform:destroy": {
+      "command": "cd apps/core/platform-shell-iac && terraform destroy -var-file=env.tfvars -auto-approve"
+    }
+  },
+  "tags": []
+}
