@@ -30,14 +30,20 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
 }
 
-variable "database_url" {
-  description = "The database URL connection string"
+variable "database_name" {
+  description = "The name of the database"
   type        = string
   sensitive   = true
 }
 
-variable "direct_url" {
-  description = "The direct URL string"
+variable "database_pooler_url" {
+  description = "The database pooler URL connection string"
+  type        = string
+  sensitive   = true
+}
+
+variable "database_direct_url" {
+  description = "The database direct URL connection string"
   type        = string
   sensitive   = true
 }
@@ -45,4 +51,16 @@ variable "direct_url" {
 variable "commit_hash" {
   description = "The commit hash of the source code to deploy"
   type        = string
+}
+
+variable "neon_project_id" {
+  description = "The Neon Project ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "neon_branch_id" {
+  description = "The Neon branch id"
+  type        = string
+  sensitive   = true
 }

@@ -1,13 +1,12 @@
-variable "project_id" {
+variable "neon_project_id" {
   description = "The Neon Project ID"
   type        = string
   sensitive   = true
 }
 
-variable "neon_project_location" {
-  description = "The Neon Project Location"
+variable "environment_name" {
+  description = "The name of the environment"
   type        = string
-  sensitive   = true
 }
 
 variable "neon_api_key" {
