@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/researchers/peers/svc-rest-api/src",
   "projectType": "application",
-  "implicitDependencies": ["researchers-peers-svc-consumer"],
+  "implicitDependencies": [],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
