@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.0](https://github.com/amaralc/peerlab/compare/peerlab@0.20.0...peerlab@0.21.0) (2023-06-14)
+
+### Features
+
+- **PEER-550:** add documentation draft ([655b6e4](https://github.com/amaralc/peerlab/commit/655b6e463bc670f9d24ff1622bc79bba0ebe6e60))
+- **PEER-550:** enhance project relationships ([eedbb25](https://github.com/amaralc/peerlab/commit/eedbb2556cce2feb765d81d0d602729759d0aaa2))
+
+### Reverts
+
+- Revert "refactor: move project to parent folder" ([b582096](https://github.com/amaralc/peerlab/commit/b582096c02298d3be9ca20b29f3e666537af3f52))
+- Revert "refactor: move project to researchers-peers-svc-rest-api" ([214d706](https://github.com/amaralc/peerlab/commit/214d7066a2d6e86bbefbd50961335664912e7428))
+- Revert "refactor: move project to researchers-peers-svc-e2e" ([072e137](https://github.com/amaralc/peerlab/commit/072e137942a07a09940f0d46aece331d634b821f))
+- Revert "refactor: adjust path to services" ([707ef81](https://github.com/amaralc/peerlab/commit/707ef81948f2bdb9dc7a63d1e4289d7ba178c8b9))
+- Revert "chore: remove path criteria" ([eedd2c8](https://github.com/amaralc/peerlab/commit/eedd2c85eebef0bd862806b43d235e621db6d42b))
+- Revert "refactor: rename project" ([2e0d9ca](https://github.com/amaralc/peerlab/commit/2e0d9ca90f6f5522de61b40671622c1c8e4da364))
+
 ## [0.20.0](https://github.com/amaralc/peerlab/compare/peerlab@0.19.0...peerlab@0.20.0) (2023-06-10)
 
 ### Features
