@@ -21,7 +21,7 @@ jobs:
       run:
         working-directory: ${{ github.workspace }}
     environment:
-      name: staging
+      name: peerlab-preview
 
     steps:
       - name: Checkout code
@@ -86,7 +86,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     environment:
-      name: staging
+      name: peerlab-preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
@@ -102,7 +102,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/staging/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -123,22 +123,22 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/core/platform-shell-iac/staging
+        working-directory: apps/core/platform-shell-iac
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/core/platform-shell-iac/staging
+        working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-        working-directory: apps/core/platform-shell-iac/staging
+        working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
-          terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform-shell-iac/staging
+          terraform apply -auto-approve tfplan  && terraform output
+        working-directory: apps/core/platform-shell-iac
