@@ -1,0 +1,33 @@
+---
+slug: ci-cd-with-nx-terraform-github-actions-vercel-and-neon
+title: '[DRAFT] CI/CD with Nx, Terraform, GitHub Actions, Vercel, Neon and Google Cloud Platform'
+authors: [amaralc]
+tags: [nx, terraform, github-actions, vercel, neon]
+---
+
+How to attend to the following developer story in a well structured and automated way?
+
+> As a developer, I want a fully functional and isolated preview environment to be created once I create a pull request
+
+## Vercel
+
+- Each project can have multiple branches (environments);
+- Official terraform support;
+
+## Neon
+
+- Each project can have multiple branches (environments);
+- Official github action support with video tutorial (https://www.youtube.com/watch?v=jjRasfbeYHk);
+- Do not have official terraform provider;
+- Unnoficial terraform provider (https://registry.terraform.io/providers/kislerdm/neon/latest/docs);
+- Author of the terraform provider:
+  - https://registry.terraform.io/namespaces/kislerdm
+  - https://www.linkedin.com/in/dkisler/
+- In the terraform provider, a branch is considered a resource;
+
+## Remote Terraform Backend with Google Cloud Platform
+
+- One back-end per environment (isolated);
+  - I cannot make proper use of Neon and Vercel features if I separate the back-end per environment;
+- One back-end per project (shared);
+  - I can make proper use of Neon and Vercel features since the environment will be created in the same project;
