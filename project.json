@@ -2,7 +2,7 @@
   "name": "peerlab",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "implicitDependencies": ["core-platform-shell-iac"],
+  "implicitDependencies": ["github-actions"],
   "targets": {},
   "tags": []
 }

@@ -1,0 +1,9 @@
+{
+  "name": "github-actions",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": ".github/workflows",
+  "projectType": "application",
+  "implicitDependencies": ["researchers-peers-svc-rest-api", "core-platform-shell-iac"],
+  "targets": {},
+  "tags": []
+}
