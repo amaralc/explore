@@ -30,12 +30,6 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
 }
 
-variable "database_name" {
-  description = "The name of the database"
-  type        = string
-  sensitive   = true
-}
-
 variable "database_pooler_url" {
   description = "The database pooler URL connection string"
   type        = string
@@ -53,14 +47,8 @@ variable "commit_hash" {
   type        = string
 }
 
-variable "neon_project_id" {
-  description = "The Neon Project ID"
+variable "credentials_path" {
+  description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
-  sensitive   = true
-}
-
-variable "neon_branch_id" {
-  description = "The Neon branch id"
-  type        = string
-  sensitive   = true
+  default     = "credentials.json"
 }

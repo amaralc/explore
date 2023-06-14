@@ -58,3 +58,9 @@ variable "neon_project_location" {
   description = "The Neon project region"
   type        = string
 }
+
+variable "credentials_path" {
+  description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
+  type        = string
+  default     = "credentials.json"
+}
