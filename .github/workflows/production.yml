@@ -106,6 +106,9 @@ jobs:
       ENVIRONMENT_NAME: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref#refs/heads/ }}
 
     steps:
+      - name: Extract branch name
+        run: echo "ENVIRONMENT_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
       - name: Get short commit hash
         run: |
           SHORT_SHA=${{ github.sha }}
