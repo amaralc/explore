@@ -7,8 +7,8 @@ resource "vercel_project" "core-platform-shell-browser" {
     production_branch = var.environment_name
   }
 
-  build_command    = "npx nx build core-platform-shell-browser --prod"      # Check the project.json file to check the name of the app
-  output_directory = "dist/apps/core/platform/platform-shell-browser/.next" # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
+  build_command    = "npx nx build core-platform-shell-browser --prod" # Check the project.json file to check the name of the app
+  output_directory = "dist/apps/core/platform-shell-browser/.next"     # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
   dev_command      = "npx nx serve core-platform-shell-browser"
   ignore_command   = "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi"
 }
