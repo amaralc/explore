@@ -134,7 +134,7 @@ jobs:
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply

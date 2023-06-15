@@ -24,18 +24,6 @@ variable "credentials_path" {
   default     = "credentials.json"
 }
 
-variable "database_url" {
-  description = "The database URL connection string"
-  type        = string
-  sensitive   = true
-}
-
-variable "direct_url" {
-  description = "The direct URL string"
-  type        = string
-  sensitive   = true
-}
-
 variable "commit_hash" {
   description = "The commit hash of the source code to deploy"
   type        = string
