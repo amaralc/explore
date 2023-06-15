@@ -1,17 +1,21 @@
 name: Build and Push Docker image
 
+# on:
+#   create:
+#     tags:
+#       - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+#     paths:
+#       - "apps/core/platform-shell-iac/**"
+#       - "apps/researchers/peers/svc-rest-api/**"
+#       - "apps/researchers/peers/svc-consumer/**"
+#       - "libs/researchers/peers/**"
+#       - "package.json"
+#       - "yarn.lock"
+#       - ".github/workflows/production.yml"
 on:
-  create:
-    tags:
-      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
-    paths:
-      - "apps/core/platform-shell-iac/**"
-      - "apps/researchers/peers/svc-rest-api/**"
-      - "apps/researchers/peers/svc-consumer/**"
-      - "libs/researchers/peers/**"
-      - "package.json"
-      - "yarn.lock"
-      - ".github/workflows/production.yml"
+  push:
+    branches:
+      - production
 
 jobs:
   check-branch:
@@ -97,6 +101,9 @@ jobs:
     defaults:
       run:
         working-directory: ${{ github.workspace }}
+    env:
+      # The expression ${GITHUB_REF#refs/heads/} will remove the refs/heads/ part, yielding just "productioN", which is the name of the branch to which you pushed.
+      ENVIRONMENT_NAME: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref#refs/heads/ }}
 
     steps:
       - name: Get short commit hash
@@ -142,7 +149,7 @@ jobs:
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "environment=${{ env.ENVIRONMENT_NAME }}" -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply

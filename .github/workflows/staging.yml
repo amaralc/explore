@@ -20,8 +20,8 @@ jobs:
     defaults:
       run:
         working-directory: ${{ github.workspace }}
-    environment:
-      name: peerlab-preview
+    # environment:
+    #   name: peerlab-preview
 
     steps:
       - name: Checkout code
@@ -85,11 +85,14 @@ jobs:
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
-    environment:
-      name: peerlab-preview
+    # environment:
+    #   name: peerlab-preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
+    env:
+      # The expression ${GITHUB_REF#refs/heads/} will remove the refs/heads/ part, yielding just "productioN", which is the name of the branch to which you pushed.
+      ENVIRONMENT_NAME: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref#refs/heads/ }}
 
     steps:
       - name: Checkout staging branch
