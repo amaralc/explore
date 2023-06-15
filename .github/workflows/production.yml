@@ -28,70 +28,73 @@ jobs:
             echo "Tag is not on the production branch, cancelling workflow."
             exit 1
           fi
-  # build:
-  #   runs-on: ubuntu-latest
-  #   needs: [check-branch]
-  #   # environment:
-  #   #   name: peerlab-preview
+  build:
+    runs-on: ubuntu-latest
+    needs: [check-branch]
+    # environment:
+    #   name: peerlab-preview
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #       if: ${{ github.event_name != 'pull_request' }}
-  #       with:
-  #         fetch-depth: 0 # This is important to get all history for all branches
-  #         ref: production
+    steps:
+      - name: Extract branch name
+        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
-  #     - name: Check if app was affected
-  #       run: |
-  #         LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
-  #         echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
+      - name: Checkout code
+        uses: actions/checkout@v3
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          fetch-depth: 0 # This is important to get all history for all branches
+          ref: production
 
-  #         yarn install
+      - name: Check if app was affected
+        run: |
+          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
+          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
 
-  #         AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
-  #         echo 'Affected apps:' $AFFECTED_APPS
+          yarn install
 
-  #         PROJECT_NAME=researchers-peers-svc-rest-api
-  #         if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
-  #           echo '✅ - Build can proceed since app was affected!'
-  #           echo "affected=true" >> $GITHUB_ENV
-  #         else
-  #           # If no dependency was affected, cancel build
-  #           echo '🛑 - Build cancelled since no dependency was affected'
-  #           echo "affected=false" >> $GITHUB_ENV
-  #         fi
+          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
+          echo 'Affected apps:' $AFFECTED_APPS
 
-  #     - name: Get short commit hash
-  #       if: ${{ env.affected == 'true' }}
-  #       run: |
-  #         SHORT_SHA=${{ github.sha }}
-  #         echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+          PROJECT_NAME=researchers-peers-svc-rest-api
+          if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
+            echo '✅ - Build can proceed since app was affected!'
+            echo "affected=true" >> $GITHUB_ENV
+          else
+            # If no dependency was affected, cancel build
+            echo '🛑 - Build cancelled since no dependency was affected'
+            echo "affected=false" >> $GITHUB_ENV
+          fi
 
-  #     - name: Set up Docker Buildx
-  #       if: ${{ env.affected == 'true' }}
-  #       uses: docker/setup-buildx-action@v2
+      - name: Get short commit hash
+        if: ${{ env.affected == 'true' }}
+        run: |
+          SHORT_SHA=${{ github.sha }}
+          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
 
-  #     - name: Login to Google Container Registry
-  #       if: ${{ env.affected == 'true' }}
-  #       uses: docker/login-action@v2
-  #       with:
-  #         registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
-  #         username: _json_key
-  #         password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+      - name: Set up Docker Buildx
+        if: ${{ env.affected == 'true' }}
+        uses: docker/setup-buildx-action@v2
 
-  #     - name: Build and push Docker image
-  #       if: ${{ env.affected == 'true' }}
-  #       uses: docker/build-push-action@v4
-  #       with:
-  #         context: .
-  #         file: ./apps/researchers/peers/svc-rest-api/Dockerfile
-  #         push: true
-  #         tags: |
-  #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
-  #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
-  #       env:
-  #         IMAGE_NAME: researchers-peers
+      - name: Login to Google Container Registry
+        if: ${{ env.affected == 'true' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+      - name: Build and push Docker image
+        if: ${{ env.affected == 'true' }}
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./apps/researchers/peers/svc-rest-api/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+        env:
+          IMAGE_NAME: researchers-peers
 
   deploy:
     # needs: [build]
@@ -104,7 +107,7 @@ jobs:
 
     steps:
       - name: Extract branch name
-        run: echo "ENVIRONMENT_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
       - name: Get short commit hash
         run: |
@@ -149,7 +152,7 @@ jobs:
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "environment=${{ env.ENVIRONMENT_NAME }}" -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "environment=${{ env.environment_name }}" -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
