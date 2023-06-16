@@ -24,8 +24,10 @@ locals {
   database_pooler_url = "postgres://${local.username}:${local.password}@${local.database_pooler_host}/${local.database_name}"
 }
 
-module "researchers-peers-svc-rest-api-production" {
+module "researchers-peers-svc-rest-api" {
   source                              = "../svc-rest-api/iac"                   # The path to the module
+  app_name                            = "researchers-peers"                     # The name of the application
+  app_component_name                  = "svc-rest-api"                          # The name of the application component
   environment                         = var.environment_name                    # The deployment environment (staging | production)
   project_id                          = var.project_id                          # The Google Cloud project ID
   region                              = var.region                              # The region where resources will be created
