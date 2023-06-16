@@ -94,7 +94,7 @@ jobs:
             ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
         env:
-          IMAGE_NAME: researchers-peers
+          IMAGE_NAME: researchers-peers-svc-rest-api
 
   deploy:
     needs: [build]
