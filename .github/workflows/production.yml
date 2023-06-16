@@ -69,7 +69,7 @@ jobs:
         if: ${{ env.affected == 'true' }}
         run: |
           SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         if: ${{ env.affected == 'true' }}
@@ -112,7 +112,7 @@ jobs:
       - name: Get short commit hash
         run: |
           SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
       - name: Checkout production branch
         uses: actions/checkout@v3
