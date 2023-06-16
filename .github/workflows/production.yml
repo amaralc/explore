@@ -91,10 +91,12 @@ jobs:
           file: ./apps/researchers/peers/svc-rest-api/Dockerfile
           push: true
           tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.image_name }}:${{ env.environment_name }}
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.image_name }}:${{ env.short_commit_sha }}
         env:
-          IMAGE_NAME: researchers-peers-svc-rest-api
+          app_name: researchers-peers
+          app_component_name: svc-rest-api
+          image_name: ${{ env.app_name }}-${{ env.app_component_name }}
 
   deploy:
     needs: [build]
