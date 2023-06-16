@@ -24,6 +24,9 @@ jobs:
     #   name: peerlab-preview
 
     steps:
+      - name: Extract branch name
+        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v3
         # if: ${{ github.event_name != 'pull_request' }}
@@ -77,10 +80,10 @@ jobs:
           file: ./apps/researchers/peers/svc-rest-api/Dockerfile
           push: true
           tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
         env:
-          IMAGE_NAME: researchers-peers
+          IMAGE_NAME: researchers-peers-svc-rest-api
 
   deploy:
     needs: [build]
@@ -90,11 +93,11 @@ jobs:
     defaults:
       run:
         working-directory: ${{ github.workspace }}
-    # env:
-    #   # The expression ${GITHUB_REF#refs/heads/} will remove the refs/heads/ part, yielding just "productioN", which is the name of the branch to which you pushed.
-    #   ENVIRONMENT_NAME: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref#refs/heads/ }}
 
     steps:
+      - name: Extract branch name
+        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
       - name: Checkout staging branch
         uses: actions/checkout@v3
 
@@ -137,7 +140,7 @@ jobs:
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
-          terraform plan -out=tfplan -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "environment=${{ env.environment_name }}" -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
