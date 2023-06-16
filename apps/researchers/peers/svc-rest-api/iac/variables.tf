@@ -1,11 +1,13 @@
 variable "app_name" {
   description = "The name of the application"
   type        = string
+  default     = "researchers-peers"
 }
 
 variable "app_component_name" {
   description = "The name of the application component"
   type        = string
+  default     = "svc-rest-api"
 }
 
 variable "environment" {
