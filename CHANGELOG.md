@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.5](https://github.com/amaralc/peerlab/compare/peerlab@0.21.4...peerlab@0.21.5) (2023-06-16)
+
+### Bug Fixes
+
+- **PEER-550:** add dependency between jobs ([f450a20](https://github.com/amaralc/peerlab/commit/f450a20c67606f9547b378c77306c4020783feed))
+- **PEER-550:** add environment name variable ([12c9052](https://github.com/amaralc/peerlab/commit/12c9052f5eea948726eb34075387f195301f5d53))
+- **PEER-550:** adjust image name ([48cb418](https://github.com/amaralc/peerlab/commit/48cb4186422ca463d7ca07afee4ab526d266dc26))
+- **PEER-550:** adjust next output directory ([215a682](https://github.com/amaralc/peerlab/commit/215a6828248d1d3d078d48f2ae8c79a153ace896))
+- **PEER-550:** adjust service name ([b6e919c](https://github.com/amaralc/peerlab/commit/b6e919c20e38d1bdd972f895a37b32e584aa94ef))
+- **PEER-550:** set environment_name as tag ([14e8592](https://github.com/amaralc/peerlab/commit/14e8592bce6df61b2b0cab06db00f6ffc7766a2d))
+
+### Reverts
+
+- Revert "fix(PEER-550): use correct image name" ([e481bb3](https://github.com/amaralc/peerlab/commit/e481bb320a21e6ef2483d2ad1de7453191a58a12))
+
 ## [0.21.4](https://github.com/amaralc/peerlab/compare/peerlab@0.21.3...peerlab@0.21.4) (2023-06-15)
 
 ### Bug Fixes
