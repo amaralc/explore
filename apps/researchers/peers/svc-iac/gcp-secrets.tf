@@ -1,3 +1,16 @@
+locals {
+  username             = neon_role.researchers-peers.name
+  password             = neon_role.researchers-peers.password
+  database_direct_host = var.neon_branch_host
+  direct_host_parts    = split(".", local.database_direct_host)
+  database_pooler_host = join(".", [format("%s-pooler", local.direct_host_parts[0]), join(".", slice(local.direct_host_parts, 1, length(local.direct_host_parts)))])
+  database_name        = neon_database.researchers-peers.name
+
+  database_direct_url = "postgres://${local.username}:${local.password}@${local.database_direct_host}/${local.database_name}"
+  database_pooler_url = "postgres://${local.username}:${local.password}@${local.database_pooler_host}/${local.database_name}"
+}
+
+
 # Create the secret in Secret Manager
 resource "google_secret_manager_secret" "researchers_peers_svc_secret" {
   secret_id = "researchers_peers_svc_secret"
@@ -15,7 +28,7 @@ resource "google_secret_manager_secret_version" "researchers_peers_svc_secret-v1
 }
 
 # Fetch the service account key from Google Secret Manager
-data "google_secret_manager_secret_version" "researchers-peers-svc_access_secret" {
+data "google_secret_manager_secret_version" "researchers-peers-secret" {
   # The project in which the secret was created
   project = var.project_id
 
@@ -42,7 +55,7 @@ resource "google_secret_manager_secret" "database_url_secret" {
 # Add the database URL as a secret version
 resource "google_secret_manager_secret_version" "database_url_secret_v1" {
   secret      = google_secret_manager_secret.database_url_secret.id # Link the secret version to the secret
-  secret_data = var.database_pooler_url                             # Set the value of the secret from the database_url variable
+  secret_data = local.database_pooler_url                           # Set the value of the secret from the database_url variable
 }
 
 # Create a secret in Google Secret Manager for the direct URL
@@ -58,7 +71,7 @@ resource "google_secret_manager_secret" "direct_url_secret" {
 # Add the direct URL as a secret version
 resource "google_secret_manager_secret_version" "direct_url_secret_v1" {
   secret      = google_secret_manager_secret.direct_url_secret.id # Link the secret version to the secret
-  secret_data = var.database_direct_url                           # Set the value of the secret from the direct_url variable
+  secret_data = local.database_direct_url                         # Set the value of the secret from the direct_url variable
 }
 
 # This block grants the 'Secret Manager Secret Accessor' role to the service account for the database URL secret

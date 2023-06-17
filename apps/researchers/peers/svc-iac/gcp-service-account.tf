@@ -1,6 +1,11 @@
+# Service Account
+locals {
+  service_account_name = "researchers-peers-${var.environment_name}"
+}
+
 # This block creates a new service account
 resource "google_service_account" "researchers_peers_svc" {
-  account_id   = "${var.app_name}-${var.app_component_name}" # The service account's identifier within the project
+  account_id   = "researchers-peers-${var.environment_name}" # The service account's identifier within the project
   display_name = "Researchers Peers Service Account"         # The display name for the service account (optional)
   project      = var.project_id                              # The ID of the project that the service account will be created in
 }

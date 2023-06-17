@@ -1,5 +1,4 @@
-# Identity and Access Management (IAM) resources
-
+## Adds permissions to service account
 
 # This block adds the Secret Manager Secret Accessor role to the service account
 resource "google_project_iam_binding" "secret_accessor" {
@@ -34,3 +33,4 @@ resource "google_project_iam_member" "run_invoker" {
   member     = "serviceAccount:${google_service_account.researchers_peers_svc.email}"
   depends_on = [google_service_account.researchers_peers_svc]
 }
+

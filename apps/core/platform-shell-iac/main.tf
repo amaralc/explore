@@ -19,7 +19,7 @@ module "staging" {
   neon_project_id                     = module.production.neon_project_id       # The Neon project ID
   project_id                          = var.project_id                          # The Google Cloud project ID
   region                              = var.region                              # The region where resources will be created
-  commit_hash                         = var.commit_hash                         # Force new cloud run revision to be created
+  commit_hash                         = "81e18b4c"                              # Force new cloud run revision to be created
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name # The name of the Docker repository
 }
 

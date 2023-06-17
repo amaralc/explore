@@ -10,7 +10,7 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
   template {
     spec {
       # The service account to be used by the service
-      service_account_name = google_service_account.researchers_peers_svc.email
+      service_account_name = var.gcp_service_account_email
 
       # The Docker image to use for the service
       containers {
@@ -28,8 +28,8 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
           name = "POSTGRES_POOLED_CONNECTION_DATABASE_URL"
           value_from {
             secret_key_ref {
-              name = google_secret_manager_secret.database_url_secret.secret_id # Reference the secret
-              key  = "latest"                                                   # Use the latest version of the secret
+              name = var.gcp_pooled_database_connection_url_secret_id # Reference the secret
+              key  = "latest"                                         # Use the latest version of the secret
             }
           }
         }
@@ -39,8 +39,8 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
           name = "POSTGRES_DIRECT_CONNECTION_DATABASE_URL"
           value_from {
             secret_key_ref {
-              name = google_secret_manager_secret.direct_url_secret.secret_id # Reference the secret
-              key  = "latest"                                                 # Use the latest version of the secret
+              name = var.gcp_direct_database_connection_url_secret_id # Reference the secret
+              key  = "latest"                                         # Use the latest version of the secret
             }
           }
         }
