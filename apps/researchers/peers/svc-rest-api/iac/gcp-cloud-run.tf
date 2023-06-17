@@ -6,6 +6,9 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
   # The region where the service will be located
   location = var.region
 
+  # Depends on secret versions
+  depends_on = [var.gcp_pooled_database_connection_url_secret_version, var.gcp_direct_database_connection_url_secret_version]
+
   # Defining the service template
   template {
     spec {
