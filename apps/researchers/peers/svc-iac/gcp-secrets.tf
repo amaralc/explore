@@ -13,7 +13,7 @@ locals {
 
 # Create the secret in Secret Manager
 resource "google_secret_manager_secret" "researchers_peers_svc_secret" {
-  secret_id = "researchers_peers_svc_secret"
+  secret_id = "${local.app_name}-${var.environment_name}-secret"
   project   = var.project_id
 
   replication {
@@ -43,9 +43,9 @@ data "google_secret_manager_secret_version" "researchers-peers-secret" {
 }
 
 # Create a secret in Google Secret Manager for the database URL
-resource "google_secret_manager_secret" "database_url_secret" {
-  secret_id = "database-url-secret" # Define the ID of the secret
-  project   = var.project_id        # Define the project where the secret should be created
+resource "google_secret_manager_secret" "gcp_pooled_database_connection_url_secret" {
+  secret_id = "${local.app_name}-${var.environment_name}-pooled-database-connection-url-secret" # Define the ID of the secret
+  project   = var.project_id                                                                    # Define the project where the secret should be created
 
   replication {
     automatic = true # Ensure the secret is replicated across all regions
@@ -53,15 +53,15 @@ resource "google_secret_manager_secret" "database_url_secret" {
 }
 
 # Add the database URL as a secret version
-resource "google_secret_manager_secret_version" "database_url_secret_v1" {
-  secret      = google_secret_manager_secret.database_url_secret.id # Link the secret version to the secret
-  secret_data = local.database_pooler_url                           # Set the value of the secret from the database_url variable
+resource "google_secret_manager_secret_version" "gcp_pooled_database_connection_url_secret_v1" {
+  secret      = google_secret_manager_secret.gcp_pooled_database_connection_url_secret.id # Link the secret version to the secret
+  secret_data = local.database_pooler_url                                                 # Set the value of the secret from the database_url variable
 }
 
 # Create a secret in Google Secret Manager for the direct URL
-resource "google_secret_manager_secret" "direct_url_secret" {
-  secret_id = "direct-url-secret" # Define the ID of the secret
-  project   = var.project_id      # Define the project where the secret should be created
+resource "google_secret_manager_secret" "gcp_direct_database_connection_url_secret" {
+  secret_id = "${local.app_name}-${var.environment_name}-direct-database-connection-url-secret" # Define the ID of the secret
+  project   = var.project_id                                                                    # Define the project where the secret should be created
 
   replication {
     automatic = true # Ensure the secret is replicated across all regions
@@ -69,18 +69,18 @@ resource "google_secret_manager_secret" "direct_url_secret" {
 }
 
 # Add the direct URL as a secret version
-resource "google_secret_manager_secret_version" "direct_url_secret_v1" {
-  secret      = google_secret_manager_secret.direct_url_secret.id # Link the secret version to the secret
-  secret_data = local.database_direct_url                         # Set the value of the secret from the direct_url variable
+resource "google_secret_manager_secret_version" "gcp_direct_database_connection_url_secret_v1" {
+  secret      = google_secret_manager_secret.gcp_direct_database_connection_url_secret.id # Link the secret version to the secret
+  secret_data = local.database_direct_url                                                 # Set the value of the secret from the direct_url variable
 }
 
 # This block grants the 'Secret Manager Secret Accessor' role to the service account for the database URL secret
-resource "google_secret_manager_secret_iam_member" "database_url_secret_accessor" {
+resource "google_secret_manager_secret_iam_member" "gcp_pooled_database_connection_url_secret_accessor" {
   # The provider for the resource, in this case Google
   provider = google
 
   # The ID of the secret to which the role will be granted
-  secret_id = google_secret_manager_secret.database_url_secret.id
+  secret_id = google_secret_manager_secret.gcp_pooled_database_connection_url_secret.id
 
   # The role to be granted. "roles/secretmanager.secretAccessor" allows read access to Secret Manager secrets
   role = "roles/secretmanager.secretAccessor"
@@ -90,12 +90,12 @@ resource "google_secret_manager_secret_iam_member" "database_url_secret_accessor
 }
 
 # This block grants the 'Secret Manager Secret Accessor' role to the service account for the direct URL secret
-resource "google_secret_manager_secret_iam_member" "direct_url_secret_accessor" {
+resource "google_secret_manager_secret_iam_member" "gcp_direct_database_connection_url_secret_accessor" {
   # The provider for the resource, in this case Google
   provider = google
 
   # The ID of the secret to which the role will be granted
-  secret_id = google_secret_manager_secret.direct_url_secret.id
+  secret_id = google_secret_manager_secret.gcp_direct_database_connection_url_secret.id
 
   # The role to be granted. "roles/secretmanager.secretAccessor" allows read access to Secret Manager secrets
   role = "roles/secretmanager.secretAccessor"

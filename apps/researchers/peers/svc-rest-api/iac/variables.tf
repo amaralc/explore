@@ -8,7 +8,7 @@ variable "app_component_name" {
   type        = string
 }
 
-variable "environment" {
+variable "environment_name" {
   description = "Environment name (staging | production)"
   type        = string
 }
@@ -48,11 +48,19 @@ variable "gcp_service_account_email" {
 variable "gcp_direct_database_connection_url_secret_id" {
   description = "The ID of the secret for the direct database connection url"
   type        = string
-  sensitive   = true
+}
+
+variable "gcp_direct_database_connection_url_secret_version" {
+  description = "A version of the secret for the direct database connection url"
+  type        = string
 }
 
 variable "gcp_pooled_database_connection_url_secret_id" {
   description = "The ID of the secret for the pooled database connection url"
   type        = string
-  sensitive   = true
+}
+
+variable "gcp_pooled_database_connection_url_secret_version" {
+  description = "A version of the secret for the pooled database connection url"
+  type        = string
 }
