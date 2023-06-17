@@ -16,6 +16,7 @@ module "staging" {
   source                              = "./preview-environment"                 # The path to the module
   vercel_api_token                    = var.vercel_api_token                    # Vercel API token
   neon_api_key                        = var.neon_api_key                        # Neon API key
+  neon_project_id                     = module.production.neon_project_id       # The Neon project ID
   project_id                          = var.project_id                          # The Google Cloud project ID
   region                              = var.region                              # The region where resources will be created
   commit_hash                         = var.commit_hash                         # Force new cloud run revision to be created
