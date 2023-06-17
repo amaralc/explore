@@ -4,15 +4,18 @@ on:
   create:
     tags:
       - "peerlab@[0-9]+.[0-9]+.[0-9]+"
-    paths:
-      - "apps/core/platform/iac-shell/**"
-      - "apps/researchers/peers/svc-rest-api/**"
-      - "apps/researchers/peers/svc-consumer/**"
-      - "apps/researchers/peers/Dockerfile"
-      - "libs/researchers/peers/**"
-      - "package.json"
-      - "yarn.lock"
-      - ".github/workflows/production.yml"
+#     paths:
+#       - "apps/core/platform-shell-iac/**"
+#       - "apps/researchers/peers/svc-rest-api/**"
+#       - "apps/researchers/peers/svc-consumer/**"
+#       - "libs/researchers/peers/**"
+#       - "package.json"
+#       - "yarn.lock"
+#       - ".github/workflows/production.yml"
+# on:
+#   push:
+#     branches:
+#       - production
 
 jobs:
   check-branch:
@@ -28,10 +31,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: [check-branch]
-    environment:
-      name: production
+    # environment:
+    #   name: peerlab-preview
 
     steps:
+      - name: Extract branch name
+        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
@@ -39,31 +45,31 @@ jobs:
           fetch-depth: 0 # This is important to get all history for all branches
           ref: production
 
-      - name: Check if app was affected
-        run: |
-          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
-          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
+      # - name: Check if app was affected
+      #   run: |
+      #     LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
+      #     echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
 
-          yarn install
+      #     yarn install
 
-          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
-          echo 'Affected apps:' $AFFECTED_APPS
+      #     AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
+      #     echo 'Affected apps:' $AFFECTED_APPS
 
-          PROJECT_NAME=researchers-peers-svc-rest-api
-          if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
-            echo '✅ - Build can proceed since app was affected!'
-            echo "affected=true" >> $GITHUB_ENV
-          else
-            # If no dependency was affected, cancel build
-            echo '🛑 - Build cancelled since no dependency was affected'
-            echo "affected=false" >> $GITHUB_ENV
-          fi
+      #     PROJECT_NAME=researchers-peers-svc-rest-api
+      #     if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
+      #       echo '✅ - Build can proceed since app was affected!'
+      #       echo "affected=true" >> $GITHUB_ENV
+      #     else
+      #       # If no dependency was affected, cancel build
+      #       echo '🛑 - Build cancelled since no dependency was affected'
+      #       echo "affected=false" >> $GITHUB_ENV
+      #     fi
 
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}
         run: |
           SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         if: ${{ env.affected == 'true' }}
@@ -82,35 +88,38 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/researchers/peers/Dockerfile
+          file: ./apps/researchers/peers/svc-rest-api/Dockerfile
           push: true
           tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
         env:
-          IMAGE_NAME: researchers-peers
+          IMAGE_NAME: researchers-peers-svc-rest-api
 
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
-    environment:
-      name: production
+    # environment:
+    #   name: peerlab-preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
 
     steps:
+      - name: Extract branch name
+        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
       - name: Get short commit hash
         run: |
           SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:7}" >> $GITHUB_ENV
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
       - name: Checkout production branch
         uses: actions/checkout@v3
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform/iac-shell/production/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -131,23 +140,23 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/core/platform/iac-shell/production
+        working-directory: apps/core/platform-shell-iac
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/core/platform/iac-shell/production
+        working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "database_url=${{ secrets.POSTGRES_POOLED_CONNECTION_DATABASE_URL }}" -var "direct_url=${{ secrets.POSTGRES_DIRECT_CONNECTION_DATABASE_URL }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-        working-directory: apps/core/platform/iac-shell/production
+          terraform plan -out=tfplan -var "environment=${{ env.environment_name }}" -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+        working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform/iac-shell/production
+        working-directory: apps/core/platform-shell-iac

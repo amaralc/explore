@@ -42,7 +42,7 @@ resource "google_secret_manager_secret" "database_url_secret" {
 # Add the database URL as a secret version
 resource "google_secret_manager_secret_version" "database_url_secret_v1" {
   secret      = google_secret_manager_secret.database_url_secret.id # Link the secret version to the secret
-  secret_data = var.database_url                                    # Set the value of the secret from the database_url variable
+  secret_data = var.database_pooler_url                             # Set the value of the secret from the database_url variable
 }
 
 # Create a secret in Google Secret Manager for the direct URL
@@ -58,7 +58,7 @@ resource "google_secret_manager_secret" "direct_url_secret" {
 # Add the direct URL as a secret version
 resource "google_secret_manager_secret_version" "direct_url_secret_v1" {
   secret      = google_secret_manager_secret.direct_url_secret.id # Link the secret version to the secret
-  secret_data = var.direct_url                                    # Set the value of the secret from the direct_url variable
+  secret_data = var.database_direct_url                           # Set the value of the secret from the direct_url variable
 }
 
 # This block grants the 'Secret Manager Secret Accessor' role to the service account for the database URL secret

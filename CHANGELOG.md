@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.6](https://github.com/amaralc/peerlab/compare/peerlab@0.21.5...peerlab@0.21.6) (2023-06-16)
+
+**Note:** Version bump only for package peerlab
+
+## [0.21.5](https://github.com/amaralc/peerlab/compare/peerlab@0.21.4...peerlab@0.21.5) (2023-06-16)
+
+### Bug Fixes
+
+- **PEER-550:** add dependency between jobs ([f450a20](https://github.com/amaralc/peerlab/commit/f450a20c67606f9547b378c77306c4020783feed))
+- **PEER-550:** add environment name variable ([12c9052](https://github.com/amaralc/peerlab/commit/12c9052f5eea948726eb34075387f195301f5d53))
+- **PEER-550:** adjust image name ([48cb418](https://github.com/amaralc/peerlab/commit/48cb4186422ca463d7ca07afee4ab526d266dc26))
+- **PEER-550:** adjust next output directory ([215a682](https://github.com/amaralc/peerlab/commit/215a6828248d1d3d078d48f2ae8c79a153ace896))
+- **PEER-550:** adjust service name ([b6e919c](https://github.com/amaralc/peerlab/commit/b6e919c20e38d1bdd972f895a37b32e584aa94ef))
+- **PEER-550:** set environment_name as tag ([14e8592](https://github.com/amaralc/peerlab/commit/14e8592bce6df61b2b0cab06db00f6ffc7766a2d))
+
+### Reverts
+
+- Revert "fix(PEER-550): use correct image name" ([e481bb3](https://github.com/amaralc/peerlab/commit/e481bb320a21e6ef2483d2ad1de7453191a58a12))
+
+## [0.21.4](https://github.com/amaralc/peerlab/compare/peerlab@0.21.3...peerlab@0.21.4) (2023-06-15)
+
+### Bug Fixes
+
+- **PEER-550:** remove database_url var and force deploy ([4e2efb6](https://github.com/amaralc/peerlab/commit/4e2efb6278c24105a9c885a84e8205778ff9e6da))
+
+## [0.21.3](https://github.com/amaralc/peerlab/compare/peerlab@0.21.2...peerlab@0.21.3) (2023-06-15)
+
+**Note:** Version bump only for package peerlab
+
+## [0.21.2](https://github.com/amaralc/peerlab/compare/peerlab@0.21.1...peerlab@0.21.2) (2023-06-15)
+
+**Note:** Version bump only for package peerlab
+
+## [0.21.1](https://github.com/amaralc/peerlab/compare/peerlab@0.21.0...peerlab@0.21.1) (2023-06-15)
+
+**Note:** Version bump only for package peerlab
+
+## [0.21.0](https://github.com/amaralc/peerlab/compare/peerlab@0.20.0...peerlab@0.21.0) (2023-06-14)
+
+### Features
+
+- **PEER-550:** add documentation draft ([655b6e4](https://github.com/amaralc/peerlab/commit/655b6e463bc670f9d24ff1622bc79bba0ebe6e60))
+- **PEER-550:** enhance project relationships ([eedbb25](https://github.com/amaralc/peerlab/commit/eedbb2556cce2feb765d81d0d602729759d0aaa2))
+
+### Reverts
+
+- Revert "refactor: move project to parent folder" ([b582096](https://github.com/amaralc/peerlab/commit/b582096c02298d3be9ca20b29f3e666537af3f52))
+- Revert "refactor: move project to researchers-peers-svc-rest-api" ([214d706](https://github.com/amaralc/peerlab/commit/214d7066a2d6e86bbefbd50961335664912e7428))
+- Revert "refactor: move project to researchers-peers-svc-e2e" ([072e137](https://github.com/amaralc/peerlab/commit/072e137942a07a09940f0d46aece331d634b821f))
+- Revert "refactor: adjust path to services" ([707ef81](https://github.com/amaralc/peerlab/commit/707ef81948f2bdb9dc7a63d1e4289d7ba178c8b9))
+- Revert "chore: remove path criteria" ([eedd2c8](https://github.com/amaralc/peerlab/commit/eedd2c85eebef0bd862806b43d235e621db6d42b))
+- Revert "refactor: rename project" ([2e0d9ca](https://github.com/amaralc/peerlab/commit/2e0d9ca90f6f5522de61b40671622c1c8e4da364))
+
+## [0.20.0](https://github.com/amaralc/peerlab/compare/peerlab@0.19.0...peerlab@0.20.0) (2023-06-10)
+
+### Features
+
+- **PEER-546:** add empty post ([f186e45](https://github.com/amaralc/peerlab/commit/f186e45a5513fed73ff5e4c773d74520bd646a9c))
+- **PEER-546:** add search to docs ([c94feb8](https://github.com/amaralc/peerlab/commit/c94feb80eb955f8367daaf57ec62acbc15805a3c))
+- **PEER-546:** create serve production executor ([93b2cfb](https://github.com/amaralc/peerlab/commit/93b2cfb60282ebb2061a68e36877e04c88062d54))
+
 ## [0.19.0](https://github.com/amaralc/peerlab/compare/peerlab@0.18.0...peerlab@0.19.0) (2023-06-10)
 
 ### Features
