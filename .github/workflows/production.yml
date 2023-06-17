@@ -1,9 +1,9 @@
 name: Build and Push Docker image
 
-on:
-  create:
-    tags:
-      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+# on:
+#   create:
+#     tags:
+#       - "peerlab@[0-9]+.[0-9]+.[0-9]+"
 #     paths:
 #       - "apps/core/platform-shell-iac/**"
 #       - "apps/researchers/peers/svc-rest-api/**"
@@ -12,10 +12,10 @@ on:
 #       - "package.json"
 #       - "yarn.lock"
 #       - ".github/workflows/production.yml"
-# on:
-#   push:
-#     branches:
-#       - production
+on:
+  push:
+    branches:
+      - production
 
 jobs:
   check-branch:
