@@ -63,6 +63,7 @@ prisma/generated
 *.log
 .env
 secrets.auto.tfvars
+tfplan
 
 # GCP
 credentials.json

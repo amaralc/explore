@@ -12,10 +12,10 @@
       "command": "cd apps/core/platform-shell-iac && terraform validate"
     },
     "terraform:plan": {
-      "command": "cd apps/core/platform-shell-iac && terraform plan -var-file=env.tfvars"
+      "command": "cd apps/core/platform-shell-iac && terraform plan -out=tfplan -var-file=env.tfvars"
     },
     "terraform:apply": {
-      "command": "cd apps/core/platform-shell-iac && terraform apply -var-file=env.tfvars -auto-approve && terraform output"
+      "command": "cd apps/core/platform-shell-iac && terraform apply -auto-approve tfplan && terraform output"
     },
     "terraform:destroy": {
       "command": "cd apps/core/platform-shell-iac && terraform destroy -var-file=env.tfvars -auto-approve"
