@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.0](https://github.com/amaralc/peerlab/compare/peerlab@0.21.6...peerlab@0.22.0) (2023-06-17)
+
+### Features
+
+- **PEER-541:** add version from package json to swagger ([d258d9a](https://github.com/amaralc/peerlab/commit/d258d9ae0c45a6e36baadb65a52789fbb46b6fc2))
+- **PEER-541:** staging environment with peers-svc ([59e77c4](https://github.com/amaralc/peerlab/commit/59e77c4ff340e83282d2f053fe0a1d2c6769b994))
+
+### Bug Fixes
+
+- **PEER-541:** add cloud run dependencies ([dc20962](https://github.com/amaralc/peerlab/commit/dc2096271090c9b0fe26f4603f391c49f9808d9a))
+- **PEER-541:** adjust project id ([81e18b4](https://github.com/amaralc/peerlab/commit/81e18b4c34f665d4e806e1d24276434ca964940b))
+- **PEER-541:** separate service from service components ([e3b502a](https://github.com/amaralc/peerlab/commit/e3b502aa10fe7dc3f1980701ca8a63df82dd2233))
+
 ## [0.21.6](https://github.com/amaralc/peerlab/compare/peerlab@0.21.5...peerlab@0.21.6) (2023-06-16)
 
 **Note:** Version bump only for package peerlab
