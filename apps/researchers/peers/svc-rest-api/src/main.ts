@@ -8,6 +8,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { configDto } from '@peerlab/researchers/peers/adapters/config.dto';
 import { ApiModule } from '@peerlab/researchers/peers/adapters/controllers/rest-api/api.module';
+import { version } from '@peerlab/root/package.json';
 import { ApiKeyGuard } from './guards/api-key.guard';
 
 const setupOpenApi = (app: INestApplication) => {
@@ -15,7 +16,7 @@ const setupOpenApi = (app: INestApplication) => {
   const options = new DocumentBuilder()
     .setTitle('Peers RESTful API')
     .setDescription('An API to find peers for your research project')
-    .setVersion('0.3.0')
+    .setVersion(version)
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
