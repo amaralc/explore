@@ -46,6 +46,11 @@ variable "neon_project_id" {
   type        = string
 }
 
+variable "neon_parent_branch_id" {
+  description = "The Neon parent branch ID"
+  type        = string
+}
+
 variable "credentials_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
