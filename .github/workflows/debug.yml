@@ -1,4 +1,4 @@
-name: Build and Push Docker image
+name: Debug - Build and Push Docker image
 
 # on:
 #   create:
@@ -15,7 +15,7 @@ name: Build and Push Docker image
 on:
   push:
     branches:
-      - bugfix/PEER-541-fix-ci-cd-deployment
+      - production
 
 jobs:
   # check-branch:
