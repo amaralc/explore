@@ -1,15 +1,15 @@
-variable "environment" {
-  description = "The preview environment unique name (e.g. branch-name, commit-hash, etc.)"
-  type        = string
-}
+# variable "environment" {
+#   description = "The preview environment unique name (e.g. branch-name, commit-hash, etc.)"
+#   type        = string
+# }
 
-variable "project_id" {
+variable "gcp_project_id" {
   description = "The Google Cloud project ID"
   type        = string
 }
 
-variable "region" {
-  description = "The region where resources will be created"
+variable "gcp_project_location" {
+  description = "The location where the GCP project will be created"
   type        = string
 }
 
