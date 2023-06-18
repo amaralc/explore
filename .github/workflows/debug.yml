@@ -15,7 +15,7 @@ name: Debug - Build and Push Docker image
 on:
   push:
     branches:
-      - production
+      - debug
 
 jobs:
   # check-branch:
