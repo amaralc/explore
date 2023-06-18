@@ -6,13 +6,13 @@ module "postgresql-dbms" {
   neon_api_key          = var.neon_api_key
 }
 
-# # PostgreSQL Database Branch Environment
-# module "postgresql-dbms-environment" {
-#   source           = "../postgresql-dbms-environment"
-#   environment_name = var.environment_name
-#   neon_project_id  = module.postgresql-dbms.neon_project_id
-#   neon_api_key     = var.neon_api_key
-# }
+# PostgreSQL Database Branch Environment
+module "postgresql-dbms-environment" {
+  source           = "../postgresql-dbms-environment"
+  environment_name = var.environment_name
+  neon_project_id  = module.postgresql-dbms.neon_project_id
+  neon_api_key     = var.neon_api_key
+}
 
 # # Researchers Peers Service
 # module "researchers-peers-svc" {
