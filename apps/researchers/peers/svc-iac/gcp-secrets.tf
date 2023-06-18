@@ -1,13 +1,11 @@
 locals {
-  username             = neon_role.researchers-peers.name
-  password             = neon_role.researchers-peers.password
-  database_direct_host = var.neon_branch_host
-  direct_host_parts    = split(".", local.database_direct_host)
-  database_pooler_host = join(".", [format("%s-pooler", local.direct_host_parts[0]), join(".", slice(local.direct_host_parts, 1, length(local.direct_host_parts)))])
-  database_name        = neon_database.researchers-peers.name
+  username        = google_sql_user.researchers-peers.name
+  password        = google_sql_user.researchers-peers.password
+  connection_name = var.gcp_sql_database_instance_connection_name
+  database_name   = google_sql_database.researchers-peers.name
 
-  database_direct_url = "postgres://${local.username}:${local.password}@${local.database_direct_host}/${local.database_name}"
-  database_pooler_url = "postgres://${local.username}:${local.password}@${local.database_pooler_host}/${local.database_name}"
+  database_direct_url = "postgres://${local.username}:${local.password}@${local.connection_name}/${local.database_name}"
+  database_pooler_url = "postgres://${local.username}:${local.password}@${local.connection_name}/${local.database_name}" # How to appropriately set pooler in cloud sql?
 }
 
 

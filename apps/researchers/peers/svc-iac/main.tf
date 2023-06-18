@@ -3,23 +3,10 @@ locals {
   app_component_name = "svc-rest-api"
 }
 
-# Peers Service
-resource "neon_role" "researchers-peers" {
-  name       = local.app_name
-  project_id = var.project_id
-  branch_id  = var.neon_branch_id
-}
-
-resource "neon_database" "researchers-peers" {
-  name       = local.app_name
-  project_id = var.project_id
-  branch_id  = var.neon_branch_id
-  owner_name = neon_role.researchers-peers.name
-}
-
 # Researchers Peers Service REST API instance
 module "researchers-peers-svc-rest-api" {
-  source                                            = "../svc-rest-api/iac"                                                                # The path to the module
+  source                                            = "../svc-rest-api/iac" # The path to the module
+  credentials_path                                  = var.credentials_path
   app_name                                          = local.app_name                                                                       # The name of the application
   app_component_name                                = local.app_component_name                                                             # The name of the application component
   environment_name                                  = var.environment_name                                                                 # The deployment environment (staging | production)
@@ -32,5 +19,4 @@ module "researchers-peers-svc-rest-api" {
   gcp_pooled_database_connection_url_secret_id      = google_secret_manager_secret.gcp_pooled_database_connection_url_secret.secret_id     # The ID of the database connection URL secret
   gcp_direct_database_connection_url_secret_version = google_secret_manager_secret_version.gcp_direct_database_connection_url_secret_v1.id # The id of the version of the database connection URL secret
   gcp_pooled_database_connection_url_secret_version = google_secret_manager_secret_version.gcp_pooled_database_connection_url_secret_v1.id # The id of the version of the database connection URL secret
-  credentials_path                                  = var.credentials_path
 }

@@ -10,10 +10,10 @@ terraform {
       version = "4.65.2" # Adjust the version to match the latest release
     }
 
-    neon = {
-      source  = "kislerdm/neon"
-      version = "0.1.0"
-    }
+    # neon = {
+    #   source  = "kislerdm/neon"
+    #   version = "0.1.0"
+    # }
   }
 }
 
@@ -31,8 +31,8 @@ provider "google-beta" {
   region      = var.region                 # The region where resources will be created
 }
 
-# Neon DB provider
-provider "neon" {
-  api_key = var.neon_api_key
-}
+# # Neon DB provider
+# provider "neon" {
+#   api_key = var.neon_api_key
+# }
 

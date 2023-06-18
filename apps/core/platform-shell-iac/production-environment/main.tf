@@ -11,10 +11,11 @@
 #   autoscaling_limit_max_cu = 1
 # }
 resource "google_sql_database_instance" "postgresql-dbms" {
-  name             = "${var.project_id}-${var.environment_name}"
-  database_version = "POSTGRES_14"
-  region           = var.region
-  project          = var.project_id
+  name                = "${var.project_id}-${var.environment_name}"
+  database_version    = "POSTGRES_14"
+  region              = var.region
+  project             = var.project_id
+  deletion_protection = false
 
   settings {
     tier = "db-f1-micro"
@@ -34,19 +35,23 @@ resource "google_sql_database_instance" "postgresql-dbms" {
 #   name       = var.environment_name
 # }
 
-# # Researchers Peers Service
-# module "researchers-peers-svc" {
-#   source                              = "../../../researchers/peers/svc-iac"
-#   commit_hash                         = var.commit_hash
-#   environment_name                    = var.environment_name
-#   region                              = var.region
-#   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-#   neon_branch_host                    = module.postgresql-dbms-environment.branch_host
-#   neon_branch_id                      = module.postgresql-dbms-environment.branch_id
-#   project_id                          = var.project_id
-#   neon_api_key                        = var.neon_api_key
-#   credentials_path                    = var.credentials_path
-# }
+# Researchers Peers Service
+module "researchers-peers-svc" {
+  source                                    = "../../../researchers/peers/svc-iac"
+  commit_hash                               = var.commit_hash
+  environment_name                          = var.environment_name
+  region                                    = var.region
+  project_id                                = var.project_id
+  credentials_path                          = var.credentials_path
+  gcp_docker_artifact_repository_name       = var.gcp_docker_artifact_repository_name
+  gcp_sql_database_instance_name            = google_sql_database_instance.postgresql-dbms.name
+  gcp_sql_database_instance_connection_name = google_sql_database_instance.postgresql-dbms.connection_name
+
+  # gcp_sql_database_instance_host      = google_sql_database_instance.postgresql-dbms.public_ip_address
+  # neon_branch_host                    = module.postgresql-dbms-environment.branch_host
+  # neon_branch_id                      = module.postgresql-dbms-environment.branch_id
+  # neon_api_key                        = var.neon_api_key
+}
 
 # # Application Shell
 # module "core-platform-shell-browser" {
