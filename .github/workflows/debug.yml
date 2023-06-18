@@ -40,12 +40,12 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         with:
           fetch-depth: 0 # This is important to get all history for all branches
-          ref: production
+          ref: bugfix/PEER-541-fix-ci-cd-deployment
 
       - name: Extract branch name
         run: |
-          echo $GITHUB_REF
-          echo $GITHUB_HEAD_REF
+          echo ${GITHUB_REF}
+          echo ${GITHUB_HEAD_REF}
           echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
       # - name: Check if app was affected
