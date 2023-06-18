@@ -42,6 +42,8 @@ gcloud services enable secretmanager.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable run.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
+gcloud services enable sqladmin.googleapis.com --project $GCP_PROJECT_ID
+
 
 # Create a service account
 gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
@@ -56,6 +58,8 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountKeyAdmin"
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectIamAdmin"
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin"
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin"
+
 
 # Create a key for the service account
 gcloud iam service-accounts keys create ./key.json --iam-account $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
