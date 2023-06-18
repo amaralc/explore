@@ -5,10 +5,20 @@
 #   project_id            = var.project_id
 #   neon_api_key          = var.neon_api_key
 # }
-resource "neon_project" "postgresql-dbms" {
-  name                     = var.project_id            # Use the same project ID as in the Google Cloud provider
-  region_id                = var.neon_project_location #"aws-eu-central-1"
-  autoscaling_limit_max_cu = 1
+# resource "neon_project" "postgresql-dbms" {
+#   name                     = var.project_id            # Use the same project ID as in the Google Cloud provider
+#   region_id                = var.neon_project_location #"aws-eu-central-1"
+#   autoscaling_limit_max_cu = 1
+# }
+resource "google_sql_database_instance" "postgresql-dbms" {
+  name             = "${var.project_id}-${var.environment_name}"
+  database_version = "POSTGRES_14"
+  region           = var.region
+  project          = var.project_id
+
+  settings {
+    tier = "db-f1-micro"
+  }
 }
 
 # # PostgreSQL Database Branch Environment
@@ -19,10 +29,10 @@ resource "neon_project" "postgresql-dbms" {
 #   neon_api_key          = var.neon_api_key
 #   neon_parent_branch_id = "main"
 # }
-resource "neon_branch" "postgresql-dbms-environment" {
-  project_id = neon_project.postgresql-dbms.id
-  name       = var.environment_name
-}
+# resource "neon_branch" "postgresql-dbms-environment" {
+#   project_id = neon_project.postgresql-dbms.id
+#   name       = var.environment_name
+# }
 
 # # Researchers Peers Service
 # module "researchers-peers-svc" {
