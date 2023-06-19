@@ -34,3 +34,11 @@ resource "google_project_iam_member" "run_invoker" {
   depends_on = [google_service_account.researchers_peers_svc]
 }
 
+# Assign the service account the Cloud SQL Client role
+resource "google_project_iam_member" "cloud_sql_client" {
+  project    = var.project_id
+  role       = "roles/cloudsql.client"
+  member     = "serviceAccount:${google_service_account.researchers_peers_svc.email}"
+  depends_on = [google_service_account.researchers_peers_svc]
+}
+

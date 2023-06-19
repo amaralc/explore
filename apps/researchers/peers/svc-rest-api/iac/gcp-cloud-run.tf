@@ -50,6 +50,15 @@
 #       }
 #     }
 
+#     # References:
+#     # https://stackoverflow.com/questions/68018718/terraform-google-cloud-run-add-cloud-sql-connection
+#     # https://github.com/hashicorp/terraform-provider-google/issues/6004#issuecomment-607282371
+#     metadata {
+#       annotations = {
+#         "run.googleapis.com/cloudsql-instances" = var.gcp_sql_database_instance_connection_name # Set the Cloud SQL instance to be used by the service
+#       }
+#     }
+
 #   }
 
 #   # Defines the service traffic parameters

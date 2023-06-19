@@ -64,3 +64,25 @@ variable "gcp_pooled_database_connection_url_secret_version" {
   description = "A version of the secret for the pooled database connection url"
   type        = string
 }
+
+variable "gcp_sql_database_instance_connection_name" {
+  description = "The name of the Cloud SQL connection"
+  type        = string
+  sensitive   = true
+}
+
+variable "gcp_sql_database_instance_name" {
+  description = "The name of the Cloud SQL instance"
+  type        = string
+  sensitive   = true
+}
+
+variable "database_direct_url" {
+  description = "The direct database connection URL"
+  type        = string
+}
+
+variable "database_pooler_url" {
+  description = "The pooled database connection URL"
+  type        = string
+}
