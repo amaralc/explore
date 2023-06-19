@@ -3,6 +3,6 @@ terraform {
   backend "gcs" {                            # The Google Cloud Storage backend
     bucket      = "peerlab-platform-tfstate" # The name of the bucket to store the state file
     credentials = "credentials.json"         # The path to the JSON key file for the Service Account Terraform will use to manage its state
-    prefix      = "environments"             # The path to the state file within the bucket
+    prefix      = "experimental"             # The path to the state file within the bucket
   }
 }
