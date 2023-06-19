@@ -101,7 +101,7 @@ jobs:
 
   deploy:
     # needs: [build]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # environment:
     #   name: peerlab-preview
     defaults:
