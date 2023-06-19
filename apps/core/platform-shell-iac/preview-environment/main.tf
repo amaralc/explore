@@ -1,25 +1,24 @@
 # PostgreSQL Database Branch Environment
 module "postgresql-dbms-environment" {
-  source                = "../postgresql-dbms-environment"
-  environment_name      = var.environment_name
-  neon_project_id       = var.neon_project_id
-  neon_api_key          = var.neon_api_key
-  neon_parent_branch_id = var.neon_parent_branch_id
+  source           = "../postgresql-dbms-environment"
+  environment_name = var.environment_name
+  neon_project_id  = var.neon_project_id
+  neon_api_key     = var.neon_api_key
 }
 
-# # Researchers Peers Service
-# module "researchers-peers-svc" {
-#   source                              = "../../../researchers/peers/svc-iac"
-#   commit_hash                         = var.commit_hash
-#   environment_name                    = var.environment_name
-#   region                              = var.region
-#   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-#   neon_branch_host                    = module.postgresql-dbms-environment.branch_host
-#   neon_branch_id                      = module.postgresql-dbms-environment.branch_id
-#   project_id                          = var.project_id
-#   neon_api_key                        = var.neon_api_key
-#   credentials_path                    = var.credentials_path
-# }
+# Researchers Peers Service
+module "researchers-peers-svc" {
+  source                              = "../../../researchers/peers/svc-iac"
+  commit_hash                         = var.commit_hash
+  environment_name                    = var.environment_name
+  region                              = var.region
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  neon_branch_host                    = module.postgresql-dbms-environment.branch_host
+  neon_branch_id                      = module.postgresql-dbms-environment.branch_id
+  project_id                          = var.project_id
+  neon_api_key                        = var.neon_api_key
+  credentials_path                    = var.credentials_path
+}
 
 # # Application Shell
 # module "core-platform-shell-browser" {
