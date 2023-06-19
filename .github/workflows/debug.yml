@@ -107,6 +107,8 @@ jobs:
     defaults:
       run:
         working-directory: ${{ github.workspace }}
+        # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+        shell: bash
 
     steps:
       - name: Extract branch name
@@ -134,8 +136,15 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
+      # - name: Set up Terraform
+      #   uses: hashicorp/setup-terraform@v2
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration.
+
+      - name: Install Terraform
+        run: |
+          sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
 
       - name: Terraform init
         run: |
