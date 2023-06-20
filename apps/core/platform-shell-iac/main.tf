@@ -1,12 +1,18 @@
 module "production" {
-  environment_name                    = "production"                            # The deployment environment (branch-name, commit-hash, etc.)
-  source                              = "./production-environment"              # The path to the module
-  commit_hash                         = var.commit_hash                         # Force new cloud run revision to be created
-  vercel_api_token                    = var.vercel_api_token                    # Vercel API token
-  project_id                          = var.gcp_project_id                      # The Google Cloud project ID
-  region                              = var.gcp_project_location                # The region where resources will be created
-  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name # The name of the Docker repository
+  source               = "./modules/environment-production"
+  gcp_project_id       = var.gcp_project_id
+  gcp_project_location = var.gcp_project_location
 }
+
+# module "production" {
+#   environment_name                    = "production"                            # The deployment environment (branch-name, commit-hash, etc.)
+#   source                              = "./production-environment"              # The path to the module
+#   commit_hash                         = var.commit_hash                         # Force new cloud run revision to be created
+#   vercel_api_token                    = var.vercel_api_token                    # Vercel API token
+#   project_id                          = var.gcp_project_id                      # The Google Cloud project ID
+#   region                              = var.gcp_project_location                # The region where resources will be created
+#   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name # The name of the Docker repository
+# }
 
 # module "staging" {
 #   environment_name                    = "staging"                               # The deployment environment (branch-name, commit-hash, etc.)
