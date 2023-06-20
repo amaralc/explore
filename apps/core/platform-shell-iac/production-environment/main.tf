@@ -1,5 +1,3 @@
-
-
 # # PostgreSQL Database Management System
 # module "postgresql-dbms" {
 #   source                = "../postgresql-dbms"

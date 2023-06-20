@@ -13,10 +13,10 @@ variable "gcp_project_location" {
   type        = string
 }
 
-variable "neon_project_location" {
-  description = "The Neon project region"
-  type        = string
-}
+# variable "neon_project_location" {
+#   description = "The Neon project region"
+#   type        = string
+# }
 
 variable "credentials_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
@@ -41,8 +41,8 @@ variable "gcp_docker_artifact_repository_name" {
   default     = "docker-repository"
 }
 
-variable "neon_api_key" {
-  description = "Neon API key"
-  type        = string
-  sensitive   = true
-}
+# variable "neon_api_key" {
+#   description = "Neon API key"
+#   type        = string
+#   sensitive   = true
+# }
