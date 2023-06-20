@@ -1,7 +1,7 @@
-data "google_vpc_access_connector" "connector" {
-  provider = google-beta
-  name     = "vpcconn"
-}
+# data "google_vpc_access_connector" "connector" {
+#   provider = google-beta
+#   name     = "vpcconn"
+# }
 
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
 resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
@@ -12,7 +12,7 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
   location = var.region
 
   # Depends on secret versions
-  depends_on = [var.gcp_pooled_database_connection_url_secret_version, var.gcp_direct_database_connection_url_secret_version]
+  depends_on = [var.gcp_pooled_database_connection_url_secret_version, var.gcp_direct_database_connection_url_secret_version, var.gcp_vpc_access_connector_name]
 
 
   # Defining the service template
@@ -64,7 +64,7 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
         # Limit scale up to prevent any cost blow outs!
         "autoscaling.knative.dev/maxScale" = "1"
         # Use the VPC Connector
-        "run.googleapis.com/vpc-access-connector" = data.google_vpc_access_connector.connector.name #google_vpc_access_connector.connector.name
+        "run.googleapis.com/vpc-access-connector" = var.gcp_vpc_access_connector_name
         # all egress from the service should go through the VPC Connector
         "run.googleapis.com/vpc-access-egress" = "all-traffic"
       }

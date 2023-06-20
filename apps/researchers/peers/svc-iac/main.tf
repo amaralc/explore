@@ -23,4 +23,5 @@ module "researchers-peers-svc-rest-api" {
   database_direct_url                               = local.database_direct_url
   database_pooler_url                               = local.database_pooler_url
   gcp_sql_database_instance_name                    = var.gcp_sql_database_instance_name
+  gcp_vpc_access_connector_name                     = var.gcp_vpc_access_connector_name
 }

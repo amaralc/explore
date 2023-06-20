@@ -63,3 +63,8 @@ variable "gcp_sql_database_instance_host" {
   type        = string
   sensitive   = true
 }
+
+variable "gcp_vpc_access_connector_name" {
+  description = "The name of the VPC access connector"
+  type        = string
+}

@@ -115,6 +115,7 @@ module "researchers-peers-svc" {
   gcp_sql_database_instance_name            = google_sql_database_instance.postgresql-dbms.name
   gcp_sql_database_instance_connection_name = google_sql_database_instance.postgresql-dbms.connection_name
   gcp_sql_database_instance_host            = google_sql_database_instance.postgresql-dbms.private_ip_address
+  gcp_vpc_access_connector_name             = google_vpc_access_connector.connector.name
 
   # neon_branch_host                    = module.postgresql-dbms-environment.branch_host
   # neon_branch_id                      = module.postgresql-dbms-environment.branch_id

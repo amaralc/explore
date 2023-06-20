@@ -77,6 +77,11 @@ variable "gcp_sql_database_instance_name" {
   sensitive   = true
 }
 
+variable "gcp_vpc_access_connector_name" {
+  description = "The name of the VPC access connector"
+  type        = string
+}
+
 variable "database_direct_url" {
   description = "The direct database connection URL"
   type        = string
