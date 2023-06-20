@@ -1,11 +1,12 @@
-# "postgres://${google_sql_user.users.name}:${google_sql_user.users.password}@${data.google_sql_database_instance.db.public_ip_address}:5432/${google_sql_database.default.name}"
-
 locals {
-  username        = google_sql_user.researchers-peers.name
-  password        = google_sql_user.researchers-peers.password
+  # username        = google_sql_user.researchers-peers.name
+  # password        = google_sql_user.researchers-peers.password
+  # database_name   = google_sql_database.researchers-peers.name
+  username        = "fake-username"
+  password        = "fake-password"
+  database_name   = "fake-database-name"
   connection_name = var.gcp_sql_database_instance_connection_name
   database_host   = var.gcp_sql_database_instance_host
-  database_name   = google_sql_database.researchers-peers.name
   database_port   = "5432"
 
   # References:
