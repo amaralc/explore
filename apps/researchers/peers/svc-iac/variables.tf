@@ -58,8 +58,8 @@ variable "gcp_sql_database_instance_connection_name" {
   sensitive   = true
 }
 
-variable "gcp_sql_database_public_ip_address" {
-  description = "The public IP address of the database instance"
+variable "gcp_sql_database_instance_host" {
+  description = "The host of the database instance"
   type        = string
   sensitive   = true
 }

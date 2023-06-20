@@ -4,15 +4,15 @@ locals {
   username        = google_sql_user.researchers-peers.name
   password        = google_sql_user.researchers-peers.password
   connection_name = var.gcp_sql_database_instance_connection_name
+  database_host   = var.gcp_sql_database_instance_host
   database_name   = google_sql_database.researchers-peers.name
-  database_host   = "/cloudsql/${var.gcp_sql_database_instance_connection_name}/.s.PGSQL.5432"
   database_port   = "5432"
 
   # References:
   # https://stackoverflow.com/questions/68018718/terraform-google-cloud-run-add-cloud-sql-connection
   # https://github.com/hashicorp/terraform-provider-google/issues/6004#issuecomment-607282371
-  database_pooler_url = "postgres://${local.username}:${local.password}@${local.database_host}/${local.database_name}"
-  database_direct_url = "postgres://${local.username}:${local.password}@${local.database_host}/${local.database_name}" # How to appropriately set pooler in cloud sql?
+  database_pooler_url = "postgres://${local.username}:${local.password}@${local.database_host}:5432/${local.database_name}"
+  database_direct_url = "postgres://${local.username}:${local.password}@${local.database_host}:5432/${local.database_name}" # How to appropriately set pooler in cloud sql?
 }
 
 

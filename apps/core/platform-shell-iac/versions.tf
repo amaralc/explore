@@ -19,6 +19,11 @@ terraform {
       source  = "kislerdm/neon"
       version = "0.1.0"
     }
+
+    random = {
+      source  = "hashicorp/random"
+      version = "3.5.1"
+    }
   }
 }
 
@@ -45,4 +50,8 @@ provider "vercel" {
 provider "neon" {
   api_key = var.neon_api_key
 }
+
+# Hashicorp Random provider
+provider "random" {}
+
 
