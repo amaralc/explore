@@ -45,7 +45,7 @@ gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable sqladmin.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable compute.googleapis.com --project $GCP_PROJECT_ID # Used to edit cloud sql instance
 gcloud services enable servicenetworking.googleapis.com --project $GCP_PROJECT_ID # Used for private ip
-
+gcloud services enable vpcaccess.googleapis.com --project $GCP_PROJECT_ID # Used for private connection (https://cloud.google.com/run/docs/configuring/connecting-vpc#terraform)
 
 
 
@@ -64,6 +64,8 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin"
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin"
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin"
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin"
+
 
 
 
