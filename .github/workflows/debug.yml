@@ -157,7 +157,7 @@ jobs:
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_project_location=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_project_location=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
