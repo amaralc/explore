@@ -20,10 +20,11 @@ resource "google_sql_database_instance" "postgresql-dbms" {
   settings {
     tier = "db-f1-micro"
 
-    ip_configuration {
-      ipv4_enabled = true
-      # private_network = "projects/${var.project_id}/global/networks/default"
-    }
+    # ip_configuration {
+    #   ipv4_enabled = true
+
+    #   # private_network = "projects/${var.project_id}/global/networks/default"
+    # }
   }
 }
 
@@ -40,24 +41,24 @@ resource "google_sql_database_instance" "postgresql-dbms" {
 #   name       = var.environment_name
 # }
 
-# Researchers Peers Service
-module "researchers-peers-svc" {
-  source                                    = "../../../researchers/peers/svc-iac"
-  commit_hash                               = var.commit_hash
-  environment_name                          = var.environment_name
-  region                                    = var.region
-  project_id                                = var.project_id
-  credentials_path                          = var.credentials_path
-  gcp_docker_artifact_repository_name       = var.gcp_docker_artifact_repository_name
-  gcp_sql_database_instance_name            = google_sql_database_instance.postgresql-dbms.name
-  gcp_sql_database_instance_connection_name = google_sql_database_instance.postgresql-dbms.connection_name
-  gcp_sql_database_public_ip_address        = google_sql_database_instance.postgresql-dbms.public_ip_address
+# # Researchers Peers Service
+# module "researchers-peers-svc" {
+#   source                                    = "../../../researchers/peers/svc-iac"
+#   commit_hash                               = var.commit_hash
+#   environment_name                          = var.environment_name
+#   region                                    = var.region
+#   project_id                                = var.project_id
+#   credentials_path                          = var.credentials_path
+#   gcp_docker_artifact_repository_name       = var.gcp_docker_artifact_repository_name
+#   gcp_sql_database_instance_name            = google_sql_database_instance.postgresql-dbms.name
+#   gcp_sql_database_instance_connection_name = google_sql_database_instance.postgresql-dbms.connection_name
+#   gcp_sql_database_public_ip_address        = google_sql_database_instance.postgresql-dbms.public_ip_address
 
-  # gcp_sql_database_instance_host      = google_sql_database_instance.postgresql-dbms.public_ip_address
-  # neon_branch_host                    = module.postgresql-dbms-environment.branch_host
-  # neon_branch_id                      = module.postgresql-dbms-environment.branch_id
-  # neon_api_key                        = var.neon_api_key
-}
+#   # gcp_sql_database_instance_host      = google_sql_database_instance.postgresql-dbms.public_ip_address
+#   # neon_branch_host                    = module.postgresql-dbms-environment.branch_host
+#   # neon_branch_id                      = module.postgresql-dbms-environment.branch_id
+#   # neon_api_key                        = var.neon_api_key
+# }
 
 # # Application Shell
 # module "core-platform-shell-browser" {
