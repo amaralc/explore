@@ -46,25 +46,25 @@ variable "credentials_path" {
   default     = "credentials.json"
 }
 
-variable "gcp_sql_database_instance_name" {
-  description = "The name of the database instance"
-  type        = string
-  sensitive   = true
-}
+# variable "gcp_sql_database_instance_name" {
+#   description = "The name of the database instance"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "gcp_sql_database_instance_connection_name" {
-  description = "The name of the database connection"
-  type        = string
-  sensitive   = true
-}
+# variable "gcp_sql_database_instance_connection_name" {
+#   description = "The name of the database connection"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "gcp_sql_database_instance_host" {
-  description = "The host of the database instance"
-  type        = string
-  sensitive   = true
-}
+# variable "gcp_sql_database_instance_host" {
+#   description = "The host of the database instance"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "gcp_vpc_access_connector_name" {
-  description = "The name of the VPC access connector"
-  type        = string
-}
+# variable "gcp_vpc_access_connector_name" {
+#   description = "The name of the VPC access connector"
+#   type        = string
+# }
