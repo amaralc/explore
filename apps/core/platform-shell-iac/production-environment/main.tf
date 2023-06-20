@@ -6,13 +6,13 @@
 #   neon_api_key          = var.neon_api_key
 # }
 
-# Network
-# VPC
-resource "google_compute_network" "private_network" {
-  name                    = "cloudrun-network"
-  provider                = google-beta
-  auto_create_subnetworks = false
-}
+# # Network
+# # VPC
+# resource "google_compute_network" "private_network" {
+#   name                    = "cloudrun-network"
+#   provider                = google-beta
+#   auto_create_subnetworks = false
+# }
 
 # # VPC access connector
 # resource "google_vpc_access_connector" "connector" {
