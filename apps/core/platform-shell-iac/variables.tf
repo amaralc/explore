@@ -1,8 +1,3 @@
-# variable "environment" {
-#   description = "The preview environment unique name (e.g. branch-name, commit-hash, etc.)"
-#   type        = string
-# }
-
 variable "gcp_project_id" {
   description = "The Google Cloud project ID"
   type        = string
@@ -12,12 +7,6 @@ variable "gcp_project_location" {
   description = "The location where the GCP project will be created"
   type        = string
 }
-
-# variable "neon_project_location" {
-#   description = "The Neon project region"
-#   type        = string
-# }
-
 variable "credentials_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
@@ -40,9 +29,3 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
   default     = "docker-repository"
 }
-
-# variable "neon_api_key" {
-#   description = "Neon API key"
-#   type        = string
-#   sensitive   = true
-# }
