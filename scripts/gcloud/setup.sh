@@ -44,6 +44,8 @@ gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJEC
 gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable sqladmin.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable compute.googleapis.com --project $GCP_PROJECT_ID # Used to edit cloud sql instance
+gcloud services enable servicenetworking.googleapis.com --project $GCP_PROJECT_ID # Used for private ip
+
 
 
 
