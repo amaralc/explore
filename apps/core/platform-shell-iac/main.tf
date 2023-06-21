@@ -10,14 +10,14 @@ module "gcp_apis" {
   ]
 }
 
-# module "production" {
-#   source               = "./modules/env-production"
-#   commit_hash          = var.commit_hash
-#   gcp_project_id       = var.gcp_project_id
-#   gcp_location         = var.gcp_location
-#   gcp_credentials_path = var.credentials_path
-#   depends_on           = [module.apis]
-# }
+module "production" {
+  source               = "./modules/env-production"
+  commit_hash          = var.commit_hash
+  gcp_project_id       = var.gcp_project_id
+  gcp_location         = var.gcp_location
+  gcp_credentials_path = var.credentials_path
+  depends_on           = [module.gcp_apis]
+}
 
 # module "production" {
 #   environment_name                    = "production"                            # The deployment environment (branch-name, commit-hash, etc.)
