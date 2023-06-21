@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "postgresql-dbms" {
   project             = var.gcp_project_id
   deletion_protection = false
 
-  # depends_on = [google_service_networking_connection.private_vpc_connection, google_vpc_access_connector.connector]
+  depends_on = [var.gcp_service_networking_connection_id]
 
   settings {
     tier = "db-f1-micro"
