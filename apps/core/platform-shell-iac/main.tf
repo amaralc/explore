@@ -1,6 +1,6 @@
 # Enable APIs
 module "gcp_apis" {
-  source         = "./modules/gcp-apis" // path to the module
+  source         = "../../../libs/iac-modules/gcp-apis" // path to the module
   gcp_project_id = var.gcp_project_id
   apis = [
     "compute.googleapis.com",
@@ -13,7 +13,7 @@ module "gcp_apis" {
 
 # Create production environment
 module "production" {
-  source           = "./modules/env-production"
+  source           = "../../../libs/iac-modules/env-production"
   short_commit_sha = var.short_commit_sha
   gcp_project_id   = var.gcp_project_id
   gcp_location     = var.gcp_location

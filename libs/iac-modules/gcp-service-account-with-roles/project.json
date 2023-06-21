@@ -1,0 +1,9 @@
+{
+  "name": "modules-gcp-service-account-with-roles",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-shell-iac/modules/gcp-service-account-with-roles",
+  "projectType": "application",
+  "implicitDependencies": ["iac-modules-gcp-apis"],
+  "targets": {},
+  "tags": []
+}
