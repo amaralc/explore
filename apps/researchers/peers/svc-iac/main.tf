@@ -10,18 +10,18 @@ module "database_access" {
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
 }
 
-# module "service_account_with_roles" {
-#   source               = "../../../core/platform-shell-iac/modules/gcp-service-account-with-roles" // path to the module
-#   service_account_name = local.app_name
-#   gcp_project_id       = var.gcp_project_id
-#   gcp_roles = [
-#     "roles/secretmanager.secretAccessor",
-#     "roles/iam.serviceAccountUser",
-#     "roles/run.admin",
-#     "roles/run.invoker",
-#     "roles/cloudsql.client"
-#   ]
-# }
+module "service_account_with_roles" {
+  source               = "../../../core/platform-shell-iac/modules/gcp-service-account-with-roles" // path to the module
+  service_account_name = local.app_name
+  gcp_project_id       = var.gcp_project_id
+  gcp_roles = [
+    "roles/secretmanager.secretAccessor",
+    "roles/iam.serviceAccountUser",
+    "roles/run.admin",
+    "roles/run.invoker",
+    "roles/cloudsql.client"
+  ]
+}
 
 # # Researchers Peers Service REST API instance
 # module "researchers-peers-svc-rest-api" {
