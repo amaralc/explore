@@ -6,7 +6,8 @@ module "gcp_apis" {
     "compute.googleapis.com",
     "servicenetworking.googleapis.com",
     "sqladmin.googleapis.com",
-    "iam.googleapis.com"
+    "iam.googleapis.com",
+    "secretmanager.googleapis.com"
   ]
 }
 
