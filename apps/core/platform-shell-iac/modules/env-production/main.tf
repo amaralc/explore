@@ -36,6 +36,7 @@ module "researchers-peers-svc" {
   gcp_project_id             = var.gcp_project_id
   gcp_location               = var.gcp_location
   gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
+  gcp_sql_dbms_instance_host = module.postgresql_dbms.google_sql_database_instance.private_ip_address
   short_commit_sha           = var.short_commit_sha
 }
 

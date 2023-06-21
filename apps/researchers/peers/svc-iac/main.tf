@@ -23,6 +23,41 @@ module "service_account_with_roles" {
   ]
 }
 
+locals {
+  username      = module.database_access.user.name
+  password      = module.database_access.user.password
+  database_name = module.database_access.database.name
+  host          = var.gcp_sql_dbms_instance_host
+  port          = "5432"
+  # username      = "fake-username"
+  # password      = "fake-password"
+  # database_name = "fake-database-name"
+  # connection_name = var.gcp_sql_database_instance_connection_name
+  # connection_name = "fake-connection-name"
+  # database_host   = "fake-database-host"
+
+  # References:
+  # https://stackoverflow.com/questions/68018718/terraform-google-cloud-run-add-cloud-sql-connection
+  # https://github.com/hashicorp/terraform-provider-google/issues/6004#issuecomment-607282371
+  database_pooler_url = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}"
+  database_direct_url = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}" # How to appropriately set pooler in cloud sql?
+}
+
+module "service_secrets" {
+  source         = "../../../core/platform-shell-iac/modules/gcp-secrets"
+  gcp_project_id = var.gcp_project_id
+  secrets = [
+    {
+      name  = "database_pooler_url"
+      value = local.database_pooler_url
+    },
+    {
+      name  = "database_direct_url"
+      value = local.database_direct_url
+    }
+  ]
+}
+
 # # Researchers Peers Service REST API instance
 # module "researchers-peers-svc-rest-api" {
 #   source                                            = "../svc-rest-api/iac" # The path to the module

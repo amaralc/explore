@@ -52,11 +52,11 @@ variable "gcp_sql_dbms_instance_name" {
 #   sensitive   = true
 # }
 
-# variable "gcp_sql_database_instance_host" {
-#   description = "The host of the database instance"
-#   type        = string
-#   sensitive   = true
-# }
+variable "gcp_sql_dbms_instance_host" {
+  description = "The host of the database instance"
+  type        = string
+  sensitive   = true
+}
 
 # variable "gcp_vpc_access_connector_name" {
 #   description = "The name of the VPC access connector"
