@@ -25,7 +25,7 @@ module "service_account_with_roles" {
 # # Researchers Peers Service REST API instance
 # module "researchers-peers-svc-rest-api" {
 #   source                                            = "../svc-rest-api/iac" # The path to the module
-#   credentials_path                                  = var.credentials_path
+#   credentials_path                                  = var.gcp_credentials_file_path
 #   app_name                                          = local.app_name                                                                       # The name of the application
 #   app_component_name                                = local.app_component_name                                                             # The name of the application component
 #   environment_name                                  = var.environment_name                                                                 # The deployment environment (staging | production)

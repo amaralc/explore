@@ -7,13 +7,13 @@ variable "gcp_location" {
   description = "A valid GCP location where resources will be deployed"
   type        = string
 }
-variable "credentials_path" {
+variable "gcp_credentials_file_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
 }
 
-variable "commit_hash" {
-  description = "The commit hash of the source code to deploy"
+variable "short_commit_sha" {
+  description = "The commit short SHA of the source code to deploy"
   type        = string
 }
 

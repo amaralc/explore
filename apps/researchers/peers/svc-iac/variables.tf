@@ -23,8 +23,8 @@ variable "gcp_location" {
   type        = string
 }
 
-variable "commit_hash" {
-  description = "The commit hash of the source code to deploy"
+variable "short_commit_sha" {
+  description = "The commit short SHA of the source code to deploy"
   type        = string
 }
 
@@ -39,11 +39,6 @@ variable "commit_hash" {
 #   type        = string
 #   sensitive   = true
 # }
-
-variable "credentials_path" {
-  description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
-  type        = string
-}
 
 variable "gcp_sql_dbms_instance_name" {
   description = "The name of the dbms instance"

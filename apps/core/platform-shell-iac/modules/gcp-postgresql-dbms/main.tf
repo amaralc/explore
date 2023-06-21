@@ -2,7 +2,9 @@ resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
 
-resource "google_sql_database_instance" "postgresql-dbms" {
+
+# Create a PostgreSQL database management system (DBMS) instance (environment)
+resource "google_sql_database_instance" "environment" {
   name                = "${var.gcp_project_id}-${var.environment_name}-${random_id.db_name_suffix.hex}"
   database_version    = "POSTGRES_14"
   region              = var.gcp_location
@@ -21,3 +23,9 @@ resource "google_sql_database_instance" "postgresql-dbms" {
     }
   }
 }
+
+output "google_sql_database_instance" {
+  value     = google_sql_database_instance.environment
+  sensitive = true
+}
+

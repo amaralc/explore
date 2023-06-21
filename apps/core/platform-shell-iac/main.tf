@@ -10,13 +10,13 @@ module "gcp_apis" {
   ]
 }
 
+# Create production environment
 module "production" {
-  source               = "./modules/env-production"
-  commit_hash          = var.commit_hash
-  gcp_project_id       = var.gcp_project_id
-  gcp_location         = var.gcp_location
-  gcp_credentials_path = var.credentials_path
-  depends_on           = [module.gcp_apis]
+  source           = "./modules/env-production"
+  short_commit_sha = var.short_commit_sha
+  gcp_project_id   = var.gcp_project_id
+  gcp_location     = var.gcp_location
+  depends_on       = [module.gcp_apis]
 }
 
 # module "production" {

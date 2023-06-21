@@ -15,29 +15,37 @@ output "vpc" {
 }
 
 
-# # Create a PostgreSQL database management system (DBMS)
-# module "postgresql_dbms" {
-#   source                        = "../gcp-sql"
-#   environment_name              = local.environment_name
-#   gcp_project_id                = var.gcp_project_id
-#   gcp_location                  = var.gcp_location
-#   gcp_network_id                = module.vpc.private_network.id
-#   gcp_private_vpc_connection_id = module.vpc.private_vpc_connection.id
-# }
+# Create a PostgreSQL database management system (DBMS) instance for the production environment
+module "postgresql_dbms" {
+  source                        = "../gcp-postgresql-dbms"
+  environment_name              = local.environment_name
+  gcp_project_id                = var.gcp_project_id
+  gcp_location                  = var.gcp_location
+  gcp_network_id                = module.vpc.private_network.id
+  gcp_private_vpc_connection_id = module.vpc.private_vpc_connection.id
+}
 
-# output "postgresql_dbms" {
-#   value = module.postgresql_dbms
-# }
-
+output "postgresql_dbms" {
+  value = module.postgresql_dbms
+}
 
 # # Researchers Peers Microservice
 # module "researchers-peers-svc" {
 #   source                     = "../../../../researchers/peers/svc-iac"
-#   environment_name           = local.environment_name   # The deployment environment (branch-name, commit-hash, etc.)
-#   commit_hash                = var.commit_hash          # Forces creation of new instance with latest image
-#   gcp_location               = var.gcp_location         # Location where resources will be created
-#   gcp_project_id             = var.gcp_project_id       # The Google Cloud project ID
-#   credentials_path           = var.gcp_credentials_path # Path to json keys from terraform root
+#   environment_name           = local.environment_name
+#   gcp_project_id             = var.gcp_project_id
+#   gcp_location               = var.gcp_location
+#   gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
+#   short_commit_sha           = var.short_commit_sha
+# }
+
+# # Researchers Peers Microservice
+# module "researchers-peers-svc" {
+#   source                     = "../../../../researchers/peers/svc-iac"
+#   environment_name           = local.environment_name # The deployment environment (branch-name, commit-hash, etc.)
+#   short_commit_sha           = var.short_commit_sha   # Forces creation of new instance with latest image
+#   gcp_location               = var.gcp_location       # Location where resources will be created
+#   gcp_project_id             = var.gcp_project_id     # The Google Cloud project ID
 #   gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
 #   # gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name # Artifact repository name
 

@@ -110,7 +110,7 @@
 #   environment_name                    = var.environment_name
 #   region                              = var.region
 #   project_id                          = var.project_id
-#   credentials_path                    = var.credentials_path
+#   credentials_path                    = var.gcp_credentials_file_path
 #   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
 #   # gcp_sql_database_instance_name            = google_sql_database_instance.postgresql-dbms.name
 #   # gcp_sql_database_instance_connection_name = google_sql_database_instance.postgresql-dbms.connection_name
