@@ -18,7 +18,7 @@ variable "gcp_network_id" {
   type        = string
 }
 
-variable "gcp_service_networking_connection_id" {
+variable "gcp_private_vpc_connection_id" {
   description = "The GCP service networking connection ID"
   type        = string
 }

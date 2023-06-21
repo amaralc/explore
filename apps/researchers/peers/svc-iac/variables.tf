@@ -1,4 +1,4 @@
-variable "project_id" {
+variable "gcp_project_id" {
   description = "The Google Cloud project ID"
   type        = string
 }
@@ -18,7 +18,7 @@ variable "environment_name" {
   type        = string
 }
 
-variable "region" {
+variable "gcp_location" {
   description = "The region where resources will be created"
   type        = string
 }
@@ -28,11 +28,11 @@ variable "commit_hash" {
   type        = string
 }
 
-variable "gcp_docker_artifact_repository_name" {
-  description = "The name of the Docker repository"
-  type        = string
-  default     = "docker-repository"
-}
+# variable "gcp_docker_artifact_repository_name" {
+#   description = "The name of the Docker repository"
+#   type        = string
+#   default     = "docker-repository"
+# }
 
 # variable "neon_api_key" {
 #   description = "Neon API key"
@@ -43,14 +43,13 @@ variable "gcp_docker_artifact_repository_name" {
 variable "credentials_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
-  default     = "credentials.json"
 }
 
-# variable "gcp_sql_database_instance_name" {
-#   description = "The name of the database instance"
-#   type        = string
-#   sensitive   = true
-# }
+variable "gcp_sql_dbms_instance_name" {
+  description = "The name of the dbms instance"
+  type        = string
+  sensitive   = true
+}
 
 # variable "gcp_sql_database_instance_connection_name" {
 #   description = "The name of the database connection"
