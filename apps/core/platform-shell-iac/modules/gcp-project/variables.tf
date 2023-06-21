@@ -8,11 +8,6 @@ variable "gcp_project_name" {
   type        = string
 }
 
-variable "gcp_location" {
-  description = "The GCP location"
-  type        = string
-}
-
 variable "gcp_billing_account_id" {
   description = "The Google Cloud billing account ID"
   type        = string

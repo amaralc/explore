@@ -1,10 +1,16 @@
-variable "gcp_project_id" {
+variable "gcp_billing_account_id" {
+  description = "The Google Cloud billing account ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "gcp_management_shell_project_id" {
   description = "The Google Cloud project ID"
   type        = string
 }
 
-variable "gcp_project_location" {
-  description = "The location where the GCP project will be created"
+variable "gcp_location" {
+  description = "A valid GCP location where resources will be deployed"
   type        = string
 }
 variable "credentials_path" {

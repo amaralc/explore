@@ -67,6 +67,7 @@ tfplan
 
 # GCP
 credentials.json
+credentials**.json
 key.json
 
 .vercel

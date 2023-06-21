@@ -1,7 +1,13 @@
+locals {
+  peerlab_platform_shell_project_name = "peerlab-platform-shell"
+}
+
 module "production" {
-  source               = "./modules/environment-production"
-  gcp_project_id       = var.gcp_project_id
-  gcp_project_location = var.gcp_project_location
+  source                 = "./modules/environment-production"
+  gcp_project_id         = local.peerlab_platform_shell_project_name
+  gcp_project_name       = local.peerlab_platform_shell_project_name
+  gcp_location           = var.gcp_location
+  gcp_billing_account_id = var.gcp_billing_account_id
 }
 
 # module "production" {
