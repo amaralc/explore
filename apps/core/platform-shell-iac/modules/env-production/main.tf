@@ -29,15 +29,15 @@ output "postgresql_dbms" {
   value = module.postgresql_dbms
 }
 
-# # Researchers Peers Microservice
-# module "researchers-peers-svc" {
-#   source                     = "../../../../researchers/peers/svc-iac"
-#   environment_name           = local.environment_name
-#   gcp_project_id             = var.gcp_project_id
-#   gcp_location               = var.gcp_location
-#   gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
-#   short_commit_sha           = var.short_commit_sha
-# }
+# Researchers Peers Microservice
+module "researchers-peers-svc" {
+  source                     = "../../../../researchers/peers/svc-iac"
+  environment_name           = local.environment_name
+  gcp_project_id             = var.gcp_project_id
+  gcp_location               = var.gcp_location
+  gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
+  short_commit_sha           = var.short_commit_sha
+}
 
 # # Researchers Peers Microservice
 # module "researchers-peers-svc" {
