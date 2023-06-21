@@ -8,6 +8,12 @@ variable "gcp_project_name" {
   type        = string
 }
 
+variable "gcp_organization_id" {
+  description = "The Google Cloud organization ID"
+  type        = string
+  sensitive   = true
+}
+
 variable "gcp_location" {
   description = "The GCP location"
   type        = string

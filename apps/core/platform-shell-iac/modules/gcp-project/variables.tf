@@ -13,3 +13,9 @@ variable "gcp_billing_account_id" {
   type        = string
   sensitive   = true
 }
+
+variable "gcp_organization_id" {
+  description = "The Google Cloud organization ID"
+  type        = string
+  sensitive   = true
+}
