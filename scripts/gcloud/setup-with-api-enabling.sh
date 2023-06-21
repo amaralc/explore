@@ -37,17 +37,15 @@ gcloud config set project $GCP_PROJECT_ID
 gcloud beta billing projects link $GCP_PROJECT_ID --billing-account=$GCP_BILLING_ACCOUNT_ID
 
 # Enable APIs
-gcloud services enable iam.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable secretmanager.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable run.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable sqladmin.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable compute.googleapis.com --project $GCP_PROJECT_ID # Used to edit cloud sql instance
-gcloud services enable servicenetworking.googleapis.com --project $GCP_PROJECT_ID # Used for private ip
-gcloud services enable vpcaccess.googleapis.com --project $GCP_PROJECT_ID # Used for private connection (https://cloud.google.com/run/docs/configuring/connecting-vpc#terraform)
-
-
+gcloud services disable iam.googleapis.com --project peerlab-management
+gcloud services disable secretmanager.googleapis.com --project peerlab-management
+gcloud services disable run.googleapis.com --project peerlab-management
+gcloud services disable cloudresourcemanager.googleapis.com --project peerlab-management
+gcloud services disable artifactregistry.googleapis.com --project peerlab-management
+gcloud services disable sqladmin.googleapis.com --project peerlab-management
+gcloud services disable compute.googleapis.com --project peerlab-management # Used to edit cloud sql instance
+gcloud services disable servicenetworking.googleapis.com --project peerlab-management # Used for private ip
+gcloud services disable vpcaccess.googleapis.com --project peerlab-management # Used for private connection (https://cloud.google.com/run/docs/configuring/connecting-vpc#terraform)
 
 # Create a service account
 gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
@@ -65,9 +63,6 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin"
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin"
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin"
-
-
-
 
 # Create a key for the service account
 gcloud iam service-accounts keys create ./key.json --iam-account $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
