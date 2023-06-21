@@ -1,9 +1,3 @@
-# # Enable APIs
-# module "apis" {
-#   source         = "./modules/gcp-apis"
-#   gcp_project_id = var.gcp_project_id
-# }
-
 # Enable APIs
 module "gcp_apis" {
   source         = "./modules/gcp-apis" // path to the module
@@ -11,18 +5,19 @@ module "gcp_apis" {
   apis = [
     "compute.googleapis.com",
     "servicenetworking.googleapis.com",
-    "sqladmin.googleapis.com"
+    "sqladmin.googleapis.com",
+    "iam.googleapis.com"
   ]
 }
 
-module "production" {
-  source               = "./modules/env-production"
-  commit_hash          = var.commit_hash
-  gcp_project_id       = var.gcp_project_id
-  gcp_location         = var.gcp_location
-  gcp_credentials_path = var.credentials_path
-  depends_on           = [module.gcp_apis]
-}
+# module "production" {
+#   source               = "./modules/env-production"
+#   commit_hash          = var.commit_hash
+#   gcp_project_id       = var.gcp_project_id
+#   gcp_location         = var.gcp_location
+#   gcp_credentials_path = var.credentials_path
+#   depends_on           = [module.apis]
+# }
 
 # module "production" {
 #   environment_name                    = "production"                            # The deployment environment (branch-name, commit-hash, etc.)
