@@ -45,5 +45,8 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 # Create a key for the service account
 gcloud iam service-accounts keys create ./key.json --iam-account $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com
 
+# Enable APIs
+gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
+
 # Create a bucket
 gsutil mb -p $GCP_PROJECT_ID -l $GCP_PROJECT_LOCATION gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
