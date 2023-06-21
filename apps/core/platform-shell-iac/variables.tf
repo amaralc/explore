@@ -1,11 +1,5 @@
-variable "gcp_billing_account_id" {
-  description = "The Google Cloud billing account ID"
-  type        = string
-  sensitive   = true
-}
-
-variable "gcp_management_shell_project_id" {
-  description = "The Google Cloud project ID"
+variable "gcp_project_id" {
+  description = "The ID of the GCP project where resources will be deployed"
   type        = string
 }
 

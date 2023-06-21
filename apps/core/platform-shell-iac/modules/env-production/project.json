@@ -1,0 +1,9 @@
+{
+  "name": "modules-env-production",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-shell-iac/modules/env-production",
+  "projectType": "application",
+  "implicitDependencies": ["modules-gcp-apis", "modules-gcp-vpc"],
+  "targets": {},
+  "tags": []
+}

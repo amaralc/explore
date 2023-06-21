@@ -1,13 +1,14 @@
-locals {
-  peerlab_platform_shell_project_name = "peerlab-platform-shell"
+# Enable APIs
+module "apis" {
+  source         = "./modules/gcp-apis"
+  gcp_project_id = var.gcp_project_id
 }
 
 module "production" {
-  source                 = "./modules/environment-production"
-  gcp_project_id         = local.peerlab_platform_shell_project_name
-  gcp_project_name       = local.peerlab_platform_shell_project_name
-  gcp_location           = var.gcp_location
-  gcp_billing_account_id = var.gcp_billing_account_id
+  source         = "./modules/env-production"
+  gcp_project_id = var.gcp_project_id
+  gcp_location   = var.gcp_location
+  depends_on     = [module.apis]
 }
 
 # module "production" {
