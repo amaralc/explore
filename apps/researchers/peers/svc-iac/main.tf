@@ -29,12 +29,6 @@ locals {
   database_name = module.database_access.database.name
   host          = var.gcp_sql_dbms_instance_host
   port          = "5432"
-  # username      = "fake-username"
-  # password      = "fake-password"
-  # database_name = "fake-database-name"
-  # connection_name = var.gcp_sql_database_instance_connection_name
-  # connection_name = "fake-connection-name"
-  # database_host   = "fake-database-host"
 
   # References:
   # https://stackoverflow.com/questions/68018718/terraform-google-cloud-run-add-cloud-sql-connection
