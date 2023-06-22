@@ -1,0 +1,28 @@
+{
+  "name": "core-platform-build-iac",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-build-iac",
+  "projectType": "application",
+  "implicitDependencies": [],
+  "targets": {
+    "terraform:init": {
+      "command": "cd apps/core/platform-build-iac && terraform init"
+    },
+    "terraform:validate": {
+      "command": "cd apps/core/platform-build-iac && terraform validate"
+    },
+    "terraform:plan": {
+      "command": "cd apps/core/platform-build-iac && terraform plan -out=tfplan -var-file=env.tfvars"
+    },
+    "terraform:apply": {
+      "command": "cd apps/core/platform-build-iac && terraform apply -auto-approve tfplan && terraform output"
+    },
+    "terraform:destroy": {
+      "command": "cd apps/core/platform-build-iac && terraform destroy -var-file=env.tfvars -auto-approve"
+    },
+    "terraform:output": {
+      "command": "cd apps/core/platform-build-iac && terraform output"
+    }
+  },
+  "tags": []
+}
