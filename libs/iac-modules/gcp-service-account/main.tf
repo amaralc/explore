@@ -10,7 +10,7 @@ output "instance" {
 
 resource "google_service_account_key" "instance" {
   service_account_id = google_service_account.instance.account_id
-  depends_on         = [google_service_account.researchers_peers_svc]
+  depends_on         = [google_service_account.instance]
 }
 
 output "instance_key" {
