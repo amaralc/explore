@@ -7,7 +7,8 @@
     "researchers-peers-svc-rest-api",
     "researchers-peers-svc-consumer",
     "modules-gcp-sql-user-and-database",
-    "modules-gcp-service-account-with-roles"
+    "modules-gcp-service-account",
+    "modules-gcp-service-account-permissions"
   ],
   "targets": {},
   "tags": []

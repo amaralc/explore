@@ -10,19 +10,7 @@ module "database_access" {
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
 }
 
-module "service_account_with_roles" {
-  source               = "../../../../libs/iac-modules/gcp-service-account-with-roles" // path to the module
-  service_account_name = local.app_name
-  gcp_project_id       = var.gcp_project_id
-  gcp_roles = [
-    "roles/secretmanager.secretAccessor",
-    "roles/iam.serviceAccountUser",
-    "roles/run.admin",
-    "roles/run.invoker",
-    "roles/cloudsql.client"
-  ]
-}
-
+# Create local variables to simplify the creation of the database connection URL secrets
 locals {
   username      = module.database_access.user.name
   password      = module.database_access.user.password
@@ -37,18 +25,40 @@ locals {
   database_direct_url = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}" # How to appropriately set pooler in cloud sql?
 }
 
+# Create database connection URL secrets
 module "service_secrets" {
   source         = "../../../../libs/iac-modules/gcp-secrets"
   gcp_project_id = var.gcp_project_id
   secrets = [
     {
       name  = "database_pooler_url"
-      value = local.database_pooler_url
+      value = local.database_pooler_url # I'm not sure why syntax highlighting is not working here
     },
     {
       name  = "database_direct_url"
-      value = local.database_direct_url
+      value = local.database_direct_url # I'm not sure why syntax highlighting is not working here
     }
+  ]
+}
+
+# Create service account
+module "service_account" {
+  source               = "../../../../libs/iac-modules/gcp-service-account"
+  gcp_project_id       = var.gcp_project_id
+  service_account_name = local.app_name
+}
+
+# Add permissions to service account
+module "service_account_permissions" {
+  source                = "../../../../libs/iac-modules/gcp-service-account-with-roles" // path to the module
+  gcp_project_id        = var.gcp_project_id
+  service_account_email = module.service_account.instance.email
+  gcp_roles = [
+    "roles/secretmanager.secretAccessor",
+    "roles/iam.serviceAccountUser",
+    "roles/run.admin",
+    "roles/run.invoker",
+    "roles/cloudsql.client"
   ]
 }
 

@@ -30,7 +30,7 @@ output "postgresql_dbms" {
 }
 
 # Researchers Peers Microservice
-module "researchers-peers-svc" {
+module "researchers-peers" {
   source                     = "../../../apps/researchers/peers/svc-iac"
   environment_name           = local.environment_name
   gcp_project_id             = var.gcp_project_id
