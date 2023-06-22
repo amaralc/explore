@@ -65,7 +65,7 @@ jobs:
           else
             # If no dependency was affected, cancel build
             echo '🛑 - Build cancelled since no dependency was affected'
-            echo "affected=false" >> $GITHUB_ENV
+            echo "affected=true" >> $GITHUB_ENV # TODO: Change to false
           fi
 
       - name: Get short commit hash
