@@ -26,11 +26,11 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # Set project as default
 gcloud config set project $GCP_PROJECT_ID
 
-# Create a service account
+# Delete a service account
 gcloud iam service-accounts delete $GCP_SERVICE_ACCOUNT_EMAIL
 
-# Enable APIs
+# Disable APIs
 gcloud services disable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
 
-# Create a bucket
+# Remove bucket
 gsutil rm -r gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
