@@ -1,4 +1,4 @@
-# Run this script: bash scripts/gcloud/setup.sh
+# Run this script: bash apps/core/platform-shell-iac/project-setup.sh
 
 # Define project name
 GCP_PROJECT_ID="project-id"
