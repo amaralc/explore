@@ -1,12 +1,12 @@
 {
-  "name": "core-platform-shell-graph",
+  "name": "core-root-shell-graph",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/platform-shell-graph",
+  "sourceRoot": "apps/core/root-shell-graph",
   "projectType": "application",
   "implicitDependencies": ["peerlab"],
   "targets": {
     "build-graph": {
-      "command": "npx nx graph --file=dist/apps/platform-shell-graph/index.html"
+      "command": "npx nx graph --file=dist/apps/root-shell-graph/index.html"
     }
   },
   "tags": []
