@@ -12,3 +12,8 @@ variable "short_commit_sha" {
   description = "The commit short SHA of the source code to deploy"
   type        = string
 }
+
+variable "vercel_api_token" {
+  description = "The Vercel API token"
+  type        = string
+}

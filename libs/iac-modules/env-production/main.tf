@@ -14,7 +14,6 @@ output "vpc" {
   value = module.vpc
 }
 
-
 # Create a PostgreSQL database management system (DBMS) instance for the production environment
 module "postgresql_dbms" {
   source                        = "../gcp-postgresql-dbms"
@@ -23,6 +22,7 @@ module "postgresql_dbms" {
   gcp_location                  = var.gcp_location
   gcp_network_id                = module.vpc.private_network.id
   gcp_private_vpc_connection_id = module.vpc.private_vpc_connection.id
+  depends_on                    = [module.vpc]
 }
 
 output "postgresql_dbms" {
@@ -38,6 +38,23 @@ module "researchers-peers" {
   gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
   gcp_sql_dbms_instance_host = module.postgresql_dbms.google_sql_database_instance.private_ip_address
   short_commit_sha           = var.short_commit_sha
+  depends_on                 = [module.postgresql_dbms]
+}
+
+# Application Shell
+module "core-platform-shell-browser" {
+  source           = "../../../core/platform-shell-browser/iac/production" # The path to the module
+  environment_name = var.environment_name                                  # The deployment environment (branch-name, commit-hash, etc.)
+  vercel_api_token = var.vercel_api_token                                  # The Vercel API token
+  depends_on       = [module.researchers-peers]
+}
+
+# Documentation with Docusaurus
+module "dx-dev-docs-browser" {
+  source           = "../../../dx/dev-docs-browser/iac/production" # The path to the module
+  environment_name = var.environment_name                          # The deployment environment (branch-name, commit-hash, etc.)
+  vercel_api_token = var.vercel_api_token                          # The Vercel API token
+  depends_on       = [module.researchers-peers]
 }
 
 # # Researchers Peers Microservice

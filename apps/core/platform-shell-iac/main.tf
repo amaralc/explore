@@ -14,11 +14,11 @@ module "gcp_apis" {
 
 module "docker_images_repository" {
   source                 = "../../../libs/iac-modules/gcp-artifact-registry" // path to the module
+  repository_format      = "DOCKER"
+  repository_description = "Docker Repository"
   gcp_project_id         = var.gcp_project_id
   gcp_region             = var.gcp_location
   repository_id          = "${var.gcp_project_id}-docker-repository"
-  repository_format      = "DOCKER"
-  repository_description = "Docker repository"
   depends_on             = [module.gcp_apis]
 }
 
@@ -28,7 +28,8 @@ module "production" {
   short_commit_sha = var.short_commit_sha
   gcp_project_id   = var.gcp_project_id
   gcp_location     = var.gcp_location
-  depends_on       = [module.gcp_apis]
+  vercel_api_token = var.vercel_api_token
+  depends_on       = [module.gcp_apis, module.docker_images_repository]
 }
 
 # module "production" {
