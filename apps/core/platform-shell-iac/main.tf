@@ -8,28 +8,18 @@ module "gcp_apis" {
     "sqladmin.googleapis.com",
     "iam.googleapis.com",
     "secretmanager.googleapis.com",
-    "artifactregistry.googleapis.com"
   ]
-}
-
-module "docker_images_repository" {
-  source                 = "../../../libs/iac-modules/gcp-artifact-registry" // path to the module
-  repository_format      = "DOCKER"
-  repository_description = "Docker Repository"
-  gcp_project_id         = var.gcp_project_id
-  gcp_region             = var.gcp_location
-  repository_id          = "${var.gcp_project_id}-docker-repository"
-  depends_on             = [module.gcp_apis]
 }
 
 # Create production environment
 module "production" {
-  source           = "../../../libs/iac-modules/env-production"
-  short_commit_sha = var.short_commit_sha
-  gcp_project_id   = var.gcp_project_id
-  gcp_location     = var.gcp_location
-  vercel_api_token = var.vercel_api_token
-  depends_on       = [module.gcp_apis, module.docker_images_repository]
+  source                              = "../../../libs/iac-modules/env-production"
+  short_commit_sha                    = var.short_commit_sha
+  gcp_project_id                      = var.gcp_project_id
+  gcp_location                        = var.gcp_location
+  vercel_api_token                    = var.vercel_api_token
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  depends_on                          = [module.gcp_apis]
 }
 
 # module "production" {

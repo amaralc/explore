@@ -31,14 +31,15 @@ output "postgresql_dbms" {
 
 # Researchers Peers Microservice
 module "researchers-peers" {
-  source                     = "../../../apps/researchers/peers/svc-iac"
-  environment_name           = local.environment_name
-  gcp_project_id             = var.gcp_project_id
-  gcp_location               = var.gcp_location
-  gcp_sql_dbms_instance_name = module.postgresql_dbms.google_sql_database_instance.name
-  gcp_sql_dbms_instance_host = module.postgresql_dbms.google_sql_database_instance.private_ip_address
-  short_commit_sha           = var.short_commit_sha
-  depends_on                 = [module.postgresql_dbms]
+  source                              = "../../../apps/researchers/peers/svc-iac"
+  environment_name                    = local.environment_name
+  gcp_project_id                      = var.gcp_project_id
+  gcp_location                        = var.gcp_location
+  short_commit_sha                    = var.short_commit_sha
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  gcp_sql_dbms_instance_host          = module.postgresql_dbms.google_sql_database_instance.private_ip_address
+  gcp_sql_dbms_instance_name          = module.postgresql_dbms.google_sql_database_instance.name
+  depends_on                          = [module.postgresql_dbms]
 }
 
 # Application Shell

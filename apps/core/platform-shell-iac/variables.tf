@@ -27,8 +27,8 @@ variable "vercel_api_token" {
   sensitive   = true
 }
 
-# variable "gcp_docker_artifact_repository_name" {
-#   description = "The name of the Docker repository"
-#   type        = string
-#   default     = "docker-repository"
-# }
+variable "gcp_docker_artifact_repository_name" {
+  description = "The name of the Docker repository"
+  type        = string
+  default     = "docker-repository"
+}
