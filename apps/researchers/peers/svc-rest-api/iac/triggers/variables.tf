@@ -13,16 +13,6 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
 }
 
-variable "image_name" {
-  description = "The name of the Docker image"
-  type        = string
-}
-
-variable "environment_name" {
-  description = "The name of the environment"
-  type        = string
-}
-
 variable "short_commit_sha" {
   description = "The short commit SHA"
   type        = string
