@@ -1,10 +1,10 @@
-# PostgreSQL Database Management System
-# Reference: https://registry.terraform.io/providers/kislerdm/neon/latest/docs
-resource "neon_project" "postgresql-dbms" {
-  name                     = var.project_id            # Use the same project ID as in the Google Cloud provider
-  region_id                = var.neon_project_location #"aws-eu-central-1"
-  autoscaling_limit_max_cu = 1
-}
+# # PostgreSQL Database Management System
+# # Reference: https://registry.terraform.io/providers/kislerdm/neon/latest/docs
+# resource "neon_project" "postgresql-dbms" {
+#   name                     = var.project_id            # Use the same project ID as in the Google Cloud provider
+#   region_id                = var.neon_project_location #"aws-eu-central-1"
+#   autoscaling_limit_max_cu = 1
+# }
 
 # # PostgreSql Database
 # # Reference: https://registry.terraform.io/providers/kislerdm/neon/latest/docs

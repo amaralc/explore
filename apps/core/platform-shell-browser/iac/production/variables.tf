@@ -5,6 +5,6 @@ variable "vercel_api_token" {
 }
 
 variable "environment_name" {
-  description = "Name of the environment"
+  description = "Name of the branch"
   type        = string
 }

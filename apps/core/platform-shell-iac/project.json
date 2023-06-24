@@ -3,7 +3,12 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/core/platform-shell-iac",
   "projectType": "application",
-  "implicitDependencies": ["researchers-peers-svc-iac", "core-platform-shell-browser", "dx-dev-docs-browser"],
+  "implicitDependencies": [
+    "core-platform-shell-browser",
+    "dx-dev-docs-browser",
+    "iac-modules-env-production",
+    "iac-modules-gcp-artifact-registry"
+  ],
   "targets": {
     "terraform:init": {
       "command": "cd apps/core/platform-shell-iac && terraform init"

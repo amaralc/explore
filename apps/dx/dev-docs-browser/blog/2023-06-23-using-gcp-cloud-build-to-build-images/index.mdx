@@ -1,0 +1,28 @@
+---
+slug: thoughts-on-github-action-versus-gcp-cloud-build
+title: 'Thoughts on GitHub Actions versus GCP Cloud Build'
+authors: [amaralc]
+tags: [gcp, terraform, cloud-build, docker, images, build]
+---
+
+## GitHub Actions
+
+In the realm of CI/CD pipeline development, the comparison between GitHub Actions and GCP Cloud Build for building
+and pushing Docker images presents an intriguing dichotomy. On one hand, GitHub Actions offers a streamlined, intuitive
+approach that seamlessly integrates with the existing GitHub ecosystem. Its straightforward configuration and
+robust functionality allow developers to focus on the core objective: delivering a high-quality product to the end-users.
+The simplicity of GitHub Actions ensures that the focus remains on the product, rather than getting lost in the labyrinth
+of configuration details.
+
+## GCP Cloud Build
+
+On the other hand, GCP Cloud Build, while powerful and flexible, can sometimes feel like a maze of configurations,
+diverting attention from the primary goal of product delivery. The complexity of setting up the pipeline in GCP Cloud
+Build can sometimes overshadow the actual purpose of the pipeline, which is to facilitate a smooth and efficient delivery
+process. While we appreciate the capabilities of GCP Cloud Build, we believe that the ease of use and straightforwardness
+of GitHub Actions better serve our current needs.
+
+## Temporary Conclusion
+
+Therefore, for now, we will stick to GitHub Actions for the build and push Docker images part. For now, I'll keep this post as that, as a reminder of when and why we took the GitHub Actions route. Eventually Its
+might be updated to describe the process in more detail.

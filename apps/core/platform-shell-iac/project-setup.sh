@@ -1,0 +1,101 @@
+# Run this script: bash apps/core/platform-shell-iac/project-setup.sh
+
+
+# This script accepts named arguments and push an image to container registry
+
+# Expected named arguments:
+# --gcp-project-id
+# --gcp-billing-account-id
+
+# Call this script with the following command: bash apps/core/platform-shell-iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID
+# Obs.: this script assumes that you are already authenticated with gcloud CLI.
+
+for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
+do                                  # This is the start of the loop block.
+case $i in                          # This starts a case statement, which checks the current argument ($i) against several patterns.
+    --gcp-project-id=*)             # This starts a new case statement pattern.
+    GCP_PROJECT_ID="${i#*=}"        # Assign the value after the equal sign, to a variable. This pattern matches any argument that starts with "--gcp-project-id=". The ${i#*=} syntax removes the prefix "--gcp-project-id=" from the argument.
+    shift                           # This removes the current argument from the list of arguments. This is necessary because the argument is no longer needed.
+    ;;                              # This ends the case statement pattern.
+    --gcp-billing-account-id=*)
+    GCP_BILLING_ACCOUNT_ID="${i#*=}"
+    shift
+    ;;
+esac                                # This ends the case statement.
+done                                # This ends the loop block.
+
+# Check if GCP_PROJECT_ID is set
+if [ -z "$GCP_PROJECT_ID" ]
+then
+    echo "Error: --gcp-project-id flag is required"
+    exit 1
+fi
+
+# Check if GCP_BILLING_ACCOUNT_ID is set
+if [ -z "$GCP_BILLING_ACCOUNT_ID" ]
+then
+    echo "Error: --gcp-billing-account-id flag is required"
+    exit 1
+fi
+
+# Define location
+GCP_PROJECT_LOCATION="europe-west3"
+
+# Service account name
+GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME="terraform-admin"
+
+# Docker artifact registry repository name
+GCP_DOCKER_ARTIFACT_REPOSITORY_NAME="docker-repository"
+
+# Set SERVICE_ACCOUNT_EMAIL
+GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com"
+
+# Define terraform bucket name
+GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
+
+# BASIC GCP SETUP
+
+# # Authenticate with Google Cloud
+# gcloud auth login
+
+# # Create project
+# gcloud projects create $GCP_PROJECT_ID
+
+# # Set project as default
+# gcloud config set project $GCP_PROJECT_ID
+
+# # Enable billing
+# gcloud beta billing projects link $GCP_PROJECT_ID --billing-account=$GCP_BILLING_ACCOUNT_ID
+
+# # Enable necessary APIs
+# gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
+# gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
+
+# # Create a bucket
+# gsutil mb -p $GCP_PROJECT_ID -l $GCP_PROJECT_LOCATION gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
+
+# # Create artifact registry repository
+# gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION  --repository-format=docker --description="Docker Repository"
+
+# Create a service account
+# gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
+
+# # Create a key for the service account
+# gcloud iam service-accounts keys create ./apps/core/platform-shell-iac/credentials.json --iam-account $GCP_SERVICE_ACCOUNT_EMAIL
+
+# # Assign roles to the service account
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/serviceusage.serviceUsageAdmin" # Necessary to list usage of APIs
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectIamAdmin" # Necessary to enable APIs
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/artifactregistry.admin" # Necessary to create repositories
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicemanagement.admin" # Necessary to enable APIs
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.admin" # Necessary to access and write to buckets
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicenetworking.networksAdmin" # Create and manage connections
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/secretmanager.admin"             # Create and manage iam policies
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountAdmin"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/run.admin"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountUser"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountKeyAdmin"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin"
+# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin"

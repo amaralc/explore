@@ -1,5 +1,6 @@
 name: Build and Push Docker image
 
+#
 # on:
 #   create:
 #     tags:
@@ -15,7 +16,7 @@ name: Build and Push Docker image
 on:
   push:
     branches:
-      - production
+      - refactor/PEER-541-use-gcp-cloud-sql
 
 jobs:
   # check-branch:
@@ -136,15 +137,8 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
 
-      # - name: Set up Terraform
-      #   uses: hashicorp/setup-terraform@v2
-      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration.
-
-      - name: Install Terraform
-        run: |
-          sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-          gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
 
       - name: Terraform init
         run: |
@@ -163,7 +157,7 @@ jobs:
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_project_location=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_project_location=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
