@@ -55,7 +55,7 @@ module "researchers-peers" {
 # Application Shell
 module "core-platform-shell-browser" {
   source           = "../../../apps/core/platform-shell-browser/iac/production" # The path to the module
-  environment_name = local.environment_name                                     # The deployment environment (branch-name, commit-hash, etc.)
+  environment_name = local.branch_name                                          # The name of the branch
   vercel_api_token = var.vercel_api_token                                       # The Vercel API token
   depends_on       = [module.researchers-peers]
 }
@@ -63,7 +63,7 @@ module "core-platform-shell-browser" {
 # Documentation with Docusaurus
 module "dx-dev-docs-browser" {
   source           = "../../../apps/dx/dev-docs-browser/iac/production" # The path to the module
-  environment_name = local.environment_name                             # The deployment environment (branch-name, commit-hash, etc.)
+  environment_name = local.branch_name                                  # The name of the branch
   vercel_api_token = var.vercel_api_token                               # The Vercel API token
   depends_on       = [module.researchers-peers]
 }
