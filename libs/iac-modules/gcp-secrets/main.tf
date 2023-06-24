@@ -34,5 +34,5 @@ output "secret_ids" {
 
 output "secrets_versions" {
   description = "Array of created secrets versions"
-  value       = [for s in googoogle_secret_manager_secret_version.versions : { version_id = s.id }]
+  value       = [for s in google_secret_manager_secret_version.versions : { version_id = s.id }]
 }

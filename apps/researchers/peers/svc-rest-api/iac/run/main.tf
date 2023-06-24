@@ -1,12 +1,7 @@
-data "google_vpc_access_connector" "connector" {
-  provider = google-beta
-  name     = "vpcconn"
-}
-
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
 resource "google_cloud_run_service" "instance" {
   # Name of the service
-  name = "${var.docker_image_name}-${var.environment_name}-${var.commit_hash}" # Use the commit hash to force a new revision to be created
+  name = "${var.docker_image_name}-${var.environment_name}-${var.short_commit_sha}" # Use the commit hash to force a new revision to be created
 
   # The region where the service will be located
   location = var.gcp_location
@@ -89,8 +84,8 @@ resource "google_cloud_run_service" "instance" {
 
 # This block defines a Cloud Run IAM member. This sets the permissions for who can access the Cloud Run service.
 resource "google_cloud_run_service_iam_member" "public" {
-  service  = google_cloud_run_service.apps_researchers_peers_rest_api.name     # The name of the service to which the IAM policy will be applied
-  location = google_cloud_run_service.apps_researchers_peers_rest_api.location # The location of the service to which the IAM policy will be applied
-  role     = "roles/run.invoker"                                               # The role to be granted
-  member   = "allUsers"                                                        # The user, group, or service account who will have the role granted. In this case, all users.
+  service  = google_cloud_run_service.instance.name     # The name of the service to which the IAM policy will be applied
+  location = google_cloud_run_service.instance.location # The location of the service to which the IAM policy will be applied
+  role     = "roles/run.invoker"                        # The role to be granted
+  member   = "allUsers"                                 # The user, group, or service account who will have the role granted. In this case, all users.
 }

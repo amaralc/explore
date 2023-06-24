@@ -4,10 +4,10 @@ locals {
 
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
-  source               = "../gcp-vpc"
-  environment_name     = local.environment_name
-  gcp_project_id       = var.gcp_project_id
-  gcp_project_location = var.gcp_location
+  source           = "../gcp-vpc"
+  environment_name = local.environment_name
+  gcp_project_id   = var.gcp_project_id
+  gcp_location     = var.gcp_location
 }
 
 output "vpc" {
@@ -39,6 +39,7 @@ module "researchers-peers" {
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
   gcp_sql_dbms_instance_host          = module.postgresql_dbms.google_sql_database_instance.private_ip_address
   gcp_sql_dbms_instance_name          = module.postgresql_dbms.google_sql_database_instance.name
+  gcp_vpc_access_connector_name       = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
   depends_on                          = [module.postgresql_dbms]
 }
 

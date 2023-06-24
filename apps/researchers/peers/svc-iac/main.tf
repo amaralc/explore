@@ -71,7 +71,7 @@ module "rest-api" {
   environment_name                                  = var.environment_name
   gcp_service_account_email                         = module.service_account.instance.email
   gcp_docker_artifact_repository_name               = var.gcp_docker_artifact_repository_name
-  docker_image_name                                 = "${var.app_name}-${var.app_component_name}"
+  docker_image_name                                 = "${local.app_name}-${local.app_component_name}"
   gcp_vpc_access_connector_name                     = var.gcp_vpc_access_connector_name
   gcp_direct_database_connection_url_secret_id      = module.service_secrets.secret_ids[0].secret_id
   gcp_direct_database_connection_url_secret_version = module.service_secrets.secrets_versions[0].id
