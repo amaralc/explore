@@ -1,7 +1,7 @@
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
 resource "google_cloud_run_service" "instance" {
   # Name of the service
-  name = "${var.docker_image_name}-${var.environment_name}-${var.short_commit_sha}" # Use the commit hash to force a new revision to be created
+  name = substr("${var.short_commit_sha}-${var.docker_image_name}-${var.environment_name}", 0, 63) # Use the commit hash to force a new revision to be created
 
   # The region where the service will be located
   location = var.gcp_location
