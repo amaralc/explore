@@ -29,7 +29,7 @@ module "docker_images_repository" {
 # Analogy: Create all github actions for the researchers peers service
 module "researchers_peers_triggers" {
   source                              = "../../researchers/peers/svc-rest-api/iac/triggers" // path to the module
-  docker_file_path                    = "./apps/researchers/peers/svc-rest-api/dockerfile"
+  docker_file_path                    = "./apps/researchers/peers/svc-rest-api/Dockerfile"
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
   gcp_docker_artifact_repository_name = module.docker_images_repository.name

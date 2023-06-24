@@ -92,7 +92,7 @@ jobs:
   #       uses: docker/build-push-action@v4
   #       with:
   #         context: .
-  #         file: ./apps/researchers/peers/svc-rest-api/dockerfile
+  #         file: ./apps/researchers/peers/svc-rest-api/Dockerfile
   #         push: true
   #         tags: |
   #           ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}

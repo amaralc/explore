@@ -93,7 +93,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/researchers/peers/svc-rest-api/dockerfile
+          file: ./apps/researchers/peers/svc-rest-api/Dockerfile
           push: true
           no-cache: true
           tags: |
