@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.0](https://github.com/amaralc/peerlab/compare/peerlab@0.23.1...peerlab@0.24.0) (2023-06-24)
+
+### Features
+
+- **PEER-541:** add nx graph and refactor vercel providers ([0e329c6](https://github.com/amaralc/peerlab/commit/0e329c6c33a25effdff597929fa8ea0b077ebefd))
+
 ## [0.23.1](https://github.com/amaralc/peerlab/compare/peerlab@0.23.0...peerlab@0.23.1) (2023-06-24)
 
 ### Bug Fixes
