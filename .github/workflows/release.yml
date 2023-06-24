@@ -14,7 +14,7 @@ name: Automated Release
 on:
   push:
     branches:
-      - production-x
+      - production
 
 # Set environment variable to disable Husky
 env:
@@ -30,6 +30,7 @@ jobs:
         with:
           token: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
+          ref: production
 
       - name: Check commit message
         id: check_commit_message

@@ -1,4 +1,4 @@
-resource "vercel_project" "dx-dev-docs-browser" {
+resource "vercel_project" "instance" {
   name      = "dx-dev-docs-browser"
   framework = "docusaurus"
   git_repository = {
@@ -15,7 +15,7 @@ resource "vercel_project" "dx-dev-docs-browser" {
 
 # Add a production deployment
 resource "vercel_deployment" "dx-dev-docs-browser-first-production-deployment" {
-  project_id        = vercel_project.dx-dev-docs-browser.id
+  project_id        = vercel_project.instance.id
   production        = true
   delete_on_destroy = true
   ref               = var.environment_name

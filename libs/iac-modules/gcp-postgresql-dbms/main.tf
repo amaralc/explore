@@ -1,11 +1,6 @@
-resource "random_id" "db_name_suffix" {
-  byte_length = 4
-}
-
-
 # Create a PostgreSQL database management system (DBMS) instance (environment)
 resource "google_sql_database_instance" "environment" {
-  name                = substr("${var.gcp_project_id}-${var.environment_name}-${random_id.db_name_suffix.hex}", 0, 63)
+  name                = substr("${var.gcp_project_id}-${var.environment_name}", 0, 63)
   database_version    = "POSTGRES_14"
   region              = var.gcp_location
   project             = var.gcp_project_id
