@@ -1,5 +1,5 @@
 locals {
-  branch_name = "feature/PEER-541-preview-environments-with-gcp"
+  branch_name = "production"
 }
 
 # Parse branch name to environment name

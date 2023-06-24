@@ -15,7 +15,7 @@ name: Build and Push Docker image
 on:
   push:
     branches:
-      - feature/PEER-541-preview-environments-with-gcp
+      - production
 
 jobs:
   # check-branch:
