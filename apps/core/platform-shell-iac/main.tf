@@ -8,6 +8,8 @@ module "gcp_apis" {
     "sqladmin.googleapis.com",
     "iam.googleapis.com",
     "secretmanager.googleapis.com",
+    "vpcaccess.googleapis.com",
+    "run.googleapis.com"
   ]
 }
 
