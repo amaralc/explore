@@ -19,8 +19,9 @@ output "user" {
 
 # Database
 resource "google_sql_database" "database" {
-  name     = var.service_name
-  instance = var.gcp_sql_dbms_instance_name
+  name       = var.service_name
+  instance   = var.gcp_sql_dbms_instance_name
+  depends_on = [google_sql_user.user]
 }
 
 output "database" {
