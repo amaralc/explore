@@ -1,6 +1,14 @@
 locals {
-  branch_name      = "feature/PEER-541-preview-environments-with-gcp"
-  environment_name = regex_replace(local.branch_name, "[^a-zA-Z0-9]", "-")
+  branch_name = "feature/PEER-541-preview-environments-with-gcp"
+}
+
+# Parse branch name to environment name
+data "external" "bash" {
+  program = ["bash", "-c", "branch_name='${local.branch_name}'; environment_name=$(echo \"$branch_name\" | sed 's/[^a-zA-Z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
+}
+
+locals {
+  environment_name = data.external.bash.result["environment_name"]
 }
 
 # Create the main Virtual Private Cloud (VPC)
