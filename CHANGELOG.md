@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.1](https://github.com/amaralc/peerlab/compare/peerlab@0.23.0...peerlab@0.23.1) (2023-06-24)
+
+### Bug Fixes
+
+- **PEER-541:** database depend on user ([3d8da11](https://github.com/amaralc/peerlab/commit/3d8da110364571a9c74760abea975e4ba94579b6))
+
 ## [0.23.0](https://github.com/amaralc/peerlab/compare/peerlab@0.22.0...peerlab@0.23.0) (2023-06-24)
 
 ### Features
