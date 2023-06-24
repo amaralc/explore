@@ -5,7 +5,7 @@ FROM node:16.20-slim as base
 # To convert your local private key from OPENSSH to PEM format, use the following command: ssh-keygen -p -N "" -m pem -f /path/to/key
 # Example usage:
 # ssh-keygen -p -N "" -m pem -f /path/to/key
-# sudo docker build -t predict-instrumented-spots:latest --build-arg SSH__PEM_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
+# sudo docker build -t my-app:latest --build-arg SSH__PEM_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
 # ARG SSH_PRIVATE_KEY
 
 # # Install ssh tools and git

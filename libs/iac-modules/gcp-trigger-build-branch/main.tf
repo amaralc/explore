@@ -59,7 +59,7 @@ resource "google_cloudbuild_trigger" "build" {
         local.environment_image_url,        # Tag the image with the latest tag for a given environment
         "-t",                               # Tag the image with a name and optionally a tag in the 'name:tag' format
         local.commit_image_url,             # Tag the image with the commit SHA
-        "-f",                               # Name of the Dockerfile (Default is 'PATH/Dockerfile')
+        "-f",                               # Name of the Dockerfile (Default is 'PATH/dockerfile')
         var.docker_file_path,               # Path to the Dockerfile
         ".",                                # The build context is the current directory
       ]
