@@ -1,10 +1,42 @@
 # Run this script: bash apps/core/platform-shell-iac/project-setup.sh
 
-# Define project name
-GCP_PROJECT_ID="core-platform-shell-iac"
 
-# Define billing account id
-GCP_BILLING_ACCOUNT_ID="01BF0C-B0879C-D976FE"
+# This script accepts named arguments and push an image to container registry
+
+# Expected named arguments:
+# --gcp-project-id
+# --gcp-billing-account-id
+
+# Call this script with the following command: bash apps/core/platform-shell-iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID
+# Obs.: this script assumes that you are already authenticated with gcloud CLI.
+
+for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
+do                                  # This is the start of the loop block.
+case $i in                          # This starts a case statement, which checks the current argument ($i) against several patterns.
+    --gcp-project-id=*)             # This starts a new case statement pattern.
+    GCP_PROJECT_ID="${i#*=}"        # Assign the value after the equal sign, to a variable. This pattern matches any argument that starts with "--gcp-project-id=". The ${i#*=} syntax removes the prefix "--gcp-project-id=" from the argument.
+    shift                           # This removes the current argument from the list of arguments. This is necessary because the argument is no longer needed.
+    ;;                              # This ends the case statement pattern.
+    --gcp-billing-account-id=*)
+    GCP_BILLING_ACCOUNT_ID="${i#*=}"
+    shift
+    ;;
+esac                                # This ends the case statement.
+done                                # This ends the loop block.
+
+# Check if GCP_PROJECT_ID is set
+if [ -z "$GCP_PROJECT_ID" ]
+then
+    echo "Error: --gcp-project-id flag is required"
+    exit 1
+fi
+
+# Check if GCP_BILLING_ACCOUNT_ID is set
+if [ -z "$GCP_BILLING_ACCOUNT_ID" ]
+then
+    echo "Error: --gcp-billing-account-id flag is required"
+    exit 1
+fi
 
 # Define location
 GCP_PROJECT_LOCATION="europe-west3"
@@ -29,8 +61,8 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # # Create project
 # gcloud projects create $GCP_PROJECT_ID
 
-# Set project as default
-gcloud config set project $GCP_PROJECT_ID
+# # Set project as default
+# gcloud config set project $GCP_PROJECT_ID
 
 # # Enable billing
 # gcloud beta billing projects link $GCP_PROJECT_ID --billing-account=$GCP_BILLING_ACCOUNT_ID
