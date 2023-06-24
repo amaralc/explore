@@ -8,7 +8,7 @@ data "external" "bash" {
 }
 
 locals {
-  environment_name = data.external.bash.result["environment_name"]
+  sanitized_environment_name = data.external.bash.result["environment_name"]
 }
 
 # Create the main Virtual Private Cloud (VPC)

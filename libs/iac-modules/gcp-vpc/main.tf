@@ -3,7 +3,7 @@
 
 # Virtual Private Cloud (VPC) network module
 resource "google_compute_network" "private_network" {
-  name                    = "${var.gcp_project_id}-${var.environment_name}"
+  name                    = substr("${var.gcp_project_id}-${var.environment_name}", 0, 63) # Character limit for VPC network names is 63
   project                 = var.gcp_project_id
   auto_create_subnetworks = false
 }
