@@ -7,8 +7,8 @@ resource "vercel_project" "instance" {
     production_branch = var.environment_name
   }
 
-  build_command    = "npx nx build core-root-shell-graph" # Check the project.json file to check the name of the app
-  output_directory = "dist/apps/core/root-shell-graph"    # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
+  build_command    = "npx nx build-graph core-root-shell-graph" # Check the project.json file to check the name of the app
+  output_directory = "dist/apps/core/root-shell-graph"          # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
   dev_command      = "npx nx serve core-root-shell-graph"
   ignore_command   = "if [ $VERCEL_ENV == '${var.environment_name}' ]; then exit 1; else exit 0; fi"
 }
