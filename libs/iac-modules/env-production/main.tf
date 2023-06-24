@@ -1,6 +1,6 @@
 locals {
   branch_name      = "feature/PEER-541-preview-environments-with-gcp"
-  environment_name = regex_replace(local.environment_name, "[^a-zA-Z0-9]", "-")
+  environment_name = regex_replace(local.branch_name, "[^a-zA-Z0-9]", "-")
 }
 
 # Create the main Virtual Private Cloud (VPC)
