@@ -46,7 +46,9 @@ jobs:
         run: |
           echo $GITHUB_REF
           echo $GITHUB_HEAD_REF
-          echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          parsed_branch_name=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g') # Replace special characters with dashes
+          echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
 
       - name: Check if app was affected
         run: |
