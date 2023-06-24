@@ -6,7 +6,7 @@
   "implicitDependencies": ["peerlab"],
   "targets": {
     "build-graph": {
-      "command": "npx nx graph --file=dist/apps/root-shell-graph/index.html"
+      "command": "npx nx graph --file=dist/apps/core/root-shell-graph/index.html"
     }
   },
   "tags": []
