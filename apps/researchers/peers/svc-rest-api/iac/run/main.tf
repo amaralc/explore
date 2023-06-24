@@ -4,12 +4,12 @@ data "google_vpc_access_connector" "connector" {
 }
 
 # This resource block defines a Google Cloud Run service. This service will host the Docker image created by the Google Cloud Build trigger.
-resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
+resource "google_cloud_run_service" "instance" {
   # Name of the service
-  name = "${var.app_name}-${var.app_component_name}-${var.environment_name}-${var.commit_hash}" # Use the commit hash to force a new revision to be created
+  name = "${var.docker_image_name}-${var.environment_name}-${var.commit_hash}" # Use the commit hash to force a new revision to be created
 
   # The region where the service will be located
-  location = var.region
+  location = var.gcp_location
 
   # Depends on secret versions
   depends_on = [var.gcp_pooled_database_connection_url_secret_version, var.gcp_direct_database_connection_url_secret_version, var.gcp_vpc_access_connector_name]
@@ -24,12 +24,12 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
       # The Docker image to use for the service
       containers {
         # The docker image is pulled from GCR using the project ID, app name and the image tag which corresponds to the commit hash
-        image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.gcp_docker_artifact_repository_name}/${var.app_name}-${var.app_component_name}:${var.environment_name}" # Use the environment to tag the image (staging, production, etc)
+        image = "${var.gcp_location}-docker.pkg.dev/${var.gcp_project_id}/${var.gcp_docker_artifact_repository_name}/${var.docker_image_name}:${var.environment_name}" # Use the environment to tag the image (staging, production, etc)
 
         # Set the ENTRYPOINT_PATH environment variable (check the Dockerfile for more details)
         env {
           name  = "ENTRYPOINT_PATH"
-          value = "entrypoints/run-${var.app_name}-${var.app_component_name}.sh"
+          value = "apps/researchers/peers/svc-rest-api/entrypoint.sh"
         }
 
         # Set the POSTGRES_POOLED_CONNECTION_DATABASE_URL environment variable from the database URL secret
@@ -71,7 +71,6 @@ resource "google_cloud_run_service" "apps_researchers_peers_rest_api" {
         # "run.googleapis.com/cloudsql-instances" = var.gcp_sql_database_instance_connection_name
       }
       # annotations = {
-
       #   "run.googleapis.com/cloudsql-instances" = var.gcp_sql_database_instance_connection_name # Set the Cloud SQL instance to be used by the service
       # }
     }

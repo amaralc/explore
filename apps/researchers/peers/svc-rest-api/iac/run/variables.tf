@@ -1,10 +1,5 @@
-variable "app_name" {
-  description = "The name of the application"
-  type        = string
-}
-
-variable "app_component_name" {
-  description = "The name of the application component"
+variable "docker_image_name" {
+  description = "The name of the Docker image"
   type        = string
 }
 
@@ -13,12 +8,12 @@ variable "environment_name" {
   type        = string
 }
 
-variable "project_id" {
+variable "gcp_project_id" {
   description = "The Google Cloud project ID"
   type        = string
 }
 
-variable "region" {
+variable "gcp_location" {
   description = "The region where resources will be created"
   type        = string
 }
@@ -28,15 +23,9 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
 }
 
-variable "commit_hash" {
+variable "short_commit_sha" {
   description = "The commit hash of the source code to deploy"
   type        = string
-}
-
-variable "credentials_path" {
-  description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
-  type        = string
-  default     = "credentials.json"
 }
 
 variable "gcp_service_account_email" {
@@ -65,29 +54,19 @@ variable "gcp_pooled_database_connection_url_secret_version" {
   type        = string
 }
 
-variable "gcp_sql_database_instance_connection_name" {
-  description = "The name of the Cloud SQL connection"
-  type        = string
-  sensitive   = true
-}
+# variable "gcp_sql_database_instance_connection_name" {
+#   description = "The name of the Cloud SQL connection"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "gcp_sql_database_instance_name" {
-  description = "The name of the Cloud SQL instance"
-  type        = string
-  sensitive   = true
-}
+# variable "gcp_sql_database_instance_name" {
+#   description = "The name of the Cloud SQL instance"
+#   type        = string
+#   sensitive   = true
+# }
 
 variable "gcp_vpc_access_connector_name" {
   description = "The name of the VPC access connector"
-  type        = string
-}
-
-variable "database_direct_url" {
-  description = "The direct database connection URL"
-  type        = string
-}
-
-variable "database_pooler_url" {
-  description = "The pooled database connection URL"
   type        = string
 }

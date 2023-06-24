@@ -29,5 +29,10 @@ resource "google_secret_manager_secret_version" "versions" {
 # Output the created secrets ids
 output "secret_ids" {
   description = "Array of created secret ids"
-  value       = [for s in google_secret_manager_secret.secrets : { name = s.secret_id, id = s.id }]
+  value       = [for s in google_secret_manager_secret.secrets : { secret_id = s.secret_id }]
+}
+
+output "secrets_versions" {
+  description = "Array of created secrets versions"
+  value       = [for s in googoogle_secret_manager_secret_version.versions : { version_id = s.id }]
 }

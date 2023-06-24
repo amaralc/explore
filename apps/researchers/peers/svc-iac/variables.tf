@@ -61,3 +61,8 @@ variable "gcp_sql_dbms_instance_host" {
 #   description = "The name of the VPC access connector"
 #   type        = string
 # }
+
+variable "gcp_vpc_access_connector_name" {
+  description = "The name of the VPC access connector"
+  type        = string
+}
