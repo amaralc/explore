@@ -3,18 +3,27 @@ locals {
   app_component_name = "svc-rest-api"
 }
 
-# Create database and user for the application
-module "database_access" {
-  source                     = "../../../../libs/iac-modules/gcp-sql-user-and-database"
-  service_name               = local.app_name
+# Create database for the service
+module "database" {
+  source                     = "../../../../libs/iac-modules/gcp-postgresql-dbms-database"
+  count                      = var.source_environment_branch_name == null ? 1 : 0 # Create database only if it is not a preview environment. For preview environments, the existing databases were already cloned from source environment
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
+  database_name              = local.app_name
+}
+
+# Create DBMS user for the service
+module "user" {
+  source                     = "../../../../libs/iac-modules/gcp-postgresql-dbms-user"
+  environment_name           = var.environment_name # Since users are duplicated from source environment, we added the environment as part of the username
+  gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
+  service_name               = local.app_name
 }
 
 # Create local variables to simplify the creation of the database connection URL secrets
 locals {
-  username      = module.database_access.user.name
-  password      = module.database_access.user.password
-  database_name = module.database_access.database.name
+  username      = module.user.username
+  password      = module.user.password
+  database_name = local.app_name
   host          = var.gcp_sql_dbms_instance_host
   port          = "5432"
 
@@ -77,7 +86,7 @@ module "rest-api" {
   gcp_direct_database_connection_url_secret_version = module.service_secrets.secrets_versions[0].version_id
   gcp_pooled_database_connection_url_secret_id      = module.service_secrets.secret_ids[1].secret_id
   gcp_pooled_database_connection_url_secret_version = module.service_secrets.secrets_versions[1].version_id
-  depends_on                                        = [module.service_account, module.service_account_permissions, module.database_access, module.service_secrets]
+  depends_on                                        = [module.service_account, module.service_account_permissions, module.database, module.user, module.service_secrets]
 }
 
 # # Researchers Peers Service REST API instance
