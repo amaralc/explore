@@ -3,7 +3,7 @@
 
 # Virtual Private Cloud (VPC) network module
 resource "google_compute_network" "private_network" {
-  name                    = substr("${var.gcp_project_id}-${var.environment_name}", 0, 63) # Character limit for VPC network names is 63
+  name                    = substr(var.environment_name, 0, 63) # Character limit for VPC network names is 63
   project                 = var.gcp_project_id
   auto_create_subnetworks = false
 }
@@ -11,10 +11,10 @@ resource "google_compute_network" "private_network" {
 # VPC access connector (https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/vpc_access_connector)
 # TODO: verify if this resource has a 1:1 mapping with the VPC access connector or with the VPC network peering or with the cloud run service
 resource "google_vpc_access_connector" "instance" {
-  name           = "vpc-access-connection"
-  ip_cidr_range  = "10.8.0.0/28" # TODO: verify if this is the correct CIDR range
-  region         = var.gcp_location
+  name           = substr(var.environment_name, 0, 25) # Connector ID must follow the pattern ^[a-z][-a-z0-9]{0,23}[a-z0-9]$. Maximum 25 characters.
+  ip_cidr_range  = "10.8.0.0/28"                       # TODO: verify if this is the correct CIDR range
   max_throughput = 300
+  region         = var.gcp_location
   network        = google_compute_network.private_network.name
 }
 
@@ -24,7 +24,7 @@ output "gcp_vpc_access_connector_name" {
 
 # Private IP address
 resource "google_compute_global_address" "private_ip_address" {
-  name          = "private-ip-address"
+  name          = substr(var.environment_name, 0, 63)
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
@@ -40,14 +40,14 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 
 # Cloud Router
 resource "google_compute_router" "router" {
-  name    = "router"
+  name    = substr(var.environment_name, 0, 63)
   region  = var.gcp_location
   network = google_compute_network.private_network.name
 }
 
 # NAT configuration
 resource "google_compute_router_nat" "router_nat" {
-  name                               = "nat"
+  name                               = substr("${var.gcp_project_id}-${var.environment_name}", 0, 63)
   region                             = var.gcp_location
   router                             = google_compute_router.router.name
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"

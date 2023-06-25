@@ -16,12 +16,24 @@ module "gcp_apis" {
 # Create production environment
 module "production" {
   source                              = "../../../libs/iac-modules/env-production"
+  branch_name                         = "production"
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
-  vercel_api_token                    = var.vercel_api_token
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
   depends_on                          = [module.gcp_apis]
+}
+
+module "staging" {
+  source                              = "../../../libs/iac-modules/env-preview"
+  branch_name                         = "staging"
+  source_environment_branch_name      = module.production.branch_name
+  source_environment_dbms_instance_id = module.production.postgresql_dbms.google_sql_database_instance.id
+  short_commit_sha                    = var.short_commit_sha
+  gcp_project_id                      = var.gcp_project_id
+  gcp_location                        = var.gcp_location
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  depends_on                          = [module.gcp_apis, module.production]
 }
 
 # module "production" {

@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-env-preview",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-shell-iac/modules/env-preview",
+  "projectType": "application",
+  "implicitDependencies": ["iac-modules-gcp-apis", "iac-modules-env-production", "iac-modules-gcp-vpc"],
+  "targets": {},
+  "tags": []
+}

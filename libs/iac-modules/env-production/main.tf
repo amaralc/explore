@@ -1,3 +1,7 @@
+output "branch_name" {
+  value = var.branch_name
+}
+
 # Parse branch name to environment name
 data "external" "bash" {
   program = ["bash", "-c", "branch_name='${var.branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
