@@ -1,7 +1,7 @@
 {
   "name": "iac-modules-neon-postgresql-dbms",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/platform-shell-iac/modules/neon-postgresql-dbms",
+  "sourceRoot": "libs/iac-modules/neon-postgresql-dbms",
   "projectType": "library",
   "implicitDependencies": [],
   "targets": {},

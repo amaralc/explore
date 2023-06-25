@@ -5,6 +5,10 @@ authors: [amaralc]
 tags: [gcp, terraform, github-actions, preview]
 ---
 
+## GCP Cloud Run Previews
+
+- https://cloud.google.com/run/docs/tutorials/configure-deployment-previews
+
 ## GCP Resources
 
 1. **google_compute_network**: A Virtual Private Cloud (VPC) network, which is a virtual version of a traditional physical network. This is the first resource you need to create because all other resources will be connected to or associated with this network.
@@ -17,6 +21,19 @@ tags: [gcp, terraform, github-actions, preview]
 8. **google_cloud_run_service**: Your NestJS service deployed on Google Cloud Run. It should be created after the VPC network, VPC access connector, and Cloud SQL database instance.
 
 source: chat gpt
+
+## GCP Database Preview Environments with Clones
+
+:::warning
+
+In GCP, when you clone a database instance, you bring the data, the users, and the permissions from the source to the newly created instance. In this
+case, if you try to replicate the environment by creating a database and user with the same name, you will get an error because they already exist.
+
+We needed to take that into consideration (after making that mistake).
+
+https://cloud.google.com/sql/docs/postgres/clone-instance
+
+:::
 
 ## References
 

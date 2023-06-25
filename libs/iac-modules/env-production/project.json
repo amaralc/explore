@@ -1,8 +1,8 @@
 {
   "name": "iac-modules-env-production",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/platform-shell-iac/modules/env-production",
-  "projectType": "application",
+  "sourceRoot": "libs/iac-modules/env-production",
+  "projectType": "library",
   "implicitDependencies": [
     "iac-modules-gcp-vpc",
     "iac-modules-gcp-postgresql-dbms",

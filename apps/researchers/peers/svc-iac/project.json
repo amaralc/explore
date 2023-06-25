@@ -6,9 +6,9 @@
   "implicitDependencies": [
     "researchers-peers-svc-rest-api",
     "researchers-peers-svc-consumer",
-    "modules-gcp-sql-user-and-database",
-    "modules-gcp-service-account",
-    "modules-gcp-service-account-permissions"
+    "iac-modules-gcp-sql-user-and-database",
+    "iac-modules-gcp-service-account",
+    "iac-modules-gcp-service-account-permissions"
   ],
   "targets": {},
   "tags": []
