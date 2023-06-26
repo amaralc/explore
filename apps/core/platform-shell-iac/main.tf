@@ -28,23 +28,9 @@ module "production" {
 }
 
 # Staging Environment
-
-# Parse branch name to environment name
-locals {
-  staging_branch_name = "staging"
-}
-data "external" "staging_branch_name" {
-  program = ["bash", "-c", "branch_name='${local.staging_branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
-}
-
-locals {
-  environment_name = data.external.staging_branch_name.result["environment_name"]
-  # environment_name = var.environment_name
-}
 module "staging" {
-  source                              = "../../../libs/iac-modules/environment"
+  source                              = "../../../libs/iac-modules/environment-wrapper"
   branch_name                         = "staging"
-  environment_name                    = local.staging_branch_name # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
   source_environment_branch_name      = module.production.branch_name
   source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
   short_commit_sha                    = var.short_commit_sha
