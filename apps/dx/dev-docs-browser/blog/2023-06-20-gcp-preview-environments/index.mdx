@@ -42,6 +42,156 @@ https://cloud.google.com/sql/docs/postgres/clone-instance
 
 :::
 
+## Terraform modules and dynamic inputs
+
+In commit "456e8bfdaf240e59af4ca8cb3c66488a1747877d", every code deploy resulted in the preview environment being fully recreated. This was not ideal
+since was taking a lot of time for no apparent reason.
+
+```tf
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+ <= read (data resources)
+Terraform will perform the following actions:
+  # module.staging.data.external.bash will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "external" "bash" {
+      + id      = (known after apply)
+      + program = [
+          + "bash",
+          + "-c",
+          + "branch_name='staging'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\"",
+        ]
+      + result  = (known after apply)
+    }
+  # module.staging.module.postgresql_dbms.google_sql_database_instance.preview_environment[0] must be replaced
+-/+ resource "google_sql_database_instance" "preview_environment" {
+      ~ available_maintenance_versions = [] -> (known after apply)
+      ~ connection_name                = "core-platform-shell-iac:europe-west3:core-platform-shell-iac-staging" -> (known after apply)
+      + encryption_key_name            = (known after apply)
+      ~ first_ip_address               = "<internal-ip-address-here>" -> (known after apply)
+      ~ id                             = "core-platform-shell-iac-staging" -> (known after apply)
+      ~ instance_type                  = "CLOUD_SQL_INSTANCE" -> (known after apply)
+      ~ ip_address                     = [
+          - {
+              - ip_address     = "<internal-ip-address-here>"
+              - time_to_retire = ""
+              - type           = "PRIVATE"
+            },
+        ] -> (known after apply)
+      ~ maintenance_version            = "POSTGRES_14_7.R20230530.01_04" -> (known after apply)
+      + master_instance_name           = (known after apply)
+      # Warning: this attribute value will no longer be marked as sensitive
+      # after applying this change.
+      ~ name                           = (sensitive value) # forces replacement
+      ~ private_ip_address             = "<internal-ip-address-here>" -> (known after apply)
+      + public_ip_address              = (known after apply)
+```
+
+The terraform logs suggests that it had something to do with "module.staging.data.external.bash" changing based on an input, but we were not sure what it is.
+The first hypothesis that emerges is that the "branch_name" variable was changing, but we were not sure why. In order to evaluate that hypothesis
+we set the "environment_name" straight as a hardcoded input, leaving notes for future reference.
+
+The "environment" module was changed from this:
+
+```t
+output "branch_name" {
+  value = var.branch_name
+}
+
+# Parse branch name to environment name
+data "external" "bash" {
+  program = ["bash", "-c", "branch_name='${var.branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
+}
+
+locals {
+  environment_name = data.external.bash.result["environment_name"]
+}
+```
+
+to this:
+
+```t
+output "branch_name" {
+  value = var.branch_name
+}
+
+# Parse branch name to environment name
+data "external" "bash" {
+  program = ["bash", "-c", "branch_name='${var.branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
+}
+
+locals {
+  # environment_name = data.external.bash.result["environment_name"]
+  environment_name = var.environment_name
+}
+```
+
+And the "staging" module now was called with the "environment_name" as a hardcoded value.
+
+```t
+# Staging Environment
+module "staging" {
+  source                              = "../../../libs/iac-modules/environment"
+  branch_name                         = "staging"
+  environment_name                    = "staging" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
+  source_environment_branch_name      = module.production.branch_name
+  source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
+  short_commit_sha                    = var.short_commit_sha
+  gcp_project_id                      = var.gcp_project_id
+  gcp_location                        = var.gcp_location
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  depends_on                          = [module.gcp_apis, module.production]
+}
+```
+
+After making this change, we tested the hypothesis by running a new terraform apply, expecting that the "module.staging.data.external.bash"
+would still change, but the "module.staging.module.postgresql_dbms.google_sql_database_instance.preview_environment[0]" would not.
+And that is exactly what happened.
+
+While the result was what we expected, we still had to figure out how to pass the "environment_name" variable to the "environment"
+module dynamically. Since we are still learning Terraform and do not quite understand its internals, the theory we came up with was
+that the Terraform module assumes that a value cannot be predicted before a bash transformation within the module, and it assumes
+that the value will change even if it is not the case. The hypothesis we decided to test now is that if the calculated value was passed
+to the module after the transformation, than the module would not make that false guess since it would be receiving a known value.
+
+The resulting "environment" module call was changed to:
+
+```t
+# Staging Environment
+
+# Parse branch name to environment name
+locals {
+  staging_branch_name = "staging"
+}
+data "external" "staging_branch_name" {
+  program = ["bash", "-c", "branch_name='${local.staging_branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
+}
+
+locals {
+  environment_name = data.external.staging_branch_name.result["environment_name"]
+}
+
+module "staging" {
+  source                              = "../../../libs/iac-modules/environment"
+  branch_name                         = "staging"
+  environment_name                    = local.staging_branch_name # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
+  source_environment_branch_name      = module.production.branch_name
+  source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
+  short_commit_sha                    = var.short_commit_sha
+  gcp_project_id                      = var.gcp_project_id
+  gcp_location                        = var.gcp_location
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  depends_on                          = [module.gcp_apis, module.production]
+}
+```
+
+And the terraform logs now show that changes in "environment_name" outside of the module are not affecting the module anymore. Now Instead of
+25 resources being destroyed and recreated, only the expected 4 resources are being recreated.
+
+Now we only needed to abstract that into it's own module in order to enhance the legibility of the main terraform file (the one that calls
+the environment modules).
+
 ## References
 
 https://github.com/GoogleCloudPlatform/solutions-terraform-cloudbuild-gitops

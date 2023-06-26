@@ -17,7 +17,7 @@ module "gcp_apis" {
 
 # Production Environment
 module "production" {
-  source                              = "../../../libs/iac-modules/environment"
+  source                              = "../../../libs/iac-modules/environment-wrapper"
   branch_name                         = "production"
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
@@ -28,14 +28,14 @@ module "production" {
 
 # Staging Environment
 module "staging" {
-  source                              = "../../../libs/iac-modules/environment"
+  source                              = "../../../libs/iac-modules/environment-wrapper"
   branch_name                         = "staging"
+  source_environment_branch_name      = module.production.branch_name
+  source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-  source_environment_branch_name      = module.production.branch_name
-  source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
   depends_on                          = [module.gcp_apis, module.production]
 }
 

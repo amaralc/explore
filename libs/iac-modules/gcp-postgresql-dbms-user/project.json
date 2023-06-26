@@ -3,7 +3,7 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/iac-modules/gcp-postgresql-dbms-user",
   "projectType": "library",
-  "implicitDependencies": ["iac-modules-gcp-vpc", "iac-modules-gcp-postgresql-dbms"],
+  "implicitDependencies": ["iac-modules-gcp-vpc", "iac-modules-gcp-postgresql-dbms-environment"],
   "targets": {},
   "tags": []
 }
