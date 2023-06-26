@@ -22,3 +22,7 @@ module "environment" {
   gcp_location                        = var.gcp_location
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
 }
+
+output "postgresql_dbms_instance_id" {
+  value = module.environment.postgresql_dbms_instance_id
+}
