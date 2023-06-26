@@ -69,23 +69,23 @@ module "service_account_permissions" {
   ]
 }
 
-# # # Researchers Peers Service REST API instance
-# module "rest-api" {
-#   source                                            = "../svc-rest-api/iac/run" # The path to the module
-#   docker_image_name                                 = "${local.service_name}-svc-rest-api"
-#   gcp_location                                      = var.gcp_location
-#   gcp_project_id                                    = var.gcp_project_id
-#   short_commit_sha                                  = var.short_commit_sha
-#   environment_name                                  = var.environment_name
-#   gcp_service_account_email                         = module.service_account.instance.email
-#   gcp_docker_artifact_repository_name               = var.gcp_docker_artifact_repository_name
-#   gcp_vpc_access_connector_name                     = var.gcp_vpc_access_connector_name
-#   gcp_direct_database_connection_url_secret_id      = module.service_secrets.secret_ids[0].secret_id
-#   gcp_direct_database_connection_url_secret_version = module.service_secrets.secrets_versions[0].version_id
-#   gcp_pooled_database_connection_url_secret_id      = module.service_secrets.secret_ids[1].secret_id
-#   gcp_pooled_database_connection_url_secret_version = module.service_secrets.secrets_versions[1].version_id
-#   depends_on                                        = [module.service_account, module.service_account_permissions, module.database, module.user, module.service_secrets]
-# }
+# # Researchers Peers Service REST API instance
+module "rest-api" {
+  source                                            = "../svc-rest-api/iac/run" # The path to the module
+  docker_image_name                                 = "${local.service_name}-svc-rest-api"
+  gcp_location                                      = var.gcp_location
+  gcp_project_id                                    = var.gcp_project_id
+  short_commit_sha                                  = var.short_commit_sha
+  environment_name                                  = var.environment_name
+  gcp_service_account_email                         = module.service_account.instance.email
+  gcp_docker_artifact_repository_name               = var.gcp_docker_artifact_repository_name
+  gcp_vpc_access_connector_name                     = var.gcp_vpc_access_connector_name
+  gcp_direct_database_connection_url_secret_id      = module.service_secrets.secret_ids[0].secret_id
+  gcp_direct_database_connection_url_secret_version = module.service_secrets.secrets_versions[0].version_id
+  gcp_pooled_database_connection_url_secret_id      = module.service_secrets.secret_ids[1].secret_id
+  gcp_pooled_database_connection_url_secret_version = module.service_secrets.secrets_versions[1].version_id
+  depends_on                                        = [module.service_account, module.service_account_permissions, module.database, module.user, module.service_secrets]
+}
 
 # # Researchers Peers Service REST API instance
 # module "researchers-peers-svc-rest-api" {
