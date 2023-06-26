@@ -2,20 +2,10 @@ output "branch_name" {
   value = var.branch_name
 }
 
-# Parse branch name to environment name
-data "external" "bash" {
-  program = ["bash", "-c", "branch_name='${var.branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
-}
-
-locals {
-  # environment_name = data.external.bash.result["environment_name"]
-  environment_name = var.environment_name
-}
-
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
   source           = "../gcp-vpc"
-  environment_name = local.environment_name
+  environment_name = var.environment_name
   gcp_project_id   = var.gcp_project_id
   gcp_location     = var.gcp_location
 }
@@ -27,7 +17,7 @@ output "vpc" {
 # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 module "postgresql_dbms" {
   source                          = "../gcp-postgresql-dbms-environment"
-  environment_name                = local.environment_name
+  environment_name                = var.environment_name
   gcp_project_id                  = var.gcp_project_id
   gcp_location                    = var.gcp_location
   gcp_network_id                  = module.vpc.private_network.id
@@ -45,7 +35,7 @@ output "postgresql_dbms_instance_id" {
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
-  environment_name                    = local.environment_name
+  environment_name                    = var.environment_name
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
