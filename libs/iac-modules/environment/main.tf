@@ -32,6 +32,7 @@ module "postgresql_dbms" {
   gcp_network_id                  = module.vpc.private_network.id
   gcp_private_vpc_connection_id   = module.vpc.private_vpc_connection.id
   gcp_sql_dbms_source_instance_id = var.source_environment_dbms_instance_id
+  source_environment_branch_name  = var.source_environment_branch_name
   depends_on                      = [module.vpc]
 }
 

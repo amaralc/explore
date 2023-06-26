@@ -1,10 +1,5 @@
-variable "service_name" {
-  description = "The name of the service"
-  type        = string
-}
-
-variable "environment_name" {
-  description = "The deployment environment (branch-name, commit-hash, etc.)"
+variable "username" {
+  description = "The database username for the service"
   type        = string
 }
 
