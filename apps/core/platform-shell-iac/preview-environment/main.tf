@@ -17,7 +17,7 @@ module "researchers-peers-svc" {
   neon_branch_id                      = module.postgresql-dbms-environment.branch_id
   project_id                          = var.project_id
   neon_api_key                        = var.neon_api_key
-  credentials_path                    = var.credentials_path
+  credentials_path                    = var.gcp_credentials_file_path
 }
 
 # # Application Shell

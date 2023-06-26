@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-gcp-service-account-permissions",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iac-modules/gcp-service-account-permissions",
+  "projectType": "library",
+  "implicitDependencies": ["iac-modules-gcp-service-account"],
+  "targets": {},
+  "tags": []
+}

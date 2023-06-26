@@ -3,6 +3,109 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.3](https://github.com/amaralc/peerlab/compare/peerlab@0.24.2...peerlab@0.24.3) (2023-06-24)
+
+**Note:** Version bump only for package peerlab
+
+## [0.24.2](https://github.com/amaralc/peerlab/compare/peerlab@0.24.1...peerlab@0.24.2) (2023-06-24)
+
+**Note:** Version bump only for package peerlab
+
+## [0.24.1](https://github.com/amaralc/peerlab/compare/peerlab@0.24.0...peerlab@0.24.1) (2023-06-24)
+
+**Note:** Version bump only for package peerlab
+
+## [0.24.0](https://github.com/amaralc/peerlab/compare/peerlab@0.23.1...peerlab@0.24.0) (2023-06-24)
+
+### Features
+
+- **PEER-541:** add nx graph and refactor vercel providers ([0e329c6](https://github.com/amaralc/peerlab/commit/0e329c6c33a25effdff597929fa8ea0b077ebefd))
+
+## [0.23.1](https://github.com/amaralc/peerlab/compare/peerlab@0.23.0...peerlab@0.23.1) (2023-06-24)
+
+### Bug Fixes
+
+- **PEER-541:** database depend on user ([3d8da11](https://github.com/amaralc/peerlab/commit/3d8da110364571a9c74760abea975e4ba94579b6))
+
+## [0.23.0](https://github.com/amaralc/peerlab/compare/peerlab@0.22.0...peerlab@0.23.0) (2023-06-24)
+
+### Features
+
+- **PEER-541:** add artifact registry repository ([6b6c70a](https://github.com/amaralc/peerlab/commit/6b6c70a3f70660728b7796678c9e466ae9faf54d))
+- **PEER-541:** add cloud run instance to service ([0e55c63](https://github.com/amaralc/peerlab/commit/0e55c631ce8cf2b3c007170f48cf49ec0371e474))
+- **PEER-541:** add cloud sql instance ([83b488c](https://github.com/amaralc/peerlab/commit/83b488c0bf5a6ecc033e3efbb27d33af90665c33))
+- **PEER-541:** add gcloud iam policy binding ([a809123](https://github.com/amaralc/peerlab/commit/a8091237190b2db081b4bca3e9f04b3a2bac6a3b))
+- **PEER-541:** add gcp-project module ([9d25ea4](https://github.com/amaralc/peerlab/commit/9d25ea41881599c7b20e2ea169b26e7658aa506a))
+- **PEER-541:** add gcp-vpc module ([ca6cdbd](https://github.com/amaralc/peerlab/commit/ca6cdbdbe8a16e88a769b3de1cefc7220d062d62))
+- **PEER-541:** add graph project ([44bbd04](https://github.com/amaralc/peerlab/commit/44bbd04abab545234dffe8a24385c0004245e8f9))
+- **PEER-541:** add minimal setup script ([bf58cda](https://github.com/amaralc/peerlab/commit/bf58cda5b6b93f90d80b0497a1df3a526e0625a0))
+- **PEER-541:** add organization id ([377319a](https://github.com/amaralc/peerlab/commit/377319ad9bb6420fb9ca93622ec23c68c4911ab1))
+- **PEER-541:** add permission and enable module ([7cf2888](https://github.com/amaralc/peerlab/commit/7cf2888171be86c159d74951656df7f2f91f94da))
+- **PEER-541:** add production module ([824cc68](https://github.com/amaralc/peerlab/commit/824cc68f564fc39d055ca85f25cbb0ce2b106262))
+- **PEER-541:** add role ([6dff4ce](https://github.com/amaralc/peerlab/commit/6dff4ce2e4357df8d43ec041d63ef3d994b2aab8))
+- **PEER-541:** add script for creating shell project ([6851661](https://github.com/amaralc/peerlab/commit/685166122dff14db22c0ab02e7876914574e5964))
+- **PEER-541:** add staging preview using neon db ([85456c3](https://github.com/amaralc/peerlab/commit/85456c335c0a73cd3e5645fa55f8c527138bf39d))
+- **PEER-541:** brief reminder of why we chose gh actions ([a7cf20e](https://github.com/amaralc/peerlab/commit/a7cf20e3957d33057fd9125278d5a291d23e55ad))
+- **PEER-541:** create terraform gc-build-branch module ([e9bf2f8](https://github.com/amaralc/peerlab/commit/e9bf2f8db82c533bd3a728fc24743595dc20d296))
+- **PEER-541:** establish cloud run and cloud sql connection ([df64b4d](https://github.com/amaralc/peerlab/commit/df64b4db12d34adc271f46def59b99ca17ec70ac))
+- **PEER-541:** first draft of gcp actions (analogy to gh actions) ([a570e5c](https://github.com/amaralc/peerlab/commit/a570e5c9324f469daf8bb2baab7033f796937bfe))
+- **PEER-541:** map dependencies with nx ([f556318](https://github.com/amaralc/peerlab/commit/f556318c7998a9253bf384b6e6d72b86a053642d))
+- **PEER-541:** recreate draft cloud build resource ([41b932b](https://github.com/amaralc/peerlab/commit/41b932b69a24c9266bf304bc5529cc2d2af62a1d))
+- **PEER-541:** use cloud sql database instance ([c7284ad](https://github.com/amaralc/peerlab/commit/c7284adb5cf0ee6dcff8577545fed3dadda05f72))
+- **PEER-541:** use private networks ([051d509](https://github.com/amaralc/peerlab/commit/051d5095392dae1bd12f4d5416beaf7a44642b44))
+
+### Bug Fixes
+
+- **PEER-514:** convert upper case to lowercase while parsing branch to environment name ([5387ea5](https://github.com/amaralc/peerlab/commit/5387ea58309c651ef60833ec98b6710afdfd3d95))
+- **PEER-514:** create artifact registry during first project setup ([ee9485b](https://github.com/amaralc/peerlab/commit/ee9485b9cd71dbf215d2bc0592e69f5e8ee7842a))
+- **PEER-514:** parse branch name to use as tag ([cc405f4](https://github.com/amaralc/peerlab/commit/cc405f4278d55208248bd30dfee8d08840647de1))
+- **PEER-541:** add character limit to instance name ([5e661fd](https://github.com/amaralc/peerlab/commit/5e661fd098baf99900359ae0d1f7d89617485cc5))
+- **PEER-541:** add string length restriction for the vpc name ([ccb5f3c](https://github.com/amaralc/peerlab/commit/ccb5f3c3f56ae51d1591ff3b7822addb4208a911))
+- **PEER-541:** add variable dependency between connection and cloud run ([1a719c0](https://github.com/amaralc/peerlab/commit/1a719c0379d3c061789c3c843fc54bfb417bdec9))
+- **PEER-541:** adjust backend and versions ([6d3d841](https://github.com/amaralc/peerlab/commit/6d3d8414246220b00904fd7e3c37433fa4ce3f49))
+- **PEER-541:** adjust entrypoint path in dockerfile ([281c5f1](https://github.com/amaralc/peerlab/commit/281c5f180f59c9793375121cac5070a4e211c309))
+- **PEER-541:** adjust tf variable names in production pipeline ([6c2d0c0](https://github.com/amaralc/peerlab/commit/6c2d0c0357aa245545e242018a66032f7c9328fd))
+- **PEER-541:** adjust typo ([e14f339](https://github.com/amaralc/peerlab/commit/e14f3390a338791dc3b65a5a792e1815f25e0505))
+- **PEER-541:** avoid cache while building docker image in ci cd ([90e3f6a](https://github.com/amaralc/peerlab/commit/90e3f6a49b0b465e27183939b958ce2223e6aa1e))
+- **PEER-541:** enable necessary api ([9742e07](https://github.com/amaralc/peerlab/commit/9742e0787f6789811da437bcd813f40d9deb783c))
+- **PEER-541:** enable service networking ([ed8795b](https://github.com/amaralc/peerlab/commit/ed8795b2ebe3347756fbaf11d00588545ed601e2))
+- **PEER-541:** force change of dockerfile ([6fb06d6](https://github.com/amaralc/peerlab/commit/6fb06d6eebca904452da3a703e98b9ffbf4bd2fe))
+- **PEER-541:** limit character count for cloud run service name ([e159ed1](https://github.com/amaralc/peerlab/commit/e159ed17df4f1ed585cbeeae6a2439c7e72ed537))
+- **PEER-541:** parse branch name to environment name in terraform ([a2bc32e](https://github.com/amaralc/peerlab/commit/a2bc32ed91ad3847779926b7353ac7fd77b83877))
+- **PEER-541:** parse branch names before assigning to environment ([4c4da70](https://github.com/amaralc/peerlab/commit/4c4da703006c71154984ad90182d93a3cc967811))
+- **PEER-541:** remove unecessary random string to prevent db substitution ([9e89209](https://github.com/amaralc/peerlab/commit/9e89209607a2d07c782146ce9a50b47630f6c172))
+- **PEER-541:** test with setup-terraform@v2 ([6e4278a](https://github.com/amaralc/peerlab/commit/6e4278ab5359ef67840980acfcc3aaf4fd057db2))
+- **PEER-541:** try installing terraform with apt-get ([ae8cd93](https://github.com/amaralc/peerlab/commit/ae8cd93c264fcc8acfdd9e86ce98886262fc6dab))
+- **PEER-541:** use bash to parse branch name ([e0bc7c3](https://github.com/amaralc/peerlab/commit/e0bc7c3c0b36e0f9271ab4b4a142f58d0eea36df))
+- **PEER-541:** use branch name for vercel ([b914c0a](https://github.com/amaralc/peerlab/commit/b914c0add016cdc846ee9312f05dc9e1d0bd86aa))
+
+### Reverts
+
+- Revert "debug: test simplified pipeline" ([6167705](https://github.com/amaralc/peerlab/commit/6167705cf707cab11d9b8083cb8c9c127208b1ff))
+- Revert "debug: rename workflwo" ([22215c6](https://github.com/amaralc/peerlab/commit/22215c6b3286ddc4348a2ea3c5cf8f822d7c25ee))
+- Revert "debug: on push" ([14a0ed2](https://github.com/amaralc/peerlab/commit/14a0ed281a3c7add2d9e2970fff60ed9713453b2))
+- Revert "debug: force build" ([d815a3d](https://github.com/amaralc/peerlab/commit/d815a3dc9804fdd274857c6cf3967f1878a6c817))
+- Revert "debug: force deploy" ([cc8f693](https://github.com/amaralc/peerlab/commit/cc8f693e1a3df3410e458c014434e8283c9f6080))
+- Revert "debug: force build" ([bea89b2](https://github.com/amaralc/peerlab/commit/bea89b2ebb20025590acd1f0d5f60cb3340a70a3))
+- Revert "adjust: use commit hash and remove staging preview" ([99765f6](https://github.com/amaralc/peerlab/commit/99765f6360af515be1c675b2e00d38f951af6143))
+- Revert "debug: deploy" ([9b7bb85](https://github.com/amaralc/peerlab/commit/9b7bb85d713268b427b7bf083e25c0bca92c9f45))
+- Revert "debug: add db environment" ([8bab252](https://github.com/amaralc/peerlab/commit/8bab252acb3918c13a8fcb590d01304e1a2002bd))
+- Revert "debug: use neon_project instead of module" ([cd42929](https://github.com/amaralc/peerlab/commit/cd4292972b71f5aec3e302e9ad4b472b237051a6))
+- Revert "adjust: remove output" ([79850da](https://github.com/amaralc/peerlab/commit/79850dab41f9110e3226f44ddba08ce79de340ef))
+
+## [0.22.0](https://github.com/amaralc/peerlab/compare/peerlab@0.21.6...peerlab@0.22.0) (2023-06-17)
+
+### Features
+
+- **PEER-541:** add version from package json to swagger ([d258d9a](https://github.com/amaralc/peerlab/commit/d258d9ae0c45a6e36baadb65a52789fbb46b6fc2))
+- **PEER-541:** staging environment with peers-svc ([59e77c4](https://github.com/amaralc/peerlab/commit/59e77c4ff340e83282d2f053fe0a1d2c6769b994))
+
+### Bug Fixes
+
+- **PEER-541:** add cloud run dependencies ([dc20962](https://github.com/amaralc/peerlab/commit/dc2096271090c9b0fe26f4603f391c49f9808d9a))
+- **PEER-541:** adjust project id ([81e18b4](https://github.com/amaralc/peerlab/commit/81e18b4c34f665d4e806e1d24276434ca964940b))
+- **PEER-541:** separate service from service components ([e3b502a](https://github.com/amaralc/peerlab/commit/e3b502aa10fe7dc3f1980701ca8a63df82dd2233))
+
 ## [0.21.6](https://github.com/amaralc/peerlab/compare/peerlab@0.21.5...peerlab@0.21.6) (2023-06-16)
 
 **Note:** Version bump only for package peerlab

@@ -1,31 +1,23 @@
-variable "environment" {
-  description = "The preview environment unique name (e.g. branch-name, commit-hash, etc.)"
+variable "gcp_project_id" {
+  description = "The ID of the GCP project where resources will be deployed"
   type        = string
+  sensitive   = true
 }
 
-variable "project_id" {
-  description = "The Google Cloud project ID"
+variable "gcp_location" {
+  description = "A valid GCP location where resources will be deployed"
   type        = string
+  sensitive   = true
 }
-
-variable "region" {
-  description = "The region where resources will be created"
-  type        = string
-}
-
-variable "neon_project_location" {
-  description = "The Neon project region"
-  type        = string
-}
-
-variable "credentials_path" {
+variable "gcp_credentials_file_path" {
   description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
   type        = string
+  sensitive   = true
   default     = "credentials.json"
 }
 
-variable "commit_hash" {
-  description = "The commit hash of the source code to deploy"
+variable "short_commit_sha" {
+  description = "The commit short SHA of the source code to deploy"
   type        = string
 }
 
@@ -39,10 +31,4 @@ variable "gcp_docker_artifact_repository_name" {
   description = "The name of the Docker repository"
   type        = string
   default     = "docker-repository"
-}
-
-variable "neon_api_key" {
-  description = "Neon API key"
-  type        = string
-  sensitive   = true
 }

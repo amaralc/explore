@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-gcp-postgresql-dbms",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iac-modules/gcp-postgresql-dbms",
+  "projectType": "library",
+  "implicitDependencies": ["iac-modules-gcp-vpc"],
+  "targets": {},
+  "tags": []
+}

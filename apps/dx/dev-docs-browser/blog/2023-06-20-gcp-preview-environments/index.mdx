@@ -1,0 +1,57 @@
+---
+slug: gcp-preview-environments
+title: '[DRAFT] GCP Preview Environments'
+authors: [amaralc]
+tags: [gcp, terraform, github-actions, preview]
+---
+
+## Preview Environments
+
+- https://youtube.com/shorts/T5xJTPOMfe8?feature=share
+- https://neon.tech/blog/branching-with-preview-environments
+- https://www.youtube.com/watch?v=jjRasfbeYHk
+- https://vercel.com/docs/concepts/deployments/preview-deployments
+
+## GCP Cloud Run Previews
+
+- https://cloud.google.com/run/docs/tutorials/configure-deployment-previews
+
+## GCP Resources
+
+1. **google_compute_network**: A Virtual Private Cloud (VPC) network, which is a virtual version of a traditional physical network. This is the first resource you need to create because all other resources will be connected to or associated with this network.
+2. **google_vpc_access_connector**: Connects your Google Cloud Run service to the VPC network. It must be created after the VPC network and before the Cloud Run service.
+3. **google_compute_global_address**: A global IP address that you reserve for your Google Cloud resources. It should be created after the VPC network and before the Cloud Router and Cloud NAT.
+4. **google_service_networking_connection**: A peering connection that allows your VPC network to connect with Google-managed services (like Cloud SQL). It should be created after the VPC network and before the Cloud SQL instance.
+5. **google_compute_router**: A virtual router within your VPC network. It's used to forward traffic between different subnets within your network. It should be created after the VPC network and global address, and before the Cloud NAT.
+6. **google_compute_router_nat**: A Cloud NAT (Network Address Translation) gateway, which allows instances without external IP addresses to access the internet. It should be created after the VPC network, global address, and router.
+7. **google_sql_database_instance**: Your Cloud SQL PostgreSQL database. It should be created after the VPC network and the service networking connection.
+8. **google_cloud_run_service**: Your NestJS service deployed on Google Cloud Run. It should be created after the VPC network, VPC access connector, and Cloud SQL database instance.
+
+source: chat gpt
+
+## GCP Database Preview Environments with Clones
+
+:::warning
+
+In GCP, when you clone a database instance, you bring the data, the users, and the permissions from the source to the newly created instance. In this
+case, if you try to replicate the environment by creating a database and user with the same name, you will get an error because they already exist.
+
+We needed to take that into consideration (after making that mistake).
+
+https://cloud.google.com/sql/docs/postgres/clone-instance
+
+:::
+
+## References
+
+https://github.com/GoogleCloudPlatform/solutions-terraform-cloudbuild-gitops
+https://spacelift.io/blog/github-actions-terraform
+https://cloud.google.com/sql/docs/mysql/introduction
+https://cloud.google.com/vpc/docs/private-google-access
+https://cloud.google.com/vpc/docs/private-service-connect
+https://cloud.google.com/vpc/docs/private-services-access
+https://cloud.google.com/vpc/docs/serverless-vpc-access
+https://cloud.google.com/run/docs/configuring/connecting-vpc#terraform
+https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/run/vpc_access_connector/main.tf
+https://github.com/terraform-google-modules/terraform-google-network/blob/HEAD/examples/submodule_vpc_serverless_connector/main.tf
+https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance

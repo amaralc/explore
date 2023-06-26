@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-gcp-service-account",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iac-modules/gcp-service-account",
+  "projectType": "library",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}

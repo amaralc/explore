@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-gcp-artifact-registry",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iac-modules/gcp-artifact-registry",
+  "projectType": "library",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}

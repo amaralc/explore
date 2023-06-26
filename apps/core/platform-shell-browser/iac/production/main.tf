@@ -1,4 +1,4 @@
-resource "vercel_project" "core-platform-shell-browser" {
+resource "vercel_project" "instance" {
   name      = "core-platform-shell-browser"
   framework = "nextjs"
   git_repository = {
@@ -15,7 +15,7 @@ resource "vercel_project" "core-platform-shell-browser" {
 
 # Add a production deployment
 resource "vercel_deployment" "first-production-deployment" {
-  project_id        = vercel_project.core-platform-shell-browser.id
+  project_id        = vercel_project.instance.id
   ref               = var.environment_name
   production        = true
   delete_on_destroy = true

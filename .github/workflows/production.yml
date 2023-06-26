@@ -4,14 +4,14 @@ on:
   create:
     tags:
       - "peerlab@[0-9]+.[0-9]+.[0-9]+"
-#     paths:
-#       - "apps/core/platform-shell-iac/**"
-#       - "apps/researchers/peers/svc-rest-api/**"
-#       - "apps/researchers/peers/svc-consumer/**"
-#       - "libs/researchers/peers/**"
-#       - "package.json"
-#       - "yarn.lock"
-#       - ".github/workflows/production.yml"
+    # paths:
+    #   - "apps/core/platform-shell-iac/**"
+    #   - "apps/researchers/peers/svc-rest-api/**"
+    #   - "apps/researchers/peers/svc-consumer/**"
+    #   - "libs/researchers/peers/**"
+    #   - "package.json"
+    #   - "yarn.lock"
+    #   - ".github/workflows/production.yml"
 # on:
 #   push:
 #     branches:
@@ -35,15 +35,20 @@ jobs:
     #   name: peerlab-preview
 
     steps:
-      - name: Extract branch name
-        run: echo "environment_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-
       - name: Checkout code
         uses: actions/checkout@v3
         if: ${{ github.event_name != 'pull_request' }}
         with:
           fetch-depth: 0 # This is important to get all history for all branches
           ref: production
+
+      - name: Extract environment name
+        run: |
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
+          echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
 
       - name: Check if app was affected
         run: |
@@ -62,7 +67,7 @@ jobs:
           else
             # If no dependency was affected, cancel build
             echo '🛑 - Build cancelled since no dependency was affected'
-            echo "affected=false" >> $GITHUB_ENV
+            echo "affected=false" >> $GITHUB_ENV # TODO: Change to false
           fi
 
       - name: Get short commit hash
@@ -79,7 +84,7 @@ jobs:
         if: ${{ env.affected == 'true' }}
         uses: docker/login-action@v2
         with:
-          registry: ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev
+          registry: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
           username: _json_key
           password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
@@ -90,9 +95,10 @@ jobs:
           context: .
           file: ./apps/researchers/peers/svc-rest-api/Dockerfile
           push: true
+          no-cache: true
           tags: |
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
-            ${{ secrets.GCP_PROJECT_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
         env:
           IMAGE_NAME: researchers-peers-svc-rest-api
 
@@ -131,9 +137,7 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v1"
 
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.4.6
+        uses: hashicorp/setup-terraform@v2
 
       - name: Terraform init
         run: |
@@ -152,7 +156,7 @@ jobs:
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "environment=${{ env.environment_name }}" -var "neon_api_key=${{ secrets.NEON_API_KEY }}" -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "region=${{ secrets.GCP_PROJECT_LOCATION }}" -var "commit_hash=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
