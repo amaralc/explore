@@ -4,10 +4,9 @@
   "sourceRoot": "libs/iac-modules/environment",
   "projectType": "library",
   "implicitDependencies": [
-    "iac-modules-gcp-apis",
-    "iac-modules-env-production",
     "iac-modules-gcp-vpc",
-    "iac-modules-gcp-postgresql-dbms-clone",
+    "iac-modules-gcp-apis",
+    "iac-modules-gcp-postgresql-dbms-environment",
     "researchers-peers-svc-iac"
   ],
   "targets": {},
