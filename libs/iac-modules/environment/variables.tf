@@ -3,6 +3,12 @@ variable "branch_name" {
   type        = string
 }
 
+variable "environment_name" {
+  description = "The name of the environment, calculated based on the branch name as -> environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). In other words, it replaces all uppercase letters with lowercase letters, and replaces all non-alphanumeric characters with dashes."
+  type        = string
+
+}
+
 variable "gcp_project_id" {
   description = "The Google Cloud project ID"
   type        = string
@@ -35,3 +41,4 @@ variable "source_environment_branch_name" {
   type        = string
   default     = null
 }
+

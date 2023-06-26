@@ -19,6 +19,7 @@ module "gcp_apis" {
 module "production" {
   source                              = "../../../libs/iac-modules/environment"
   branch_name                         = "production"
+  environment_name                    = "production"
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
@@ -30,12 +31,13 @@ module "production" {
 module "staging" {
   source                              = "../../../libs/iac-modules/environment"
   branch_name                         = "staging"
+  environment_name                    = "staging" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
+  source_environment_branch_name      = module.production.branch_name
+  source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-  source_environment_branch_name      = module.production.branch_name
-  source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
   depends_on                          = [module.gcp_apis, module.production]
 }
 

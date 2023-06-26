@@ -8,7 +8,8 @@ data "external" "bash" {
 }
 
 locals {
-  environment_name = data.external.bash.result["environment_name"]
+  # environment_name = data.external.bash.result["environment_name"]
+  environment_name = var.environment_name
 }
 
 # Create the main Virtual Private Cloud (VPC)
