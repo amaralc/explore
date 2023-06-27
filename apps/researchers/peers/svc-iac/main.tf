@@ -52,7 +52,7 @@ module "service_secrets" {
 module "service_account" {
   source               = "../../../../libs/iac-modules/gcp-service-account"
   gcp_project_id       = var.gcp_project_id
-  service_account_name = substr("${local.service_name}-${var.environment_name}", 0, 30)
+  service_account_name = substr("${local.service_name}-${var.short_commit_sha}", 0, 30)
 }
 
 # Add permissions to service account
