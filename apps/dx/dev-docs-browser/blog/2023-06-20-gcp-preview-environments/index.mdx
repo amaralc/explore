@@ -146,8 +146,8 @@ module "staging" {
 ```
 
 After making this change, we tested the hypothesis by running a new terraform apply, expecting that the "module.staging.data.external.bash"
-would still change, but the "module.staging.module.postgresql_dbms.google_sql_database_instance.preview_environment[0]" would not.
-And that is exactly what happened.
+would still change, but the "module.staging.module.postgresql_dbms.google_sql_database_instance.preview_environment[0]" would not,
+and that is exactly what happened.
 
 While the result was what we expected, we still had to figure out how to pass the "environment_name" variable to the "environment"
 module dynamically. Since we are still learning Terraform and do not quite understand its internals, the theory we came up with was
@@ -191,6 +191,11 @@ And the terraform logs now show that changes in "environment_name" outside of th
 
 Now we only needed to abstract that into it's own module in order to enhance the legibility of the main terraform file (the one that calls
 the environment modules).
+
+Unfortunately, after abstracting that into it's own module, the terraform logs showed that the modules went back to the state where they were
+being destroyed and recreated. We then gave a step back and left it as it was before, with the "environment_name" being passed as a local
+variable from the main root module. The module "environment-wrapper" that was created to abstract the parsing of "branch_name" to "environment_name"
+was removed but is still available as archive for documentation purposes.
 
 ## References
 

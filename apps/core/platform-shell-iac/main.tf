@@ -17,8 +17,9 @@ module "gcp_apis" {
 
 # Production Environment
 module "production" {
-  source                              = "../../../libs/iac-modules/environment-wrapper"
+  source                              = "../../../libs/iac-modules/environment"
   branch_name                         = "production"
+  environment_name                    = "production"
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
@@ -27,9 +28,10 @@ module "production" {
 }
 
 # Staging Environment
-module "staging" {
-  source                              = "../../../libs/iac-modules/environment-wrapper"
-  branch_name                         = "staging"
+module "bugfix-peer-541-prevent-preview-environment-from-being-recreated" {
+  source                              = "../../../libs/iac-modules/environment"
+  branch_name                         = "bugfix/PEER-541-prevent-preview-environment-from-being-recreated"
+  environment_name                    = "bugfix-peer-541-prevent-preview-environment-from-being-recreated" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
   source_environment_branch_name      = module.production.branch_name
   source_environment_dbms_instance_id = module.production.postgresql_dbms_instance_id
   short_commit_sha                    = var.short_commit_sha
