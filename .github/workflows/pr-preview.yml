@@ -161,7 +161,7 @@ jobs: # A workflow can have multiple jobs
       - name: Check if Docker image exists
         id: check_image
         run: |
-          IMAGE_EXISTS=$(gcloud container images list-tags ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }} --filter="tags:${{ env.environment_name }}" --format=json | jq '. | length')
+          IMAGE_EXISTS=$(gcloud container images list-tags ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }} --filter="tags:${{ env.environment_name }}" --format=json | jq '. | length')
           if [ $IMAGE_EXISTS -eq 0 ]; then
             echo "is_existing_image=false" >> $GITHUB_ENV
           else
