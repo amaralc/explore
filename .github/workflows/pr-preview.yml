@@ -168,6 +168,16 @@ jobs: # A workflow can have multiple jobs
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
+      - name: Save GCP credentials to file
+        run: |
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
       - name: Check if Docker image exists
         id: check_image
         run: |
