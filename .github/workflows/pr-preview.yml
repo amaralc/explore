@@ -125,8 +125,8 @@ jobs: # A workflow can have multiple jobs
   build:
     needs: [pr-checks]
     runs-on: ubuntu-latest
-    # environment:
-    #   name: peerlab-preview
+    env:
+      IMAGE_NAME: researchers-peers-svc-rest-api
 
     steps:
       - name: Checkout code
@@ -212,8 +212,6 @@ jobs: # A workflow can have multiple jobs
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
-        env:
-          IMAGE_NAME: researchers-peers-svc-rest-api
 
   deploy:
     needs: [build]
