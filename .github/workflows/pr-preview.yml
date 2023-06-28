@@ -142,31 +142,41 @@ jobs: # A workflow can have multiple jobs
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
           echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
 
-      # - name: Check if app was affected
-      #   run: |
-      #     LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
-      #     echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
+      - name: Check if app was affected
+        run: |
+          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
+          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
 
-      #     yarn install
+          yarn install
 
-      #     AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
-      #     echo 'Affected apps:' $AFFECTED_APPS
+          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
+          echo 'Affected apps:' $AFFECTED_APPS
 
-      #     PROJECT_NAME=researchers-peers-svc-rest-api
-      #     if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
-      #       echo '✅ - Build can proceed since app was affected!'
-      #       echo "affected=true" >> $GITHUB_ENV
-      #     else
-      #       # If no dependency was affected, cancel build
-      #       echo '🛑 - Build cancelled since no dependency was affected'
-      #       echo "affected=false" >> $GITHUB_ENV # TODO: Change to false
-      #     fi
+          PROJECT_NAME=researchers-peers-svc-rest-api
+          if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
+            echo '✅ - Build can proceed since app was affected!'
+            echo "affected=true" >> $GITHUB_ENV
+          else
+            # If no dependency was affected, cancel build
+            echo '🛑 - Build cancelled since no dependency was affected'
+            echo "affected=true" >> $GITHUB_ENV # TODO: Change to false
+          fi
 
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}
         run: |
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
+
+      - name: Check if Docker image exists
+        id: check_image
+        run: |
+          IMAGE_EXISTS=$(gcloud container images list-tags ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }} --filter="tags:${{ env.environment_name }}" --format=json | jq '. | length')
+          if [ $IMAGE_EXISTS -eq 0 ]; then
+            echo "is_existing_image=false" >> $GITHUB_ENV
+          else
+            echo "is_existing_image=true" >> $GITHUB_ENV
+          fi
 
       - name: Set up Docker Buildx
         if: ${{ env.affected == 'true' }}
@@ -181,7 +191,7 @@ jobs: # A workflow can have multiple jobs
           password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
       - name: Build and push Docker image
-        if: ${{ env.affected == 'true' }}
+        if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
         uses: docker/build-push-action@v4
         with:
           context: .
