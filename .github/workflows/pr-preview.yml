@@ -142,26 +142,6 @@ jobs: # A workflow can have multiple jobs
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
           echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
 
-      - name: Check if app was affected
-        run: |
-          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
-          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
-
-          yarn install
-
-          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
-          echo 'Affected apps:' $AFFECTED_APPS
-
-          PROJECT_NAME=researchers-peers-svc-rest-api
-          if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
-            echo '✅ - Build can proceed since app was affected!'
-            echo "affected=true" >> $GITHUB_ENV
-          else
-            # If no dependency was affected, cancel build
-            echo '🛑 - Build cancelled since no dependency was affected'
-            echo "affected=true" >> $GITHUB_ENV # TODO: Change to false
-          fi
-
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}
         run: |
@@ -188,8 +168,29 @@ jobs: # A workflow can have multiple jobs
             echo "is_existing_image=true" >> $GITHUB_ENV
           fi
 
+      - name: Check if app was affected
+        if: ${{ env.is_existing_image == 'true' }}
+        run: |
+          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
+          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
+
+          yarn install
+
+          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
+          echo 'Affected apps:' $AFFECTED_APPS
+
+          PROJECT_NAME=researchers-peers-svc-rest-api
+          if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
+            echo '✅ - Build can proceed since app was affected!'
+            echo "affected=true" >> $GITHUB_ENV
+          else
+            # If no dependency was affected, cancel build
+            echo '🛑 - Build cancelled since no dependency was affected'
+            echo "affected=true" >> $GITHUB_ENV # TODO: Change to false
+          fi
+
       - name: Set up Docker Buildx
-        if: ${{ env.affected == 'true' }}
+        if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
         uses: docker/setup-buildx-action@v2
 
       - name: Login to Google Container Registry
