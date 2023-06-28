@@ -116,7 +116,7 @@ jobs: # A workflow can have multiple jobs
             npm ci
           fi
 
-      - name: Lint, test, and build affected projects
+      - name: Lint and test affected projects
         run: |
           # npx nx format:check
           # npx nx affected --target build --parallel 3
