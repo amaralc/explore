@@ -7,13 +7,13 @@ module "database" {
   source                     = "../../../../libs/iac-modules/gcp-postgresql-dbms-database"
   count                      = var.source_environment_branch_name == null ? 1 : 0 # Create database only if it is not a preview environment. For preview environments, the existing databases were already cloned from source environment
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
-  database_name              = local.service_name
+  database_name              = substr(local.service_name, 0, 63)
 }
 
 # Create DBMS user for the service
 module "user" {
   source                     = "../../../../libs/iac-modules/gcp-postgresql-dbms-user"
-  username                   = "${local.service_name}-${var.environment_name}" # Since users are duplicated from source environment, we added the environment as part of the username
+  username                   = substr("${local.service_name}-${var.environment_name}", 0, 63) # Since users are duplicated from source environment, we added the environment as part of the username
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
 }
 
