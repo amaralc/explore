@@ -27,7 +27,7 @@ module "production" {
   depends_on                          = [module.gcp_apis]
 }
 
-# Staging Environment
+# Branch Environment
 module "bugfix-peer-541-prevent-preview-environment-from-being-recreated" {
   source                              = "../../../libs/iac-modules/environment"
   branch_name                         = "bugfix/PEER-541-prevent-preview-environment-from-being-recreated"

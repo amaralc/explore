@@ -1,11 +1,12 @@
 locals {
-  service_name = "researchers-peers"
+  service_name              = "researchers-peers"
+  is_production_environment = var.source_environment_branch_name == null ? true : false
 }
 
 # Create database for the service
 module "database" {
   source                     = "../../../../libs/iac-modules/gcp-postgresql-dbms-database"
-  count                      = var.source_environment_branch_name == null ? 1 : 0 # Create database only if it is not a preview environment. For preview environments, the existing databases were already cloned from source environment
+  count                      = local.is_production_environment == true ? 1 : 0 # Create database only if it is a production environment. For preview environments, the existing databases were already cloned from source environment
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
   database_name              = substr(local.service_name, 0, 63)
 }
@@ -50,9 +51,12 @@ module "service_secrets" {
 
 # Create service account
 module "service_account" {
-  source               = "../../../../libs/iac-modules/gcp-service-account"
-  gcp_project_id       = var.gcp_project_id
-  service_account_name = substr("${local.service_name}-${var.short_commit_sha}", 0, 30)
+  source                    = "../../../../libs/iac-modules/gcp-service-account"
+  gcp_project_id            = var.gcp_project_id
+  service_name              = local.service_name
+  environment_name          = substr(var.environment_name, 0, 63)
+  short_commit_sha          = var.short_commit_sha
+  is_production_environment = var.source_environment_branch_name == null ? true : false
 }
 
 # Add permissions to service account

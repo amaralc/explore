@@ -1,3 +1,7 @@
+locals {
+  is_preview_environment = var.source_environment_branch_name != null ? true : false
+}
+
 output "branch_name" {
   value = var.branch_name
 }
