@@ -143,7 +143,6 @@ jobs: # A workflow can have multiple jobs
           echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
 
       - name: Get short commit hash
-        if: ${{ env.affected == 'true' }}
         run: |
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
