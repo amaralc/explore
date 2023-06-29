@@ -34,7 +34,7 @@ resource "vercel_deployment" "production_deployment" {
 # Add a preview deployment
 resource "vercel_deployment" "preview_deployment" {
   count             = var.is_production_environment ? 0 : 1
-  project_id        = var.is_production_environment ? var.source_environment_project_id : "non-existing-project-id"
+  project_id        = var.is_production_environment ? "non-existing-project-id" : var.source_environment_project_id
   ref               = var.branch_name
   environment       = var.preview_environment_variables
   production        = false
