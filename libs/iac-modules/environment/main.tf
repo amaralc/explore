@@ -50,7 +50,7 @@ module "researchers-peers" {
   depends_on                          = [module.postgresql_dbms]
 }
 
-# # Application Shell
+
 # module "core-platform-shell-browser" {
 #   source                        = "../../../apps/core/platform-shell-browser/iac" # The path to the module
 #   branch_name                   = var.branch_name                                 # The name of the branch
@@ -59,10 +59,9 @@ module "researchers-peers" {
 #   depends_on                    = [module.researchers-peers]
 # }
 
-# output "core_platform_shell_browser_vercel_project_id" {
-#   value = module.core-platform-shell-browser.vercel_project_id
-# }
 
+
+# Application Shell
 module "core-platform-shell-browser" {
   source                           = "../environment-vercel"
   project_name                     = "core-platform-shell-browser"
@@ -86,22 +85,50 @@ output "core_platform_shell_browser_vercel_project_id" {
   value = local.is_production_environment ? module.core-platform-shell-browser.vercel_project_id : null
 }
 
-# # Application Shell
-# module "core-platform-shell-browser" {
-#   source           = "../../../apps/core/platform-shell-browser/iac/production" # The path to the module
-#   environment_name = var.branch_name                                            # The name of the branch
-#   depends_on       = [module.researchers-peers]
-# }
+
 
 # # Documentation with Docusaurus
-# module "dx-dev-docs-browser" {
-#   source           = "../../../apps/dx/dev-docs-browser/iac/production" # The path to the module
-#   environment_name = var.branch_name                                    # The name of the branch
-#   depends_on       = [module.researchers-peers]
-# }
+module "dx-dev-docs-browser" {
+  source                           = "../environment-vercel"
+  project_name                     = "dx-dev-docs-browser"
+  framework                        = "nextjs"
+  git_provider                     = "github"
+  username_and_repository          = "amaralc/peerlab"
+  branch_name                      = var.branch_name
+  is_production_environment        = local.is_production_environment
+  install_command                  = local.is_production_environment ? "yarn install" : null
+  build_command                    = local.is_production_environment ? "npx nx build dx-dev-docs-browser --prod" : null
+  output_directory                 = local.is_production_environment ? "dist/apps/dx/dev-docs-browser/.next" : null
+  ignore_command                   = local.is_production_environment ? null : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
+  preview_environment_variables    = local.is_production_environment ? null : null # Map of string key and values
+  production_environment_variables = local.is_production_environment ? null : null # Set of objects with key, value and target (production, preview, development)
+  source_environment_project_id    = var.production_environment_dx_dev_docs_browser_vercel_project_id
+
+  depends_on = [module.researchers-peers]
+}
+
+output "dx_dev_docs_browser_vercel_project_id" {
+  value = local.is_production_environment ? module.dx-dev-docs-browser.vercel_project_id : null
+}
 
 # # Nx Graph
-# module "core-root-shell-graph" {
-#   source           = "../../../apps/core/root-shell-graph/iac/production" # The path to the module
-#   environment_name = var.branch_name                                      # The name of the branch
-# }
+module "core-root-shell-graph" {
+  source                           = "../environment-vercel"
+  project_name                     = "core-root-shell-graph"
+  framework                        = "nextjs"
+  git_provider                     = "github"
+  username_and_repository          = "amaralc/peerlab"
+  branch_name                      = var.branch_name
+  is_production_environment        = local.is_production_environment
+  install_command                  = local.is_production_environment ? "yarn install" : null
+  build_command                    = local.is_production_environment ? "npx nx build core-root-shell-graph --prod" : null
+  output_directory                 = local.is_production_environment ? "dist/apps/core/root-shell-graph/.next" : null
+  ignore_command                   = local.is_production_environment ? null : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
+  preview_environment_variables    = local.is_production_environment ? null : null # Map of string key and values
+  production_environment_variables = local.is_production_environment ? null : null # Set of objects with key, value and target (production, preview, development)
+  source_environment_project_id    = var.production_environment_core_root_shell_graph_vercel_project_id
+}
+
+output "core_root_shell_graph_vercel_project_id" {
+  value = local.is_production_environment ? module.core-root-shell-graph.vercel_project_id : null
+}

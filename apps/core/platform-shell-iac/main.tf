@@ -39,6 +39,8 @@ module "bugfix-peer-541-prevent-preview-environment-from-being-recreated" {
   gcp_location                                                         = var.gcp_location
   gcp_docker_artifact_repository_name                                  = var.gcp_docker_artifact_repository_name
   production_environment_core_platform_shell_browser_vercel_project_id = module.production.core_platform_shell_browser_vercel_project_id
+  production_environment_core_root_shell_graph_vercel_project_id       = module.production.core_root_shell_graph_vercel_project_id
+  production_environment_dx_dev_docs_browser_vercel_project_id         = module.production.dx_dev_docs_browser_vercel_project_id
   depends_on                                                           = [module.gcp_apis, module.production]
 }
 
