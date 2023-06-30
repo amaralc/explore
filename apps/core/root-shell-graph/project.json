@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/core/root-shell-graph",
   "projectType": "application",
-  "implicitDependencies": [],
+  "implicitDependencies": ["github-actions"],
   "targets": {
     "build-graph": {
       "command": "npx nx graph --file=dist/apps/core/root-shell-graph/index.html"

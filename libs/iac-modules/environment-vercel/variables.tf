@@ -23,11 +23,6 @@ variable "framework" {
   description = "The framework of the project"
   type        = string
   default     = null
-
-  validation {
-    condition     = var.framework == null || contains(["nextjs"], var.framework)
-    error_message = "The framework must be null or one of ['nextjs']"
-  }
 }
 
 variable "branch_name" {

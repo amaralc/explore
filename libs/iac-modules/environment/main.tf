@@ -61,74 +61,74 @@ module "researchers-peers" {
 
 
 
-# # Application Shell
-# module "core-platform-shell-browser" {
-#   source                           = "../environment-vercel"
-#   project_name                     = "core-platform-shell-browser"
-#   framework                        = "nextjs"
-#   git_provider                     = "github"
-#   username_and_repository          = "amaralc/peerlab"
-#   branch_name                      = var.branch_name
-#   is_production_environment        = local.is_production_environment
-#   install_command                  = local.is_production_environment ? "yarn install" : null
-#   build_command                    = local.is_production_environment ? "npx nx build core-platform-shell-browser --prod" : null
-#   output_directory                 = local.is_production_environment ? "dist/apps/core/platform-shell-browser/.next" : null
-#   ignore_command                   = local.is_production_environment ? null : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
-#   preview_environment_variables    = local.is_production_environment ? null : null # Map of string key and values
-#   production_environment_variables = local.is_production_environment ? null : null # Set of objects with key, value and target (production, preview, development)
-#   source_environment_project_id    = var.production_environment_core_platform_shell_browser_vercel_project_id
+# Application Shell
+module "core-platform-shell-browser" {
+  source                           = "../environment-vercel"
+  project_name                     = "core-platform-shell-browser"
+  framework                        = "nextjs"
+  git_provider                     = "github"
+  username_and_repository          = "amaralc/peerlab"
+  branch_name                      = var.branch_name
+  is_production_environment        = local.is_production_environment
+  install_command                  = local.is_production_environment ? "yarn install" : null
+  build_command                    = local.is_production_environment ? "npx nx build core-platform-shell-browser --prod" : null
+  output_directory                 = local.is_production_environment ? "dist/apps/core/platform-shell-browser/.next" : null
+  ignore_command                   = local.is_production_environment ? null : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
+  preview_environment_variables    = local.is_production_environment ? null : null # Map of string key and values
+  production_environment_variables = local.is_production_environment ? null : null # Set of objects with key, value and target (production, preview, development)
+  source_environment_project_id    = var.production_environment_core_platform_shell_browser_vercel_project_id
 
-#   depends_on = [module.researchers-peers]
-# }
+  depends_on = [module.researchers-peers]
+}
 
-# output "core_platform_shell_browser_vercel_project_id" {
-#   value = local.is_production_environment ? module.core-platform-shell-browser.vercel_project_id : null
-# }
+output "core_platform_shell_browser_vercel_project_id" {
+  value = local.is_production_environment ? module.core-platform-shell-browser.vercel_project_id : null
+}
 
 
 
-# # # Documentation with Docusaurus
-# module "dx-dev-docs-browser" {
-#   source                           = "../environment-vercel"
-#   project_name                     = "dx-dev-docs-browser"
-#   framework                        = "nextjs"
-#   git_provider                     = "github"
-#   username_and_repository          = "amaralc/peerlab"
-#   branch_name                      = var.branch_name
-#   is_production_environment        = local.is_production_environment
-#   install_command                  = local.is_production_environment ? "yarn install" : null
-#   build_command                    = local.is_production_environment ? "npx nx build dx-dev-docs-browser --prod" : null
-#   output_directory                 = local.is_production_environment ? "dist/apps/dx/dev-docs-browser/.next" : null
-#   ignore_command                   = local.is_production_environment ? null : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
-#   preview_environment_variables    = local.is_production_environment ? null : null # Map of string key and values
-#   production_environment_variables = local.is_production_environment ? null : null # Set of objects with key, value and target (production, preview, development)
-#   source_environment_project_id    = var.production_environment_dx_dev_docs_browser_vercel_project_id
+# # Documentation with Docusaurus
+module "dx-dev-docs-browser" {
+  source                           = "../environment-vercel"
+  project_name                     = "dx-dev-docs-browser"
+  framework                        = "docusaurus-2" # https://vercel.com/docs/rest-api/endpoints#create-a-new-project
+  git_provider                     = "github"
+  username_and_repository          = "amaralc/peerlab"
+  branch_name                      = var.branch_name
+  is_production_environment        = local.is_production_environment
+  install_command                  = local.is_production_environment ? "yarn install" : null
+  build_command                    = local.is_production_environment ? "yarn nx build-docs dx-dev-docs-browser --prod" : null # Use build-docs command to prevent building dependencies used for graphing purposes only
+  output_directory                 = local.is_production_environment ? "dist/apps/dx/dev-docs-browser" : null                 # Attention to the output of non-nextjs projects
+  ignore_command                   = local.is_production_environment ? null : null                                            # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
+  preview_environment_variables    = local.is_production_environment ? null : null                                            # Map of string key and values
+  production_environment_variables = local.is_production_environment ? null : null                                            # Set of objects with key, value and target (production, preview, development)
+  source_environment_project_id    = var.production_environment_dx_dev_docs_browser_vercel_project_id
 
-#   depends_on = [module.researchers-peers]
-# }
+  depends_on = [module.researchers-peers]
+}
 
-# output "dx_dev_docs_browser_vercel_project_id" {
-#   value = local.is_production_environment ? module.dx-dev-docs-browser.vercel_project_id : null
-# }
+output "dx_dev_docs_browser_vercel_project_id" {
+  value = local.is_production_environment ? module.dx-dev-docs-browser.vercel_project_id : null
+}
 
-# # # Nx Graph
-# module "core-root-shell-graph" {
-#   source                           = "../environment-vercel"
-#   project_name                     = "core-root-shell-graph"
-#   framework                        = "nextjs"
-#   git_provider                     = "github"
-#   username_and_repository          = "amaralc/peerlab"
-#   branch_name                      = var.branch_name
-#   is_production_environment        = local.is_production_environment
-#   install_command                  = local.is_production_environment ? "yarn install" : null
-#   build_command                    = local.is_production_environment ? "npx nx build core-root-shell-graph --prod" : null
-#   output_directory                 = local.is_production_environment ? "dist/apps/core/root-shell-graph" : null
-#   ignore_command                   = local.is_production_environment ? null : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
-#   preview_environment_variables    = local.is_production_environment ? null : null # Map of string key and values
-#   production_environment_variables = local.is_production_environment ? null : null # Set of objects with key, value and target (production, preview, development)
-#   source_environment_project_id    = var.production_environment_core_root_shell_graph_vercel_project_id
-# }
+# # Nx Graph
+module "core-root-shell-graph" {
+  source                           = "../environment-vercel"
+  project_name                     = "core-root-shell-graph"
+  framework                        = null
+  git_provider                     = "github"
+  username_and_repository          = "amaralc/peerlab"
+  branch_name                      = var.branch_name
+  is_production_environment        = local.is_production_environment
+  install_command                  = local.is_production_environment ? "yarn install" : null
+  build_command                    = local.is_production_environment ? "yarn nx build-graph core-root-shell-graph --prod" : null # Use build-graph command to prevent building dependencies used for graphing purposes only
+  output_directory                 = local.is_production_environment ? "dist/apps/core/root-shell-graph" : null                  # Attention to the output of non-nextjs projects
+  ignore_command                   = local.is_production_environment ? null : null                                               # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
+  preview_environment_variables    = local.is_production_environment ? null : null                                               # Map of string key and values
+  production_environment_variables = local.is_production_environment ? null : null                                               # Set of objects with key, value and target (production, preview, development)
+  source_environment_project_id    = var.production_environment_core_root_shell_graph_vercel_project_id
+}
 
-# output "core_root_shell_graph_vercel_project_id" {
-#   value = local.is_production_environment ? module.core-root-shell-graph.vercel_project_id : null
-# }
+output "core_root_shell_graph_vercel_project_id" {
+  value = local.is_production_environment ? module.core-root-shell-graph.vercel_project_id : null
+}
