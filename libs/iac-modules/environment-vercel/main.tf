@@ -39,6 +39,7 @@ resource "vercel_deployment" "preview_deployment" {
   environment       = var.preview_environment_variables
   production        = false
   delete_on_destroy = true # Set false if you want to keep the preview deployment after destroying the infrastructure
+  depends_on        = [var.source_environment_project_id]
 }
 
 # # An environment variable that will be created
