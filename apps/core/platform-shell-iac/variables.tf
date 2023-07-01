@@ -1,3 +1,16 @@
+variable "gcp_billing_account_id" {
+  description = "The ID of the GCP billing account to associate this project with"
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "gcp_organization_id" {
+  description = "The ID of the GCP organization where resources will be deployed"
+  type        = string
+  sensitive   = true
+}
+
 variable "gcp_project_id" {
   description = "The ID of the GCP project where resources will be deployed"
   type        = string

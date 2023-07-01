@@ -6,7 +6,20 @@ variable "branch_name" {
 variable "environment_name" {
   description = "The name of the environment, calculated based on the branch name as -> environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). In other words, it replaces all uppercase letters with lowercase letters, and replaces all non-alphanumeric characters with dashes."
   type        = string
+}
 
+variable "gcp_billing_account_id" {
+  description = "The ID of the GCP billing account to associate this project with"
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "gcp_organization_id" {
+  description = "The ID of the GCP organization where resources will be deployed"
+  type        = string
+  sensitive   = true
+  default     = null
 }
 
 variable "gcp_project_id" {
