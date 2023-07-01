@@ -216,6 +216,8 @@ jobs: # A workflow can have multiple jobs
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
+    environment:
+      name: preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
@@ -270,7 +272,7 @@ jobs: # A workflow can have multiple jobs
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
+          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }} -var "core_platform_shell_browser_vercel_project_id=${{ secrets.CORE_PLATFORM_SHELL_BROWSER_VERCEL_PROJECT_ID }}" -var "core_root_shell_graph_vercel_project_id=${{ secrets.CORE_ROOT_SHELL_GRAPH_VERCEL_PROJECT_ID }}" -var "dx_dev_docs_browser_vercel_project_id=${{ secrets.DX_DEV_DOCS_BROWSER_VERCEL_PROJECT_ID }}"
         working-directory: apps/core/platform-shell-iac
 
       - name: Terraform Apply
