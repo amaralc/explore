@@ -7,8 +7,8 @@ import { ListPaginatedPeersService } from '@peerlab/researchers/peers/core/domai
 import { PaginationQueryDto } from '@peerlab/researchers/peers/core/shared/dto/pagination-query.dto';
 import { GlobalAppHttpException } from '@peerlab/researchers/peers/core/shared/errors/global-app-http-exception';
 import { configDto } from '../../../../config.dto';
+import { postMethodDocs } from './docs';
 import { GetPeersResponseDto } from './get-peers-response.dto';
-import { postMethodDocs } from './swagger';
 
 @ApiTags('Peers')
 @Controller({

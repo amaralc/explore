@@ -1,6 +1,10 @@
 import { OperationObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 
 const description = `
+---
+\`Experimental\`
+---
+
 # Create a new Peer
 
 This endpoint help you to create a new Peer.
