@@ -3,19 +3,20 @@
  * This is only a minimal backend to get started.
  */
 
-import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { configDto } from '@peerlab/researchers/peers/adapters/config.dto';
 import { ApiModule } from '@peerlab/researchers/peers/adapters/controllers/rest-api/api.module';
 import { version } from '@peerlab/root/package.json';
 import { ApiKeyGuard } from './guards/api-key.guard';
+import { mainDescriptionMarkdown } from './main.docs';
 
 const setupOpenApi = (app: INestApplication) => {
   // Setting up Swagger document
   const options = new DocumentBuilder()
     .setTitle('Peers RESTful API')
-    .setDescription('An API to find peers for your research project')
+    .setDescription(mainDescriptionMarkdown)
     .setVersion(version)
     .build();
 
@@ -25,6 +26,8 @@ const setupOpenApi = (app: INestApplication) => {
 
 const bootstrap = async () => {
   const app = await NestFactory.create(ApiModule);
+
+  // Enable CORS for specific domains
   app.enableCors({
     origin:
       /^(?:https?:\/\/)?.*\.my\.domain|^(?:https?:\/\/)?localhost(:\d+)?|^(?:https?:\/\/)?(my-project-).*-my-team\.vercel\.app/,
@@ -44,6 +47,11 @@ const bootstrap = async () => {
 
   // Use guards on all routes
   app.useGlobalGuards(new ApiKeyGuard());
+
+  // Enable versioning
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
 
   // Setting up Swagger document
   setupOpenApi(app);

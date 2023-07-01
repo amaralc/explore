@@ -11,7 +11,10 @@ import { GetPeersResponseDto } from './get-peers-response.dto';
 import { postMethodDocs } from './swagger';
 
 @ApiTags('Peers')
-@Controller('peers')
+@Controller({
+  path: 'peers',
+  version: ['0'],
+})
 export class PeersRestController {
   constructor(
     private createPeerService: CreatePeerService,

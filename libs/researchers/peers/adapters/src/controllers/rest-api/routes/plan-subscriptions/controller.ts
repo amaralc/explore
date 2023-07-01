@@ -2,7 +2,10 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { ListPaginatedPlanSubscriptionsService } from '@peerlab/researchers/peers/core/domains/plan-subscriptions/services/list-paginated-plan-subscriptions.service';
 import { PaginationQueryDto } from '@peerlab/researchers/peers/core/shared/dto/pagination-query.dto';
 
-@Controller('plan-subscriptions')
+@Controller({
+  path: 'plan-subscriptions',
+  version: ['0'],
+})
 export class PlanSubscriptionsRestController {
   constructor(private listPaginatedPlanSubscriptionsService: ListPaginatedPlanSubscriptionsService) {}
 
