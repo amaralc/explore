@@ -1,7 +1,7 @@
 {
-  "name": "iac-modules-gcp-apis",
+  "name": "iac-modules-neon-postgresql-dbms",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/iac-modules/gcp-apis",
+  "sourceRoot": "libs/iac-modules/neon-postgresql-dbms",
   "projectType": "library",
   "implicitDependencies": [],
   "targets": {},

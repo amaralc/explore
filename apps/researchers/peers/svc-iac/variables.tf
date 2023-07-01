@@ -66,3 +66,9 @@ variable "gcp_vpc_access_connector_name" {
   description = "The name of the VPC access connector"
   type        = string
 }
+
+variable "source_environment_branch_name" {
+  description = "The name of the source environment branch"
+  type        = string
+  default     = null
+}

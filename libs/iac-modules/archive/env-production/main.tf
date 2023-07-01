@@ -1,10 +1,10 @@
-locals {
-  branch_name = "production"
+output "branch_name" {
+  value = var.branch_name
 }
 
 # Parse branch name to environment name
 data "external" "bash" {
-  program = ["bash", "-c", "branch_name='${local.branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
+  program = ["bash", "-c", "branch_name='${var.branch_name}'; environment_name=$(echo \"$branch_name\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
 }
 
 locals {
@@ -55,21 +55,21 @@ module "researchers-peers" {
 # Application Shell
 module "core-platform-shell-browser" {
   source           = "../../../apps/core/platform-shell-browser/iac/production" # The path to the module
-  environment_name = local.branch_name                                          # The name of the branch
+  environment_name = var.branch_name                                            # The name of the branch
   depends_on       = [module.researchers-peers]
 }
 
 # Documentation with Docusaurus
 module "dx-dev-docs-browser" {
   source           = "../../../apps/dx/dev-docs-browser/iac/production" # The path to the module
-  environment_name = local.branch_name                                  # The name of the branch
+  environment_name = var.branch_name                                    # The name of the branch
   depends_on       = [module.researchers-peers]
 }
 
 # Nx Graph
 module "core-root-shell-graph" {
   source           = "../../../apps/core/root-shell-graph/iac/production" # The path to the module
-  environment_name = local.branch_name                                    # The name of the branch
+  environment_name = var.branch_name                                      # The name of the branch
 }
 
 # # Researchers Peers Microservice

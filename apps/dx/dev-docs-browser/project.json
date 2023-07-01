@@ -2,10 +2,10 @@
   "name": "dx-dev-docs-browser",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "implicitDependencies": ["docusaurus"],
+  "implicitDependencies": ["docusaurus", "researchers-peers-svc-rest-api"],
   "sourceRoot": "apps/dx/dev-docs-browser/src",
   "targets": {
-    "build": {
+    "build-docs": {
       "executor": "@peerlab/docusaurus:browser",
       "options": {
         "outputPath": "dist/apps/dx/dev-docs-browser"

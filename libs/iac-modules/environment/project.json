@@ -1,0 +1,15 @@
+{
+  "name": "iac-modules-environment",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iac-modules/environment",
+  "projectType": "library",
+  "implicitDependencies": [
+    "iac-modules-gcp-vpc",
+    "iac-modules-gcp-apis",
+    "iac-modules-gcp-postgresql-dbms-environment",
+    "iac-modules-environment-vercel",
+    "researchers-peers-svc-iac"
+  ],
+  "targets": {},
+  "tags": []
+}

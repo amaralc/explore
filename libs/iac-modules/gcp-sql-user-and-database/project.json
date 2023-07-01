@@ -1,9 +1,0 @@
-{
-  "name": "modules-gcp-sql-user-and-database",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/core/platform-shell-iac/modules/gcp-sql-user-and-database",
-  "projectType": "application",
-  "implicitDependencies": ["iac-modules-gcp-apis", "iac-modules-gcp-vpc", "iac-modules-gcp-postgresql-dbms"],
-  "targets": {},
-  "tags": []
-}

@@ -1,3 +1,8 @@
+variable "branch_name" {
+  description = "The name of the branch"
+  type        = string
+}
+
 variable "gcp_project_id" {
   description = "The Google Cloud project ID"
   type        = string
@@ -10,11 +15,6 @@ variable "gcp_location" {
 
 variable "short_commit_sha" {
   description = "The commit short SHA of the source code to deploy"
-  type        = string
-}
-
-variable "vercel_api_token" {
-  description = "The Vercel API token"
   type        = string
 }
 

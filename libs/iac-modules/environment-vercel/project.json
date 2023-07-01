@@ -1,7 +1,7 @@
 {
-  "name": "iac-modules-gcp-apis",
+  "name": "iac-modules-environment-vercel",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/iac-modules/gcp-apis",
+  "sourceRoot": "libs/iac-modules/environment-vercel",
   "projectType": "library",
   "implicitDependencies": [],
   "targets": {},
