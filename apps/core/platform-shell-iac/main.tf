@@ -28,10 +28,10 @@ module "production" {
 }
 
 # Branch Environment
-module "bugfix-peer-541-prevent-preview-environment-from-being-recreated" {
+module "feature-peer-541-add-docs-to-preview" {
   source                                                               = "../../../libs/iac-modules/environment"
-  branch_name                                                          = "bugfix/PEER-541-prevent-preview-environment-from-being-recreated"
-  environment_name                                                     = "bugfix-peer-541-prevent-preview-environment-from-being-recreated" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
+  branch_name                                                          = "feature/PEER-541-add-docs-to-preview"
+  environment_name                                                     = "feature-peer-541-add-docs-to-preview" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
   source_environment_branch_name                                       = module.production.branch_name
   source_environment_dbms_instance_id                                  = module.production.postgresql_dbms_instance_id
   short_commit_sha                                                     = var.short_commit_sha
@@ -40,8 +40,8 @@ module "bugfix-peer-541-prevent-preview-environment-from-being-recreated" {
   gcp_docker_artifact_repository_name                                  = var.gcp_docker_artifact_repository_name
   production_environment_core_platform_shell_browser_vercel_project_id = module.production.core_platform_shell_browser_vercel_project_id
   production_environment_core_root_shell_graph_vercel_project_id       = module.production.core_root_shell_graph_vercel_project_id
-  # production_environment_dx_dev_docs_browser_vercel_project_id         = module.production.dx_dev_docs_browser_vercel_project_id
-  depends_on = [module.gcp_apis, module.production]
+  production_environment_dx_dev_docs_browser_vercel_project_id         = module.production.dx_dev_docs_browser_vercel_project_id
+  depends_on                                                           = [module.gcp_apis, module.production]
 }
 
 
