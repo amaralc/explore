@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.0](https://github.com/amaralc/peerlab/compare/peerlab@0.26.7...peerlab@0.27.0) (2023-07-01)
+
+### Features
+
+- **PEER-541:** enable docs and create environment ([0e10521](https://github.com/amaralc/peerlab/commit/0e10521256136242d942e9021fff279c7e1726bc))
+
+### Bug Fixes
+
+- **PEER-541:** adjust condition in pipeline ([97646f4](https://github.com/amaralc/peerlab/commit/97646f482e8861f3252c5001e9f5d82551f6a03e))
+
 ## [0.26.7](https://github.com/amaralc/peerlab/compare/peerlab@0.26.6...peerlab@0.26.7) (2023-07-01)
 
 **Note:** Version bump only for package peerlab
