@@ -7,7 +7,7 @@
 # - https://dev.to/xcanchal/monorepo-using-lerna-conventional-commits-and-github-packages-4m8m
 # - https://dev.to/xcanchal/automatic-versioning-in-a-lerna-monorepo-using-github-actions-4hij
 
-name: Pull Request Checks and Provisioning of Preview Environment
+name: Build, tag using the branch name and redeploy system
 
 on:
   pull_request:

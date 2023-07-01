@@ -1,4 +1,4 @@
-name: Build and Push Docker image
+name: Build, tag as "production" and redeploy system
 
 on:
   create:
