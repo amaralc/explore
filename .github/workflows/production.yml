@@ -59,7 +59,8 @@ jobs:
 
       - name: Check if app was affected
         run: |
-          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
+          echo 'Last tagged commit before head:' $(git for-each-ref --sort=-taggerdate --format '%(refname) %(objectname)' refs/tags | head -n 2 | tail -n 1)
+          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | head -n 2 | tail -n 1)
           echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
 
           yarn install
