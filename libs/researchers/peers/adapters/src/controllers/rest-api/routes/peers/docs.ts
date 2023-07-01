@@ -12,9 +12,6 @@ This endpoint help you to create a new Peer.
 ## Peer Definition
 
 A Peer is a node that is connected to the network. It can be a researcher or a participant.
-
-... TODO
-
 `;
 
 export const postMethodDocs: Partial<OperationObject> = {
