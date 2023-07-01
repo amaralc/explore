@@ -46,15 +46,19 @@ jobs:
         run: |
           if [[ "${{ github.event_name }}" == "push" ]]; then
             branch_name=${GITHUB_REF#refs/heads/}
+            echo "branch_name:" $branch_name
           elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
             branch_name=${GITHUB_HEAD_REF}
+            echo "branch_name:" $branch_name
           else
             # If the event is a tag push, then checkout the tag and find the branch that contains the tag
             git fetch --depth=1 origin +refs/tags/*:refs/tags/*
             git checkout "${GITHUB_REF#refs/tags/}"
             branch_name=$(git branch -r --contains tags/${GITHUB_REF#refs/tags/} | sed -n 's/origin\///p' | head -n1)
+            echo "branch_name:" $branch_name
           fi
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
+          echo "parsed_branch_name:" $parsed_branch_name
           echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
 
       - name: Check if app was affected
