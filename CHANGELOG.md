@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.0](https://github.com/amaralc/peerlab/compare/peerlab@0.25.0...peerlab@0.26.0) (2023-07-01)
+
+### Features
+
+- **PEER-541:** enable versioning and describe stability levels ([d2b3cb2](https://github.com/amaralc/peerlab/commit/d2b3cb2140577e11d2b7a5cc94a3c057fe73dbfd))
+
 ## [0.25.0](https://github.com/amaralc/peerlab/compare/peerlab@0.24.3...peerlab@0.25.0) (2023-07-01)
 
 ### Features
