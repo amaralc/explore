@@ -31,6 +31,7 @@ module "production" {
 
 # TODO -> How to prevent one preview branch from applying changes that disrupt other preview environments?
 # #       Option: create a new project for every preview branch?
+# #       Actually the entire tfstate should be isolated for each preview branch
 
 # Branch Environment
 module "feature-peer-541-isolate-environments-and-terraform-states" {
