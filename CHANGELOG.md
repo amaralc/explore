@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.0](https://github.com/amaralc/peerlab/compare/peerlab@0.24.3...peerlab@0.25.0) (2023-07-01)
+
+### Features
+
+- **PEER-541:** add docs and graph ([be805ee](https://github.com/amaralc/peerlab/commit/be805eed883a14d87ffd4610afae960f77412fb5))
+- **PEER-541:** add rest api staging preview ([8eabc87](https://github.com/amaralc/peerlab/commit/8eabc8765db8a9bd95fe7dffe15893d87ab3963d))
+- **PEER-541:** add wrapper environment ([8814183](https://github.com/amaralc/peerlab/commit/88141832f45ccce602b286889a3ecad2d7022a8d))
+- **PEER-541:** apply terraform in pr workflow ([992a6a4](https://github.com/amaralc/peerlab/commit/992a6a40e6e618d3737999c16434a78e3f4b00ee))
+- **PEER-541:** build staging preview ([2180329](https://github.com/amaralc/peerlab/commit/2180329b7878084225c166dd53699f5c5e02a5f9))
+- **PEER-541:** create system wide branch model with gcp and sql clone ([6d9f19a](https://github.com/amaralc/peerlab/commit/6d9f19abd176ce93f7db72037ae52f386876a3cf))
+- **PEER-541:** create vercel environment module and add deployment ([4f599b4](https://github.com/amaralc/peerlab/commit/4f599b4cbd19cbd63776331452f4e4a09d6a5d39))
+- **PEER-541:** test preview environment differene in peers service ([c36618c](https://github.com/amaralc/peerlab/commit/c36618c6df43b63ddfb7ce2f166887782e71c1e9))
+
+### Bug Fixes
+
+- **PEER-541:** adjust cloud run service name format ([456e8bf](https://github.com/amaralc/peerlab/commit/456e8bfdaf240e59af4ca8cb3c66488a1747877d))
+- **PEER-541:** adjust condition to build new image ([4e4f6a6](https://github.com/amaralc/peerlab/commit/4e4f6a61d827d3108bc29dcc1f7b39a61d5ddc60))
+- **PEER-541:** adjust conditions to build image ([67cf1e6](https://github.com/amaralc/peerlab/commit/67cf1e6dbd9dad8444e07b9dee9a3e518babab9f))
+- **PEER-541:** adjust project id reference ([86234aa](https://github.com/amaralc/peerlab/commit/86234aa69bd89493f3ebabbc9a39b600e3d95f14))
+- **PEER-541:** authenticate before checking if image exist ([1494e58](https://github.com/amaralc/peerlab/commit/1494e58cca5ffcea5ce433b6164ac30c1fe2540a))
+- **PEER-541:** avoid repetition of service account names and ending with dash ([6526dbd](https://github.com/amaralc/peerlab/commit/6526dbd3aaff551c832c239c4a86bd8e5b090774))
+- **PEER-541:** create service account name with conditions ([944f07a](https://github.com/amaralc/peerlab/commit/944f07aa551e011e3d7059d254065a652d19020a))
+- **PEER-541:** prevent environments for being recreated unnecessarily ([e986415](https://github.com/amaralc/peerlab/commit/e986415c4475837a1a3b14dce4209154cdd1d4b2))
+- **PEER-541:** prevent preview modules from being recreated ([f5adb2c](https://github.com/amaralc/peerlab/commit/f5adb2cdf9b1e39599dc1f2c5b3083158aebb27a))
+- **PEER-541:** validate username and database_name ([e2138ca](https://github.com/amaralc/peerlab/commit/e2138cadd5ad0fb4f045dbbe880b53cd83f9f8f3))
+
 ## [0.24.3](https://github.com/amaralc/peerlab/compare/peerlab@0.24.2...peerlab@0.24.3) (2023-06-24)
 
 **Note:** Version bump only for package peerlab
