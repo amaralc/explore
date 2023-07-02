@@ -241,7 +241,7 @@ jobs: # A workflow can have multiple jobs
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/preview/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -260,23 +260,23 @@ jobs: # A workflow can have multiple jobs
           echo "Running terraform init..."
           echo ""
           terraform init -backend-config='prefix=${{ env.environment_name }}' # Set the backend prefix as the parsed branch name (environment name)
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/preview
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/preview
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
           terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "core_platform_shell_browser_vercel_project_id=${{ secrets.CORE_PLATFORM_SHELL_BROWSER_VERCEL_PROJECT_ID }}" -var "core_root_shell_graph_vercel_project_id=${{ secrets.CORE_ROOT_SHELL_GRAPH_VERCEL_PROJECT_ID }}" -var "dx_dev_docs_browser_vercel_project_id=${{ secrets.DX_DEV_DOCS_BROWSER_VERCEL_PROJECT_ID }}"
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/preview
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/preview
