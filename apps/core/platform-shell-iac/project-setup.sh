@@ -80,12 +80,15 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # Create a service account
 # gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
 
-# MANUAL STEP
+# MANUAL STEPS
 
-# Add Project Creator role to service account
+# 1. Add Project Creator role to service account
 # - Access https://console.cloud.google.com/cloud-resource-manager
 # - Follow steps documented in https://cloud.google.com/resource-manager/docs/default-access-control
 # - References: https://registry.terraform.io/modules/terraform-google-modules/project-factory/google/latest#permissions
+
+# 2. Add Billing Account User role to service account
+# - References: https://cloud.google.com/billing/docs/how-to/grant-access-to-billing?hl=pt-br
 
 # # Create a key for the service account
 # gcloud iam service-accounts keys create ./apps/core/platform-shell-iac/credentials.json --iam-account $GCP_SERVICE_ACCOUNT_EMAIL
