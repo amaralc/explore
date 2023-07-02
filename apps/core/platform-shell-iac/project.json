@@ -5,32 +5,41 @@
   "projectType": "application",
   "implicitDependencies": ["iac-modules-environment", "iac-modules-gcp-apis"],
   "targets": {
-    "terraform-init-production": {
+    "production-terraform-init": {
       "command": "cd apps/core/platform-shell-iac/production && terraform init"
     },
-    "terraform-validate-production": {
+    "production-terraform-validate": {
       "command": "cd apps/core/platform-shell-iac/production && terraform validate"
     },
-    "terraform-plan-production": {
+    "production-terraform-plan": {
       "command": "cd apps/core/platform-shell-iac/production && terraform plan -out=tfplan -var-file=env.tfvars"
     },
-    "terraform-apply-production": {
+    "production-terraform-apply": {
       "command": "cd apps/core/platform-shell-iac/production && terraform apply -auto-approve tfplan && terraform output"
     },
-    "terraform-destroy-production": {
+    "production-terraform-destroy": {
       "command": "cd apps/core/platform-shell-iac/production && terraform destroy -var-file=env.tfvars -auto-approve"
     },
-    "terraform-output-production": {
+    "production-terraform-output": {
       "command": "cd apps/core/platform-shell-iac/production && terraform output"
     },
-    "terraform-init-preview": {
+    "preview-terraform-init": {
       "command": "cd apps/core/platform-shell-iac/preview && terraform init -backend-config='prefix=feature-peer-541-isolate-environments-and-terraform-states'"
     },
-    "terraform-validate-preview": {
+    "preview-terraform-validate": {
       "command": "cd apps/core/platform-shell-iac/preview && terraform validate"
     },
-    "terraform-plan-preview": {
+    "preview-terraform-plan": {
       "command": "cd apps/core/platform-shell-iac/preview && terraform plan -out=tfplan -var-file=env.tfvars"
+    },
+    "preview-terraform-apply": {
+      "command": "cd apps/core/platform-shell-iac/preview && terraform apply -auto-approve tfplan && terraform output"
+    },
+    "preview-terraform-destroy": {
+      "command": "cd apps/core/platform-shell-iac/preview && terraform destroy -var-file=env.tfvars -auto-approve"
+    },
+    "preview-terraform-output": {
+      "command": "cd apps/core/platform-shell-iac/preview && terraform output"
     }
   },
   "tags": []
