@@ -1,18 +1,3 @@
-# Enable APIs
-module "gcp_apis" {
-  source         = "../../../../libs/iac-modules/gcp-apis" // path to the module
-  gcp_project_id = var.gcp_project_id
-  apis = [
-    "compute.googleapis.com",
-    "servicenetworking.googleapis.com",
-    "sqladmin.googleapis.com",
-    "iam.googleapis.com",
-    "secretmanager.googleapis.com",
-    "vpcaccess.googleapis.com",
-    "run.googleapis.com"
-  ]
-}
-
 # TODO -> How to prevent one preview branch from applying changes that disrupt other preview environments?
 # #       Option: create a new project for every preview branch?
 # #       Actually the entire tfstate should be isolated for each preview branch
@@ -25,11 +10,22 @@ data "google_sql_database_instance" "production" {
   name = substr("${var.gcp_project_id}-${local.source_environment_branch_name}", 0, 63)
 }
 
+data "local_file" "credentials" {
+  filename = "${path.module}/credentials.json"
+}
+
+locals {
+  credentials           = jsondecode(data.local_file.credentials.content)
+  service_account_email = local.credentials.client_email
+}
+
 # Branch Environment
 module "feature-peer-541-isolate-environments-and-terraform-states" {
   source                                                               = "../../../../libs/iac-modules/environment"
   branch_name                                                          = "feature/PEER-541-isolate-environments-and-terraform-states"
   environment_name                                                     = "feature-peer-541-isolate-environments-and-terraform-states" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
+  owner_account_email                                                  = var.owner_account_email
+  creator_service_account_email                                        = local.service_account_email
   source_environment_branch_name                                       = local.source_environment_branch_name
   source_environment_dbms_instance_id                                  = data.google_sql_database_instance.production.id
   short_commit_sha                                                     = var.short_commit_sha
@@ -41,5 +37,5 @@ module "feature-peer-541-isolate-environments-and-terraform-states" {
   production_environment_core_platform_shell_browser_vercel_project_id = var.core_platform_shell_browser_vercel_project_id
   production_environment_core_root_shell_graph_vercel_project_id       = var.core_root_shell_graph_vercel_project_id
   production_environment_dx_dev_docs_browser_vercel_project_id         = var.dx_dev_docs_browser_vercel_project_id
-  depends_on                                                           = [module.gcp_apis, data.google_sql_database_instance.production]
+  depends_on                                                           = [data.google_sql_database_instance.production]
 }

@@ -1,3 +1,10 @@
+variable "owner_account_email" {
+  description = "The email of the account that will own the resources"
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
 variable "gcp_billing_account_id" {
   description = "The ID of the GCP billing account to associate this project with"
   type        = string

@@ -7,44 +7,57 @@ output "branch_name" {
   value = var.branch_name
 }
 
-# Generate a random ID with the random_id resource. This ID will be used as prefix to create a unique project ID for the new GCP project.
-resource "random_id" "instance" {
-  byte_length = 8
+module "environment_id" {
+  source = "../random-fixed-id"
 }
 
-# The null_resource with lifecycle block and ignore_changes argument is used to ensure that the random ID does not change in subsequent runs.
-resource "null_resource" "ignore_id_changes" {
-  triggers = {
-    id = random_id.instance.hex
-  }
-
-  lifecycle {
-    ignore_changes = [
-      triggers,
-    ]
-  }
+locals {
+  short_environment_name = local.is_production_environment ? "production" : "${substr(var.environment_name, 0, 18)}-${module.environment_id.instance}" # Limit the name to 24 characters
 }
 
-# Create a project in the GCP organization if the environment is a preview environment
-resource "google_project" "project" {
-  count           = local.is_production_environment ? 0 : 1
-  project_id      = substr("${random_id.instance.hex}-${var.gcp_project_id}-${var.environment_name}", 0, 30) # Name cannot have more than 30 characters
-  name            = substr("${random_id.instance.hex}-${var.gcp_project_id}-${var.environment_name}", 0, 30) # Name cannot have more than 30 characters
-  billing_account = var.gcp_billing_account_id
-  org_id          = var.gcp_organization_id
+# Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
+module "gcp_project" {
+  source                        = "../gcp-project"
+  count                         = 0 # local.is_production_environment ? 0 : 1 # For now, we wont use child projects in order to avoid billing account issues
+  is_production_environment     = local.is_production_environment
+  gcp_billing_account_id        = var.gcp_billing_account_id
+  gcp_organization_id           = var.gcp_organization_id
+  gcp_project_id                = var.gcp_project_id
+  environment_name              = local.short_environment_name
+  creator_service_account_email = var.creator_service_account_email
+  owner_account_email           = var.owner_account_email
 }
+
 
 # Define which project ID to use
 locals {
-  project_id = local.is_production_environment ? var.gcp_project_id : google_project.project[0].id
+  project_id = var.gcp_project_id # local.is_production_environment ? var.gcp_project_id : module.gcp_project[0].project_id # For now, we wont use child projects in order to avoid billing account issues
+}
+
+# Enable APIs
+module "gcp_apis" {
+  count          = local.is_production_environment ? 1 : 0 # Since we are not using child projects, we need to enable APIs only in the production environment
+  source         = "../gcp-apis"                           // path to the module
+  gcp_project_id = local.project_id
+  apis = [
+    "compute.googleapis.com",
+    "servicenetworking.googleapis.com",
+    "sqladmin.googleapis.com",
+    "iam.googleapis.com",
+    "secretmanager.googleapis.com",
+    "vpcaccess.googleapis.com",
+    "run.googleapis.com",
+    "cloudbilling.googleapis.com"
+  ]
 }
 
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
   source           = "../gcp-vpc"
-  environment_name = var.environment_name
+  environment_name = local.short_environment_name # Limit the name to 24 characters
   gcp_project_id   = local.project_id
   gcp_location     = var.gcp_location
+  depends_on       = [module.gcp_project, module.gcp_apis]
 }
 
 output "vpc" {
@@ -54,14 +67,14 @@ output "vpc" {
 # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 module "postgresql_dbms" {
   source                          = "../gcp-postgresql-dbms-environment"
-  environment_name                = var.environment_name
+  environment_name                = local.short_environment_name
   gcp_project_id                  = local.project_id
   gcp_location                    = var.gcp_location
   gcp_network_id                  = module.vpc.private_network.id
   gcp_private_vpc_connection_id   = module.vpc.private_vpc_connection.id
   gcp_sql_dbms_source_instance_id = var.source_environment_dbms_instance_id
   source_environment_branch_name  = var.source_environment_branch_name
-  depends_on                      = [module.vpc]
+  depends_on                      = [module.gcp_project, module.vpc, module.gcp_apis]
 }
 
 output "postgresql_dbms_instance_id" {
@@ -72,7 +85,7 @@ output "postgresql_dbms_instance_id" {
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
-  environment_name                    = var.environment_name
+  environment_name                    = local.short_environment_name
   gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
@@ -80,7 +93,7 @@ module "researchers-peers" {
   gcp_sql_dbms_instance_host          = module.postgresql_dbms.gcp_sql_dbms_instance_host
   gcp_sql_dbms_instance_name          = module.postgresql_dbms.gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name       = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
-  depends_on                          = [module.postgresql_dbms]
+  depends_on                          = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
 
 # Application Shell

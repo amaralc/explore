@@ -1,5 +1,5 @@
 {
-  "name": "iac-modules-gcp-service-account-permissions",
+  "name": "iac-modules-gcp-account-permissions",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/iac-modules/gcp-service-account-permissions",
   "projectType": "library",
