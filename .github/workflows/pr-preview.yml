@@ -217,7 +217,7 @@ jobs: # A workflow can have multiple jobs
     needs: [build]
     runs-on: ubuntu-latest
     environment:
-      name: preview
+      name: core-platform-shell-iac-preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
