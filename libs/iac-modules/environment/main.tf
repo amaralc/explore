@@ -155,11 +155,11 @@ module "core-root-shell-graph" {
   branch_name                      = var.branch_name
   is_production_environment        = local.is_production_environment
   install_command                  = local.is_production_environment ? "yarn install" : null
-  build_command                    = local.is_production_environment ? "yarn nx build-graph core-root-shell-graph --prod" : null                 # Use build-graph command to prevent building dependencies used for graphing purposes only
-  output_directory                 = local.is_production_environment ? "dist/apps/core/root-shell-graph" : null                                  # Attention to the output of non-nextjs projects
-  ignore_command                   = local.is_production_environment ? "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
-  preview_environment_variables    = local.is_production_environment ? null : null                                                               # Map of string key and values
-  production_environment_variables = local.is_production_environment ? null : null                                                               # Set of objects with key, value and target (production, preview, development)
+  build_command                    = local.is_production_environment ? "yarn nx build-graph core-root-shell-graph --prod" : null # Use build-graph command to prevent building dependencies used for graphing purposes only
+  output_directory                 = local.is_production_environment ? "dist/apps/core/root-shell-graph" : null                  # Attention to the output of non-nextjs projects
+  ignore_command                   = local.is_production_environment ? null : null                                               # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
+  preview_environment_variables    = local.is_production_environment ? null : null                                               # Map of string key and values
+  production_environment_variables = local.is_production_environment ? null : null                                               # Set of objects with key, value and target (production, preview, development)
   source_environment_project_id    = var.production_environment_core_root_shell_graph_vercel_project_id
 }
 

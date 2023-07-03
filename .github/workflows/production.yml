@@ -126,7 +126,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/production/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -145,23 +145,23 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/production
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/production
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
           terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/production
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform-shell-iac
+        working-directory: apps/core/platform-shell-iac/production
