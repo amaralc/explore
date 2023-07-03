@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.1](https://github.com/amaralc/peerlab/compare/peerlab@0.28.0...peerlab@0.28.1) (2023-07-03)
+
+### Bug Fixes
+
+- **PEER-541:** remove requirement for org id ([1b87748](https://github.com/amaralc/peerlab/commit/1b8774848e2656f059c67692562d5c8e5b7f2553))
+
 ## [0.28.0](https://github.com/amaralc/peerlab/compare/peerlab@0.27.0...peerlab@0.28.0) (2023-07-03)
 
 ### Features
