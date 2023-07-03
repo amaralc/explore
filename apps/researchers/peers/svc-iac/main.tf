@@ -61,9 +61,10 @@ module "service_account" {
 
 # Add permissions to service account
 module "service_account_permissions" {
-  source                = "../../../../libs/iac-modules/gcp-service-account-permissions" // path to the module
-  gcp_project_id        = var.gcp_project_id
-  service_account_email = module.service_account.instance.email
+  source              = "../../../../libs/iac-modules/gcp-account-permissions" // path to the module
+  gcp_project_id      = var.gcp_project_id
+  account_email       = module.service_account.instance.email
+  account_member_type = "serviceAccount"
   gcp_roles = [
     "roles/secretmanager.secretAccessor",
     "roles/iam.serviceAccountUser",

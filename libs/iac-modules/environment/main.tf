@@ -1,17 +1,63 @@
 locals {
-  is_production_environment = var.source_environment_branch_name == null ? true : false
+  is_production_environment = var.source_environment_branch_name == null ? true : false # Set feature flag to control the type of environment
 }
 
+# Output the branch name for other modules to use as source
 output "branch_name" {
   value = var.branch_name
+}
+
+module "environment_id" {
+  source = "../random-fixed-id"
+}
+
+locals {
+  short_environment_name = local.is_production_environment ? "production" : "${substr(var.environment_name, 0, 18)}-${module.environment_id.instance}" # Limit the name to 24 characters
+}
+
+# Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
+module "gcp_project" {
+  source                        = "../gcp-project"
+  count                         = 0 # local.is_production_environment ? 0 : 1 # For now, we wont use child projects in order to avoid billing account issues
+  is_production_environment     = local.is_production_environment
+  gcp_billing_account_id        = var.gcp_billing_account_id
+  gcp_organization_id           = var.gcp_organization_id
+  gcp_project_id                = var.gcp_project_id
+  environment_name              = local.short_environment_name
+  creator_service_account_email = var.creator_service_account_email
+  owner_account_email           = var.owner_account_email
+}
+
+
+# Define which project ID to use
+locals {
+  project_id = var.gcp_project_id # local.is_production_environment ? var.gcp_project_id : module.gcp_project[0].project_id # For now, we wont use child projects in order to avoid billing account issues
+}
+
+# Enable APIs
+module "gcp_apis" {
+  count          = local.is_production_environment ? 1 : 0 # Since we are not using child projects, we need to enable APIs only in the production environment
+  source         = "../gcp-apis"                           // path to the module
+  gcp_project_id = local.project_id
+  apis = [
+    "compute.googleapis.com",
+    "servicenetworking.googleapis.com",
+    "sqladmin.googleapis.com",
+    "iam.googleapis.com",
+    "secretmanager.googleapis.com",
+    "vpcaccess.googleapis.com",
+    "run.googleapis.com",
+    "cloudbilling.googleapis.com"
+  ]
 }
 
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
   source           = "../gcp-vpc"
-  environment_name = var.environment_name
-  gcp_project_id   = var.gcp_project_id
+  environment_name = local.short_environment_name # Limit the name to 24 characters
+  gcp_project_id   = local.project_id
   gcp_location     = var.gcp_location
+  depends_on       = [module.gcp_project, module.gcp_apis]
 }
 
 output "vpc" {
@@ -21,14 +67,14 @@ output "vpc" {
 # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 module "postgresql_dbms" {
   source                          = "../gcp-postgresql-dbms-environment"
-  environment_name                = var.environment_name
-  gcp_project_id                  = var.gcp_project_id
+  environment_name                = local.short_environment_name
+  gcp_project_id                  = local.project_id
   gcp_location                    = var.gcp_location
   gcp_network_id                  = module.vpc.private_network.id
   gcp_private_vpc_connection_id   = module.vpc.private_vpc_connection.id
   gcp_sql_dbms_source_instance_id = var.source_environment_dbms_instance_id
   source_environment_branch_name  = var.source_environment_branch_name
-  depends_on                      = [module.vpc]
+  depends_on                      = [module.gcp_project, module.vpc, module.gcp_apis]
 }
 
 output "postgresql_dbms_instance_id" {
@@ -40,26 +86,15 @@ module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
-  gcp_project_id                      = var.gcp_project_id
+  gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
   gcp_sql_dbms_instance_host          = module.postgresql_dbms.gcp_sql_dbms_instance_host
   gcp_sql_dbms_instance_name          = module.postgresql_dbms.gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name       = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
-  depends_on                          = [module.postgresql_dbms]
+  depends_on                          = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
-
-
-# module "core-platform-shell-browser" {
-#   source                        = "../../../apps/core/platform-shell-browser/iac" # The path to the module
-#   branch_name                   = var.branch_name                                 # The name of the branch
-#   is_production_environment     = local.is_production_environment
-#   source_environment_project_id = var.production_environment_core_platform_shell_browser_vercel_project_id
-#   depends_on                    = [module.researchers-peers]
-# }
-
-
 
 # Application Shell
 module "core-platform-shell-browser" {
@@ -85,9 +120,7 @@ output "core_platform_shell_browser_vercel_project_id" {
   value = local.is_production_environment ? module.core-platform-shell-browser.vercel_project_id : null
 }
 
-
-
-# # Documentation with Docusaurus
+# Documentation with Docusaurus
 module "dx-dev-docs-browser" {
   source                           = "../environment-vercel"
   project_name                     = "dx-dev-docs-browser"
@@ -112,7 +145,7 @@ output "dx_dev_docs_browser_vercel_project_id" {
   value = local.is_production_environment ? module.dx-dev-docs-browser.vercel_project_id : null
 }
 
-# # Nx Graph
+# Nx Graph
 module "core-root-shell-graph" {
   source                           = "../environment-vercel"
   project_name                     = "core-root-shell-graph"
