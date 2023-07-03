@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.0](https://github.com/amaralc/peerlab/compare/peerlab@0.27.0...peerlab@0.28.0) (2023-07-03)
+
+### Features
+
+- **PEER-541:** add environment name as fixed id ([1116bfd](https://github.com/amaralc/peerlab/commit/1116bfda4b0977c9bee090bfdc407173c269771f))
+- **PEER-541:** create preview environments in separate projects ([60d6cdd](https://github.com/amaralc/peerlab/commit/60d6cddc7939b1ea9b066d1d5731986922b919d1))
+- **PEER-541:** move preview environment to separate state ([97b5eed](https://github.com/amaralc/peerlab/commit/97b5eed18600ba833f118e73c0bf77ab31807f15))
+
+### Bug Fixes
+
+- **PEER-514:** adjust environment name ([531c442](https://github.com/amaralc/peerlab/commit/531c4429b50e7764b3e61253a2e6d7681c1b5567))
+- **PEER-541:** adjust path ([e20d8d6](https://github.com/amaralc/peerlab/commit/e20d8d650393d8780e67ad099826c01343b0a541))
+
 ## [0.27.0](https://github.com/amaralc/peerlab/compare/peerlab@0.26.7...peerlab@0.27.0) (2023-07-01)
 
 ### Features
