@@ -11,8 +11,13 @@ module "environment_id" {
   source = "../random-fixed-id"
 }
 
+module "parsed_branch_name" {
+  source      = "../parsed-branch-name"
+  branch_name = var.branch_name
+}
+
 locals {
-  short_environment_name = local.is_production_environment ? "production" : "${substr(var.environment_name, 0, 18)}-${module.environment_id.instance}" # Limit the name to 24 characters
+  short_environment_name = local.is_production_environment ? "production" : "${substr(module.parsed_branch_name.instance, 0, 18)}-${module.environment_id.instance}" # Limit the name to 24 characters
 }
 
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
@@ -67,7 +72,7 @@ output "vpc" {
 # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 module "postgresql_dbms" {
   source                          = "../gcp-postgresql-dbms-environment"
-  environment_name                = local.short_environment_name
+  environment_name                = module.parsed_branch_name.instance
   gcp_project_id                  = local.project_id
   gcp_location                    = var.gcp_location
   gcp_network_id                  = module.vpc.private_network.id
@@ -85,7 +90,7 @@ output "postgresql_dbms_instance_id" {
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
-  environment_name                    = var.environment_name
+  environment_name                    = module.parsed_branch_name.instance
   gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
