@@ -20,10 +20,10 @@ locals {
 }
 
 # Branch Environment
-module "feature-peer-541-isolate-environments-and-terraform-states" {
+module "refactor-peer-541-parse-branch-name-within-module" {
   source                                                               = "../../../../libs/iac-modules/environment"
-  branch_name                                                          = "feature/PEER-541-isolate-environments-and-terraform-states"
-  environment_name                                                     = "feature-peer-541-isolate-environments-and-terraform-states" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
+  branch_name                                                          = "refactor/PEER-541-parse-branch-name-within-module"
+  environment_name                                                     = "refactor-peer-541-parse-branch-name-within-module" # environment_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'). [hypothesis] Passing this value hardcoded here prevents the module from being destroyed and recreated unnecessarily. Take a look at the description of the environment_name variable in the environment module.
   owner_account_email                                                  = var.owner_account_email
   creator_service_account_email                                        = local.service_account_email
   source_environment_branch_name                                       = local.source_environment_branch_name

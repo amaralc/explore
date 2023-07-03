@@ -2,7 +2,6 @@
 module "production" {
   source                              = "../../../../libs/iac-modules/environment"
   branch_name                         = "production"
-  environment_name                    = "production"
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
   gcp_location                        = var.gcp_location
