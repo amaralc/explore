@@ -31,16 +31,17 @@ resource "vercel_deployment" "production_deployment" {
   delete_on_destroy = true # Set false if you want to keep the production deployment after destroying the infrastructure
 }
 
-# Add a preview deployment
-resource "vercel_deployment" "preview_deployment" {
-  count             = var.is_production_environment ? 0 : 1
-  project_id        = var.is_production_environment ? "non-existing-project-id" : var.source_environment_project_id
-  ref               = var.branch_name
-  environment       = var.preview_environment_variables
-  production        = false
-  delete_on_destroy = true # Set false if you want to keep the preview deployment after destroying the infrastructure
-  depends_on        = [var.source_environment_project_id]
-}
+# # Preview deployments are automatically created by Vercel. However, we can create them manually if we want to, but the ignore command might affect that. TODO: evaluate correct use of ignore command with this approach
+# # Add a preview deployment
+# resource "vercel_deployment" "preview_deployment" {
+#   count             = var.is_production_environment ? 0 : 1
+#   project_id        = var.is_production_environment ? "non-existing-project-id" : var.source_environment_project_id
+#   ref               = var.branch_name
+#   environment       = var.preview_environment_variables
+#   production        = false
+#   delete_on_destroy = true # Set false if you want to keep the preview deployment after destroying the infrastructure
+#   depends_on        = [var.source_environment_project_id]
+# }
 
 # # An environment variable that will be created
 # # for this project for the "production" environment.

@@ -9,6 +9,7 @@ variable "gcp_organization_id" {
   description = "The ID of the GCP organization where resources will be deployed"
   type        = string
   sensitive   = true
+  default     = null
 }
 
 variable "gcp_project_id" {
