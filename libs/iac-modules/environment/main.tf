@@ -85,7 +85,7 @@ output "postgresql_dbms_instance_id" {
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
-  environment_name                    = local.short_environment_name
+  environment_name                    = var.environment_name
   gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
