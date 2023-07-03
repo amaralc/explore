@@ -1,3 +1,9 @@
+variable "destroy_preview_environments" {
+  description = "Whether to destroy preview environments"
+  type        = bool
+  default     = false
+}
+
 variable "owner_account_email" {
   description = "The email of the account that will own the resources"
   type        = string
@@ -35,10 +41,6 @@ variable "gcp_credentials_file_path" {
   sensitive   = true
   default     = "credentials.json"
 }
-
-# production_environment_core_platform_shell_browser_vercel_project_id = module.production.core_platform_shell_browser_vercel_project_id
-# production_environment_core_root_shell_graph_vercel_project_id       = module.production.core_root_shell_graph_vercel_project_id
-# production_environment_dx_dev_docs_browser_vercel_project_id         = module.production.dx_dev_docs_browser_vercel_project_id
 
 variable "core_platform_shell_browser_vercel_project_id" {
   description = "The Vercel project ID of the core-platform-shell-browser in the production environment"

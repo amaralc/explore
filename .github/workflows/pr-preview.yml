@@ -141,7 +141,7 @@ jobs: # A workflow can have multiple jobs
           echo $GITHUB_HEAD_REF
           branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
-          echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
+          echo "parsed_branch_name=$parsed_branch_name" >> $GITHUB_ENV
 
       - name: Get short commit hash
         run: |
@@ -161,7 +161,7 @@ jobs: # A workflow can have multiple jobs
       - name: Check if Docker image exists
         id: check_image
         run: |
-          IMAGE_EXISTS=$(gcloud container images list-tags ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }} --filter="tags:${{ env.environment_name }}" --format=json | jq '. | length')
+          IMAGE_EXISTS=$(gcloud container images list-tags ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }} --filter="tags:${{ env.parsed_branch_name }}" --format=json | jq '. | length')
           if [ $IMAGE_EXISTS -eq 0 ]; then
             echo "is_existing_image=false" >> $GITHUB_ENV
           else
@@ -210,7 +210,7 @@ jobs: # A workflow can have multiple jobs
           push: true
           no-cache: true
           tags: |
-            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.parsed_branch_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
 
   deploy:
@@ -229,7 +229,7 @@ jobs: # A workflow can have multiple jobs
           echo $GITHUB_HEAD_REF
           branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
-          echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
+          echo "parsed_branch_name=$parsed_branch_name" >> $GITHUB_ENV
 
       - name: Get short commit hash
         run: |
@@ -259,7 +259,7 @@ jobs: # A workflow can have multiple jobs
         run: |
           echo "Running terraform init..."
           echo ""
-          terraform init -backend-config='prefix=${{ env.environment_name }}' # Set the backend prefix as the parsed branch name (environment name)
+          terraform init -backend-config='prefix=${{ env.parsed_branch_name }}' # Set the backend prefix as the parsed branch name (environment name)
         working-directory: apps/core/platform-shell-iac/preview
 
       - name: Terraform validate

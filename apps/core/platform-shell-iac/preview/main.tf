@@ -19,8 +19,10 @@ locals {
   service_account_email = local.credentials.client_email
 }
 
+
 # Branch Environment
 module "refactor-peer-541-parse-branch-name-within-module" {
+  count                                                                = var.destroy_preview_environments == true ? 0 : 1 # Used in the production workflow to destroy preview environments after the merge
   source                                                               = "../../../../libs/iac-modules/environment"
   branch_name                                                          = "refactor/PEER-541-parse-branch-name-within-module"
   owner_account_email                                                  = var.owner_account_email
