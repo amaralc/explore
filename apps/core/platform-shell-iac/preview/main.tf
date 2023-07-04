@@ -22,6 +22,7 @@ locals {
 
 # Branch Environment
 module "refactor-peer-541-parse-branch-name-within-module" {
+  count                                                                = 0 # Destroy the module
   source                                                               = "../../../../libs/iac-modules/environment"
   branch_name                                                          = "refactor/PEER-541-parse-branch-name-within-module"
   owner_account_email                                                  = var.owner_account_email
