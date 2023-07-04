@@ -56,18 +56,18 @@ module "gcp_apis" {
   ]
 }
 
-# # Create the main Virtual Private Cloud (VPC)
-# module "vpc" {
-#   source           = "../gcp-vpc"
-#   environment_name = local.short_environment_name # Limit the name to 24 characters
-#   gcp_project_id   = local.project_id
-#   gcp_location     = var.gcp_location
-#   depends_on       = [module.gcp_project, module.gcp_apis]
-# }
+# Create the main Virtual Private Cloud (VPC)
+module "vpc" {
+  source           = "../gcp-vpc"
+  environment_name = local.short_environment_name # Limit the name to 24 characters
+  gcp_project_id   = local.project_id
+  gcp_location     = var.gcp_location
+  depends_on       = [module.gcp_project, module.gcp_apis]
+}
 
-# output "vpc" {
-#   value = module.vpc
-# }
+output "vpc" {
+  value = module.vpc
+}
 
 # # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 # module "postgresql_dbms" {
