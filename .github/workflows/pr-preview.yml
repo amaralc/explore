@@ -42,7 +42,7 @@ jobs: # A workflow can have multiple jobs
 
       - name: Check if target branch is production
         run: |
-          if [[ "$TARGET_BRANCH" != "$PRODUCTION_BRANCH" ]]; then
+          if [[ "${{ env.TARGET_BRANCH }}" != "${{ env.PRODUCTION_BRANCH }}" ]]; then
             echo "::error::Target branch is not production, cancelling workflow"
             exit 1
           fi
