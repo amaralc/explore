@@ -24,7 +24,7 @@
       "command": "cd apps/core/platform-shell-iac/production && terraform output"
     },
     "preview-terraform-init": {
-      "command": "cd apps/core/platform-shell-iac/preview && terraform init -backend-config='prefix=feature-peer-541-isolate-environments-and-terraform-states'"
+      "command": "cd apps/core/platform-shell-iac/preview && terraform init"
     },
     "preview-terraform-validate": {
       "command": "cd apps/core/platform-shell-iac/preview && terraform validate"

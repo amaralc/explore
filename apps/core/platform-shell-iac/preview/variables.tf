@@ -1,9 +1,3 @@
-variable "destroy_preview_environments" {
-  description = "Whether to destroy preview environments"
-  type        = bool
-  default     = false
-}
-
 variable "owner_account_email" {
   description = "The email of the account that will own the resources"
   type        = string
