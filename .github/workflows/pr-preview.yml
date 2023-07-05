@@ -19,6 +19,8 @@ env:
 jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
+    env:
+      PRODUCTION_BRANCH: "production"
     steps:
       - name: Get target and source branch names
         run: |
@@ -30,10 +32,18 @@ jobs: # A workflow can have multiple jobs
           echo "Target branch: $TARGET_BRANCH"
           echo "Source branch: $SOURCE_BRANCH"
 
-      - name: Check if target branch is main
+      - name: Check if PR was merged
         run: |
-          if [[ "$TARGET_BRANCH" != "main" ]]; then
-            echo "::error::Target branch is not main, cancelling workflow"
+          if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            echo "PR was merged"
+          else
+            echo "PR was not merged"
+          fi
+
+      - name: Check if target branch is production
+        run: |
+          if [[ "$TARGET_BRANCH" != "$PRODUCTION_BRANCH" ]]; then
+            echo "::error::Target branch is not production, cancelling workflow"
             exit 1
           fi
 
