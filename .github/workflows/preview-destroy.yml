@@ -85,44 +85,44 @@ jobs: # A workflow can have multiple jobs
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
-      - name: Checkout branch
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.SOURCE_BRANCH }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Checkout branch
+      #   uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{ env.SOURCE_BRANCH }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Save GCP credentials to file
-        run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/preview/credentials.json
-
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
-        with:
-          credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
-
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-
-      - name: Terraform init
-        run: |
-          echo "Running terraform init..."
-          echo ""
-          terraform init -backend-config='prefix=${{ env.parsed_branch_name }}' # Set the backend prefix as the parsed branch name (environment name)
-        working-directory: apps/core/platform-shell-iac/preview
-
-      - name: Terraform validate
-        run: |
-          echo "Running terraform validate..."
-          terraform validate
-        working-directory: apps/core/platform-shell-iac/preview
-
-      # - name: Terraform Destroy
+      # - name: Save GCP credentials to file
       #   run: |
-      #     echo "Running terraform plan..."
-      #     echo "Commit Hash: ${{ env.short_commit_sha }}"
-      #     terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "core_platform_shell_browser_vercel_project_id=${{ secrets.CORE_PLATFORM_SHELL_BROWSER_VERCEL_PROJECT_ID }}" -var "core_root_shell_graph_vercel_project_id=${{ secrets.CORE_ROOT_SHELL_GRAPH_VERCEL_PROJECT_ID }}" -var "dx_dev_docs_browser_vercel_project_id=${{ secrets.DX_DEV_DOCS_BROWSER_VERCEL_PROJECT_ID }}" -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}"
+      #     echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/preview/credentials.json
+
+      # - id: "auth"
+      #   name: "Authenticate to Google Cloud"
+      #   uses: "google-github-actions/auth@v1"
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+      # - name: "Set up Cloud SDK"
+      #   uses: "google-github-actions/setup-gcloud@v1"
+
+      # - name: Set up Terraform
+      #   uses: hashicorp/setup-terraform@v2
+
+      # - name: Terraform init
+      #   run: |
+      #     echo "Running terraform init..."
+      #     echo ""
+      #     terraform init -backend-config='prefix=${{ env.parsed_branch_name }}' # Set the backend prefix as the parsed branch name (environment name)
       #   working-directory: apps/core/platform-shell-iac/preview
+
+      # - name: Terraform validate
+      #   run: |
+      #     echo "Running terraform validate..."
+      #     terraform validate
+      #   working-directory: apps/core/platform-shell-iac/preview
+
+      # # - name: Terraform Destroy
+      # #   run: |
+      # #     echo "Running terraform plan..."
+      # #     echo "Commit Hash: ${{ env.short_commit_sha }}"
+      # #     terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "core_platform_shell_browser_vercel_project_id=${{ secrets.CORE_PLATFORM_SHELL_BROWSER_VERCEL_PROJECT_ID }}" -var "core_root_shell_graph_vercel_project_id=${{ secrets.CORE_ROOT_SHELL_GRAPH_VERCEL_PROJECT_ID }}" -var "dx_dev_docs_browser_vercel_project_id=${{ secrets.DX_DEV_DOCS_BROWSER_VERCEL_PROJECT_ID }}" -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}"
+      # #   working-directory: apps/core/platform-shell-iac/preview
