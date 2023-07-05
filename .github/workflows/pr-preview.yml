@@ -20,10 +20,22 @@ jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
     steps:
-      - name: Get target branch name
+      - name: Get target and source branch names
         run: |
           echo "TARGET_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
-          echo "TARGET_BRANCH=${{ github.event.pull_request.base.ref }}"
+          echo "SOURCE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+
+      - name: Log branch names
+        run: |
+          echo "Target branch: $TARGET_BRANCH"
+          echo "Source branch: $SOURCE_BRANCH"
+
+      - name: Check if target branch is main
+        run: |
+          if [[ "$TARGET_BRANCH" != "main" ]]; then
+            echo "::error::Target branch is not main, cancelling workflow"
+            exit 1
+          fi
 
   # pr-checks: # Name of the job
   #   runs-on: ubuntu-latest # Instance type where job will run
