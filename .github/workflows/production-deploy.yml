@@ -1,4 +1,4 @@
-name: Build, tag as "production" and redeploy system
+name: Build, tag and deploy "production" environment
 
 on:
   create:
@@ -160,61 +160,3 @@ jobs:
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
         working-directory: apps/core/platform-shell-iac/production
-
-  destroy-preview-environments:
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
-
-    steps:
-      - name: Get short commit hash
-        run: |
-          SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
-
-      - name: Checkout production branch
-        uses: actions/checkout@v3
-
-      - name: Save GCP credentials to file
-        run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/preview/credentials.json
-
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
-        with:
-          credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
-
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-
-      - name: Terraform init
-        run: |
-          echo "Running terraform init..."
-          echo ""
-          terraform init
-        working-directory: apps/core/platform-shell-iac/preview
-
-      - name: Terraform validate preview
-        run: |
-          echo "Running terraform validate..."
-          terraform validate
-        working-directory: apps/core/platform-shell-iac/preview
-
-      - name: Terraform plan preview
-        run: |
-          echo "Running terraform plan..."
-          echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "gcp_organization_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}" -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" -var "destroy_preview_environments=true" -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}"
-        working-directory: apps/core/platform-shell-iac/preview
-
-      - name: Terraform apply (destroy preview)
-        run: |
-          echo "Running terraform apply..."
-          terraform apply -auto-approve tfplan
-        working-directory: apps/core/platform-shell-iac/preview
