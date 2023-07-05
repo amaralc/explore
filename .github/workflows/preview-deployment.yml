@@ -7,7 +7,7 @@
 # - https://dev.to/xcanchal/monorepo-using-lerna-conventional-commits-and-github-packages-4m8m
 # - https://dev.to/xcanchal/automatic-versioning-in-a-lerna-monorepo-using-github-actions-4hij
 
-name: Build, tag using the branch name and redeploy system
+name: Preview Deployment (PR to Production)
 
 on:
   pull_request:
@@ -17,7 +17,46 @@ env:
   HUSKY: 0
 
 jobs: # A workflow can have multiple jobs
+  check-target:
+    runs-on: ubuntu-latest # Instance type where job will run
+    env:
+      PRODUCTION_BRANCH: "production"
+    steps:
+      - name: Get target and source branch names
+        run: |
+          echo "TARGET_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+          echo "SOURCE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+
+      - name: Log branch names
+        run: |
+          echo "Target branch: $TARGET_BRANCH"
+          echo "Source branch: $SOURCE_BRANCH"
+
+      # - name: Check if PR was merged
+      #   run: |
+      #     if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+      #       echo "PR was merged"
+      #     else
+      #       echo "PR was not merged"
+      #     fi
+
+      - name: Check if target branch is production
+        run: |
+          if [[ "${{ env.TARGET_BRANCH }}" != "${{ env.PRODUCTION_BRANCH }}" ]]; then
+            echo "::error::Target branch is not production, cancelling workflow"
+            echo "CANCEL_WORKFLOW=true" >> $GITHUB_ENV
+          fi
+
+      - name: Cancel workflow if target branch is not production
+        if: env.CANCEL_WORKFLOW == 'true'
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel
+
   pr-checks: # Name of the job
+    needs: [check-target]
     runs-on: ubuntu-latest # Instance type where job will run
     defaults:
       run:
