@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.0](https://github.com/amaralc/peerlab/compare/peerlab@0.28.3...peerlab@0.29.0) (2023-07-05)
+
+### Features
+
+- **PEER-554:** add checks to preview deployment ([71287cc](https://github.com/amaralc/peerlab/commit/71287cc0a27657f6e92865743dda06f412f2814e))
+- **PEER-554:** create and debug destroy workflow ([bf19454](https://github.com/amaralc/peerlab/commit/bf194540d9935aa6e5308cdb7d4defdd11a38ebd))
+
+### Bug Fixes
+
+- **PEER-541:** adjust github actions workflow conditions ([3de39ef](https://github.com/amaralc/peerlab/commit/3de39efe06e1fc1314d4807cbe80c67730958acd))
+
 ## [0.28.3](https://github.com/amaralc/peerlab/compare/peerlab@0.28.2...peerlab@0.28.3) (2023-07-03)
 
 ### Bug Fixes
