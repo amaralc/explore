@@ -52,7 +52,8 @@ module "gcp_apis" {
     "secretmanager.googleapis.com",
     "vpcaccess.googleapis.com",
     "run.googleapis.com",
-    "cloudbilling.googleapis.com"
+    "cloudbilling.googleapis.com",
+    "apigee.googleapis.com"
   ]
 }
 
