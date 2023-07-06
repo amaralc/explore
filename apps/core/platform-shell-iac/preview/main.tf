@@ -20,11 +20,11 @@ locals {
 }
 
 
-# Branch Environment
-module "refactor-peer-541-parse-branch-name-within-module" {
-  count                                                                = 0 # Point to the correct backend prefix (parsed branch name), set 0 to disable this module and 1 to enable it
+# Preview Environment
+module "preview-environment-01" {
+  count                                                                = 0 # Set 0 to disable this module and 1 to enable it
   source                                                               = "../../../../libs/iac-modules/environment"
-  branch_name                                                          = "refactor/PEER-541-parse-branch-name-within-module"
+  branch_name                                                          = "feature/PEER-549-api-gateway"
   owner_account_email                                                  = var.owner_account_email
   creator_service_account_email                                        = local.service_account_email
   source_environment_branch_name                                       = local.source_environment_branch_name
