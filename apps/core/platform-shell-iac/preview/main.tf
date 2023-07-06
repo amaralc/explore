@@ -22,7 +22,7 @@ locals {
 
 # Preview Environment
 module "preview-environment-01" {
-  count                                                                = 0 # Set 0 to disable this module and 1 to enable it
+  count                                                                = 1 # Set 0 to disable this module and 1 to enable it
   source                                                               = "../../../../libs/iac-modules/environment"
   branch_name                                                          = "feature/PEER-549-api-gateway"
   owner_account_email                                                  = var.owner_account_email

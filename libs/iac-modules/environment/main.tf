@@ -104,7 +104,9 @@ module "gcp_apis" {
 
 # API Gateway
 module "api_gateway" {
-  source = "../gcp-apigee"
+  source         = "../gcp-apigee"
+  gcp_location   = var.gcp_location
+  gcp_project_id = var.gcp_project_id
 }
 
 # # Application Shell
