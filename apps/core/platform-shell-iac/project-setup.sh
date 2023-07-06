@@ -82,6 +82,8 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 
 # MANUAL STEPS
 
+# Adding roles in the organization level cannot yet be accomplished using the gcloud CLI. The following steps must be done manually.
+
 # 1. Add Project Creator role to service account
 # - Access https://console.cloud.google.com/cloud-resource-manager
 # - Follow steps documented in https://cloud.google.com/resource-manager/docs/default-access-control
@@ -89,6 +91,11 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 
 # 2. Add Billing Account User role to service account
 # - References: https://cloud.google.com/billing/docs/how-to/grant-access-to-billing?hl=pt-br
+
+# 3. Add Apigee Oganization Admin role to service account
+# - References: https://cloud.google.com/apigee/docs/hybrid/v1.10/precog-provision.html
+
+# AUTOMATIC STEPS
 
 # # Create a key for the service account
 # gcloud iam service-accounts keys create ./apps/core/platform-shell-iac/credentials.json --iam-account $GCP_SERVICE_ACCOUNT_EMAIL
@@ -109,4 +116,3 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin"
 # gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin"
 # gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin"
-# gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/apigee.organizationAdmin"
