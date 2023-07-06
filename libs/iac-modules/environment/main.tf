@@ -103,7 +103,7 @@ module "gcp_apis" {
 # }
 
 # API Gateway
-module "apigee" {
+module "api_gateway" {
   source = "../gcp-apigee"
 }
 
