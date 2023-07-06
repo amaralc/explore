@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.31.0](https://github.com/amaralc/peerlab/compare/peerlab@0.30.0...peerlab@0.31.0) (2023-07-06)
+
+### Features
+
+- **PEER-549:** enable apigee api ([c963b3f](https://github.com/amaralc/peerlab/commit/c963b3f6b6916012168b8bef0c54532aa4027630))
+
 ## [0.30.0](https://github.com/amaralc/peerlab/compare/peerlab@0.29.1...peerlab@0.30.0) (2023-07-06)
 
 ### Features
