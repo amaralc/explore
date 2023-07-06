@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.0](https://github.com/amaralc/peerlab/compare/peerlab@0.29.1...peerlab@0.30.0) (2023-07-06)
+
+### Features
+
+- **PEER-541:** re-enable all environment modules ([4c4fbfc](https://github.com/amaralc/peerlab/commit/4c4fbfcdf782c4a4851284e50590c7ee263a3369))
+
 ## [0.29.1](https://github.com/amaralc/peerlab/compare/peerlab@0.29.0...peerlab@0.29.1) (2023-07-05)
 
 **Note:** Version bump only for package peerlab
