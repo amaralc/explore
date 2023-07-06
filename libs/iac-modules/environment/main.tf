@@ -52,7 +52,7 @@ module "gcp_apis" {
     "secretmanager.googleapis.com",
     "vpcaccess.googleapis.com",
     "run.googleapis.com",
-    "cloudbilling.googleapis.com", # Necessary if we need to span child projects (do we?)
+    "cloudbilling.googleapis.com",
     "apigee.googleapis.com"
   ]
 }
