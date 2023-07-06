@@ -42,7 +42,7 @@ locals {
 # Enable APIs
 module "gcp_apis" {
   count          = local.is_production_environment ? 1 : 0 # Since we are not using child projects, we need to enable APIs only in the production environment
-  source         = "../gcp-apis"                           // path to the module
+  source         = "../gcp-apis"                           # path to the module
   gcp_project_id = local.project_id
   apis = [
     "compute.googleapis.com",
@@ -107,6 +107,7 @@ module "api_gateway" {
   source         = "../gcp-apigee"
   gcp_location   = var.gcp_location
   gcp_project_id = var.gcp_project_id
+  depends_on     = [module.gcp_apis]
 }
 
 # # Application Shell
