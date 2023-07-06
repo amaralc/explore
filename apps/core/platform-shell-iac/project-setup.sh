@@ -39,7 +39,7 @@ then
 fi
 
 # Define location
-GCP_PROJECT_LOCATION="europe-west3"
+GCP_PROJECT_LOCATION="europe-west3" # Apigee analytics are not available in europe-west3.  Supported regions: asia-northeast1,europe-west1,us-central1,us-east1,us-west1,australia-southeast1,europe-west2,asia-south1,asia-east1,asia-southeast1,asia-southeast2,me-west1
 
 # Service account name
 GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME="terraform-admin"
