@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.0](https://github.com/amaralc/peerlab/compare/peerlab@0.32.0...peerlab@0.33.0) (2023-07-08)
+
+### Features
+
+- pass branch name as build arg to use nx_branch ([1d0ff46](https://github.com/amaralc/peerlab/commit/1d0ff467f10353c10f30be7a44ff62796d803e33))
+- **PEER-541:** use flag to enable preview environment creation ([a2b7400](https://github.com/amaralc/peerlab/commit/a2b7400767501c583e1cebe6741420844e27c50f))
+- **PEER-556:** document the process of using a remote cache with nx ([7f255c8](https://github.com/amaralc/peerlab/commit/7f255c841bd64d9017b9aed95ffdc51864d3cc4c))
+- **PEER-556:** set token dynamically ([743cbda](https://github.com/amaralc/peerlab/commit/743cbdabe4e67c4c10206e878fff7670c1325197))
+- **PEER-556:** setup remote cache ([c1005b5](https://github.com/amaralc/peerlab/commit/c1005b5a8cad41709bda9a1b3fe709cf074ffb85))
+- **PEER-556:** use remote cache to build image ([5974071](https://github.com/amaralc/peerlab/commit/597407139be424c8811d930012994f5aa1d6d3ac))
+
+### Bug Fixes
+
+- **PEER-556:** adjust dockerfile ([381da8c](https://github.com/amaralc/peerlab/commit/381da8c785cf75511318bc93022981fe7749c2cb))
+- **PEER-556:** use nx_branch ([0bcde67](https://github.com/amaralc/peerlab/commit/0bcde67efa76c66d8bde61fbddd39c6b19b54b3e))
+
 ## [0.32.0](https://github.com/amaralc/peerlab/compare/peerlab@0.31.0...peerlab@0.32.0) (2023-07-08)
 
 ### Features
