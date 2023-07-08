@@ -4,6 +4,8 @@ authors: [amaralc]
 tags: [nx, cache, remote-cache, caching]
 ---
 
+## Setup Nx Cloud
+
 ```bash
 npx nx connect-to-nx-cloud
 ✔ Enable distributed caching to make your CI faster · Yes
@@ -30,9 +32,18 @@ UPDATE nx.json
 Done in 2.21s.
 ```
 
-References:
+## Access Token, CI/CD and Version Control
+
+### Fake Token
+
+### Override Fake Token With Custom Script
+
+### Github Actions Workflow
+
+## References
 
 - https://www.youtube.com/watch?v=gWsDE7kBDw8
 - https://www.youtube.com/watch?v=cG2hEI5L3qI
 - https://nx.dev/nx-cloud/set-up/github
 - https://nx.dev/nx-cloud/account/access-tokens
+- https://blog.nrwl.io/speed-up-your-yarn-workspace-with-nx-bc7ce99a6c64
