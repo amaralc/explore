@@ -67,6 +67,17 @@ jobs: # A workflow can have multiple jobs
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # Checkout all branches and tags
 
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
+      - name: Extract branch name
+        run: |
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "branch_name=$branch_name" >> $GITHUB_ENV
+
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2 # Public action
         with:
@@ -151,8 +162,12 @@ jobs: # A workflow can have multiple jobs
         run: |
           # npx nx format:check
           # npx nx affected --target build --parallel 3
-          npx nx affected --target lint --parallel 3
-          npx nx affected --target test --parallel 3 --ci --code-coverage
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
+
+      - name: Override nx token back to fake value # Avoid leaking the token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=fake-token
 
   build:
     needs: [pr-checks]
@@ -168,11 +183,16 @@ jobs: # A workflow can have multiple jobs
         with:
           fetch-depth: 0 # This is important to get all history for all branches
 
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
       - name: Extract environment name
         run: |
           echo $GITHUB_REF
           echo $GITHUB_HEAD_REF
           branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "branch_name=$branch_name" >> $GITHUB_ENV
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
           echo "parsed_branch_name=$parsed_branch_name" >> $GITHUB_ENV
 
@@ -241,10 +261,15 @@ jobs: # A workflow can have multiple jobs
           context: .
           file: ./apps/researchers/peers/svc-rest-api/Dockerfile
           push: true
-          no-cache: true
+          no-cache: true # TODO: Check if this is necessary
+          build-args: BRANCH_NAME=${{ env.branch_name }}
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.parsed_branch_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+
+      - name: Override nx token back to fake value # Avoid leaking the token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=fake-token
 
   deploy:
     needs: [build]

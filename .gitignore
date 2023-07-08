@@ -43,6 +43,7 @@ testem.log
 Thumbs.db
 
 # Env
+nx-cloud.env
 .env
 .env.development.local
 .env.production.local
