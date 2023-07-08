@@ -71,6 +71,13 @@ jobs: # A workflow can have multiple jobs
         run: |
           bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
 
+      - name: Extract branch name
+        run: |
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "branch_name=$branch_name" >> $GITHUB_ENV
+
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2 # Public action
         with:
@@ -155,8 +162,8 @@ jobs: # A workflow can have multiple jobs
         run: |
           # npx nx format:check
           # npx nx affected --target build --parallel 3
-          npx nx affected --target lint --parallel 3
-          npx nx affected --target test --parallel 3 --ci --code-coverage
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
 
       - name: Override nx token back to fake value # Avoid leaking the token
         run: |
