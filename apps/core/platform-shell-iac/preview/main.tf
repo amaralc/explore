@@ -4,10 +4,12 @@
 
 locals {
   source_environment_branch_name = "production"
+  preview_environments_enabled   = false # TODO -> Set as repository environment variable
 }
 
 data "google_sql_database_instance" "production" {
-  name = substr("${var.gcp_project_id}-${local.source_environment_branch_name}", 0, 63)
+  count = local.preview_environments_enabled == true ? 1 : 0
+  name  = substr("${var.gcp_project_id}-${local.source_environment_branch_name}", 0, 63)
 }
 
 data "local_file" "credentials" {
@@ -22,7 +24,7 @@ locals {
 
 # Preview Environment
 module "preview-environment-01" {
-  count                                                                = 0 # Set 0 to disable this module and 1 to enable it
+  count                                                                = local.preview_environments_enabled == true ? 1 : 0
   source                                                               = "../../../../libs/iac-modules/environment"
   branch_name                                                          = "feature/PEER-541-adjust-preview-workflow"
   owner_account_email                                                  = var.owner_account_email
