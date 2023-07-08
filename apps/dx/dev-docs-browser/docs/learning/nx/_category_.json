@@ -1,0 +1,8 @@
+{
+  "label": "NX",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Nx, a set of extensible dev tools for monorepos."
+  }
+}

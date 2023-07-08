@@ -1,0 +1,8 @@
+{
+  "label": "Docusaurus",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Docusaurus, a static site generator for React, optimized for building technical documentation."
+  }
+}
