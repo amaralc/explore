@@ -34,3 +34,5 @@ References:
 
 - https://www.youtube.com/watch?v=gWsDE7kBDw8
 - https://www.youtube.com/watch?v=cG2hEI5L3qI
+- https://nx.dev/nx-cloud/set-up/github
+- https://nx.dev/nx-cloud/account/access-tokens
