@@ -20,7 +20,7 @@ jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
     env:
-      PRODUCTION_BRANCH: "production"
+      PRODUCTION_BRANCH: "production" # Set the name of your production branch here
     steps:
       - name: Get target and source branch names
         run: |
@@ -46,6 +46,13 @@ jobs: # A workflow can have multiple jobs
         run: |
           if [[ "${{ env.TARGET_BRANCH }}" != "${{ env.PRODUCTION_BRANCH }}" ]]; then
             echo "::error::Target branch is not production, cancelling workflow"
+            echo "CANCEL_WORKFLOW=true" >> $GITHUB_ENV
+          fi
+
+      - name: Cancel workflow if source branch is production
+        run: |
+          if [[ "${{ env.SOURCE_BRANCH }}" == "${{ env.PRODUCTION_BRANCH }}" ]]; then
+            echo "::error::Source branch is production, cancelling workflow"
             echo "CANCEL_WORKFLOW=true" >> $GITHUB_ENV
           fi
 
