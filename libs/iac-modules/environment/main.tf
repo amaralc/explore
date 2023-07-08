@@ -42,7 +42,7 @@ locals {
 # Enable APIs
 module "gcp_apis" {
   count          = local.is_production_environment ? 1 : 0 # Since we are not using child projects, we need to enable APIs only in the production environment
-  source         = "../gcp-apis"                           // path to the module
+  source         = "../gcp-apis"                           # path to the module
   gcp_project_id = local.project_id
   apis = [
     "compute.googleapis.com",
@@ -53,7 +53,7 @@ module "gcp_apis" {
     "vpcaccess.googleapis.com",
     "run.googleapis.com",
     "cloudbilling.googleapis.com",
-    "apigee.googleapis.com"
+    # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
 

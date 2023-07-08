@@ -1,5 +1,5 @@
 {
-  "name": "modules-gcp-secrets",
+  "name": "iac-modules-gcp-secrets",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/iac-modules/gcp-secrets",
   "projectType": "library",

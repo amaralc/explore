@@ -157,6 +157,8 @@ jobs: # A workflow can have multiple jobs
   build:
     needs: [pr-checks]
     runs-on: ubuntu-latest
+    environment:
+      name: core-platform-shell-iac-preview
     env:
       IMAGE_NAME: researchers-peers-svc-rest-api
 

@@ -9,7 +9,8 @@
     "iac-modules-gcp-postgresql-dbms-user",
     "iac-modules-gcp-postgresql-dbms-database",
     "iac-modules-gcp-service-account",
-    "iac-modules-gcp-account-permissions"
+    "iac-modules-gcp-account-permissions",
+    "iac-modules-gcp-secrets"
   ],
   "targets": {},
   "tags": []
