@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.0](https://github.com/amaralc/peerlab/compare/peerlab@0.31.0...peerlab@0.32.0) (2023-07-08)
+
+### Features
+
+- **PEER-541:** require approval to proceed ([a265e01](https://github.com/amaralc/peerlab/commit/a265e01280f020e1c33aba7eb0cc187e4e54c581))
+- **PEER-549:** add apigee permission command ([c1ab758](https://github.com/amaralc/peerlab/commit/c1ab7585721039f4b8562cdda52b0c2c0ed1fb4c))
+- **PEER-549:** add basic apigee resource ([c3dc3e9](https://github.com/amaralc/peerlab/commit/c3dc3e970267e1100c13835ddd144263b5b0beac))
+- **PEER-549:** add blog entry ([9409d1f](https://github.com/amaralc/peerlab/commit/9409d1f37e3a660ae9be02f2bc7211585d1ce444))
+
+### Bug Fixes
+
+- **PEER-541:** add condition to run cleanup ([27ec64f](https://github.com/amaralc/peerlab/commit/27ec64ff50e08b9b4e09cbc36beb65f942daf9f9))
+- **PEER-541:** add environment to build step ([be49b56](https://github.com/amaralc/peerlab/commit/be49b56e0c4797258ff58003a79e0ffc75e5c85a))
+- **PEER-541:** adjust environment cleanup ([0cbc92c](https://github.com/amaralc/peerlab/commit/0cbc92c8f1ef99978b8523497cc5d2f4df1339e3))
+- **PEER-541:** use different location to support apigee analytics ([8cd5995](https://github.com/amaralc/peerlab/commit/8cd5995159156f16115da9fa2ff409b3406c2dd5))
+- **PEER-549:** remove automatic and document manual step ([a525f51](https://github.com/amaralc/peerlab/commit/a525f51931bfd3fbe4da580b363247f78c11d7ed))
+
 ## [0.31.0](https://github.com/amaralc/peerlab/compare/peerlab@0.30.0...peerlab@0.31.0) (2023-07-06)
 
 ### Features
