@@ -27,7 +27,7 @@ FROM base as build
 # Copy package.json and yarn lock to app directory
 # Set workdir
 WORKDIR /app/
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock nx.json ./
 
 # Install app dependencies
 RUN yarn install --frozen-lockfile
@@ -56,8 +56,6 @@ ENV API_KEY=my-secret-api-key
 COPY . .
 
 RUN echo 'Generating Prisma Client...'
-
-# Setup client and environment variables
 RUN yarn prisma:generate:postgres
 
 # Declares a branch name as argument. This value is used to set the NX_BRANCH in Nx Cloud.
@@ -65,7 +63,7 @@ ARG BRANCH_NAME
 
 # Build the service api
 # Creates a "dist" folder with the production build
-RUN yarn prisma:generate:postgres && NX_BRANCH=$BRANCH_NAME yarn nx run researchers-peers-svc-rest-api:build
+RUN NX_BRANCH=$BRANCH_NAME yarn nx run researchers-peers-svc-rest-api:build
 
 # build smaller image for running
 FROM base
