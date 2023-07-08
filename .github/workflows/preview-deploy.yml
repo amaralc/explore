@@ -67,6 +67,10 @@ jobs: # A workflow can have multiple jobs
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # Checkout all branches and tags
 
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2 # Public action
         with:

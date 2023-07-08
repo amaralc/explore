@@ -4,8 +4,6 @@ authors: [amaralc]
 tags: [nx, cache, remote-cache, caching]
 ---
 
-https://www.youtube.com/watch?v=gWsDE7kBDw8
-
 ```bash
 npx nx connect-to-nx-cloud
 ✔ Enable distributed caching to make your CI faster · Yes
@@ -31,3 +29,8 @@ UPDATE nx.json
 
 Done in 2.21s.
 ```
+
+References:
+
+- https://www.youtube.com/watch?v=gWsDE7kBDw8
+- https://www.youtube.com/watch?v=cG2hEI5L3qI
