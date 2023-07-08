@@ -158,6 +158,10 @@ jobs: # A workflow can have multiple jobs
           npx nx affected --target lint --parallel 3
           npx nx affected --target test --parallel 3 --ci --code-coverage
 
+      - name: Override nx token back to fake value # Avoid leaking the token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=fake-token
+
   build:
     needs: [pr-checks]
     runs-on: ubuntu-latest
