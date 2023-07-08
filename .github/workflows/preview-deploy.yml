@@ -176,6 +176,10 @@ jobs: # A workflow can have multiple jobs
         with:
           fetch-depth: 0 # This is important to get all history for all branches
 
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
       - name: Extract environment name
         run: |
           echo $GITHUB_REF
@@ -253,6 +257,10 @@ jobs: # A workflow can have multiple jobs
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.parsed_branch_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
+
+      - name: Override nx token back to fake value # Avoid leaking the token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=fake-token
 
   deploy:
     needs: [build]
