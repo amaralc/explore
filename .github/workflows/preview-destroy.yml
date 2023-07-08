@@ -19,6 +19,8 @@ env:
 jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
+    environment:
+      name: core-platform-shell-iac-preview # Requires permission to proceed
     env:
       PRODUCTION_BRANCH: "production" # Set the name of your production branch here
     steps:
