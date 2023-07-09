@@ -4,6 +4,8 @@ authors: [amaralc]
 tags: [gcp, terraform, vercel, neon, planetscale, nx, deploy-preview, preview-environments]
 ---
 
+![System Preview Environments Workflow](./assets/system-preview-environments-worfklow.webp)
+
 ## Branching and Preview Deployments
 
 ### Vercel Preview Deployments
@@ -272,11 +274,11 @@ The combination of the concepts brought by Vercel, PlanetScale and Neon, helped 
 
 However, the journey to this point was not without challenges. The use of Terraform to automate the process of provisioning resources was crucial, but we encountered roadblocks such as Neon's lack of an official Terraform provider and the complexity of setting up resources on Google Cloud Platform. Despite these challenges, we were able to overcome them and create a minimum viable workflow concept.
 
+Finally, the adoption of the Nx build system, has been instrumental in our development workflow. It has allowed us to build and test multiple applications and libraries in a single repository, enforcing consistency and good practices across the entire codebase. Furthermore, the Nx Graph helps us to understand how the modules and projects depend on one another, which in turn let's us enhance the overall design very quickly. The journey to this point has been challenging, but the result is a validated workflow that can allows us to deliver value to our customers faster and more efficiently than ever before.
+
 ![System Preview Environments Workflow](./assets/system-preview-environments-worfklow.webp)
 
 <p align="center">Figure 5 - System Preview Environments Workflow</p>
-
-Finally, the adoption of the Nx build system, has been instrumental in our development workflow. It has allowed us to build and test multiple applications and libraries in a single repository, enforcing consistency and good practices across the entire codebase. Furthermore, the Nx Graph helps us to understand how the modules and projects depend on one another, which in turn let's us enhance the overall design very quickly. The journey to this point has been challenging, but the result is a validated workflow that can allows us to deliver value to our customers faster and more efficiently than ever before.
 
 ## References
 
