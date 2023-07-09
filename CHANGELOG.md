@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.0](https://github.com/amaralc/peerlab/compare/peerlab@0.33.1...peerlab@0.34.0) (2023-07-09)
+
+### Features
+
+- **PEER-541:** document the system preview environments workflow ([5326ea9](https://github.com/amaralc/peerlab/commit/5326ea94a62d36b8aa3868d1ff86ed71ec757a8d))
+
 ## [0.33.1](https://github.com/amaralc/peerlab/compare/peerlab@0.33.0...peerlab@0.33.1) (2023-07-09)
 
 **Note:** Version bump only for package peerlab
