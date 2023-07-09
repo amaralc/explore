@@ -1,0 +1,3 @@
+[submodule "modules/private-templates"]
+	path = modules/private-templates
+	url = git@github.com:amaralc/private-templates.git
