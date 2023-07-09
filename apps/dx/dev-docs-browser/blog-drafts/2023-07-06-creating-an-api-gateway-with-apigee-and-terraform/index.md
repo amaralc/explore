@@ -1,5 +1,4 @@
 ---
-slug: creating-an-api-gateway-with-apigee-and-terraform
 title: '[DRAFT] Creating an API Gateway with Apigee and Terraform'
 authors: [amaralc]
 tags: [gcp, terraform, apigee, api-gateway, api-management]
