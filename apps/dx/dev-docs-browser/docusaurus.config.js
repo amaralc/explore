@@ -34,6 +34,8 @@ const config = {
   organizationName: 'amaralc', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
+
+
   presets: [
     [
       'classic',
@@ -56,7 +58,11 @@ const config = {
     ],
   ],
 
-  themes: [searchLocalPluging],
+  markdown: {
+    mermaid: true,
+  },
+
+  themes: [searchLocalPluging, '@docusaurus/theme-mermaid'],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -130,6 +136,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ["hcl", "toml"],
       },
     }),
 };
