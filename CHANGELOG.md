@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.35.1](https://github.com/amaralc/peerlab/compare/peerlab@0.35.0...peerlab@0.35.1) (2023-07-10)
+
+**Note:** Version bump only for package peerlab
+
 ## [0.35.0](https://github.com/amaralc/peerlab/compare/peerlab@0.34.1...peerlab@0.35.0) (2023-07-09)
 
 ### Features
