@@ -164,6 +164,7 @@ jobs: # A workflow can have multiple jobs
           # npx nx affected --target build --parallel 3
           NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
           NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target build --parallel 3
 
       - name: Override nx token back to fake value # Avoid leaking the token
         run: |
