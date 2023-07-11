@@ -28,8 +28,8 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts",
-    "../../../apps/platform-shell-browser/.next/types/**/*.ts",
-    "../../../dist/apps/platform-shell-browser/.next/types/**/*.ts",
+    "../../../apps/core/platform-shell-browser/.next/types/**/*.ts",
+    "../../../dist/apps/core/platform-shell-browser/.next/types/**/*.ts",
   ],
   "exclude": [
     "node_modules",
