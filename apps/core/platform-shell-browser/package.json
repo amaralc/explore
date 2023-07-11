@@ -1,5 +1,5 @@
 {
-  "name": "@peerlab/core/platform-shell-browser",
+  "name": "core-platform-shell-browser",
   "version": "0.1.14",
   "license": "MIT",
   "author": {
