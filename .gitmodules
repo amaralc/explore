@@ -1,3 +1,6 @@
 [submodule "modules/private-templates"]
 	path = modules/private-templates
 	url = git@github.com:amaralc/private-templates.git
+[submodule "modules/peerlab-platform-ts-api-mvp-dev"]
+	path = modules/peerlab-platform-ts-api-mvp-dev
+	url = git@github.com:peerlab-devs/peerlab-platform-ts-api-mvp-dev.git
