@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.36.0](https://github.com/amaralc/peerlab/compare/peerlab@0.35.1...peerlab@0.36.0) (2023-07-12)
+
+### Features
+
+- **PEER-567:** add vercel project to core-platform-shell-browser-vite ([9e0fb88](https://github.com/amaralc/peerlab/commit/9e0fb88a4a8e4505a959c580d85df3adb5c9d75a))
+- **PEER-567:** bootstrap vite shell app ([80764eb](https://github.com/amaralc/peerlab/commit/80764eb515e17c202827459faebe8c6b19278aa2))
+
 ## [0.35.1](https://github.com/amaralc/peerlab/compare/peerlab@0.35.0...peerlab@0.35.1) (2023-07-10)
 
 **Note:** Version bump only for package peerlab
