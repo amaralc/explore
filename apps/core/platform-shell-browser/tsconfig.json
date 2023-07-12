@@ -11,12 +11,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "types": ["jest", "node"],
+    "types": [
+      "jest",
+      "node"
+    ],
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "**/*.ts",
@@ -24,8 +28,13 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts",
-    "../../../apps/service-mfe/.next/types/**/*.ts",
-    "../../../dist/apps/service-mfe/.next/types/**/*.ts"
+    "../../../apps/core/platform-shell-browser/.next/types/**/*.ts",
+    "../../../dist/apps/core/platform-shell-browser/.next/types/**/*.ts",
   ],
-  "exclude": ["node_modules", "jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ]
 }
