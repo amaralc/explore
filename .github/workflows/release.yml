@@ -68,7 +68,7 @@ jobs:
         node-version: [18]
         npm-version: [8]
         yarn-version: ["1.22.x"]
-        pnpm-version: [7]
+        pnpm-version: [8]
 
     steps:
       - name: Checkout [Default Branch]
@@ -94,6 +94,7 @@ jobs:
           node-version: "${{ matrix.node-version }}"
           npm-version: "${{ matrix.npm-version }}"
           yarn-version: "${{ matrix.yarn-version }}"
+          pnpm-version: "${{ matrix.pnpm-version }}"
 
       - name: Install PNPM
         if: env.package_manager == 'pnpm'
@@ -158,11 +159,18 @@ jobs:
             npm ci
           fi
 
+      - name: Extract branch name
+        run: |
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "branch_name=$branch_name" >> $GITHUB_ENV
+
       - name: Check affected
-        run: | # npx nx format:check
-          npx nx affected --target lint --parallel 3
-          npx nx affected --target test --parallel 3 --ci --code-coverage
-          # npx nx affected --target build --parallel 3
+        run: |
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
+          NX_BRANCH=${{ env.branch_name }} npx nx affected --target build --parallel 3
 
       # - name: Release Libs
       #   if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
@@ -188,10 +196,10 @@ jobs:
         run: |
           git status
           git diff
-          yarn git:discard:all
+          pnpm git:discard:all
           git status
           git diff
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
           # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
-          yarn release
+          pnpm release
