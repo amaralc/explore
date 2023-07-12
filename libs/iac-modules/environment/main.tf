@@ -106,7 +106,7 @@ module "researchers-peers" {
 module "core-platform-shell-browser-vite" {
   source                           = "../environment-vercel"
   project_name                     = "core-platform-shell-browser-vite"
-  framework                        = null
+  framework                        = "vite"
   git_provider                     = "github"
   username_and_repository          = "amaralc/peerlab"
   branch_name                      = var.branch_name
