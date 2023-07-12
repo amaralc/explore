@@ -64,12 +64,6 @@ variable "source_environment_branch_name" {
   default     = null
 }
 
-variable "production_environment_core_platform_shell_browser_vercel_project_id" {
-  description = "The Vercel project ID of the core-platform-shell-browser in the production environment"
-  type        = string
-  default     = null
-}
-
 variable "production_environment_core_root_shell_graph_vercel_project_id" {
   description = "The Vercel project ID of the core-root-shell-graph in the production environment"
   type        = string
