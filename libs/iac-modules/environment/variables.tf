@@ -82,3 +82,9 @@ variable "production_environment_dx_dev_docs_browser_vercel_project_id" {
   default     = null
 }
 
+variable "production_environment_core_platform_shell_browser_vite_vercel_project_id" {
+  description = "The Vercel project ID of the core-platform-shell-browser-vite in the production environment"
+  type        = string
+  default     = null
+}
+
