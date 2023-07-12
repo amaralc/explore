@@ -1,7 +1,7 @@
 // Reference: https://github.com/ZachJW34/nx-plus/blob/master/libs/docusaurus/src/executors/dev-server/executor.ts
 
 import { serve } from '@docusaurus/core/lib';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 import * as path from 'path';
 import { join } from 'path';
 import { ServeExecutorSchema } from './schema';
