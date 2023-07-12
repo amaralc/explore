@@ -7,7 +7,7 @@ getLastMergeCommitBeforeHead(){
 # Define affected variables for preview
 setAffectedAppsAndLibs(){
   # Install dependencies
-  yarn install
+  pnpm install
 
   # Get last merge commit for current branch
   getLastMergeCommitBeforeHead

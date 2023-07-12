@@ -11,7 +11,7 @@ resource "vercel_project" "instance" {
   }
 
   environment      = var.production_environment_variables # Set of objects with key, value and target (production, preview, development)
-  install_command  = var.install_command                  # "yarn install"
+  install_command  = var.install_command                  # "pnpm install"
   dev_command      = var.dev_command                      # "npx nx serve core-platform-shell-browser"
   build_command    = var.build_command                    # "npx nx build core-platform-shell-browser --prod"                  # Check the project.json file to check the name of the app
   output_directory = var.output_directory                 # "dist/apps/core/platform-shell-browser/.next"                      # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)

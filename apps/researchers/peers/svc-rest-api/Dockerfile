@@ -30,7 +30,7 @@ WORKDIR /app/
 COPY package.json yarn.lock nx.json ./
 
 # Install app dependencies
-RUN yarn install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # # Remove SSH keys
 # RUN rm -rf /root/.ssh/

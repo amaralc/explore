@@ -111,8 +111,8 @@ module "core-platform-shell-browser-vite" {
   username_and_repository          = "amaralc/peerlab"
   branch_name                      = var.branch_name
   is_production_environment        = local.is_production_environment
-  install_command                  = local.is_production_environment ? "yarn install" : null
-  build_command                    = local.is_production_environment ? "yarn nx build core-platform-shell-browser-vite --prod" : null # Use build-graph command to prevent building dependencies used for graphing purposes only
+  install_command                  = local.is_production_environment ? "pnpm install" : null
+  build_command                    = local.is_production_environment ? "pnpm nx build core-platform-shell-browser-vite --prod" : null # Use build-graph command to prevent building dependencies used for graphing purposes only
   output_directory                 = local.is_production_environment ? "dist/apps/core/platform-shell-browser-vite" : null            # Attention to the output of non-nextjs projects
   ignore_command                   = local.is_production_environment ? null : null                                                    # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
   preview_environment_variables    = local.is_production_environment ? null : null                                                    # Map of string key and values
@@ -135,9 +135,9 @@ module "dx-dev-docs-browser" {
   username_and_repository          = "amaralc/peerlab"
   branch_name                      = var.branch_name
   is_production_environment        = local.is_production_environment
-  install_command                  = local.is_production_environment ? "yarn install" : null
-  dev_command                      = local.is_production_environment ? "yarn nx serve dx-dev-docs-browser" : null             # Vercel dev command
-  build_command                    = local.is_production_environment ? "yarn nx build-docs dx-dev-docs-browser --prod" : null # Use build-docs command to prevent building dependencies used for graphing purposes only
+  install_command                  = local.is_production_environment ? "pnpm install" : null
+  dev_command                      = local.is_production_environment ? "pnpm nx serve dx-dev-docs-browser" : null             # Vercel dev command
+  build_command                    = local.is_production_environment ? "pnpm nx build-docs dx-dev-docs-browser --prod" : null # Use build-docs command to prevent building dependencies used for graphing purposes only
   output_directory                 = local.is_production_environment ? "dist/apps/dx/dev-docs-browser" : null                 # Attention to the output of non-nextjs projects
   ignore_command                   = local.is_production_environment ? null : null                                            # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
   preview_environment_variables    = local.is_production_environment ? null : null                                            # Map of string key and values
@@ -160,8 +160,8 @@ module "core-root-shell-graph" {
   username_and_repository          = "amaralc/peerlab"
   branch_name                      = var.branch_name
   is_production_environment        = local.is_production_environment
-  install_command                  = local.is_production_environment ? "yarn install" : null
-  build_command                    = local.is_production_environment ? "yarn nx build-graph core-root-shell-graph --prod" : null # Use build-graph command to prevent building dependencies used for graphing purposes only
+  install_command                  = local.is_production_environment ? "pnpm install" : null
+  build_command                    = local.is_production_environment ? "pnpm nx build-graph core-root-shell-graph --prod" : null # Use build-graph command to prevent building dependencies used for graphing purposes only
   output_directory                 = local.is_production_environment ? "dist/apps/core/root-shell-graph" : null                  # Attention to the output of non-nextjs projects
   ignore_command                   = local.is_production_environment ? null : null                                               # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" : null
   preview_environment_variables    = local.is_production_environment ? null : null                                               # Map of string key and values
