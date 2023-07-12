@@ -24,7 +24,8 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "core-platform-shell-browser-vite:build"
+        "buildTarget": "core-platform-shell-browser-vite:build",
+        "port": 4210
       },
       "configurations": {
         "development": {
@@ -65,6 +66,19 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/core/platform-shell-browser-vite/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/core/platform-shell-browser-vite/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "core-platform-shell-browser-vite:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "core-platform-shell-browser:serve:production"
+        }
       }
     }
   },
