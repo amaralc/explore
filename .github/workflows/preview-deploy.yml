@@ -58,7 +58,7 @@ jobs: # A workflow can have multiple jobs
         node-version: [18]
         npm-version: [8]
         yarn-version: ["1.22.x"]
-        pnpm-version: [7]
+        pnpm-version: [8]
     steps:
       - name: Checkout [Pull Request] # Download code from the repository
         uses: actions/checkout@v2 # Public action
@@ -88,12 +88,13 @@ jobs: # A workflow can have multiple jobs
         run: |
           echo "package_manager=$([[ -f ./yarn.lock ]] && echo "yarn" || ([[ -f ./pnpm-lock.yaml ]] && echo "pnpm") || echo "npm")" >> $GITHUB_ENV
 
-      - name: Set node/npm/yarn versions using volta
+      - name: Set node/npm/yarn/pnpm versions using volta
         uses: volta-cli/action@v3
         with:
           node-version: "${{ matrix.node-version }}"
           npm-version: "${{ matrix.npm-version }}"
           yarn-version: "${{ matrix.yarn-version }}"
+          pnpm-version: "${{ matrix.pnpm-version }}"
 
       - name: Install PNPM
         if: env.package_manager == 'pnpm'
@@ -160,8 +161,6 @@ jobs: # A workflow can have multiple jobs
 
       - name: Lint and test affected projects
         run: |
-          # npx nx format:check
-          # npx nx affected --target build --parallel 3
           NX_BRANCH=${{ env.branch_name }} npx nx affected --target lint --parallel 3
           NX_BRANCH=${{ env.branch_name }} npx nx affected --target test --parallel 3 --ci --code-coverage
           NX_BRANCH=${{ env.branch_name }} npx nx affected --target build --parallel 3
@@ -228,7 +227,7 @@ jobs: # A workflow can have multiple jobs
           LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
           echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
 
-          yarn install
+          pnpm install
 
           AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
           echo 'Affected apps:' $AFFECTED_APPS

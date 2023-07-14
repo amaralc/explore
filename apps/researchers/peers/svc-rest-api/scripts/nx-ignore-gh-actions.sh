@@ -1,7 +1,7 @@
 LAST_MERGE_COMMIT_BEFORE_HEAD=$(git log --merges -n 2 --pretty=format:"%H" | tail -n 1)
 echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
 
-yarn install
+pnpm install
 
 AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
 echo 'Affected apps:' $AFFECTED_APPS
