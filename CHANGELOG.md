@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.37.0](https://github.com/amaralc/peerlab/compare/peerlab@0.36.1...peerlab@0.37.0) (2023-07-14)
+
+### Features
+
+- **PEER-569:** redirect non-authenticated user to sign-in page ([87537e2](https://github.com/amaralc/peerlab/commit/87537e2983aec3b22d18691c851b436ffaa78958))
+
 ## [0.36.1](https://github.com/amaralc/peerlab/compare/peerlab@0.36.0...peerlab@0.36.1) (2023-07-12)
 
 **Note:** Version bump only for package peerlab
