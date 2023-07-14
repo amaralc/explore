@@ -1,43 +1,22 @@
 import styled from '@emotion/styled';
-
-import NxWelcome from './nx-welcome';
-
+import { lazy } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import { AuthGuard } from '../components/auth-guard';
 
 const StyledApp = styled.div`
   // Your style here
 `;
 
+const SignInPage = lazy(() => import('../pages/sign-in'));
+const RootPage = lazy(() => import('../pages/root'));
+
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="core-platform-shell-browser-vite" />
+      <h1>Welcome!</h1>
       <Routes>
-        <Route
-          path="/sign-in"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-
-        <Route
-          path="/"
-          element={
-            <AuthGuard>
-              <div>
-                This is the generated root route. <Link to="/page-2">Click here for page 2.</Link>
-              </div>
-            </AuthGuard>
-          }
-        />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/" element={<RootPage />} />
       </Routes>
-      {/* END: routes */}
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
       <br />
       <hr />
       <br />
@@ -47,7 +26,7 @@ export function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/page-2">Page 2</Link>
+            <Link to="/sign-in">SignIn</Link>
           </li>
         </ul>
       </div>
