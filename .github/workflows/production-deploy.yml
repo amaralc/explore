@@ -22,6 +22,12 @@ jobs:
     needs: [check-branch]
     environment:
       name: core-platform-shell-iac-production # Requires permission to proceed
+    strategy:
+      matrix:
+        node-version: [18]
+        npm-version: [8]
+        yarn-version: ["1.22.x"]
+        pnpm-version: [8]
 
     steps:
       - name: Checkout code
