@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useRouter } from '../../hooks/use-router';
+import { useRouter } from '../../../hooks/use-router';
 import { AuthGuardProps } from './types';
 
 const useAuth = () => {
