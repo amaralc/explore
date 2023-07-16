@@ -87,6 +87,21 @@ output "postgresql_dbms_instance_id" {
   value = module.postgresql_dbms.gcp_sql_dbms_instance_id
 }
 
+# Identity and Access Management (IAM) Service
+module "security-iam-svc" {
+  source                              = "../../../apps/security/iam-svc/iac"
+  source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
+  environment_name                    = module.parsed_branch_name.instance
+  gcp_project_id                      = local.project_id
+  gcp_location                        = var.gcp_location
+  short_commit_sha                    = var.short_commit_sha
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  gcp_sql_dbms_instance_host          = module.postgresql_dbms.gcp_sql_dbms_instance_host
+  gcp_sql_dbms_instance_name          = module.postgresql_dbms.gcp_sql_dbms_instance_name
+  gcp_vpc_access_connector_name       = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
+  depends_on                          = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
+}
+
 # Researchers Peers Microservice
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
