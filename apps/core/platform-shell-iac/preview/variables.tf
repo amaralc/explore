@@ -36,7 +36,7 @@ variable "gcp_credentials_file_path" {
   default     = "credentials.json"
 }
 
-variable "core_platform_shell_browser_vercel_project_id" {
+variable "core_platform_shell_browser_vite_vercel_project_id" {
   description = "The Vercel project ID of the core-platform-shell-browser in the production environment"
   type        = string
   default     = null
