@@ -5,6 +5,6 @@ terraform {
     credentials = "credentials.json"                # The path to the JSON key file for the Service Account Terraform will use to manage its state
 
     # The prefix will be set as an inline attribute, with 'terraform init -backend-config="prefix=preview-environment-name"'
-    prefix = "feature-peer-567-add-iam-service-with-keycloak"
+    # prefix = "feature-peer-567-add-iam-service-with-keycloak"
   }
 }

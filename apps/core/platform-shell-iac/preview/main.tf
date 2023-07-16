@@ -26,7 +26,7 @@ locals {
 module "preview-environment-01" {
   count                                                                     = local.preview_environments_enabled == true ? 1 : 0
   source                                                                    = "../../../../libs/iac-modules/environment"
-  branch_name                                                               = "feature/PEER-541-adjust-preview-workflow"
+  branch_name                                                               = "feature/PEER-567-add-iam-service-with-keycloak"
   owner_account_email                                                       = var.owner_account_email
   creator_service_account_email                                             = local.service_account_email
   source_environment_branch_name                                            = local.source_environment_branch_name
