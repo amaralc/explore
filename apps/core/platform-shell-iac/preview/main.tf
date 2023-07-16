@@ -4,7 +4,7 @@
 
 locals {
   source_environment_branch_name = "production"
-  preview_environments_enabled   = false # TODO -> Set as repository environment variable
+  preview_environments_enabled   = true # TODO -> Set as repository environment variable
 }
 
 data "google_sql_database_instance" "production" {
