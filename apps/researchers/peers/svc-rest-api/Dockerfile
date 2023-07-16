@@ -1,6 +1,10 @@
 # Start recipe from base image
 FROM node:16.20-slim as base
 
+# Using pnpm with docker (https://pnpm.io/next/docker)
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
 # Local SSH key in PEM format <--------- IMPORTANT!
 # To convert your local private key from OPENSSH to PEM format, use the following command: ssh-keygen -p -N "" -m pem -f /path/to/key
 # Example usage:
@@ -29,8 +33,8 @@ FROM base as build
 WORKDIR /app/
 COPY package.json pnpm-lock.yaml nx.json ./
 
-# Install app dependencies
-RUN pnpm install --frozen-lockfile
+# Install app dependencies using pnpm (https://pnpm.io/next/docker)
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 # # Remove SSH keys
 # RUN rm -rf /root/.ssh/
