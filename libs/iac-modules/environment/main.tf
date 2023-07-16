@@ -105,7 +105,8 @@ module "security-iam-svc" {
 # Researchers Peers Microservice
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
-  source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
+  count                               = local.is_production_environment ? 1 : 0 # Disable module in preview environments
+  source_environment_branch_name      = var.source_environment_branch_name      # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = module.parsed_branch_name.instance
   gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
