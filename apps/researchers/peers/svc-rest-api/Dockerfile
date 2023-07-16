@@ -24,10 +24,10 @@ RUN apt-get update -y && apt-get install -y openssl
 FROM base as build
 
 # Avoid cache purge by adding requirements first
-# Copy package.json and yarn lock to app directory
+# Copy package.json and pnpm lock to app directory
 # Set workdir
 WORKDIR /app/
-COPY package.json yarn.lock nx.json ./
+COPY package.json pnpm-lock.yaml nx.json ./
 
 # Install app dependencies
 RUN pnpm install --frozen-lockfile
@@ -56,14 +56,14 @@ ENV API_KEY=my-secret-api-key
 COPY . .
 
 RUN echo 'Generating Prisma Client...'
-RUN yarn prisma:generate:postgres
+RUN pnpm prisma:generate:postgres
 
 # Declares a branch name as argument. This value is used to set the NX_BRANCH in Nx Cloud.
 ARG BRANCH_NAME
 
 # Build the service api
 # Creates a "dist" folder with the production build
-RUN NX_BRANCH=$BRANCH_NAME yarn nx run researchers-peers-svc-rest-api:build
+RUN NX_BRANCH=$BRANCH_NAME pnpm nx run researchers-peers-svc-rest-api:build
 
 # build smaller image for running
 FROM base
@@ -87,7 +87,7 @@ ENV API_KEY=my-secret-api-key
 ENV ENTRYPOINT_PATH="apps/researchers/peers/svc-rest-api/entrypoint.sh"
 
 WORKDIR /app/
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml ./
 
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
