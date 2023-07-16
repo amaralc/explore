@@ -89,6 +89,7 @@ output "postgresql_dbms_instance_id" {
 
 # Identity and Access Management (IAM) Service
 module "security-iam-svc" {
+  count                               = local.is_production_environment ? 0 : 1 # Disable module in production environment
   source                              = "../../../apps/security/iam-svc/iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = module.parsed_branch_name.instance
@@ -121,6 +122,7 @@ module "researchers-peers" {
 # Nx Graph
 module "core-platform-shell-browser-vite" {
   source                           = "../environment-vercel"
+  count                            = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   project_name                     = "core-platform-shell-browser-vite"
   framework                        = "vite"
   git_provider                     = "github"
@@ -139,12 +141,13 @@ module "core-platform-shell-browser-vite" {
 }
 
 output "core_platform_shell_browser_vite_vercel_project_id" {
-  value = local.is_production_environment ? module.core-platform-shell-browser-vite.vercel_project_id : null
+  value = local.is_production_environment ? module.core-platform-shell-browser-vite[0].vercel_project_id : null
 }
 
 # Documentation with Docusaurus
 module "dx-dev-docs-browser" {
   source                           = "../environment-vercel"
+  count                            = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   project_name                     = "dx-dev-docs-browser"
   framework                        = null # https://vercel.com/docs/rest-api/endpoints#create-a-new-project
   git_provider                     = "github"
@@ -164,12 +167,13 @@ module "dx-dev-docs-browser" {
 }
 
 output "dx_dev_docs_browser_vercel_project_id" {
-  value = local.is_production_environment ? module.dx-dev-docs-browser.vercel_project_id : null
+  value = local.is_production_environment ? module.dx-dev-docs-browser[0].vercel_project_id : null
 }
 
 # Nx Graph
 module "core-root-shell-graph" {
   source                           = "../environment-vercel"
+  count                            = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   project_name                     = "core-root-shell-graph"
   framework                        = null
   git_provider                     = "github"
@@ -186,5 +190,5 @@ module "core-root-shell-graph" {
 }
 
 output "core_root_shell_graph_vercel_project_id" {
-  value = local.is_production_environment ? module.core-root-shell-graph.vercel_project_id : null
+  value = local.is_production_environment ? module.core-root-shell-graph[0].vercel_project_id : null
 }
