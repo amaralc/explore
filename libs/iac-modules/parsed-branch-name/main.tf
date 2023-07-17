@@ -4,16 +4,15 @@ data "external" "parse_branch_name" {
 
 # The null_resource with lifecycle block and ignore_changes argument is used to ensure that the parsed branch name does not change in subsequent runs.
 resource "null_resource" "ignore_branch_name_changes" {
-  depends_on = [var.branch_name]
   triggers = {
     parsed_branch_name = data.external.parse_branch_name.result["parsed_branch_name"]
   }
 
-  lifecycle {
-    ignore_changes = [
-      triggers,
-    ]
-  }
+  # lifecycle {
+  #   ignore_changes = [
+  #     triggers,
+  #   ]
+  # }
 }
 
 # Output the fixed parsed branch name
