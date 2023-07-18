@@ -10,7 +10,6 @@ resource "null_resource" "ignore_branch_name_changes" {
 
   # Test the lifecycle block and ignore_changes argument
   lifecycle {
-    replace_triggered_by = [var.branch_name]
     ignore_changes = [
       triggers,
     ]
