@@ -8,12 +8,13 @@ resource "null_resource" "ignore_branch_name_changes" {
     parsed_branch_name = data.external.parse_branch_name.result["parsed_branch_name"]
   }
 
-  # # Test the lifecycle block and ignore_changes argument
-  # lifecycle {
-  #   ignore_changes = [
-  #     triggers,
-  #   ]
-  # }
+  # Test the lifecycle block and ignore_changes argument
+  lifecycle {
+    replace_triggered_by = [var.branch_name]
+    ignore_changes = [
+      triggers,
+    ]
+  }
 }
 
 # Output the fixed parsed branch name
