@@ -23,10 +23,10 @@ locals {
 
 
 # Preview Environment
-module "preview-environment-01" {
+module "preview-environment" {
   count                                                                     = local.preview_environments_enabled == true ? 1 : 0
   source                                                                    = "../../../../libs/iac-modules/environment"
-  branch_name                                                               = "feature/PEER-567-add-iam-service-with-keycloak"
+  branch_name                                                               = var.branch_name
   owner_account_email                                                       = var.owner_account_email
   creator_service_account_email                                             = local.service_account_email
   source_environment_branch_name                                            = local.source_environment_branch_name

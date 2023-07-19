@@ -70,3 +70,8 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
   default     = "docker-repository"
 }
+
+variable "branch_name" {
+  description = "The name of the branch to deploy an environment from"
+  type        = string
+}
