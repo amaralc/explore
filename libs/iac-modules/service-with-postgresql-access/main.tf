@@ -6,13 +6,13 @@ locals {
 module "database" {
   source                     = "../gcp-postgresql-dbms-database"
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
-  database_name              = substr("${var.service_name}-${var.environment_name}", 0, 63) # Since databases are duplicated from source environment, we added the environment as part of the database name
+  database_name              = substr("${var.service_name}-${var.environment_name}", 0, 60) # Since databases are duplicated from source environment, we added the environment as part of the database name
 }
 
 # Create DBMS user for the service
 module "user" {
   source                     = "../gcp-postgresql-dbms-user"
-  username                   = substr("${var.service_name}-${var.environment_name}", 0, 63) # Since users are duplicated from source environment, we added the environment as part of the username
+  username                   = substr("${var.service_name}-${var.environment_name}", 0, 60) # Since users are duplicated from source environment, we added the environment as part of the username
   gcp_sql_dbms_instance_name = var.gcp_sql_dbms_instance_name
 }
 
@@ -55,7 +55,7 @@ module "service_account" {
   source                    = "../gcp-service-account"
   gcp_project_id            = var.gcp_project_id
   service_name              = var.service_name
-  environment_name          = substr(var.environment_name, 0, 63)
+  environment_name          = substr(var.environment_name, 0, 60)
   short_commit_sha          = var.short_commit_sha
   is_production_environment = var.source_environment_branch_name == null ? true : false
 }
