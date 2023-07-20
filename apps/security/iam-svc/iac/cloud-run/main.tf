@@ -20,16 +20,16 @@ resource "google_cloud_run_service" "instance" {
         # The docker image is pulled from GCR using the project ID, app name and the image tag which corresponds to the commit hash
         image = "${var.gcp_location}-docker.pkg.dev/${var.gcp_project_id}/${var.gcp_docker_artifact_repository_name}/${var.docker_image_name}:${var.environment_name}" # Use the environment to tag the image (staging, production, etc)
 
-        # Set the KC_DB_URL environment variable from the direct URL secret
-        env {
-          name = "KC_DB_URL"
-          value_from {
-            secret_key_ref {
-              name = var.gcp_database_connection_url_secret_id # Reference the secret
-              key  = "latest"                                  # Use the latest version of the secret
-            }
-          }
-        }
+        # # Set the KC_DB_URL environment variable from the direct URL secret
+        # env {
+        #   name = "KC_DB_URL"
+        #   value_from {
+        #     secret_key_ref {
+        #       name = var.gcp_database_connection_url_secret_id # Reference the secret
+        #       key  = "latest"                                  # Use the latest version of the secret
+        #     }
+        #   }
+        # }
       }
     }
 
