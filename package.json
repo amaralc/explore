@@ -12,6 +12,7 @@
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "pre-release": "lerna version prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
+    "release:graduate": "lerna version --yes --conventional-graduate --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "consumer-with-api:serve": "make consumer-with-api-serve",
     "test:unit": "nx run-many --target=test --all=true",
     "env:setup": "cp .env.example .env",
