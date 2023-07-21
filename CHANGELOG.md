@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.0](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4...peerlab@0.38.0) (2023-07-21)
+
+### Features
+
+- **PEER-577:** ci - document the process of graduating a pre-release ([e259d30](https://github.com/amaralc/peerlab/commit/e259d3015c91a5a0d73c67831d7f21f6f092fbfe))
+
 ## [0.37.4](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-beta.1...peerlab@0.37.4) (2023-07-21)
 
 ### Bug Fixes
