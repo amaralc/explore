@@ -146,6 +146,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ env.node_version }}-
 
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
       - name: Install dependencies
         run: |
           if [ "${{ env.package_manager == 'yarn' }}" == "true" ]; then
@@ -203,3 +207,7 @@ jobs:
           git config --global user.email "${{ github.actor}}@users.noreply.github.com"
           # echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
           pnpm pre-release
+
+      - name: Override nx token back to fake value # Avoid leaking the token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=fake-token
