@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.37.4-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-rc.1...peerlab@0.37.4-beta.0) (2023-07-21)
+
+### Bug Fixes
+
+- **PEER-577:** use beta as prerelease id ([3eeca54](https://github.com/amaralc/peerlab/commit/3eeca54a1e570eb28a0b96a3d33fce55355fa08c))
+
 ## [0.37.4-rc.1](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-rc.0...peerlab@0.37.4-rc.1) (2023-07-21)
 
 ### Features
