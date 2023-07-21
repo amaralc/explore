@@ -111,14 +111,14 @@ curl \
         \"cloudId\": \"$ATLASSIAN_CLOUD_ID\",
         \"event\": {
             \"deployment\": {
-                \"updateSequenceNumber\": 2,
-                \"displayName\": \"Production Deployment\",
+                \"updateSequenceNumber\": 1,
+                \"displayName\": \"Deployment\",
                 \"description\": \"Production Deployment\",
-                \"url\": \"https://www.peerlab.com.br\",
+                \"url\": \"$PIPELINE_URL\",
                 \"lastUpdated\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\",
                 \"externalEventSourceId\": \"$COMPASS_EXTERNAL_EVENT_SOURCE_ID\",
                 \"deploymentProperties\": {
-                    \"sequenceNumber\": 2,
+                    \"sequenceNumber\": 1,
                     \"state\": \"SUCCESSFUL\",
                     \"pipeline\": {
                         \"pipelineId\": \"$PIPELINE_RUN_ID\",
