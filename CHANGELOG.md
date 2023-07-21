@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.37.4](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-beta.1...peerlab@0.37.4) (2023-07-21)
+
+### Bug Fixes
+
+- **PEER-577:** ci - add release:graduate script ([73688b7](https://github.com/amaralc/peerlab/commit/73688b75eafe910019e9d71c3a1f59c1265d2eed))
+
 ## [0.37.4-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-beta.0...peerlab@0.37.4-beta.1) (2023-07-21)
 
 **Note:** Version bump only for package peerlab
