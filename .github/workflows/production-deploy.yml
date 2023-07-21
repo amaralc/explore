@@ -243,3 +243,7 @@ jobs:
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
         working-directory: apps/core/platform-shell-iac/production
+
+      - name: Emmit Compass Deployment event
+        run: |
+          bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}
