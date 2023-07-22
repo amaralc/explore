@@ -8,7 +8,7 @@ ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 
 # Configure a database vendor
-ENV KC_DB=postgres
+# ENV KC_DB=postgres
 
 WORKDIR /opt/keycloak
 
@@ -26,4 +26,4 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 # ENV KC_DB_PASSWORD=<DBPASSWORD>
 
 ENV KC_HOSTNAME=localhost
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
