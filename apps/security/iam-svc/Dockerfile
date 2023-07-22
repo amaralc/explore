@@ -20,7 +20,9 @@ FROM quay.io/keycloak/keycloak:22.0.0
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 # change these values to point to a running postgres instance
-# ENV KC_DB=postgres
+ENV KC_DB=postgres
+
+# # Values for postgres connection are being passed in from the cloud run deployment environment variables
 # ENV KC_DB_URL=<DBURL>
 # ENV KC_DB_USERNAME=<DBUSERNAME>
 # ENV KC_DB_PASSWORD=<DBPASSWORD>

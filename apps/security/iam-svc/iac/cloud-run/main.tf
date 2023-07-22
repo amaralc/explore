@@ -7,7 +7,7 @@ resource "google_cloud_run_service" "instance" {
   location = var.gcp_location
 
   # Depends on secret versions
-  depends_on = [var.gcp_database_connection_url_secret_version, var.gcp_vpc_access_connector_name]
+  depends_on = [var.gcp_vpc_access_connector_name, var.gcp_database_connection_url_secret_version, var.gcp_dbms_username_secret_version, var.gcp_dbms_password_secret_version]
 
   # Increase the memory limit to 1 GiB
   # memory = "1024Mi"
@@ -35,16 +35,36 @@ resource "google_cloud_run_service" "instance" {
           }
         }
 
-        # # Set the KC_DB_URL environment variable from the direct URL secret
-        # env {
-        #   name = "KC_DB_URL"
-        #   value_from {
-        #     secret_key_ref {
-        #       name = var.gcp_database_connection_url_secret_id # Reference the secret
-        #       key  = "latest"                                  # Use the latest version of the secret
-        #     }
-        #   }
-        # }
+        # Set the KC_DB_URL environment variable from the direct URL secret
+        env {
+          name = "KC_DB_URL"
+          value_from {
+            secret_key_ref {
+              name = var.gcp_database_connection_url_secret_id # Reference the secret
+              key  = "latest"                                  # Use the latest version of the secret
+            }
+          }
+        }
+
+        env {
+          name = "KC_DB_USERNAME"
+          value_from {
+            secret_key_ref {
+              name = var.gcp_dbms_username_secret_id
+              key  = "latest"
+            }
+          }
+        }
+
+        env {
+          name = "KC_DB_PASSWORD"
+          value_from {
+            secret_key_ref {
+              name = var.gcp_dbms_password_secret_id
+              key  = "latest"
+            }
+          }
+        }
       }
     }
 

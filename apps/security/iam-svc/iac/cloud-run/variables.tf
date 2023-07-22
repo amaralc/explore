@@ -28,6 +28,26 @@ variable "gcp_database_connection_url_secret_version" {
   type        = string
 }
 
+variable "gcp_dbms_username_secret_id" {
+  description = "The username of the database user"
+  type        = string
+}
+
+variable "gcp_dbms_username_secret_version" {
+  description = "A version of the secret for the username of the database user"
+  type        = string
+}
+
+variable "gcp_dbms_password_secret_id" {
+  description = "The password of the database user"
+  type        = string
+}
+
+variable "gcp_dbms_password_secret_version" {
+  description = "A version of the secret for the password of the database user"
+  type        = string
+}
+
 variable "gcp_service_account_email" {
   description = "The email of the GCP Service Account"
   type        = string

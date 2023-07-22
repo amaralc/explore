@@ -38,6 +38,14 @@ module "service_secrets" {
     {
       name  = "database_url_${var.service_name}_${var.environment_name}"
       value = local.database_url # I'm not sure why syntax highlighting is not working here
+    },
+    {
+      name  = "dbms_username_${var.service_name}_${var.environment_name}"
+      value = local.username
+    },
+    {
+      name  = "dbms_password_${var.service_name}_${var.environment_name}"
+      value = local.password
     }
   ]
 }
@@ -48,6 +56,22 @@ output "database_url_secret_id" {
 
 output "database_url_secret_version" {
   value = module.service_secrets.secrets_versions[0].version_id
+}
+
+output "dbms_username_secret_id" {
+  value = module.service_secrets.secret_ids[1].secret_id
+}
+
+output "dbms_username_secret_version" {
+  value = module.service_secrets.secrets_versions[1].version_id
+}
+
+output "dbms_password_secret_id" {
+  value = module.service_secrets.secret_ids[2].secret_id
+}
+
+output "dbms_password_secret_version" {
+  value = module.service_secrets.secrets_versions[2].version_id
 }
 
 # Create service account
