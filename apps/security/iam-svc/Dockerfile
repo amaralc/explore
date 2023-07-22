@@ -28,4 +28,8 @@ ENV KC_DB=postgres
 # ENV KC_DB_PASSWORD=<DBPASSWORD>
 
 ENV KC_HOSTNAME=localhost
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
+
+# Do NOT use the --optimized flag for the start command if you want to use a particular DB (except the H2)
+# https://keycloak.discourse.group/t/how-should-kc-db-url-be-formatted-for-postgres/18626/3
+# https://www.keycloak.org/server/db#:~:text=Do%20NOT%20use,Configuring%20Keycloak
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
