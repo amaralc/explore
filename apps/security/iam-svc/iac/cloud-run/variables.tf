@@ -18,13 +18,13 @@ variable "gcp_location" {
   type        = string
 }
 
-variable "gcp_database_connection_url_secret_id" {
-  description = "The ID of the secret for the database connection url"
+variable "gcp_jdbc_database_connection_url_secret_id" {
+  description = "The ID of the secret for the jdbc database connection url"
   type        = string
 }
 
-variable "gcp_database_connection_url_secret_version" {
-  description = "A version of the secret for the database connection url"
+variable "gcp_jdbc_database_connection_url_secret_version" {
+  description = "A version of the secret for the jdbc database connection url"
   type        = string
 }
 

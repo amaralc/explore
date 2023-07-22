@@ -27,7 +27,8 @@ locals {
   # References:
   # https://stackoverflow.com/questions/68018718/terraform-google-cloud-run-add-cloud-sql-connection
   # https://github.com/hashicorp/terraform-provider-google/issues/6004#issuecomment-607282371
-  database_url = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}" # How to appropriately set pooler in cloud sql?
+  database_url      = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}" # How to appropriately set pooler in cloud sql?
+  jdbc_database_url = "jdbc:postgresql://${local.host}:${local.port}/${local.database_name}"
 }
 
 # Create database connection URL secrets
@@ -40,12 +41,16 @@ module "service_secrets" {
       value = local.database_url # I'm not sure why syntax highlighting is not working here
     },
     {
+      name  = "jdbc_database_url_${var.service_name}_${var.environment_name}"
+      value = local.jdbc_database_url # This is useful for Keycloak only (https://www.keycloak.org/server/db)
+    },
+    {
       name  = "dbms_username_${var.service_name}_${var.environment_name}"
-      value = local.username
+      value = local.username # This is useful for Keycloak only (https://www.keycloak.org/server/db)
     },
     {
       name  = "dbms_password_${var.service_name}_${var.environment_name}"
-      value = local.password
+      value = local.password # This is useful for Keycloak only (https://www.keycloak.org/server/db)
     }
   ]
 }
@@ -58,20 +63,28 @@ output "database_url_secret_version" {
   value = module.service_secrets.secrets_versions[0].version_id
 }
 
-output "dbms_username_secret_id" {
+output "jdbc_database_url_secret_id" {
   value = module.service_secrets.secret_ids[1].secret_id
 }
 
-output "dbms_username_secret_version" {
+output "jdbc_database_url_secret_version" {
   value = module.service_secrets.secrets_versions[1].version_id
 }
 
-output "dbms_password_secret_id" {
+output "dbms_username_secret_id" {
   value = module.service_secrets.secret_ids[2].secret_id
 }
 
-output "dbms_password_secret_version" {
+output "dbms_username_secret_version" {
   value = module.service_secrets.secrets_versions[2].version_id
+}
+
+output "dbms_password_secret_id" {
+  value = module.service_secrets.secret_ids[3].secret_id
+}
+
+output "dbms_password_secret_version" {
+  value = module.service_secrets.secrets_versions[3].version_id
 }
 
 # Create service account
