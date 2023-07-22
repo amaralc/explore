@@ -27,9 +27,15 @@ locals {
   # References:
   # https://stackoverflow.com/questions/68018718/terraform-google-cloud-run-add-cloud-sql-connection
   # https://github.com/hashicorp/terraform-provider-google/issues/6004#issuecomment-607282371
-  database_url      = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}" # How to appropriately set pooler in cloud sql?
-  jdbc_database_url = "jdbc:postgresql://${local.host}:${local.port}/${local.database_name}"
+  database_url = "postgres://${local.username}:${local.password}@${local.host}:${local.port}/${local.database_name}" # How to appropriately set pooler in cloud sql?
+
+  # References:
+  # https://stackoverflow.com/a/76210250
+  # https://cloud.google.com/sql/docs/postgres/samples/cloud-sql-postgres-servlet-connect-unix
+  # jdbc_database_url = "jdbc:postgresql:///${local.database_name}?cloudSqlInstance=${var.gcp_sql_dbms_instance_name}&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+  jdbc_database_url = "jdbc:postgresql://${local.host}:${local.port}/${local.database_name}?socketFactory=com.google.cloud.sql.postgres.SocketFactory"
 }
+
 
 # Create database connection URL secrets
 module "service_secrets" {
