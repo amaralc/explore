@@ -102,3 +102,11 @@ module "service_account_permissions" {
     "roles/cloudsql.client"
   ]
 }
+
+# Create IAM policy binding for each secret
+resource "google_secret_manager_secret_iam_member" "secret_accessor" {
+  count     = length(module.service_secrets.secret_ids)                 # Create one instance of this resource for each secret ID
+  secret_id = module.service_secrets.secret_ids[count.index]            # Specify the ID of the secret for the current instance
+  role      = "roles/secretmanager.secretAccessor"                      # Grant the 'Secret Manager Secret Accessor' role
+  member    = "serviceAccount:${module.service_account.instance.email}" # Grant the role to the service account specified by the service account module
+}
