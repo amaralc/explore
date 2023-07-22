@@ -23,8 +23,8 @@ module "cloud-run-instance" {
   gcp_vpc_access_connector_name                   = var.gcp_vpc_access_connector_name
   gcp_docker_artifact_repository_name             = var.gcp_docker_artifact_repository_name
   gcp_service_account_email                       = module.database_and_access_management.service_account_email
-  gcp_jdbc_database_connection_url_secret_id      = module.database_and_access_management.database_url_secret_id
-  gcp_jdbc_database_connection_url_secret_version = module.database_and_access_management.database_url_secret_version
+  gcp_jdbc_database_connection_url_secret_id      = module.database_and_access_management.jdbc_database_url_secret_id
+  gcp_jdbc_database_connection_url_secret_version = module.database_and_access_management.jdbc_database_url_secret_version
   gcp_dbms_username_secret_id                     = module.database_and_access_management.dbms_username_secret_id
   gcp_dbms_username_secret_version                = module.database_and_access_management.dbms_username_secret_version
   gcp_dbms_password_secret_id                     = module.database_and_access_management.dbms_password_secret_id
