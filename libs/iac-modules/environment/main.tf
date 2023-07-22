@@ -89,7 +89,7 @@ output "postgresql_dbms_instance_id" {
 
 # Identity and Access Management (IAM) Service
 module "security-iam-svc" {
-  count                               = local.is_production_environment ? 0 : 1 # Disable module in production environment
+  count                               = local.is_production_environment ? 0 : 0 # Disable module in production environment
   source                              = "../../../apps/security/iam-svc/iac"
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = module.parsed_branch_name.instance
