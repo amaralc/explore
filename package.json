@@ -1,6 +1,6 @@
 {
   "name": "peerlab",
-  "version": "0.37.3",
+  "version": "0.38.0",
   "license": "MIT",
   "author": {
     "name": "Calil Amaral",
@@ -10,7 +10,9 @@
     "prepare": "husky install",
     "git:discard:all": "git checkout -- .",
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
+    "pre-release": "lerna version prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
+    "release:graduate": "lerna version --yes --conventional-graduate --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "consumer-with-api:serve": "make consumer-with-api-serve",
     "test:unit": "nx run-many --target=test --all=true",
     "env:setup": "cp .env.example .env",

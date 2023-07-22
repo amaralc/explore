@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.0](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4...peerlab@0.38.0) (2023-07-21)
+
+### Features
+
+- **PEER-577:** ci - document the process of graduating a pre-release ([e259d30](https://github.com/amaralc/peerlab/commit/e259d3015c91a5a0d73c67831d7f21f6f092fbfe))
+
+## [0.37.4](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-beta.1...peerlab@0.37.4) (2023-07-21)
+
+### Bug Fixes
+
+- **PEER-577:** ci - add release:graduate script ([73688b7](https://github.com/amaralc/peerlab/commit/73688b75eafe910019e9d71c3a1f59c1265d2eed))
+
+## [0.37.4-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-beta.0...peerlab@0.37.4-beta.1) (2023-07-21)
+
+**Note:** Version bump only for package peerlab
+
+## [0.37.4-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-rc.1...peerlab@0.37.4-beta.0) (2023-07-21)
+
+### Bug Fixes
+
+- **PEER-577:** use beta as prerelease id ([3eeca54](https://github.com/amaralc/peerlab/commit/3eeca54a1e570eb28a0b96a3d33fce55355fa08c))
+
+## [0.37.4-rc.1](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4-rc.0...peerlab@0.37.4-rc.1) (2023-07-21)
+
+### Features
+
+- **PEER-577:** add custom event and deployment event scripts ([0ac8962](https://github.com/amaralc/peerlab/commit/0ac8962655212a98cf2fb75535669d0f99e7e089))
+- **PEER-577:** ci - emmit deployment event ([d9fe795](https://github.com/amaralc/peerlab/commit/d9fe79519c659d8c53dcb98981876087c09bcbcb))
+- **PEER-577:** docs - document the process ([53848a1](https://github.com/amaralc/peerlab/commit/53848a1615dd05070551ac6236784652d8e13fd6))
+
+### Bug Fixes
+
+- **PEER-577:** ci - use nx cloud in pipeline ([cbcace6](https://github.com/amaralc/peerlab/commit/cbcace682363daa76584f7d520090dbaebe60727))
+
+## [0.37.4-rc.0](https://github.com/amaralc/peerlab/compare/peerlab@0.37.3...peerlab@0.37.4-rc.0) (2023-07-20)
+
+**Note:** Version bump only for package peerlab
+
 ## [0.37.3](https://github.com/amaralc/peerlab/compare/peerlab@0.37.2...peerlab@0.37.3) (2023-07-14)
 
 **Note:** Version bump only for package peerlab
