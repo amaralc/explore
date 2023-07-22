@@ -9,6 +9,9 @@ resource "google_cloud_run_service" "instance" {
   # Depends on secret versions
   depends_on = [var.gcp_database_connection_url_secret_version, var.gcp_vpc_access_connector_name]
 
+  # Increase the memory limit to 1 GiB
+  # memory = "1024Mi"
+
   # Defining the service template
   template {
     spec {
@@ -19,6 +22,18 @@ resource "google_cloud_run_service" "instance" {
       containers {
         # The docker image is pulled from GCR using the project ID, app name and the image tag which corresponds to the commit hash
         image = "${var.gcp_location}-docker.pkg.dev/${var.gcp_project_id}/${var.gcp_docker_artifact_repository_name}/${var.docker_image_name}:${var.environment_name}" # Use the environment to tag the image (staging, production, etc)
+
+        resources {
+          limits = {
+            # # CPU usage limit
+            # # https://cloud.google.com/run/docs/configuring/cpu
+            # cpu = "1000m" # 1 vCPU
+
+            # Memory usage limit (per container)
+            # https://cloud.google.com/run/docs/configuring/memory-limits
+            memory = "1024Mi"
+          }
+        }
 
         # # Set the KC_DB_URL environment variable from the direct URL secret
         # env {
@@ -62,6 +77,8 @@ resource "google_cloud_run_service" "instance" {
     # Whether traffic should be directed to the latest revision
     latest_revision = true
   }
+
+
 }
 
 # This block defines a Cloud Run IAM member. This sets the permissions for who can access the Cloud Run service.
