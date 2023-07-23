@@ -25,7 +25,7 @@ resource "null_resource" "ignore_branch_code_changes" {
 
 resource "null_resource" "logger" {
   provisioner "local-exec" {
-    command = "echo 'Environment name: ${local.environment_name}'"
+    command = "echo 'Environment name: ${null_resource.ignore_branch_code_changes.triggers["environment_name"]}'"
   }
 }
 
