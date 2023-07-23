@@ -17,6 +17,12 @@ variable "branch_name" {
   type        = string
 }
 
+variable "environment_name" {
+  description = "The name of the environment"
+  type        = string
+  default     = null # Production environment has its own default value
+}
+
 variable "gcp_billing_account_id" {
   description = "The ID of the GCP billing account to associate this project with"
   type        = string

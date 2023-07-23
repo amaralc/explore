@@ -75,3 +75,8 @@ variable "branch_name" {
   description = "The name of the branch to deploy an environment from"
   type        = string
 }
+
+variable "environment_name" {
+  description = "The name of the environment to deploy"
+  type        = string
+}

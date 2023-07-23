@@ -7,17 +7,8 @@ output "branch_name" {
   value = var.branch_name
 }
 
-module "environment_id" {
-  source = "../random-fixed-id"
-}
-
-module "environment_name" {
-  source      = "../environment-name"
-  branch_name = var.branch_name
-}
-
 locals {
-  short_environment_name = local.is_production_environment ? "production" : "${module.environment_name.instance}" # Limit the name to 24 characters
+  short_environment_name = local.is_production_environment ? "production" : "${var.environment_name}" # Limit the name to 24 characters
 }
 
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
@@ -73,7 +64,7 @@ output "vpc" {
 # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 module "postgresql_dbms" {
   source                          = "../gcp-postgresql-dbms-environment"
-  environment_name                = module.environment_name.instance
+  environment_name                = local.short_environment_name
   gcp_project_id                  = local.project_id
   gcp_location                    = var.gcp_location
   gcp_network_id                  = module.vpc.private_network.id
@@ -92,7 +83,7 @@ module "security-iam-svc" {
   count                                 = local.is_production_environment ? 0 : 1 # Disable module in production environment
   source                                = "../../../apps/security/iam-svc/iac"
   source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
-  environment_name                      = module.environment_name.instance
+  environment_name                      = local.short_environment_name
   gcp_project_id                        = local.project_id
   gcp_location                          = var.gcp_location
   short_commit_sha                      = var.short_commit_sha
@@ -109,7 +100,7 @@ module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
   count                               = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   source_environment_branch_name      = var.source_environment_branch_name      # Informs the type of environment in order to decide how to treat database and users
-  environment_name                    = module.environment_name.instance
+  environment_name                    = local.short_environment_name
   gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha

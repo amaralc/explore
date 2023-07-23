@@ -375,6 +375,9 @@ jobs: # A workflow can have multiple jobs
           echo "branch_name=$branch_name" >> $GITHUB_ENV
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
           echo "parsed_branch_name=$parsed_branch_name" >> $GITHUB_ENV
+          environment_name=$(bash ./scripts/deploy/parse-branch-name-to-environment-code.sh)
+          echo "Environment name: $environment_name"
+          echo "environment_name=$environment_name" >> $GITHUB_ENV
 
       - name: Get short commit hash
         run: |
@@ -516,7 +519,7 @@ jobs: # A workflow can have multiple jobs
           no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
           tags: |
-            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.parsed_branch_name }}
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
 
       - name: Override nx token back to fake value # Avoid leaking the token
@@ -541,6 +544,9 @@ jobs: # A workflow can have multiple jobs
           parsed_branch_name=$(echo "$branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
           echo "branch_name=$branch_name" >> $GITHUB_ENV
           echo "parsed_branch_name=$parsed_branch_name" >> $GITHUB_ENV
+          environment_name=$(bash ./scripts/deploy/parse-branch-name-to-environment-code.sh)
+          echo "Environment name: $environment_name"
+          echo "environment_name=$environment_name" >> $GITHUB_ENV
 
       - name: Get short commit hash
         run: |
