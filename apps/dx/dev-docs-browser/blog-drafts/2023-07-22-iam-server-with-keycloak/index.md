@@ -12,6 +12,8 @@ description: 'Creating an identity server using keycloak'
   - "DefaultCacheManager start failed, stopping any running components: org.infinispan.commons.CacheException: - Unable to start JGroups Channel"
 
 - Issues
+  - Updated ad 2022-10-21 by doctor78si: https://www.reddit.com/r/googlecloud/comments/y979c6/keycloak_on_gcp/?onetap_auto=true (VERY PROMISSING!!)
+    - Updated ad 2022-10-21 by mpbits: https://github.com/mpbits/dev-ops/blob/main/gcp/keycloak/Dockerfile
   - Updated at 2023-04-18 by lamenawuer: https://keycloak.discourse.group/t/i-dont-know-whats-wrong-with-my-infinispan-config-file/21572
   - Updated at 2023-04-07 by M3lkior: https://keycloak.discourse.group/t/configuring-keycloak-in-gcp-cloud-run-using-docker-umage/21280/5
   - Updated at 2023-05-24 by Paul Werner: https://stackoverflow.com/a/76210250 (PROMISSING!!)
