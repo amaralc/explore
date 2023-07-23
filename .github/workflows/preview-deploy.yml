@@ -504,7 +504,7 @@ jobs: # A workflow can have multiple jobs
         if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
         run: |
           echo "Getting .jar file from https://storage.googleapis.com/cloud-sql-java-connector ..."
-          wget -P https://storage.googleapis.com/cloud-sql-java-connector/v1.2.0/postgres-socket-factory-1.2.0-jar-with-driver-and-dependencies.jar
+          wget https://storage.googleapis.com/cloud-sql-java-connector/v1.2.0/postgres-socket-factory-1.2.0-jar-with-driver-and-dependencies.jar
 
       - name: Build and push Docker image
         if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
