@@ -80,7 +80,7 @@ resource "google_cloud_run_service" "instance" {
         # all egress from the service should go through the VPC Connector
         "run.googleapis.com/vpc-access-egress" = "all-traffic"
         # # Set the Cloud SQL instance to be used by the service
-        # "run.googleapis.com/cloudsql-instances" = var.gcp_sql_database_instance_connection_name
+        "run.googleapis.com/cloudsql-instances" = var.gcp_sql_dbms_instance_connection_name
       }
       # annotations = {
       #   "run.googleapis.com/cloudsql-instances" = var.gcp_sql_database_instance_connection_name # Set the Cloud SQL instance to be used by the service

@@ -68,3 +68,8 @@ variable "gcp_vpc_access_connector_name" {
   description = "The name of the VPC access connector"
   type        = string
 }
+
+variable "gcp_sql_dbms_instance_connection_name" {
+  description = "The connection name of the Cloud SQL DBMS instance"
+  type        = string
+}

@@ -32,8 +32,8 @@ locals {
   # References:
   # https://stackoverflow.com/a/76210250
   # https://cloud.google.com/sql/docs/postgres/samples/cloud-sql-postgres-servlet-connect-unix
-  # jdbc_database_url = "jdbc:postgresql:///${local.database_name}?cloudSqlInstance=${var.gcp_sql_dbms_instance_name}&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
-  jdbc_database_url = "jdbc:postgresql://${local.host}:${local.port}/${local.database_name}?socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+  jdbc_database_url = "jdbc:postgresql:///${local.database_name}?cloudSqlInstance=${var.gcp_sql_dbms_instance_name}&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+  # jdbc_database_url = "jdbc:postgresql://${local.host}:${local.port}/${local.database_name}?socketFactory=com.google.cloud.sql.postgres.SocketFactory"
 }
 
 

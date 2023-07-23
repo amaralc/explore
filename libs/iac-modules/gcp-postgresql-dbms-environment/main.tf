@@ -65,4 +65,8 @@ output "gcp_sql_dbms_instance_id" {
   value = local.is_production_environment == true ? google_sql_database_instance.root_environment[0].id : google_sql_database_instance.preview_environment[0].id
 }
 
+output "gcp_sql_dbms_instance_connection_name" {
+  value = local.is_production_environment == true ? google_sql_database_instance.root_environment[0].connection_name : google_sql_database_instance.preview_environment[0].connection_name
+}
+
 
