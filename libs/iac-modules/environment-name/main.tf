@@ -6,13 +6,13 @@ locals {
 }
 
 data "external" "parse_branch_code" {
-  program = ["bash", "-c", "branch_code_base64_sha256='${local.branch_code_base64_sha256}'; environment_name=$(echo \"$branch_code_base64_sha256\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
+  program = ["bash", "-c", "branch_code_base64_sha256='${local.branch_code_base64_sha256}'; environment_name=$(echo \"$branch_code_base64_sha256\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
 }
 
 # The null_resource with lifecycle block and ignore_changes argument is used to ensure that the parsed branch name does not change in subsequent runs.
 resource "null_resource" "ignore_branch_code_changes" {
   triggers = {
-    environment_name = data.external.parse_branch_code.result["environment_name"]
+    environment_name = substr(data.external.parse_branch_code.result["environment_name"], 0, 10)
   }
 
   # Test the lifecycle block and ignore_changes argument
