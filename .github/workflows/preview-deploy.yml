@@ -539,6 +539,14 @@ jobs: # A workflow can have multiple jobs
         working-directory: ${{ github.workspace }}
 
     steps:
+      - name: Get short commit hash
+        run: |
+          SHORT_SHA=${{ github.sha }}
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
+
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
       - name: Extract environment name
         run: |
           echo $GITHUB_REF
@@ -550,14 +558,6 @@ jobs: # A workflow can have multiple jobs
           environment_name=$(bash ./scripts/deploy/parse-branch-name-to-environment-code.sh --branch-name=$branch_name)
           echo "Environment name: $environment_name"
           echo "environment_name=$environment_name" >> $GITHUB_ENV
-
-      - name: Get short commit hash
-        run: |
-          SHORT_SHA=${{ github.sha }}
-          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
-
-      - name: Checkout branch
-        uses: actions/checkout@v3
 
       - name: Save GCP credentials to file
         run: |
