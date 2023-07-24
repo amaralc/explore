@@ -3,7 +3,7 @@
 # - https://stackoverflow.com/a/76210250
 # - https://github.com/mpbits/dev-ops/blob/main/gcp/keycloak/Dockerfile
 
-FROM quay.io/keycloak/keycloak:latest as builder
+FROM quay.io/keycloak/keycloak:22.0.0 as builder
 
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
@@ -18,12 +18,14 @@ ENV KC_DB_DRIVER=org.postgresql.Driver
 
 # Install custom providers
 COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
-COPY keycloak-metrics-spi-2.5.3.jar /opt/keycloak/providers/
+
+# TODO: verify if build was failing due to this provider
+# COPY keycloak-metrics-spi-2.5.3.jar /opt/keycloak/providers/
 
 # Build keycloak
 RUN /opt/keycloak/bin/kc.sh build --transaction-xa-enabled=false
 
-FROM quay.io/keycloak/keycloak:latest
+FROM quay.io/keycloak/keycloak:22.0.0
 
 # TODO: verify if next line is needed
 COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
