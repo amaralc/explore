@@ -24,7 +24,8 @@ RUN /opt/keycloak/bin/kc.sh build --transaction-xa-enabled=false
 
 FROM quay.io/keycloak/keycloak:latest
 
-COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+# TODO: verify if next line is needed
+# COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
 
 COPY --from=builder /opt/keycloak /opt/keycloak
 WORKDIR /opt/keycloak
