@@ -3,7 +3,7 @@ name: Build, tag and deploy "production" environment
 on:
   create:
     tags:
-      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+      - "^peerlab@[0-9]+.[0-9]+.[0-9]+$"
 
 jobs:
   check-branch:
