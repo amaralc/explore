@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.38.1-beta.1...peerlab@0.38.1-beta.2) (2023-07-24)
+
+### Bug Fixes
+
+- **ci:** update tag pattern for production deploy pipeline ([4f3847a](https://github.com/amaralc/peerlab/commit/4f3847a03c8c5dec7526a1ce42321dc94e65d9aa))
+
 ## [0.38.1-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.38.1-beta.0...peerlab@0.38.1-beta.1) (2023-07-24)
 
 **Note:** Version bump only for package peerlab
