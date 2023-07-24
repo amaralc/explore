@@ -3,14 +3,15 @@ locals {
 }
 
 module "database_and_access_management" {
-  source                         = "../../../../libs/iac-modules/service-with-postgresql-access"
-  service_name                   = local.service_name
-  environment_name               = var.environment_name
-  gcp_project_id                 = var.gcp_project_id
-  gcp_sql_dbms_instance_name     = var.gcp_sql_dbms_instance_name
-  gcp_sql_dbms_instance_host     = var.gcp_sql_dbms_instance_host
-  short_commit_sha               = var.short_commit_sha
-  source_environment_branch_name = var.source_environment_branch_name
+  source                                = "../../../../libs/iac-modules/service-with-postgresql-access"
+  service_name                          = local.service_name
+  environment_name                      = var.environment_name
+  gcp_project_id                        = var.gcp_project_id
+  gcp_sql_dbms_instance_name            = var.gcp_sql_dbms_instance_name
+  gcp_sql_dbms_instance_host            = var.gcp_sql_dbms_instance_host
+  short_commit_sha                      = var.short_commit_sha
+  source_environment_branch_name        = var.source_environment_branch_name
+  gcp_sql_dbms_instance_connection_name = var.gcp_sql_dbms_instance_connection_name
 }
 
 module "cloud-run-instance" {

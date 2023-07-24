@@ -1,49 +1,52 @@
 # References:
 # - https://www.keycloak.org/server/containers
 # - https://stackoverflow.com/a/76210250
+# - https://github.com/mpbits/dev-ops/blob/main/gcp/keycloak/Dockerfile
 
-FROM quay.io/keycloak/keycloak:22.0.0 as builder
+FROM quay.io/keycloak/keycloak:latest as builder
 
-# Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
-ENV KC_FEATURES=preview,token-exchange
-
-# Configure a database vendor
+ENV KC_FEATURES=token-exchange
 ENV KC_DB=postgres
 
-# This is needed in order to use com.google.cloud.sql.mysql.SocketFactory
-# More at https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc-mysql.md
-COPY postgres-socket-factory-1.2.0-jar-with-driver-and-dependencies.jar /opt/keycloak/providers/
+# This is needed in order to use com.google.cloud.sql.postgres.SocketFactory
+# More at https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc-postgres.md
+ENV KC_DB_KIND=postgres
+ENV KC_DB_DIALECT=org.hibernate.dialect.PostgreSQL10Dialect
+ENV KC_DB_DRIVER=org.postgresql.Driver
+COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+
+# Install custom providers
+RUN curl -sL https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar -o /opt/keycloak/providers/keycloak-metrics-spi-2.5.3.jar
+
 RUN /opt/keycloak/bin/kc.sh build --transaction-xa-enabled=false
 
-FROM quay.io/keycloak/keycloak:22.0.0
+FROM quay.io/keycloak/keycloak:latest
 
-# Install socket for postgres
-COPY postgres-socket-factory-1.2.0-jar-with-driver-and-dependencies.jar /opt/keycloak/providers/
+COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+
 COPY --from=builder /opt/keycloak /opt/keycloak
-
 WORKDIR /opt/keycloak
-# # for demonstration purposes only, please make sure to use proper certificates in production instead
-# RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
-# RUN /opt/keycloak/bin/kc.sh build
-
+# for demonstration purposes only, please make sure to use proper certificates in production instead
+RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
 # change these values to point to a running postgres instance
-# # Values for postgres connection are being passed in from the cloud run deployment environment variables
-
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
-ENV KC_FEATURES=preview,token-exchange
+ENV KC_FEATURES=token-exchange
 
-ENV KEYCLOAK_ADMIN=admin
-ENV KEYCLOAK_ADMIN_PASSWORD=admin
+ENV KEYCLOAK_ADMIN=fake-preview-admin
+ENV KEYCLOAK_ADMIN_PASSWORD=fake-preview-admin
 
 ENV KC_DB=postgres
+ENV KC_DB_KIND=postgres
+ENV KC_DB_DIALECT=org.hibernate.dialect.PostgreSQL10Dialect
+ENV KC_DB_DRIVER=org.postgresql.Driver
 ENV KC_TRANSACTION_XA_ENABLED=false
 
-# ENV KC_DB_URL="jdbc:mysql:///keycloak?cloudSqlInstance=<INSTANCE_CONNECTION_NAME>&socketFactory=com.google.cloud.sql.mysql.SocketFactory"
-# ENV KC_DB_USERNAME=<MYSQL_USERNAME>
-# ENV KC_DB_PASSWORD=<MYSQL_USER_PASSWORD>
+# ENV KC_DB_URL="jdbc:postgresql:///<DATABASE_NAME>?cloudSqlInstance=<INSTANCE_CONNECTION_NAME>&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+# ENV KC_DB_USERNAME=<POSTGRESQL_USERNAME>
+# ENV KC_DB_PASSWORD=<POSTGRESQL_USER_PASSWORD>
 
 ENV KC_HOSTNAME_STRICT=false
 ENV KC_HTTPS_CLIENT_AUTH=request
@@ -53,10 +56,5 @@ ENV KC_HTTP_ENABLED=true
 ENV KC_HTTP_PORT=8080
 ENV KC_PROXY=edge
 ENV PROXY_ADDRESS_FORWARDING=true
-# ENV KC_HOSTNAME=localhost
 
-# Do NOT use the --optimized flag for the start command if you want to use a particular DB (except the H2)
-# https://keycloak.discourse.group/t/how-should-kc-db-url-be-formatted-for-postgres/18626/3
-# https://www.keycloak.org/server/db#:~:text=Do%20NOT%20use,Configuring%20Keycloak
-# ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized", "--spi-email-template-provider=freemarker-plus-mustache", "--spi-email-template-freemarker-plus-mustache-enabled=true"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
