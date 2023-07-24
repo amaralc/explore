@@ -506,11 +506,11 @@ jobs: # A workflow can have multiple jobs
           username: _json_key
           password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
-      - name: Get postgres-socket-factory-1.2.0 with driver and dependencies
+      - name: Get Keycloak providers
         if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
         run: |
-          echo "Getting .jar file from https://storage.googleapis.com/cloud-sql-java-connector ..."
           wget https://storage.googleapis.com/cloud-sql-java-connector/v1.8.1/postgres-socket-factory-1.8.1-jar-with-dependencies.jar
+          wget https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar
 
       - name: Build and push Docker image
         if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}

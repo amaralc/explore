@@ -15,19 +15,22 @@ ENV KC_DB=postgres
 ENV KC_DB_KIND=postgres
 ENV KC_DB_DIALECT=org.hibernate.dialect.PostgreSQL10Dialect
 ENV KC_DB_DRIVER=org.postgresql.Driver
-COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
 
 # Install custom providers
-RUN curl -sL https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar -o /opt/keycloak/providers/keycloak-metrics-spi-2.5.3.jar
+COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+COPY keycloak-metrics-spi-2.5.3.jar /opt/keycloak/providers/
 
+# Build keycloak
 RUN /opt/keycloak/bin/kc.sh build --transaction-xa-enabled=false
 
 FROM quay.io/keycloak/keycloak:latest
 
 # TODO: verify if next line is needed
-# COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+COPY keycloak-metrics-spi-2.5.3.jar /opt/keycloak/providers/
 
 COPY --from=builder /opt/keycloak /opt/keycloak
+
 WORKDIR /opt/keycloak
 # for demonstration purposes only, please make sure to use proper certificates in production instead
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
