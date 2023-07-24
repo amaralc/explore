@@ -15,10 +15,10 @@ ENV KC_DB=postgres
 ENV KC_DB_KIND=postgres
 ENV KC_DB_DIALECT=org.hibernate.dialect.PostgreSQL10Dialect
 ENV KC_DB_DRIVER=org.postgresql.Driver
-COPY postgres-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
 
 # Install custom providers
-RUN curl -sL https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar -o /opt/keycloak/providers/keycloak-metrics-spi-2.5.3.jar
+RUN wget -P /opt/keycloak/providers/ https://storage.googleapis.com/cloud-sql-java-connector/v1.8.1/postgres-socket-factory-1.8.1-jar-with-dependencies.jar
+RUN wget -P /opt/keycloak/providers/ https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar
 
 RUN /opt/keycloak/bin/kc.sh build --transaction-xa-enabled=false
 
