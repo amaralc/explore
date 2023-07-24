@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.38.0...peerlab@0.38.1-beta.0) (2023-07-24)
+
+### Features
+
+- **PEER-567:** add job to build security-iam-svc in preview deploy workflow ([cf68cff](https://github.com/amaralc/peerlab/commit/cf68cff0be83f7be540657194effb08bcdce6a88))
+- **PEER-567:** add security-iam-svc ([d5c2c38](https://github.com/amaralc/peerlab/commit/d5c2c3849dc4e8777e9882eb49f8f1ea3c5cc6bd))
+- **PEER-567:** add security-iam-svc to environment module ([bdaf7de](https://github.com/amaralc/peerlab/commit/bdaf7de774ac46aba7e4487b21d3d5d52f1849a4))
+- **PEER-567:** add service-with-postgresql-access iac module ([50b7ab7](https://github.com/amaralc/peerlab/commit/50b7ab721f86d2f3259e9efa811659ecc286f5de))
+- **PEER-567:** deploy one preview environment for branch ([edffdd9](https://github.com/amaralc/peerlab/commit/edffdd99bbe65c36c26aaa95b3afdfc39102bfec))
+- **PEER-567:** firebase - add command to update project labels ([57fe1ff](https://github.com/amaralc/peerlab/commit/57fe1ff054f388e84202e7de90bb1ea755cf7206))
+
+### Bug Fixes
+
+- **PEER-567:** access secret_id attribute ([ac4dd61](https://github.com/amaralc/peerlab/commit/ac4dd61e2bcde14e850cd112b18c838b98e4edea))
+- **PEER-567:** add a hostname to keycloak instance ([b8893a9](https://github.com/amaralc/peerlab/commit/b8893a9972d7dc4e83f6a1b2627101f7461076d9))
+- **PEER-567:** add google_secret_manager_secret_iam_member block ([9a0e973](https://github.com/amaralc/peerlab/commit/9a0e973a7d81ec0f620e85fb3f59e49456c439b4))
+- **PEER-567:** add missing start command ([4ef3d38](https://github.com/amaralc/peerlab/commit/4ef3d3899181bc8996bf049047630873795a2985))
+- **PEER-567:** add missing variable to tf command ([db18b5f](https://github.com/amaralc/peerlab/commit/db18b5fca7b509239fca06b55ce93ef9993d0e08))
+- **PEER-567:** add postgres socket factory and add references ([32e55a7](https://github.com/amaralc/peerlab/commit/32e55a74bea2bf78780edfd4df7e87deebcde540))
+- **PEER-567:** add socket factory to jdbc db url ([2988743](https://github.com/amaralc/peerlab/commit/298874363138a5fd92ae4fdf01bcff1987976c54))
+- **PEER-567:** adjust branch name ([07e2772](https://github.com/amaralc/peerlab/commit/07e277249151755be6e28c7a0a7b20a54d1309be))
+- **PEER-567:** adjust vpc access connector name ([71eeb9b](https://github.com/amaralc/peerlab/commit/71eeb9bbc9e07601b5e2068418ae518d46b0949f))
+- **PEER-567:** configure Dockerfile with postgres driver ([b806284](https://github.com/amaralc/peerlab/commit/b806284aa9e7444762acee935bf0e935c0e9c661))
+- **PEER-567:** copy .jar to root folder ([fd7b44d](https://github.com/amaralc/peerlab/commit/fd7b44d3c0ccc90ab066ea6e488ae1637e158a28))
+- **PEER-567:** destroy and change db deletion policy ([08ae7c7](https://github.com/amaralc/peerlab/commit/08ae7c74ab88b7540996d23bd2817a0144f33e3b))
+- **PEER-567:** do not use --optimized command for postgres ([4a54147](https://github.com/amaralc/peerlab/commit/4a54147601c9b1755c4224375681fba0ad4d9b13))
+- **PEER-567:** fix and shorten env name ([35922f7](https://github.com/amaralc/peerlab/commit/35922f7677169483d23e07510d6c9151de5004c3))
+- **PEER-567:** fix variable name ([a978fc4](https://github.com/amaralc/peerlab/commit/a978fc4e46638c45209ed2770c7b8ccffddc1e29))
+- **PEER-567:** fix wget command ([7528b98](https://github.com/amaralc/peerlab/commit/7528b98f652124386e3fdb172f5f00d07f0f4bcb))
+- **PEER-567:** increase the memory limit ([9e07ac1](https://github.com/amaralc/peerlab/commit/9e07ac14f12834e1ea82626ba98e87117c235fa7))
+- **PEER-567:** install pnpm in docker image and adjust conditions in workflows ([71d807b](https://github.com/amaralc/peerlab/commit/71d807bd1c43f8c531a13377361553b3474d5fbb))
+- **PEER-567:** invert step order ([f2e4410](https://github.com/amaralc/peerlab/commit/f2e441035615061ebd6cd7f92c8f3110de45c4b2))
+- **PEER-567:** move get providers to ci ([926db98](https://github.com/amaralc/peerlab/commit/926db98e65a263f3a55e36cfcc2ebd77d6be4c1a))
+- **PEER-567:** pass branch name to script ([424f7f4](https://github.com/amaralc/peerlab/commit/424f7f40014626e0fd8661f4a3b7e744f0668d3e))
+- **PEER-567:** remove env from cloud run module ([62abf67](https://github.com/amaralc/peerlab/commit/62abf67e0a3033aa6da2e2630c111fa969286866))
+- **PEER-567:** remove postgres and add --optimized ([bd7c7b9](https://github.com/amaralc/peerlab/commit/bd7c7b9e3262307282cbaf416c4019c7f8538541))
+- **PEER-567:** shorten environment name ([7aff03c](https://github.com/amaralc/peerlab/commit/7aff03c8487902f475ad1d85d16d8d9d11d8823d))
+- **PEER-567:** use connection name in jdbc url ([1bdf741](https://github.com/amaralc/peerlab/commit/1bdf741ce50a696c862695fbc2a9ab05f8c6e07a))
+- **PEER-567:** use dbms connection name ([b234cff](https://github.com/amaralc/peerlab/commit/b234cff72aafe09bb35bf6f0e0fe848bc39e8f32))
+- **PEER-567:** use jdbc secret values ([5bee838](https://github.com/amaralc/peerlab/commit/5bee83801ebfd4e2c105aa7e43ecd4f856484de0))
+- **PEER-567:** use jdbc url with user and password ([c285a6e](https://github.com/amaralc/peerlab/commit/c285a6e73300b608c66b489bb39a8c226433812d))
+- **PEER-567:** use max 60 characters for database name ([df2784a](https://github.com/amaralc/peerlab/commit/df2784a71908bfa658658fab224efb3b4ec37878))
+- **PEER-567:** use null resource ([98b3c59](https://github.com/amaralc/peerlab/commit/98b3c59644a35c8a0c76a518f1807bafefc1b7fc))
+- **PEER-567:** use pnpm in researchers-peers-svc-rest-api dockerfile ([1356cdc](https://github.com/amaralc/peerlab/commit/1356cdc7a02b9497b59d23bedaafccabab0d5aa7))
+- **PEER-567:** use pnpm within docker and github actions ([9ff76a5](https://github.com/amaralc/peerlab/commit/9ff76a5f30637c542cf4e3c86e6add7ae54f6cc7))
+- **PEER-567:** use postgres connection ([bf7d586](https://github.com/amaralc/peerlab/commit/bf7d58641bf3a49a35a255628bdf0db0907f1d2c))
+- **PEER-567:** use sha256 as env name ([690e2d9](https://github.com/amaralc/peerlab/commit/690e2d91969e9fd3459b2409e67a45fc843700f1))
+
+### Reverts
+
+- Revert "refactor(PEER-567): use wget within dockerfile" ([edcbb16](https://github.com/amaralc/peerlab/commit/edcbb16e31e366882107e27ab5f640db54c9d648))
+- Revert "fix(PEER-567): use instance name instead of connection name" ([6dc00fc](https://github.com/amaralc/peerlab/commit/6dc00fcc56a9bc8c05abeba4b712d8fe2115bd24))
+- Revert "chore(PEER-567): destroy resources temporarily" ([29e7a91](https://github.com/amaralc/peerlab/commit/29e7a91190cd20f2edb81860786dcbbf49eb5413))
+
 ## [0.38.0](https://github.com/amaralc/peerlab/compare/peerlab@0.37.4...peerlab@0.38.0) (2023-07-21)
 
 ### Features
