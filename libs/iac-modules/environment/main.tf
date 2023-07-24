@@ -7,17 +7,8 @@ output "branch_name" {
   value = var.branch_name
 }
 
-module "environment_id" {
-  source = "../random-fixed-id"
-}
-
-module "parsed_branch_name" {
-  source      = "../parsed-branch-name"
-  branch_name = var.branch_name
-}
-
 locals {
-  short_environment_name = local.is_production_environment ? "production" : "${module.parsed_branch_name.instance}" # Limit the name to 24 characters
+  short_environment_name = local.is_production_environment ? "production" : "${var.environment_name}" # Limit the name to 24 characters
 }
 
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
@@ -73,7 +64,7 @@ output "vpc" {
 # Create a PostgreSQL database management system (DBMS) instance clone for the preview environment
 module "postgresql_dbms" {
   source                          = "../gcp-postgresql-dbms-environment"
-  environment_name                = module.parsed_branch_name.instance
+  environment_name                = local.short_environment_name
   gcp_project_id                  = local.project_id
   gcp_location                    = var.gcp_location
   gcp_network_id                  = module.vpc.private_network.id
@@ -87,11 +78,29 @@ output "postgresql_dbms_instance_id" {
   value = module.postgresql_dbms.gcp_sql_dbms_instance_id
 }
 
+# Identity and Access Management (IAM) Service
+module "security-iam-svc" {
+  count                                 = local.is_production_environment ? 0 : 1 # Disable module in production environment
+  source                                = "../../../apps/security/iam-svc/iac"
+  source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
+  environment_name                      = local.short_environment_name
+  gcp_project_id                        = local.project_id
+  gcp_location                          = var.gcp_location
+  short_commit_sha                      = var.short_commit_sha
+  gcp_docker_artifact_repository_name   = var.gcp_docker_artifact_repository_name
+  gcp_sql_dbms_instance_host            = module.postgresql_dbms.gcp_sql_dbms_instance_host
+  gcp_sql_dbms_instance_name            = module.postgresql_dbms.gcp_sql_dbms_instance_name
+  gcp_vpc_access_connector_name         = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
+  gcp_sql_dbms_instance_connection_name = module.postgresql_dbms.gcp_sql_dbms_instance_connection_name
+  depends_on                            = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
+}
+
 # Researchers Peers Microservice
 module "researchers-peers" {
   source                              = "../../../apps/researchers/peers/svc-iac"
-  source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
-  environment_name                    = module.parsed_branch_name.instance
+  count                               = local.is_production_environment ? 1 : 0 # Disable module in preview environments
+  source_environment_branch_name      = var.source_environment_branch_name      # Informs the type of environment in order to decide how to treat database and users
+  environment_name                    = local.short_environment_name
   gcp_project_id                      = local.project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
@@ -105,6 +114,7 @@ module "researchers-peers" {
 # Nx Graph
 module "core-platform-shell-browser-vite" {
   source                           = "../environment-vercel"
+  count                            = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   project_name                     = "core-platform-shell-browser-vite"
   framework                        = "vite"
   git_provider                     = "github"
@@ -123,12 +133,13 @@ module "core-platform-shell-browser-vite" {
 }
 
 output "core_platform_shell_browser_vite_vercel_project_id" {
-  value = local.is_production_environment ? module.core-platform-shell-browser-vite.vercel_project_id : null
+  value = local.is_production_environment ? module.core-platform-shell-browser-vite[0].vercel_project_id : null
 }
 
 # Documentation with Docusaurus
 module "dx-dev-docs-browser" {
   source                           = "../environment-vercel"
+  count                            = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   project_name                     = "dx-dev-docs-browser"
   framework                        = null # https://vercel.com/docs/rest-api/endpoints#create-a-new-project
   git_provider                     = "github"
@@ -148,12 +159,13 @@ module "dx-dev-docs-browser" {
 }
 
 output "dx_dev_docs_browser_vercel_project_id" {
-  value = local.is_production_environment ? module.dx-dev-docs-browser.vercel_project_id : null
+  value = local.is_production_environment ? module.dx-dev-docs-browser[0].vercel_project_id : null
 }
 
 # Nx Graph
 module "core-root-shell-graph" {
   source                           = "../environment-vercel"
+  count                            = local.is_production_environment ? 1 : 0 # Disable module in preview environments
   project_name                     = "core-root-shell-graph"
   framework                        = null
   git_provider                     = "github"
@@ -170,5 +182,5 @@ module "core-root-shell-graph" {
 }
 
 output "core_root_shell_graph_vercel_project_id" {
-  value = local.is_production_environment ? module.core-root-shell-graph.vercel_project_id : null
+  value = local.is_production_environment ? module.core-root-shell-graph[0].vercel_project_id : null
 }

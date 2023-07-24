@@ -1,0 +1,54 @@
+# References:
+# - https://stackoverflow.com/a/76210250
+
+FROM quay.io/phasetwo/phasetwo-keycloak:latest as builder
+
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
+ENV KC_FEATURES=preview,token-exchange
+ENV KC_DB=mysql
+
+# This is needed in order to use com.google.cloud.sql.mysql.SocketFactory
+# More at https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc-mysql.md
+ENV KC_DB_KIND=mysql
+ENV KC_DB_DIALECT=org.hibernate.dialect.MySQL8Dialect
+COPY mysql-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+
+RUN /opt/keycloak/bin/kc.sh build --transaction-xa-enabled=false
+
+FROM quay.io/phasetwo/phasetwo-keycloak:latest
+
+# Install socket for mysql
+COPY mysql-socket-factory-1.8.1-jar-with-dependencies.jar /opt/keycloak/providers/
+
+COPY --from=builder /opt/keycloak /opt/keycloak
+WORKDIR /opt/keycloak
+# for demonstration purposes only, please make sure to use proper certificates in production instead
+# RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
+# change these values to point to a running mysql instance
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
+ENV KC_FEATURES=preview,token-exchange
+
+ENV KEYCLOAK_ADMIN=admin
+ENV KEYCLOAK_ADMIN_PASSWORD=admin
+
+ENV KC_DB=mysql
+ENV KC_DB_KIND=mysql
+ENV KC_DB_DIALECT=org.hibernate.dialect.MySQL8Dialect
+ENV KC_TRANSACTION_XA_ENABLED=false
+
+# ENV KC_DB_URL="jdbc:mysql:///keycloak?cloudSqlInstance=<INSTANCE_CONNECTION_NAME>&socketFactory=com.google.cloud.sql.mysql.SocketFactory"
+# ENV KC_DB_USERNAME=<MYSQL_USERNAME>
+# ENV KC_DB_PASSWORD=<MYSQL_USER_PASSWORD>
+
+ENV KC_HOSTNAME_STRICT=false
+ENV KC_HTTPS_CLIENT_AUTH=request
+ENV KC_HTTPS_PORT=8443
+ENV KC_HTTPS_PROTOCOLS=TLSv1.3,TLSv1.2
+ENV KC_HTTP_ENABLED=true
+ENV KC_HTTP_PORT=8080
+ENV KC_PROXY=edge
+ENV PROXY_ADDRESS_FORWARDING=true
+
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized", "--spi-email-template-provider=freemarker-plus-mustache", "--spi-email-template-freemarker-plus-mustache-enabled=true"]

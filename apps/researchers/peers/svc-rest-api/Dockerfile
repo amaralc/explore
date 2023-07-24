@@ -1,5 +1,8 @@
 # Start recipe from base image
-FROM node:16.20-slim as base
+FROM node:18.12-slim as base
+
+# Using pnpm with docker
+RUN npm i -g pnpm
 
 # Local SSH key in PEM format <--------- IMPORTANT!
 # To convert your local private key from OPENSSH to PEM format, use the following command: ssh-keygen -p -N "" -m pem -f /path/to/key
@@ -24,12 +27,12 @@ RUN apt-get update -y && apt-get install -y openssl
 FROM base as build
 
 # Avoid cache purge by adding requirements first
-# Copy package.json and yarn lock to app directory
+# Copy package.json and pnpm lock to app directory
 # Set workdir
 WORKDIR /app/
-COPY package.json yarn.lock nx.json ./
+COPY package.json pnpm-lock.yaml nx.json ./
 
-# Install app dependencies
+# Install app dependencies using pnpm
 RUN pnpm install --frozen-lockfile
 
 # # Remove SSH keys
@@ -56,14 +59,14 @@ ENV API_KEY=my-secret-api-key
 COPY . .
 
 RUN echo 'Generating Prisma Client...'
-RUN yarn prisma:generate:postgres
+RUN pnpm prisma:generate:postgres
 
 # Declares a branch name as argument. This value is used to set the NX_BRANCH in Nx Cloud.
 ARG BRANCH_NAME
 
 # Build the service api
 # Creates a "dist" folder with the production build
-RUN NX_BRANCH=$BRANCH_NAME yarn nx run researchers-peers-svc-rest-api:build
+RUN NX_BRANCH=$BRANCH_NAME pnpm nx run researchers-peers-svc-rest-api:build
 
 # build smaller image for running
 FROM base
@@ -87,7 +90,7 @@ ENV API_KEY=my-secret-api-key
 ENV ENTRYPOINT_PATH="apps/researchers/peers/svc-rest-api/entrypoint.sh"
 
 WORKDIR /app/
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml ./
 
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist

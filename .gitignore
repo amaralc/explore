@@ -77,3 +77,6 @@ key.json
 # Generated Docusaurus files
 .docusaurus/
 .cache-loader/
+
+# Java related (keycloak)
+*.jar
