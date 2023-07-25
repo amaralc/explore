@@ -135,13 +135,12 @@ jobs:
 
       - name: Check if app was affected
         run: |
-          echo 'Last tagged commit before head:' $(git for-each-ref --sort=-taggerdate --format '%(refname) %(objectname)' refs/tags | head -n 2 | tail -n 1)
-          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | head -n 2 | tail -n 1)
-          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
+          LAST_TAGGED_COMMIT_BEFORE_HEAD=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | head -n 2 | tail -n 1)
+          LAST_TAG_BEFORE_HEAD=$(git describe $LAST_TAGGED_COMMIT_BEFORE_HEAD)
 
           pnpm install
 
-          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
+          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_TAGGED_COMMIT_BEFORE_HEAD)
           echo 'Affected apps:' $AFFECTED_APPS
 
           PROJECT_NAME=researchers-peers-svc-rest-api

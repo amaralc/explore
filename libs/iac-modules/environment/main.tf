@@ -44,6 +44,7 @@ module "gcp_apis" {
     "vpcaccess.googleapis.com",
     "run.googleapis.com",
     "cloudbilling.googleapis.com",
+    "firebase.googleapis.com",
     # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
