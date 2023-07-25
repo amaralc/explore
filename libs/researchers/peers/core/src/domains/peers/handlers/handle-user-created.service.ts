@@ -31,7 +31,7 @@ export class HandleUserCreatedService {
       console.log(peer);
 
       // Log
-      this.logger.info('Plan subscription created', { ...messageValueDto });
+      this.logger.log('Plan subscription created', { ...messageValueDto });
     } catch (error) {
       new EventErrorLog(this.logger, error, { topic, partition, message });
     }

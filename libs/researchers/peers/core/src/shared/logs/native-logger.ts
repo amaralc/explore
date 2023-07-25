@@ -1,6 +1,9 @@
 import { ApplicationLogger } from './application-logger';
 
 export class NativeLogger implements ApplicationLogger {
+  log(message: string, metadata: Record<string, unknown>): void {
+    console.log(JSON.stringify({ message, metadata }));
+  }
   info(message: string, metadata: Record<string, unknown>): void {
     console.info(JSON.stringify({ message, metadata }));
   }
