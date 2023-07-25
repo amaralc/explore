@@ -61,7 +61,7 @@ const bootstrap = async () => {
   await app.listen(port);
   Logger.log(`🚀 Service API is running on: http://localhost:${port}`, 'bootstrap');
   Logger.log(`🚀 Swagger API is running on: http://localhost:${port}/docs`, 'bootstrap');
-  Logger.log(`2023-06-25T00:21:00.000Z UTC-03:00`, `bootstrap`);
+  Logger.log(`2023-07-24T22:52:00.000Z UTC-03:00`, `bootstrap`);
 };
 
 bootstrap();
