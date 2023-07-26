@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.2-beta.5](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.4...peerlab@0.39.2-beta.5) (2023-07-26)
+
+### Bug Fixes
+
+- **PEER-567:** remove firebase resources ([b342978](https://github.com/amaralc/peerlab/commit/b34297832e95abc833ca640356fd8cce927b69d2))
+
 ## [0.39.2-beta.4](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.3...peerlab@0.39.2-beta.4) (2023-07-26)
 
 ### Bug Fixes
