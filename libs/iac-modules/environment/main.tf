@@ -44,22 +44,22 @@ module "gcp_apis" {
     "vpcaccess.googleapis.com",
     "run.googleapis.com",
     "cloudbilling.googleapis.com",
-    "firebase.googleapis.com",
-    "serviceusage.googleapis.com", # https://firebase.google.com/docs/projects/terraform/get-started
+    # "firebase.googleapis.com",
+    # "serviceusage.googleapis.com", # https://firebase.google.com/docs/projects/terraform/get-started
     # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
 
-# Enables Firebase services for the new project created above.
-resource "google_firebase_project" "default" {
-  provider = google-beta
-  project  = var.gcp_project_id
+# # Enables Firebase services for the new project created above.
+# resource "google_firebase_project" "default" {
+#   provider = google-beta
+#   project  = var.gcp_project_id
 
-  # Waits for the required APIs to be enabled.
-  depends_on = [
-    module.gcp_apis
-  ]
-}
+#   # Waits for the required APIs to be enabled.
+#   depends_on = [
+#     module.gcp_apis
+#   ]
+# }
 
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
