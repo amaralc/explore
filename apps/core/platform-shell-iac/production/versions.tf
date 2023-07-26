@@ -24,6 +24,11 @@ terraform {
       source  = "hashicorp/random"
       version = "3.5.1"
     }
+
+    mongodbatlas = {
+      source  = "mongodbatlas/mongodbatlas"
+      version = "1.10.2"
+    }
   }
 }
 
@@ -53,5 +58,10 @@ provider "neon" {
 
 # Hashicorp Random provider
 provider "random" {}
+
+provider "mongodbatlas" {
+  public_key  = var.mongodb_atlas_public_key
+  private_key = var.mongodb_atlas_private_key
+}
 
 
