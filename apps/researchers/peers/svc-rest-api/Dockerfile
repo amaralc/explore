@@ -38,23 +38,6 @@ RUN pnpm install --frozen-lockfile
 # # Remove SSH keys
 # RUN rm -rf /root/.ssh/
 
-## Environment
-ENV NODE_ENV="production"
-ENV PORT="8080"
-ENV ENV_SILENT=true
-
-## Database provider ("mongodb-mongoose-orm" | "postgresql-prisma-orm" | "postgresql-type-orm" |  "in-memory")
-ENV DATABASE_PROVIDER=postgresql-prisma-orm
-
-## Events provider ('kafka' | 'in-memory')
-ENV EVENTS_PROVIDER=in-memory
-
-## Transporter ('nestjs-default-kafka-transporter' | 'nestjs-custom-kafka-transporter' | 'simple-kafka-transporter')
-ENV EVENTS_TRANSPORTER=nestjs-default-kafka-transporter
-
-## Auth
-ENV API_KEY=my-secret-api-key
-
 # Add the rest of the files
 COPY . .
 
@@ -71,11 +54,13 @@ RUN NX_BRANCH=$BRANCH_NAME pnpm nx run researchers-peers-svc-rest-api:build
 # build smaller image for running
 FROM base
 
+## Built-in environment variables
 ENV PORT="8080"
 ENV NODE_ENV="production"
+ENV ENV_SILENT=true
 
 ## Database provider ("mongodb-mongoose-orm" | "postgresql-prisma-orm" | "postgresql-type-orm" |  "in-memory")
-ENV DATABASE_PROVIDER=postgresql-prisma-orm
+ENV DATABASE_PROVIDER=in-memory
 
 ## Events provider ('kafka' | 'in-memory')
 ENV EVENTS_PROVIDER=in-memory
