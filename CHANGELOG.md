@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.0](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.5...peerlab@0.40.0) (2023-07-26)
+
+### Features
+
+- **PEER-573:** add mongodb cluster ([2b20860](https://github.com/amaralc/peerlab/commit/2b208609405fdd82566100998a79a6a3ce444473))
+
 ## [0.39.2-beta.5](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.4...peerlab@0.39.2-beta.5) (2023-07-26)
 
 ### Bug Fixes
