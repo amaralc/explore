@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.2-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.0...peerlab@0.39.2-beta.1) (2023-07-26)
+
+### Bug Fixes
+
+- **researchers-peers:** use in-memory database ([897a630](https://github.com/amaralc/peerlab/commit/897a630df1c9b471c265b3df71bce5c95a22cbd5))
+
 ## [0.39.2-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.39.1...peerlab@0.39.2-beta.0) (2023-07-26)
 
 ### Bug Fixes
