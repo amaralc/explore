@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.2-beta.4](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.3...peerlab@0.39.2-beta.4) (2023-07-26)
+
+### Bug Fixes
+
+- **PEER-567:** ci - adjust dependency ([279788f](https://github.com/amaralc/peerlab/commit/279788f531ef7be753aae83fdaca84d280eb3c53))
+
 ## [0.39.2-beta.3](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.2...peerlab@0.39.2-beta.3) (2023-07-26)
 
 ### Features
