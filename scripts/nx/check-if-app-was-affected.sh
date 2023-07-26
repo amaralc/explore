@@ -53,5 +53,5 @@ if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
 else
   # If no dependency was affected, cancel build
   echo '🛑 - Build cancelled since no dependency was affected'
-  echo "affected=true" >> $FILE_PATH # TODO: Change to false
+  echo "affected=false" >> $FILE_PATH
 fi
