@@ -39,6 +39,7 @@ provider "google-beta" {
   credentials = file(var.gcp_credentials_file_path) # The service account key
   project     = var.gcp_project_id                  # Your Google Cloud project ID
   region      = var.gcp_location                    # The region where resources will be created
+  # Check firebase options here: https://firebase.google.com/docs/projects/terraform/get-started
 }
 
 # Vercel provider
