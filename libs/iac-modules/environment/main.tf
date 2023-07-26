@@ -57,7 +57,7 @@ resource "google_firebase_project" "default" {
 
   # Waits for the required APIs to be enabled.
   depends_on = [
-    google_project_service.default
+    module.gcp_apis
   ]
 }
 
