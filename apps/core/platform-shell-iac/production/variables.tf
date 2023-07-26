@@ -46,3 +46,16 @@ variable "gcp_docker_artifact_repository_name" {
   type        = string
   default     = "docker-repository"
 }
+
+variable "mongodb_atlas_public_key" {
+  description = "MongoDB Atlas public key"
+  type        = string
+  sensitive   = true
+}
+
+variable "mongodb_atlas_private_key" {
+  description = "MongoDB Atlas private key"
+  type        = string
+  sensitive   = true
+}
+
