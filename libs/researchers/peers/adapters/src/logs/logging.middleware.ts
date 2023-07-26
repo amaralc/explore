@@ -10,7 +10,7 @@ export class LoggingMiddleware implements NestMiddleware {
     const start = Number(new Date());
     res.on('finish', () => {
       const end = Number(new Date());
-      this.logger.info('Logging middleware', {
+      this.logger.log('Logging middleware', {
         className: LoggingMiddleware.name,
         latencyInMs: end - start,
       });

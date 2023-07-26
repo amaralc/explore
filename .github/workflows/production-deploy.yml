@@ -3,7 +3,7 @@ name: Build, tag and deploy "production" environment
 on:
   create:
     tags:
-      - "peerlab@[0-9]+.[0-9]+.[0-9]+"
+      - "^peerlab@[0-9]+.[0-9]+.[0-9]+$"
 
 jobs:
   check-branch:
@@ -20,8 +20,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: [check-branch]
-    environment:
-      name: core-platform-shell-iac-production # Requires permission to proceed
+    # environment:
+    #   name: core-platform-shell-iac-production # Requires permission to proceed
     strategy:
       matrix:
         node-version: [18]
@@ -135,24 +135,7 @@ jobs:
 
       - name: Check if app was affected
         run: |
-          echo 'Last tagged commit before head:' $(git for-each-ref --sort=-taggerdate --format '%(refname) %(objectname)' refs/tags | head -n 2 | tail -n 1)
-          LAST_MERGE_COMMIT_BEFORE_HEAD=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | head -n 2 | tail -n 1)
-          echo 'Last merge commit before head:' $LAST_MERGE_COMMIT_BEFORE_HEAD
-
-          pnpm install
-
-          AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
-          echo 'Affected apps:' $AFFECTED_APPS
-
-          PROJECT_NAME=researchers-peers-svc-rest-api
-          if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
-            echo '✅ - Build can proceed since app was affected!'
-            echo "affected=true" >> $GITHUB_ENV
-          else
-            # If no dependency was affected, cancel build
-            echo '🛑 - Build cancelled since no dependency was affected'
-            echo "affected=false" >> $GITHUB_ENV # TODO: Change to false
-          fi
+          bash scripts/nx/check-if-app-was-affected.sh --project-name=researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
 
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}

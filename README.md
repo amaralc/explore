@@ -4,6 +4,8 @@ PeerLab is a step towards [eA's vision](https://github.com/amaralc/ea). A way to
 
 While the whole thing isn't up and running, I keep using the idea to practice software development skills, mainly with TypeScript, Node.js, React, some Bash and Terraform.
 
+<!---->
+
 <!-- ## Use cases
 
 The primary use case I had in mind, was to manage my books and tools. I often lend books to friends and colleagues and later find myself asking the same question: "Where is that book again?". If PeerLab could help me to find answers for that sort of question, than we are on the right track.

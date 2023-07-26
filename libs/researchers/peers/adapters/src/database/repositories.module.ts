@@ -25,7 +25,7 @@ const logger = new NativeLogger();
 @Module({})
 export class DatabaseRepositoriesModule {
   static register({ provider }: { provider: IDatabaseProvider }): DynamicModule {
-    logger.info(`Database provider: ${provider}`, { className: DatabaseRepositoriesModule.name });
+    logger.log(`Database provider: ${provider}`, { className: DatabaseRepositoriesModule.name });
 
     let dynamicImports: Array<DynamicModule> = [];
     let dynamicProviders: Array<Provider> = [];

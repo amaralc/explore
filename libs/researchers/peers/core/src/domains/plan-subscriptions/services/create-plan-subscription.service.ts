@@ -33,7 +33,7 @@ export class CreatePlanSubscriptionService {
     const planSubscription = await this.planSubscriptionsDatabaseRepository.create(createPlanSubscriptionDto);
 
     // Log
-    this.logger.info('Plan subscription stored', { planSubscription, className: CreatePlanSubscriptionService.name });
+    this.logger.log('Plan subscription stored', { planSubscription, className: CreatePlanSubscriptionService.name });
 
     return { planSubscription };
   }

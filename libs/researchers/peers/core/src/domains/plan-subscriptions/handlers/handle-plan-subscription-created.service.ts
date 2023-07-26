@@ -27,7 +27,7 @@ export class HandlePlanSubscriptionCreatedService {
       await this.planSubscriptionsDatabaseRepository.create(planSubscriptionCreatedMessageDto);
 
       // Log
-      this.logger.info('Plan subscription created', { ...planSubscriptionCreatedMessageDto });
+      this.logger.log('Plan subscription created', { ...planSubscriptionCreatedMessageDto });
     } catch (error) {
       new EventErrorLog(this.logger, error, { topic, partition, message });
     }
