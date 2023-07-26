@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.1](https://github.com/amaralc/peerlab/compare/peerlab@0.40.0...peerlab@0.40.1) (2023-07-26)
+
+### Bug Fixes
+
+- **PEER-573:** adjust mongodb provider name ([c30d01f](https://github.com/amaralc/peerlab/commit/c30d01fc50761e14023b3f4ec017761304d428e2))
+
 ## [0.40.0](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.5...peerlab@0.40.0) (2023-07-26)
 
 ### Features
