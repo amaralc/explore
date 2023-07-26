@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.2-beta.3](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.2...peerlab@0.39.2-beta.3) (2023-07-26)
+
+### Features
+
+- **PEER-567:** auth - add firebase project ([b54dbd4](https://github.com/amaralc/peerlab/commit/b54dbd4592f39be000b63e1fa9d47e7c263b6bcc))
+
+### Bug Fixes
+
+- **PEER-567:** ci - add variable to tf command ([527123f](https://github.com/amaralc/peerlab/commit/527123fdd905bd525b52ae21ca9d7a5462f61b1f))
+
 ## [0.39.2-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.39.2-beta.1...peerlab@0.39.2-beta.2) (2023-07-26)
 
 **Note:** Version bump only for package peerlab
