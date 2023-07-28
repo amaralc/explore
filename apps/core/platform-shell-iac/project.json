@@ -23,6 +23,9 @@
     "production-terraform-output": {
       "command": "cd apps/core/platform-shell-iac/production && terraform output"
     },
+    "production-terraform-providers": {
+      "command": "cd apps/core/platform-shell-iac/production && terraform providers"
+    },
     "preview-terraform-init": {
       "command": "cd apps/core/platform-shell-iac/preview && terraform init"
     },
