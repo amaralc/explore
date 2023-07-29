@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.2](https://github.com/amaralc/peerlab/compare/peerlab@0.41.1...peerlab@0.41.2) (2023-07-29)
+
+### Bug Fixes
+
+- **PEER-573:** remove unnecessary information and adjust var name ([5f65918](https://github.com/amaralc/peerlab/commit/5f65918c26f613af6aea7dea2519cba00a36e709))
+
 ## [0.41.1](https://github.com/amaralc/peerlab/compare/peerlab@0.41.0...peerlab@0.41.1) (2023-07-29)
 
 ### Bug Fixes
