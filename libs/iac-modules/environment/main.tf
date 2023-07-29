@@ -92,6 +92,7 @@ output "postgresql_dbms_instance_id" {
 }
 
 module "mongodb_dbms" {
+  count                = local.is_production_environment ? 0 : 0 # Disabled module
   source               = "../mongodb-dbms-environment"
   environment_name     = local.short_environment_name
   mongodb_atlas_org_id = var.mongodb_atlas_org_id
