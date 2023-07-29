@@ -29,5 +29,5 @@ resource "mongodbatlas_cluster" "instance" {
 
   # Provider Settings "block"
   provider_name               = "GCP"
-  provider_instance_size_name = "M0"
+  provider_instance_size_name = "M10"
 }
