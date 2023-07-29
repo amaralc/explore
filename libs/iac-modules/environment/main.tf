@@ -44,8 +44,8 @@ module "gcp_apis" {
     "vpcaccess.googleapis.com",
     "run.googleapis.com",
     "cloudbilling.googleapis.com",
-    # "firebase.googleapis.com",
-    # "serviceusage.googleapis.com", # https://firebase.google.com/docs/projects/terraform/get-started
+    "firebase.googleapis.com",
+    "serviceusage.googleapis.com", # https://firebase.google.com/docs/projects/terraform/get-started
     # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
