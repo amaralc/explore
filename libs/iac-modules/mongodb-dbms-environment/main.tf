@@ -12,22 +12,22 @@ resource "mongodbatlas_project" "instance" {
 
 # Sets free tier cluster (https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/advanced_cluster)
 resource "mongodbatlas_advanced_cluster" "instance" {
-  project_id   = mongodbatlas_project.instance.id
-  name         = var.environment_name
+  project_id   = "PROJECT ID"
+  name         = "NAME OF CLUSTER"
   cluster_type = "REPLICASET"
   replication_specs {
-    num_shards = 1
-    regions_config {
-      region_name     = "EASTERN_US"
-      electable_nodes = 3
-      priority        = 7
-      read_only_nodes = 0
+    region_configs {
+      electable_specs {
+        instance_size = "M0"
+        node_count    = 3
+      }
+      analytics_specs {
+        instance_size = "M0"
+        node_count    = 1
+      }
+      provider_name = "GCP"
+      priority      = 1
+      region_name   = "US_EAST_1"
     }
   }
-  cloud_backup                 = true
-  auto_scaling_disk_gb_enabled = true
-
-  # Provider Settings "block"
-  provider_name               = "GCP"
-  provider_instance_size_name = "M0"
 }
