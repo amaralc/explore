@@ -1,3 +1,6 @@
+# References
+# - https://gmusumeci.medium.com/how-to-deploy-mongodb-atlas-on-gcp-using-terraform-3c88127c00d0
+
 resource "mongodbatlas_project" "instance" {
   name   = var.environment_name
   org_id = var.mongodb_atlas_org_id
@@ -25,9 +28,11 @@ resource "mongodbatlas_advanced_cluster" "instance" {
         instance_size = "M0"
         node_count    = 1
       }
-      provider_name = "GCP"
-      priority      = 1
-      region_name   = "US_EAST_1"
+
+      priority              = 1
+      backing_provider_name = "GCP"
+      provider_name         = "TENANT" # See https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/cluster
+      region_name           = "US_EAST_1"
     }
   }
 }
