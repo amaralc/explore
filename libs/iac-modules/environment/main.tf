@@ -99,9 +99,25 @@ module "mongodb_dbms" {
   depends_on           = [module.gcp_project, module.vpc, module.gcp_apis]
 }
 
+module "core-platform-experiments" {
+  count                                 = local.is_production_environment ? 0 : 1 # Enable module only in preview environments
+  source                                = "../../../apps/core/platform-experiments/iac"
+  source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
+  environment_name                      = local.short_environment_name
+  gcp_project_id                        = local.project_id
+  gcp_location                          = var.gcp_location
+  short_commit_sha                      = var.short_commit_sha
+  gcp_docker_artifact_repository_name   = var.gcp_docker_artifact_repository_name
+  gcp_sql_dbms_instance_host            = module.postgresql_dbms.gcp_sql_dbms_instance_host
+  gcp_sql_dbms_instance_name            = module.postgresql_dbms.gcp_sql_dbms_instance_name
+  gcp_vpc_access_connector_name         = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
+  gcp_sql_dbms_instance_connection_name = module.postgresql_dbms.gcp_sql_dbms_instance_connection_name
+  depends_on                            = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
+}
+
 # Identity and Access Management (IAM) Service
 module "security-iam-svc" {
-  count                                 = local.is_production_environment ? 0 : 0 # Disable module in production environment
+  count                                 = local.is_production_environment ? 0 : 0 # Disabled module
   source                                = "../../../apps/security/iam-svc/iac"
   source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                      = local.short_environment_name
