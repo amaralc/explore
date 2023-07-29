@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.2-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.40.1...peerlab@0.40.2-beta.0) (2023-07-29)
+
+### Bug Fixes
+
+- **PEER-573:** move mongodb to module ([483ef93](https://github.com/amaralc/peerlab/commit/483ef9338a3746c6dfcca99896c1610e1b23e2f3))
+- **PEER-573:** rename mongodbatlas provider ([0c0cf92](https://github.com/amaralc/peerlab/commit/0c0cf925bbffa3b629365938dcca78de79037138))
+
 ## [0.40.1](https://github.com/amaralc/peerlab/compare/peerlab@0.40.0...peerlab@0.40.1) (2023-07-26)
 
 ### Bug Fixes
