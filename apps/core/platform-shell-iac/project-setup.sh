@@ -70,6 +70,7 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # # Enable necessary APIs
 # gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
 # gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
+# gcloud services enable serviceusage.googleapis.com --project $GCP_PROJECT_ID
 
 # # Label project for Firebase integration (https://firebase.google.com/docs/projects/terraform/get-started)
 # gcloud projects update $GCP_PROJECT_ID --update-labels firebase=enabled
