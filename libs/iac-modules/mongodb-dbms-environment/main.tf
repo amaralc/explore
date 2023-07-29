@@ -1,10 +1,6 @@
-data "mongodbatlas_roles_org_id" "instance" {
-  id = var.mongodb_atlas_org_id
-}
-
 resource "mongodbatlas_project" "instance" {
   name   = var.environment_name
-  org_id = data.mongodbatlas_roles_org_id.test.org_id
+  org_id = var.mongodb_atlas_org_id
 
   is_collect_database_specifics_statistics_enabled = true
   is_data_explorer_enabled                         = true

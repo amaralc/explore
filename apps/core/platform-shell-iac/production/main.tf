@@ -8,4 +8,5 @@ module "production" {
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
   gcp_billing_account_id              = var.gcp_billing_account_id
   gcp_organization_id                 = var.gcp_organization_id
+  mongodb_atlas_org_id                = var.mongodb_atlas_org_id
 }
