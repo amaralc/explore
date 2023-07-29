@@ -10,7 +10,8 @@ resource "mongodbatlas_project" "instance" {
   is_schema_advisor_enabled                        = true
 }
 
-resource "mongodbatlas_cluster" "instance" {
+# Sets free tier cluster (https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/advanced_cluster)
+resource "mongodbatlas_advanced_cluster" "instance" {
   project_id   = mongodbatlas_project.instance.id
   name         = var.environment_name
   cluster_type = "REPLICASET"
@@ -25,9 +26,8 @@ resource "mongodbatlas_cluster" "instance" {
   }
   cloud_backup                 = true
   auto_scaling_disk_gb_enabled = true
-  mongo_db_major_version       = "4.2"
 
   # Provider Settings "block"
   provider_name               = "GCP"
-  provider_instance_size_name = "M10"
+  provider_instance_size_name = "M0"
 }
