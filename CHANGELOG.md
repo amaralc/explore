@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.3-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.41.2...peerlab@0.41.3-beta.0) (2023-07-29)
+
+### Bug Fixes
+
+- **PEER-573:** use valid cluster size ([81c0e5b](https://github.com/amaralc/peerlab/commit/81c0e5bef03a2240bba6e8a45d11a5ffeb859c28))
+
 ## [0.41.2](https://github.com/amaralc/peerlab/compare/peerlab@0.41.1...peerlab@0.41.2) (2023-07-29)
 
 ### Bug Fixes
