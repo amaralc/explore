@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.0](https://github.com/amaralc/peerlab/compare/peerlab@0.40.2-beta.2...peerlab@0.41.0) (2023-07-29)
+
+### Features
+
+- **PEER-573:** add mongodb project and cluster using terraform ([a574f12](https://github.com/amaralc/peerlab/commit/a574f12fad0e7f38cdbdfe5d2dea10bf9f0c7c14))
+
+### Bug Fixes
+
+- **PEER-567:** ci - add service usage setup script ([67cb684](https://github.com/amaralc/peerlab/commit/67cb684a18f5a8c52338c69e86a22b3c521d09fe))
+
 ## [0.40.2-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.40.2-beta.1...peerlab@0.40.2-beta.2) (2023-07-29)
 
 ### Bug Fixes
