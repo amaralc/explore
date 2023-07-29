@@ -91,26 +91,13 @@ output "postgresql_dbms_instance_id" {
   value = module.postgresql_dbms.gcp_sql_dbms_instance_id
 }
 
-resource "mongodbatlas_cluster" "test" {
-  project_id   = var.gcp_project_id
-  name         = local.short_environment_name
-  cluster_type = "REPLICASET"
-  replication_specs {
-    num_shards = 1
-    regions_config {
-      region_name     = "EASTERN_US"
-      electable_nodes = 3
-      priority        = 7
-      read_only_nodes = 0
-    }
-  }
-  cloud_backup                 = true
-  auto_scaling_disk_gb_enabled = true
-  mongo_db_major_version       = "4.2"
-
-  # Provider Settings "block"
-  provider_name               = "GCP"
-  provider_instance_size_name = "M0"
+module "mongodb_dbms" {
+  source                    = "../mongodb-dbms-environment"
+  gcp_project_id            = var.gcp_project_id
+  environment_name          = local.short_environment_name
+  mongodb_atlas_public_key  = var.mongodb_atlas_public_key
+  mongodb_atlas_private_key = var.mongodb_atlas_private_key
+  depends_on                = [module.gcp_project, module.vpc, module.gcp_apis]
 }
 
 # Identity and Access Management (IAM) Service

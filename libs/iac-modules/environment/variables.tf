@@ -88,3 +88,15 @@ variable "production_environment_core_platform_shell_browser_vite_vercel_project
   default     = null
 }
 
+variable "mongodb_atlas_public_key" {
+  description = "MongoDB Atlas public key"
+  type        = string
+  sensitive   = true
+}
+
+variable "mongodb_atlas_private_key" {
+  description = "MongoDB Atlas private key"
+  type        = string
+  sensitive   = true
+}
+
