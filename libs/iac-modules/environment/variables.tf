@@ -88,4 +88,11 @@ variable "production_environment_core_platform_shell_browser_vite_vercel_project
   default     = null
 }
 
+variable "mongodb_atlas_org_id" {
+  description = "The ID of the MongoDB Atlas organization"
+  type        = string
+  sensitive   = true
+}
+
+
 

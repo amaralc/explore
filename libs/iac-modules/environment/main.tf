@@ -92,10 +92,11 @@ output "postgresql_dbms_instance_id" {
 }
 
 module "mongodb_dbms" {
-  source           = "../mongodb-dbms-environment"
-  gcp_project_id   = var.gcp_project_id
-  environment_name = local.short_environment_name
-  depends_on       = [module.gcp_project, module.vpc, module.gcp_apis]
+  source               = "../mongodb-dbms-environment"
+  environment_name     = local.short_environment_name
+  gcp_project_id       = var.gcp_project_id
+  mongodb_atlas_org_id = var.mongodb_atlas_org_id
+  depends_on           = [module.gcp_project, module.vpc, module.gcp_apis]
 }
 
 # Identity and Access Management (IAM) Service

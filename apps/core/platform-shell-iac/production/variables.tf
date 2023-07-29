@@ -59,3 +59,9 @@ variable "mongodb_atlas_private_key" {
   sensitive   = true
 }
 
+variable "mongodb_atlas_org_id" {
+  description = "MongoDB Atlas organization ID"
+  type        = string
+  sensitive   = true
+}
+
