@@ -1,0 +1,9 @@
+{
+  "name": "core-platform-experiments",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/platform-experiments",
+  "projectType": "application",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}
