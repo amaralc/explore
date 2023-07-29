@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    vercel = {
+    mongodbatlas = {
       source = "mongodb/mongodbatlas"
     }
   }
