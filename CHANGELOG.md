@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.3-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.0...peerlab@0.41.3-beta.1) (2023-07-29)
+
+### Bug Fixes
+
+- **PEER-573:** use advanced cluster and fix data structure ([02605de](https://github.com/amaralc/peerlab/commit/02605de4ab4cb85e43704655d7a8c4d40b457e9e))
+- **PEER-573:** use free tier cluster ([4e6ceb9](https://github.com/amaralc/peerlab/commit/4e6ceb9dc68a57a83e4b49920a057ec0c5f8dcd9))
+
 ## [0.41.3-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.41.2...peerlab@0.41.3-beta.0) (2023-07-29)
 
 ### Bug Fixes
