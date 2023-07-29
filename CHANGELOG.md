@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.2-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.40.2-beta.1...peerlab@0.40.2-beta.2) (2023-07-29)
+
+### Bug Fixes
+
+- **PEER-567:** enable firebase api and service usage ([eab08af](https://github.com/amaralc/peerlab/commit/eab08afab3a2ba2191db4dbaae85eea92521ef49))
+
 ## [0.40.2-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.40.2-beta.0...peerlab@0.40.2-beta.1) (2023-07-29)
 
 ### Bug Fixes
