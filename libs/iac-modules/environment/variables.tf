@@ -92,6 +92,7 @@ variable "mongodb_atlas_org_id" {
   description = "The ID of the MongoDB Atlas organization"
   type        = string
   sensitive   = true
+  default     = null
 }
 
 
