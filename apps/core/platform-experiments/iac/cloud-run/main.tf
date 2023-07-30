@@ -9,15 +9,8 @@ resource "google_cloud_run_service" "instance" {
   # Depends on secret versions
   depends_on = [var.gcp_vpc_access_connector_name, var.gcp_database_connection_url_secret_version]
 
-  # Increase the memory limit to 1 GiB
-  # memory = "1024Mi"
-
   # Defining the service template
   template {
-
-    ports {
-      container_port = 4242
-    }
 
     spec {
       # The service account to be used by the service
@@ -27,6 +20,10 @@ resource "google_cloud_run_service" "instance" {
       containers {
         # The docker image is pulled from GCR using the project ID, app name and the image tag which corresponds to the commit hash
         image = "${var.gcp_location}-docker.pkg.dev/${var.gcp_project_id}/${var.gcp_docker_artifact_repository_name}/${var.docker_image_name}:${var.environment_name}" # Use the environment to tag the image (staging, production, etc)
+
+        ports {
+          container_port = 4242
+        }
 
         resources {
           limits = {
