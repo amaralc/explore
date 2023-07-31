@@ -28,3 +28,17 @@ module "cloud-run-instance" {
   gcp_database_connection_url_secret_id      = module.database_and_access_management.database_url_secret_id
   gcp_database_connection_url_secret_version = module.database_and_access_management.database_url_secret_version
 }
+
+output "service_url" {
+  description = "The URL of the service"
+  value       = module.cloud-run-instance.url
+}
+
+module "unleash-state" {
+  source             = "./unleash"
+  environment_name   = var.environment_name
+  unleash_api_url    = module.cloud-run-instance.url
+  unleash_auth_token = "default:development.unleash-insecure-api-token"
+}
+
+

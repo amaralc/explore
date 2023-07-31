@@ -102,6 +102,10 @@ resource "google_cloud_run_service" "instance" {
 
 }
 
+output "url" {
+  value = google_cloud_run_service.instance.status[0].url # The URL of the service (https://github.com/GoogleCloudPlatform/terraform-google-cloud-run/blob/main/outputs.tf)
+}
+
 # This block defines a Cloud Run IAM member. This sets the permissions for who can access the Cloud Run service.
 resource "google_cloud_run_service_iam_member" "public" {
   service  = google_cloud_run_service.instance.name     # The name of the service to which the IAM policy will be applied
