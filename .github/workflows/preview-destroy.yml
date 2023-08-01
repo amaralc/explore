@@ -81,6 +81,12 @@ jobs: # A workflow can have multiple jobs
           echo "SOURCE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
           echo "Source branch: $SOURCE_BRANCH"
 
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.SOURCE_BRANCH }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Extract environment name
         run: |
           echo $GITHUB_REF
@@ -96,12 +102,6 @@ jobs: # A workflow can have multiple jobs
         run: |
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
-
-      - name: Checkout branch
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.SOURCE_BRANCH }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Save GCP credentials to file
         run: |
