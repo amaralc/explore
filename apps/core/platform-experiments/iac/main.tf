@@ -39,6 +39,13 @@ module "unleash-state" {
   environment_name   = var.environment_name
   unleash_api_url    = module.cloud-run-instance.url
   unleash_auth_token = "default:development.unleash-insecure-api-token"
+
+  providers {
+    unleash = {
+      api_url    = var.unleash_api_url
+      auth_token = var.unleash_auth_token
+    }
+  }
 }
 
 
