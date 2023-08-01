@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.0](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.4...peerlab@0.42.0) (2023-08-01)
+
+### Features
+
+- **PEER-573:** enable unleash instance ([bde828e](https://github.com/amaralc/peerlab/commit/bde828ebb82160736744db17d921f5b58ffcd763))
+
 ## [0.41.3-beta.4](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.3...peerlab@0.41.3-beta.4) (2023-08-01)
 
 ### Bug Fixes
