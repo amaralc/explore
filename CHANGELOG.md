@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.3-beta.3](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.2...peerlab@0.41.3-beta.3) (2023-08-01)
+
+### Features
+
+- **core-platform-experiments:** call service iac module ([4fc476b](https://github.com/amaralc/peerlab/commit/4fc476b11833426f3d05e0e2f302a4a49e3245d5))
+- **PEER-573:** add api tokens to unleash using terraform ([d40da69](https://github.com/amaralc/peerlab/commit/d40da6958816a169d56ad26f2de51475d4f4db3a))
+- **PEER-573:** add experiments service with unleash ([e53c9c9](https://github.com/amaralc/peerlab/commit/e53c9c9461782e24af57e9cd39ef961652cbbe77))
+- **PEER-573:** use generated api tokens ([cf73663](https://github.com/amaralc/peerlab/commit/cf73663056a1c7cb33245513860fcc3017dca1aa))
+- **PEER-573:** use unleash feature flag to control user-facing feature ([90b88b1](https://github.com/amaralc/peerlab/commit/90b88b107c3dc3744d946f5c03b1105f26045fc1))
+
+### Bug Fixes
+
+- **PEER-573:** remove unnused arguments ([4418a39](https://github.com/amaralc/peerlab/commit/4418a398247b34fba9c30d4566737b52e7b5a03c))
+- **PEER-573:** set mongodb org id as optional ([d1775e1](https://github.com/amaralc/peerlab/commit/d1775e131ccdb363f92281a095efb44ecde6a320))
+- **PEER-573:** specify port ([6f5946a](https://github.com/amaralc/peerlab/commit/6f5946a2082e046bda8a0d5591693c70ad6a7f1d))
+
+### Reverts
+
+- Revert "adjust: abandon db" ([b82df45](https://github.com/amaralc/peerlab/commit/b82df4511859813f9b3b1bc96096031e568c935f))
+- Revert "debug(PEER-573): remove project" ([8d9dee4](https://github.com/amaralc/peerlab/commit/8d9dee4f6be37fe1fb4f6c8c48ead3452c42beeb))
+- Revert "chore: remove depends_on argument" ([0a27622](https://github.com/amaralc/peerlab/commit/0a27622c2f27e7eccc971ef3d3c6b90a3ee7f733))
+- Revert "fix(PEER-573): remove count for legacy module" ([9144216](https://github.com/amaralc/peerlab/commit/91442161f117586eb02753537ad540c911356e35))
+
 ## [0.41.3-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.1...peerlab@0.41.3-beta.2) (2023-07-29)
 
 ### Bug Fixes
