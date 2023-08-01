@@ -35,16 +35,10 @@ output "service_url" {
 }
 
 module "unleash-state" {
-  source = "./unleash"
-  providers = {
-    unleash = {
-      source     = "philips-labs/unleash"
-      api_url    = module.cloud-run-instance.url
-      auth_token = "default:development.unleash-insecure-api-token"
-    }
-  }
-
-  environment_name = var.environment_name
+  source             = "./unleash"
+  environment_name   = var.environment_name
+  unleash_api_url    = module.cloud-run-instance.url
+  unleash_auth_token = "default:development.unleash-insecure-api-token"
 }
 
 
