@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.2](https://github.com/amaralc/peerlab/compare/peerlab@0.42.1...peerlab@0.42.2) (2023-08-01)
+
+### Bug Fixes
+
+- **PEER-573:** build experiments app ([00e7c73](https://github.com/amaralc/peerlab/commit/00e7c737d5f9241a609ae59d062a851b7afa135f))
+
 ## [0.42.1](https://github.com/amaralc/peerlab/compare/peerlab@0.42.0...peerlab@0.42.1) (2023-08-01)
 
 **Note:** Version bump only for package peerlab
