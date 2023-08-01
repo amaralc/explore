@@ -100,7 +100,7 @@ module "mongodb_dbms" {
 }
 
 module "core-platform-experiments" {
-  count                                 = local.is_production_environment ? 0 : 0 # Enable module only in preview environments
+  count                                 = local.is_production_environment ? 0 : 1 # Enable module only in preview environments
   source                                = "../../../apps/core/platform-experiments/iac"
   source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                      = local.short_environment_name
