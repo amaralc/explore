@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.3-beta.4](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.3...peerlab@0.41.3-beta.4) (2023-08-01)
+
+### Bug Fixes
+
+- **ci:** checkout branch before parsing ([b484d7a](https://github.com/amaralc/peerlab/commit/b484d7ab60ba4bbb9866d34eca4bdb76ecac049a))
+
 ## [0.41.3-beta.3](https://github.com/amaralc/peerlab/compare/peerlab@0.41.3-beta.2...peerlab@0.41.3-beta.3) (2023-08-01)
 
 ### Features
