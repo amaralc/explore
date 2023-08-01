@@ -53,3 +53,13 @@ variable "gcp_sql_dbms_instance_connection_name" {
   description = "The connection name of the Cloud SQL DBMS instance"
   type        = string
 }
+
+variable "unleash_frontend_api_tokens" {
+  description = "Comma separated Unleash frontend API tokens. Ex.: 'default.development:my-secret,default.production:my-secret'"
+  sensitive   = true
+}
+
+variable "unleash_client_api_tokens" {
+  description = "Comma separated Unleash API tokens. Ex.: 'default.development:my-secret,default.production:my-secret'"
+  sensitive   = true
+}

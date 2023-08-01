@@ -60,12 +60,12 @@ resource "google_cloud_run_service" "instance" {
 
         env {
           name  = "INIT_FRONTEND_API_TOKENS"
-          value = "default:development.unleash-insecure-frontend-api-token" # TODO: remove after testing
+          value = var.unleash_frontend_api_tokens
         }
 
         env {
           name  = "INIT_CLIENT_API_TOKENS"
-          value = "default:development.unleash-insecure-api-token" # TODO: remove after testing
+          value = var.unleash_client_api_tokens
         }
       }
     }

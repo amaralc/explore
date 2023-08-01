@@ -14,6 +14,26 @@ module "database_and_access_management" {
   gcp_sql_dbms_instance_connection_name = var.gcp_sql_dbms_instance_connection_name
 }
 
+resource "random_password" "frontend_development" {
+  length  = 64
+  special = false
+}
+
+resource "random_password" "frontend_production" {
+  length  = 64
+  special = false
+}
+
+resource "random_password" "client_development" {
+  length  = 64
+  special = false
+}
+
+resource "random_password" "client_production" {
+  length  = 64
+  special = false
+}
+
 module "cloud-run-instance" {
   source                                     = "./cloud-run"
   docker_image_name                          = local.service_name
@@ -24,6 +44,8 @@ module "cloud-run-instance" {
   gcp_vpc_access_connector_name              = var.gcp_vpc_access_connector_name
   gcp_docker_artifact_repository_name        = var.gcp_docker_artifact_repository_name
   gcp_sql_dbms_instance_connection_name      = var.gcp_sql_dbms_instance_connection_name
+  unleash_client_api_tokens                  = "default.development:${random_password.client_development.result},default.production:${random_password.client_production.result}"
+  unleash_frontend_api_tokens                = "default.development:${random_password.frontend_development.result},default.production:${random_password.frontend_production.result}"
   gcp_service_account_email                  = module.database_and_access_management.service_account_email
   gcp_database_connection_url_secret_id      = module.database_and_access_management.database_url_secret_id
   gcp_database_connection_url_secret_version = module.database_and_access_management.database_url_secret_version
@@ -32,21 +54,6 @@ module "cloud-run-instance" {
 output "service_url" {
   description = "The URL of the service"
   value       = module.cloud-run-instance.url
-}
-
-provider "unleash" {
-  alias      = "dynamic"
-  auth_token = "default:development.unleash-insecure-api-token"
-  api_url    = module.cloud-run-instance.url
-}
-
-module "unleash-state" {
-  source           = "./unleash"
-  environment_name = var.environment_name
-
-  providers = {
-    "unleash" = unleash.dynamic # Use the dynamic provider (https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider)
-  }
 }
 
 
