@@ -77,6 +77,9 @@ dependencies:
   '@swc/helpers':
     specifier: 0.5.0
     version: 0.5.0
+  '@unleash/proxy-client-react':
+    specifier: ^3.6.0
+    version: 3.6.0(unleash-proxy-client@2.5.0)
   axios:
     specifier: 1.0.0
     version: 1.0.0
@@ -143,6 +146,9 @@ dependencies:
   tslib:
     specifier: 2.3.0
     version: 2.3.0
+  unleash-proxy-client:
+    specifier: ^2.5.0
+    version: 2.5.0
 
 devDependencies:
   '@babel/preset-react':
@@ -8138,6 +8144,14 @@ packages:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.1
     dev: true
+
+  /@unleash/proxy-client-react@3.6.0(unleash-proxy-client@2.5.0):
+    resolution: {integrity: sha512-maQ3PYdBWUpIraD9z/2C8oVoCAS/EryV0WT4HiZQWxzrwvrZ+XHQJw1sImzRdWlGMvl1qJcgdEoxXhNSuYIrEQ==}
+    peerDependencies:
+      unleash-proxy-client: ^2.5.0
+    dependencies:
+      unleash-proxy-client: 2.5.0
+    dev: false
 
   /@vitejs/plugin-react@4.0.0(vite@4.3.9):
     resolution: {integrity: sha512-HX0XzMjL3hhOYm+0s95pb0Z7F8O81G7joUHgfDd/9J/ZZf5k4xX6QAMFkKsHFxaHlf6X7GD7+XuaZ66ULiJuhQ==}
@@ -20942,6 +20956,10 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /tiny-emitter@2.1.0:
+    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
+    dev: false
+
   /tiny-invariant@1.3.1:
     resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
     dev: false
@@ -21628,6 +21646,13 @@ packages:
   /universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+
+  /unleash-proxy-client@2.5.0:
+    resolution: {integrity: sha512-GWYLcQDW2UVhqAVwZX7jNzD6Lp96UJXEi66r9MiDd/C3Xw7rbTdFziNJAhEZpLNqR7j75+TfZaEYMCMy/k778g==}
+    dependencies:
+      tiny-emitter: 2.1.0
+      uuid: 8.3.2
+    dev: false
 
   /unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}

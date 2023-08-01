@@ -1,125 +1,61 @@
-version: '3'
+# This docker compose setup configures:
+# - the Unleash server instance + the necessary backing Postgres database
+# - the Unleash proxy
+#
+# To learn more about all the parts of Unleash, visit
+# https://docs.getunleash.io
+#
+# NOTE: please do not use this configuration for production setups.
+# Unleash does not take responsibility for any data leaks or other
+# problems that may arise as a result.
+#
+# This is intended to be used for demo, development, and learning
+# purposes only.
 
-volumes:
-  zookeeper:
-    driver: local
-
-  kafka:
-    driver: local
-
-  confluent-control-center:
-    driver: local
-
-  postgres:
-    driver: local
-
-  mongo:
-    driver: local
-
-  # hasura:
-  #   driver: local
-
+version: '3.9'
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
-    hostname: zookeeper
-    container_name: zookeeper
-    volumes:
-      - zookeeper:/var/lib/zookeeper/data
+  # The Unleash server contains the Unleash configuration and
+  # communicates with server-side SDKs and the Unleash Proxy
+  web:
+    image: unleashorg/unleash-server:latest
     ports:
-      - '2181:2181'
+      - '4242:4242'
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-
-
-  kafka:
-    image: confluentinc/cp-server:7.3.0
-    hostname: kafka
-    container_name: kafka
-    volumes:
-      - kafka:/var/lib/kafka/data
+      # This points Unleash to its backing database (defined in the `db` section below)
+      DATABASE_URL: 'postgres://postgres:unleash@db/postgres'
+      # Disable SSL for database connections. @chriswk: why do we do this?
+      DATABASE_SSL: 'false'
+      # Changing log levels:
+      LOG_LEVEL: 'warn'
+      # Proxy clients must use one of these keys to connect to the
+      # Proxy. To add more keys, separate them with a comma (`key1,key2`).
+      INIT_FRONTEND_API_TOKENS: 'default:development.unleash-insecure-frontend-api-token'
+      # Initialize Unleash with a default set of client API tokens. To
+      # initialize Unleash with multiple tokens, separate them with a
+      # comma (`token1,token2`).
+      INIT_CLIENT_API_TOKENS: 'default:development.unleash-insecure-api-token'
     depends_on:
-      - zookeeper
-    ports:
-      - '9092:9092'
-      - '9094:9094'
+      db:
+        condition: service_healthy
+    command: ['node', 'index.js']
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:4242/health || exit 1
+      interval: 1s
+      timeout: 1m
+      retries: 5
+      start_period: 15s
+  db:
+    expose:
+      - '5432'
+    image: postgres:15
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092,OUTSIDE://host.docker.internal:9094
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_CONFLUENT_BALANCER_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      CONFLUENT_METRICS_ENABLE: 'false'
-      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
-
-  confluent-control-center:
-    image: confluentinc/cp-enterprise-control-center:7.3.0
-    hostname: control-center
-    container_name: confluent-control-center
-    volumes:
-      - confluent-control-center:/var/lib/confluent-control-center/data
-    depends_on:
-      - kafka
-    ports:
-      - '9021:9021'
-    environment:
-      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:29092'
-      CONTROL_CENTER_REPLICATION_FACTOR: 1
-      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
-      CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
-      CONFLUENT_METRICS_TOPIC_REPLICATION: 1
-      PORT: 9021
-
-  postgres:
-    image: postgres:12
-    container_name: postgres
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
-    restart: always
-    env_file:
-      - .env
-
-  # Mongo Database container initialization (https://hub.docker.com/_/mongo)
-  mongo:
-    image: mongo:5.0
-    restart: always
-    container_name: mongo
-    volumes:
-      - mongo:/var/lib/mongo/data
-    ports:
-      - '27017:27017'
-    env_file:
-      - .env
-
-  # # Mongo Express (https://github.com/mongo-express/mongo-express)
-  # mongo-express:
-  #   depends_on:
-  #     - mongo
-  #   image: mongo-express
-  #   container_name: mongo-express
-  #   restart: always
-  #   ports:
-  #     - 8081:8081
-  #   env_file:
-  #     - .env
-
-  # hasura:
-  #   image: hasura/graphql-engine:v2.18.0
-  #   container_name: hasura
-  #   volumes:
-  #     - hasura:/var/lib/hasura/data
-  #   ports:
-  #     - '8080:8080'
-  #   depends_on:
-  #     - 'postgres'
-  #   restart: always
-  #   env_file:
-  #     - .env
+      # create a database called `db`
+      POSTGRES_DB: 'db'
+      # trust incoming connections blindly (DON'T DO THIS IN PRODUCTION!)
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+    healthcheck:
+      test: ['CMD', 'pg_isready', '--username=postgres', '--host=127.0.0.1', '--port=5432']
+      interval: 2s
+      timeout: 1m
+      retries: 5
+      start_period: 10s
