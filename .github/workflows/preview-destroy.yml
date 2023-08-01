@@ -19,8 +19,8 @@ env:
 jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
-    environment:
-      name: core-platform-shell-iac-preview # Requires permission to proceed
+    # environment:
+    #   name: core-platform-shell-iac-preview # Requires permission to proceed
     env:
       PRODUCTION_BRANCH: "production" # Set the name of your production branch here
     steps:
@@ -69,8 +69,8 @@ jobs: # A workflow can have multiple jobs
   destroy:
     needs: [check-target]
     runs-on: ubuntu-latest
-    environment:
-      name: core-platform-shell-iac-preview
+    # environment:
+    #   name: core-platform-shell-iac-preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
