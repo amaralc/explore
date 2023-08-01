@@ -34,17 +34,18 @@ output "service_url" {
   value       = module.cloud-run-instance.url
 }
 
-module "unleash-state" {
-  source             = "./unleash"
-  environment_name   = var.environment_name
-  unleash_api_url    = module.cloud-run-instance.url
-  unleash_auth_token = "default:development.unleash-insecure-api-token"
+provider "unleash" {
+  alias      = "dynamic"
+  auth_token = "default:development.unleash-insecure-api-token"
+  api_url    = module.cloud-run-instance.url
+}
 
-  providers {
-    unleash = {
-      api_url    = var.unleash_api_url
-      auth_token = var.unleash_auth_token
-    }
+module "unleash-state" {
+  source           = "./unleash"
+  environment_name = var.environment_name
+
+  providers = {
+    "unleash" = unleash.dynamic # Use the dynamic provider (https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider)
   }
 }
 
