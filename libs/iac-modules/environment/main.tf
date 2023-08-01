@@ -112,6 +112,7 @@ module "core-platform-experiments" {
   gcp_sql_dbms_instance_name            = module.postgresql_dbms.gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name         = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
   gcp_sql_dbms_instance_connection_name = module.postgresql_dbms.gcp_sql_dbms_instance_connection_name
+  depends_on                            = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
 
 # # Identity and Access Management (IAM) Service
