@@ -29,6 +29,11 @@ terraform {
       source  = "mongodb/mongodbatlas"
       version = "1.10.2"
     }
+
+    auth0 = {
+      source  = "auth0/auth0"
+      version = "1.0.0-beta.1"
+    }
   }
 }
 
@@ -62,6 +67,12 @@ provider "random" {}
 provider "mongodbatlas" {
   public_key  = var.mongodb_atlas_public_key
   private_key = var.mongodb_atlas_private_key
+}
+
+provider "auth0" {
+  domain    = var.auth0_domain
+  api_token = var.auth0_api_token
+  debug     = var.auth0_debug
 }
 
 

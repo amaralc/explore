@@ -71,3 +71,22 @@ variable "support_account_email" {
   sensitive   = true
 }
 
+variable "auth0_domain" {
+  description = "Auth0 domain"
+  type        = string
+  sensitive   = true
+}
+
+variable "auth0_api_token" {
+  description = "Auth0 API token"
+  type        = string
+  sensitive   = true
+}
+
+variable "auth0_debug" {
+  description = "Auth0 debug"
+  type        = bool
+  sensitive   = true
+}
+
+
