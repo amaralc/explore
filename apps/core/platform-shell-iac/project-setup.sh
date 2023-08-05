@@ -103,17 +103,22 @@ GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN"
 # Adding roles in the organization level cannot yet be accomplished using the gcloud CLI. The following steps must be done manually.
 
 # 1. Add Project Creator role to service account
+# - Necessary if you intend to create a project using terraform
 # - Access https://console.cloud.google.com/cloud-resource-manager
 # - Follow steps documented in https://cloud.google.com/resource-manager/docs/default-access-control
 # - References: https://registry.terraform.io/modules/terraform-google-modules/project-factory/google/latest#permissions
 
 # 2. Add Billing Account User role to service account
+# - Necessary if you intend to create a billing account using terraform
 # - References: https://cloud.google.com/billing/docs/how-to/grant-access-to-billing?hl=pt-br
 
 # 3. Add Apigee Oganization Admin role to service account
+# - Necessary if you intend to create an apigee organization using terraform
 # - References: https://cloud.google.com/apigee/docs/hybrid/v1.10/precog-provision.html
 
 # 4. Consent screen. We still could not manage to create a consent screen using terraform. Apparantly one was already created automatically  with "unconfiguredapp@google.com" support email, probably related to firebase automatic creation.
+# - Depending on how you created your project, this step may not be necessary.
+# - Access https://console.cloud.google.com/apis/credentials/consent
 # References:
 # - https://console.cloud.google.com/apis/credentials/consent
 
