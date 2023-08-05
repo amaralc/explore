@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.0-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.43.0-beta.1...peerlab@0.43.0-beta.2) (2023-08-05)
+
+### Bug Fixes
+
+- **PEER-567:** auth - add permission ([599fafc](https://github.com/amaralc/peerlab/commit/599fafcfaf9ee71e22a1acbeb55e3fc6992030a1))
+
 ## [0.43.0-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.43.0-beta.0...peerlab@0.43.0-beta.1) (2023-08-05)
 
 ### Bug Fixes
