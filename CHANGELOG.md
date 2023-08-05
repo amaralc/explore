@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.1...peerlab@0.43.3-beta.2) (2023-08-05)
+
+### Bug Fixes
+
+- **PEER-567:** add role ([c464474](https://github.com/amaralc/peerlab/commit/c464474fb1e9809b5df96e10c8b379d3ad57c1aa))
+- **PEER-567:** use hardcoded value ([ea36f19](https://github.com/amaralc/peerlab/commit/ea36f198eaff2a7df8f56ddf49070c49d8abb8f2))
+
 ## [0.43.3-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.0...peerlab@0.43.3-beta.1) (2023-08-05)
 
 ### Bug Fixes
