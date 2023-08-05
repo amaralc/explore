@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.0](https://github.com/amaralc/peerlab/compare/peerlab@0.43.0-beta.5...peerlab@0.43.0) (2023-08-05)
+
+### Features
+
+- **PEER-567:** auth - enable identity aware proxy ([2cdb422](https://github.com/amaralc/peerlab/commit/2cdb422f7868a6979756514f0e859d6f43169dfe))
+
 ## [0.43.0-beta.5](https://github.com/amaralc/peerlab/compare/peerlab@0.43.0-beta.4...peerlab@0.43.0-beta.5) (2023-08-05)
 
 ### Features
