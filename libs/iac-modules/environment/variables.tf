@@ -1,3 +1,9 @@
+variable "support_account_email" {
+  description = "The email of the account that will provide support"
+  type        = string
+  sensitive   = true
+}
+
 variable "owner_account_email" {
   description = "The email of the account that will own the resources"
   type        = string

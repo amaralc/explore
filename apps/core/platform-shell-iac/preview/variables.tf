@@ -80,3 +80,9 @@ variable "environment_name" {
   description = "The name of the environment to deploy"
   type        = string
 }
+
+variable "support_account_email" {
+  description = "The support email for the IAP brand"
+  type        = string
+  sensitive   = true
+}

@@ -41,6 +41,28 @@ resource "google_identity_platform_project_default_config" "auth" {
   ]
 }
 
+
+# Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_client)
+resource "google_iap_brand" "instance" {
+  application_title = var.application_title
+  support_email     = var.support_account_email
+  project           = var.gcp_project_id
+}
+
+resource "google_iap_client" "instance" {
+  display_name = "Test Client"
+  brand        = google_iap_brand.instance.name
+}
+
+resource "google_identity_platform_oauth_idp_config" "instance" {
+  name          = "oidc.google.public"
+  display_name  = google_iap_client.instance.display_name
+  issuer        = "google"
+  client_id     = google_iap_client.instance.client_id
+  client_secret = google_iap_client.instance.secret
+  enabled       = true
+}
+
 # module "database_and_access_management" {
 #   source                                = "../../../../libs/iac-modules/service-with-postgresql-access"
 #   service_name                          = local.service_name

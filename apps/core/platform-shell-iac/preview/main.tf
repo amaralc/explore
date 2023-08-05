@@ -41,5 +41,6 @@ module "preview-environment" {
   production_environment_core_platform_shell_browser_vite_vercel_project_id = var.core_platform_shell_browser_vite_vercel_project_id
   production_environment_core_root_shell_graph_vercel_project_id            = var.core_root_shell_graph_vercel_project_id
   production_environment_dx_dev_docs_browser_vercel_project_id              = var.dx_dev_docs_browser_vercel_project_id
+  support_account_email                                                     = var.support_account_email
   depends_on                                                                = [data.google_sql_database_instance.production]
 }

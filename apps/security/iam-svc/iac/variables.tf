@@ -26,6 +26,17 @@ variable "gcp_project_id" {
   type        = string
 }
 
+variable "support_account_email" {
+  description = "The support email for the IAP brand"
+  type        = string
+  sensitive   = true
+}
+
+variable "application_title" {
+  description = "The title of the application"
+  type        = string
+}
+
 # variable "short_commit_sha" {
 #   description = "The commit short SHA of the source code to deploy"
 #   type        = string

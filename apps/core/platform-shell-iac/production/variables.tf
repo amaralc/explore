@@ -65,3 +65,9 @@ variable "mongodb_atlas_org_id" {
   sensitive   = true
 }
 
+variable "support_account_email" {
+  description = "The support email for the IAP brand"
+  type        = string
+  sensitive   = true
+}
+

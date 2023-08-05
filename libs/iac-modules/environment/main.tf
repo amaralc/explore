@@ -93,10 +93,12 @@ module "mongodb_dbms" {
 
 # Identity and Access Management (IAM) Service
 module "security-iam-svc" {
-  count          = local.is_production_environment ? 1 : 0 # Disabled module
-  source         = "../../../apps/security/iam-svc/iac"
-  gcp_project_id = local.project_id
-  depends_on     = [module.gcp_apis, module.gcp_project]
+  count                 = local.is_production_environment ? 1 : 0 # Disabled module
+  source                = "../../../apps/security/iam-svc/iac"
+  gcp_project_id        = local.project_id
+  support_account_email = var.support_account_email
+  application_title     = local.is_production_environment ? "PeerLab" : "PeerLab Preview ${local.short_environment_name}"
+  depends_on            = [module.gcp_apis, module.gcp_project]
   # source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   # environment_name                      = local.short_environment_name
   # gcp_location                          = var.gcp_location
