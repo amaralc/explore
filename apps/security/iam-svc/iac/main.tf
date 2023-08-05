@@ -3,7 +3,8 @@ locals {
 }
 
 resource "google_firebase_project" "instance" {
-  project = var.gcp_project_id
+  project  = var.gcp_project_id
+  provider = google-beta
 }
 
 # module "database_and_access_management" {
