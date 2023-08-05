@@ -43,59 +43,61 @@ resource "google_identity_platform_project_default_config" "auth" {
 
 
 locals {
-  domain                      = "amaralc.com"
-  support_account_email       = "support@${local.domain}"
-  service_account_credentials = jsondecode(file("credentials.json"))
-  service_account_email       = local.service_account_credentials.client_email
-  types                       = ["default"]
-  label_keys = {
-    "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
-    "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
-    "security" = "cloudidentity.googleapis.com/groups.security"
-    "external" = "system/groups/external"
-    # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
-    # Not supported by provider yet.
-    "posix" = "cloudidentity.googleapis.com/groups.posix"
-  }
+  domain                = "amaralc.com"
+  support_account_email = "support@${local.domain}"
+  # service_account_credentials = jsondecode(file("credentials.json"))
+  # service_account_email       = local.service_account_credentials.client_email
+  # types                       = ["default"]
+  # label_keys = {
+  #   "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
+  #   "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
+  #   "security" = "cloudidentity.googleapis.com/groups.security"
+  #   "external" = "system/groups/external"
+  #   # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
+  #   # Not supported by provider yet.
+  #   "posix" = "cloudidentity.googleapis.com/groups.posix"
+  # }
 }
 
-data "google_organization" "org" {
-  count  = local.domain != "" ? 1 : 0
-  domain = local.domain
-}
+# data "google_organization" "org" {
+#   count  = local.domain != "" ? 1 : 0
+#   domain = local.domain
+# }
 
-locals {
-  customer_id = data.google_organization.org[0].directory_customer_id
-}
+# locals {
+#   customer_id = data.google_organization.org[0].directory_customer_id
+# }
 
 
-# Creates an identity group (https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/main.tf)
-resource "google_cloud_identity_group" "group" {
-  count                = local.domain != "" ? 1 : 0
-  provider             = google-beta
-  display_name         = "Support"
-  description          = "Support Team"
-  parent               = "customers/${local.customer_id}"
-  initial_group_config = "EMPTY"
-  group_key {
-    id = local.support_account_email
-  }
+# # Creates an identity group (https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/main.tf)
+# # Currently done in setup phase
+# resource "google_cloud_identity_group" "group" {
+#   count                = local.domain != "" ? 1 : 0
+#   provider             = google-beta
+#   display_name         = "Support"
+#   description          = "Support Team"
+#   parent               = "customers/${local.customer_id}"
+#   initial_group_config = "EMPTY"
+#   group_key {
+#     id = local.support_account_email
+#   }
 
-  labels = { for t in local.types : local.label_keys[t] => "" }
-}
+#   labels = { for t in local.types : local.label_keys[t] => "" }
+# }
 
-resource "google_cloud_identity_group_membership" "owners" {
-  for_each = toset([local.service_account_email])
+# # Create Group membership (currently done in setup phase)
+# resource "google_cloud_identity_group_membership" "owners" {
+#   for_each = toset([local.service_account_email])
 
-  provider = google-beta
-  group    = google_cloud_identity_group.group[0].id
+#   provider = google-beta
+#   group    = google_cloud_identity_group.group[0].id
 
-  preferred_member_key { id = each.key }
+#   preferred_member_key { id = each.key }
 
-  # MEMBER role must be specified. The order of roles should not be changed.
-  roles { name = "OWNER" }
-  roles { name = "MEMBER" }
-}
+#   # MEMBER role must be specified. The order of roles should not be changed.
+#   roles { name = "OWNER" }
+#   roles { name = "MEMBER" }
+# }
 
 
 # Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_client)
