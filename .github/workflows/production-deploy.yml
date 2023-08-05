@@ -210,7 +210,7 @@ jobs:
           parsed_branch_name=$(echo "$trimmed_branch_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g') # Replace special characters with dashes, and upper case letters by lowercase letters
           echo "parsed_branch_name:" $parsed_branch_name
           echo "environment_name=$parsed_branch_name" >> $GITHUB_ENV
-          echo "environment_name:" $parsed_branch_name"
+          echo "environment_name:" $parsed_branch_name
 
       - name: Get short commit hash
         run: |
