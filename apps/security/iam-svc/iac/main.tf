@@ -41,13 +41,62 @@ resource "google_identity_platform_project_default_config" "auth" {
   ]
 }
 
+data "google_organization" "org" {
+  # count  = var.domain != "" ? 1 : 0
+  domain = "amaralc.com"
+}
 
-# # Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_client)
-# resource "google_iap_brand" "instance" {
-#   application_title = var.application_title
-#   support_email     = var.support_account_email
-#   project           = var.gcp_project_id
-# }
+locals {
+  support_account_email       = "support@amaralc.com"
+  service_account_credentials = jsondecode(file("credentials.json"))
+  service_account_email       = local.service_account_credentials.client_email
+  types                       = ["default"]
+  label_keys = {
+    "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
+    "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
+    "security" = "cloudidentity.googleapis.com/groups.security"
+    "external" = "system/groups/external"
+    # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
+    # Not supported by provider yet.
+    "posix" = "cloudidentity.googleapis.com/groups.posix"
+  }
+}
+
+# Creates an identity group (https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/main.tf)
+resource "google_cloud_identity_group" "group" {
+  count                = var.domain != "" ? 1 : 0
+  provider             = google-beta
+  display_name         = "Support"
+  description          = "Support Team"
+  parent               = "customers/${data.google_organization.org[0].directory_customer_id}"
+  initial_group_config = "EMPTY"
+  group_key {
+    id = local.support_account_email
+  }
+
+  labels = { for t in local.types : local.label_keys[t] => "" }
+}
+
+resource "google_cloud_identity_group_membership" "owners" {
+  for_each = toset([local.service_account_email])
+
+  provider = google-beta
+  group    = google_cloud_identity_group.group.id
+
+  preferred_member_key { id = each.key }
+
+  # MEMBER role must be specified. The order of roles should not be changed.
+  roles { name = "OWNER" }
+  roles { name = "MEMBER" }
+}
+
+
+# Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_client)
+resource "google_iap_brand" "instance" {
+  application_title = var.application_title
+  support_email     = local.support_account_email # Group email
+  project           = var.gcp_project_id
+}
 
 # resource "google_iap_client" "instance" {
 #   display_name = "Test Client"
