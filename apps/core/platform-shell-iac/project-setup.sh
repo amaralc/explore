@@ -21,6 +21,10 @@ case $i in                          # This starts a case statement, which checks
     GCP_BILLING_ACCOUNT_ID="${i#*=}"
     shift
     ;;
+    --domain=*)
+    DOMAIN="${i#*=}"
+    shift
+    ;;
 esac                                # This ends the case statement.
 done                                # This ends the loop block.
 
@@ -38,6 +42,13 @@ then
     exit 1
 fi
 
+# Check if DOMAIN is set
+if [ -z "$DOMAIN" ]
+then
+    echo "Error: --domain flag is required"
+    exit 1
+fi
+
 # Define location
 GCP_PROJECT_LOCATION="europe-west3" # Apigee analytics are not available in europe-west3.  Supported regions: asia-northeast1,europe-west1,us-central1,us-east1,us-west1,australia-southeast1,europe-west2,asia-south1,asia-east1,asia-southeast1,asia-southeast2,me-west1
 
@@ -52,6 +63,9 @@ GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.ia
 
 # Define terraform bucket name
 GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
+
+# Define a support group email
+GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN"
 
 # BASIC GCP SETUP
 
@@ -100,6 +114,9 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # - References: https://cloud.google.com/apigee/docs/hybrid/v1.10/precog-provision.html
 
 # AUTOMATIC STEPS
+
+# Create a support group email. This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
+# gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN --description="Support Group"
 
 # # Create a key for the service account
 # gcloud iam service-accounts keys create ./apps/core/platform-shell-iac/credentials.json --iam-account $GCP_SERVICE_ACCOUNT_EMAIL
