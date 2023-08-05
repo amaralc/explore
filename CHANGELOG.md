@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.0...peerlab@0.43.3-beta.1) (2023-08-05)
+
+### Bug Fixes
+
+- **PEER-567:** auth - fix typo ([dc3324a](https://github.com/amaralc/peerlab/commit/dc3324ad672adeb59828242eb54facd55803e26d))
+
 ## [0.43.3-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.43.2...peerlab@0.43.3-beta.0) (2023-08-05)
 
 ### Features
