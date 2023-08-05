@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.0-beta.3](https://github.com/amaralc/peerlab/compare/peerlab@0.43.0-beta.2...peerlab@0.43.0-beta.3) (2023-08-05)
+
+### Features
+
+- **PEER-573:** auth - add identity platform config ([e23f30c](https://github.com/amaralc/peerlab/commit/e23f30cbd52b81d0c4e8e9bc39e7ff6f036a4374))
+
 ## [0.43.0-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.43.0-beta.1...peerlab@0.43.0-beta.2) (2023-08-05)
 
 ### Bug Fixes
