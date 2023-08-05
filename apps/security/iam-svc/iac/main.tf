@@ -88,7 +88,7 @@ resource "google_cloud_identity_group_membership" "owners" {
   for_each = toset([local.service_account_email])
 
   provider = google-beta
-  group    = google_cloud_identity_group.group.id
+  group    = google_cloud_identity_group.group[0].id
 
   preferred_member_key { id = each.key }
 
