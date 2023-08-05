@@ -8,39 +8,39 @@ resource "google_firebase_project" "instance" {
   provider = google-beta
 }
 
-# Creates an Identity Platform config.
-# Also enables Firebase Authentication with Identity Platform in the project if not.
-resource "google_identity_platform_config" "auth" {
-  provider = google-beta
-  project  = var.gcp_project_id
+# # Creates an Identity Platform config.
+# # Also enables Firebase Authentication with Identity Platform in the project if not.
+# resource "google_identity_platform_config" "auth" {
+#   provider = google-beta
+#   project  = var.gcp_project_id
 
-  # For example, you can configure to auto-delete Anonymous users.
-  autodelete_anonymous_users = true # TODO: check what this means
-}
+#   # For example, you can configure to auto-delete Anonymous users.
+#   autodelete_anonymous_users = true # TODO: check what this means
+# }
 
-# Adds more configurations, like for the email/password sign-in provider.
-resource "google_identity_platform_project_default_config" "auth" {
-  provider = google-beta
-  project  = var.gcp_project_id
+# # Adds more configurations, like for the email/password sign-in provider.
+# resource "google_identity_platform_project_default_config" "auth" {
+#   provider = google-beta
+#   project  = var.gcp_project_id
 
-  sign_in {
-    allow_duplicate_emails = false
+#   sign_in {
+#     allow_duplicate_emails = false
 
-    anonymous {
-      enabled = true # TODO: check what this means
-    }
+#     anonymous {
+#       enabled = true # TODO: check what this means
+#     }
 
-    email {
-      enabled           = true
-      password_required = false
-    }
-  }
+#     email {
+#       enabled           = true
+#       password_required = false
+#     }
+#   }
 
-  # Wait for Authentication to be initialized before enabling email/password.
-  depends_on = [
-    google_identity_platform_config.auth
-  ]
-}
+#   # Wait for Authentication to be initialized before enabling email/password.
+#   depends_on = [
+#     google_identity_platform_config.auth
+#   ]
+# }
 
 
 locals {
@@ -152,3 +152,5 @@ locals {
 #   gcp_dbms_password_secret_id                     = module.database_and_access_management.dbms_password_secret_id
 #   gcp_dbms_password_secret_version                = module.database_and_access_management.dbms_password_secret_version
 # }
+
+
