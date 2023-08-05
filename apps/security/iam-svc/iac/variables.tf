@@ -37,11 +37,11 @@ variable "application_title" {
   type        = string
 }
 
-variable "gcp_customer_id" {
-  description = "The Google Cloud customer ID"
-  type        = string
-  sensitive   = true
-}
+# variable "gcp_customer_id" {
+#   description = "The Google Cloud customer ID"
+#   type        = string
+#   sensitive   = true
+# }
 
 
 # variable "short_commit_sha" {
