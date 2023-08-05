@@ -97,7 +97,7 @@ module "security-iam-svc" {
   source                = "../../../apps/security/iam-svc/iac"
   gcp_project_id        = local.project_id
   support_account_email = "contact@amaralc.com"
-  application_title     = local.is_production_environment ? "PeerLab" : "PeerLab Preview ${local.short_environment_name}"
+  application_title     = local.is_production_environment ? "core-platform-shell-iac-consent" : "core-platform-shell-iac-consent-preview ${local.short_environment_name}"
   depends_on            = [module.gcp_apis, module.gcp_project]
   # source_environment_branch_name        = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   # environment_name                      = local.short_environment_name

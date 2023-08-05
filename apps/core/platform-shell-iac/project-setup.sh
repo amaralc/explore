@@ -113,6 +113,11 @@ GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN"
 # 3. Add Apigee Oganization Admin role to service account
 # - References: https://cloud.google.com/apigee/docs/hybrid/v1.10/precog-provision.html
 
+# 4. Consent screen. We still could not manage to create a consent screen using terraform. Apparantly one was already created automatically  with "unconfiguredapp@google.com" support email, probably related to firebase automatic creation.
+# References:
+# - https://console.cloud.google.com/apis/credentials/consent
+
+
 # AUTOMATIC STEPS
 
 # Create a support group email. This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
@@ -120,7 +125,6 @@ GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN"
 # gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN --display-name="Support Team" --description="Support Team"
 # gcloud identity groups memberships add --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --roles="MEMBER"
 # gcloud identity groups memberships modify-membership-roles --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --add-roles=OWNER
-
 
 # # Create a key for the service account
 # gcloud iam service-accounts keys create ./apps/core/platform-shell-iac/credentials.json --iam-account $GCP_SERVICE_ACCOUNT_EMAIL
