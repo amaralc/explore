@@ -2,9 +2,43 @@ locals {
   service_name = "security-iam-svc"
 }
 
+# Initialize firebase project
 resource "google_firebase_project" "instance" {
   project  = var.gcp_project_id
   provider = google-beta
+}
+
+# Creates an Identity Platform config.
+# Also enables Firebase Authentication with Identity Platform in the project if not.
+resource "google_identity_platform_config" "auth" {
+  provider = google-beta
+  project  = var.gcp_project_id
+
+  # For example, you can configure to auto-delete Anonymous users.
+  autodelete_anonymous_users = true # TODO: check what this means
+}
+
+# Adds more configurations, like for the email/password sign-in provider.
+resource "google_identity_platform_project_default_config" "auth" {
+  provider = google-beta
+  project  = var.gcp_project_id
+  sign_in {
+    allow_duplicate_emails = false
+
+    anonymous {
+      enabled = true # TODO: check what this means
+    }
+
+    email {
+      enabled           = true
+      password_required = false
+    }
+  }
+
+  # Wait for Authentication to be initialized before enabling email/password.
+  depends_on = [
+    google_identity_platform_config.auth
+  ]
 }
 
 # module "database_and_access_management" {
