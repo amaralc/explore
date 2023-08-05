@@ -41,13 +41,10 @@ resource "google_identity_platform_project_default_config" "auth" {
   ]
 }
 
-data "google_organization" "org" {
-  # count  = var.domain != "" ? 1 : 0
-  domain = "amaralc.com"
-}
 
 locals {
-  support_account_email       = "support@amaralc.com"
+  domain                      = "amaralc.com"
+  support_account_email       = "support@${local.domain}"
   service_account_credentials = jsondecode(file("credentials.json"))
   service_account_email       = local.service_account_credentials.client_email
   types                       = ["default"]
@@ -62,13 +59,23 @@ locals {
   }
 }
 
+data "google_organization" "org" {
+  count  = local.domain != "" ? 1 : 0
+  domain = local.domain
+}
+
+locals {
+  customer_id = data.google_organization.org[0].directory_customer_id
+}
+
+
 # Creates an identity group (https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/main.tf)
 resource "google_cloud_identity_group" "group" {
-  count                = var.domain != "" ? 1 : 0
+  count                = local.domain != "" ? 1 : 0
   provider             = google-beta
   display_name         = "Support"
   description          = "Support Team"
-  parent               = "customers/${data.google_organization.org[0].directory_customer_id}"
+  parent               = "customers/${local.customer_id}"
   initial_group_config = "EMPTY"
   group_key {
     id = local.support_account_email
