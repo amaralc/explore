@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.16](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.15...peerlab@0.43.3-beta.16) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** trigger by changes in env name ([bfee3e7](https://github.com/amaralc/peerlab/commit/bfee3e77720475a3805be8a1dc3bcfad68d4ec03))
+
 ## [0.43.3-beta.15](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.14...peerlab@0.43.3-beta.15) (2023-08-06)
 
 ### Reverts
