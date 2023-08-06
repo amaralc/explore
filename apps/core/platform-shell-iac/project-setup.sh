@@ -124,11 +124,11 @@ GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN"
 # - https://console.cloud.google.com/apis/credentials/consent
 
 
-# AUTOMATIC STEPS
+# # AUTOMATIC STEPS
 
-# Create a support group email. This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
-# Reference: https://cloud.google.com/sdk/gcloud/reference/identity/groups/create
-# gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN --display-name="Support Team" --description="Support Team"
+# # Create a support group email. This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
+# # Reference: https://cloud.google.com/sdk/gcloud/reference/identity/groups/create
+# gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN --display-name="support-team" --description="Support team members will be contacted by end users to clarify doubts and help users get the most out of the platform"
 # gcloud identity groups memberships add --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --roles="MEMBER"
 # gcloud identity groups memberships modify-membership-roles --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --add-roles=OWNER
 
