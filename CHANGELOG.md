@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.15](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.14...peerlab@0.43.3-beta.15) (2023-08-06)
+
+### Reverts
+
+- Revert "fix(PEER-579): ignore changes" ([a87a577](https://github.com/amaralc/peerlab/commit/a87a5774b04ec714a7c9305ca7f14487b57ad274))
+- Revert "refactor: rename project" ([8d82ce4](https://github.com/amaralc/peerlab/commit/8d82ce423c0a9ab9984c7234297a7633d4763c06))
+- Revert "chore: cleanup environment" ([e4a05d6](https://github.com/amaralc/peerlab/commit/e4a05d659cffe9160f57a5fa2164fc462a337dd4))
+
 ## [0.43.3-beta.14](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.13...peerlab@0.43.3-beta.14) (2023-08-06)
 
 ### Bug Fixes
