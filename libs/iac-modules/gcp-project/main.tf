@@ -22,6 +22,7 @@ locals {
 
 # Create a project in the GCP organization if the environment is a preview environment
 resource "google_project" "instance" {
+  provider        = google-beta
   project_id      = local.project_id
   name            = local.project_id
   org_id          = var.gcp_organization_id
