@@ -25,6 +25,15 @@ locals {
   customer_id = data.google_organization.org[0].directory_customer_id
 }
 
+# Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
+# The support email has limitations as described in the documentation: "Can be either a user or group email. When a user email is specified, the caller must be the user with the associated email address. When a group email is specified, the caller can be either a user or a service account which is an owner of the specified group in Cloud Identity.
+# In order to create a group programmatically you will need to use the cli (check our setup-project.sh script).
+resource "google_iap_brand" "instance" {
+  application_title = var.application_title
+  support_email     = local.support_account_email # Group email
+  project           = var.gcp_project_id
+}
+
 # # Creates an Identity Platform config.
 # # Also enables Firebase Authentication with Identity Platform in the project if not.
 # resource "google_identity_platform_config" "auth" {
@@ -59,14 +68,7 @@ locals {
 #   ]
 # }
 
-# # Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
-# # The support email has limitations as described in the documentation: "Can be either a user or group email. When a user email is specified, the caller must be the user with the associated email address. When a group email is specified, the caller can be either a user or a service account which is an owner of the specified group in Cloud Identity.
-# # In order to create a group programmatically you will need to use the cli (check our setup-project.sh script).
-# resource "google_iap_brand" "instance" {
-#   application_title = var.application_title
-#   support_email     = local.support_account_email # Group email
-#   project           = var.gcp_project_id
-# }
+
 
 # resource "google_iap_client" "instance" {
 #   display_name = "Test Client"
