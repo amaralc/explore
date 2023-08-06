@@ -78,8 +78,8 @@ module "postgresql_dbms" {
   environment_name                = local.short_environment_name
   gcp_project_id                  = local.project_id
   gcp_location                    = var.gcp_location
-  gcp_network_id                  = module.vpc.private_network.id
-  gcp_private_vpc_connection_id   = module.vpc.private_vpc_connection.id
+  gcp_network_id                  = module.vpc[0].private_network.id
+  gcp_private_vpc_connection_id   = module.vpc[0].private_vpc_connection.id
   gcp_sql_dbms_source_instance_id = var.source_environment_dbms_instance_id
   source_environment_branch_name  = var.source_environment_branch_name
   depends_on                      = [module.gcp_project, module.vpc, module.gcp_apis]
@@ -117,7 +117,7 @@ module "core-platform-experiments" {
   gcp_docker_artifact_repository_name   = var.gcp_docker_artifact_repository_name
   gcp_sql_dbms_instance_host            = module.postgresql_dbms.gcp_sql_dbms_instance_host
   gcp_sql_dbms_instance_name            = module.postgresql_dbms.gcp_sql_dbms_instance_name
-  gcp_vpc_access_connector_name         = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
+  gcp_vpc_access_connector_name         = module.vpc[0].gcp_vpc_access_connector_name # Necessary to stablish connection with database
   gcp_sql_dbms_instance_connection_name = module.postgresql_dbms.gcp_sql_dbms_instance_connection_name
   depends_on                            = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
@@ -134,7 +134,7 @@ module "researchers-peers" {
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
   gcp_sql_dbms_instance_host          = module.postgresql_dbms.gcp_sql_dbms_instance_host
   gcp_sql_dbms_instance_name          = module.postgresql_dbms.gcp_sql_dbms_instance_name
-  gcp_vpc_access_connector_name       = module.vpc.gcp_vpc_access_connector_name # Necessary to stablish connection with database
+  gcp_vpc_access_connector_name       = module.vpc[0].gcp_vpc_access_connector_name # Necessary to stablish connection with database
   depends_on                          = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
 
