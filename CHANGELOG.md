@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.10](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.9...peerlab@0.43.3-beta.10) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** ci - use locals ([e4fcc25](https://github.com/amaralc/peerlab/commit/e4fcc256ebf6659ac34fb8456aca4777c47773c3))
+
 ## [0.43.3-beta.9](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.8...peerlab@0.43.3-beta.9) (2023-08-06)
 
 ### Bug Fixes
