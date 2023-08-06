@@ -115,10 +115,10 @@ module "core-platform-experiments" {
   gcp_location                          = var.gcp_location
   short_commit_sha                      = var.short_commit_sha
   gcp_docker_artifact_repository_name   = var.gcp_docker_artifact_repository_name
-  gcp_sql_dbms_instance_host            = module.postgresql_dbms.gcp_sql_dbms_instance_host
-  gcp_sql_dbms_instance_name            = module.postgresql_dbms.gcp_sql_dbms_instance_name
+  gcp_sql_dbms_instance_host            = module.postgresql_dbms[0].gcp_sql_dbms_instance_host
+  gcp_sql_dbms_instance_name            = module.postgresql_dbms[0].gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name         = module.vpc[0].gcp_vpc_access_connector_name # Necessary to stablish connection with database
-  gcp_sql_dbms_instance_connection_name = module.postgresql_dbms.gcp_sql_dbms_instance_connection_name
+  gcp_sql_dbms_instance_connection_name = module.postgresql_dbms[0].gcp_sql_dbms_instance_connection_name
   depends_on                            = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
 
@@ -132,8 +132,8 @@ module "researchers-peers" {
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-  gcp_sql_dbms_instance_host          = module.postgresql_dbms.gcp_sql_dbms_instance_host
-  gcp_sql_dbms_instance_name          = module.postgresql_dbms.gcp_sql_dbms_instance_name
+  gcp_sql_dbms_instance_host          = module.postgresql_dbms[0].gcp_sql_dbms_instance_host
+  gcp_sql_dbms_instance_name          = module.postgresql_dbms[0].gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name       = module.vpc[0].gcp_vpc_access_connector_name # Necessary to stablish connection with database
   depends_on                          = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
 }
