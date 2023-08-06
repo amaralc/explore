@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.5](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.4...peerlab@0.43.3-beta.5) (2023-08-06)
+
+### Features
+
+- **PEER-567:** enable project ([cea93c4](https://github.com/amaralc/peerlab/commit/cea93c40087ea8f89ad5088c955ca887006bcbf2))
+- **PEER-579:** create projects for environments ([8b7bc36](https://github.com/amaralc/peerlab/commit/8b7bc362eda35cd96417c9dc5a65d41c0a2671d7))
+- **PEER-579:** enable apis ([6258a5d](https://github.com/amaralc/peerlab/commit/6258a5dcd3147992d18874450c26c2feca7d3898))
+
+### Bug Fixes
+
+- **PEER-567:** disable all ([a78be4a](https://github.com/amaralc/peerlab/commit/a78be4a00b53f5d4880e263ab1fda197c0fbd362))
+- **PEER-567:** rename project ([20e9d15](https://github.com/amaralc/peerlab/commit/20e9d15823b079d81c1c2045a5176df64df0a5d9))
+- **PEER-567:** use array form ([ed73058](https://github.com/amaralc/peerlab/commit/ed730587f63c28a1b340e30403907c19060f0d8c))
+- **PEER-567:** use array form to access resource attribute ([ae400a3](https://github.com/amaralc/peerlab/commit/ae400a39dbdf827a3a1e722b6dff66428ccd24cd))
+- **PEER-567:** use module as list ([afe5bd4](https://github.com/amaralc/peerlab/commit/afe5bd4bf19ea88492e8954a091bfc704061dd4b))
+- **PEER-579:** ci - check module length before output ([54d0b35](https://github.com/amaralc/peerlab/commit/54d0b35328ea18d53052e364ede1a68d88ab54c8))
+- **PEER-579:** enable api ([1844694](https://github.com/amaralc/peerlab/commit/184469450cc4876c62c139376815a266af4d32cb))
+- **PEER-579:** force dependency ([29f63f5](https://github.com/amaralc/peerlab/commit/29f63f59b1cb21a85b3a73789380ad7d3428670b))
+- **PEER-579:** pass variables to tf command ([56138a2](https://github.com/amaralc/peerlab/commit/56138a298b7587cfe4c2d8f984750534cdd64cb3))
+- **PEER-579:** remove dependency on module gcp-apis ([68286f4](https://github.com/amaralc/peerlab/commit/68286f41b1967cfb004c456698111c7ae6ba9e55))
+
 ## [0.43.3-beta.4](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.3...peerlab@0.43.3-beta.4) (2023-08-06)
 
 ### Features
