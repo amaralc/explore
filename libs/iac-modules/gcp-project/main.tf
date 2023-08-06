@@ -9,20 +9,6 @@ resource "null_resource" "log_random_id" {
   }
 }
 
-# The null_resource with lifecycle block and ignore_changes argument is used to ensure that the random ID does not change in subsequent runs.
-resource "null_resource" "ignore_id_changes" {
-  triggers = {
-    id               = random_id.instance.hex
-    environment_name = var.environment_name
-  }
-
-  lifecycle {
-    ignore_changes = [
-      triggers.id,
-    ]
-  }
-}
-
 locals {
   project_id = "${substr("${var.environment_name}", 0, 25)}-${substr(random_id.instance.hex, 0, 4)}" # Name cannot have more than 30 characters
 }
