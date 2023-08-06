@@ -362,7 +362,7 @@ jobs:
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
-          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }} -var "auth0_api_token=${{ secrets.AUTH0_API_TOKEN }}" -var "auth0_domain=${{ secrets.AUTH0_DOMAIN }}"
+          terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }}" -var "auth0_api_token=${{ secrets.AUTH0_API_TOKEN }}" -var "auth0_domain=${{ secrets.AUTH0_DOMAIN }}"
         working-directory: apps/core/platform-shell-iac/production
 
       - name: Terraform Apply
