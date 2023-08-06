@@ -25,7 +25,7 @@ module "postgresql_dbms" {
   environment_name                = local.environment_name
   gcp_project_id                  = var.gcp_project_id
   gcp_location                    = var.gcp_location
-  gcp_network_id                  = module.vpc.private_network.id
+  gcp_network_id                  = module.vpc[0].private_network.id
   gcp_private_vpc_connection_id   = module.vpc.private_vpc_connection.id
   gcp_sql_dbms_source_instance_id = var.source_environment_dbms_instance_id
   depends_on                      = [module.vpc]
