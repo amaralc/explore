@@ -34,54 +34,55 @@ resource "google_iap_brand" "instance" {
   project           = var.gcp_project_id
 }
 
-# Add iap client
-resource "google_iap_client" "instance" {
-  display_name = "security-iam-svc"
-  brand        = google_iap_brand.instance.name
+# Creates an Identity Platform config.
+# Also enables Firebase Authentication with Identity Platform in the project if not.
+resource "google_identity_platform_config" "auth" {
+  provider = google-beta
+  project  = var.gcp_project_id
+
+  # For example, you can configure to auto-delete Anonymous users.
+  autodelete_anonymous_users = true # TODO: check what this means
 }
 
-# Add oauth idp config
-resource "google_identity_platform_oauth_idp_config" "instance" {
-  name          = "oidc.google.public"
-  display_name  = google_iap_client.instance.display_name
-  issuer        = "google"
-  client_id     = google_iap_client.instance.client_id
-  client_secret = google_iap_client.instance.secret
-  enabled       = true
+# Adds more configurations, like for the email/password sign-in provider.
+resource "google_identity_platform_project_default_config" "auth" {
+  provider = google-beta
+  project  = var.gcp_project_id
+
+  sign_in {
+    allow_duplicate_emails = false
+
+    anonymous {
+      enabled = true # TODO: check what this means
+    }
+
+    email {
+      enabled           = true
+      password_required = false
+    }
+  }
+
+  # Wait for Authentication to be initialized before enabling email/password.
+  depends_on = [
+    google_identity_platform_config.auth,
+    google_iap_brand.instance
+  ]
 }
 
-# # Creates an Identity Platform config.
-# # Also enables Firebase Authentication with Identity Platform in the project if not.
-# resource "google_identity_platform_config" "auth" {
-#   provider = google-beta
-#   project  = var.gcp_project_id
-
-#   # For example, you can configure to auto-delete Anonymous users.
-#   autodelete_anonymous_users = true # TODO: check what this means
+# # Add iap client
+# resource "google_iap_client" "instance" {
+#   display_name = "security-iam-svc"
+#   brand        = google_iap_brand.instance.name
 # }
 
-# # Adds more configurations, like for the email/password sign-in provider.
-# resource "google_identity_platform_project_default_config" "auth" {
-#   provider = google-beta
-#   project  = var.gcp_project_id
-
-#   sign_in {
-#     allow_duplicate_emails = false
-
-#     anonymous {
-#       enabled = true # TODO: check what this means
-#     }
-
-#     email {
-#       enabled           = true
-#       password_required = false
-#     }
-#   }
-
-#   # Wait for Authentication to be initialized before enabling email/password.
-#   depends_on = [
-#     google_identity_platform_config.auth
-#   ]
+# # Add oauth idp config
+# resource "google_identity_platform_oauth_idp_config" "instance" {
+#   name          = "oidc.google.public"
+#   display_name  = google_iap_client.instance.display_name
+#   issuer        = "google"
+#   client_id     = google_iap_client.instance.client_id
+#   client_secret = google_iap_client.instance.secret
+#   enabled       = true
 # }
 
 # # Initialize firebase project
