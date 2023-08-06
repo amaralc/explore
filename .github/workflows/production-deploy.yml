@@ -339,10 +339,21 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
-        with:
-          version: ">= 441.0.0"
+      - name: Install gcloud CLI
+        run: |
+          curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-441.0.0-linux-x86_64.tar.gz
+          tar -xf google-cloud-cli-441.0.0-linux-x86_64.tar.gz
+          ./google-cloud-sdk/install.sh --quiet
+
+      - name: Initialize gcloud CLI
+        run: |
+          gcloud init --quiet
+          ./google-cloud-sdk/bin/gcloud init --quiet
+
+      # - name: "Set up Cloud SDK"
+      #   uses: "google-github-actions/setup-gcloud@v1"
+      #   with:
+      #     version: ">= 441.0.0"
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2

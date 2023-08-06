@@ -28,11 +28,11 @@ resource "google_project" "instance" {
   org_id          = var.gcp_organization_id
   billing_account = var.gcp_billing_account_id
 
-  # # Remove project from billing account after it is destroyed. TODO: Unlink projects manually for now
-  # provisioner "local-exec" {
-  #   when    = destroy
-  #   command = "gcloud auth activate-service-account --key-file=credentials.json && gcloud beta billing projects unlink ${self.project_id} --quiet"
-  # }
+  # Remove project from billing account after it is destroyed. TODO: Unlink projects manually for now
+  provisioner "local-exec" {
+    when    = destroy
+    command = "gcloud auth activate-service-account --key-file=credentials.json && gcloud beta billing projects unlink ${self.project_id} --quiet"
+  }
 }
 
 output "project_id" {
