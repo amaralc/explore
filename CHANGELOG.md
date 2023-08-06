@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.5-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.43.4...peerlab@0.43.5-beta.0) (2023-08-06)
+
+### Features
+
+- **PEER-567:** auth - enable module ([eeef060](https://github.com/amaralc/peerlab/commit/eeef060218d9ea25a1232f56dedb74a897744906))
+
 ## [0.43.4](https://github.com/amaralc/peerlab/compare/peerlab@0.43.4-beta.0...peerlab@0.43.4) (2023-08-06)
 
 **Note:** Version bump only for package peerlab
