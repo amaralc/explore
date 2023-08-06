@@ -345,10 +345,9 @@ jobs:
           tar -xf google-cloud-cli-441.0.0-linux-x86_64.tar.gz
           ./google-cloud-sdk/install.sh --quiet
 
-      - name: Initialize gcloud CLI
+      - name: Authenticate with gcloud cli
         run: |
           gcloud auth activate-service-account --key-file=apps/core/platform-shell-iac/production/credentials.json
-          gcloud init
 
       # - name: "Set up Cloud SDK"
       #   uses: "google-github-actions/setup-gcloud@v1"
