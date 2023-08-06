@@ -70,11 +70,26 @@ resource "google_identity_platform_project_default_config" "auth" {
   ]
 }
 
-# # Add iap client
-# resource "google_iap_client" "instance" {
-#   display_name = "security-iam-svc"
-#   brand        = google_iap_brand.instance.name
-# }
+# Add iap client
+resource "google_iap_client" "instance" {
+  display_name = "security-iam-svc"
+  brand        = google_iap_brand.instance.name
+}
+
+
+resource "google_identity_platform_default_supported_idp_config" "google_sign_in" {
+  provider = google-beta
+  project  = var.gcp_project_id
+
+  enabled       = true
+  idp_id        = "google.com"
+  client_id     = google_iap_client.instance.client_id
+  client_secret = google_iap_client.instance.secret # Reference: https://firebase.google.com/codelabs/firebase-terraform#5
+
+  depends_on = [
+    google_identity_platform_config.auth
+  ]
+}
 
 # # Add oauth idp config
 # resource "google_identity_platform_oauth_idp_config" "instance" {
@@ -84,13 +99,15 @@ resource "google_identity_platform_project_default_config" "auth" {
 #   client_id     = google_iap_client.instance.client_id
 #   client_secret = google_iap_client.instance.secret
 #   enabled       = true
+#   depends_on    = [google_identity_platform_project_default_config.auth]
 # }
+
 
 # # Initialize firebase project
 # resource "google_firebase_project" "instance" {
 #   project  = var.gcp_project_id
 #   provider = google-beta
-#   depends_on = [# TODO: check if this is needed]
+#   depends_on = []
 # }
 
 # module "database_and_access_management" {
