@@ -45,7 +45,7 @@ module "gcp_project" {
 
 # Define which project ID to use
 locals {
-  project_id = var.gcp_project_id # local.is_production_environment ? var.gcp_project_id : module.gcp_project[0].project_id # For now, we wont use child projects in order to avoid billing account issues
+  project_id = local.is_production_environment ? var.gcp_project_id : module.gcp_project[0].project_id # For now, we wont use child projects in order to avoid billing account issues
 }
 
 locals {
