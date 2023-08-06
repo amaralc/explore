@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.20](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.19...peerlab@0.43.3-beta.20) (2023-08-06)
+
+### Features
+
+- **PEER-567:** add cloud identity group ([59f32e8](https://github.com/amaralc/peerlab/commit/59f32e8652d47fe99b470b5e984bb370aa6bf569))
+- **PEER-567:** auth - add iap brand ([42f4ebc](https://github.com/amaralc/peerlab/commit/42f4ebc8f9376c74a639bc40a7c71c44a2abca75))
+- **PEER-567:** auth - enable identity platform ([5136134](https://github.com/amaralc/peerlab/commit/5136134cdb211e7a7f9d54e470a632f67f04a27d))
+
+### Bug Fixes
+
+- **PEER-567:** add references ([5e7df8c](https://github.com/amaralc/peerlab/commit/5e7df8ce6425737f6a44c504b2b0f117af9d56fd))
+- **PEER-567:** create group with terraform ([a340983](https://github.com/amaralc/peerlab/commit/a34098308be9a3ead365b3bfecceabd1746321f1))
+- **PEER-579:** ci - use correct project id ([895fe5b](https://github.com/amaralc/peerlab/commit/895fe5be1ba838e01ec305c7ba6c5972fcde2ee6))
+- **PEER-579:** ci - use correct project id ([d47ab34](https://github.com/amaralc/peerlab/commit/d47ab3473b5238dabd1ec3af46ffa36920259809))
+- **PEER-579:** enable apis for shell iac project ([3db3921](https://github.com/amaralc/peerlab/commit/3db3921c4ef2ee446ec87a12f008369b3b02d73d))
+
 ## [0.43.3-beta.19](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.18...peerlab@0.43.3-beta.19) (2023-08-06)
 
 ### Bug Fixes
