@@ -56,7 +56,7 @@ module "vpc" {
   environment_name = local.short_environment_name            # Limit the name to 24 characters
   gcp_project_id   = local.project_id
   gcp_location     = var.gcp_location
-  depends_on       = [module.gcp_project, module.gcp_apis]
+  depends_on       = [module.gcp_project]
 }
 
 output "vpc" {
@@ -74,7 +74,7 @@ module "postgresql_dbms" {
   gcp_private_vpc_connection_id   = module.vpc[0].private_vpc_connection.id
   gcp_sql_dbms_source_instance_id = var.source_environment_dbms_instance_id
   source_environment_branch_name  = var.source_environment_branch_name
-  depends_on                      = [module.gcp_project, module.vpc, module.gcp_apis]
+  depends_on                      = [module.gcp_project, module.vpc]
 }
 
 output "postgresql_dbms_instance_id" {
@@ -86,7 +86,7 @@ module "mongodb_dbms" {
   count                = local.is_production_environment ? 0 : 0 # Disabled module
   environment_name     = local.short_environment_name
   mongodb_atlas_org_id = var.mongodb_atlas_org_id
-  depends_on           = [module.gcp_project, module.vpc, module.gcp_apis]
+  depends_on           = [module.gcp_project, module.vpc]
 }
 
 # Identity and Access Management (IAM) Service
@@ -95,7 +95,7 @@ module "security-iam-svc" {
   count             = local.is_production_environment ? 0 : 0 # Enabled in production environments only
   gcp_project_id    = local.project_id
   application_title = local.is_production_environment ? "core-platform-shell-iac-consent" : "core-platform-shell-iac-consent-preview ${local.short_environment_name}"
-  depends_on        = [module.gcp_apis, module.gcp_project]
+  depends_on        = [module.gcp_project]
 }
 
 module "core-platform-experiments" {
@@ -111,7 +111,7 @@ module "core-platform-experiments" {
   gcp_sql_dbms_instance_name            = module.postgresql_dbms[0].gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name         = module.vpc[0].gcp_vpc_access_connector_name # Necessary to stablish connection with database
   gcp_sql_dbms_instance_connection_name = module.postgresql_dbms[0].gcp_sql_dbms_instance_connection_name
-  depends_on                            = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
+  depends_on                            = [module.postgresql_dbms, module.gcp_project]
 }
 
 # Researchers Peers Microservice
@@ -127,7 +127,7 @@ module "researchers-peers" {
   gcp_sql_dbms_instance_host          = module.postgresql_dbms[0].gcp_sql_dbms_instance_host
   gcp_sql_dbms_instance_name          = module.postgresql_dbms[0].gcp_sql_dbms_instance_name
   gcp_vpc_access_connector_name       = module.vpc[0].gcp_vpc_access_connector_name # Necessary to stablish connection with database
-  depends_on                          = [module.postgresql_dbms, module.gcp_apis, module.gcp_project]
+  depends_on                          = [module.postgresql_dbms, module.gcp_project]
 }
 
 # Nx Graph
