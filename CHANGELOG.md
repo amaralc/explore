@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.14](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.13...peerlab@0.43.3-beta.14) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** auth init ([944f409](https://github.com/amaralc/peerlab/commit/944f40911d44384c868a1b052ef3512b9a3fbd35))
+- **PEER-579:** ci - authenticate ([4d7beb4](https://github.com/amaralc/peerlab/commit/4d7beb43c88feab5e907fdfde9a9fcbd3bc46a23))
+- **PEER-579:** ci - rename project ([1f7b438](https://github.com/amaralc/peerlab/commit/1f7b4385a6f8545236ee818957613a7176579a8b))
+- **PEER-579:** ignore changes ([ecab00b](https://github.com/amaralc/peerlab/commit/ecab00bf067c23a436c478a1f147cc5ae69d917c))
+- **PEER-579:** rename project ([24c9488](https://github.com/amaralc/peerlab/commit/24c9488e87bc42ca548f65e301c1bd4f1bc15fb8))
+- **PEER-579:** use random number ([363533e](https://github.com/amaralc/peerlab/commit/363533e09badc71c2279b9d80776c01f83a11919))
+
 ## [0.43.3-beta.13](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.12...peerlab@0.43.3-beta.13) (2023-08-06)
 
 ### Bug Fixes
