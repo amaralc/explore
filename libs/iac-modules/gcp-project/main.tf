@@ -76,21 +76,3 @@ module "project_admin" {
   gcp_project_id = google_project.instance.project_id
   depends_on     = [module.gcp_apis]
 }
-
-# # Enable APIs
-# module "gcp_apis" {
-#   count          = var.is_production_environment ? 0 : 1
-#   source         = "../gcp-apis" // path to the module
-#   gcp_project_id = google_project.instance.project_id
-#   apis = [
-#     "compute.googleapis.com",
-#     "servicenetworking.googleapis.com",
-#     "sqladmin.googleapis.com",
-#     "iam.googleapis.com",
-#     "secretmanager.googleapis.com",
-#     "vpcaccess.googleapis.com",
-#     "run.googleapis.com",
-#     "cloudbilling.googleapis.com"
-#   ]
-#   depends_on = [google_project.instance, module.project_admin]
-# }
