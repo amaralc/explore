@@ -34,6 +34,22 @@ resource "google_iap_brand" "instance" {
   project           = var.gcp_project_id
 }
 
+# Add iap client
+resource "google_iap_client" "test_client" {
+  display_name = "Test Client"
+  brand        = google_iap_brand.instance.name
+}
+
+# Add oauth idp config
+# resource "google_identity_platform_oauth_idp_config" "instance" {
+#   name          = "oidc.google.public"
+#   display_name  = google_iap_client.instance.display_name
+#   issuer        = "google"
+#   client_id     = google_iap_client.instance.client_id
+#   client_secret = google_iap_client.instance.secret
+#   enabled       = true
+# }
+
 # # Creates an Identity Platform config.
 # # Also enables Firebase Authentication with Identity Platform in the project if not.
 # resource "google_identity_platform_config" "auth" {
@@ -66,22 +82,6 @@ resource "google_iap_brand" "instance" {
 #   depends_on = [
 #     google_identity_platform_config.auth
 #   ]
-# }
-
-
-
-# resource "google_iap_client" "instance" {
-#   display_name = "Test Client"
-#   brand        = google_iap_brand.instance.name
-# }
-
-# resource "google_identity_platform_oauth_idp_config" "instance" {
-#   name          = "oidc.google.public"
-#   display_name  = google_iap_client.instance.display_name
-#   issuer        = "google"
-#   client_id     = google_iap_client.instance.client_id
-#   client_secret = google_iap_client.instance.secret
-#   enabled       = true
 # }
 
 # # Initialize firebase project
