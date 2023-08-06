@@ -53,7 +53,7 @@ module "project_owner" {
   gcp_roles           = ["roles/owner"]
   account_email       = var.owner_account_email
   gcp_project_id      = google_project.instance.project_id
-  depends_on          = [google_project.instance]
+  depends_on          = [google_project.instance, module.gcp_apis]
 }
 
 module "project_admin" {
@@ -79,6 +79,7 @@ module "project_admin" {
   ]
   account_email  = var.creator_service_account_email
   gcp_project_id = google_project.instance.project_id
+  depends_on     = [module.gcp_apis]
 }
 
 # # Enable APIs
