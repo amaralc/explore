@@ -23,6 +23,9 @@ module "gcp_project" {
   creator_service_account_email = var.creator_service_account_email
   owner_account_email           = var.owner_account_email
   apis = [
+    "cloudresourcemanager.googleapis.com",
+    "serviceusage.googleapis.com",
+    "artifactregistry.googleapis.com",
     "compute.googleapis.com",
     "servicenetworking.googleapis.com",
     "sqladmin.googleapis.com",
