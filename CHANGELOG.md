@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.6](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.5...peerlab@0.43.3-beta.6) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** ci - use google beta ([5803b1b](https://github.com/amaralc/peerlab/commit/5803b1b55ab7bf0d64e522d2c3782d3f77e555f1))
+
 ## [0.43.3-beta.5](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.4...peerlab@0.43.3-beta.5) (2023-08-06)
 
 ### Features
