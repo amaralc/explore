@@ -78,7 +78,7 @@ module "postgresql_dbms" {
 }
 
 output "postgresql_dbms_instance_id" {
-  value = module.postgresql_dbms[0] ? module.postgresql_dbms[0].gcp_sql_dbms_instance_id : null
+  value = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].gcp_sql_dbms_instance_id : null
 }
 
 module "mongodb_dbms" {
@@ -152,7 +152,7 @@ module "core-platform-shell-browser-vite" {
 }
 
 output "core_platform_shell_browser_vite_vercel_project_id" {
-  value = local.is_production_environment ? module.core-platform-shell-browser-vite[0].vercel_project_id : null
+  value = local.is_production_environment && length(module.core-platform-shell-browser-vite) > 0 ? module.core-platform-shell-browser-vite[0].vercel_project_id : null
 }
 
 # Documentation with Docusaurus
@@ -178,7 +178,7 @@ module "dx-dev-docs-browser" {
 }
 
 output "dx_dev_docs_browser_vercel_project_id" {
-  value = local.is_production_environment ? module.dx-dev-docs-browser[0].vercel_project_id : null
+  value = local.is_production_environment && length(module.dx-dev-docs-browser) > 0 ? module.dx-dev-docs-browser[0].vercel_project_id : null
 }
 
 # Nx Graph
@@ -201,5 +201,5 @@ module "core-root-shell-graph" {
 }
 
 output "core_root_shell_graph_vercel_project_id" {
-  value = local.is_production_environment ? module.core-root-shell-graph[0].vercel_project_id : null
+  value = local.is_production_environment && length(module.core-root-shell-graph) > 0 ? module.core-root-shell-graph[0].vercel_project_id : null
 }
