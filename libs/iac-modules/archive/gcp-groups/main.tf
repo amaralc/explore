@@ -4,6 +4,29 @@
 # # - https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/README.md
 # # - https://cloud.google.com/identity/docs/how-to/setup#assigning_an_admin_role_to_the_service_account
 
+# locals {
+#   domain = "mydomain.com"
+#   types  = ["default"]
+#   label_keys = {
+#     "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
+#     "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
+#     "security" = "cloudidentity.googleapis.com/groups.security"
+#     "external" = "system/groups/external"
+#     # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
+#     # Not supported by provider yet.
+#     "posix" = "cloudidentity.googleapis.com/groups.posix"
+#   }
+# }
+
+# data "google_organization" "org" {
+#   count  = local.domain != "" ? 1 : 0
+#   domain = local.domain
+# }
+
+# locals {
+#   customer_id = data.google_organization.org[0].directory_customer_id
+# }
+
 # # Creates an identity group (https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/README.md)
 # module "group" {
 #   source  = "terraform-google-modules/group/google"
