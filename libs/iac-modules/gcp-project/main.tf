@@ -3,6 +3,12 @@ resource "random_id" "instance" {
   byte_length = 8
 }
 
+resource "null_resource" "log_random_id" {
+  provisioner "local-exec" {
+    command = "echo ${random_id.instance.hex}"
+  }
+}
+
 # The null_resource with lifecycle block and ignore_changes argument is used to ensure that the random ID does not change in subsequent runs.
 resource "null_resource" "ignore_id_changes" {
   triggers = {
