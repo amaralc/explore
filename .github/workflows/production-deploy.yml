@@ -347,7 +347,6 @@ jobs:
 
       - name: Initialize gcloud CLI
         run: |
-          gcloud init --quiet
           ./google-cloud-sdk/bin/gcloud init --quiet
 
       # - name: "Set up Cloud SDK"
