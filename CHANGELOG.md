@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.13](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.12...peerlab@0.43.3-beta.13) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** remove --quiet flag ([6a6d31d](https://github.com/amaralc/peerlab/commit/6a6d31dc7a650b486abc02e08c648bf2493dcf15))
+
 ## [0.43.3-beta.12](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.11...peerlab@0.43.3-beta.12) (2023-08-06)
 
 ### Bug Fixes
