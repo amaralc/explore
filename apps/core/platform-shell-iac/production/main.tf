@@ -35,7 +35,7 @@ module "core_platform_shell_iac_apis" {
 # Production Environment
 module "production" {
   source                              = "../../../../libs/iac-modules/environment"
-  count                               = 1 # Disabled
+  count                               = 1 # Enabled
   branch_name                         = "production"
   short_commit_sha                    = var.short_commit_sha
   gcp_project_id                      = var.gcp_project_id
