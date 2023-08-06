@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.21](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.20...peerlab@0.43.3-beta.21) (2023-08-06)
+
+### Features
+
+- **PEER-567:** add brand ([8d1e794](https://github.com/amaralc/peerlab/commit/8d1e794d27d3037c9a0eb541224a4cba8e7d1540))
+- **PEER-567:** add google idp to client ([534dad0](https://github.com/amaralc/peerlab/commit/534dad09af98e51ccefc2dc42a00035c37fc2a3c))
+- **PEER-567:** add iap client ([e1aa3d1](https://github.com/amaralc/peerlab/commit/e1aa3d16b2567e3030de43991d260176a7a1fd74))
+- **PEER-567:** auth - add microsoft sign-in ([d68f5c9](https://github.com/amaralc/peerlab/commit/d68f5c93a6356be2091206dfe87ebc3446d47ee9))
+- **PEER-567:** configure open id connect to client ([e11c5c7](https://github.com/amaralc/peerlab/commit/e11c5c703b0d863466d5be51746cd8e2356b9a17))
+
 ## [0.43.3-beta.20](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.19...peerlab@0.43.3-beta.20) (2023-08-06)
 
 ### Features
