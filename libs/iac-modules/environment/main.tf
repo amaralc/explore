@@ -14,7 +14,7 @@ locals {
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
 module "gcp_project" {
   source                        = "../gcp-project"
-  count                         = local.is_production_environment ? 0 : 0 # For now, we wont use child projects in order to avoid billing account issues
+  count                         = local.is_production_environment ? 1 : 0 # Enable project creation for production environments only
   is_production_environment     = local.is_production_environment
   gcp_billing_account_id        = var.gcp_billing_account_id
   gcp_organization_id           = var.gcp_organization_id
@@ -22,19 +22,6 @@ module "gcp_project" {
   environment_name              = local.short_environment_name
   creator_service_account_email = var.creator_service_account_email
   owner_account_email           = var.owner_account_email
-}
-
-
-# Define which project ID to use
-locals {
-  project_id = var.gcp_project_id # local.is_production_environment ? var.gcp_project_id : module.gcp_project[0].project_id # For now, we wont use child projects in order to avoid billing account issues
-}
-
-# Enable APIs
-module "gcp_apis" {
-  source         = "../gcp-apis"                           # path to the module
-  count          = local.is_production_environment ? 0 : 0 # Since we are not using child projects, we need to enable APIs only in the production environment
-  gcp_project_id = local.project_id
   apis = [
     "compute.googleapis.com",
     "servicenetworking.googleapis.com",
@@ -51,6 +38,11 @@ module "gcp_apis" {
     "iap.googleapis.com",             # Enable Google Identity Aware Proxy (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/identity_platform_oauth_idp_config)
     # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
+}
+
+# Define which project ID to use
+locals {
+  project_id = var.gcp_project_id # local.is_production_environment ? var.gcp_project_id : module.gcp_project[0].project_id # For now, we wont use child projects in order to avoid billing account issues
 }
 
 locals {

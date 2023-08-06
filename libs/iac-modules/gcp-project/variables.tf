@@ -36,3 +36,8 @@ variable "gcp_organization_id" {
   type        = string
   sensitive   = true
 }
+
+variable "apis" {
+  description = "The list of APIs to enable"
+  type        = list(string)
+}

@@ -21,7 +21,7 @@ locals {
 }
 
 # Create a project in the GCP organization if the environment is a preview environment
-resource "google_project" "project" {
+resource "google_project" "instance" {
   project_id      = local.project_id
   name            = local.project_id
   org_id          = var.gcp_organization_id
@@ -35,22 +35,30 @@ resource "google_project" "project" {
 }
 
 output "project_id" {
-  value = var.is_production_environment ? null : google_project.project.project_id
+  value = google_project.instance.project_id
+}
+
+# Enable APIs
+module "gcp_apis" {
+  source         = "../gcp-apis"    # Path to the module
+  gcp_project_id = local.project_id # The ID of the project to enable APIs
+  apis           = var.apis         # The list of APIs to enable
+  depends_on     = [google_project.instance]
 }
 
 module "project_owner" {
-  count               = var.is_production_environment ? 0 : 1
   source              = "../gcp-account-permissions"
+  count               = var.is_production_environment ? 1 : 1
   account_member_type = "user"
   gcp_roles           = ["roles/owner"]
   account_email       = var.owner_account_email
-  gcp_project_id      = google_project.project.project_id
-  depends_on          = [google_project.project]
+  gcp_project_id      = google_project.instance.project_id
+  depends_on          = [google_project.instance]
 }
 
 module "project_admin" {
-  count               = var.is_production_environment ? 0 : 1
   source              = "../gcp-account-permissions"
+  count               = var.is_production_environment ? 1 : 1
   account_member_type = "serviceAccount"
   gcp_roles = [
     "roles/serviceusage.serviceUsageAdmin",
@@ -70,14 +78,14 @@ module "project_admin" {
     "roles/vpcaccess.admin"
   ]
   account_email  = var.creator_service_account_email
-  gcp_project_id = google_project.project.project_id
+  gcp_project_id = google_project.instance.project_id
 }
 
 # # Enable APIs
 # module "gcp_apis" {
 #   count          = var.is_production_environment ? 0 : 1
 #   source         = "../gcp-apis" // path to the module
-#   gcp_project_id = google_project.project.project_id
+#   gcp_project_id = google_project.instance.project_id
 #   apis = [
 #     "compute.googleapis.com",
 #     "servicenetworking.googleapis.com",
@@ -88,5 +96,5 @@ module "project_admin" {
 #     "run.googleapis.com",
 #     "cloudbilling.googleapis.com"
 #   ]
-#   depends_on = [google_project.project, module.project_admin]
+#   depends_on = [google_project.instance, module.project_admin]
 # }
