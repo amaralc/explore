@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.4](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.3...peerlab@0.43.3-beta.4) (2023-08-06)
+
+### Features
+
+- **PEER-567:** add support account email group ([88825fa](https://github.com/amaralc/peerlab/commit/88825fa08b1f0dbd98e172469b14c65617adc802))
+- **PEER-567:** auth - add owner membership to group ([4b66b25](https://github.com/amaralc/peerlab/commit/4b66b258212240aa53193d9d91b20d490a082b63))
+- **peer-567:** auth - config auth0 ([94af5fc](https://github.com/amaralc/peerlab/commit/94af5fca6e27f96ed14a3d93d63c3d7d96731d40))
+- **PEER-567:** create support group ([63765c0](https://github.com/amaralc/peerlab/commit/63765c0dffa4a193f65e71c2241af3505c8462cb))
+
+### Bug Fixes
+
+- **ci:** check branch ([71df9f9](https://github.com/amaralc/peerlab/commit/71df9f95ab4a1a3be11a362fca4952cc966f856d))
+- **PEER-567:** add debug ([f6b6cce](https://github.com/amaralc/peerlab/commit/f6b6cce07463e338bc3299be9b8f42a8d24a86aa))
+- **PEER-567:** auth - call resource using array syntax ([01ea160](https://github.com/amaralc/peerlab/commit/01ea16005b0da2d3d673b7f50ef35a34b6a9ea45))
+- **PEER-567:** auth - remove firebase project ([7444423](https://github.com/amaralc/peerlab/commit/7444423421a9fa2fe86b06289201c89840e24981))
+- **PEER-567:** auth - remove unused variable ([ffe9832](https://github.com/amaralc/peerlab/commit/ffe9832626f41e2732f10ae2428896567de58c83))
+- **PEER-567:** auth - use tf variables ([def6d73](https://github.com/amaralc/peerlab/commit/def6d735f9e95fda6accc7f41101928b16a732f6))
+- **PEER-567:** disable services and cleanup ([7d203ed](https://github.com/amaralc/peerlab/commit/7d203edb0868c4e439dd53a6a6d88a0dc4bf2ed4))
+- **PEER-567:** remove need for customer id ([46db09d](https://github.com/amaralc/peerlab/commit/46db09dbc2bfc22f7578c1f29893e037953fd9fc))
+
 ## [0.43.3-beta.3](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.2...peerlab@0.43.3-beta.3) (2023-08-05)
 
 ### Bug Fixes
