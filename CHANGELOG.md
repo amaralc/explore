@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.9](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.8...peerlab@0.43.3-beta.9) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** rename project ([8e541bc](https://github.com/amaralc/peerlab/commit/8e541bcf134d4656d453b5d13d350ea18ad4f1f2))
+
 ## [0.43.3-beta.8](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.7...peerlab@0.43.3-beta.8) (2023-08-06)
 
 ### Bug Fixes
