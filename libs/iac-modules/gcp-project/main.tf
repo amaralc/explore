@@ -1,16 +1,17 @@
 # Generate a random ID with the random_id resource. This ID will be used as prefix to create a unique project ID for the new GCP project.
 resource "random_id" "instance" {
+  prefix      = "${var.environment_name}-"
   byte_length = 8
 }
 
 resource "null_resource" "log_random_id" {
   provisioner "local-exec" {
-    command = "echo ${random_id.instance.hex}"
+    command = "echo 'Env: ' ${random_id.instance.hex}"
   }
 }
 
 locals {
-  project_id = "${substr("${var.environment_name}", 0, 25)}-${substr(random_id.instance.hex, 0, 4)}" # Name cannot have more than 30 characters
+  project_id = substr(random_id.instance.hex, 0, 30) # Name cannot have more than 30 characters
 }
 
 # Create a project in the GCP organization if the environment is a preview environment
