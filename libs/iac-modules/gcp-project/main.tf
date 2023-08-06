@@ -6,12 +6,13 @@ resource "random_id" "instance" {
 # The null_resource with lifecycle block and ignore_changes argument is used to ensure that the random ID does not change in subsequent runs.
 resource "null_resource" "ignore_id_changes" {
   triggers = {
-    id = random_id.instance.hex
+    id               = random_id.instance.hex
+    environment_name = var.environment_name
   }
 
   lifecycle {
     ignore_changes = [
-      triggers,
+      triggers.id,
     ]
   }
 }
