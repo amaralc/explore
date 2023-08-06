@@ -14,7 +14,7 @@ locals {
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
 module "gcp_project" {
   source                        = "../gcp-project"
-  count                         = local.is_production_environment ? 1 : 0 # For now, we wont use child projects in order to avoid billing account issues
+  count                         = local.is_production_environment ? 0 : 0 # For now, we wont use child projects in order to avoid billing account issues
   is_production_environment     = local.is_production_environment
   gcp_billing_account_id        = var.gcp_billing_account_id
   gcp_organization_id           = var.gcp_organization_id
@@ -86,7 +86,7 @@ module "postgresql_dbms" {
 }
 
 output "postgresql_dbms_instance_id" {
-  value = module.postgresql_dbms[0].gcp_sql_dbms_instance_id
+  value = module.postgresql_dbms[0] ? module.postgresql_dbms[0].gcp_sql_dbms_instance_id : null
 }
 
 module "mongodb_dbms" {
