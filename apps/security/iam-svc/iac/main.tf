@@ -1,19 +1,19 @@
 locals {
-  service_name          = "security-iam-svc"
-  domain                = "amaralc.com"
-  support_account_email = "support@${local.domain}"
-  # service_account_credentials = jsondecode(file("credentials.json"))
-  # service_account_email       = local.service_account_credentials.client_email
-  # types                       = ["default"]
-  # label_keys = {
-  #   "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
-  #   "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
-  #   "security" = "cloudidentity.googleapis.com/groups.security"
-  #   "external" = "system/groups/external"
-  #   # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
-  #   # Not supported by provider yet.
-  #   "posix" = "cloudidentity.googleapis.com/groups.posix"
-  # }
+  service_name                = "security-iam-svc"
+  domain                      = "amaralc.com"
+  support_account_email       = "support@${local.domain}"
+  service_account_credentials = jsondecode(file("credentials.json"))
+  service_account_email       = local.service_account_credentials.client_email
+  types                       = ["default"]
+  label_keys = {
+    "default"  = "cloudidentity.googleapis.com/groups.discussion_forum"
+    "dynamic"  = "cloudidentity.googleapis.com/groups.dynamic"
+    "security" = "cloudidentity.googleapis.com/groups.security"
+    "external" = "system/groups/external"
+    # Placeholders according to https://cloud.google.com/identity/docs/groups#group_properties.
+    # Not supported by provider yet.
+    "posix" = "cloudidentity.googleapis.com/groups.posix"
+  }
 }
 
 data "google_organization" "org" {
@@ -116,6 +116,7 @@ resource "google_cloud_identity_group_membership" "owners" {
 # resource "google_firebase_project" "instance" {
 #   project  = var.gcp_project_id
 #   provider = google-beta
+#   depends_on = [# TODO: check if this is needed]
 # }
 
 # module "database_and_access_management" {
