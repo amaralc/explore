@@ -1,8 +1,8 @@
-# module "auth_provider_and_persistence" {
-#   source            = "./auth"
-#   application_title = var.application_title
-#   gcp_project_id    = var.gcp_project_id
-# }
+module "auth_provider_and_persistence" {
+  source            = "./auth"
+  application_title = var.application_title
+  gcp_project_id    = var.gcp_project_id
+}
 
 # module "database_and_access_management" {
 #   source                                = "../../../../libs/iac-modules/service-with-postgresql-access"
