@@ -16,15 +16,15 @@
 #   }
 # }
 
-# locals {
-#   project_id = "${substr("${var.environment_name}", 0, 25)}-${substr(random_id.instance.hex, 0, 4)}" # Name cannot have more than 30 characters
-# }
+locals {
+  project_id = var.environment_name # "${substr("${var.environment_name}", 0, 25)}-${substr(random_id.instance.hex, 0, 4)}" # Name cannot have more than 30 characters
+}
 
 # Create a project in the GCP organization if the environment is a preview environment
 resource "google_project" "instance" {
   provider        = google-beta
-  project_id      = var.environment_name
-  name            = var.environment_name
+  project_id      = local.project_id
+  name            = local.project_id
   org_id          = var.gcp_organization_id
   billing_account = var.gcp_billing_account_id
 
