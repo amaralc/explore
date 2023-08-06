@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.7](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.6...peerlab@0.43.3-beta.7) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** ci - accept default answers when unlinking account ([3e45ff0](https://github.com/amaralc/peerlab/commit/3e45ff075f1fe5fb8b223ec20e0f0175b90c1390))
+
 ## [0.43.3-beta.6](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.5...peerlab@0.43.3-beta.6) (2023-08-06)
 
 ### Bug Fixes
