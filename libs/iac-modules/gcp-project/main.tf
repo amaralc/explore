@@ -1,6 +1,10 @@
 # Generate a random ID with the random_id resource. This ID will be used as prefix to create a unique project ID for the new GCP project.
 resource "random_id" "instance" {
-  prefix      = "${var.environment_name}-"
+  prefix = "${var.environment_name}-"
+  keepers = {
+    # Generate a new id each time we switch to a new environment_name
+    ami_id = var.environment_name
+  }
   byte_length = 8
 }
 
