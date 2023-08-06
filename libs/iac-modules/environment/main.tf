@@ -8,7 +8,7 @@ output "branch_name" {
 }
 
 locals {
-  short_environment_name = local.is_production_environment ? "platform-x-env-production" : "platform-x-${var.environment_name}" # Limit the name to 24 characters
+  short_environment_name = local.is_production_environment ? "production" : "${var.environment_name}" # Limit the name to 24 characters
 }
 
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
