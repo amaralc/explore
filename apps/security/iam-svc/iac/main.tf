@@ -42,6 +42,8 @@ resource "google_identity_platform_config" "auth" {
 
   # For example, you can configure to auto-delete Anonymous users.
   autodelete_anonymous_users = true # TODO: check what this means
+
+  depends_on = [google_iap_brand.instance]
 }
 
 # Adds more configurations, like for the email/password sign-in provider.
@@ -64,8 +66,7 @@ resource "google_identity_platform_project_default_config" "auth" {
 
   # Wait for Authentication to be initialized before enabling email/password.
   depends_on = [
-    google_identity_platform_config.auth,
-    google_iap_brand.instance
+    google_identity_platform_config.auth
   ]
 }
 
