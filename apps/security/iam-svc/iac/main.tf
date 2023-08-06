@@ -1,49 +1,5 @@
 locals {
-  service_name = "security-iam-svc"
-}
-
-# Initialize firebase project
-resource "google_firebase_project" "instance" {
-  project  = var.gcp_project_id
-  provider = google-beta
-}
-
-# # Creates an Identity Platform config.
-# # Also enables Firebase Authentication with Identity Platform in the project if not.
-# resource "google_identity_platform_config" "auth" {
-#   provider = google-beta
-#   project  = var.gcp_project_id
-
-#   # For example, you can configure to auto-delete Anonymous users.
-#   autodelete_anonymous_users = true # TODO: check what this means
-# }
-
-# # Adds more configurations, like for the email/password sign-in provider.
-# resource "google_identity_platform_project_default_config" "auth" {
-#   provider = google-beta
-#   project  = var.gcp_project_id
-
-#   sign_in {
-#     allow_duplicate_emails = false
-
-#     anonymous {
-#       enabled = true # TODO: check what this means
-#     }
-
-#     email {
-#       enabled           = true
-#       password_required = false
-#     }
-#   }
-
-#   # Wait for Authentication to be initialized before enabling email/password.
-#   depends_on = [
-#     google_identity_platform_config.auth
-#   ]
-# }
-
-
-locals {
+  service_name          = "security-iam-svc"
   domain                = "amaralc.com"
   support_account_email = "support@${local.domain}"
   # service_account_credentials = jsondecode(file("credentials.json"))
@@ -60,14 +16,48 @@ locals {
   # }
 }
 
-# data "google_organization" "org" {
-#   count  = local.domain != "" ? 1 : 0
-#   domain = local.domain
-# }
+data "google_organization" "org" {
+  count  = local.domain != "" ? 1 : 0
+  domain = local.domain
+}
 
-# locals {
-#   customer_id = data.google_organization.org[0].directory_customer_id
-# }
+locals {
+  customer_id = data.google_organization.org[0].directory_customer_id
+}
+
+# Creates an Identity Platform config.
+# Also enables Firebase Authentication with Identity Platform in the project if not.
+resource "google_identity_platform_config" "auth" {
+  provider = google-beta
+  project  = var.gcp_project_id
+
+  # For example, you can configure to auto-delete Anonymous users.
+  autodelete_anonymous_users = true # TODO: check what this means
+}
+
+# Adds more configurations, like for the email/password sign-in provider.
+resource "google_identity_platform_project_default_config" "auth" {
+  provider = google-beta
+  project  = var.gcp_project_id
+
+  sign_in {
+    allow_duplicate_emails = false
+
+    anonymous {
+      enabled = true # TODO: check what this means
+    }
+
+    email {
+      enabled           = true
+      password_required = false
+    }
+  }
+
+  # Wait for Authentication to be initialized before enabling email/password.
+  depends_on = [
+    google_identity_platform_config.auth
+  ]
+}
 
 
 # # Creates an identity group (https://github.com/terraform-google-modules/terraform-google-group/blob/v0.6.0/main.tf)
@@ -120,6 +110,12 @@ locals {
 #   client_id     = google_iap_client.instance.client_id
 #   client_secret = google_iap_client.instance.secret
 #   enabled       = true
+# }
+
+# # Initialize firebase project
+# resource "google_firebase_project" "instance" {
+#   project  = var.gcp_project_id
+#   provider = google-beta
 # }
 
 # module "database_and_access_management" {

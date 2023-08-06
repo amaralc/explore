@@ -95,9 +95,9 @@ module "mongodb_dbms" {
 # Identity and Access Management (IAM) Service
 module "security-iam-svc" {
   source            = "../../../apps/security/iam-svc/iac"
-  count             = local.is_production_environment ? 0 : 0 # Enabled in production environments only
+  count             = local.is_production_environment ? 1 : 0 # Enabled in production environments only
   gcp_project_id    = local.project_id
-  application_title = local.is_production_environment ? "core-platform-shell-iac-consent" : "core-platform-shell-iac-consent-preview ${local.short_environment_name}"
+  application_title = local.is_production_environment ? "Peerlab AC" : "Peerlab AC Preview ${local.short_environment_name}"
   depends_on        = [module.gcp_project]
 }
 

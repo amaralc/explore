@@ -26,6 +26,11 @@ resource "google_project" "instance" {
   org_id          = var.gcp_organization_id
   billing_account = var.gcp_billing_account_id
 
+  # Required for the project to display in any list of Firebase projects (https://firebase.google.com/docs/projects/terraform/get-started)
+  labels = {
+    "firebase" = "enabled"
+  }
+
   # Remove project from billing account after it is destroyed. TODO: Unlink projects manually for now
   provisioner "local-exec" {
     when    = destroy
