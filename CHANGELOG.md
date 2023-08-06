@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.8](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.7...peerlab@0.43.3-beta.8) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-567:** ci - remove local-exec and make operation manually ([4400d82](https://github.com/amaralc/peerlab/commit/4400d826b6ad29b74a85c4c67afc3ee90ea4d40d))
+- **PEER-579:** ci - use gcloud cli 441.0.0 ([62df674](https://github.com/amaralc/peerlab/commit/62df674f215de22bc98ab7de036cdb09ea533bf2))
+
 ## [0.43.3-beta.7](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.6...peerlab@0.43.3-beta.7) (2023-08-06)
 
 ### Bug Fixes
