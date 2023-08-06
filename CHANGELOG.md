@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.19](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.18...peerlab@0.43.3-beta.19) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** generate new ids ([6bd223d](https://github.com/amaralc/peerlab/commit/6bd223db1bc638ea2de784d8b85354c9a3dd0a7d))
+
 ## [0.43.3-beta.18](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.17...peerlab@0.43.3-beta.18) (2023-08-06)
 
 **Note:** Version bump only for package peerlab
