@@ -7,6 +7,31 @@ locals {
   service_account_email = local.credentials.client_email
 }
 
+module "core_platform_shell_iac_apis" {
+  source         = "../../../../libs/iac-modules/gcp-apis"
+  gcp_project_id = var.gcp_project_id
+  apis = [
+    "cloudresourcemanager.googleapis.com",
+    "serviceusage.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "compute.googleapis.com",
+    "servicenetworking.googleapis.com",
+    "sqladmin.googleapis.com",
+    "iam.googleapis.com",
+    "secretmanager.googleapis.com",
+    "vpcaccess.googleapis.com",
+    "run.googleapis.com",
+    "cloudbilling.googleapis.com",
+    "firebase.googleapis.com",
+    "serviceusage.googleapis.com",    # https://firebase.google.com/docs/projects/terraform/get-started
+    "identitytoolkit.googleapis.com", # Enable Firebase Identity Toolkit (https://firebase.google.com/docs/projects/terraform/get-started#tf-sample-auth)
+    "cloudidentity.googleapis.com",   # Enable Google Identity Platform (https://stackoverflow.com/questions/70317379/how-to-configure-google-identity-platform-with-cli-sdk)
+    "iap.googleapis.com",             # Enable Google Identity Aware Proxy (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/identity_platform_oauth_idp_config)
+    # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
+  ]
+
+}
+
 # Production Environment
 module "production" {
   source                              = "../../../../libs/iac-modules/environment"
@@ -21,4 +46,5 @@ module "production" {
   support_account_email               = var.support_account_email
   creator_service_account_email       = local.service_account_email
   owner_account_email                 = var.owner_account_email
+  depends_on                          = [module.core_platform_shell_iac_apis]
 }
