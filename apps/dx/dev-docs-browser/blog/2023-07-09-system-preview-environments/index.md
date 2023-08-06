@@ -309,3 +309,4 @@ Finally, the adoption of the Nx build system, has been instrumental in our devel
 - Google Cloud. (n.d.). Terraform Registry, Terraform Registry. Retrieved July 9, 2023, from https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance
 - Google Cloud. (2021, August 19). Dev, test, and production environments with Google Serverless #shorts, YouTube. Retrieved July 9, 2023, from https://www.youtube.com/shorts/T5xJTPOMfe8
 - Google Cloud. (2023). Clone instances | Cloud SQL for PostgreSQL | Google Cloud, Google Cloud. Retrieved July 9, 2023, from https://cloud.google.com/sql/docs/postgres/clone-instance
+- Overview of environments | Firebase Documentation. (2023). Firebase. Retrieved August 6, 2023, from https://firebase.google.com/docs/projects/dev-workflows/overview-environments
