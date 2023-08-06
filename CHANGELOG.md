@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.3-beta.11](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.10...peerlab@0.43.3-beta.11) (2023-08-06)
+
+### Bug Fixes
+
+- **PEER-579:** install gcloud cli without gh action ([96b319b](https://github.com/amaralc/peerlab/commit/96b319b4e9b7a82ac34c3a3ab5f238ca4c55cdc7))
+- **PEER-579:** unlink projects manually ([3df529d](https://github.com/amaralc/peerlab/commit/3df529d19c80d6d130b37d1d6de05aac9141a763))
+
 ## [0.43.3-beta.10](https://github.com/amaralc/peerlab/compare/peerlab@0.43.3-beta.9...peerlab@0.43.3-beta.10) (2023-08-06)
 
 ### Bug Fixes
