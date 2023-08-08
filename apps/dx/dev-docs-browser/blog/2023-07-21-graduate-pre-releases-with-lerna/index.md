@@ -47,3 +47,5 @@ The `my-app@0.37.4#production` tag is the production tag.
 - UNPKG - @lerna/version. (n.d.). UNPKG - @lerna/Version. Retrieved from https://unpkg.com/browse/@lerna/version@6.6.2/README.md
 - Try Bard, an AI experiment by Google. (n.d.). Try Bard, an AI Experiment by Google. Retrieved from https://bard.google.com
 - Khandelwal, S. (2021). Lerna from a DevOps point of view, Lerna from a DevOps Point of View. Retrieved August 7, 2023, from https://www.linkedin.com/pulse/lerna-from-devops-point-view-shishir-khandelwal
+- Can Lerna bump prerelease version according to the Conventional Commits specification? (2020, April 10). Stack Overflow. Retrieved from https://stackoverflow.com/questions/61144530/can-lerna-bump-prerelease-version-according-to-the-conventional-commits-specific
+- lerna. (2018, May 22). Correct way to use conventional-commits and canary / prerelease · Issue #1433 · lerna/lerna, GitHub. Retrieved from https://github.com/lerna/lerna/issues/1433
