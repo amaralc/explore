@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@1.0.0...peerlab@1.1.0-beta.0) (2023-08-08)
+
+### Features
+
+- **PEER-579:** ci - add conventional prerelease ([98d4138](https://github.com/amaralc/peerlab/commit/98d413852258e22a89369ff3774cd55fccda4011))
+- **PEER-579:** ci - add lerna reference ([3cbc8d8](https://github.com/amaralc/peerlab/commit/3cbc8d89b81e3bc1f8e9661b6455106af6fb83c8))
+
 ## [1.0.0](https://github.com/amaralc/peerlab/compare/peerlab@0.44.0...peerlab@1.0.0) (2023-08-08)
 
 ### ⚠ BREAKING CHANGES
