@@ -15,6 +15,18 @@ lerna version prerelease --preid beta
 
 The tag `my-app@0.37.4-beta.0` will be created and pushed to your repository.
 
+:::info
+
+Remember that this approach do not take into consideration weather the commit messages follow the conventional commits specification or not, so the first prerelease after a production release will always bump the patch version no matter if previous commits indicate that a new feature was added.
+
+If you want your prerelease to be bumped according to the conventional commits specification, you can use the --conventional-prerelease flag instead as pointed out by Mizo [(Mizo, 2020)](https://github.com/lerna/lerna/issues/1433#issuecomment-623413942).
+
+`lerna version --conventional-prerelease --preid beta`
+
+According to Khandelwal, other strategies using preminor, premajor are also possible [(Khandelwal, 2021)](https://www.linkedin.com/pulse/lerna-from-devops-point-view-shishir-khandelwal).
+
+:::
+
 After that, if you run the following command:
 
 ```bash
@@ -48,4 +60,4 @@ The `my-app@0.37.4#production` tag is the production tag.
 - Try Bard, an AI experiment by Google. (n.d.). Try Bard, an AI Experiment by Google. Retrieved from https://bard.google.com
 - Khandelwal, S. (2021). Lerna from a DevOps point of view, Lerna from a DevOps Point of View. Retrieved August 7, 2023, from https://www.linkedin.com/pulse/lerna-from-devops-point-view-shishir-khandelwal
 - Can Lerna bump prerelease version according to the Conventional Commits specification? (2020, April 10). Stack Overflow. Retrieved from https://stackoverflow.com/questions/61144530/can-lerna-bump-prerelease-version-according-to-the-conventional-commits-specific
-- lerna. (2018, May 22). Correct way to use conventional-commits and canary / prerelease · Issue #1433 · lerna/lerna, GitHub. Retrieved from https://github.com/lerna/lerna/issues/1433
+- lerna. (2018, May 22). Correct way to use conventional-commits and canary / prerelease · Issue #1433 · lerna/lerna, GitHub. Retrieved from https://github.com/lerna/lerna/issues/1433#issuecomment-623413942
