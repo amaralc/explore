@@ -136,7 +136,7 @@ module "researchers-peers" {
 # Nx Graph
 module "core-platform-shell-browser-vite" {
   source                           = "../environment-vercel"
-  count                            = local.is_production_environment ? 0 : 0 # Disable module
+  count                            = local.is_production_environment ? 1 : 0 # Disable module
   project_name                     = "core-platform-shell-browser-vite"
   framework                        = "vite"
   git_provider                     = "github"
