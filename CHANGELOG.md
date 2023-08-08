@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.0](https://github.com/amaralc/peerlab/compare/peerlab@0.43.5-beta.0...peerlab@0.44.0) (2023-08-08)
+
+### Features
+
+- **PEER-567:** auth - enable shell app ([b55f7e5](https://github.com/amaralc/peerlab/commit/b55f7e5e47730d35a2ca866bb5e3506ae5a25284))
+
 ## [0.43.5-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.43.4...peerlab@0.43.5-beta.0) (2023-08-06)
 
 ### Features
