@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/amaralc/peerlab/compare/peerlab@1.1.0...peerlab@1.2.0) (2023-08-08)
+
+### Features
+
+- **PEER-579:** ci - enable frontend projects ([81e6743](https://github.com/amaralc/peerlab/commit/81e67434a5dd5662513bef38fadb0e8f31598b16))
+- **PEER-579:** docs - enhance docs ([c16bc9d](https://github.com/amaralc/peerlab/commit/c16bc9dffc4e8c9e6d1f3c7e51a3b0d7fb3ef7de))
+
 ## [1.1.0](https://github.com/amaralc/peerlab/compare/peerlab@1.1.0-beta.1...peerlab@1.1.0) (2023-08-08)
 
 **Note:** Version bump only for package peerlab
