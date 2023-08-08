@@ -161,7 +161,7 @@ output "core_platform_shell_browser_vite_vercel_project_id" {
 # Documentation with Docusaurus
 module "dx-dev-docs-browser" {
   source                           = "../environment-vercel"
-  count                            = local.is_production_environment ? 0 : 0 # Disable module
+  count                            = local.is_production_environment ? 1 : 0 # Disable module
   project_name                     = "dx-dev-docs-browser"
   framework                        = null # https://vercel.com/docs/rest-api/endpoints#create-a-new-project
   git_provider                     = "github"
@@ -187,7 +187,7 @@ output "dx_dev_docs_browser_vercel_project_id" {
 # Nx Graph
 module "core-root-shell-graph" {
   source                           = "../environment-vercel"
-  count                            = local.is_production_environment ? 0 : 0 # Disable module
+  count                            = local.is_production_environment ? 1 : 0 # Disable module
   project_name                     = "core-root-shell-graph"
   framework                        = null
   git_provider                     = "github"
