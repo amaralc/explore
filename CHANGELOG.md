@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/amaralc/peerlab/compare/peerlab@0.44.0...peerlab@1.0.0) (2023-08-08)
+
+### ⚠ BREAKING CHANGES
+
+- **PEER-567:** force bump to 1.0.0
+
+### config
+
+- **PEER-567:** force bump to 1.0.0 ([966dda6](https://github.com/amaralc/peerlab/commit/966dda62eb0d997ddd45a6a7a6dfadcdb2352d81))
+
 ## [0.44.0](https://github.com/amaralc/peerlab/compare/peerlab@0.43.5-beta.0...peerlab@0.44.0) (2023-08-08)
 
 ### Features
