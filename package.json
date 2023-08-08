@@ -13,6 +13,7 @@
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "prerelease": "lerna version prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "prerelease:no-push": "lerna version prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
+    "conventional-prerelease:no-push": "lerna version --conventional-prerelease --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "preminor": "lerna version preminor --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "preminor:no-push": "lerna version preminor --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
     "premajor": "lerna version premajor --preid beta --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
