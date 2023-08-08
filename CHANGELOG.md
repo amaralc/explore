@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@1.2.0...peerlab@1.3.0-beta.0) (2023-08-08)
+
+### Features
+
+- **PEER-567:** auth - add firebase to project ([38d399e](https://github.com/amaralc/peerlab/commit/38d399ee4554227bfdcc2887c0a427a84736390a))
+
 ## [1.2.0](https://github.com/amaralc/peerlab/compare/peerlab@1.1.0...peerlab@1.2.0) (2023-08-08)
 
 ### Features
