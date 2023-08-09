@@ -4,3 +4,6 @@
 [submodule "modules/peerlab-platform-ts-api-mvp-dev"]
 	path = modules/peerlab-platform-ts-api-mvp-dev
 	url = git@github.com:peerlab-devs/peerlab-platform-ts-api-mvp-dev.git
+[submodule "modules/peerlab-fe-dev"]
+	path = modules/peerlab-fe-dev
+	url = git@github.com:dev-peerlab/peerlab-fe-dev.git
