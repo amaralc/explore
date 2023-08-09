@@ -12,11 +12,35 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'github.com',
+      },
+      {
+        hostname: 'avatars.githubusercontent.com',
+      },
+    ],
+    domains: ['github.com', 'avatars.githubusercontent.com'],
+  },
 };
 
+// @ts-ignore: Add types for nextra
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.tsx',
+  unstable_flexsearch: true,
+  unstable_staticImage: true,
+  // options
+  flexsearch: true,
+  staticImage: true,
+  defaultShowCopyCode: true,
+});
+
 const plugins = [
-  // Add more Next.js plugins to this list if needed.
+  withNextra,
   withNx,
+  // Add more Next.js plugins to this list if needed.
 ];
 
 module.exports = composePlugins(...plugins)(nextConfig);
