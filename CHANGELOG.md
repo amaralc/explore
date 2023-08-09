@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/amaralc/peerlab/compare/peerlab@1.3.0...peerlab@1.4.0) (2023-08-09)
+
+### Features
+
+- **PEER-581:** experiment with cobe project ([c631e44](https://github.com/amaralc/peerlab/commit/c631e44f798728bd86e2961eafb44ef6f95b7f38))
+
+### Reverts
+
+- Revert "chore: remove nextra docs" ([eac06a7](https://github.com/amaralc/peerlab/commit/eac06a7aec0b006da0fa376e6e3663659d416751))
+
 ## [1.3.0](https://github.com/amaralc/peerlab/compare/peerlab@1.3.0-beta.0...peerlab@1.3.0) (2023-08-09)
 
 ### Features
