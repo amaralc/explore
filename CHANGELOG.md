@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/amaralc/peerlab/compare/peerlab@1.3.0-beta.0...peerlab@1.3.0) (2023-08-09)
+
+### Features
+
+- **PEER-581:** mkt - add vercel deployment ([330d2c2](https://github.com/amaralc/peerlab/commit/330d2c24fe0369f2b414da0d2eaa6bba7ec48a19))
+- **PEER-581:** mkt - bootstrap basic website ([cb47fec](https://github.com/amaralc/peerlab/commit/cb47fecd3cdea042016395468304faba5f59c7a9))
+
 ## [1.3.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@1.2.0...peerlab@1.3.0-beta.0) (2023-08-08)
 
 ### Features
