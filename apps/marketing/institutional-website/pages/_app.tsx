@@ -1,16 +1,19 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import '../styles.css';
+import './styles.css';
 
 function CustomApp({ Component, pageProps }: AppProps) {
-  return (
+  const getLayout = Component.getLayout || ((page) => page);
+  return getLayout(
     <>
       <Head>
-        <title>Welcome to docs!</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=optional"
+          rel="stylesheet"
+          type="text/css"
+        />
       </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
+      <Component {...pageProps} />
     </>
   );
 }
