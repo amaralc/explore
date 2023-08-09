@@ -94,6 +94,12 @@ variable "production_environment_core_platform_shell_browser_vite_vercel_project
   default     = null
 }
 
+variable "production_environment_marketing_institutional_website_vercel_project_id" {
+  description = "The Vercel project ID of the marketing-institutional-website in the production environment"
+  type        = string
+  default     = null
+}
+
 variable "mongodb_atlas_org_id" {
   description = "The ID of the MongoDB Atlas organization"
   type        = string
