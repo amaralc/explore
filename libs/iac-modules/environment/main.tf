@@ -187,7 +187,7 @@ output "dx_dev_docs_browser_vercel_project_id" {
 # Nx Graph
 module "core-root-shell-graph" {
   source                           = "../environment-vercel"
-  count                            = local.is_production_environment ? 1 : 0 # Disable module
+  count                            = local.is_production_environment ? 0 : 0 # Disable module
   project_name                     = "core-root-shell-graph"
   framework                        = null
   git_provider                     = "github"
@@ -225,7 +225,7 @@ module "marketing-institutional-website" {
   preview_environment_variables    = local.is_production_environment ? null : null                                                   # Map of string key and values
   production_environment_variables = local.is_production_environment ? null : null                                                   # Set of objects with key, value and target (production, preview, development)
   source_environment_project_id    = var.production_environment_marketing_institutional_website_vercel_project_id
-  depends_on                       = []
+  depends_on                       = [module.core-root-shell-graph]
 }
 
 output "marketing_institutional_website_vercel_project_id" {
