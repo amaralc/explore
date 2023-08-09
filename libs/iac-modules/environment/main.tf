@@ -229,5 +229,5 @@ module "marketing-institutional-website" {
 }
 
 output "marketing_institutional_website_vercel_project_id" {
-  value = local.is_production_environment && length(module.core-institutional-website) > 0 ? module.core-institutional-website[0].vercel_project_id : null
+  value = local.is_production_environment && length(module.marketing-institutional-website) > 0 ? module.marketing-institutional-website[0].vercel_project_id : null
 }
