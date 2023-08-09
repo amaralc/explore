@@ -1,7 +1,7 @@
 {
-  "name": "dx-docs-nextra",
+  "name": "marketing-institutional-website",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/dx/docs-nextra",
+  "sourceRoot": "apps/marketing/institutional-website",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/dx/docs-nextra"
+        "outputPath": "dist/apps/marketing/institutional-website"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/dx/docs-nextra"
+          "outputPath": "apps/marketing/institutional-website"
         },
         "production": {}
       }
@@ -22,16 +22,16 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "dx-docs-nextra:build",
+        "buildTarget": "marketing-institutional-website:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "dx-docs-nextra:build:development",
+          "buildTarget": "marketing-institutional-website:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "dx-docs-nextra:build:production",
+          "buildTarget": "marketing-institutional-website:build:production",
           "dev": false
         }
       }
@@ -39,14 +39,14 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "dx-docs-nextra:build:production"
+        "buildTarget": "marketing-institutional-website:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/dx/docs-nextra/jest.config.ts",
+        "jestConfig": "apps/marketing/institutional-website/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -60,7 +60,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/dx/docs-nextra/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/marketing/institutional-website/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

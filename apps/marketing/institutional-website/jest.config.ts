@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'dx-docs-nextra',
+  displayName: 'marketing-institutional-website',
   preset: '../../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/apps/dx/docs-nextra',
+  coverageDirectory: '../../../coverage/apps/marketing/institutional-website',
 };
