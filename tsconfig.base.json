@@ -20,7 +20,7 @@
       "@peerlab/researchers/peers/core/*": ["libs/researchers/peers/core/src/*"],
       "@peerlab/root/*": ["./*"],
       "@peerlab/ui/shared/*": ["libs/shared/ui/src/lib/*"],
-      "@peerlab/modules/core-platform-shell-browser-vite/*": ["modules/private-templates/apps/core-platform-shell-browser-vite/src/*"],
+      "@peerlab/modules/core-platform-shell-browser-vite/*": ["modules/private-templates/apps/core/platform-shell-browser-vite/src/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]
