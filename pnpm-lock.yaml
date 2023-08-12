@@ -41,6 +41,9 @@ dependencies:
   '@emotion/styled':
     specifier: 11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.14)(react@18.2.0)
+  '@firebase/auth':
+    specifier: ^1.1.0
+    version: 1.1.0(@firebase/app@0.9.15)(react-native@0.72.3)
   '@fontsource/inter':
     specifier: 5.0.4
     version: 5.0.4
@@ -128,6 +131,9 @@ dependencies:
   '@swc/helpers':
     specifier: 0.5.0
     version: 0.5.0
+  '@types/prop-types':
+    specifier: ^15.7.5
+    version: 15.7.5
   '@unleash/proxy-client-react':
     specifier: ^3.6.0
     version: 3.6.0(unleash-proxy-client@2.5.0)
@@ -299,6 +305,9 @@ dependencies:
   rxjs:
     specifier: 7.2.0
     version: 7.2.0
+  simplebar-core:
+    specifier: ^1.2.4
+    version: 1.2.4
   simplebar-react:
     specifier: 3.2.4
     version: 3.2.4(react@18.2.0)
@@ -409,6 +418,9 @@ devDependencies:
   '@types/lodash.throttle':
     specifier: 4.1.7
     version: 4.1.7
+  '@types/mapbox-gl':
+    specifier: ^2.7.13
+    version: 2.7.13
   '@types/node':
     specifier: 20.4.0
     version: 20.4.0
@@ -12004,7 +12016,6 @@ packages:
 
   /@types/geojson@7946.0.10:
     resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
-    dev: false
 
   /@types/graceful-fs@4.1.6:
     resolution: {integrity: sha512-Sig0SNORX9fdW+bQuTEovKj3uHcUL6LQKbCrrqb1X7J6/ReAbhCXRAhc+SMejhLELFj2QcyuxmUooZ4bt5ReSw==}
@@ -12129,7 +12140,6 @@ packages:
     resolution: {integrity: sha512-qNffhTdYkeFl8QG9Q1zPPJmcs8PvHgmLa1PcwP1rxvcfMsIgcFr/FnrCttG0ZnH7Kzdd7xfECSRNTWSr4jC3PQ==}
     dependencies:
       '@types/geojson': 7946.0.10
-    dev: false
 
   /@types/mdast@3.0.12:
     resolution: {integrity: sha512-DT+iNIRNX884cx0/Q1ja7NyUPpZuv0KPyL5rGNxm1WC1OtHstl7n4Jb7nk+xacNShQMbczJjt8uFzznpp6kYBg==}
