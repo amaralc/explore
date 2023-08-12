@@ -146,11 +146,11 @@ module "core-platform-shell-browser-nextjs" {
 # Vite
 module "core-platform-shell-browser-vite" {
   source                        = "../../../apps/core/platform-shell-browser-vite/iac"
-  is_service_enabled            = true
+  is_service_enabled            = false
   is_production_environment     = local.is_production_environment
   branch_name                   = var.branch_name
   source_environment_project_id = var.production_environment_core_platform_shell_browser_vite_vercel_project_id
-  depends_on                    = [module.researchers-peers, module.module.core-platform-shell-browser-nextjs]
+  depends_on                    = [module.researchers-peers]
 }
 
 # Documentation with Docusaurus
