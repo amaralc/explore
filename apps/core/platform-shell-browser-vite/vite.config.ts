@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'node:path';
+import { defineConfig } from 'vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -40,4 +41,17 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
   },
+
+  resolve: {
+    alias: [
+      {
+        find: /^~(.+)/,
+        replacement: path.join(process.cwd(), 'node_modules/$1'),
+      },
+      // {
+      //   find: /^src(.+)/,
+      //   replacement: path.join(process.cwd(), 'src/$1'),
+      // },
+    ],
+  }
 });
