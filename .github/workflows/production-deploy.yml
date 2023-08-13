@@ -329,7 +329,7 @@ jobs:
       - name: Checkout production branch
         uses: actions/checkout@v3
         with:
-          ssh-key: ${{ secrets.SUBMODULE_CONTENT_PULL_KEY }} # https://samuelsson.dev/access-private-submodules-in-github-actions/
+          ssh-key: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }} # https://samuelsson.dev/access-private-submodules-in-github-actions/
           submodules: "recursive"
 
       - name: Save GCP credentials to file
