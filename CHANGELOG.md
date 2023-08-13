@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@1.5.0-beta.0...peerlab@1.5.0-beta.1) (2023-08-13)
+
+### Features
+
+- **PEER-567:** style - add shadcn config files ([f9ecf58](https://github.com/amaralc/peerlab/commit/f9ecf58b33fbf70f09c7c1f333dbecff2f05417a))
+- **PEER-567:** style - add tailwind config ([0e5ada5](https://github.com/amaralc/peerlab/commit/0e5ada577d148d540770895284552434175c87b7))
+- **PEER-567:** style - finish shadcn setup ([cd4bc23](https://github.com/amaralc/peerlab/commit/cd4bc232b2169177d2b90dd7dd1315f46c62c04e))
+- **PEER-567:** style - test shadcn button ([71331a7](https://github.com/amaralc/peerlab/commit/71331a7d65b1724ec3f6dc9b854bad5872fe0439))
+- **PEER-567:** use shadcn auth page ([99bb859](https://github.com/amaralc/peerlab/commit/99bb859db5af6ded6f8d4886eecf823e61c633a4))
+
+### Bug Fixes
+
+- add depth ([c2725b6](https://github.com/amaralc/peerlab/commit/c2725b671c042f13251ef1cc571365f4ddb9cfea))
+- **PEER-567:** adjust token ([b3bfafa](https://github.com/amaralc/peerlab/commit/b3bfafa483b1caccc652d6405aeb64650aecd801))
+- **PEER-567:** enable docs and remove recursive failed command ([d9f005a](https://github.com/amaralc/peerlab/commit/d9f005a4197c0b9617e22b5ead1c383585e6e6b8))
+- **PEER-567:** style - add root tsconfig ([c67b9ff](https://github.com/amaralc/peerlab/commit/c67b9ff8fee454e0bc40c6064e60b72fe5d30140))
+- remove import ([db8c985](https://github.com/amaralc/peerlab/commit/db8c9850610f741543c01e9f8be7e29d4600b87a))
+- use template-main ([3d054c4](https://github.com/amaralc/peerlab/commit/3d054c4b0a956284277aeafbdd89c019cdf50b70))
+
 ## [1.5.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@1.4.4...peerlab@1.5.0-beta.0) (2023-08-13)
 
 ### Features
