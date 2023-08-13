@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@1.4.4...peerlab@1.5.0-beta.0) (2023-08-13)
+
+### Features
+
+- **PEER-567:** add shared ui lib ([4d8d7cc](https://github.com/amaralc/peerlab/commit/4d8d7ccc3de7725ee525110303b9af221c3c7e08))
+- **PEER-567:** add template deps ([9ad7959](https://github.com/amaralc/peerlab/commit/9ad79595070cecea04472fec168a2533debc20ef))
+- **PEER-567:** add template dev deps ([314775a](https://github.com/amaralc/peerlab/commit/314775a5e2359834b146f163665496a197ec676f))
+- **PEER-567:** enable vite and disable nextjs ([187c001](https://github.com/amaralc/peerlab/commit/187c0013a36900ac152ab3636468ddef66c35319))
+- **PEER-567:** ui - use public assets ([ebbfd00](https://github.com/amaralc/peerlab/commit/ebbfd00b3ed85edd94438f320a3b3e43438f9b4b))
+
+### Bug Fixes
+
+- **PEER-567:** add runtime checks to error type ([ecca1f6](https://github.com/amaralc/peerlab/commit/ecca1f626e83f75a8b281cf56bbbc49e77c534eb))
+- **PEER-567:** adjust reference ([0bd2a2e](https://github.com/amaralc/peerlab/commit/0bd2a2e071a50f18075178db8ab83d7681ebc47d))
+- **PEER-567:** adjust template imports ([e7ab911](https://github.com/amaralc/peerlab/commit/e7ab911c3f969ff9000c6e762865041e47aee739))
+- **PEER-567:** check error type ([5d2d74c](https://github.com/amaralc/peerlab/commit/5d2d74c8fd83509e15338a5c2260f438bb5b2b37))
+- **PEER-567:** use submodules ([ae5e4ff](https://github.com/amaralc/peerlab/commit/ae5e4ff306129cbed8d46ec248fdf4c56ecdd295))
+- **PEER-567:** validate before calling err attribute ([28c0387](https://github.com/amaralc/peerlab/commit/28c0387776339843b0b58a36e4437543a5de94a1))
+
 ## [1.4.4](https://github.com/amaralc/peerlab/compare/peerlab@1.4.3...peerlab@1.4.4) (2023-08-10)
 
 **Note:** Version bump only for package peerlab
