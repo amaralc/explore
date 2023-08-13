@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Button } from '@peerlab/ui/shared/components/ui/button';
 import { lazy } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
@@ -13,6 +14,8 @@ export function App() {
   return (
     <StyledApp>
       <h1>Welcome!</h1>
+      <Button>Click Me</Button>
+
       <Routes>
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/" element={<RootPage />} />
