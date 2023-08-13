@@ -3,6 +3,7 @@ import { FirebaseOptions } from 'firebase/app';
 export const featureFlags = {
   unleashFlagProviderEnabled: true,
   'PEER-567-sign-in-with-google': true,
+  uiProvider: import.meta.env['SHADCN_UI_ENABLED'] as 'material-ui' | 'shadcn-ui',
 };
 
 export const firebaseConfig: FirebaseOptions = {

@@ -10,18 +10,36 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@peerlab/docusaurus": ["libs/docusaurus/src/index.ts"],
-      "@peerlab/researchers/peers/adapters/*": ["libs/researchers/peers/adapters/src/*"],
-      "@peerlab/researchers/peers/core/*": ["libs/researchers/peers/core/src/*"],
-      "@peerlab/root/*": ["./*"],
-      "@peerlab/ui/shared/*": ["libs/shared/ui/src/lib/*"],
-      "@peerlab/modules/core-platform-shell-browser-vite/*": ["modules/private-templates/apps/core/platform-shell-browser-vite/src/*"],
+      "@peerlab/docusaurus": [
+        "libs/docusaurus/src/index.ts"
+      ],
+      "@peerlab/modules/core-platform-shell-browser-vite/*": [
+        "modules/private-templates/apps/core/platform-shell-browser-vite/src/*"
+      ],
+      "@peerlab/researchers/peers/adapters/*": [
+        "libs/researchers/peers/adapters/src/*"
+      ],
+      "@peerlab/researchers/peers/core/*": [
+        "libs/researchers/peers/core/src/*"
+      ],
+      "@peerlab/root/*": [
+        "./*"
+      ],
+      "@peerlab/ui/shared/*": [
+        "libs/shared/ui/src/lib/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
