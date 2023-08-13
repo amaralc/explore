@@ -328,10 +328,6 @@ jobs:
 
       - name: Checkout production branch
         uses: actions/checkout@v3
-        with:
-          ssh-key: ${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }} # https://samuelsson.dev/access-private-submodules-in-github-actions/
-          submodules: "recursive"
-          fetch-depth: 1 # This is important to get all history for all branches
 
       - name: Save GCP credentials to file
         run: |

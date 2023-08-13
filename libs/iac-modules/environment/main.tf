@@ -156,7 +156,7 @@ module "core-platform-shell-browser-vite" {
 # Docs
 module "dx-dev-docs-browser" {
   source                        = "../../../apps/dx/dev-docs-browser/iac"
-  is_service_enabled            = false
+  is_service_enabled            = true
   is_production_environment     = local.is_production_environment
   branch_name                   = var.branch_name
   source_environment_project_id = var.production_environment_dx_dev_docs_browser_vercel_project_id
