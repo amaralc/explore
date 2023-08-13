@@ -5,7 +5,6 @@
 // import App from './app/app';
 // import { unleashConfig } from './config';
 // import { firebaseApp } from './libs/firebase';
-// import '@peerlab/modules/core-platform-shell-browser-vite/global.css';
 import '@peerlab/modules/core-platform-shell-browser-vite/main';
 
 // // Lazy load the FlagProvider component
