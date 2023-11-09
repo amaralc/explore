@@ -175,7 +175,7 @@ jobs: # A workflow can have multiple jobs
     # environment:
     #   name: core-platform-shell-iac-preview
     env:
-      IMAGE_NAME: researchers-peers-svc-rest-api
+      IMAGE_NAME: core-researchers-peers-svc-rest-api
     strategy:
       matrix:
         node-version: [18]
@@ -307,7 +307,7 @@ jobs: # A workflow can have multiple jobs
           AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
           echo 'Affected apps:' $AFFECTED_APPS
 
-          PROJECT_NAME=researchers-peers-svc-rest-api
+          PROJECT_NAME=core-researchers-peers-svc-rest-api
           if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
             echo '✅ - Build can proceed since app was affected!'
             echo "affected=true" >> $GITHUB_ENV
@@ -334,7 +334,7 @@ jobs: # A workflow can have multiple jobs
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/researchers/peers/svc-rest-api/Dockerfile
+          file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
           push: true
           no-cache: true # TODO: Check if this is necessary
           build-args: BRANCH_NAME=${{ env.branch_name }}
@@ -346,13 +346,13 @@ jobs: # A workflow can have multiple jobs
         run: |
           bash scripts/nx/set-token.sh --access-token=fake-token
 
-  # build-security-iam-svc:
+  # build-kernel-security-iam-svc:
   #   needs: [pr-checks]
   #   runs-on: ubuntu-latest
   #   # environment:
   #   #   name: core-platform-shell-iac-preview
   #   env:
-  #     IMAGE_NAME: security-iam-svc
+  #     IMAGE_NAME: kernel-security-iam-svc
   #   strategy:
   #     matrix:
   #       node-version: [18]
@@ -484,7 +484,7 @@ jobs: # A workflow can have multiple jobs
   #         AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
   #         echo 'Affected apps:' $AFFECTED_APPS
 
-  #         PROJECT_NAME=researchers-peers-svc-rest-api
+  #         PROJECT_NAME=core-researchers-peers-svc-rest-api
   #         if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
   #           echo '✅ - Build can proceed since app was affected!'
   #           echo "affected=true" >> $GITHUB_ENV
@@ -517,7 +517,7 @@ jobs: # A workflow can have multiple jobs
   #       uses: docker/build-push-action@v4
   #       with:
   #         context: .
-  #         file: ./apps/security/iam-svc/Dockerfile
+  #         file: ./apps/kernel/security-iam-svc/Dockerfile
   #         push: true
   #         no-cache: true # TODO: Check if this is necessary
   #         # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -529,13 +529,13 @@ jobs: # A workflow can have multiple jobs
   #       run: |
   #         bash scripts/nx/set-token.sh --access-token=fake-token
 
-  build-core-platform-experiments:
+  build-kernel-flag-management:
     needs: [pr-checks]
     runs-on: ubuntu-latest
     # environment:
     #   name: core-platform-shell-iac-preview
     env:
-      IMAGE_NAME: core-platform-experiments
+      IMAGE_NAME: kernel-flag-management
     strategy:
       matrix:
         node-version: [18]
@@ -637,7 +637,7 @@ jobs: # A workflow can have multiple jobs
           AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
           echo 'Affected apps:' $AFFECTED_APPS
 
-          PROJECT_NAME=researchers-peers-svc-rest-api
+          PROJECT_NAME=core-researchers-peers-svc-rest-api
           if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
             echo '✅ - Build can proceed since app was affected!'
             echo "affected=true" >> $GITHUB_ENV
@@ -664,7 +664,7 @@ jobs: # A workflow can have multiple jobs
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/core/platform-experiments/Dockerfile
+          file: ./apps/kernel/flag-management/Dockerfile
           push: true
           no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -679,8 +679,8 @@ jobs: # A workflow can have multiple jobs
   deploy:
     needs: [
         build-researchers-peers-rest-api,
-        # build-security-iam-svc,
-        build-core-platform-experiments,
+        # build-kernel-security-iam-svc,
+        build-kernel/flag-management,
       ]
     runs-on: ubuntu-latest
     # environment:

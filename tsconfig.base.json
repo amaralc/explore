@@ -18,11 +18,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@peerlab/core/management-shell-browser/shared-ui/*": [
+        "libs/core/management-shell-browser/shared-ui/src/lib/*"
+      ],
       "@peerlab/docusaurus": [
         "libs/docusaurus/src/index.ts"
       ],
-      "@peerlab/modules/core-platform-shell-browser-vite/*": [
-        "modules/private-templates/apps/core/platform-shell-browser-vite/src/*"
+      "@peerlab/kernel/management-shell-browser/*": [
+        "apps/kernel/management-shell-browser/src/*"
       ],
       "@peerlab/researchers/peers/adapters/*": [
         "libs/researchers/peers/adapters/src/*"
@@ -32,9 +35,6 @@
       ],
       "@peerlab/root/*": [
         "./*"
-      ],
-      "@peerlab/ui/shared/*": [
-        "libs/shared/ui/src/lib/*"
       ]
     }
   },

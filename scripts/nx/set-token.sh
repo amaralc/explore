@@ -5,6 +5,7 @@
 
 # Expected named arguments:
 # --access-token
+# --install-jq (optional) "true" or "false" (default is "false"), weather the tool jq should be installed or not
 
 # Call this script with the following command: bash scripts/nx/set-token.sh --access-token=my-secret-token
 
@@ -23,6 +24,17 @@ if [ -z "$ACCESS_TOKEN" ]
 then
     echo "Error: --access-token flag is required"
     exit 1
+fi
+
+# Set default variables
+if [ "$INSTALL_JQ" != "true" ]; then
+  INSTALL_JQ="false"
+fi
+
+# Install jq
+if [ "$INSTALL_JQ" == "true" ]; then
+  echo "Installing jq..."
+  sudo apt-get install jq
 fi
 
 # Overrite token from nx.json

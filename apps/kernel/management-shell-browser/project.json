@@ -1,0 +1,91 @@
+{
+  "name": "kernel-management-shell-browser",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kernel/management-shell-browser/src",
+  "projectType": "application",
+  "implicitDependencies": ["kernel-security-iam-svc"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/kernel/management-shell-browser",
+        "postcssConfig": "apps/web/postcss.config.js"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "kernel-management-shell-browser:build",
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "kernel-management-shell-browser:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "kernel-management-shell-browser:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "kernel-management-shell-browser:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "kernel-management-shell-browser:build:development"
+        },
+        "production": {
+          "buildTarget": "kernel-management-shell-browser:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/apps/kernel/management-shell-browser"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../coverage/apps/kernel/management-shell-browser"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/kernel/management-shell-browser/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/kernel/management-shell-browser/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "kernel-management-shell-browser:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "kernel-management-shell-browser:serve:production"
+        }
+      }
+    },
+    "docker-build": {
+      "command": "docker build -f apps/kernel/management-shell-browser/Dockerfile . -t kernel-management-shell-browser"
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "core-researchers-peers-svc",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/core/researchers-peers-svc/e2e",
+  "projectType": "application",
+  "implicitDependencies": [
+    "core-researchers-peers-svc-rest-api",
+    "core-researchers-peers-svc-consumer",
+    "core-researchers-peers-svc-iac",
+    "core-researchers-peers-svc-e2e"
+  ],
+  "targets": {},
+  "tags": []
+}

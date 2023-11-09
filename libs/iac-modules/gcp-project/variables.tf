@@ -18,10 +18,15 @@ variable "is_production_environment" {
 variable "environment_name" {
   description = "The name of the environment"
   type        = string
+
+  validation {
+    condition     = length(var.environment_name) <= 23
+    error_message = "The environment name must be 23 characters or less." # Network resources have a 23 character limit
+  }
 }
 
-variable "gcp_project_id" {
-  description = "The Google Cloud project ID"
+variable "gcp_shell_project_id" {
+  description = "The shell Google Cloud project ID"
   type        = string
 }
 

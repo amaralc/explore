@@ -2,7 +2,99 @@
 
 PeerLab is a step towards [eA's vision](https://github.com/amaralc/ea). A way to connect university laboratories and the needs of the society while giving meaning and purpose to the actions of students in a sustainable way so they can perceive it every day.
 
-While the whole thing isn't up and running, I keep using the idea to practice software development skills, mainly with TypeScript, Node.js, React, some Bash and Terraform.
+While the whole thing isn't up and running, I keep using the idea to practice software development skills, mainly with TypeScript, Node.js, React, some Bash and Terraform. During the process I'm also trying to constantly practice lean principles.
+
+> "If you eliminate enough waste, soon you go faster than the people who are just trying to go fast"
+> (Beck and Andres, 2004)
+
+## Mission
+
+To make hiring services from university labs globally, as easy as buying a beer or a plane ticket.
+
+## Vision
+
+A world where universities are as popular as shopping centers and the scientific method is pervasive and entrenched in our society.
+
+## Values
+
+Communication, Simplicity, Feedback, Courage, Respect, Continuous Learning and Experimentation.
+
+# Setup
+
+## Requirements
+
+- [Bun 1.0.2+](https://bun.sh/docs/installation)
+- [Docker](https://docs.docker.com/engine/install/ubuntu/)
+- [Terraform 1.5.7+](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform)
+- [GCloud CLI](https://cloud.google.com/sdk/docs/install)
+- [GitHub CLI](https://cli.github.com/)
+
+# Known Issues
+
+- ~~ci(build): Connection between github and gcp is configured manually; Cloud build v2 allows automatic configuration, but requires contact with google sales team;~~
+- ~~ci(build): Cloud Build is currently being triggered manually~~ (Fixed: we are now building with GitHub Actions, Terraform and Docker resources). (Fixed: we adopted GitHub Actions to build images, making it unnecessary to sync with GCP Repositories)
+- ~~ci(build): After building a new image, it is necessary to trigger a new deployment of that service; Maybe a final github call by the end of every run, with a random name for every run, could do it. Another option would be to call the google api and create a new cloud run revision of that service.~~ (Fixed: adopting GitHub actions, Terraform and Docker resources)
+- ci(auth): Automatic deployments can only create brands with internal access in GCP; External access needs to be configured manually;
+- ~~ci(auth): We still do not have automatically assigned domains and subdomains. That prevents us from using firebase with a cloud run deployment since the generated domains are random;~~ (Fixed: generation of domains and subdomains are now automated).
+- ci(auth): We need to manually enable the Google auth client through Firebase Console in order to sign in with google in our applications.
+- ci(build): Unnecessary images are being built even though the project was not affected by the commit.
+
+# Features
+
+- [ ] CI/CD
+  - [x] Manage cloud infrastructure with code;
+  - [x] Create full stack preview environments if and when needed;
+  - [ ] Automate builds and deployments (IN PROGRESS);
+  - [ ] Manage feature toggles;
+- [ ] Auth
+  - [x] Sign in with Google;
+  - [ ] Sign in with Microsoft;
+  - [ ] Sign in with ORCID;
+- [ ] Lab Admin Dashboard
+  - [ ] Create organization;
+    - [ ] Freemium;
+    - [ ] Standard - Recurring revenue;
+    - [ ] Enterprise - Recurring revenue;
+  - [ ] Create and publish a machine in an organization;
+  - [ ] Create and publish a service provided by the organization;
+  - [ ] Members;
+    - [ ] Invite members;
+- [ ] Lab Research
+  - [ ] Create and publish blog articles;
+  - [ ] Create and publish success cases and reports;
+- [ ] Lab Front
+  - [ ] Services
+    - [ ] List services
+    - [ ] Show service details
+    - [ ] Request service
+  - [ ] Equipment
+    - [ ] List equipment
+    - [ ] Show equipment details
+    - [ ] Book equipment (if you are listed as a machine user)
+    - [ ] List users that know how to operate the equipment
+    - [ ] List success cases
+    - [ ] Show security procedures and safety requirements
+    - [ ] Show operational procedures
+    - [ ] Access training material
+  - [ ] Members
+    - [ ] List current members
+    - [ ] List alumni
+  - [ ] Research
+    - [ ] Overview
+    - [ ] Publications
+    - [ ] Blog articles
+
+# References
+
+- Sutherland, J. and Sutherland, J. J. (2014). Scrum, Random House.
+- Ries, E. (2017). The Lean Startup, Crown Business.
+- Martin, R. C. (2019). Clean Agile, Prentice Hall.
+- Beck, K. and Andres, C. (2004). Extreme Programming Explained, Addison-Wesley Professional.
+- Skelton, M. and Pais, M. (2019). Team Topologies, It Revolution Press.
+- Winters, T., Manshreck, T. and Wright, H. (2020). Software Engineering at Google: Lessons Learned from Programming over Time.
+- Kim, G., Behr, K. and Spafford, G. (2018). The Phoenix Project, IT Revolution.
+- Kim, G. (2019). The Unicorn Project, IT Revolution.
+- Kim, G., Humble, J., Debois, P., Willis, J. and Forsgren, N. (2021). The DevOps Handbook, IT Revolution.
 
 <!-- ## Use cases
 

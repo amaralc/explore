@@ -1,0 +1,8 @@
+{
+  "label": "Overarching",
+  "position": 0,
+  "link": {
+    "type": "generated-index",
+    "description": "ADRs that describe decisions that concern the entire codebase."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "kernel-api-gateway-svc",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kernel/api-gateway-svc",
+  "projectType": "application",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}

@@ -1,0 +1,65 @@
+{
+  "name": "kernel-shell-iac",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kernel/shell-iac",
+  "projectType": "application",
+  "implicitDependencies": [
+    "iac-modules-gcp-vpc",
+    "iac-modules-gcp-apis",
+    "iac-modules-gcp-postgresql-dbms-environment",
+    "iac-modules-environment-vercel",
+    "core-researchers-peers-svc-iac",
+    "kernel-security-iam-svc"
+  ],
+  "targets": {
+    "production-terraform-init": {
+      "command": "cd apps/kernel/shell-iac/production && terraform init -upgrade"
+    },
+    "production-terraform-validate": {
+      "command": "cd apps/kernel/shell-iac/production && terraform validate"
+    },
+    "production-terraform-plan": {
+      "command": "cd apps/kernel/shell-iac/production && terraform plan -out=tfplan -var-file=env.tfvars"
+    },
+    "production-terraform-apply-flag-management": {
+      "command": "cd apps/kernel/shell-iac/production && terraform plan -out=tfplan -var-file=env.tfvars && terraform apply -auto-approve -target='module.production[0].module.kernel-flag-management[0]'"
+    },
+    "production-terraform-apply": {
+      "command": "cd apps/kernel/shell-iac/production && terraform apply -auto-approve tfplan && terraform output"
+    },
+    "production-terraform-destroy": {
+      "command": "cd apps/kernel/shell-iac/production && terraform destroy -var-file=env.tfvars -auto-approve"
+    },
+    "production-terraform-output": {
+      "command": "cd apps/kernel/shell-iac/production && terraform output"
+    },
+    "production-terraform-providers": {
+      "command": "cd apps/kernel/shell-iac/production && terraform providers"
+    },
+    "production-terraform-graph": {
+      "command": "cd apps/kernel/shell-iac/production && terraform graph | dot -Tsvg > graph.svg"
+    },
+    "preview-terraform-init": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform init"
+    },
+    "preview-terraform-validate": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform validate"
+    },
+    "preview-terraform-plan": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform plan -out=tfplan -var-file=env.tfvars"
+    },
+    "preview-terraform-apply": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform apply -auto-approve tfplan && terraform output"
+    },
+    "preview-terraform-destroy": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform destroy -var-file=env.tfvars -auto-approve"
+    },
+    "preview-terraform-output": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform output"
+    },
+    "preview-terraform-graph": {
+      "command": "cd apps/kernel/shell-iac/preview && terraform graph | dot -Tsvg > graph.svg"
+    }
+  },
+  "tags": []
+}

@@ -8,7 +8,9 @@
           "build",
           "lint",
           "test",
-          "e2e"
+          "e2e",
+          "production-terraform-init",
+          "production-terraform-validate"
         ],
         "accessToken": "fake-token"
       }

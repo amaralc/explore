@@ -61,6 +61,6 @@ module "postgresql_dbms" {
 
 # # Nx Graph
 # module "core-root-shell-graph" {
-#   source           = "../../../apps/core/root-shell-graph/iac/production" # The path to the module
+#   source           = "../../../apps/kernel/system-graph-browser/iac/production" # The path to the module
 #   environment_name = var.branch_name                                      # The name of the branch
 # }

@@ -1,0 +1,271 @@
+name: Deploy to production
+
+on:
+  # create:
+  #   tags:
+  #     - "^peerlab@[0-9]+.[0-9]+.[0-9]+$"
+  push:
+    branches:
+      - production
+
+jobs:
+  build:
+    if: false # Disabled
+    runs-on: ubuntu-latest
+    # environment:
+    #   name: core-platform-shell-iac-preview
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
+      - name: Get short commit hash
+        run: |
+          SHORT_SHA=${{ github.sha }}
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
+
+      - name: Save GCP credentials to file
+        run: |
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/kernel/shell-iac/production/credentials.json
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+      # - name: Install bun
+      #   uses: oven-sh/setup-bun@v1
+
+      # - name: Install deps with bun
+      #   run: |
+      #     bun install
+
+      - name: Build all projects
+        run: |
+          pnpm prisma:generate:postgres
+          NX_BRANCH=${GITHUB_REF#refs/heads/} pnpm nx run-many --target=build --all=true --parallel=3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Google Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+      - name: Build and push kernel-flag-management Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./apps/kernel/flag-management/Dockerfile
+          push: true
+          # no-cache: true # TODO: Check if this is necessary
+          # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
+          tags: |
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/kernel-flag-management:${{ env.short_commit_sha }}
+
+      - name: Build and push core-researchers-peers-svc-rest-api Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
+          push: true
+          # no-cache: true # TODO: Check if this is necessary
+          # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
+          tags: |
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/core-researchers-peers-svc-rest-api:${{ env.short_commit_sha }}
+
+      - name: Build and push kernel-management-shell-browser Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./apps/kernel/management-shell-browser/Dockerfile
+          push: true
+          # no-cache: true # TODO: Check if this is necessary
+          # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
+          tags: |
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/kernel-management-shell-browser:${{ env.short_commit_sha }}
+
+      - name: Override nx token back to fake value # Avoid leaking the token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=fake-token
+  deploy:
+    # needs: [build]
+    if: true # Enabled
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Checkout all branches and tags
+
+      - name: Get short commit hash
+        run: |
+          SHORT_SHA=${{ github.sha }}
+          echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
+
+      - name: Save GCP credentials to file
+        run: |
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/kernel/shell-iac/production/credentials.json
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
+
+      - name: Install gh CLI (used to set unleash provider secrets for the 2nd run)
+        run: |
+          type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+          && sudo apt update \
+          && sudo apt install gh -y
+
+      - name: Install gcloud CLI
+        run: |
+          curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-441.0.0-linux-x86_64.tar.gz
+          tar -xf google-cloud-cli-441.0.0-linux-x86_64.tar.gz
+          ./google-cloud-sdk/install.sh --quiet
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Authenticate with gcloud cli
+        run: |
+          gcloud auth activate-service-account --key-file=apps/kernel/shell-iac/production/credentials.json
+
+      - name: Override fake nx token
+        run: |
+          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: '8.9.1'
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      - name: Terraform init
+        run: |
+          echo "Running terraform init..."
+          echo ""
+          terraform init
+        working-directory: apps/kernel/shell-iac/production
+
+      - name: Terraform validate
+        run: |
+          echo "Running terraform validate..."
+          terraform validate
+        working-directory: apps/kernel/shell-iac/production
+
+      - name: Terraform apply kernel-flag-management only
+        run: |
+          echo "Applying kernel-flag-management changes..."
+          terraform apply -auto-approve -target="module.production[0].module.kernel-flag-management[0]" \
+            -var "domain_name=${{ secrets.DOMAIN_NAME }}" \
+            -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var "gcp_location=${{ secrets.GCP_LOCATION }}" \
+            -var "short_commit_sha=${{ env.short_commit_sha }}" \
+            -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }}" \
+            -var "owner_account_email=${{ secrets.OWNER_ACCOUNT_EMAIL }}" \
+            -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}" \
+            -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" \
+            -var "nx_cloud_access_token=${{ secrets.NX_ACCESS_TOKEN }}" \
+            -var "neon_api_key=${{ secrets.NEON_API_KEY }}" \
+            -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" \
+            -var "unleash_api_url=${{ secrets.UNLEASH_API_URL }}" \
+            -var "unleash_auth_token=${{ secrets.UNLEASH_AUTH_TOKEN }}" \
+            -var "environment_path=$GITHUB_ENV"
+
+          # echo "Saving flag management url and token..."
+          # echo "unleash_api_url=$(terraform output flag_management_url)" >> $GITHUB_ENV
+          # echo "unleash_auth_token=$(terraform output flag_management_admin_api_token)" >> $GITHUB_ENV
+        working-directory: apps/kernel/shell-iac/production
+
+      - name: Terraform Plan
+        run: |
+          echo "Running terraform plan..."
+          echo "Commit Hash: ${{ env.short_commit_sha }}"
+          terraform plan -out=tfplan \
+            -var "domain_name=${{ secrets.DOMAIN_NAME }}" \
+            -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var "gcp_location=${{ secrets.GCP_LOCATION }}" \
+            -var "short_commit_sha=${{ env.short_commit_sha }}" \
+            -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }}" \
+            -var "owner_account_email=${{ secrets.OWNER_ACCOUNT_EMAIL }}" \
+            -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}" \
+            -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" \
+            -var "nx_cloud_access_token=${{ secrets.NX_ACCESS_TOKEN }}" \
+            -var "neon_api_key=${{ secrets.NEON_API_KEY }}" \
+            -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" \
+            -var "unleash_api_url=${{ env.unleash_api_url }}" \
+            -var "unleash_auth_token=${{ env.unleash_auth_token }}" \
+            -var "environment_path=$GITHUB_ENV"
+        working-directory: apps/kernel/shell-iac/production
+
+      - name: Terraform Apply
+        run: |
+          echo "Running terraform apply..."
+          terraform apply -auto-approve tfplan
+        working-directory: apps/kernel/shell-iac/production
+
+      # - name: Terraform Destroy
+      #   run: |
+      #     echo "Destroying infrastructure..."
+      #     terraform destroy -auto-approve \
+      #       -var "domain_name=${{ secrets.DOMAIN_NAME }}" \
+      #       -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" \
+      #       -var "gcp_location=${{ secrets.GCP_LOCATION }}" \
+      #       -var "short_commit_sha=${{ env.short_commit_sha }}" \
+      #       -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }}" \
+      #       -var "owner_account_email=${{ secrets.OWNER_ACCOUNT_EMAIL }}" \
+      #       -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}" \
+      #       -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" \
+      #       -var "nx_cloud_access_token=${{ secrets.NX_ACCESS_TOKEN }}" \
+      #       -var "neon_api_key=${{ secrets.NEON_API_KEY }}" \
+      #       -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}"
+      #       -var "unleash_api_url=${{ secrets.UNLEASH_API_URL }}" \
+      #       -var "unleash_auth_token=${{ secrets.UNLEASH_AUTH_TOKEN }}" \
+      #   working-directory: apps/kernel/shell-iac/production
+
+      # - name: Emmit Compass Deployment event
+      #   run: |
+      #     bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}

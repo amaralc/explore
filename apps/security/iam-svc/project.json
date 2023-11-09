@@ -1,9 +1,0 @@
-{
-  "name": "security-iam-svc",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/security/iam",
-  "projectType": "application",
-  "implicitDependencies": [],
-  "targets": {},
-  "tags": []
-}

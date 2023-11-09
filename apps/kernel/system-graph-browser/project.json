@@ -1,0 +1,13 @@
+{
+  "name": "kernel-system-graph-browser",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kernel/system-graph-browser",
+  "projectType": "application",
+  "implicitDependencies": [],
+  "targets": {
+    "build-graph": {
+      "command": "npx nx graph --file=dist/apps/kernel/system-graph-browser/index.html"
+    }
+  },
+  "tags": []
+}

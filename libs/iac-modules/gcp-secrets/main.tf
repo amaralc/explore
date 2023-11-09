@@ -20,7 +20,7 @@ locals {
 
 # Create secrets versions
 resource "google_secret_manager_secret_version" "versions" {
-  count = length(var.secrets)
+  count = length(local.created_secrets)
 
   secret      = local.created_secrets[count.index].id
   secret_data = var.secrets[count.index].value

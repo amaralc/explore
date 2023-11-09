@@ -13,7 +13,7 @@ output "instance" {
 }
 
 resource "google_service_account_key" "instance" {
-  service_account_id = google_service_account.instance.account_id
+  service_account_id = google_service_account.instance.id
   depends_on         = [google_service_account.instance]
 }
 

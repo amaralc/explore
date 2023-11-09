@@ -1,35 +1,20 @@
-
-# Parse the branch name to a string that uses lowercase letters, starts with a letter, and replaces special characters with a hyphen
-locals {
-  branch_name_base64_sha256 = base64sha256(var.branch_name)
-  branch_code_base64_sha256 = "b-${local.branch_name_base64_sha256}" # Many resources expect it to start with a letter
-}
-
-data "external" "parse_branch_code" {
-  program = ["bash", "-c", "branch_code_base64_sha256='${local.branch_code_base64_sha256}'; environment_name=$(echo \"$branch_code_base64_sha256\" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g'); echo \"{\\\"environment_name\\\": \\\"$environment_name\\\"}\""]
-}
-
-# The null_resource with lifecycle block and ignore_changes argument is used to ensure that the parsed branch name does not change in subsequent runs.
-resource "null_resource" "ignore_branch_code_changes" {
-  triggers = {
-    environment_name = substr(data.external.parse_branch_code.result["environment_name"], 0, 10)
+# Generate a random ID with the random_id resource. This ID will be used as prefix to create a unique project ID for the new GCP project.
+resource "random_id" "instance" {
+  prefix = "${var.environment_name_prefix}-"
+  keepers = {
+    # Generate a new id each time we switch to a new environment_name
+    ami_id = var.environment_name_prefix
   }
-
-  # Test the lifecycle block and ignore_changes argument
-  lifecycle {
-    ignore_changes = [
-      triggers,
-    ]
-  }
+  byte_length = 8
 }
 
-resource "null_resource" "logger" {
+resource "null_resource" "log_random_id" {
   provisioner "local-exec" {
-    command = "echo 'Environment name: ${null_resource.ignore_branch_code_changes.triggers["environment_name"]}'"
+    command = "echo 'Env: ' ${random_id.instance.hex}"
   }
 }
 
-# Output the fixed parsed branch code
-output "instance" {
-  value = null_resource.ignore_branch_code_changes.triggers["environment_name"]
+output "value" {
+  description = "Environment name with prefix, random characters and less than 23 characters"
+  value       = substr(random_id.instance.hex, 0, 23) # Name cannot have more than 23 characters (network resources have a 23 character limit)
 }

@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-postgresql-dbms-database",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/iac-modules/postgresql-dbms-database",
+  "projectType": "library",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}

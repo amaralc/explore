@@ -38,7 +38,17 @@ variable "trigger_name" {
   type        = string
 }
 
-variable "nx_affected_script_path" {
-  description = "The path to the nx affected script"
+variable "branch_name" {
+  description = "The name of the branch"
+  type        = string
+}
+
+# variable "gcp_cloudbuildv2_repository_id" {
+#   description = "The ID of the Cloud Build V2 repository"
+#   type        = string
+# }
+
+variable "nx_affected_script" {
+  description = "The script to be executed"
   type        = string
 }

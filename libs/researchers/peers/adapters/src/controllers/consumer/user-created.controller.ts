@@ -14,7 +14,6 @@ export class UserCreatedController {
 
   @EventPattern('user-created')
   async handleUserCreatedreated(@Payload() data: UserCreatedMessageValueDto, @Ctx() context: KafkaContext) {
-    console.log('here');
     await this.handleUserCreatedreatedService.execute({
       topic: context.getTopic(),
       partition: context.getPartition(),

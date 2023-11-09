@@ -18,11 +18,11 @@ variable "commit_hash" {
   type        = string
 }
 
-variable "vercel_api_token" {
-  description = "Vercel API token"
-  type        = string
-  sensitive   = true
-}
+# variable "vercel_api_token" {
+#   description = "Vercel API token"
+#   type        = string
+#   sensitive   = true
+# }
 
 variable "gcp_docker_artifact_repository_name" {
   description = "The name of the Docker repository"

@@ -1,3 +1,15 @@
+# Reference: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudbuild_trigger
+# Errors
+# - Error: Error creating Trigger: googleapi: Error 400: triggers with repository resources cannot be created in the "global" region
+#   - Change to use europe-west3
+# - generic::failed_precondition: due to quota restrictions, cannot run builds in this region
+#   - Change to use us-west1
+# - Error creating Trigger: googleapi: Error 400: location of the repository: *** does not match the current region: us-west1
+#   - Move back to europe-west3
+#   - Try to increase quota restrictions for europe-west3 in google console
+#     - Contact our Sales Team for requests above 0.
+
+
 locals {
   github_owner_username  = "amaralc"
   github_repository_name = "peerlab"
@@ -7,6 +19,8 @@ locals {
 
 # This resource block defines a Google Cloud Build trigger that will react to pushes on a specificgcr.io/cloud-builders/yarn
 resource "google_cloudbuild_trigger" "build" {
+  count = 1 # Disabled
+
   # Name of the trigger
   name = var.trigger_name
 
@@ -16,7 +30,9 @@ resource "google_cloudbuild_trigger" "build" {
   # Disable status of the trigger
   disabled = false
 
-  # GitHub configuration
+  # # The GCP location
+  # location = local.gcp_build_region
+
   github {
     # GitHub owner's username
     owner = local.github_owner_username
@@ -27,9 +43,22 @@ resource "google_cloudbuild_trigger" "build" {
     # Configuration for triggering on a push to a specific branch
     push {
       # Regex pattern for the branch name to trigger on
-      branch = "^${var.environment_name}$"
+      branch = "^${var.branch_name}$"
     }
   }
+
+  # # GitHub configuration using Cloud Build V2 repository
+  # # # This approach results in errors documented in the top of this file. An increase in quota for a specific region should be requested to the google sales team before proceeding with this solution.
+  # repository_event_config {
+  #   # The cloudbuildv2 repository id (see https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudbuild_trigger)
+  #   repository = var.gcp_cloudbuildv2_repository_id
+
+  #   # Configuration for triggering on a push to a specific branch
+  #   push {
+  #     # Regex pattern for the branch name to trigger on
+  #     branch = "^${var.branch_name}$"
+  #   }
+  # }
 
   # Included files for the trigger
   included_files = ["."]
@@ -37,18 +66,25 @@ resource "google_cloudbuild_trigger" "build" {
   # Defines the build configuration
   build {
 
+    timeout = "720s"
+
     # options {
     #   # The type of machine to be used while building the Docker image
     #   machine_type = "E2_HIGHCPU_32"
     # }
 
-    # Each step in the build is represented as a list of commands
-    step {
-      id         = "verify-if-app-was-affected"
-      name       = "gcr.io/cloud-builders/yarn"
-      entrypoint = "bash"
-      args       = [var.nx_affected_script_path]
-    }
+    # TODO: verify if app was affected before building the image (https://cloud.google.com/build/docs/automating-builds/create-manage-triggers#including_the_repository_history_in_a_build)
+    # step {
+    #   id   = "checkout-repository"
+    #   name = "gcr.io/cloud-builders/git"
+    #   args = ["fetch", "--unshallow"]
+    # }
+
+    # step {
+    #   id     = "verify-if-app-was-affected"
+    #   name   = "gcr.io/cloud-builders/npm:node-18.12.0"
+    #   script = var.nx_affected_script
+    # }
 
     step {
       id   = "build-image"                  # Unique identifier for the build step
@@ -100,5 +136,11 @@ resource "google_cloudbuild_trigger" "build" {
       local.environment_image_url, # Image with the latest tag for a given environment
       local.commit_image_url       # Image with the commit SHA tag
     ]
+  }
+
+  provisioner "local-exec" {
+    when    = create
+    command = "gcloud beta builds triggers run ${var.trigger_name} --branch=${var.branch_name}" # Force first run after creation
+    # command = "gcloud beta builds triggers run ${var.trigger_name} --branch=${var.branch_name} --region=${var.gcp_location}" # Force first run after creation
   }
 }

@@ -135,7 +135,7 @@ jobs:
 
       - name: Check if app was affected
         run: |
-          bash scripts/nx/check-if-app-was-affected.sh --project-name=researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
+          bash scripts/nx/check-if-app-was-affected.sh --project-name=core-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
 
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}
@@ -160,22 +160,22 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/researchers/peers/svc-rest-api/Dockerfile
+          file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
           push: true
           no-cache: true
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
         env:
-          IMAGE_NAME: researchers-peers-svc-rest-api
+          IMAGE_NAME: core-researchers-peers-svc-rest-api
 
-  build-core-platform-experiments:
+  build-kernel-flag-management:
     needs: [check-branch]
     runs-on: ubuntu-latest
     # environment:
     #   name: core-platform-shell-iac-preview
     env:
-      IMAGE_NAME: core-platform-experiments
+      IMAGE_NAME: kernel-flag-management
     strategy:
       matrix:
         node-version: [18]
@@ -278,7 +278,7 @@ jobs:
       - name: Check if app was affected
         if: ${{ env.is_existing_image == 'true' }}
         run: |
-          bash scripts/nx/check-if-app-was-affected.sh --project-name=researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
+          bash scripts/nx/check-if-app-was-affected.sh --project-name=core-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
 
       - name: Set up Docker Buildx
         if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
@@ -297,7 +297,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/core/platform-experiments/Dockerfile
+          file: ./apps/kernel/flag-management/Dockerfile
           push: true
           no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -310,7 +310,7 @@ jobs:
           bash scripts/nx/set-token.sh --access-token=fake-token
 
   deploy:
-    needs: [build-researchers-peers-rest-api, build-core-platform-experiments]
+    needs: [build-researchers-peers-rest-api, build-kernel-flag-management]
     runs-on: ubuntu-latest
     defaults:
       run:

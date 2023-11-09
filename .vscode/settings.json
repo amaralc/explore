@@ -3,7 +3,6 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true,
     "source.fixAll.eslint": true,
-    "source.fixAll.tslint": true
   },
   "editor.formatOnSave": true,
   "files.associations": {
@@ -13,5 +12,8 @@
     "editor.formatOnSave": false
   },
   "cSpell.words": ["kafkajs", "nestjs", "Partitioner", "Partitioners"],
-  "eslint.validate": ["json"]
+  "eslint.validate": [
+    "json"
+  ],
+  "testing.automaticallyOpenPeekView": "never"
 }

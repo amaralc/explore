@@ -1,0 +1,93 @@
+{
+  "name": "archive-platform-shell-browser",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/archive/platform-shell-browser",
+  "projectType": "application",
+  "implicitDependencies": [
+    "core-researchers-peers-svc-rest-api"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/archive/platform-shell-browser"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/archive/platform-shell-browser"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "archive-platform-shell-browser:build",
+        "dev": true,
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "archive-platform-shell-browser:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "archive-platform-shell-browser:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "archive-platform-shell-browser:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/archive/platform-shell-browser/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/archive/platform-shell-browser/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/archive/platform-shell-browser/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "archive-platform-shell-browser:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "archive-platform-shell-browser:serve:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
