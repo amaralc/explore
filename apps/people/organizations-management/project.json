@@ -1,0 +1,8 @@
+{
+  "name": "people-organizations-management",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/people/organizations-management/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}

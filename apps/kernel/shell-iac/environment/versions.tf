@@ -3,5 +3,8 @@ terraform {
     neon = {
       source = "kislerdm/neon"
     }
+    mongodbatlas = {
+      source = "mongodb/mongodbatlas"
+    }
   }
 }

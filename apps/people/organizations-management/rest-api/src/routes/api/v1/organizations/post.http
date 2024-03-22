@@ -1,0 +1,11 @@
+@PRODUCTION_BASE_URL=https://production-server.com
+@DEVELOPMENT_BASE_URL=http://localhost:8080
+
+POST {{PRODUCTION_BASE_URL}}/api/v1/organizations HTTP/1.1
+Content-Type: application/json
+
+{
+  "nickname": "peerlab",
+  "ownerAgentId": "qyoupcI7PkPx5c9BIASIlw12fIB2",
+  "planSubscriptionName": "FREE"
+}

@@ -1,0 +1,46 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Express App",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps/people/organizations-management",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "nx",
+        "run",
+        "people-organizations-management:serve"
+      ],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "restart": true,
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/dist/apps/people/organizations-management/**/*.js"]
+    },
+    {
+      "name": "Test Express App",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps/people/organizations-management",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "nx",
+        "run",
+        "people-organizations-management-base:test"
+      ],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "restart": true,
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/dist/apps/people/organizations-management/**/*.js"]
+    }
+  ]
+}

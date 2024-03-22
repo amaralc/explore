@@ -1,0 +1,17 @@
+{
+  "name": "people-researchers-peers-svc-iac",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/people/researchers-peers-svc/iac",
+  "projectType": "application",
+  "implicitDependencies": [
+    "people-researchers-peers-svc-rest-api",
+    "people-researchers-peers-svc-consumer",
+    "iac-modules-gcp-postgresql-dbms-user",
+    "iac-modules-postgresql-dbms-database",
+    "iac-modules-gcp-service-account",
+    "iac-modules-gcp-account-permissions",
+    "iac-modules-gcp-secrets"
+  ],
+  "targets": {},
+  "tags": []
+}

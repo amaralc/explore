@@ -3,9 +3,358 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.59.1](https://github.com/amaralc/explore/compare/peerlab@1.5.0-beta.1...peerlab@0.59.1) (2023-11-09)
+## [0.71.5](https://github.com/amaralc/peerlab/compare/peerlab@0.71.4...peerlab@0.71.5) (2024-03-22)
+
+### Bug Fixes
+
+- **PEER-667:** remove unleash dependencies ([5fd62a5](https://github.com/amaralc/peerlab/commit/5fd62a5e4c82c7fd4391b805f79533db79ee61a8))
+
+## [0.71.4](https://github.com/amaralc/peerlab/compare/peerlab@0.71.3...peerlab@0.71.4) (2024-03-22)
+
+### Bug Fixes
+
+- **PEER-668:** force hardcoded flags ([8a69921](https://github.com/amaralc/peerlab/commit/8a69921aa54dda32d3aef2888805a0b829a55885))
+
+## [0.71.3](https://github.com/amaralc/peerlab/compare/peerlab@0.71.2...peerlab@0.71.3) (2024-03-22)
 
 **Note:** Version bump only for package peerlab
+
+## [0.71.2](https://github.com/amaralc/peerlab/compare/peerlab@0.71.1...peerlab@0.71.2) (2024-03-22)
+
+### Bug Fixes
+
+- **PEER-668:** add nx_affected as dependency of functions resource ([7139e92](https://github.com/amaralc/peerlab/commit/7139e923b533fa2b75b2b99942e562c18f2889e8))
+
+## [0.71.1](https://github.com/amaralc/peerlab/compare/peerlab@0.71.0...peerlab@0.71.1) (2024-03-21)
+
+### Bug Fixes
+
+- **PEER-668:** remove dependency between browser and base library due to type error (to be fixed) ([4312500](https://github.com/amaralc/peerlab/commit/43125008c87c3e5cd1dee15c510ec834b98ac799))
+
+## [0.71.0](https://github.com/amaralc/peerlab/compare/peerlab@0.70.0...peerlab@0.71.0) (2024-03-21)
+
+### Features
+
+- **PEER-668:** enable cors in rest api ([56b36d0](https://github.com/amaralc/peerlab/commit/56b36d0fa82262d17ce3adc65f79060f4bad8fc8))
+- **PEER-668:** integrate with running api ([08cf3ad](https://github.com/amaralc/peerlab/commit/08cf3ad0f216da0b750074c7eac6b148bad33ff8))
+
+### Bug Fixes
+
+- **PEER-668:** disable mock and enable rest api call ([c32250b](https://github.com/amaralc/peerlab/commit/c32250bd1601e195e3c7a64410cf0e9994d9288b))
+- **PEER-668:** use 201 status code for entity creation ([649ad3f](https://github.com/amaralc/peerlab/commit/649ad3fba60ca138aaa2ba3933f951e714ce8bc3))
+
+## [0.70.0](https://github.com/amaralc/peerlab/compare/peerlab@0.69.1...peerlab@0.70.0) (2024-03-20)
+
+### Features
+
+- **PEER-668:** add basic organization slice and mock functionality ([b8c9441](https://github.com/amaralc/peerlab/commit/b8c9441288ec1bde883dbb7b29cad51658d1fda7))
+
+### Bug Fixes
+
+- **PEER-668:** integrate form to create organization with fake api ([41a230e](https://github.com/amaralc/peerlab/commit/41a230e68687d4b51fdf36b48e75e5309c16cec4))
+
+## [0.69.1](https://github.com/amaralc/peerlab/compare/peerlab@0.69.0...peerlab@0.69.1) (2024-03-17)
+
+### Bug Fixes
+
+- **PEER-649:** add type string to custom enum ([f7592ff](https://github.com/amaralc/peerlab/commit/f7592ff9b8f08be81e655312c5bdeedf18763013))
+- **PEER-649:** enhance openapi and move files ([c4dcff2](https://github.com/amaralc/peerlab/commit/c4dcff21760844d6164430c34502a399ecca5025))
+- **PEER-649:** remove const and examples key from openapi ([e2f9a87](https://github.com/amaralc/peerlab/commit/e2f9a870eda14fa1b263d85ab60ffc6f229abe43))
+
+## [0.69.0](https://github.com/amaralc/peerlab/compare/peerlab@0.68.0...peerlab@0.69.0) (2024-03-15)
+
+### Features
+
+- **PEER-649:** add openapi v3.1.0 schemas switching from class-validator to typebox ([155d821](https://github.com/amaralc/peerlab/commit/155d821043353dc49bedc5cf0fafc0c73f859260))
+
+## [0.68.0](https://github.com/amaralc/peerlab/compare/peerlab@0.67.4...peerlab@0.68.0) (2024-03-14)
+
+### Features
+
+- **PEER-649:** initialize open api specification with ts support ([df4f257](https://github.com/amaralc/peerlab/commit/df4f2579ad3b6d02ef4ab66ecf0362052fae4bfb))
+
+## [0.67.4](https://github.com/amaralc/peerlab/compare/peerlab@0.67.3...peerlab@0.67.4) (2024-03-13)
+
+### Bug Fixes
+
+- **PEER-649:** adjust entity reference and rename repository ([3e8c8a4](https://github.com/amaralc/peerlab/commit/3e8c8a44bce6af5308e65bfeb755560eeb01d2f4))
+
+## [0.67.3](https://github.com/amaralc/peerlab/compare/peerlab@0.67.2...peerlab@0.67.3) (2024-03-12)
+
+### Bug Fixes
+
+- **PEER-649:** remove hexadecimal rule from user and agent id since firebase do not follow it ([e8c4213](https://github.com/amaralc/peerlab/commit/e8c421317721c1f24dc5487487b29372849c1695))
+- **PEER-649:** substitute class-validator by typebox and ajv for schema validation ([eb8bea2](https://github.com/amaralc/peerlab/commit/eb8bea289f22baa448ada5692e9fa98f969e411b))
+
+## [0.67.2](https://github.com/amaralc/peerlab/compare/peerlab@0.67.1...peerlab@0.67.2) (2024-03-12)
+
+### Bug Fixes
+
+- **PEER-667:** use dto instead of type ([7fcefc3](https://github.com/amaralc/peerlab/commit/7fcefc334f4fe4346487811284e9c534fd7cebc8))
+
+## [0.67.1](https://github.com/amaralc/peerlab/compare/peerlab@0.67.0...peerlab@0.67.1) (2024-03-12)
+
+**Note:** Version bump only for package peerlab
+
+## [0.67.0](https://github.com/amaralc/peerlab/compare/peerlab@0.66.11...peerlab@0.67.0) (2024-03-11)
+
+### Features
+
+- **PEER-665:** organizations should have an email ([70f2ede](https://github.com/amaralc/peerlab/commit/70f2ede455ce2aabdab1c57b88198cee91ca07dd))
+
+## [0.66.11](https://github.com/amaralc/peerlab/compare/peerlab@0.66.10...peerlab@0.66.11) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** use user.delete event type for the delete function ([898c085](https://github.com/amaralc/peerlab/commit/898c085076b97e359536ccf4a7ba342d200c04af))
+- **PEER-664:** release database connections after db operation ([d279322](https://github.com/amaralc/peerlab/commit/d2793225abaeb28f4f986fa2bcb79ee99536b011))
+
+## [0.66.10](https://github.com/amaralc/peerlab/compare/peerlab@0.66.9...peerlab@0.66.10) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** add commit hash to zip file ([f1de3ca](https://github.com/amaralc/peerlab/commit/f1de3ca1866faf2fdbcbe51957bcd240cf115177))
+- **PEER-662:** delete agents for deleted users ([9e51d53](https://github.com/amaralc/peerlab/commit/9e51d53f1597e06a598c8b57e9729abdb1c2e661))
+- **PEER-662:** replace function zip when source code change ([0605132](https://github.com/amaralc/peerlab/commit/0605132558e0d3eb6d904e0f028df78cd8e4a9b8))
+- **PEER-662:** use commit sha to differentiate zip filename and force replacement ([4db008c](https://github.com/amaralc/peerlab/commit/4db008c3fd73f0b1c0fbfae3d584a6e942979210))
+
+## [0.66.9](https://github.com/amaralc/peerlab/compare/peerlab@0.66.8...peerlab@0.66.9) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** map background function event dates to user entity correctly ([15332e0](https://github.com/amaralc/peerlab/commit/15332e096e9b8eefbfc393d372e5458da8670275))
+
+## [0.66.8](https://github.com/amaralc/peerlab/compare/peerlab@0.66.7...peerlab@0.66.8) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** remove string length validation from AgentV1 id and reorganize function ([518c956](https://github.com/amaralc/peerlab/commit/518c9561356946d244c1d3cfcb3c9e20a75d35fa))
+
+## [0.66.7](https://github.com/amaralc/peerlab/compare/peerlab@0.66.6...peerlab@0.66.7) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** use pure function instead of async function ([8dbc98c](https://github.com/amaralc/peerlab/commit/8dbc98c1a9ec0a99d4195c1eff7f7ef358ff05c3))
+- **PEER-662:** use static method ([4d2f3a7](https://github.com/amaralc/peerlab/commit/4d2f3a79c475cbfb7962621e34745312492bf9e8))
+
+## [0.66.6](https://github.com/amaralc/peerlab/compare/peerlab@0.66.5...peerlab@0.66.6) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** avoid using default import since lib does not export a default ([932f5a6](https://github.com/amaralc/peerlab/commit/932f5a6d2617181ba6b9a8adb468b105143f6263))
+- **PEER-662:** disable function ([c3d93dd](https://github.com/amaralc/peerlab/commit/c3d93ddd59483e37ea9e48b6fc0712696a498396))
+- **PEER-662:** enable cloud function ([c6f4541](https://github.com/amaralc/peerlab/commit/c6f4541323b1e9878f3e933bfd69d00bd71678a3))
+- **PEER-662:** save new users in mongodb ([d99b8a9](https://github.com/amaralc/peerlab/commit/d99b8a9563b19d1ceab0685c8e4c65fca548bcd1))
+- **PEER-662:** use @google-cloud/functions-framework ([c65300e](https://github.com/amaralc/peerlab/commit/c65300e7e81d56f63e65f8e88fe1c013fc697b53))
+- **PEER-662:** use background functions format ([47a2be7](https://github.com/amaralc/peerlab/commit/47a2be732b3d8f2daebd532564b808531e19f29b))
+
+## [0.66.5](https://github.com/amaralc/peerlab/compare/peerlab@0.66.4...peerlab@0.66.5) (2024-03-10)
+
+### Bug Fixes
+
+- **PEER-662:** generate package.json on function build and use index.js ([ed3788d](https://github.com/amaralc/peerlab/commit/ed3788d0f328829bd755a1a75f4652fa8ca9415e))
+- **PEER-662:** remove event_trigger ([861e81e](https://github.com/amaralc/peerlab/commit/861e81e0ad88a5a25521f49d047ed1d367b3b72f))
+- **PEER-662:** remove pnpm-lock.yaml from functions build output ([d6c2511](https://github.com/amaralc/peerlab/commit/d6c2511e2896b9eda49dce71dd084a4314bd9866))
+- **PEER-662:** rename google function file to function.js ([9bf154b](https://github.com/amaralc/peerlab/commit/9bf154b69b50faa11dc463ac8815f9ffa755fa65))
+- **PEER-662:** switch to cloud functions stable gen 1 resource ([3bde963](https://github.com/amaralc/peerlab/commit/3bde96370c11de2e819aff8220122febd663006f))
+- **PEER-662:** upgrade google provider ([e5bfeea](https://github.com/amaralc/peerlab/commit/e5bfeea19f7ef6c01ca8ebe0399b6253f4e92881))
+- **PEER-662:** use user.create as event_type ([61f5d9e](https://github.com/amaralc/peerlab/commit/61f5d9e760364bf7c8584f3b3be88f44fa346d3e))
+
+## [0.66.4](https://github.com/amaralc/peerlab/compare/peerlab@0.66.3...peerlab@0.66.4) (2024-03-09)
+
+### Bug Fixes
+
+- **PEER-662:** zip module use archive.zip as default local path ([0f24cc2](https://github.com/amaralc/peerlab/commit/0f24cc2dab5b0eb1294c5ebfbbfa5af99cd8d682))
+
+## [0.66.3](https://github.com/amaralc/peerlab/compare/peerlab@0.66.2...peerlab@0.66.3) (2024-03-09)
+
+### Bug Fixes
+
+- **PEER-662:** use functions.js filename and restructure zip content ([6b1ffde](https://github.com/amaralc/peerlab/commit/6b1ffdee4ed002e523467a08dd5f1eb02a6e76e2))
+
+## [0.66.2](https://github.com/amaralc/peerlab/compare/peerlab@0.66.1...peerlab@0.66.2) (2024-03-09)
+
+### Bug Fixes
+
+- **PEER-662:** enable cloud build ([6e97863](https://github.com/amaralc/peerlab/commit/6e9786335fe877d68626ba13bb269225bb7aee95))
+
+## [0.66.1](https://github.com/amaralc/peerlab/compare/peerlab@0.66.0...peerlab@0.66.1) (2024-03-09)
+
+### Bug Fixes
+
+- **PEER-662:** avoid ignoring the zip script ([6ceac14](https://github.com/amaralc/peerlab/commit/6ceac1418e40a7646575d91ca83d77d655444901))
+- **PEER-662:** remove event trigger ([f633543](https://github.com/amaralc/peerlab/commit/f63354319b6f5a03ddc5140180e266b82451130d))
+
+## [0.66.0](https://github.com/amaralc/peerlab/compare/peerlab@0.65.0...peerlab@0.66.0) (2024-03-09)
+
+### Features
+
+- **PEER-662:** create an agent when a user is created ([dec4c18](https://github.com/amaralc/peerlab/commit/dec4c18deb0d24335369c612f4b3c659734b3c3b))
+
+### Bug Fixes
+
+- **PEER-622:** use firebase user.create event type and add logs to functions ([dc557b8](https://github.com/amaralc/peerlab/commit/dc557b8266419040a3c4851f090379b891862d1f))
+- **PEER-662:** adjust path to functions.zip and enable functions api ([9ad5c0d](https://github.com/amaralc/peerlab/commit/9ad5c0dc4069b43ff5f7d3200b5ae2bac1981f99))
+- **PEER-662:** adjust reference to archive source and output path ([13b2894](https://github.com/amaralc/peerlab/commit/13b2894d288bffb50eb022e0b166240771a2fa14))
+- **PEER-662:** build functions if affected ([e18673d](https://github.com/amaralc/peerlab/commit/e18673d95fc3f06f72d245a78eac81d4e9a896c2))
+- **peer-662:** build projects in github actions ([716634d](https://github.com/amaralc/peerlab/commit/716634dc6c08223defd743d774f0773505396762))
+- **PEER-662:** enable eventarc google api ([03dff61](https://github.com/amaralc/peerlab/commit/03dff6140c16dec515419e6db51c8665ca5a7381))
+- **PEER-662:** move zip to module to enforce dependecy relation ([319aa61](https://github.com/amaralc/peerlab/commit/319aa619e1faabdf022d49568f50d7cb0eb1bd7a))
+- **PEER-662:** replace non-existing path by service component name ([b911cb4](https://github.com/amaralc/peerlab/commit/b911cb43b82a3c4cbbd86550cbb2621fbc048c46))
+- **PEER-662:** use path relative to main.tf entrypoint ([68121a7](https://github.com/amaralc/peerlab/commit/68121a7bfdfbb6b80afcafec0811b5ef1e5a918a))
+- **PEER-662:** zip file within build script ([41990ed](https://github.com/amaralc/peerlab/commit/41990ed814c34403b302559f2f0880088dd28e25))
+
+## [0.65.0](https://github.com/amaralc/peerlab/compare/peerlab@0.64.5...peerlab@0.65.0) (2024-03-09)
+
+### Features
+
+- **PEER-622:** create agents for new users ([abeda25](https://github.com/amaralc/peerlab/commit/abeda257f5226643fb3386c5ed40a21190661766))
+
+## [0.64.5](https://github.com/amaralc/peerlab/compare/peerlab@0.64.4...peerlab@0.64.5) (2024-03-05)
+
+### Bug Fixes
+
+- **PEER-622:** use local flag to enable single sign on ([cae4007](https://github.com/amaralc/peerlab/commit/cae400799aa2ae5cea675d8b25eb2a9f47e3962a))
+
+## [0.64.4](https://github.com/amaralc/peerlab/compare/peerlab@0.64.3...peerlab@0.64.4) (2024-03-05)
+
+### Bug Fixes
+
+- **PEER-622:** use google_cloud_run_v2_service and add domain name ([2407f24](https://github.com/amaralc/peerlab/commit/2407f24ec18e056ae5fb993b13336832095a8d7c))
+
+## [0.64.3](https://github.com/amaralc/peerlab/compare/peerlab@0.64.2...peerlab@0.64.3) (2024-03-05)
+
+### Bug Fixes
+
+- **PEER-622:** use array index to reference mongodb project ([d93e57b](https://github.com/amaralc/peerlab/commit/d93e57bfe8f19c6af120477abd9f9d1074f89684))
+
+## [0.64.2](https://github.com/amaralc/peerlab/compare/peerlab@0.64.1...peerlab@0.64.2) (2024-03-05)
+
+### Bug Fixes
+
+- **PEER-622:** allow access from any ip ([84624ef](https://github.com/amaralc/peerlab/commit/84624eff7849b385fe2273dceeb78ecde85f11ba))
+
+## [0.64.1](https://github.com/amaralc/peerlab/compare/peerlab@0.64.0...peerlab@0.64.1) (2024-03-05)
+
+### Bug Fixes
+
+- **PEER-622:** use sh for alpine image ([c02bb42](https://github.com/amaralc/peerlab/commit/c02bb42801530615514fa4ec62c1b99cc2a5928b))
+
+## [0.64.0](https://github.com/amaralc/peerlab/compare/peerlab@0.63.3...peerlab@0.64.0) (2024-03-05)
+
+### Features
+
+- **PEER-662:** add service with database connection ([0a3abcb](https://github.com/amaralc/peerlab/commit/0a3abcb8b4b4e73fce7cfe686106342a8efd0c53))
+- **PEER-662:** enable service and add ignore build steps ([ad6ae92](https://github.com/amaralc/peerlab/commit/ad6ae929fbc515baef32c676072c09195b134f6e))
+
+### Bug Fixes
+
+- **PEER-622:** adjust organizations management functions build ([02d8d5f](https://github.com/amaralc/peerlab/commit/02d8d5f237fa70ea109b63e2e2ca99fa37379c5c))
+- **PEER-622:** adjust unleash frontend url condition ([144857f](https://github.com/amaralc/peerlab/commit/144857f8bbf9ef438cfc70a8eee71e6c2631ee43))
+- **PEER-622:** build people organizations management ([ed32e6a](https://github.com/amaralc/peerlab/commit/ed32e6aa109b4a3f21b7c1114e90c16d73653a36))
+- **PEER-622:** destroy management-shell browser app ([eeb163d](https://github.com/amaralc/peerlab/commit/eeb163d89a6f218ec087aa4cf9e158b5ca2b0b03))
+- **PEER-622:** disable flag management ([a7b2562](https://github.com/amaralc/peerlab/commit/a7b25626d027c5c155bb4513a6471b73f30e6672))
+- **PEER-622:** disable flag management and postgres persistence ([92ed6ba](https://github.com/amaralc/peerlab/commit/92ed6bacff223f0ac86d52cbb571eccfea4604fe))
+- **PEER-622:** enable flag management only ([fe9d080](https://github.com/amaralc/peerlab/commit/fe9d080f4a7a798880df95417076839d7b03c98d))
+- **PEER-622:** enable flag management) ([418f49c](https://github.com/amaralc/peerlab/commit/418f49c581d7b071d84dfff17ea8df1a42a588e9))
+- **PEER-622:** evaluate module length before assigning value ([e614600](https://github.com/amaralc/peerlab/commit/e6146000d6ea678af7154b272c424a71e6e44968))
+- **PEER-622:** remove kernel-management-shell-browser ([bf9c171](https://github.com/amaralc/peerlab/commit/bf9c1719d76bd4f170fc769dbdf06acf3a60b68c))
+- **PEER-622:** remove rest api ([640f909](https://github.com/amaralc/peerlab/commit/640f9091dbdd26e0ebb9d9ee5aae97b6df11e0f6))
+- **PEER-622:** remove unleash provider ([7600d4f](https://github.com/amaralc/peerlab/commit/7600d4fcee0c30bc7647191390a6c0daa1197620))
+- **PEER-622:** remove unleash provider while not using service ([ebb4a66](https://github.com/amaralc/peerlab/commit/ebb4a661fc711cafd8e9f695ffed1b7dd0862b49))
+- **PEER-622:** remove unleash resources from management shell ([417e263](https://github.com/amaralc/peerlab/commit/417e263b4695d64bdbcace7cfc1a7f0182dc211f))
+- **PEER-662:** delete mongodb tenant cluster ([ef87ed5](https://github.com/amaralc/peerlab/commit/ef87ed5cc64724e27405fbddc59522174178712d))
+- **PEER-662:** enable organizations management service ([26380dc](https://github.com/amaralc/peerlab/commit/26380dca3c685d24fe81c1ae6cec6402c857379e))
+- **PEER-662:** set scope according to mongodb atlas docs ([8aa7c85](https://github.com/amaralc/peerlab/commit/8aa7c8549e3ada62b1268db192109b674ddebbc1))
+- **PEER-662:** use serverless mongodb instance ([12caa68](https://github.com/amaralc/peerlab/commit/12caa680f7a12a21e8cc5638270cd7f679f58789))
+
+## [0.63.3](https://github.com/amaralc/peerlab/compare/peerlab@0.63.2...peerlab@0.63.3) (2024-03-02)
+
+### Bug Fixes
+
+- **PEER-662:** change cluster region name ([10dc645](https://github.com/amaralc/peerlab/commit/10dc64534ff97b178839e7f703beb61c261fa3f6))
+
+## [0.63.2](https://github.com/amaralc/peerlab/compare/peerlab@0.63.1...peerlab@0.63.2) (2024-03-02)
+
+### Bug Fixes
+
+- **PEER-662:** add cluster name and change region ([efe103f](https://github.com/amaralc/peerlab/commit/efe103fc66fdee88e5f63ca4fc63c0c290bcbe69))
+
+## [0.63.1](https://github.com/amaralc/peerlab/compare/peerlab@0.63.0...peerlab@0.63.1) (2024-03-02)
+
+### Bug Fixes
+
+- **PEER-662:** add mongodb atlas group id ([917a3bc](https://github.com/amaralc/peerlab/commit/917a3bc34a7b956d6031e131c46cc764723139b7))
+
+## [0.63.0](https://github.com/amaralc/peerlab/compare/peerlab@0.62.2...peerlab@0.63.0) (2024-03-02)
+
+### Features
+
+- **PEER-662:** add mongodb cluster ([f2a0bf6](https://github.com/amaralc/peerlab/commit/f2a0bf65bf9ca7ae12cd0b4e2fac5e059433b82e))
+- **PEER-662:** execute action once a new user is created in firebase ([79fe8c2](https://github.com/amaralc/peerlab/commit/79fe8c208d5e9b02095283024dac0fb4a0c77c71))
+
+## [0.62.2](https://github.com/amaralc/peerlab/compare/peerlab@0.62.1...peerlab@0.62.2) (2024-03-02)
+
+### Bug Fixes
+
+- **PEER-661:** rename projects ([dadabdc](https://github.com/amaralc/peerlab/commit/dadabdc63e578579121d6139c57ee4a5416da183))
+
+## [0.62.1](https://github.com/amaralc/peerlab/compare/peerlab@0.62.0...peerlab@0.62.1) (2024-03-01)
+
+### Bug Fixes
+
+- **PEER-660:** use environment variables dynamically ([5ce660a](https://github.com/amaralc/peerlab/commit/5ce660aa238b8550c55a3743f0e025ce9f759275))
+- **PEER-660:** use mongodb in memory and adapt application ([77fba02](https://github.com/amaralc/peerlab/commit/77fba02fb6fefeb6be878ae5bdfe1dcd63c3d7ab))
+
+## [0.62.0](https://github.com/amaralc/peerlab/compare/peerlab@0.61.1...peerlab@0.62.0) (2024-02-18)
+
+### Features
+
+- **PEER-644:** create organization with owner agent ([e4a7d7a](https://github.com/amaralc/peerlab/commit/e4a7d7aa19ecfcd5e7cad120fbe7b38dad571ffd))
+
+## [0.61.1](https://github.com/amaralc/peerlab/compare/peerlab@0.61.0...peerlab@0.61.1) (2024-02-10)
+
+**Note:** Version bump only for package peerlab
+
+## [0.61.0](https://github.com/amaralc/peerlab/compare/peerlab@0.60.1...peerlab@0.61.0) (2024-02-10)
+
+### Features
+
+- update values ([1ee6f16](https://github.com/amaralc/peerlab/commit/1ee6f16cff0e2b959bec34f7b0a5b89d5fb2d22d))
+
+### Bug Fixes
+
+- **PEER-658:** reduce minimum instance count to 0 ([3582138](https://github.com/amaralc/peerlab/commit/358213897b7a9dc74141db713ae78dfa3c4c9ddc))
+
+## [0.60.1](https://github.com/amaralc/peerlab/compare/peerlab@0.60.0...peerlab@0.60.1) (2024-02-01)
+
+### Bug Fixes
+
+- increase expiration date of client key ([0e59c5d](https://github.com/amaralc/peerlab/commit/0e59c5d260426c786803b5e5e81bdb8f46d6b0b5))
+
+## [0.60.0](https://github.com/amaralc/peerlab/compare/peerlab@0.60.0-beta.0...peerlab@0.60.0) (2024-01-29)
+
+**Note:** Version bump only for package peerlab
+
+## [0.60.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.59.1-beta.0...peerlab@0.60.0-beta.0) (2023-12-25)
+
+### Features
+
+- **PEER-644:** bootstrap express application ([f35286a](https://github.com/amaralc/peerlab/commit/f35286a21d5389051630d26236f69d81a4c74e43))
+- **PEER-644:** create organization ([73aceaf](https://github.com/amaralc/peerlab/commit/73aceafd24cb94c798f4135fb5473cd206499561))
+- **PEER-644:** create organization ([b02a1f4](https://github.com/amaralc/peerlab/commit/b02a1f41fb25cf1cdf5565ce39ac511c9c18b4e0))
+- **PEER-644:** start core components to create organization ([5dcd3c7](https://github.com/amaralc/peerlab/commit/5dcd3c7890cbefdca45246b691089c62a83b993b))
+
+### Bug Fixes
+
+- **PEER-644:** remove prop-types ([f3495bb](https://github.com/amaralc/peerlab/commit/f3495bbf8595e5cc49386e819e3c6f7e7e81bf0c))
+- **PEER-644:** use json parser and add conflicting nickname test ([632127f](https://github.com/amaralc/peerlab/commit/632127f48d5dafd53b6f3eb5318cc625c1911c66))
+
+## [0.59.1-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.59.0...peerlab@0.59.1-beta.0) (2023-11-09)
+
+### Bug Fixes
+
+- **PEER-642:** downgrade swc deps ([999e8ca](https://github.com/amaralc/peerlab/commit/999e8cabce71e38bb7543bfc3ba2bdf413a4f375))
 
 ## [0.59.0](https://github.com/amaralc/peerlab/compare/peerlab@0.58.0...peerlab@0.59.0) (2023-10-30)
 
@@ -1051,7 +1400,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **PEER-596:** fix service name ([25a0daf](https://github.com/amaralc/peerlab/commit/25a0daf92a90951c743b47172e0b2b81a5736ca2))
 - **PEER-596:** increase build timeout ([9855b6f](https://github.com/amaralc/peerlab/commit/9855b6f9845e64bae38d158b8941f9e871cd27b0))
 - **PEER-596:** use shell project id ([8143797](https://github.com/amaralc/peerlab/commit/8143797915fec35259ae1b53e7d916b60666d9ea))
-- **PEER596:** adjust core-researchers-peers-svc deployment ([6c41790](https://github.com/amaralc/peerlab/commit/6c4179067be51955657c5fe3db79ee28513c5f62))
+- **PEER596:** adjust people-researchers-peers-svc deployment ([6c41790](https://github.com/amaralc/peerlab/commit/6c4179067be51955657c5fe3db79ee28513c5f62))
 
 ## [0.52.1-beta.6](https://github.com/amaralc/peerlab/compare/peerlab@0.52.1-beta.5...peerlab@0.52.1-beta.6) (2023-09-08)
 

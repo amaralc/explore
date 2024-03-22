@@ -1,0 +1,62 @@
+{
+  "name": "people-organizations-management-rest-api",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/people/organizations-management/rest-api/src",
+  "projectType": "application",
+  "targets": {
+    "setup": {
+      "command": "cp apps/people/organizations-management/rest-api/.env.example apps/people/organizations-management/.env"
+    },
+    "docker-build": {
+      "command": "docker build -f apps/people/organizations-management/rest-api/Dockerfile . -t people-organizations-management-rest-api"
+    },
+    "docker-run": {
+      "command": "docker run -p 8080:8080 --name people-organizations-management-rest-api people-organizations-management-rest-api"
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/people/organizations-management/rest-api",
+        "main": "apps/people/organizations-management/rest-api/src/main.ts",
+        "tsConfig": "apps/people/organizations-management/rest-api/tsconfig.app.json",
+        "assets": ["apps/people/organizations-management/rest-api/src/assets"],
+        "webpackConfig": "apps/people/organizations-management/rest-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "people-organizations-management-rest-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "people-organizations-management-rest-api:build:development"
+        },
+        "production": {
+          "buildTarget": "people-organizations-management-rest-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/people/organizations-management/rest-api/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

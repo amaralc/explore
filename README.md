@@ -17,7 +17,7 @@ A world where universities are as popular as shopping centers and the scientific
 
 ## Values
 
-Communication, Simplicity, Feedback, Courage, Respect, Continuous Learning and Experimentation.
+Communication, Adaptability, Resilience, Courage, Respect, Continuous Learning and Experimentation.
 
 # Setup
 
@@ -36,29 +36,36 @@ Communication, Simplicity, Feedback, Courage, Respect, Continuous Learning and E
 - ~~ci(build): After building a new image, it is necessary to trigger a new deployment of that service; Maybe a final github call by the end of every run, with a random name for every run, could do it. Another option would be to call the google api and create a new cloud run revision of that service.~~ (Fixed: adopting GitHub actions, Terraform and Docker resources)
 - ci(auth): Automatic deployments can only create brands with internal access in GCP; External access needs to be configured manually;
 - ~~ci(auth): We still do not have automatically assigned domains and subdomains. That prevents us from using firebase with a cloud run deployment since the generated domains are random;~~ (Fixed: generation of domains and subdomains are now automated).
+- ~~ci(build): Unnecessary images are being built even though the project was not affected by the commit.~~ (Fixed: we now check weather the image needs to be built using nx ignore and a custom script);
 - ci(auth): We need to manually enable the Google auth client through Firebase Console in order to sign in with google in our applications.
-- ci(build): Unnecessary images are being built even though the project was not affected by the commit.
 
 # Features
 
 - [ ] CI/CD
   - [x] Manage cloud infrastructure with code;
   - [x] Create full stack preview environments if and when needed;
-  - [ ] Automate builds and deployments (IN PROGRESS);
-  - [ ] Manage feature toggles;
+  - [x] Automate builds and deployments;
+  - [x] Manage feature toggles;
+  - [ ] Validate preview environment;
 - [ ] Auth
   - [x] Sign in with Google;
   - [ ] Sign in with Microsoft;
   - [ ] Sign in with ORCID;
-- [ ] Lab Admin Dashboard
+- [ ] Back Office API;
+- [ ] Lab Admin
   - [ ] Create organization;
     - [ ] Freemium;
     - [ ] Standard - Recurring revenue;
     - [ ] Enterprise - Recurring revenue;
-  - [ ] Create and publish a machine in an organization;
-  - [ ] Create and publish a service provided by the organization;
+    - [ ] Create organizations in batch;
+  - [ ] Create child organization;
+  - [ ] Convert child organization in root organization;
+  - [ ] Change organization ownership;
+  - [ ] Create and publish a public equipment in an organization;
+  - [ ] Create and publish a public service provided by the organization;
   - [ ] Members;
     - [ ] Invite members;
+    - [ ] Remove members;
 - [ ] Lab Research
   - [ ] Create and publish blog articles;
   - [ ] Create and publish success cases and reports;

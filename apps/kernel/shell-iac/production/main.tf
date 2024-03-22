@@ -99,8 +99,8 @@ module "production" {
   owner_account_email                 = var.owner_account_email
   nx_cloud_access_token               = var.nx_cloud_access_token
   environment_path                    = var.environment_path
+  mongodb_atlas_org_id                = var.mongodb_atlas_org_id
   depends_on                          = [module.core_platform_shell_iac_apis] #, google_dns_record_set.search_console_verification]
-  # mongodb_atlas_org_id                = var.mongodb_atlas_org_id
   # gcp_cloudbuildv2_repository_id    = module.github_source_repository.repository_id
 }
 

@@ -78,7 +78,7 @@ resource "google_cloud_run_v2_service" "instance" {
     scaling {
       # Maximum and minimum instances. Old "autoscaling.knative.dev" (https://cloud.google.com/run/docs/configuring/max-instances)
       max_instance_count = 1
-      min_instance_count = 1
+      min_instance_count = 0
     }
 
     # The service account to be used by the service

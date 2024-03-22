@@ -138,7 +138,7 @@
 
 #   #     - name: Check if app was affected
 #   #       run: |
-#   #         bash scripts/nx/check-if-app-was-affected.sh --project-name=core-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
+#   #         bash scripts/nx/check-if-app-was-affected.sh --project-name=people-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
 
 #   #     - name: Get short commit hash
 #   #       if: ${{ env.affected == 'true' }}
@@ -163,14 +163,14 @@
 #   #       uses: docker/build-push-action@v4
 #   #       with:
 #   #         context: .
-#   #         file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
+#   #         file: ./apps/people/researchers-peers-svc/rest-api/Dockerfile
 #   #         push: true
 #   #         no-cache: true
 #   #         tags: |
 #   #           ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
 #   #           ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
 #   #       env:
-#   #         IMAGE_NAME: core-researchers-peers-svc-rest-api
+#   #         IMAGE_NAME: people-researchers-peers-svc-rest-api
 
 #   build-kernel-flag-management:
 #     # needs: [check-branch]

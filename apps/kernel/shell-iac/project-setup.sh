@@ -10,6 +10,10 @@
 # --domain-name
 # --github-username
 # --github-repository
+# --mongodb-atlas-org-id
+# --mongodb-atlas-public-key
+# --mongodb-atlas-private-key
+# --mongodb-atlas-group-id
 
 # Call this script with the following command: bash apps/core/platform-shell-iac/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
 # Obs.: this script assumes that you are already authenticated with gcloud CLI.
@@ -43,6 +47,18 @@ case $i in                          # This starts a case statement, which checks
     ;;
     --github-repository=*)
     GITHUB_REPOSITORY="${i#*=}"
+    shift
+    ;;
+    --mongodb-atlas-org-id=*)
+    MONGODB_ATLAS_ORG_ID="${i#*=}"
+    shift
+    ;;
+    --mongodb-atlas-public-key=*)
+    MONGODB_ATLAS_PUBLIC_KEY="${i#*=}"
+    shift
+    ;;
+    --mongodb-atlas-private-key=*)
+    MONGODB_ATLAS_PRIVATE_KEY="${i#*=}"
     shift
     ;;
 esac                                # This ends the case statement.
@@ -87,6 +103,27 @@ fi
 if [ -z "$GITHUB_REPOSITORY" ]
 then
     echo "Error: --github-repository flag is required"
+    exit 1
+fi
+
+# Check if MONGODB_ATLAS_ORG_ID is set
+if [ -z "$MONGODB_ATLAS_ORG_ID" ]
+then
+    echo "Error: --mongodb-atlas-org-id flag is required"
+    exit 1
+fi
+
+# Check if MONGODB_ATLAS_PUBLIC_KEY is set
+if [ -z "$MONGODB_ATLAS_PUBLIC_KEY" ]
+then
+    echo "Error: --mongodb-atlas-public-key flag is required"
+    exit 1
+fi
+
+# Check if MONGODB_ATLAS_PRIVATE_KEY is set
+if [ -z "$MONGODB_ATLAS_PRIVATE_KEY" ]
+then
+    echo "Error: --mongodb-atlas-private-key flag is required"
     exit 1
 fi
 
@@ -198,6 +235,9 @@ gh secret set GCP_LOCATION -b$GCP_PROJECT_LOCATION
 gh secret set GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY < $GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY_PATH
 gh secret set UNLEASH_API_URL -b "unleash-fake-url"
 gh secret set UNLEASH_AUTH_TOKEN -b "unleash-fake-token"
+gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID
+gh secret set MONGODB_ATLAS_PUBLIC_KEY -b $MONGODB_ATLAS_PUBLIC_KEY
+gh secret set MONGODB_ATLAS_PRIVATE_KEY -b $MONGODB_ATLAS_PRIVATE_KEY
 
 ########## 3. BASIC TERRAFORM SETUP
 echo ""

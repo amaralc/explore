@@ -20,7 +20,7 @@ jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
     env:
-      PRODUCTION_BRANCH: "production"
+      PRODUCTION_BRANCH: 'production'
     steps:
       - name: Get target and source branch names
         run: |
@@ -57,7 +57,7 @@ jobs: # A workflow can have multiple jobs
       matrix:
         node-version: [18]
         npm-version: [8]
-        yarn-version: ["1.22.x"]
+        yarn-version: ['1.22.x']
         pnpm-version: [8]
     steps:
       - name: Checkout [Pull Request] # Download code from the repository
@@ -91,16 +91,16 @@ jobs: # A workflow can have multiple jobs
       - name: Set node/npm/yarn/pnpm versions using volta
         uses: volta-cli/action@v3
         with:
-          node-version: "${{ matrix.node-version }}"
-          npm-version: "${{ matrix.npm-version }}"
-          yarn-version: "${{ matrix.yarn-version }}"
-          pnpm-version: "${{ matrix.pnpm-version }}"
+          node-version: '${{ matrix.node-version }}'
+          npm-version: '${{ matrix.npm-version }}'
+          yarn-version: '${{ matrix.yarn-version }}'
+          pnpm-version: '${{ matrix.pnpm-version }}'
 
       - name: Install PNPM
         if: env.package_manager == 'pnpm'
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: "${{ matrix.pnpm-version }}"
+          version: '${{ matrix.pnpm-version }}'
 
       - name: Print node/npm/yarn/pnpm versions
         id: versions
@@ -175,12 +175,12 @@ jobs: # A workflow can have multiple jobs
     # environment:
     #   name: core-platform-shell-iac-preview
     env:
-      IMAGE_NAME: core-researchers-peers-svc-rest-api
+      IMAGE_NAME: people-researchers-peers-svc-rest-api
     strategy:
       matrix:
         node-version: [18]
         npm-version: [8]
-        yarn-version: ["1.22.x"]
+        yarn-version: ['1.22.x']
         pnpm-version: [8]
 
     steps:
@@ -214,9 +214,9 @@ jobs: # A workflow can have multiple jobs
         run: |
           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
@@ -240,16 +240,16 @@ jobs: # A workflow can have multiple jobs
         if: ${{ env.is_existing_image == 'true' }}
         uses: volta-cli/action@v3
         with:
-          node-version: "${{ matrix.node-version }}"
-          npm-version: "${{ matrix.npm-version }}"
-          yarn-version: "${{ matrix.yarn-version }}"
-          pnpm-version: "${{ matrix.pnpm-version }}"
+          node-version: '${{ matrix.node-version }}'
+          npm-version: '${{ matrix.npm-version }}'
+          yarn-version: '${{ matrix.yarn-version }}'
+          pnpm-version: '${{ matrix.pnpm-version }}'
 
       - name: Install PNPM
         if: ${{ env.is_existing_image == 'true' && env.package_manager == 'pnpm'}}
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: "${{ matrix.pnpm-version }}"
+          version: '${{ matrix.pnpm-version }}'
 
       - name: Print node/npm/yarn/pnpm versions
         if: ${{ env.is_existing_image == 'true' }}
@@ -307,7 +307,7 @@ jobs: # A workflow can have multiple jobs
           AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
           echo 'Affected apps:' $AFFECTED_APPS
 
-          PROJECT_NAME=core-researchers-peers-svc-rest-api
+          PROJECT_NAME=people-researchers-peers-svc-rest-api
           if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
             echo '✅ - Build can proceed since app was affected!'
             echo "affected=true" >> $GITHUB_ENV
@@ -334,7 +334,7 @@ jobs: # A workflow can have multiple jobs
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
+          file: ./apps/people/researchers-peers-svc/rest-api/Dockerfile
           push: true
           no-cache: true # TODO: Check if this is necessary
           build-args: BRANCH_NAME=${{ env.branch_name }}
@@ -484,7 +484,7 @@ jobs: # A workflow can have multiple jobs
   #         AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
   #         echo 'Affected apps:' $AFFECTED_APPS
 
-  #         PROJECT_NAME=core-researchers-peers-svc-rest-api
+  #         PROJECT_NAME=people-researchers-peers-svc-rest-api
   #         if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
   #           echo '✅ - Build can proceed since app was affected!'
   #           echo "affected=true" >> $GITHUB_ENV
@@ -572,9 +572,9 @@ jobs: # A workflow can have multiple jobs
         run: |
           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
@@ -598,14 +598,14 @@ jobs: # A workflow can have multiple jobs
         if: ${{ env.is_existing_image == 'true' }}
         uses: volta-cli/action@v3
         with:
-          node-version: "${{ matrix.node-version }}"
-          pnpm-version: "${{ matrix.pnpm-version }}"
+          node-version: '${{ matrix.node-version }}'
+          pnpm-version: '${{ matrix.pnpm-version }}'
 
       - name: Install PNPM
         if: ${{ env.is_existing_image == 'true'}}
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: "${{ matrix.pnpm-version }}"
+          version: '${{ matrix.pnpm-version }}'
 
       - name: Print node/pnpm versions
         if: ${{ env.is_existing_image == 'true' }}
@@ -637,7 +637,7 @@ jobs: # A workflow can have multiple jobs
           AFFECTED_APPS=$(npx nx print-affected --type=app --select=projects --base=$LAST_MERGE_COMMIT_BEFORE_HEAD)
           echo 'Affected apps:' $AFFECTED_APPS
 
-          PROJECT_NAME=core-researchers-peers-svc-rest-api
+          PROJECT_NAME=people-researchers-peers-svc-rest-api
           if [[ $AFFECTED_APPS == *$PROJECT_NAME* ]]; then
             echo '✅ - Build can proceed since app was affected!'
             echo "affected=true" >> $GITHUB_ENV
@@ -714,14 +714,14 @@ jobs: # A workflow can have multiple jobs
         run: |
           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/preview/credentials.json
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2

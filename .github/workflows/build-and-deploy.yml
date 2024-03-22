@@ -71,16 +71,16 @@ jobs:
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/kernel-flag-management:${{ env.short_commit_sha }}
 
-      - name: Build and push core-researchers-peers-svc-rest-api Docker image
+      - name: Build and push people-researchers-peers-svc-rest-api Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
+          file: ./apps/people/researchers-peers-svc/rest-api/Dockerfile
           push: true
           # no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
           tags: |
-            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/core-researchers-peers-svc-rest-api:${{ env.short_commit_sha }}
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/people-researchers-peers-svc-rest-api:${{ env.short_commit_sha }}
 
       - name: Build and push kernel-management-shell-browser Docker image
         uses: docker/build-push-action@v4
@@ -178,6 +178,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build all projects
+        run: |
+          NX_BRANCH=${GITHUB_REF#refs/heads/} pnpm nx run-many --target=build --all=true --parallel=3
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -213,7 +217,10 @@ jobs:
             -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" \
             -var "unleash_api_url=${{ secrets.UNLEASH_API_URL }}" \
             -var "unleash_auth_token=${{ secrets.UNLEASH_AUTH_TOKEN }}" \
-            -var "environment_path=$GITHUB_ENV"
+            -var "environment_path=$GITHUB_ENV" \
+            -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" \
+            -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" \
+            -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" \
 
           # echo "Saving flag management url and token..."
           # echo "unleash_api_url=$(terraform output flag_management_url)" >> $GITHUB_ENV
@@ -238,7 +245,10 @@ jobs:
             -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}" \
             -var "unleash_api_url=${{ env.unleash_api_url }}" \
             -var "unleash_auth_token=${{ env.unleash_auth_token }}" \
-            -var "environment_path=$GITHUB_ENV"
+            -var "environment_path=$GITHUB_ENV" \
+            -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" \
+            -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" \
+            -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" \
         working-directory: apps/kernel/shell-iac/production
 
       - name: Terraform Apply
@@ -246,6 +256,10 @@ jobs:
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
         working-directory: apps/kernel/shell-iac/production
+
+      - name: Emmit Compass Deployment event
+        run: |
+          bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}
 
       # - name: Terraform Destroy
       #   run: |
@@ -264,8 +278,7 @@ jobs:
       #       -var "neon_project_location=${{ secrets.NEON_PROJECT_LOCATION }}"
       #       -var "unleash_api_url=${{ secrets.UNLEASH_API_URL }}" \
       #       -var "unleash_auth_token=${{ secrets.UNLEASH_AUTH_TOKEN }}" \
+      #       -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" \
+      #       -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" \
+      #       -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" \
       #   working-directory: apps/kernel/shell-iac/production
-
-      # - name: Emmit Compass Deployment event
-      #   run: |
-      #     bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}

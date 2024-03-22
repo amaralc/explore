@@ -8,7 +8,7 @@
     "iac-modules-gcp-apis",
     "iac-modules-gcp-postgresql-dbms-environment",
     "iac-modules-environment-vercel",
-    "core-researchers-peers-svc-iac",
+    "people-researchers-peers-svc-iac",
     "kernel-security-iam-svc"
   ],
   "targets": {

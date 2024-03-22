@@ -1,53 +1,55 @@
-resource "unleash_api_token" "management-shell-browser" {
-  username    = "admin"
-  type        = "frontend"
-  expires_at  = "2023-11-25T00:00:00Z"
-  environment = var.is_production_environment ? "production" : "development"
-  projects    = ["default"]
-}
+# resource "unleash_api_token" "management-shell-browser" {
+#   username    = "admin"
+#   type        = "frontend"
+#   expires_at  = "2024-04-28T00:00:00Z"
+#   environment = var.is_production_environment ? "production" : "development"
+#   projects    = ["default"]
+# }
 
-resource "unleash_feature_v2" "with_env_strategies" {
-  name               = "PEER_547_GOOGLE_SSO_ENABLED"
-  description        = "Weather or not to enable Google SSO"
-  type               = "release"
-  project_id         = "default"
-  archive_on_destroy = false
+# # The prefix VITE and FEATURE_FLAG were added only to make it easier to find the flag in all codebase,
+# # but if we opt to use unleash again, these prefixes are not needed
+# resource "unleash_feature_v2" "with_env_strategies" {
+#   name               = "VITE_PEER_547_FEATURE_FLAG_GOOGLE_SSO_ENABLED"
+#   description        = "Weather or not to enable Google SSO"
+#   type               = "release"
+#   project_id         = "default"
+#   archive_on_destroy = false
 
-  environment {
-    name    = "production"
-    enabled = false
-  }
+#   environment {
+#     name    = "production"
+#     enabled = false
+#   }
 
-  environment {
-    name    = "development"
-    enabled = true
+#   environment {
+#     name    = "development"
+#     enabled = true
 
-    strategy {
-      name = "remoteAddress"
-      parameters = {
-        IPs = "189.434.777.123,host.test.com"
-      }
-    }
-    strategy {
-      name = "flexibleRollout"
-      parameters = {
-        rollout    = "68"
-        stickiness = "random"
-        groupId    = "toggle"
-      }
-    }
-  }
+#     strategy {
+#       name = "remoteAddress"
+#       parameters = {
+#         IPs = "189.434.777.123,host.test.com"
+#       }
+#     }
+#     strategy {
+#       name = "flexibleRollout"
+#       parameters = {
+#         rollout    = "68"
+#         stickiness = "random"
+#         groupId    = "toggle"
+#       }
+#     }
+#   }
 
-  tag {
-    type  = "simple"
-    value = var.docker_image_name
-  }
-}
+#   tag {
+#     type  = "simple"
+#     value = var.docker_image_name
+#   }
+# }
 
 locals {
   # Variables defined within module
   module_environment_variables = {
-    VITE_UNLEASH_CLIENT_KEY = unleash_api_token.management-shell-browser.secret
+    # VITE_UNLEASH_CLIENT_KEY                       = "fake-client-key" # unleash_api_token.management-shell-browser.secret is already being passed in the environment
   }
 
   # Variables defined outside module
@@ -145,7 +147,7 @@ resource "google_cloud_run_v2_service" "instance" {
     scaling {
       # Maximum and minimum instances. Old "autoscaling.knative.dev" (https://cloud.google.com/run/docs/configuring/max-instances)
       max_instance_count = 1
-      min_instance_count = 1
+      min_instance_count = 0
     }
 
     # The service account to be used by the service

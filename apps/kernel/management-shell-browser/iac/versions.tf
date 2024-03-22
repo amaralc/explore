@@ -8,8 +8,9 @@ terraform {
       source = "kreuzwerker/docker"
     }
 
-    unleash = {
-      source = "philips-labs/unleash"
-    }
+    # # If you use it here you might get caught in a loop of dependencies and provider initialization
+    # unleash = {
+    #   source = "philips-labs/unleash"
+    # }
   }
 }

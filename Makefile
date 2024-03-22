@@ -60,3 +60,12 @@ terraform-plan-staging-out:
 
 terraform-destroy-staging:
 	cd apps/core/platform-shell-iac/staging && terraform destroy -var-file=env.tfvars
+
+kong-postgres:
+	COMPOSE_PROFILES=database KONG_DATABASE=postgres docker compose -f apps/kernel/api-gateway/docker-compose-kong.yml up -d
+
+kong-dbless:
+	docker compose -f apps/kernel/api-gateway/docker-compose-kong.yml up -d 
+
+clean:
+	docker compose -f apps/kernel/api-gateway/docker-compose-kong.yml down -v

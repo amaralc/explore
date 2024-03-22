@@ -4,14 +4,14 @@ terraform {
       source = "hashicorp/google"
       # Test version 5.0.0 after correcting https://github.com/hashicorp/terraform-provider-google/issues/16217
       # which is related to https://github.com/amaralc/peerlab/actions/runs/6497683905/job/17647315911
-      version = "4.80.0"
+      version = "4.84.0"
     }
 
     google-beta = {
       source = "hashicorp/google-beta"
       # Test version 5.0.0 after correcting https://github.com/hashicorp/terraform-provider-google/issues/16217
       # which is related to https://github.com/amaralc/peerlab/actions/runs/6497683905/job/17647315911
-      version = "4.80.0"
+      version = "4.84.0"
     }
 
     neon = {
@@ -30,10 +30,10 @@ terraform {
     #   version = "0.15.0"
     # }
 
-    # mongodbatlas = {
-    #   source  = "mongodb/mongodbatlas"
-    #   version = "1.10.2"
-    # }
+    mongodbatlas = {
+      source  = "mongodb/mongodbatlas"
+      version = "1.15.1"
+    }
 
     # auth0 = {
     #   source  = "auth0/auth0"
@@ -84,10 +84,10 @@ provider "neon" {
 # Hashicorp Random provider
 provider "random" {}
 
-# provider "mongodbatlas" {
-#   public_key  = var.mongodb_atlas_public_key
-#   private_key = var.mongodb_atlas_private_key
-# }
+provider "mongodbatlas" {
+  public_key  = var.mongodb_atlas_public_key
+  private_key = var.mongodb_atlas_private_key
+}
 
 # provider "auth0" {
 #   domain    = var.auth0_domain
@@ -116,8 +116,10 @@ provider "random" {}
 #   }
 # }
 
-provider "unleash" {
-  # Values created using project-setup.sh are placeholders for the first run. A second apply is needed to get the real value.
-  api_url    = var.unleash_api_url
-  auth_token = var.unleash_auth_token
-}
+# # Unleash provider
+# # If you disable the Unleash provider, you must also remove the unleash provider from the required_providers block.
+# provider "unleash" {
+#   # Values created using project-setup.sh are placeholders for the first run. A second apply is needed to get the real value.
+#   api_url    = var.unleash_api_url
+#   auth_token = var.unleash_auth_token
+# }

@@ -1,0 +1,25 @@
+{
+  "name": "people-researchers-peers-svc-e2e",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/people/researchers-peers-svc/e2e",
+  "projectType": "application",
+  "implicitDependencies": ["people-researchers-peers-svc-rest-api", "people-researchers-peers-svc-consumer"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+      "options": {
+        "jestConfig": "apps/people/researchers-peers-svc/e2e/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/people/researchers-peers-svc/e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": []
+}

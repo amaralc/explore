@@ -10,36 +10,19 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@peerlab/core/management-shell-browser/shared-ui/*": [
-        "libs/core/management-shell-browser/shared-ui/src/lib/*"
-      ],
-      "@peerlab/docusaurus": [
-        "libs/docusaurus/src/index.ts"
-      ],
-      "@peerlab/kernel/management-shell-browser/*": [
-        "apps/kernel/management-shell-browser/src/*"
-      ],
-      "@peerlab/researchers/peers/adapters/*": [
-        "libs/researchers/peers/adapters/src/*"
-      ],
-      "@peerlab/researchers/peers/core/*": [
-        "libs/researchers/peers/core/src/*"
-      ],
-      "@peerlab/root/*": [
-        "./*"
-      ]
+      "@peerlab/core/management-shell-browser/shared-ui/*": ["libs/core/management-shell-browser/shared-ui/src/lib/*"],
+      "@peerlab/docusaurus": ["libs/docusaurus/src/index.ts"],
+      "@peerlab/kernel/management-shell-browser/*": ["apps/kernel/management-shell-browser/src/*"],
+      "@peerlab/people/organizations-management/base/*": ["apps/people/organizations-management/base/src/*"],
+      "@peerlab/researchers/peers/adapters/*": ["libs/researchers/peers/adapters/src/*"],
+      "@peerlab/researchers/peers/core/*": ["libs/researchers/peers/core/src/*"],
+      "@peerlab/root/*": ["./*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

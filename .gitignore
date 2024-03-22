@@ -80,3 +80,6 @@ key.json
 
 # Java related (keycloak)
 *.jar
+
+# Nx
+.nx

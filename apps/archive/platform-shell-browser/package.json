@@ -1,1 +1,9 @@
-{"name":"archive/platform-shell-browser","version":"0.1.14","license":"MIT","author":{"name":"Calil Amaral","email":"amaral.calil@gmail.com"}}
+{
+  "name": "archive/platform-shell-browser",
+  "version": "0.1.14",
+  "license": "MIT",
+  "author": {
+    "name": "Calil Amaral",
+    "email": "amaral.calil@gmail.com"
+  }
+}

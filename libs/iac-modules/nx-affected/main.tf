@@ -51,3 +51,6 @@ fi
 EOF
   }
 }
+
+
+# TODO: enhance this module so that it outputs a boolean that indicates if the build should proceed or not

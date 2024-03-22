@@ -100,12 +100,12 @@ variable "production_environment_core_platform_shell_browser_vercel_project_id" 
   default     = null
 }
 
-# variable "mongodb_atlas_org_id" {
-#   description = "The ID of the MongoDB Atlas organization"
-#   type        = string
-#   sensitive   = true
-#   default     = null
-# }
+variable "mongodb_atlas_org_id" {
+  description = "The ID of the MongoDB Atlas organization"
+  type        = string
+  sensitive   = true
+  default     = null
+}
 
 # variable "gcp_cloudbuildv2_repository_id" {
 #   description = "The ID of the Cloud Build V2 repository"

@@ -3,7 +3,7 @@ name: Build, tag and deploy "production" environment
 on:
   create:
     tags:
-      - "^peerlab@[0-9]+.[0-9]+.[0-9]+$"
+      - '^peerlab@[0-9]+.[0-9]+.[0-9]+$'
 
 jobs:
   check-branch:
@@ -26,7 +26,7 @@ jobs:
       matrix:
         node-version: [18]
         npm-version: [8]
-        yarn-version: ["1.22.x"]
+        yarn-version: ['1.22.x']
         pnpm-version: [8]
 
     steps:
@@ -45,16 +45,16 @@ jobs:
       - name: Set node/npm/yarn versions using volta
         uses: volta-cli/action@v3
         with:
-          node-version: "${{ matrix.node-version }}"
-          npm-version: "${{ matrix.npm-version }}"
-          yarn-version: "${{ matrix.yarn-version }}"
-          pnpm-version: "${{ matrix.pnpm-version }}"
+          node-version: '${{ matrix.node-version }}'
+          npm-version: '${{ matrix.npm-version }}'
+          yarn-version: '${{ matrix.yarn-version }}'
+          pnpm-version: '${{ matrix.pnpm-version }}'
 
       - name: Install PNPM
         if: env.package_manager == 'pnpm'
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: "${{ matrix.pnpm-version }}"
+          version: '${{ matrix.pnpm-version }}'
 
       - name: Print node/npm/yarn/pnpm versions
         id: versions
@@ -135,7 +135,7 @@ jobs:
 
       - name: Check if app was affected
         run: |
-          bash scripts/nx/check-if-app-was-affected.sh --project-name=core-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
+          bash scripts/nx/check-if-app-was-affected.sh --project-name=people-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
 
       - name: Get short commit hash
         if: ${{ env.affected == 'true' }}
@@ -160,14 +160,14 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/core/researchers-peers-svc/rest-api/Dockerfile
+          file: ./apps/people/researchers-peers-svc/rest-api/Dockerfile
           push: true
           no-cache: true
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.environment_name }}
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.short_commit_sha }}
         env:
-          IMAGE_NAME: core-researchers-peers-svc-rest-api
+          IMAGE_NAME: people-researchers-peers-svc-rest-api
 
   build-kernel-flag-management:
     needs: [check-branch]
@@ -221,9 +221,9 @@ jobs:
         run: |
           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/credentials.json
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
@@ -247,14 +247,14 @@ jobs:
         if: ${{ env.is_existing_image == 'true' }}
         uses: volta-cli/action@v3
         with:
-          node-version: "${{ matrix.node-version }}"
-          pnpm-version: "${{ matrix.pnpm-version }}"
+          node-version: '${{ matrix.node-version }}'
+          pnpm-version: '${{ matrix.pnpm-version }}'
 
       - name: Install PNPM
         if: ${{ env.is_existing_image == 'true'}}
         uses: pnpm/action-setup@v2.2.1
         with:
-          version: "${{ matrix.pnpm-version }}"
+          version: '${{ matrix.pnpm-version }}'
 
       - name: Print node/pnpm versions
         if: ${{ env.is_existing_image == 'true' }}
@@ -278,7 +278,7 @@ jobs:
       - name: Check if app was affected
         if: ${{ env.is_existing_image == 'true' }}
         run: |
-          bash scripts/nx/check-if-app-was-affected.sh --project-name=core-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
+          bash scripts/nx/check-if-app-was-affected.sh --project-name=people-researchers-peers-svc-rest-api --file-path=$GITHUB_ENV
 
       - name: Set up Docker Buildx
         if: ${{ env.affected == 'true' || env.is_existing_image == 'false' }}
@@ -329,14 +329,14 @@ jobs:
         run: |
           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/core/platform-shell-iac/production/credentials.json
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: ${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}
 
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2

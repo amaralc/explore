@@ -1,0 +1,55 @@
+{
+  "name": "people-organizations-management-functions",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/people/organizations-management/functions/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/people/organizations-management/functions",
+        "outputFileName": "index.js",
+        "generatePackageJson": true,
+        "main": "apps/people/organizations-management/functions/src/main.ts",
+        "tsConfig": "apps/people/organizations-management/functions/tsconfig.app.json",
+        "assets": ["apps/people/organizations-management/functions/src/assets"],
+        "webpackConfig": "apps/people/organizations-management/functions/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "functions:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "functions:build:development"
+        },
+        "production": {
+          "buildTarget": "functions:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/people/organizations-management/functions/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

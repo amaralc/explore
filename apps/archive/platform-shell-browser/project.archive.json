@@ -3,15 +3,11 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/archive/platform-shell-browser",
   "projectType": "application",
-  "implicitDependencies": [
-    "core-researchers-peers-svc-rest-api"
-  ],
+  "implicitDependencies": ["people-researchers-peers-svc-rest-api"],
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/archive/platform-shell-browser"
@@ -50,9 +46,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/archive/platform-shell-browser/jest.config.ts",
         "passWithNoTests": true
@@ -65,14 +59,10 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "executor": "@nx/eslint:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/archive/platform-shell-browser/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["apps/archive/platform-shell-browser/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "e2e": {

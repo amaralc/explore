@@ -2,10 +2,7 @@
   "name": "kernel-dev-docs-browser",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "implicitDependencies": [
-    "docusaurus",
-    "core-researchers-peers-svc-rest-api"
-  ],
+  "implicitDependencies": ["docusaurus", "people-researchers-peers-svc-rest-api"],
   "sourceRoot": "apps/kernel/dev-docs-browser/src",
   "targets": {
     "build-docs": {

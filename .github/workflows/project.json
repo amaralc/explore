@@ -3,10 +3,7 @@
   "$schema": "../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": ".github/workflows",
   "projectType": "application",
-  "implicitDependencies": [
-    "core-researchers-peers-svc-rest-api",
-    "kernel-shell-iac"
-  ],
+  "implicitDependencies": ["people-researchers-peers-svc-rest-api", "kernel-shell-iac"],
   "targets": {},
   "tags": []
 }

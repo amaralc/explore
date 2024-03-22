@@ -74,6 +74,24 @@ variable "nx_cloud_access_token" {
   sensitive   = true
 }
 
+variable "mongodb_atlas_org_id" {
+  description = "MongoDB Atlas organization ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "mongodb_atlas_public_key" {
+  description = "MongoDB Atlas public key"
+  type        = string
+  sensitive   = true
+}
+
+variable "mongodb_atlas_private_key" {
+  description = "MongoDB Atlas private key"
+  type        = string
+  sensitive   = true
+}
+
 ## References
 # The variables below are not in use currently, but are kept here for future reference.
 # Zitadel is still a valid option for authentication, but we are currently using Firebase.
@@ -84,24 +102,6 @@ variable "nx_cloud_access_token" {
 
 # variable "vercel_api_token" {
 #   description = "Vercel API token"
-#   type        = string
-#   sensitive   = true
-# }
-
-# variable "mongodb_atlas_public_key" {
-#   description = "MongoDB Atlas public key"
-#   type        = string
-#   sensitive   = true
-# }
-
-# variable "mongodb_atlas_private_key" {
-#   description = "MongoDB Atlas private key"
-#   type        = string
-#   sensitive   = true
-# }
-
-# variable "mongodb_atlas_org_id" {
-#   description = "MongoDB Atlas organization ID"
 #   type        = string
 #   sensitive   = true
 # }
