@@ -41,6 +41,12 @@
       "restart": true,
       "sourceMaps": true,
       "outFiles": ["${workspaceFolder}/dist/apps/people/organizations-management/**/*.js"]
+    },
+    {
+      "name": "Attach to Service",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps",
+      "type": "node",
     }
   ]
 }

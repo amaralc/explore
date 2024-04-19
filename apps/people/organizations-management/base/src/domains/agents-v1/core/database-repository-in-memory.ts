@@ -1,5 +1,4 @@
 import { randomBytes } from 'crypto';
-import { UserV1Entity } from '../../users-v1/core/entity';
 import { AgentsV1DatabaseRepository, CreateManyResponseDto } from './database-repository';
 import { AgentV1Entity, IAgentV1Dto } from './entity';
 
@@ -7,35 +6,49 @@ export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {
   private inMemoryAgentsV1: Array<AgentV1Entity> = [];
 
   generateUniqueId(): string {
-    return randomBytes(12).toString('hex');
+    return randomBytes(14).toString('hex');
   }
 
-  createFromUserV1(user: UserV1Entity): Promise<AgentV1Entity> {
-    const agent = new AgentV1Entity({
-      id: user.id,
-      email: user.email,
-      type: 'INDIVIDUAL',
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    });
-    const persistedAgent = this.create(agent);
-    return persistedAgent;
+  async generateIndexes() {
+    console.log('No indexes to generate when using in-memory repository');
   }
 
-  async create(agent: AgentV1Entity): Promise<AgentV1Entity> {
-    this.inMemoryAgentsV1.push(agent);
-    return agent;
+  async getAgentByNickname(nickname: string): Promise<IAgentV1Dto | null> {
+    const existingAgent = this.inMemoryAgentsV1.find((agent) => agent.nickname === nickname);
+    if (!existingAgent) {
+      return null;
+    }
+
+    return existingAgent;
+  }
+
+  async create(inputDto: AgentV1Entity): Promise<AgentV1Entity> {
+    const agentWithSameNickname = this.inMemoryAgentsV1.find((agent) => inputDto.nickname === agent.nickname);
+    if (agentWithSameNickname) {
+      throw Error('Duplicated key. Agent with same nickname already exist.');
+    }
+
+    const agentWithSameEmailAndType = this.inMemoryAgentsV1.find(
+      (agent) => inputDto.email === agent.email && inputDto.type === agent.type,
+    );
+
+    if (agentWithSameEmailAndType) {
+      throw Error('Duplicated key. Agent with same email and type already exist.');
+    }
+
+    this.inMemoryAgentsV1.push(inputDto);
+    return inputDto;
   }
 
   async createMany(agents: AgentV1Entity[]): Promise<CreateManyResponseDto> {
     const uniqueAgents = [...new Set(agents)];
     if (uniqueAgents.length !== agents.length) {
-      throw new Error('Agents must be unique');
+      throw new Error('Agents must be unique'); // TODO: fix this rule that is more strict than the one applied in the "create" method
     }
 
     const agentIds = agents.map((agent) => agent.id);
     for (const agent of agents) {
-      this.inMemoryAgentsV1.push(agent);
+      this.create(agent);
     }
 
     return {

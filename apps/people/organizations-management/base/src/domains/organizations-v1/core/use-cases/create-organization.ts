@@ -1,6 +1,7 @@
-import { schemaValidator } from '@peerlab/people/organizations-management/base/utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
 import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-repository';
+import { AgentV1Entity } from '../../../agents-v1/core/entity';
 import { IOrganizationV1Dto, OrganizationV1Entity, organizationV1JsonSchema } from '../entity';
 import { OrganizationsV1Repository } from '../repository';
 
@@ -51,10 +52,22 @@ export class CreateOrganizationV1UseCase {
       throw new Error('Owner agent already have a free organization');
     }
 
+    const organizationAgent = new AgentV1Entity({
+      id: this.agentsV1Repository.generateUniqueId(),
+      nickname: inputDto.nickname,
+      email: inputDto.email,
+      type: 'ORGANIZATION',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+
+    await this.agentsV1Repository.create(organizationAgent);
+
     const organizationV1Entity = new OrganizationV1Entity({
       id: this.organizationsV1Repository.generateUniqueId(),
       nickname: inputDto.nickname,
       ownerAgentId: ownerAgent.id,
+      agentId: organizationAgent.id,
       email: inputDto.email,
       planSubscriptionName: inputDto.planSubscriptionName,
       createdAt: new Date().toISOString(),

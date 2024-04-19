@@ -1,7 +1,6 @@
+import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { randomBytes } from 'crypto';
 import { Collection } from 'mongodb';
-import { MongoDbDriver } from '../../../database-drivers/mongodb-driver';
-import { UserV1Entity } from '../../users-v1/core/entity';
 import { AgentsV1DatabaseRepository, CreateManyResponseDto } from '../core/database-repository';
 import { AgentV1Entity, IAgentV1Dto } from '../core/entity';
 
@@ -37,6 +36,19 @@ export class MongoDbAgentsV1DatabaseRepository implements AgentsV1DatabaseReposi
     return randomBytes(14).toString('hex'); // 28 characters (Firebase uid length)
   }
 
+  public async generateIndexes(): Promise<void> {
+    await this.getCollection().createIndexes([
+      {
+        key: { nickname: 1 },
+        unique: true,
+      },
+      {
+        key: { email: 1, type: 1 },
+        unique: true, // We can only have one agent with a combination of email and type
+      },
+    ]);
+  }
+
   public async create(inputDto: AgentV1Entity): Promise<AgentV1Entity> {
     const mongoDbAgent = this.mapDomainToMongoDb(inputDto);
     const result = await this.getCollection().insertOne(mongoDbAgent);
@@ -61,19 +73,6 @@ export class MongoDbAgentsV1DatabaseRepository implements AgentsV1DatabaseReposi
     return { ids: insertedIds, count: result.insertedCount };
   }
 
-  public async createFromUserV1(user: UserV1Entity): Promise<AgentV1Entity> {
-    const agent = new AgentV1Entity({
-      id: user.id,
-      email: user.email,
-      type: 'INDIVIDUAL',
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    });
-
-    const createdAgent = await this.create(agent);
-    return createdAgent;
-  }
-
   public async getAgentById(id: string): Promise<AgentV1Entity | null> {
     const agent = await this.getCollection().findOne({ _id: id });
     if (!agent) {
@@ -85,9 +84,19 @@ export class MongoDbAgentsV1DatabaseRepository implements AgentsV1DatabaseReposi
   }
 
   async findByEmail(email: string): Promise<Array<AgentV1Entity>> {
-    const mongoDbAgentsV1 = await this.getCollection().find({ email });
-    const domainAgentsV1 = (await mongoDbAgentsV1.toArray()).map(this.mapMongoDbToDomain);
+    const mongoDbAgentsV1 = await this.getCollection().find({ email }).toArray();
+    const domainAgentsV1 = mongoDbAgentsV1.map(this.mapMongoDbToDomain);
     return domainAgentsV1;
+  }
+
+  async getAgentByNickname(nickname: string): Promise<IAgentV1Dto | null> {
+    const mongoDbAgentV1 = await this.getCollection().findOne({ nickname });
+    if (!mongoDbAgentV1) {
+      return null;
+    }
+
+    const domainAgentV1 = this.mapMongoDbToDomain(mongoDbAgentV1);
+    return domainAgentV1;
   }
 
   async getByEmailAndType(email: string, type: IAgentV1Dto['type']): Promise<AgentV1Entity | null> {

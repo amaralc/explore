@@ -1,6 +1,6 @@
+import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
+import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
-import { IPaginatedEntities } from '../../../utils/paginated-entities';
-import { PaginationDto } from '../../../utils/pagination-dto';
 import { OrganizationV1Entity } from './entity';
 import { OrganizationsV1Repository } from './repository';
 

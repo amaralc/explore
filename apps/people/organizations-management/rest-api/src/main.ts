@@ -1,6 +1,6 @@
+import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
 import { defaultConfiguration } from '@peerlab/people/organizations-management/base/config/default-configuration';
-import { MongoDbMemoryServer } from '@peerlab/people/organizations-management/base/database-drivers/mongodb-memory-server';
 import { bootstrapApplication } from './app';
 
 const start = async () => {
@@ -9,7 +9,8 @@ const start = async () => {
 
   // If the application is not in production mode, use in memory database
   if (defaultConfiguration.database.provider === 'mongodb-in-memory') {
-    const databaseUri = await MongoDbMemoryServer.initializeInMemoryDatabase();
+    const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
+    const databaseUri = result.databaseUri;
     configurationManager.setConfig({
       ...configurationManager.getConfig(),
       database: {

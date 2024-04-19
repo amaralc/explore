@@ -41,30 +41,15 @@ resource "google_identity_platform_config" "auth" {
     "kernel-management-shell-browser.${var.domain_name}"
   ]
 
-  depends_on = [google_firebase_project.auth]
-}
-
-# Adds more configurations, like for the email/password sign-in provider.
-resource "google_identity_platform_project_default_config" "auth" {
-  provider = google-beta
-  project  = var.gcp_project_id
   sign_in {
     allow_duplicate_emails = false
-
-    # anonymous {
-    #   enabled = true
-    # }
-
     email {
       enabled           = true
       password_required = false
     }
   }
 
-  # Wait for Authentication to be initialized before enabling email/password.
-  depends_on = [
-    google_identity_platform_config.auth
-  ]
+  depends_on = [google_firebase_project.auth]
 }
 
 # Add iap client
@@ -266,38 +251,62 @@ output "firebase_app_id" {
 #   is_auto_update      = true
 # }
 
+
 # Get web app config (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/firebase_web_app.html)
-data "google_firebase_web_app_config" "basic" {
-  provider   = google-beta
-  web_app_id = google_firebase_web_app.kernel-management-shell-browser-vite.app_id
+# This option started to fail as of 2024-03-29 (https://github.com/amaralc/peerlab/actions/runs/8495162275/job/23271143389) 
+# data "google_firebase_web_app_config" "basic" {
+#   provider   = google-beta
+#   web_app_id = google_firebase_web_app.kernel-management-shell-browser-vite.app_id
+# }
+
+# # Alternative implementation 1: calling the API directly (https://firebase.google.com/docs/reference/firebase-management/rest/v1beta1/projects.webApps/getConfig)
+# resource "null_resource" "firebase_web_app_config" {
+#   triggers = {
+#     app_id = google_firebase_web_app.kernel-management-shell-browser-vite.app_id
+#   }
+
+#   provisioner "local-exec" {
+#     command = "bash ${path.module}/get-firebase-webapp-config.sh ${var.gcp_project_id} ${google_firebase_web_app.kernel-management-shell-browser-vite.app_id} > ${path.module}/firebase-webapp-config.json"
+#   }
+# }
+
+# Alternative implementation 2: get the token using the cli and get the webapp config using an http resource
+data "external" "gcloud_access_token_json" {
+  program = ["sh", "-c", "gcloud auth print-access-token | jq -R '{token: .}'"]
+}
+
+data "http" "get_webapp_config" {
+  url    = "https://firebase.googleapis.com/v1beta1/projects/${var.gcp_project_id}/webApps/${google_firebase_web_app.kernel-management-shell-browser-vite.app_id}/config"
+  method = "GET"
+
+  # Optional request headers
+  request_headers = {
+    Accept        = "application/json"
+    Authorization = "Bearer ${data.external.gcloud_access_token_json.result.token}"
+  }
 }
 
 output "firebase_api_key" {
-  value       = data.google_firebase_web_app_config.basic.api_key
+  value       = jsondecode(data.http.get_webapp_config.response_body)["apiKey"]
   description = "The firebase api key"
-  sensitive   = true
 }
 
 output "firebase_auth_domain" {
   value       = "${var.gcp_project_id}.firebaseapp.com"
   description = "The firebase auth domain"
-  sensitive   = true
 }
 
 output "firebase_project_id" {
   value       = var.gcp_project_id
   description = "The firebase project id"
-  sensitive   = true
 }
 
 output "firebase_storage_bucket" {
   value       = "${var.gcp_project_id}.appspot.com"
   description = "The firebase storage bucket"
-  sensitive   = true
 }
 
 output "firebase_messaging_sender_id" {
-  value       = data.google_firebase_web_app_config.basic.messaging_sender_id
+  value       = jsondecode(data.http.get_webapp_config.response_body)["messagingSenderId"]
   description = "The firebase messaging sender id"
-  sensitive   = true
 }

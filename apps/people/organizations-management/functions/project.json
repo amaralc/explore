@@ -24,6 +24,9 @@
         "production": {}
       }
     },
+    "post-build": {
+      "command": "node apps/people/organizations-management/functions/post-build.js"
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",

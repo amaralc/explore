@@ -38,6 +38,7 @@ Communication, Adaptability, Resilience, Courage, Respect, Continuous Learning a
 - ~~ci(auth): We still do not have automatically assigned domains and subdomains. That prevents us from using firebase with a cloud run deployment since the generated domains are random;~~ (Fixed: generation of domains and subdomains are now automated).
 - ~~ci(build): Unnecessary images are being built even though the project was not affected by the commit.~~ (Fixed: we now check weather the image needs to be built using nx ignore and a custom script);
 - ci(auth): We need to manually enable the Google auth client through Firebase Console in order to sign in with google in our applications.
+- ci(build) Error: Error while updating cloudfunction configuration: Error waiting for Updating CloudFunctions Function: Error code 3, message: Build failed: This project is using pnpm but you have not included the Functions Framework in your dependencies. Please add it by running: 'pnpm add @google-cloud/functions-framework'.; Error ID: 5b6dc8b5. (+1)
 
 # Features
 

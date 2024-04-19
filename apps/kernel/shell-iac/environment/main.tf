@@ -254,7 +254,7 @@ module "kernel-management-shell-browser" {
   gcp_dns_managed_zone_name           = var.gcp_dns_managed_zone_name
   source_environment_project_id       = var.production_environment_core_platform_shell_browser_vite_vercel_project_id
 
-  environment_variables = {
+  external_environment_variables = {
     "VITE_FIREBASE_API_KEY"                                  = module.kernel-security-iam-svc[0].firebase_api_key
     "VITE_FIREBASE_AUTH_DOMAIN"                              = module.kernel-security-iam-svc[0].firebase_auth_domain
     "VITE_FIREBASE_PROJECT_ID"                               = module.kernel-security-iam-svc[0].firebase_project_id
@@ -262,13 +262,6 @@ module "kernel-management-shell-browser" {
     "VITE_FIREBASE_MESSAGING_SENDER_ID"                      = module.kernel-security-iam-svc[0].firebase_messaging_sender_id
     "VITE_FIREBASE_APP_ID"                                   = module.kernel-security-iam-svc[0].firebase_app_id
     "VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL" = module.people-organizations-management[0].rest_api_url
-    "VITE_FEATURE_FLAG_AUTH_PROVIDER"                        = "firebase"
-    "VITE_FEATURE_FLAG_MOCK_APIS_ENABLED"                    = "false"
-    "VITE_FEATURE_FLAG_UNTITLED_SECTION_ENABLED"             = "false"
-    "VITE_FEATURE_FLAG_CONCEPTS_SECTION_ENABLED"             = "false"
-    "VITE_FEATURE_FLAG_PAGES_SECTION_ENABLED"                = "false"
-    "VITE_FEATURE_FLAG_MISC_SECTION_ENABLED"                 = "false"
-    "VITE_FEATURE_FLAG_PEER_547_GOOGLE_SSO_ENABLED"          = "true"
     # "VITE_UNLEASH_CLIENT_KEY"                                = "fake-client-key" # unleash_api_token.management-shell-browser.secret
     # "VITE_UNLEASH_FRONTEND_URL"                              = "${length(module.kernel-flag-management) > 0 ? module.kernel-flag-management[0].url : "https://fake-unleash-url.super.fake"}/api/frontend" # https://docs.getunleash.io/reference/sdks/react
   }

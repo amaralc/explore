@@ -7,5 +7,9 @@ terraform {
     google-beta = {
       source = "hashicorp/google-beta"
     }
+
+    http = {
+      source = "hashicorp/http"
+    }
   }
 }

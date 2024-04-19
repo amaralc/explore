@@ -1,4 +1,4 @@
-import { MongoDbDriver } from '../database-drivers/mongodb-driver';
+import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { MongoDbAgentsV1DatabaseRepository } from '../domains/agents-v1/adapters/database-repository-mongodb';
 import { AgentsV1DatabaseRepository } from '../domains/agents-v1/core/database-repository';
 import { fakeAgents } from '../domains/agents-v1/core/fixtures';
@@ -33,7 +33,7 @@ export class ConfigurationManager {
     }
 
     await this.initializeRepositories();
-    if (this.config.database.seed === 'true') {
+    if (this.config.database.seed === 'true' && this.config.server.nodeEnv !== 'production') {
       await this.seedDatabase();
     }
   }
@@ -65,6 +65,8 @@ export class ConfigurationManager {
         organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
         agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
       };
+
+      await this.repositories.agentsV1.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'development') {
@@ -73,6 +75,7 @@ export class ConfigurationManager {
         organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
         agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
       };
+      await this.repositories.agentsV1.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'test') {
@@ -81,6 +84,7 @@ export class ConfigurationManager {
         organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
         agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
       };
+      await this.repositories.agentsV1.generateIndexes();
     }
   }
 
@@ -93,7 +97,7 @@ export class ConfigurationManager {
   }
 
   async seedDatabase() {
-    if (this.config.database.seed === 'true') {
+    if (this.config.database.seed === 'true' && this.config.server.nodeEnv !== 'production') {
       console.log('Seeding database...');
       const { count } = await this.repositories.agentsV1.createMany(fakeAgents);
       console.log(`Total agents created: ${count}`);

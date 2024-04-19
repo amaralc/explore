@@ -1,6 +1,6 @@
-import Ajv from 'ajv';
+import Ajv, { ErrorObject } from 'ajv';
 import addFormats from 'ajv-formats';
-import { ValidationExceptionV1 } from '../errors/validation-exception-v1';
+import { ValidationExceptionV2Error } from '../errors/validation-exception-v1';
 
 export class SchemaValidator {
   private readonly ajv: Ajv;
@@ -46,11 +46,27 @@ export class SchemaValidator {
     );
   }
 
+  public validate<Schema>(
+    schema: Schema,
+    data: unknown,
+  ): { isValid: boolean; errors: ErrorObject<string, Record<string, any>, unknown>[] } {
+    this.ajv.compile(schema);
+    const isValid = this.ajv.validate(schema, data);
+
+    const result = {
+      isValid,
+      errors: this.ajv.errors,
+    };
+
+    return result;
+  }
+
   public validateOrReject<Schema>(schema: Schema, data: unknown): void {
     this.ajv.compile(schema);
     const isValid = this.ajv.validate(schema, data);
+
     if (!isValid) {
-      throw new ValidationExceptionV1(this.ajv.errors, 'Invalid input used to create AgentV1Entity');
+      throw new ValidationExceptionV2Error(this.ajv.errors);
     }
   }
 }

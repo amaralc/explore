@@ -3,6 +3,311 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.74.0](https://github.com/amaralc/peerlab/compare/peerlab@0.73.2...peerlab@0.74.0) (2024-04-19)
+
+### Features
+
+- **PEER-680:** finish application e2e tests and refactor tests and util imports ([8d7987a](https://github.com/amaralc/peerlab/commit/8d7987aa255b69d0bd2be7d8c980c8e32a38c894))
+
+## [0.73.2](https://github.com/amaralc/peerlab/compare/peerlab@0.73.1...peerlab@0.73.2) (2024-04-19)
+
+**Note:** Version bump only for package peerlab
+
+## [0.73.1](https://github.com/amaralc/peerlab/compare/peerlab@0.73.0...peerlab@0.73.1) (2024-04-18)
+
+**Note:** Version bump only for package peerlab
+
+## [0.73.0](https://github.com/amaralc/peerlab/compare/peerlab@0.72.38...peerlab@0.73.0) (2024-04-18)
+
+### Features
+
+- **PEER-680:** bootstrap assets catalog base and rest api - wip ([f993911](https://github.com/amaralc/peerlab/commit/f993911ce3db00e1fd9ebd1dbf73e49c2044d520))
+
+### Bug Fixes
+
+- **PEER-680:** adjust project name and type issue ([833942f](https://github.com/amaralc/peerlab/commit/833942fce38174dc7de13a9b61f80ad751ece605))
+- **PEER-680:** fix configuration and add test to assets-catalog ([f008d3c](https://github.com/amaralc/peerlab/commit/f008d3c7564702732732ce8c917addd71c18d430))
+
+## [0.72.38](https://github.com/amaralc/peerlab/compare/peerlab@0.72.37...peerlab@0.72.38) (2024-04-14)
+
+### Bug Fixes
+
+- **PEER-690:** add flag manager, unskip and adjust tests after upgrading vite ([60d8e6f](https://github.com/amaralc/peerlab/commit/60d8e6f4675b420428db784cb2e1403ada29c241))
+
+## [0.72.37](https://github.com/amaralc/peerlab/compare/peerlab@0.72.36...peerlab@0.72.37) (2024-04-08)
+
+### Bug Fixes
+
+- **PEER-678:** add hyphen between random string and prefix ([8e66d66](https://github.com/amaralc/peerlab/commit/8e66d66181dc1e932e6977e890b09a86409909cb))
+
+## [0.72.36](https://github.com/amaralc/peerlab/compare/peerlab@0.72.35...peerlab@0.72.36) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** validate agent nickname pattern ([665556e](https://github.com/amaralc/peerlab/commit/665556e7942d4b7f891fe56bd4ffc6fa4391c40e))
+
+## [0.72.35](https://github.com/amaralc/peerlab/compare/peerlab@0.72.34...peerlab@0.72.35) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** validate nickname pattern ([ba4272f](https://github.com/amaralc/peerlab/commit/ba4272f7b8312c052b95c9fcc7669525162da7dc))
+
+## [0.72.34](https://github.com/amaralc/peerlab/compare/peerlab@0.72.33...peerlab@0.72.34) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** use the same utilitary logic to parse string to slug ([278a375](https://github.com/amaralc/peerlab/commit/278a3754a25e597f5f2e1adc5dbb73e7c9b439d5))
+
+## [0.72.33](https://github.com/amaralc/peerlab/compare/peerlab@0.72.32...peerlab@0.72.33) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** return null instead of throwing null ([e86a9b7](https://github.com/amaralc/peerlab/commit/e86a9b7d82835fc5ab5542eccf74fb9a316fc892))
+
+## [0.72.32](https://github.com/amaralc/peerlab/compare/peerlab@0.72.31...peerlab@0.72.32) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** avoid logging error.stack ([375e40f](https://github.com/amaralc/peerlab/commit/375e40f99a9353fd09788c7126d38b9464ef2dec))
+
+## [0.72.31](https://github.com/amaralc/peerlab/compare/peerlab@0.72.30...peerlab@0.72.31) (2024-04-07)
+
+**Note:** Version bump only for package peerlab
+
+## [0.72.30](https://github.com/amaralc/peerlab/compare/peerlab@0.72.29...peerlab@0.72.30) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** return null if no agent is found ([c05a486](https://github.com/amaralc/peerlab/commit/c05a486fb2488f59b45d5ac62082010926636b0a))
+
+## [0.72.29](https://github.com/amaralc/peerlab/compare/peerlab@0.72.28...peerlab@0.72.29) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** use iso date format while creating agent from firebase user event ([fa6cdca](https://github.com/amaralc/peerlab/commit/fa6cdcafc3355dd186520926cf92e6c3dc3720ae))
+
+## [0.72.28](https://github.com/amaralc/peerlab/compare/peerlab@0.72.27...peerlab@0.72.28) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-672:** agents should have unique nicknames ([27ba651](https://github.com/amaralc/peerlab/commit/27ba651ed3129304fa8a003690d62f5f592dd4b8))
+- **PEER-678:** create organization agent while creating new organization ([7dc59f1](https://github.com/amaralc/peerlab/commit/7dc59f17d6b222c5a9a71b9079239df4c8d59d8e))
+
+## [0.72.27](https://github.com/amaralc/peerlab/compare/peerlab@0.72.26...peerlab@0.72.27) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** remove email and password options ([5f83d8b](https://github.com/amaralc/peerlab/commit/5f83d8b61762f32e777dc4404f05e892fdac0d4f))
+
+## [0.72.26](https://github.com/amaralc/peerlab/compare/peerlab@0.72.25...peerlab@0.72.26) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-678:** use a map to select the auth context ([a94c7f9](https://github.com/amaralc/peerlab/commit/a94c7f9e12deb2fac3a5cb1d2d84d884275d820b))
+
+## [0.72.25](https://github.com/amaralc/peerlab/compare/peerlab@0.72.24...peerlab@0.72.25) (2024-04-07)
+
+### Bug Fixes
+
+- **PEER-673:** enable log and skip nx cache ([400118e](https://github.com/amaralc/peerlab/commit/400118e09df50ef07a9e47bb0599126f7b9a6f55))
+
+## [0.72.24](https://github.com/amaralc/peerlab/compare/peerlab@0.72.23...peerlab@0.72.24) (2024-04-06)
+
+**Note:** Version bump only for package peerlab
+
+## [0.72.23](https://github.com/amaralc/peerlab/compare/peerlab@0.72.22...peerlab@0.72.23) (2024-04-06)
+
+**Note:** Version bump only for package peerlab
+
+## [0.72.22](https://github.com/amaralc/peerlab/compare/peerlab@0.72.21...peerlab@0.72.22) (2024-04-01)
+
+### Bug Fixes
+
+- **PEER-674:** log firebase config ([16cb8ba](https://github.com/amaralc/peerlab/commit/16cb8bacf95cf28428e08d966280a4bf7a3edea8))
+
+## [0.72.21](https://github.com/amaralc/peerlab/compare/peerlab@0.72.20...peerlab@0.72.21) (2024-04-01)
+
+### Bug Fixes
+
+- **PEER-674:** log firebase config ([ca13b18](https://github.com/amaralc/peerlab/commit/ca13b1860e8e5239aef009ba4ce8de7023cd053b))
+
+## [0.72.20](https://github.com/amaralc/peerlab/compare/peerlab@0.72.19...peerlab@0.72.20) (2024-03-31)
+
+### Bug Fixes
+
+- **PEER-674:** use json data ([0172f71](https://github.com/amaralc/peerlab/commit/0172f717a73e279bbefb8383b2fa20cc8443bf1c))
+
+## [0.72.19](https://github.com/amaralc/peerlab/compare/peerlab@0.72.18...peerlab@0.72.19) (2024-03-31)
+
+**Note:** Version bump only for package peerlab
+
+## [0.72.18](https://github.com/amaralc/peerlab/compare/peerlab@0.72.17...peerlab@0.72.18) (2024-03-31)
+
+### Bug Fixes
+
+- **PEER-674:** use json data ([85dc046](https://github.com/amaralc/peerlab/commit/85dc0463c51c60d1c3f89d54e60f1cc0aeaa76f9))
+
+## [0.72.17](https://github.com/amaralc/peerlab/compare/peerlab@0.72.16...peerlab@0.72.17) (2024-03-31)
+
+### Bug Fixes
+
+- **PEER-674:** use http provider with gcloud cli ([8c3979b](https://github.com/amaralc/peerlab/commit/8c3979b045653d9b7d59c548acaf36dacabcca49))
+
+## [0.72.16](https://github.com/amaralc/peerlab/compare/peerlab@0.72.15...peerlab@0.72.16) (2024-03-31)
+
+### Bug Fixes
+
+- **PEER-674:** get web app config directly from the api ([e0fe536](https://github.com/amaralc/peerlab/commit/e0fe5368e0150813f1d6a1c6d4e78733b76ca8c4))
+
+## [0.72.15](https://github.com/amaralc/peerlab/compare/peerlab@0.72.14...peerlab@0.72.15) (2024-03-31)
+
+### Bug Fixes
+
+- **PEER-674:** terraform version ([75b8644](https://github.com/amaralc/peerlab/commit/75b8644a0e24305497dbb3d22fd013a07fd82e85))
+- **PEER-674:** upgrade google provider ([32d85cf](https://github.com/amaralc/peerlab/commit/32d85cff01139a7000c7d97f44d31773227bf532))
+
+## [0.72.14](https://github.com/amaralc/peerlab/compare/peerlab@0.72.13...peerlab@0.72.14) (2024-03-31)
+
+### Bug Fixes
+
+- **PEER-673:** remove deprecated resources ([ea0a078](https://github.com/amaralc/peerlab/commit/ea0a078b90c5ed7990f2eebe5638b4998ab42f10))
+
+## [0.72.13](https://github.com/amaralc/peerlab/compare/peerlab@0.72.12...peerlab@0.72.13) (2024-03-29)
+
+### Bug Fixes
+
+- **PEER-673:** add post build script to workflow ([70e4c9b](https://github.com/amaralc/peerlab/commit/70e4c9b499cfe72ac4ff328ed0d836ffcdded438))
+
+## [0.72.12](https://github.com/amaralc/peerlab/compare/peerlab@0.72.11...peerlab@0.72.12) (2024-03-29)
+
+### Bug Fixes
+
+- **peer-673:** remove pnpm-lock.yaml from output from all builds ([1754908](https://github.com/amaralc/peerlab/commit/17549083b3618dd2670a4a711c7290729235dc64))
+
+## [0.72.11](https://github.com/amaralc/peerlab/compare/peerlab@0.72.10...peerlab@0.72.11) (2024-03-25)
+
+### Bug Fixes
+
+- **PEER-673:** merge environment variables ([94ea7f6](https://github.com/amaralc/peerlab/commit/94ea7f68a252b4ad79f198145cda1c298daea220))
+
+## [0.72.10](https://github.com/amaralc/peerlab/compare/peerlab@0.72.9...peerlab@0.72.10) (2024-03-25)
+
+### Bug Fixes
+
+- **PEER-671:** remove pnpm lock ([7079ecc](https://github.com/amaralc/peerlab/commit/7079ecc7836fbeefa51465228392c6eda794e78c))
+
+## [0.72.9](https://github.com/amaralc/peerlab/compare/peerlab@0.72.8...peerlab@0.72.9) (2024-03-25)
+
+### Bug Fixes
+
+- **PEER-644:** export environment variables instead of relying on a .env file ([81b8a78](https://github.com/amaralc/peerlab/commit/81b8a784734a3347acf6e879684ef8282c5ae5da))
+- **PEER-671:** remove pnpm lock when commit sha changes ([1bd83a6](https://github.com/amaralc/peerlab/commit/1bd83a68e9a1b3e4b9e45f1fa38eb2c1f0573ebf))
+
+## [0.72.8](https://github.com/amaralc/peerlab/compare/peerlab@0.72.7...peerlab@0.72.8) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-644:** use single source of environment variables for front-end project ([1254100](https://github.com/amaralc/peerlab/commit/12541001371b10fedb88482362f22ab1fc04c8a0))
+
+### Reverts
+
+- Revert "debug(PEER): log env file" ([73e0515](https://github.com/amaralc/peerlab/commit/73e0515f2f7c6b028ec18739cd6e0e7cad4e384d))
+- Revert "debug(PEER): log env file before building" ([3316e47](https://github.com/amaralc/peerlab/commit/3316e47132f0a25b67741285d83ba8fa09fc20d4))
+- Revert "chore(release): [skip-github-pipeline]" ([bdf76b4](https://github.com/amaralc/peerlab/commit/bdf76b42eefaf5931836a8a6280638b55d1991d8))
+- Revert "fix(PEER-671): hardcode env variables to validate implementation" ([1536027](https://github.com/amaralc/peerlab/commit/15360275ff24aff013582a1eed7d14843f41a935))
+
+## [0.72.7](https://github.com/amaralc/peerlab/compare/peerlab@0.72.7...peerlab@0.72.7) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-644:** use single source of environment variables for front-end project ([1254100](https://github.com/amaralc/peerlab/commit/12541001371b10fedb88482362f22ab1fc04c8a0))
+
+### Reverts
+
+- Revert "debug(PEER): log env file" ([73e0515](https://github.com/amaralc/peerlab/commit/73e0515f2f7c6b028ec18739cd6e0e7cad4e384d))
+- Revert "debug(PEER): log env file before building" ([3316e47](https://github.com/amaralc/peerlab/commit/3316e47132f0a25b67741285d83ba8fa09fc20d4))
+- Revert "chore(release): [skip-github-pipeline]" ([bdf76b4](https://github.com/amaralc/peerlab/commit/bdf76b42eefaf5931836a8a6280638b55d1991d8))
+- Revert "fix(PEER-671): hardcode env variables to validate implementation" ([1536027](https://github.com/amaralc/peerlab/commit/15360275ff24aff013582a1eed7d14843f41a935))
+
+## [0.72.6](https://github.com/amaralc/peerlab/compare/peerlab@0.72.5...peerlab@0.72.6) (2024-03-24)
+
+**Note:** Version bump only for package peerlab
+
+## [0.72.5](https://github.com/amaralc/peerlab/compare/peerlab@0.72.4...peerlab@0.72.5) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-644:** avoid building front-end with existing cache ([4ce08b3](https://github.com/amaralc/peerlab/commit/4ce08b32609699d42bc448a4b4816db271565670))
+
+## [0.72.4](https://github.com/amaralc/peerlab/compare/peerlab@0.72.3...peerlab@0.72.4) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-644:** force new instance when .env file changes ([f47e451](https://github.com/amaralc/peerlab/commit/f47e451529a5396190951331812f751d57498780))
+
+## [0.72.3](https://github.com/amaralc/peerlab/compare/peerlab@0.72.2...peerlab@0.72.3) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-547:** rename feature flag ([ec71ea4](https://github.com/amaralc/peerlab/commit/ec71ea45d305f5ce743f2f69e992e2b301de18cd))
+
+## [0.72.2](https://github.com/amaralc/peerlab/compare/peerlab@0.72.1...peerlab@0.72.2) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-644:** url should start with http or https in frontend client ([9c8faaa](https://github.com/amaralc/peerlab/commit/9c8faaa145efeead04d28b939716e6ddc2daddbb))
+
+## [0.72.1](https://github.com/amaralc/peerlab/compare/peerlab@0.72.0...peerlab@0.72.1) (2024-03-24)
+
+### Reverts
+
+- Revert "fix(PEER-671): disable kernel-management-shell-browser" ([c413c94](https://github.com/amaralc/peerlab/commit/c413c9473919c434dee3a466d7c06bbe21b0ad12))
+
+## [0.72.0](https://github.com/amaralc/peerlab/compare/peerlab@0.71.11...peerlab@0.72.0) (2024-03-24)
+
+### Features
+
+- **PEER-644:** add docker-run command to make it easier to run locally ([6e417ed](https://github.com/amaralc/peerlab/commit/6e417ed5cbd3e3e4ec4052b3e3d0e1e6e90568e1))
+
+### Bug Fixes
+
+- **PEER-671:** disable kernel-management-shell-browser ([d3c02c0](https://github.com/amaralc/peerlab/commit/d3c02c088023e17cc9478d807e661856600818a0))
+
+## [0.71.11](https://github.com/amaralc/peerlab/compare/peerlab@0.71.10...peerlab@0.71.11) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-671:** add dependency between nx_affected and local environment variables ([50552ae](https://github.com/amaralc/peerlab/commit/50552ae3f6e3691083289f1dbf3dd3d4f9ed79dc))
+
+## [0.71.10](https://github.com/amaralc/peerlab/compare/peerlab@0.71.9...peerlab@0.71.10) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-671:** merging env variables in kernel-management-shell-browser ([043a88b](https://github.com/amaralc/peerlab/commit/043a88b444334025bd388195fb8672ba125f6c79))
+
+## [0.71.9](https://github.com/amaralc/peerlab/compare/peerlab@0.71.8...peerlab@0.71.9) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-668:** disable unleash provider provisioning step ([2c4b60a](https://github.com/amaralc/peerlab/commit/2c4b60a5d0f206cbc6a2a5cb37cae386eb09f53f))
+- **PEER-671:** upgrade mongodb-memory-server ([be32012](https://github.com/amaralc/peerlab/commit/be320125c69246d2bab062c85ab29063e59452d4))
+
+## [0.71.8](https://github.com/amaralc/peerlab/compare/peerlab@0.71.7...peerlab@0.71.8) (2024-03-24)
+
+### Bug Fixes
+
+- **PEER-668:** ensure prisma client exist during deploy ([d95d81a](https://github.com/amaralc/peerlab/commit/d95d81a5fe61b086de3fb4f2bb9accf760aacb3e))
+
+## [0.71.7](https://github.com/amaralc/peerlab/compare/peerlab@0.71.6...peerlab@0.71.7) (2024-03-22)
+
+**Note:** Version bump only for package peerlab
+
+## [0.71.6](https://github.com/amaralc/peerlab/compare/peerlab@0.71.5...peerlab@0.71.6) (2024-03-22)
+
+### Reverts
+
+- Revert "Revert "fix(PEER-668): lock versions"" ([faf446e](https://github.com/amaralc/peerlab/commit/faf446ebbfe1fca22a7b4bbce168846b111a9951))
+
 ## [0.71.5](https://github.com/amaralc/peerlab/compare/peerlab@0.71.4...peerlab@0.71.5) (2024-03-22)
 
 ### Bug Fixes

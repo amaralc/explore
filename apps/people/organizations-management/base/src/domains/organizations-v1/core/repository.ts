@@ -1,5 +1,5 @@
-import { IPaginatedEntities } from '../../../utils/paginated-entities';
-import { PaginationDto } from '../../../utils/pagination-dto';
+import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
+import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { IOrganizationV1Dto, OrganizationV1Entity } from './entity';
 
 export abstract class OrganizationsV1Repository {

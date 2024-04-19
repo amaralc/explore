@@ -157,6 +157,6 @@ resource "google_dns_record_set" "cname_record" {
 }
 
 output "url" {
-  value = "${google_cloud_run_domain_mapping.default.status[0].resource_records[0].name}.${var.domain_name}"
+  value = "https://${google_cloud_run_domain_mapping.default.status[0].resource_records[0].name}.${var.domain_name}"
 }
 

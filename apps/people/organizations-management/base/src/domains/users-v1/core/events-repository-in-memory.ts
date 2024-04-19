@@ -17,13 +17,13 @@ export class InMemoryUsersV1EventsRepository implements UsersV1EventsRepository 
 
   public authenticationEventToEntity(userV1AuthenticationEvent: UserV1AuthenticationEventDto): UserV1Entity {
     const userV1Entity = new UserV1Entity({
-      createdAt: userV1AuthenticationEvent.metadata.createdAt,
       displayName: userV1AuthenticationEvent.displayName,
       email: userV1AuthenticationEvent.email,
       emailVerified: userV1AuthenticationEvent.emailVerified,
       id: userV1AuthenticationEvent.uid,
       photoURL: userV1AuthenticationEvent.photoURL,
-      updatedAt: userV1AuthenticationEvent.metadata.lastSignedInAt,
+      createdAt: new Date(userV1AuthenticationEvent.metadata.createdAt).toISOString(),
+      updatedAt: new Date(userV1AuthenticationEvent.metadata.lastSignedInAt).toISOString(),
       disabled: false,
     });
     return userV1Entity;

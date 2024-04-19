@@ -20,7 +20,21 @@ export class CreateAgentV1FromUserV1CreationEventUseCase {
       throw new Error('Agent with same email already exists');
     }
 
-    const agentV1 = await this.agentsV1Repository.createFromUserV1(userV1);
+    const userAgent = new AgentV1Entity({
+      id: userCreatedEvent.uid,
+      email: userCreatedEvent.email,
+      nickname: AgentV1Entity.generateNicknameFromEmail(userCreatedEvent.email),
+      type: 'INDIVIDUAL',
+      createdAt: new Date(userCreatedEvent.metadata.createdAt).toISOString(),
+      updatedAt: new Date(userCreatedEvent.metadata.createdAt).toISOString(),
+    });
+
+    const agentV1WithSameNickname = await this.agentsV1Repository.getAgentByNickname(userAgent.nickname);
+    if (agentV1WithSameNickname) {
+      throw new Error('Agent with the same nickname already exists');
+    }
+
+    const agentV1 = await this.agentsV1Repository.create(userAgent);
     return agentV1;
   }
 }

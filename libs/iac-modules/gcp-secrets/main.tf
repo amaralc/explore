@@ -6,7 +6,7 @@ resource "google_secret_manager_secret" "secrets" {
   project   = var.gcp_project_id
 
   replication {
-    automatic = true
+    auto {}
   }
 }
 

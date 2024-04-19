@@ -1,7 +1,7 @@
 # Known Issues
 
 - [x] Error while trying to create a new AgentV1 because Firebase UserRecord uid cannot be used as input in MongoDb new ObjectId() constructor. (https://console.cloud.google.com/functions/details/europe-west1/createAgentV1WhenUserV1IsCreated?env=gen1&project=production-294af8cd4959&tab=logs)
-- [ ] Error: Error while updating cloudfunction configuration: Error waiting for Updating CloudFunctions Function: Error code 3, message: Build failed: This project is using pnpm but you have not included the Functions Framework in your dependencies. Please add it by running: 'pnpm add @google-cloud/functions-framework'.; Error ID: 5b6dc8b5
+- [ ] Error: Error while updating cloudfunction configuration: Error waiting for Updating CloudFunctions Function: Error code 3, message: Build failed: This project is using pnpm but you have not included the Functions Framework in your dependencies. Please add it by running: 'pnpm add @google-cloud/functions-framework'.; Error ID: 5b6dc8b5. (+1)
 
 # References
 

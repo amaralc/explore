@@ -4,6 +4,7 @@ import { AgentV1Entity } from './entity';
 export const fakeAgents = [
   new AgentV1Entity({
     email: 'fake-agent@email.com',
+    nickname: AgentV1Entity.generateNicknameFromEmail('fake-agent@email.com'),
     id: randomBytes(14).toString('hex'),
     type: 'INDIVIDUAL',
     createdAt: new Date().toISOString(),

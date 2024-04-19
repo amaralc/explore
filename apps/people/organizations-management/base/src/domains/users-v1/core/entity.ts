@@ -1,5 +1,5 @@
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
-import { schemaValidator } from '../../../utils/validators/json-schema-validator';
 
 export const userV1JsonSchema = Type.Object({
   id: Type.String({

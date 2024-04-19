@@ -9,9 +9,7 @@ locals {
   build_script = <<EOF
 echo 'Building app...'
 pnpm nx run ${var.service_component_name}:build --prod
-echo 'Removing pnpm-lock.yaml from build output...'
-# We need to remove pnpm-lock.yaml from the build output because it result in cloud function error during build (https://github.com/firebase/firebase-tools/issues/5911)
-rm -f ${local.absolute_build_output_path}/pnpm-lock.yaml
+pnpm nx run ${var.service_component_name}:post-build
 EOF
 }
 
@@ -21,6 +19,27 @@ module "nx_affected" {
   short_commit_sha = var.short_commit_sha
   build_script     = local.build_script
 }
+
+resource "null_resource" "remove_pnpm_lock" {
+  triggers = {
+    short_commit_sha = var.short_commit_sha
+  }
+
+  provisioner "local-exec" {
+    command = <<-EOF
+echo 'Removing pnpm-lock.yaml from build output...'
+# We need to remove pnpm-lock.yaml from the build output because it result in cloud function error during build (https://github.com/firebase/firebase-tools/issues/5911)
+rm -f ${local.absolute_build_output_path}/pnpm-lock.yaml
+EOF
+  }
+
+  depends_on = [local.absolute_build_output_path, module.nx_affected]
+}
+
+# TODO: 
+# nx_affected should output a boolean that indicates if the build should proceed or not, otherwise we
+# will keep having the build failing such as in https://github.com/amaralc/peerlab/actions/runs/8409876756/job/23027685469
+# ............
 
 module "zip_functions" {
   source           = "../../../../../libs/iac-modules/zip"
@@ -85,7 +104,7 @@ resource "google_storage_bucket_object" "people_organizations_management_functio
 # }
 
 resource "google_cloudfunctions_function" "functions" {
-  depends_on = [module.nx_affected]
+  depends_on = [module.nx_affected, null_resource.remove_pnpm_lock]
   for_each = {
     createAgentV1WhenUserV1IsCreated = {
       name        = "createAgentV1WhenUserV1IsCreated"

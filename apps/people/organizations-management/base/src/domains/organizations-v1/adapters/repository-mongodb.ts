@@ -1,7 +1,7 @@
+import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
+import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
+import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Collection, ObjectId } from 'mongodb';
-import { MongoDbDriver } from '../../../database-drivers/mongodb-driver';
-import { IPaginatedEntities } from '../../../utils/paginated-entities';
-import { PaginationDto } from '../../../utils/pagination-dto';
 import { IOrganizationV1Dto, OrganizationV1Entity } from '../core/entity';
 import { OrganizationsV1Repository } from '../core/repository';
 

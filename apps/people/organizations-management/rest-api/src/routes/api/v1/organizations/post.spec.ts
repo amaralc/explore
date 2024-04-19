@@ -1,8 +1,9 @@
+import { firebaseIdFormat, iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
+import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
-import { MongoDbMemoryServer } from '@peerlab/people/organizations-management/base/database-drivers/mongodb-memory-server';
 import { fakeAgentsByIdOrEmail } from '@peerlab/people/organizations-management/base/domains/agents-v1/core/fixtures';
+import { IOrganizationV1Dto } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/entity';
 import { CreateOrganizationV1InputDto } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/use-cases/create-organization';
-import { iso8601DateFormat } from '@peerlab/people/organizations-management/base/utils/date-formats';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../app';
 
@@ -13,7 +14,8 @@ describe('POST /v1/organizations', () => {
 
   beforeAll(async () => {
     configurationManager = new ConfigurationManager();
-    databaseUri = await MongoDbMemoryServer.initializeInMemoryDatabase();
+    const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
+    databaseUri = result.databaseUri;
     // Override the default configuration with in memory database configuration
     configurationManager.setConfig({
       ...configurationManager.getConfig(),
@@ -37,8 +39,9 @@ describe('POST /v1/organizations', () => {
       planSubscriptionName: 'FREE',
     };
 
-    const expectedResponseBody = {
-      id: expect.any(String),
+    const expectedResponseBody: IOrganizationV1Dto = {
+      id: expect.stringMatching(mongoDbIdFormat),
+      agentId: expect.stringMatching(firebaseIdFormat),
       nickname: requestBody.nickname,
       ownerAgentId: requestBody.ownerAgentId,
       email: requestBody.email,

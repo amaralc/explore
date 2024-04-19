@@ -4,14 +4,14 @@ terraform {
       source = "hashicorp/google"
       # Test version 5.0.0 after correcting https://github.com/hashicorp/terraform-provider-google/issues/16217
       # which is related to https://github.com/amaralc/peerlab/actions/runs/6497683905/job/17647315911
-      version = "4.84.0"
+      version = "5.22.0"
     }
 
     google-beta = {
       source = "hashicorp/google-beta"
       # Test version 5.0.0 after correcting https://github.com/hashicorp/terraform-provider-google/issues/16217
       # which is related to https://github.com/amaralc/peerlab/actions/runs/6497683905/job/17647315911
-      version = "4.84.0"
+      version = "5.22.0"
     }
 
     neon = {
@@ -53,6 +53,11 @@ terraform {
     unleash = {
       source  = "philips-labs/unleash"
       version = "0.3.8"
+    }
+
+    http = {
+      source  = "hashicorp/http"
+      version = "3.4.2"
     }
   }
 }

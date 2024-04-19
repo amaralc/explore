@@ -2,12 +2,12 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "4.80.0" # Adjust the version to match the latest release
+      version = "5.22.0" # Adjust the version to match the latest release
     }
 
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "4.80.0" # Adjust the version to match the latest release
+      version = "5.22.0" # Adjust the version to match the latest release
     }
 
     vercel = {

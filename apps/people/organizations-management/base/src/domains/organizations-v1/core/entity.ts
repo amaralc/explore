@@ -1,8 +1,8 @@
+import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-entity';
+import { CustomEnum } from '@peerlab/kernel/shared-ts-utils/types/custom-enum';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
 import 'reflect-metadata';
-import { getDtoFromEntity } from '../../../utils/get-dto-from-entity';
-import { CustomEnum } from '../../../utils/types/custom-enum';
-import { schemaValidator } from '../../../utils/validators/json-schema-validator';
 
 export const organizationV1JsonSchema = Type.Object({
   id: Type.String({
@@ -13,6 +13,7 @@ export const organizationV1JsonSchema = Type.Object({
   }),
   nickname: Type.String({
     minLength: 4,
+    pattern: '^(?:[a-z0-9]+(?:-[a-z0-9]+)*){4,}$', // Starts with a letter or number, followed by letters, numbers or hyphens, and ends with a letter or number with more 4 characters or more
     description: 'The nickname of the agent. It must have at least 4 characters.',
   }),
   email: Type.String({
@@ -20,10 +21,16 @@ export const organizationV1JsonSchema = Type.Object({
     description:
       'The email of the organization. An organization agent can have the same e-mail of its owner only if its owner is an individual agent. Two organizations cannot have the same e-mail.',
   }),
+  agentId: Type.String({
+    minLength: 24,
+    maxLength: 28,
+    pattern: '^[A-Za-z0-9]{24,28}$', // Between  24 and 28 characters, alphanumeric
+    description: 'The unique identifier of organization agent, as a hexadecimal string of 28 characters.',
+  }),
   ownerAgentId: Type.String({
     minLength: 24,
     maxLength: 28,
-    pattern: '^[A-Za-z0-9]{24,28}$', // BBetween  24 and 28 characters, alphanumeric
+    pattern: '^[A-Za-z0-9]{24,28}$', // Between  24 and 28 characters, alphanumeric
     description:
       'The unique identifier of the agent that owns the organization, as a hexadecimal string of 28 characters.',
   }),
@@ -48,6 +55,7 @@ export class OrganizationV1Entity {
   id: string;
   nickname: string;
   email: string;
+  agentId: string;
   ownerAgentId: string;
   planSubscriptionName: IOrganizationV1Dto['planSubscriptionName'];
   createdAt: string;
@@ -64,7 +72,7 @@ export class OrganizationV1Entity {
   }
 
   getDto(): IOrganizationV1Dto {
-    const dto = getDtoFromEntity<IOrganizationV1Dto, OrganizationV1Entity>(this);
+    const dto = getDtoFromEntity<IOrganizationV1Dto>(this);
     return dto;
   }
 }

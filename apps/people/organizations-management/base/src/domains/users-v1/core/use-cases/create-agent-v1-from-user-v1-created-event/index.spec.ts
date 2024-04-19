@@ -22,11 +22,11 @@ describe('createAgentV1FromUserV1CreatedEvent', () => {
   it('should create an agent from a user created event', async () => {
     const userCreatedEvent: UserV1AuthenticationEventDto = {
       displayName: 'New User',
-      email: 'new-user@email.com',
+      email: 'new.user-01@email.com',
       emailVerified: true,
       metadata: {
-        createdAt: new Date().toISOString(),
-        lastSignedInAt: new Date().toISOString(),
+        createdAt: '2024-04-07T12:58:35.35Z', // Firebase timestamp format uses two digits for the milliseconds
+        lastSignedInAt: '2024-04-07T12:58:35.35Z', // Firebase timestamp format uses two digits for the milliseconds
       },
       photoURL: 'https://www.photo.com/john-doe',
       providerData: [],
@@ -36,11 +36,12 @@ describe('createAgentV1FromUserV1CreatedEvent', () => {
     const createdAgentV1 = await useCase.execute(userCreatedEvent);
 
     const expectedAgentV1: IAgentV1Dto = {
-      createdAt: userCreatedEvent.metadata.createdAt,
+      createdAt: new Date(userCreatedEvent.metadata.createdAt).toISOString(),
       email: userCreatedEvent.email,
+      nickname: expect.stringMatching(/^new-user-01/), // starts with the email prefix converted to slug (without special characters)
       id: userCreatedEvent.uid,
       type: 'INDIVIDUAL',
-      updatedAt: userCreatedEvent.metadata.lastSignedInAt,
+      updatedAt: new Date(userCreatedEvent.metadata.lastSignedInAt).toISOString(),
     };
 
     expect(createdAgentV1).toEqual(expectedAgentV1);
