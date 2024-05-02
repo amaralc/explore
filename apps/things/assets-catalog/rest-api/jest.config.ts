@@ -11,4 +11,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../../coverage/apps/things/assets-catalog/base',
+  testTimeout: 100000,
 };

@@ -1,19 +1,27 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
+import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
+import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
-import { Collection, ObjectId } from 'mongodb';
+import { Collection, MongoError, ObjectId } from 'mongodb';
 import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity } from '../core/entity';
 import { TaxonomicUnitsV1DatabaseRepository } from '../core/repository-database';
+import { TaxonomicUnitAlreadyExistsError } from '../core/use-cases/create-taxonomic-unit.errors';
 
 type IMongoDbTaxonomicUnitV1 = { _id: ObjectId } & Omit<ITaxonomicUnitV1Dto, 'id'>;
 
 export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnitsV1DatabaseRepository {
-  mongoDbDriver: MongoDbDriver;
-  collectionName = 'TaxonomicUnitV1';
+  private collectionName = 'TaxonomicUnitV1';
 
-  constructor(mongoDbDriver: MongoDbDriver) {
-    this.mongoDbDriver = mongoDbDriver;
+  constructor(private readonly mongoDbDriver: MongoDbDriver) {
+    nativeLogger.info(`Successfully initialized ${this.constructor.name}`, {
+      scope: {
+        moduleName: 'things-assets-catalog-base',
+        className: this.constructor.name,
+      },
+      steps: [],
+    });
   }
 
   private getCollection(): Collection<IMongoDbTaxonomicUnitV1> {
@@ -45,15 +53,21 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
   }
 
   public async create(inputDto: TaxonomicUnitV1Entity): Promise<ITaxonomicUnitV1Dto> {
-    const mongoDbDocument = this.mapDomainToMongoDb(inputDto);
-    const result = await this.getCollection().insertOne(mongoDbDocument);
+    try {
+      const mongoDbDocument = this.mapDomainToMongoDb(inputDto);
+      const result = await this.getCollection().insertOne(mongoDbDocument);
 
-    if (result.acknowledged === false) {
-      throw new Error('Failed to create taxonomic unit');
+      if (result.acknowledged === false) {
+        throw new Error('Failed to create taxonomic unit');
+      }
+
+      return inputDto;
+    } catch (error) {
+      if (error instanceof MongoError && error.code === 11000) {
+        throw new TaxonomicUnitAlreadyExistsError();
+      }
+      throw error;
     }
-    const insertedDocument = await this.getCollection().findOne({ _id: result.insertedId });
-    const entityDto = this.mapMongoDbToDomain(insertedDocument);
-    return entityDto;
   }
 
   public async createMany(agents: Array<TaxonomicUnitV1Entity>): Promise<CreateManyResponseDto> {
@@ -108,12 +122,29 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
   }
 
   public async generateIndexes(): Promise<void> {
-    console.log('Generating indexes for TaxonomicUnitV1 collection');
-    await this.getCollection().createIndexes([
-      {
-        key: { slug: 1 },
-        unique: true,
+    const log: ILogMetadata = {
+      scope: {
+        moduleName: 'taxonomic-units-v1',
+        className: MongoDbTaxonomicUnitsV1DatabaseRepository.name,
+        methodName: 'execute',
       },
-    ]);
+      steps: [],
+    };
+    try {
+      log.steps.push({ message: 'Attempting to generate indexes for TaxonomicUnitV1 collection' });
+      await this.getCollection().createIndexes([{ key: { slug: 1 }, unique: true }]);
+
+      nativeLogger.info('Successfully generated indexes for TaxonomicUnitV1 collection');
+    } catch (error) {
+      log.steps.push({
+        message: 'Failed to create indexes for TaxonomicUnitV1 collection',
+        metadata: { errorStack: error.stack },
+      });
+      nativeLogger.error('Failed to create indexes for TaxonomicUnitV1 collection', log);
+    }
+  }
+
+  public async deleteAll(): Promise<void> {
+    await this.getCollection().deleteMany();
   }
 }

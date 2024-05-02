@@ -1,8 +1,8 @@
 import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-repository';
 import { InMemoryAgentsV1Repository } from '../../../agents-v1/core/database-repository-in-memory';
 import { AgentV1Entity } from '../../../agents-v1/core/entity';
-import { OrganizationsV1Repository } from '../repository';
-import { InMemoryOrganizationsV1Repository } from '../repository-in-memory';
+import { OrganizationsV1Repository } from '../database-repository';
+import { InMemoryOrganizationsV1Repository } from '../database-repository-in-memory';
 import { GetOrganizationV1ByIdUseCase } from './get-organization-by-id';
 
 describe('Get OrganizationV1', () => {

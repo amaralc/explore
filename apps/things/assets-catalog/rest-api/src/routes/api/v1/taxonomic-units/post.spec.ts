@@ -1,7 +1,6 @@
 import { iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
-import { NativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
 import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config/configuration-manager';
 import { defaultConfiguration } from '@peerlab/things/assets-catalog/base/config/default-configuration';
 import { ITaxonomicUnitV1Dto } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/entity';
@@ -17,8 +16,7 @@ describe('POST /v1/taxonomic-units', () => {
   let testDatabaseDriver: MongoDbDriver;
 
   beforeAll(async () => {
-    const logger = new NativeLogger();
-    configurationManager = new ConfigurationManager(defaultConfiguration, logger);
+    configurationManager = new ConfigurationManager(defaultConfiguration);
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
     databaseUri = result.databaseUri;
     mongoDbMemoryServer = result.mongoMemoryServer;

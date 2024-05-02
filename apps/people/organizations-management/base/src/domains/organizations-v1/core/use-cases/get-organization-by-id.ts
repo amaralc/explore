@@ -1,5 +1,5 @@
+import { OrganizationsV1Repository } from '../database-repository';
 import { OrganizationV1Entity } from '../entity';
-import { OrganizationsV1Repository } from '../repository';
 
 export class GetOrganizationV1ByIdUseCase {
   private organizationsV1Repository: OrganizationsV1Repository;

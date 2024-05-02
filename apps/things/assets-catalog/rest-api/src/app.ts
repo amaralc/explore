@@ -4,6 +4,7 @@ import * as path from 'path';
 
 import { validateCors } from '@peerlab/kernel/shared-ts-utils/enable-cors';
 import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config/configuration-manager';
+import { V1AssetsController } from './routes/api/v1/assets';
 import { V1TaxonomicUnitsController } from './routes/api/v1/taxonomic-units';
 import OpenApiV3Controller from './routes/docs/v3/open-api-json';
 
@@ -11,6 +12,7 @@ export const bootstrapApplication = async (configurationManager: ConfigurationMa
   try {
     // Initialize configuration manager (database connections, etc.)
     await import('dotenv').then((dotenv) => dotenv.config());
+
     await configurationManager.initialize();
 
     // Initialize Express application
@@ -27,6 +29,9 @@ export const bootstrapApplication = async (configurationManager: ConfigurationMa
 
     const v1TaxonomicUnitsController = new V1TaxonomicUnitsController(configurationManager);
     router.post('/api/v1/taxonomic-units', v1TaxonomicUnitsController.create);
+
+    const v1AssetsController = new V1AssetsController(configurationManager);
+    router.post('/api/v1/assets', v1AssetsController.create);
 
     // Initialize routes
     app.use(router);

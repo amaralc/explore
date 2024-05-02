@@ -1,11 +1,11 @@
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
+import { OrganizationsV1Repository } from './database-repository';
 import { OrganizationV1Entity } from './entity';
-import { OrganizationsV1Repository } from './repository';
 
 export class InMemoryOrganizationsV1Repository implements OrganizationsV1Repository {
-  private organizations: Array<OrganizationV1Entity> = [];
+  constructor(private organizations: Array<OrganizationV1Entity> = []) {}
 
   generateUniqueId() {
     return randomBytes(12).toString('hex');
@@ -15,6 +15,7 @@ export class InMemoryOrganizationsV1Repository implements OrganizationsV1Reposit
     if (this.organizations.some((organization) => organization.id === organizationV1Entity.id)) {
       throw new Error('Organization with the same id already exists');
     }
+
     this.organizations.push(organizationV1Entity);
     return organizationV1Entity;
   }

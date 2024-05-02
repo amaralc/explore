@@ -46,6 +46,14 @@
       "options": {
         "jestConfig": "apps/things/assets-catalog/rest-api/jest.config.ts"
       }
+    },
+    "docker-build": {
+      "command": "docker build -f apps/things/assets-catalog/rest-api/Dockerfile . -t things-assets-catalog-rest-api",
+      "dependsOn": ["build"]
+    },
+    "docker-run": {
+      "command": "docker run -p 8080:8080 things-assets-catalog-rest-api",
+      "dependsOn": []
     }
   },
   "tags": []

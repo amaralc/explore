@@ -1,0 +1,10 @@
+@PRODUCTION_BASE_URL=https://production-server.com
+@DEVELOPMENT_BASE_URL=http://localhost:8080
+@BASE_URL={{DEVELOPMENT_BASE_URL}}
+
+POST {{BASE_URL}}/api/v1/taxonomic-units HTTP/1.1
+Content-Type: application/json
+
+{
+  "slug": "measurement"
+}

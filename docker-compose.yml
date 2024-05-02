@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 volumes:
   zookeeper:
@@ -13,7 +13,7 @@ volumes:
   postgres:
     driver: local
 
-  mongo:
+  mongodb:
     driver: local
 
   # hasura:
@@ -31,7 +31,6 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-
 
   kafka:
     image: confluentinc/cp-server:7.3.0
@@ -87,17 +86,57 @@ services:
     env_file:
       - .env
 
-  # Mongo Database container initialization (https://hub.docker.com/_/mongo)
-  mongo:
-    image: mongo:5.0
+  # Mongo Database container initialization (https://hub.docker.com/r/mongodb/mongodb-community-server/tags)
+  mongodb:
+    image: mongodb/mongodb-community-server:7.0.9-ubi8
     restart: always
-    container_name: mongo
+    container_name: mongodb
     volumes:
-      - mongo:/var/lib/mongo/data
+      - mongodb:/var/lib/mongodb/data
     ports:
       - '27017:27017'
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=local-root-user
+      - MONGODB_INITDB_ROOT_PASSWORD=local-root-password
+
+  things-assets-catalog-rest-api:
+    image: node:18.17.1
+    volumes:
+      - ./:/app
+    working_dir: /app
+    ports:
+      - 8080:8080
+    command: 'dist/apps/things/assets-catalog/rest-api/main.js'
+    depends_on:
+      - mongodb
+      # - kafka
     env_file:
-      - .env
+      - dist/apps/things/assets-catalog/rest-api/.env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '512MB'
+
+  prometheus:
+    image: prom/prometheus:v2.47.0
+    command:
+      - --web.enable-remote-write-receiver
+      - --enable-feature=native-histograms
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+
+  grafana:
+    image: grafana/grafana:10.1.2
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/
 
   # # Mongo Express (https://github.com/mongo-express/mongo-express)
   # mongo-express:

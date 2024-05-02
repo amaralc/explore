@@ -2,8 +2,8 @@ import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-d
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Collection, ObjectId } from 'mongodb';
+import { OrganizationsV1Repository } from '../core/database-repository';
 import { IOrganizationV1Dto, OrganizationV1Entity } from '../core/entity';
-import { OrganizationsV1Repository } from '../core/repository';
 
 type IMongoDbOrganization = { _id: ObjectId } & Omit<IOrganizationV1Dto, 'id'>;
 

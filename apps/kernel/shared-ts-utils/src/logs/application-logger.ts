@@ -1,9 +1,9 @@
-type ILogStep = {
+export type ILogStep = {
   message: string;
   metadata?: Record<string, unknown>;
 };
 
-type ILogScope = {
+export type ILogScope = {
   moduleName: string;
   className?: string;
   methodName?: string;
@@ -11,15 +11,12 @@ type ILogScope = {
 };
 
 export type ILogMetadata = {
-  steps: Array<ILogStep>;
   scope: ILogScope;
+  steps: Array<ILogStep>;
 };
 
 export abstract class ApplicationLogger {
-  abstract setLogScope(scope: ILogScope): void;
-  abstract setLogStep(step: ILogStep): void;
-  abstract log(message: string, metadata?: Record<string, unknown>): void;
-  abstract info?(message: string, metadata?: Record<string, unknown>): void;
+  abstract info(message: string, metadata?: Record<string, unknown>): void;
   abstract error(message: string, metadata?: Record<string, unknown>): void;
   abstract warn(message: string, metadata?: Record<string, unknown>): void;
   abstract debug?(message: string, metadata?: Record<string, unknown>): void;

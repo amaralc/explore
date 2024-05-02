@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.79.0](https://github.com/amaralc/peerlab/compare/peerlab@0.79.0-beta.2...peerlab@0.79.0) (2024-05-02)
+
+### Features
+
+- **PEER-695:** add break-point test ([e43114b](https://github.com/amaralc/peerlab/commit/e43114b5d5cb2ca43f6388f65dd8f94ed7a685ce))
+- **PEER-695:** add grafana and prometheus to monitor load tests ([686f7a3](https://github.com/amaralc/peerlab/commit/686f7a32f9714442d8b4a3d2b7ccda138197fe36))
+
+### Performance Improvements
+
+- **PEER-695:** avoid reading database before responding from repository ([55a4ee4](https://github.com/amaralc/peerlab/commit/55a4ee42f68538ad24bed0e6368ba4eec64a05ed))
+- **PEER-695:** avoid reading the database to check for duplicated taxonomic units ([ef4c3b4](https://github.com/amaralc/peerlab/commit/ef4c3b440b3cedbcaecc8de5f5f0df76d532590d))
+
+## [0.79.0-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.79.0-beta.1...peerlab@0.79.0-beta.2) (2024-05-01)
+
+**Note:** Version bump only for package peerlab
+
+## [0.79.0-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.79.0-beta.0...peerlab@0.79.0-beta.1) (2024-04-30)
+
+### Bug Fixes
+
+- **PEER:** remove logger instances and reduce memory leak ([cad4399](https://github.com/amaralc/peerlab/commit/cad439971edd1c0a06833e18cb9212fb878a5aea))
+
+## [0.79.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.78.0...peerlab@0.79.0-beta.0) (2024-04-23)
+
+### Features
+
+- **PEER-691:** prepare to seed db with existing data ([51b566d](https://github.com/amaralc/peerlab/commit/51b566d75315be3c7c39ce8d9ed83dba8d854633))
+
+## [0.78.0](https://github.com/amaralc/peerlab/compare/peerlab@0.77.0...peerlab@0.78.0) (2024-04-20)
+
+### Features
+
+- **PEER-680:** add assets to api docs ([4ae27d1](https://github.com/amaralc/peerlab/commit/4ae27d1e2bc8159ade592b4f72222e7283ae1cae))
+
+## [0.77.0](https://github.com/amaralc/peerlab/compare/peerlab@0.77.0-beta.1...peerlab@0.77.0) (2024-04-20)
+
+### Features
+
+- **PEER-683:** create asset entity and use case ([73fcf91](https://github.com/amaralc/peerlab/commit/73fcf91f02a134ada937f88ab1eb03362a28dde1))
+- **PEER-683:** create basic assets with related taxons ([f037dfe](https://github.com/amaralc/peerlab/commit/f037dfe9875ec93d8212184f1c41313315959360))
+
+## [0.77.0-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.77.0-beta.0...peerlab@0.77.0-beta.1) (2024-04-20)
+
+**Note:** Version bump only for package peerlab
+
+## [0.77.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.76.3-beta.0...peerlab@0.77.0-beta.0) (2024-04-20)
+
+### Features
+
+- **PEER-680:** remove log and regenerate db passwords on every change ([09b3611](https://github.com/amaralc/peerlab/commit/09b361119e0620cd39404ead7c898558ba30298a))
+
+### Bug Fixes
+
+- **PEER-680:** do not use default values in configuration ([b84a50e](https://github.com/amaralc/peerlab/commit/b84a50e2bf8a03a223b40c8b20ba919da1e9459a))
+- **PEER-680:** set database name correctly ([de7421b](https://github.com/amaralc/peerlab/commit/de7421b6183669c96356e79ac4f692dc1db47e9b))
+
+## [0.76.3-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.76.2...peerlab@0.76.3-beta.0) (2024-04-20)
+
+**Note:** Version bump only for package peerlab
+
+## [0.76.2](https://github.com/amaralc/peerlab/compare/peerlab@0.76.1...peerlab@0.76.2) (2024-04-20)
+
+### Bug Fixes
+
+- **PEER-680:** add logs to repository ([ef52f82](https://github.com/amaralc/peerlab/commit/ef52f82224bc466b8bd1d163a6aa23e7aa5d6d3b))
+
+## [0.76.1](https://github.com/amaralc/peerlab/compare/peerlab@0.76.0...peerlab@0.76.1) (2024-04-19)
+
+**Note:** Version bump only for package peerlab
+
+## [0.76.0](https://github.com/amaralc/peerlab/compare/peerlab@0.75.1...peerlab@0.76.0) (2024-04-19)
+
+### Features
+
+- **PEER-680:** add things-assets-catalog to environment module and deploy service ([e050445](https://github.com/amaralc/peerlab/commit/e050445144bebe93fa01c00aa97f6ba7d63e9444))
+
+## [0.75.1](https://github.com/amaralc/peerlab/compare/peerlab@0.75.0...peerlab@0.75.1) (2024-04-19)
+
+### Bug Fixes
+
+- **PEER-680:** fix flag manager imports and tsconfig relative path ([ca4d45a](https://github.com/amaralc/peerlab/commit/ca4d45a95d230b14f2d0af472475e6de4bda416b))
+
+## [0.75.0](https://github.com/amaralc/peerlab/compare/peerlab@0.74.0...peerlab@0.75.0) (2024-04-19)
+
+### Features
+
+- **PEER-680:** add things-assets-catalog deployment configuration ([1b52d5f](https://github.com/amaralc/peerlab/commit/1b52d5f39ef6d8a04feb5a4c469b183601fbf7ea))
+
 ## [0.74.0](https://github.com/amaralc/peerlab/compare/peerlab@0.73.2...peerlab@0.74.0) (2024-04-19)
 
 ### Features

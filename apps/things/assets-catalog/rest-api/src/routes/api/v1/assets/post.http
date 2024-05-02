@@ -1,0 +1,12 @@
+@PRODUCTION_BASE_URL=https://production-server.com
+@DEVELOPMENT_BASE_URL=http://localhost:8080
+@BASE_URL={{DEVELOPMENT_BASE_URL}}
+
+POST {{BASE_URL}}/api/v1/assets HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Mechanical Lathe",
+  "taxonomicUnitSlug": "manufacturing",
+  "tags": ["metal", "wood", "plastic"]
+}

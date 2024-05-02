@@ -3,9 +3,9 @@ import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-rep
 import { InMemoryAgentsV1Repository } from '../../../agents-v1/core/database-repository-in-memory';
 import { AgentV1Entity } from '../../../agents-v1/core/entity';
 import { fakeAgents, fakeAgentsByIdOrEmail } from '../../../agents-v1/core/fixtures';
+import { OrganizationsV1Repository } from '../database-repository';
+import { InMemoryOrganizationsV1Repository } from '../database-repository-in-memory';
 import { IOrganizationV1Dto } from '../entity';
-import { OrganizationsV1Repository } from '../repository';
-import { InMemoryOrganizationsV1Repository } from '../repository-in-memory';
 import { CreateOrganizationV1InputDto, CreateOrganizationV1UseCase } from './create-organization';
 
 describe('Create OrganizationV1 with free plan subscription', () => {

@@ -1,10 +1,10 @@
 import { UserRecord } from 'firebase-admin/auth';
 import { UsersV1DatabaseRepository } from '../core/database-repository';
-import { UserV1Entity } from '../core/entity';
-import { IBackgroundFunctionUserRecord } from './database-repository-firebase.types';
+import { IUserV1Dto } from '../core/entity';
+import { UserV1AuthenticationEventDto } from '../core/events-repository';
 
 export class FirebaseUsersV1DatabaseRepository implements UsersV1DatabaseRepository {
-  static mapBackgroundFunctionAuthEventToDomain(eventData: IBackgroundFunctionUserRecord): UserV1Entity {
+  static mapBackgroundFunctionAuthEventToDomain(eventData: UserV1AuthenticationEventDto): IUserV1Dto {
     return {
       id: eventData.uid,
       email: eventData.email,
@@ -17,7 +17,7 @@ export class FirebaseUsersV1DatabaseRepository implements UsersV1DatabaseReposit
     };
   }
 
-  static mapFirebaseToDomain(firebaseUser: UserRecord): UserV1Entity {
+  static mapFirebaseToDomain(firebaseUser: UserRecord): IUserV1Dto {
     return {
       id: firebaseUser.uid,
       email: firebaseUser.email,

@@ -2,8 +2,8 @@ import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json
 import { Static, Type } from '@sinclair/typebox';
 import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-repository';
 import { AgentV1Entity } from '../../../agents-v1/core/entity';
+import { OrganizationsV1Repository } from '../database-repository';
 import { IOrganizationV1Dto, OrganizationV1Entity, organizationV1JsonSchema } from '../entity';
-import { OrganizationsV1Repository } from '../repository';
 
 export const createOrgaNizationV1InputDtoSchema = Type.Object({
   nickname: organizationV1JsonSchema.properties.nickname,

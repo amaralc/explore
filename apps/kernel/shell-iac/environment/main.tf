@@ -205,6 +205,30 @@ module "people-organizations-management" {
   depends_on = [mongodbatlas_project.instance, module.gcp_project]
 }
 
+# Assets Catalog Microservice
+module "things-assets-catalog" {
+  source                              = "../../../things/assets-catalog/iac"
+  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 1 : 0 # Disable module in preview environments
+  branch_name                         = var.branch_name
+  source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
+  environment_name                    = var.environment_name
+  gcp_project_id                      = module.gcp_project[0].project_id # Project where cloud run instances will be deployed
+  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_location                        = var.gcp_location
+  short_commit_sha                    = var.short_commit_sha
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  nx_cloud_access_token               = var.nx_cloud_access_token
+  domain_name                         = var.domain_name
+  gcp_dns_managed_zone_name           = var.gcp_dns_managed_zone_name
+  dbms_provider = {
+    mongodb_atlas = {
+      org_id     = var.mongodb_atlas_org_id
+      project_id = mongodbatlas_project.instance[0].id
+    }
+  }
+  depends_on = [mongodbatlas_project.instance, module.gcp_project]
+}
+
 # Researchers Peers Microservice
 module "people-researchers-peers-svc" {
   source                              = "../../../people/researchers-peers-svc/iac"

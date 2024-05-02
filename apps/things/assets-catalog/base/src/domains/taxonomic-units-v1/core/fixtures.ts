@@ -8,6 +8,12 @@ export const fakeTaxonomicUnitsV1 = [
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }),
+  new TaxonomicUnitV1Entity({
+    slug: 'manufacturing',
+    id: randomBytes(12).toString('hex'),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }),
 ];
 
 const taxonByIdOrSlug: Map<string, TaxonomicUnitV1Entity> = new Map();

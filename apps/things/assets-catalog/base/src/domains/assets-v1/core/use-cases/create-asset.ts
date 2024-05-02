@@ -1,0 +1,81 @@
+import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
+import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { Static, Type } from '@sinclair/typebox';
+import { TaxonomicUnitV1NotFoundError } from '../../../taxonomic-units-v1/core/errors';
+import { TaxonomicUnitsV1DatabaseRepository } from '../../../taxonomic-units-v1/core/repository-database';
+import { AssetV1Entity, IAssetV1Dto, assetV1JsonSchema } from '../entity';
+import { AssetsV1DatabaseRepository } from '../repository-database';
+
+export const createAssetV1InputDtoSchema = Type.Object({
+  name: assetV1JsonSchema.properties.name,
+  taxonomicUnitSlug: assetV1JsonSchema.properties.taxonomicUnitSlug,
+  tags: assetV1JsonSchema.properties.tags,
+});
+
+export type CreateAssetV1InputDto = Static<typeof createAssetV1InputDtoSchema>;
+
+export class CreateAssetV1UseCase {
+  constructor(
+    private readonly assetsV1DatabaseRepository: AssetsV1DatabaseRepository,
+    private readonly taxonomicUnitsV1DatabaseRepository: TaxonomicUnitsV1DatabaseRepository,
+  ) {
+    const log: ILogMetadata = {
+      scope: {
+        moduleName: 'assets-v1',
+        className: CreateAssetV1UseCase.name,
+        methodName: 'constructor',
+      },
+      steps: [],
+    };
+    nativeLogger.info('Initializing CreateAssetV1UseCase...', log);
+  }
+
+  public async execute(inputDto: CreateAssetV1InputDto): Promise<IAssetV1Dto> {
+    const log: ILogMetadata = {
+      scope: {
+        moduleName: 'assets-v1',
+        className: CreateAssetV1UseCase.name,
+        methodName: 'execute',
+      },
+      steps: [],
+    };
+    try {
+      log.steps.push({ message: 'Validating input dto...' });
+      schemaValidator.validateOrReject(createAssetV1InputDtoSchema, inputDto);
+
+      log.steps.push({ message: 'Validating if taxonomic unit is valid' });
+      const existingTaxonomicUnitV1Dto = await this.taxonomicUnitsV1DatabaseRepository.findBySlug(
+        inputDto.taxonomicUnitSlug,
+      );
+
+      if (!existingTaxonomicUnitV1Dto) {
+        throw new TaxonomicUnitV1NotFoundError();
+      }
+
+      log.steps.push({ message: 'Creating a new asset entity...' });
+
+      const assetV1Dto: IAssetV1Dto = {
+        id: this.assetsV1DatabaseRepository.generateUniqueId(),
+        name: inputDto.name,
+        tags: inputDto.tags,
+        taxonomicUnitSlug: inputDto.taxonomicUnitSlug,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      log.steps.push({ message: 'Validating asset entity...' });
+      new AssetV1Entity(assetV1Dto);
+
+      log.steps.push({ message: 'Storing asset in repository...' });
+      const createdAssetDto = await this.assetsV1DatabaseRepository.create(assetV1Dto);
+
+      nativeLogger.info(`Successfully created asset ${createdAssetDto.id}`);
+      return createdAssetDto;
+    } catch (error) {
+      log.steps.push({ message: 'Error while creating asset', metadata: { errorStack: error.stack } });
+      nativeLogger.error('Error while creating asset', log);
+      throw error;
+    }
+  }
+}

@@ -1,12 +1,11 @@
+import { AssetV1Entity, assetV1JsonSchema } from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/entity';
+import {
+  TaxonomicUnitV1Entity,
+  taxonomicUnitV1JsonSchema,
+} from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/entity';
 import { OpenApiBuilder } from 'openapi3-ts/oas30';
-// import { AgentV1Entity, agentV1JsonSchema } from '../../../../../../base/src/domains/agents-v1/core/entity';
-// import {
-//   OrganizationV1Entity,
-//   organizationV1JsonSchema,
-// } from '../../../../../../base/src/domains/organizations-v1/core/entity';
-// import { UserV1Entity, userV1JsonSchema } from '../../../../../../base/src/domains/users-v1/core/entity';
-// import { v1OrganizationsIdControllerSchema } from '../../../api/v1/organizations/[id]/index.docs';
-// import { organizationsV1ControllerSchema } from '../../../api/v1/organizations/index.docs';
+import { assetsV1ControllerSchema } from '../../../api/v1/assets/index.docs';
+import { taxonomicUnitV1ControllerSchema } from '../../../api/v1/taxonomic-units/index.docs';
 
 export class OpenApiV3Entity extends OpenApiBuilder {
   constructor() {
@@ -16,7 +15,7 @@ export class OpenApiV3Entity extends OpenApiBuilder {
       contact: {
         name: 'PeerLab',
       },
-      title: 'People | Assets Catalog API',
+      title: 'Things | Assets Catalog API',
       version: '1.0.0',
     });
     this.addServer({
@@ -24,12 +23,10 @@ export class OpenApiV3Entity extends OpenApiBuilder {
       description: 'Local server',
     });
 
-    // this.addSchema(AgentV1Entity.name, agentV1JsonSchema);
+    this.addSchema(TaxonomicUnitV1Entity.name, taxonomicUnitV1JsonSchema);
+    this.addPath('/api/v1/organizations', taxonomicUnitV1ControllerSchema);
 
-    // this.addSchema(OrganizationV1Entity.name, organizationV1JsonSchema);
-    // this.addPath('/api/v1/organizations', organizationsV1ControllerSchema);
-    // this.addPath('/api/v1/organizations/{id}', v1OrganizationsIdControllerSchema);
-
-    // this.addSchema(UserV1Entity.name, userV1JsonSchema);
+    this.addSchema(AssetV1Entity.name, assetV1JsonSchema);
+    this.addPath('/api/v1/assets', assetsV1ControllerSchema);
   }
 }

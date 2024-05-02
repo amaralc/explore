@@ -1,20 +1,39 @@
 import { iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
-import { ApplicationLogger } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { NativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
+import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
+import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '../../adapters/database-repository-mongodb';
 import { ITaxonomicUnitV1Dto } from '../entity';
 import { TaxonomicUnitsV1DatabaseRepository } from '../repository-database';
-import { InMemoryTaxonomicUnitsV1DatabaseRepository } from '../repository-database-in-memory';
 import { CreateTaxonomicUnitV1InputDto, CreateTaxonomicUnitV1UseCase } from './create-taxonomic-unit';
+import { TaxonomicUnitAlreadyExistsError } from './create-taxonomic-unit.errors';
 
 describe('Create TaxonomicUnitV1 with free plan subscription', () => {
   let taxonomicUnitsV1DatabaseRepository: TaxonomicUnitsV1DatabaseRepository;
   let createOrganizationUseCase: CreateTaxonomicUnitV1UseCase;
-  let logger: ApplicationLogger;
+  let mongoDbMemoryServer: MongoDbMemoryServer;
+  let mongoDbDriver: MongoDbDriver;
+
+  beforeAll(async () => {
+    const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
+    mongoDbMemoryServer = result.mongoMemoryServer;
+    mongoDbDriver = new MongoDbDriver(result.databaseUri);
+    await mongoDbDriver.connectToDatabase('test-database');
+  });
 
   beforeEach(async () => {
-    logger = new NativeLogger();
-    taxonomicUnitsV1DatabaseRepository = new InMemoryTaxonomicUnitsV1DatabaseRepository();
-    createOrganizationUseCase = new CreateTaxonomicUnitV1UseCase(taxonomicUnitsV1DatabaseRepository, logger);
+    taxonomicUnitsV1DatabaseRepository = new MongoDbTaxonomicUnitsV1DatabaseRepository(mongoDbDriver);
+    await taxonomicUnitsV1DatabaseRepository.generateIndexes();
+
+    createOrganizationUseCase = new CreateTaxonomicUnitV1UseCase(taxonomicUnitsV1DatabaseRepository);
+  });
+
+  afterEach(async () => {
+    await taxonomicUnitsV1DatabaseRepository.deleteAll();
+  });
+
+  afterAll(async () => {
+    await mongoDbDriver.disconnect();
+    await mongoDbMemoryServer.stop();
   });
 
   it('should create a taxonomic unit', async () => {
@@ -44,7 +63,7 @@ describe('Create TaxonomicUnitV1 with free plan subscription', () => {
 
     await createOrganizationUseCase.execute(createOrganizationInputDto);
     await expect(createOrganizationUseCase.execute(duplicatedNicknameOrganizationInputDto)).rejects.toThrow(
-      'Taxonomic unit with same slug already exist',
+      TaxonomicUnitAlreadyExistsError,
     );
   });
 });

@@ -3,7 +3,7 @@ import { MongoDbAgentsV1DatabaseRepository } from '../domains/agents-v1/adapters
 import { AgentsV1DatabaseRepository } from '../domains/agents-v1/core/database-repository';
 import { fakeAgents } from '../domains/agents-v1/core/fixtures';
 import { MongoDbOrganizationsV1Repository } from '../domains/organizations-v1/adapters/repository-mongodb';
-import { OrganizationsV1Repository } from '../domains/organizations-v1/core/repository';
+import { OrganizationsV1Repository } from '../domains/organizations-v1/core/database-repository';
 import { defaultConfiguration } from './default-configuration';
 
 export type IAppConfiguration = typeof defaultConfiguration;
@@ -33,6 +33,7 @@ export class ConfigurationManager {
     }
 
     await this.initializeRepositories();
+
     if (this.config.database.seed === 'true' && this.config.server.nodeEnv !== 'production') {
       await this.seedDatabase();
     }
@@ -89,10 +90,6 @@ export class ConfigurationManager {
   }
 
   async getRepositories() {
-    if (!this.repositories) {
-      await this.initializeRepositories();
-    }
-
     return this.repositories;
   }
 

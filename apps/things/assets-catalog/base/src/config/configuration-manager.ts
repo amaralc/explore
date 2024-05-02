@@ -1,36 +1,34 @@
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
-import { ApplicationLogger } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
+import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { MongoDbAssetsV1DatabaseRepository } from '../domains/assets-v1/adapters/database-repository-mongodb';
+import { fakeAssetsV1 } from '../domains/assets-v1/core/fixtures';
+import { AssetsV1DatabaseRepository } from '../domains/assets-v1/core/repository-database';
 import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '../domains/taxonomic-units-v1/adapters/database-repository-mongodb';
 import { fakeTaxonomicUnitsV1 } from '../domains/taxonomic-units-v1/core/fixtures';
 import { TaxonomicUnitsV1DatabaseRepository } from '../domains/taxonomic-units-v1/core/repository-database';
-import { defaultConfiguration } from './default-configuration';
-export type IAppConfiguration = typeof defaultConfiguration;
+import { IAppConfiguration } from './default-configuration';
 
 export class ConfigurationManager {
-  defaultConfiguration = defaultConfiguration;
   config: IAppConfiguration;
   isProduction: boolean;
   databaseDriver: MongoDbDriver;
   repositories?: {
     taxonomicUnitsV1Database: TaxonomicUnitsV1DatabaseRepository;
+    assetsV1Database?: AssetsV1DatabaseRepository;
   };
 
-  constructor(
-    configOverride: IAppConfiguration = defaultConfiguration,
-    private logger: ApplicationLogger,
-  ) {
-    this.config = configOverride;
+  constructor(private readonly initialConfiguration: IAppConfiguration) {
+    this.config = this.initialConfiguration;
     this.isProduction = this.config.server.nodeEnv === 'production';
-    this.logger = logger;
   }
 
   async initialize() {
     if (['mongodb-in-memory', 'mongodb'].includes(this.config.database.provider)) {
-      console.log('Connecting to MongoDb...');
+      nativeLogger.info('Connecting to MongoDb...');
       const mongoDbDriver = new MongoDbDriver(this.getConfig().database.uri);
       this.databaseDriver = mongoDbDriver;
       await this.databaseDriver.connectToDatabase(this.getConfig().database.name);
-      console.log('Connected to MongoDb');
+      nativeLogger.info('Connected to MongoDb');
     }
 
     await this.initializeRepositories();
@@ -48,15 +46,11 @@ export class ConfigurationManager {
   }
 
   getDefaultConfig() {
-    return this.defaultConfiguration;
+    return this.initialConfiguration;
   }
 
   getDatabaseDriver() {
     return this.databaseDriver;
-  }
-
-  getLogger() {
-    return this.logger;
   }
 
   async initializeRepositories(): Promise<void> {
@@ -65,44 +59,49 @@ export class ConfigurationManager {
     }
 
     if (this.config.server.nodeEnv === 'production') {
-      console.log('Production mode');
+      nativeLogger.info('Running in production mode...');
       this.repositories = {
-        taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
+        taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.databaseDriver),
+        assetsV1Database: new MongoDbAssetsV1DatabaseRepository(this.databaseDriver),
       };
 
       await this.repositories.taxonomicUnitsV1Database.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'development') {
-      console.log('Development mode');
+      nativeLogger.info('Running in development mode...');
       this.repositories = {
-        taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
+        taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.databaseDriver),
+        assetsV1Database: new MongoDbAssetsV1DatabaseRepository(this.databaseDriver),
       };
+
       await this.repositories.taxonomicUnitsV1Database.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'test') {
-      console.log('Test mode');
+      nativeLogger.info('Running in test mode...');
       this.repositories = {
-        taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
+        taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.databaseDriver),
+        assetsV1Database: new MongoDbAssetsV1DatabaseRepository(this.databaseDriver),
       };
       await this.repositories.taxonomicUnitsV1Database.generateIndexes();
     }
   }
 
-  async getRepositories() {
-    if (!this.repositories) {
-      await this.initializeRepositories();
-    }
-
+  getRepositories() {
+    nativeLogger.info('Getting repositories...');
     return this.repositories;
   }
 
   async seedDatabase() {
     if (this.config.database.seed === 'true' && this.config.server.nodeEnv !== 'production') {
-      console.log('Seeding database...');
-      const { count } = await this.repositories.taxonomicUnitsV1Database.createMany(fakeTaxonomicUnitsV1);
-      console.log(`Total agents created: ${count}`);
+      nativeLogger.info('Database seed enabled. Seeding database...');
+      const { count: taxonomicUnitsCount } =
+        await this.repositories.taxonomicUnitsV1Database.createMany(fakeTaxonomicUnitsV1);
+      nativeLogger.info(`Total taxonomic units created: ${taxonomicUnitsCount}`);
+
+      const { count: assetsCount } = await this.repositories.assetsV1Database.createMany(fakeAssetsV1);
+      nativeLogger.info(`Total assets created: ${assetsCount}`);
     }
   }
 }

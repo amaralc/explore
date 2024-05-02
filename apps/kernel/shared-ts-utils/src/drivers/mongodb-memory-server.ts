@@ -1,4 +1,6 @@
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
+import { ILogMetadata } from '../logs/application-logger';
+import { nativeLogger } from '../logs/native-logger';
 
 export class MongoDbMemoryServer {
   mongoMemoryReplicaSet?: MongoMemoryReplSet;
@@ -23,11 +25,16 @@ export class MongoDbMemoryServer {
   }
 
   static async initializeInMemoryDatabase(): Promise<{ databaseUri: string; mongoMemoryServer: MongoDbMemoryServer }> {
+    const log: ILogMetadata = {
+      scope: { moduleName: MongoDbMemoryServer.name, methodName: 'initializeInMemoryDatabase' },
+      steps: [],
+    };
     const mongoMemoryServer = new MongoDbMemoryServer();
-    console.log('Initializing in memory database');
+    log.steps.push({ message: 'Initializing in memory database...' });
+
     await mongoMemoryServer.create();
     const databaseUri = mongoMemoryServer.getUri();
-    console.log('In memory database uri:', databaseUri);
+    nativeLogger.info(`In memory database uri: ${databaseUri}`, log);
     return { databaseUri, mongoMemoryServer };
   }
 }

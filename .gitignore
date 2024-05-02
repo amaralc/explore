@@ -83,3 +83,6 @@ key.json
 
 # Nx
 .nx
+
+# Content
+fixtures-content**.json

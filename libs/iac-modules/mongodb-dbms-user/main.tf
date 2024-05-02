@@ -1,6 +1,9 @@
 resource "random_password" "admin" {
   length  = 64
   special = false
+  keepers = {
+    always_change = "${timestamp()}" # Regenerate password on every terraform apply
+  }
 }
 
 resource "mongodbatlas_database_user" "admin" {

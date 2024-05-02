@@ -1,4 +1,5 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
+import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
@@ -67,6 +68,6 @@ export class InMemoryTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnit
   }
 
   async generateIndexes() {
-    console.log('No indexes to generate when using in-memory repository');
+    nativeLogger.info('No indexes to generate when using in-memory repository');
   }
 }

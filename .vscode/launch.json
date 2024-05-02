@@ -44,7 +44,7 @@
     },
     {
       "name": "Attach to Service",
-      "request": "launch",
+      "request": "attach",
       "cwd": "${workspaceFolder}/apps",
       "type": "node",
     }

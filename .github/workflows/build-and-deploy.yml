@@ -93,6 +93,17 @@ jobs:
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/kernel-management-shell-browser:${{ env.short_commit_sha }}
+      
+      - name: Build and push things-assets-catalog-rest-api Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./apps/kernel/assets-catalog/rest-api/Dockerfile
+          push: true
+          # no-cache: true # TODO: Check if this is necessary
+          # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
+          tags: |
+            ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/things-assets-catalog-rest-api:${{ env.short_commit_sha }}
 
       - name: Override nx token back to fake value # Avoid leaking the token
         run: |
