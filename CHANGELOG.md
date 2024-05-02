@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.80.0](https://github.com/amaralc/explore/compare/peerlab@0.59.1...peerlab@0.80.0) (2024-05-02)
+
+### Features
+
+- move latest peerlab improvements into the open ([2be06d4](https://github.com/amaralc/explore/commit/2be06d483860bf5088efb6cd90c67462deeff90c))
+- move latest peerlab improvements into the open ([a8ba3c1](https://github.com/amaralc/explore/commit/a8ba3c18fce3f84aaa4e32b8d5ecb868a202498c))
+- **PEER-668:** restructure, add organizations-management and refactor code ([2c303c4](https://github.com/amaralc/explore/commit/2c303c44a2ada8b672bddbb379bcffabf7a32d95))
+
 ## [0.79.0](https://github.com/amaralc/peerlab/compare/peerlab@0.79.0-beta.2...peerlab@0.79.0) (2024-05-02)
 
 ### Features
