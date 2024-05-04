@@ -99,6 +99,11 @@ services:
     environment:
       - MONGODB_INITDB_ROOT_USERNAME=local-root-user
       - MONGODB_INITDB_ROOT_PASSWORD=local-root-password
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '1024MB'
 
   things-assets-catalog-rest-api:
     image: node:18.17.1
