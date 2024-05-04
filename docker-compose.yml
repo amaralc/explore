@@ -102,7 +102,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
+          cpus: '0.25378' # (0.2500 -> 4100 MHz, 0.2378 -> 3900 Mhz)
           memory: '1024MB'
 
   things-assets-catalog-rest-api:
