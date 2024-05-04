@@ -83,8 +83,9 @@ services:
     ports:
       - '5432:5432'
     restart: always
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_USER=local-postgres-user
+      - POSTGRES_PASSWORD=local-postgres-password
 
   # Mongo Database container initialization (https://hub.docker.com/r/mongodb/mongodb-community-server/tags)
   mongodb:
