@@ -102,8 +102,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2564' # (0.2439 -> 4100 MHz, 0.2564 -> 3900 Mhz)
-          memory: '1024MB'
+          cpus: '0.24390' # targetMaxCpuClockSpeed / hostMaxCpuClockSpeed (ex.: 1000 MHz / 4100 MHz = 0.24390) -> Check with: lscpu | grep "CPU max MHz"
+          memory: '512MB'
+        reservations:
+          cpus: '0.24390' # Reserve the same ammout as the limmit to force container to use the maximum reserved clock speed and allow reproducibility between machines
+          memory: '512MB'
 
   things-assets-catalog-rest-api:
     image: node:18.17.1
@@ -121,7 +124,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2564' # (0.2439 -> 4100 MHz, 0.2564 -> 3900 Mhz)
+          cpus: '0.24390' # targetMaxCpuClockSpeed / hostMaxCpuClockSpeed (ex.: 1000 MHz / 4100 MHz = 0.24390) -> Check with: lscpu | grep "CPU max MHz"
+          memory: '512MB'
+        reservations:
+          cpus: '0.24390' # Reserve the same ammout as the limmit to force container to use the maximum reserved clock speed and allow reproducibility between machines
           memory: '512MB'
 
   prometheus:
