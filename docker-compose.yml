@@ -102,7 +102,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2378' # (0.2500 -> 4100 MHz, 0.2378 -> 3900 Mhz)
+          cpus: '0.2500' # (0.2500 -> 4100 MHz, 0.2378 -> 3900 Mhz)
           memory: '1024MB'
 
   things-assets-catalog-rest-api:
@@ -121,7 +121,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: '0.1500' # (0.2500 -> 4100 MHz, 0.2378 -> 3900 Mhz)
           memory: '512MB'
 
   prometheus:
