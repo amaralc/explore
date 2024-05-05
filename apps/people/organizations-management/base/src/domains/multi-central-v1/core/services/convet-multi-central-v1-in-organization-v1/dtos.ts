@@ -1,4 +1,4 @@
-import { IMultiCentralV1 } from '../../../../multi-central-v1/core/types';
+import { IMultiCentralV1 } from '../../types';
 
 export type IConvertMultiCentralV1InOrganizationV1InputDto = {
   id: string;

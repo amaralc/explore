@@ -1,0 +1,20 @@
+import { createHash } from 'crypto';
+
+export const hashIntegerIntoValidFirebaseUID = (integer: number) => {
+  // Validate integer
+  if (!Number.isInteger(integer)) {
+    throw new Error('Input is not an integer');
+  }
+
+  if (integer > 4294967295) {
+    throw new Error('Input is out of range. It must be >= 0 and <= 4294967295.');
+  }
+
+  // Create a hash from the integer for uniqueness
+  const hash = createHash('sha256');
+  hash.update(Buffer.from(integer.toString()));
+  const uid = hash.digest('hex'); // Get the hexadecimal string of the hash
+
+  // Firebase UID can be up to 128 characters, but we'll use a standard length from the hash
+  return uid.substring(0, 28); // Use the first 28 characters to ensure it's not excessively long
+};

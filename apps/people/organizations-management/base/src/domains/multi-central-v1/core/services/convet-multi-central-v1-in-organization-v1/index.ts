@@ -1,7 +1,7 @@
 import { stringToSlug } from '@peerlab/kernel/shared-ts-utils/string-to-slug';
 import { randomBytes } from 'crypto';
-import { IOrganizationV1Dto } from '../../entity';
-import { IConvertMultiCentralV1InOrganizationV1InputDto } from './input.dto';
+import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity';
+import { IConvertMultiCentralV1InOrganizationV1InputDto } from './dtos';
 
 export class ConvertMultiCentralV1InOrganizationV1Service {
   static execute(inputDto: IConvertMultiCentralV1InOrganizationV1InputDto): IOrganizationV1Dto {
