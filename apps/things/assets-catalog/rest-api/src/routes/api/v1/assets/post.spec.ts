@@ -5,7 +5,6 @@ import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config
 import { defaultConfiguration } from '@peerlab/things/assets-catalog/base/config/default-configuration';
 import { IAssetV1Dto } from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/entity';
 import { CreateAssetV1InputDto } from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/use-cases/create-asset';
-import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/adapters/database-repository-mongodb';
 import { fakeTaxonomicUnitsV1 } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/fixtures';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../app';
@@ -18,7 +17,6 @@ describe('POST /v1/assets', () => {
   let databaseUri: string;
   let mongoDbMemoryServer: MongoDbMemoryServer;
   let testDatabaseDriver: MongoDbDriver;
-  let mongoDbTaxonomicUnitsV1DatabaseRepository: MongoDbTaxonomicUnitsV1DatabaseRepository;
 
   beforeAll(async () => {
     configurationManager = new ConfigurationManager(defaultConfiguration);
@@ -42,8 +40,6 @@ describe('POST /v1/assets', () => {
 
   beforeEach(async () => {
     await testDatabaseDriver.client.db(configurationManager.getConfig().database.name).dropDatabase();
-    mongoDbTaxonomicUnitsV1DatabaseRepository = new MongoDbTaxonomicUnitsV1DatabaseRepository(testDatabaseDriver);
-    await mongoDbTaxonomicUnitsV1DatabaseRepository.create(existingTaxonomicUnit);
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
