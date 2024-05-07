@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.81.1](https://github.com/amaralc/explore/compare/peerlab@0.81.0...peerlab@0.81.1) (2024-05-07)
+
+**Note:** Version bump only for package peerlab
+
 ## [0.81.0](https://github.com/amaralc/explore/compare/peerlab@0.80.3...peerlab@0.81.0) (2024-05-05)
 
 ### Features
