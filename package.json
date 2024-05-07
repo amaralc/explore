@@ -116,7 +116,7 @@
     "jest-environment-node": "29.4.1",
     "jsdom": "22.1.0",
     "jsonc-eslint-parser": "2.3.0",
-    "lerna": "7.2.0",
+    "lerna": "8.1.2",
     "nx": "18.0.4",
     "postcss": "8.4.38",
     "prettier": "3.0.2",
