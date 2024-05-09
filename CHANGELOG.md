@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.82.0](https://github.com/amaralc/explore/compare/peerlab@0.81.1...peerlab@0.82.0) (2024-05-09)
+
+### Features
+
+- **PEER-698:** convert multi institution in organization v1 ([a218147](https://github.com/amaralc/explore/commit/a2181476128f9716c4a173c8008f49eb5f34c0cf))
+
 ## [0.81.1](https://github.com/amaralc/explore/compare/peerlab@0.81.0...peerlab@0.81.1) (2024-05-07)
 
 **Note:** Version bump only for package peerlab
