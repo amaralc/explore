@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.82.1](https://github.com/amaralc/explore/compare/peerlab@0.82.0...peerlab@0.82.1) (2024-05-11)
+
+### Bug Fixes
+
+- **PEER-698:** adjust agent id generation and validate input ([9f59d16](https://github.com/amaralc/explore/commit/9f59d16dd1bcf61defa79e93e79f4b00661bf130))
+
 ## [0.82.0](https://github.com/amaralc/explore/compare/peerlab@0.81.1...peerlab@0.82.0) (2024-05-09)
 
 ### Features
