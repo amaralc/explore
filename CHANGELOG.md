@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.82.2](https://github.com/amaralc/explore/compare/peerlab@0.82.1...peerlab@0.82.2) (2024-05-12)
+
+### Bug Fixes
+
+- **PEER-698:** adjust conversion of central into agent and organization ([072052b](https://github.com/amaralc/explore/commit/072052bdf39ffe214872cdc743682a416428814c))
+
 ## [0.82.1](https://github.com/amaralc/explore/compare/peerlab@0.82.0...peerlab@0.82.1) (2024-05-11)
 
 ### Bug Fixes
