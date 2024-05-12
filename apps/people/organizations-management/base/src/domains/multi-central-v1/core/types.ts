@@ -1,4 +1,4 @@
-export interface IUnidade {
+interface IUnidade {
   id: number;
   instituicao_id: number;
   unidade_id?: number;
@@ -6,7 +6,7 @@ export interface IUnidade {
   sigla?: string;
 }
 
-export interface IEndereco {
+interface IEndereco {
   id: number;
   internacional: boolean;
   cep: string;
@@ -19,16 +19,16 @@ export interface IEndereco {
   pais: Pais;
 }
 
-export enum Estado {
+enum Estado {
   Rj = 'RJ',
   SP = 'SP',
 }
 
-export enum Pais {
+enum Pais {
   Brasil = 'Brasil',
 }
 
-export interface IFoto {
+interface IFoto {
   id: number;
   nome_original: string;
   nome_final: string;
@@ -38,16 +38,16 @@ export interface IFoto {
   tamanho: number;
 }
 
-export enum Encoding {
+enum Encoding {
   The7Bit = '7bit',
 }
 
-export enum Mimetype {
+enum Mimetype {
   ImageJPEG = 'image/jpeg',
   ImagePNG = 'image/png',
 }
 
-export interface IInstituicao {
+interface IInstituicao {
   id: number;
   nome: Nome;
   sigla: Sigla;
@@ -55,12 +55,12 @@ export interface IInstituicao {
   link_numero_patrimonio: null | string;
 }
 
-export enum IDocumentoInstitucional {
+enum IDocumentoInstitucional {
   NúmeroUSP = 'Número USP',
   RegistroFuncionalNúmeroDeMatrícula = 'Registro Funcional/Número de matrícula',
 }
 
-export enum Nome {
+enum Nome {
   HospitalDasClínicasFMUSP = 'Hospital das Clínicas - FMUSP',
   InstitutoDePesquisasEnergéticasENucleares = 'Instituto de Pesquisas Energéticas e Nucleares',
   UniversidadeDeSãoPaulo = 'Universidade de São Paulo',
@@ -69,7 +69,7 @@ export enum Nome {
   UniversidadeFederalDeSãoPaulo = 'Universidade Federal de São Paulo',
 }
 
-export enum Sigla {
+enum Sigla {
   Hcfmusp = 'HCFMUSP',
   Ipen = 'IPEN',
   Unesp = 'UNESP',
@@ -78,7 +78,7 @@ export enum Sigla {
   Usp = 'USP',
 }
 
-export interface IMultiCentralV1 {
+interface IMultiCentralV1 {
   id: number;
   instituicao_id: number;
   unidade_id: number;

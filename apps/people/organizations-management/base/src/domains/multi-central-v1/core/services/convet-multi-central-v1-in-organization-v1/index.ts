@@ -1,23 +1,23 @@
+import { hashIntegerIntoValidObjectId } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-into-valid-object-id';
 import { stringToSlug } from '@peerlab/kernel/shared-ts-utils/string-to-slug';
-import { randomBytes } from 'crypto';
 import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity';
-import { IConvertMultiCentralV1InOrganizationV1InputDto } from './dtos';
+import { IConvertMultiCentralV1InOrganizationV1InputDto } from './dto';
 
 export class ConvertMultiCentralV1InOrganizationV1Service {
   static execute(inputDto: IConvertMultiCentralV1InOrganizationV1InputDto): IOrganizationV1Dto {
-    const { agentId, id, multiCentralV1, ownerAgentId } = inputDto;
+    const { multiCentralV1, agentV1, ownerAgentId } = inputDto;
 
-    const slugId = randomBytes(12).toString('hex');
+    const id = hashIntegerIntoValidObjectId(multiCentralV1.id);
 
     const convertedOrganizationV1Dto: IOrganizationV1Dto = {
       id,
       ownerAgentId: ownerAgentId,
-      agentId: agentId,
-      createdAt: new Date().toISOString(),
+      agentId: agentV1.id,
       email: multiCentralV1.email,
-      nickname: stringToSlug(multiCentralV1.sigla + '-' + slugId),
+      nickname: stringToSlug(multiCentralV1.sigla + '-' + id),
       planSubscriptionName: 'FREE',
-      updatedAt: new Date().toISOString(),
+      createdAt: new Date(multiCentralV1.created).toISOString(),
+      updatedAt: new Date(multiCentralV1.updated).toISOString(),
     };
 
     return convertedOrganizationV1Dto;
