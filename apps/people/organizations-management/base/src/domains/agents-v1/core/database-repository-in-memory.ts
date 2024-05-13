@@ -1,5 +1,6 @@
 import { randomBytes } from 'crypto';
-import { AgentsV1DatabaseRepository, CreateManyResponseDto } from './database-repository';
+import { CreateManyResponseDto } from '../../_shared/types';
+import { AgentsV1DatabaseRepository } from './database-repository';
 import { AgentV1Entity, IAgentV1Dto } from './entity';
 
 export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {

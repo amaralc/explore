@@ -1,7 +1,8 @@
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { randomBytes } from 'crypto';
 import { Collection } from 'mongodb';
-import { AgentsV1DatabaseRepository, CreateManyResponseDto } from '../core/database-repository';
+import { CreateManyResponseDto } from '../../_shared/types';
+import { AgentsV1DatabaseRepository } from '../core/database-repository';
 import { AgentV1Entity, IAgentV1Dto } from '../core/entity';
 
 type IMongoDbAgentV1 = { _id: string } & Omit<IAgentV1Dto, 'id'>;

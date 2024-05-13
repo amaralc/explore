@@ -1,9 +1,5 @@
+import { CreateManyResponseDto } from '../../_shared/types';
 import { AgentV1Entity, IAgentV1Dto } from './entity';
-
-export class CreateManyResponseDto {
-  ids: string[];
-  count: number;
-}
 
 export abstract class AgentsV1DatabaseRepository {
   abstract generateUniqueId(): string;
