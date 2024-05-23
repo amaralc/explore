@@ -1,11 +1,15 @@
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
-import { OrganizationsV1Repository } from './database-repository';
+import { OrganizationsV1DatabaseRepository } from './database-repository';
 import { OrganizationV1Entity } from './entity';
 
-export class InMemoryOrganizationsV1Repository implements OrganizationsV1Repository {
+export class InMemoryOrganizationsV1Repository implements OrganizationsV1DatabaseRepository {
   constructor(private organizations: Array<OrganizationV1Entity> = []) {}
+
+  generateIndexes(): Promise<void> {
+    throw new Error('Method not implemented in InMemoryOrganizationsV1Repository');
+  }
 
   generateUniqueId() {
     return randomBytes(12).toString('hex');

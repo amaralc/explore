@@ -2,6 +2,9 @@ import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-e
 import { CustomEnum } from '@peerlab/kernel/shared-ts-utils/types/custom-enum';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
+import { multiDepartmentV1Schema } from '../../multi-department-v1/core/entity';
+import { multiInstitutionV1Schema } from '../../multi-institution-v1/core/entity';
+import { multiUnitV1Schema } from '../../multi-unit-v1/core/entity';
 
 export const multiCentralV1Schema = Type.Object({
   id: Type.Integer({
@@ -122,76 +125,9 @@ export const multiCentralV1Schema = Type.Object({
     description: 'The unique identifier of the user that updated the multi central as an integer',
   }),
   deleted: Type.Null(),
-  instituicao: Type.Object({
-    id: Type.Integer({
-      minimum: 0,
-      maximum: 4294967295,
-      description: 'The unique identifier of the institution as an integer',
-    }),
-    nome: Type.String({
-      description: 'The name of the institution',
-    }),
-    sigla: Type.String({
-      description: 'The acronym of the institution',
-    }),
-    documento_institucional: Type.Union([
-      Type.Null(),
-      Type.String({
-        description: 'The document of the institution',
-      }),
-    ]),
-    link_numero_patrimonio: Type.Union([
-      Type.Null(),
-      Type.String({
-        description: 'The link to the asset number of the institution',
-      }),
-    ]),
-  }),
-  unidade: Type.Object({
-    id: Type.Integer({
-      minimum: 0,
-      maximum: 4294967295,
-      description: 'The unique identifier of the unit as an integer',
-    }),
-    instituicao_id: Type.Integer({
-      minimum: 0,
-      maximum: 4294967295,
-      description: 'The unique identifier of the institution that the unit belongs to as an integer',
-    }),
-
-    nome: Type.String({
-      description: 'The name of the unit',
-    }),
-    sigla: Type.Union([
-      Type.Null(),
-      Type.String({
-        description: 'The acronym of the unit',
-      }),
-    ]),
-  }),
-  departamento: Type.Union([
-    Type.Null(),
-    Type.Object({
-      id: Type.Integer({
-        minimum: 0,
-        maximum: 4294967295,
-        description: 'The unique identifier of the department as an integer',
-      }),
-      instituicao_id: Type.Integer({
-        minimum: 0,
-        maximum: 4294967295,
-        description: 'The unique identifier of the institution that the department belongs to as an integer',
-      }),
-      unidade_id: Type.Integer({
-        minimum: 0,
-        maximum: 4294967295,
-        description: 'The unique identifier of the unit that the department belongs to as an integer',
-      }),
-      nome: Type.String({
-        description: 'The name of the department',
-      }),
-    }),
-  ]),
+  instituicao: multiInstitutionV1Schema,
+  unidade: multiUnitV1Schema,
+  departamento: Type.Union([Type.Null(), multiDepartmentV1Schema]),
   foto: Type.Union([
     Type.Null(),
     Type.Object({

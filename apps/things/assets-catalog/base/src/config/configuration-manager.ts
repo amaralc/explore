@@ -1,5 +1,5 @@
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { MongoDbAssetsV1DatabaseRepository } from '../domains/assets-v1/adapters/database-repository-mongodb';
 import { fakeAssetsV1 } from '../domains/assets-v1/core/fixtures';
 import { AssetsV1DatabaseRepository } from '../domains/assets-v1/core/repository-database';
@@ -24,11 +24,11 @@ export class ConfigurationManager {
 
   async initialize() {
     if (['mongodb-in-memory', 'mongodb'].includes(this.config.database.provider)) {
-      nativeLogger.info('Connecting to MongoDb...');
+      winstonLogger.info('Connecting to MongoDb...');
       const mongoDbDriver = new MongoDbDriver(this.getConfig().database.uri);
       this.databaseDriver = mongoDbDriver;
       await this.databaseDriver.connectToDatabase(this.getConfig().database.name);
-      nativeLogger.info('Connected to MongoDb');
+      winstonLogger.info('Connected to MongoDb');
     }
 
     await this.initializeRepositories();
@@ -59,7 +59,7 @@ export class ConfigurationManager {
     }
 
     if (this.config.server.nodeEnv === 'production') {
-      nativeLogger.info('Running in production mode...');
+      winstonLogger.info('Running in production mode...');
       this.repositories = {
         taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.databaseDriver),
         assetsV1Database: new MongoDbAssetsV1DatabaseRepository(this.databaseDriver),
@@ -69,7 +69,7 @@ export class ConfigurationManager {
     }
 
     if (this.config.server.nodeEnv === 'development') {
-      nativeLogger.info('Running in development mode...');
+      winstonLogger.info('Running in development mode...');
       this.repositories = {
         taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.databaseDriver),
         assetsV1Database: new MongoDbAssetsV1DatabaseRepository(this.databaseDriver),
@@ -79,7 +79,7 @@ export class ConfigurationManager {
     }
 
     if (this.config.server.nodeEnv === 'test') {
-      nativeLogger.info('Running in test mode...');
+      winstonLogger.info('Running in test mode...');
       this.repositories = {
         taxonomicUnitsV1Database: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.databaseDriver),
         assetsV1Database: new MongoDbAssetsV1DatabaseRepository(this.databaseDriver),
@@ -89,19 +89,19 @@ export class ConfigurationManager {
   }
 
   getRepositories() {
-    nativeLogger.info('Getting repositories...');
+    winstonLogger.info('Getting repositories...');
     return this.repositories;
   }
 
   async seedDatabase() {
     if (this.config.database.seed === 'true' && this.config.server.nodeEnv !== 'production') {
-      nativeLogger.info('Database seed enabled. Seeding database...');
+      winstonLogger.info('Database seed enabled. Seeding database...');
       const { count: taxonomicUnitsCount } =
         await this.repositories.taxonomicUnitsV1Database.createMany(fakeTaxonomicUnitsV1);
-      nativeLogger.info(`Total taxonomic units created: ${taxonomicUnitsCount}`);
+      winstonLogger.info(`Total taxonomic units created: ${taxonomicUnitsCount}`);
 
       const { count: assetsCount } = await this.repositories.assetsV1Database.createMany(fakeAssetsV1);
-      nativeLogger.info(`Total assets created: ${assetsCount}`);
+      winstonLogger.info(`Total assets created: ${assetsCount}`);
     }
   }
 }

@@ -1,10 +1,10 @@
-import { OrganizationsV1Repository } from '../database-repository';
+import { OrganizationsV1DatabaseRepository } from '../database-repository';
 import { OrganizationV1Entity } from '../entity';
 
 export class GetOrganizationV1ByIdUseCase {
-  private organizationsV1Repository: OrganizationsV1Repository;
+  private organizationsV1Repository: OrganizationsV1DatabaseRepository;
 
-  constructor(organizationsV1Repository: OrganizationsV1Repository) {
+  constructor(organizationsV1Repository: OrganizationsV1DatabaseRepository) {
     this.organizationsV1Repository = organizationsV1Repository;
   }
 

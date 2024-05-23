@@ -7,6 +7,7 @@ import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config
 import { V1AssetsController } from './routes/api/v1/assets';
 import { V1TaxonomicUnitsController } from './routes/api/v1/taxonomic-units';
 import OpenApiV3Controller from './routes/docs/v3/open-api-json';
+import ApiReferenceController from './routes/docs/v3/reference';
 
 export const bootstrapApplication = async (configurationManager: ConfigurationManager) => {
   try {
@@ -26,6 +27,9 @@ export const bootstrapApplication = async (configurationManager: ConfigurationMa
 
     const openApiV3Controller = new OpenApiV3Controller();
     router.get('/docs/v3/open-api-json', openApiV3Controller.getOpenApiV3JsonSpecification);
+
+    const apiReferenceController = new ApiReferenceController();
+    router.use('/docs/reference', apiReferenceController.getApiReference);
 
     const v1TaxonomicUnitsController = new V1TaxonomicUnitsController(configurationManager);
     router.post('/api/v1/taxonomic-units', v1TaxonomicUnitsController.create);

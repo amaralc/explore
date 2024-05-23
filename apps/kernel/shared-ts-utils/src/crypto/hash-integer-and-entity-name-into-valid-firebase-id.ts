@@ -1,9 +1,14 @@
 import { createHash } from 'crypto';
+import { IMultiEntityName } from './types';
 
-export const hashIntegerIntoValidFirebaseUID = (integer: number) => {
+export const hashIntegerAndEntityNameIntoValidFirebaseUID = (integer: number, entityName: IMultiEntityName) => {
   // Validate integer
   if (!Number.isInteger(integer)) {
     throw new Error('Input is not an integer');
+  }
+
+  if (typeof entityName !== 'string') {
+    throw new Error('Entity name must be a string');
   }
 
   if (integer > 4294967295) {
@@ -12,7 +17,7 @@ export const hashIntegerIntoValidFirebaseUID = (integer: number) => {
 
   // Create a hash from the integer for uniqueness
   const hash = createHash('sha256');
-  hash.update(Buffer.from(integer.toString()));
+  hash.update(Buffer.from(integer.toString() + entityName));
   const uid = hash.digest('hex'); // Get the hexadecimal string of the hash
 
   // Firebase UID can be up to 128 characters, but we'll use a standard length from the hash

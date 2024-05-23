@@ -11,4 +11,5 @@ export abstract class AgentsV1DatabaseRepository {
   abstract findByEmail(email: string): Promise<Array<AgentV1Entity>>;
   abstract getByEmailAndType(email: string, type: IAgentV1Dto['type']): Promise<AgentV1Entity | null>;
   abstract generateIndexes(): Promise<void>;
+  abstract listAll(): Promise<Array<IAgentV1Dto>>;
 }

@@ -1,5 +1,5 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
@@ -64,6 +64,6 @@ export class InMemoryAssetsV1DatabaseRepository implements AssetsV1DatabaseRepos
   }
 
   async generateIndexes() {
-    nativeLogger.info('No indexes to generate when using in-memory repository');
+    winstonLogger.info('No indexes to generate when using in-memory repository');
   }
 }

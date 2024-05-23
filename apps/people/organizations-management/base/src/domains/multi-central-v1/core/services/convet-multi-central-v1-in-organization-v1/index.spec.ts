@@ -7,14 +7,11 @@ import { IConvertMultiCentralV1InOrganizationV1InputDto } from './dto';
 describe('ConvertMultiCentralV1InOrganizationV1Service', () => {
   it('should convert multi-central-v1 in organization-v1 with valid attributes', () => {
     // Given
-    const multiCentralV1 = multiCentralsV1Fixtures[0];
-
-    const agentV1 = ConvertMultiCentralV1InAgentV1Service.execute(multiCentralV1);
-
+    const multiCentralV1Dto = multiCentralsV1Fixtures[0];
+    const agentV1Dto = ConvertMultiCentralV1InAgentV1Service.execute(multiCentralV1Dto);
     const inputDto: IConvertMultiCentralV1InOrganizationV1InputDto = {
-      multiCentralV1,
-      agentV1,
-      ownerAgentId: '0000000000000000000000000000',
+      multiCentralV1Dto,
+      agentV1Dto,
     };
 
     // When
@@ -22,16 +19,15 @@ describe('ConvertMultiCentralV1InOrganizationV1Service', () => {
 
     // Then
     const generatedNicknameRegex = /-([a-f0-9]{24})$/; // Ends with a hexadecimal string of 24 characters that represents the multi-institution-v1 id (mongodb id format)
-
     const expectedOrganizationV1Dto = {
       id: expect.stringMatching(mongoDbIdFormat),
       ownerAgentId: expect.stringMatching(firebaseIdFormat),
       agentId: expect.stringMatching(firebaseIdFormat),
-      email: multiCentralV1.email,
+      email: multiCentralV1Dto.email,
       nickname: expect.stringMatching(generatedNicknameRegex),
       planSubscriptionName: 'FREE',
-      createdAt: multiCentralV1.created,
-      updatedAt: multiCentralV1.updated,
+      createdAt: multiCentralV1Dto.created,
+      updatedAt: multiCentralV1Dto.updated,
     };
 
     expect(organizationV1Dto).toEqual(expectedOrganizationV1Dto);

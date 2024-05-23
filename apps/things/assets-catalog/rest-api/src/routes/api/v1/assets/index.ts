@@ -1,6 +1,6 @@
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config/configuration-manager';
 import { CreateAssetV1UseCase } from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/use-cases/create-asset';
 import { TaxonomicUnitV1NotFoundError } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/errors';
@@ -33,7 +33,7 @@ export class V1AssetsController {
       log.steps.push({ message: 'Binding methods to CreateAssetV1UseCase' });
       this.create = this.create.bind(this);
 
-      nativeLogger.info('Success instantiating CreateAssetV1UseCase', log);
+      winstonLogger.info('Success instantiating CreateAssetV1UseCase', log);
     } catch (error) {
       log.steps.push({
         message: 'Error instantiating CreateAssetV1UseCase',
@@ -41,7 +41,7 @@ export class V1AssetsController {
           errorStack: error.stack,
         },
       });
-      nativeLogger.error('Error instantiating CreateAssetV1UseCase', log);
+      winstonLogger.error('Error instantiating CreateAssetV1UseCase', log);
       throw error;
     }
   }
@@ -59,7 +59,7 @@ export class V1AssetsController {
       log.steps.push({ message: 'Executing createAssetV1UseCase' });
       const createdAssetV1 = await this.createAssetV1UseCase.execute(req.body);
 
-      nativeLogger.info(`Successfully created asset '${createdAssetV1.name}' with id ${createdAssetV1.id}`);
+      winstonLogger.info(`Successfully created asset '${createdAssetV1.name}' with id ${createdAssetV1.id}`);
       res.status(201).json(createdAssetV1);
     } catch (error) {
       if (error instanceof ValidationExceptionV2Error) {
@@ -69,7 +69,7 @@ export class V1AssetsController {
             causes: error.causes,
           },
         });
-        nativeLogger.info('Failed to create asset due to validation error', log);
+        winstonLogger.info('Failed to create asset due to validation error', log);
         res.status(400).json({ message: error.message, causes: error.causes });
         return;
       }
@@ -81,7 +81,7 @@ export class V1AssetsController {
             taxonomicUnitSlug: req.body.taxonomicUnitSlug,
           },
         });
-        nativeLogger.info('Failed to create asset. Taxonomic unit not found', log);
+        winstonLogger.info('Failed to create asset. Taxonomic unit not found', log);
         res.status(404).json({ message: error.message });
         return;
       }
@@ -92,7 +92,7 @@ export class V1AssetsController {
           taxonomicUnitSlug: req.body.taxonomicUnitSlug,
         },
       });
-      nativeLogger.error('Failed to create taxonomic unit due to unknown error', log);
+      winstonLogger.error('Failed to create taxonomic unit due to unknown error', log);
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }

@@ -97,6 +97,22 @@ resource "google_cloud_run_v2_service" "instance" {
         }
       }
 
+      # Set external source base URL for multiInstitutionsV1 and multiCentralsV1
+      env {
+        name  = "DATABASE_SEED_FROM_EXTERNAL_SOURCE"
+        value = "false"
+      }
+
+      env {
+        name  = "MULTI_INSTITUTIONS_V1_BASE_URL"
+        value = "https://uspmulti.prp.usp.br/api/public/instituicoes"
+      }
+
+      env {
+        name  = "MULTI_CENTRALS_V1_BASE_URL"
+        value = "https://uspmulti.prp.usp.br/api/public/centrais"
+      }
+
       ports {
         container_port = 80
       }

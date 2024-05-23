@@ -4,7 +4,7 @@ dotenv.config();
 
 import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config/configuration-manager';
 import { defaultConfiguration } from '@peerlab/things/assets-catalog/base/config/default-configuration';
 import { bootstrapApplication } from './app';
@@ -50,7 +50,14 @@ const start = async () => {
 
   log.steps.push({ message: 'Starting server...' });
   const server = app.listen(port, () => {
-    nativeLogger.info(`Listening at http://localhost:${port}`, log);
+    winstonLogger.info(`Listening at http://localhost:${port}`, log);
+    winstonLogger.info('Testing logger', {
+      scope: {
+        moduleName: 'fake module',
+        methodName: 'fakeMethod',
+      },
+      steps: [{ message: 'fake message' }],
+    });
   });
 
   server.on('error', (error) => {
@@ -58,7 +65,7 @@ const start = async () => {
       message: 'Server error. Closing server...',
       metadata: { errorStack: error.stack },
     });
-    nativeLogger.error('Server error. Closing server...', log);
+    winstonLogger.error('Server error. Closing server...', log);
     server.close();
   });
 };

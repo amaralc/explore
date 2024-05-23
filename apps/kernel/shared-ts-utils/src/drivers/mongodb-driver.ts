@@ -1,4 +1,5 @@
 import { Collection, Db, MongoClient } from 'mongodb';
+import { winstonLogger } from '../logs/winston-logger';
 
 export class MongoDbDriver {
   client: MongoClient;
@@ -15,7 +16,13 @@ export class MongoDbDriver {
   async connectToDatabase(databaseName: string) {
     if (!this.client) throw new Error('No client');
     await this.client.connect();
-    console.log('Connected to database');
+    winstonLogger.info('Connected to database', {
+      scope: {
+        moduleName: MongoDbDriver.name,
+        methodName: 'connectToDatabase',
+      },
+      steps: [],
+    });
     this.database = this.client.db(databaseName);
   }
 

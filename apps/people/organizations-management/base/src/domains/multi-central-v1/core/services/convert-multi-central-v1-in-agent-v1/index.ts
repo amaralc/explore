@@ -1,11 +1,11 @@
-import { hashIntegerIntoValidFirebaseUID } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-into-valid-firebase-id';
+import { hashIntegerAndEntityNameIntoValidFirebaseUID } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-and-entity-name-into-valid-firebase-id';
 import { stringToSlug } from '@peerlab/kernel/shared-ts-utils/string-to-slug';
 import { AgentV1Entity, IAgentV1Dto } from '../../../../agents-v1/core/entity';
 import { IMultiCentralV1Dto } from '../../entity';
 
 export class ConvertMultiCentralV1InAgentV1Service {
   static execute(inputDto: IMultiCentralV1Dto): IAgentV1Dto {
-    const id = hashIntegerIntoValidFirebaseUID(inputDto.id);
+    const id = hashIntegerAndEntityNameIntoValidFirebaseUID(inputDto.id, 'MultiCentralV1');
 
     const agentV1 = new AgentV1Entity({
       id,

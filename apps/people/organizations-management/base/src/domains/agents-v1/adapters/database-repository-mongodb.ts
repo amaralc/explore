@@ -43,10 +43,6 @@ export class MongoDbAgentsV1DatabaseRepository implements AgentsV1DatabaseReposi
         key: { nickname: 1 },
         unique: true,
       },
-      {
-        key: { email: 1, type: 1 },
-        unique: true, // We can only have one agent with a combination of email and type
-      },
     ]);
   }
 
@@ -115,5 +111,9 @@ export class MongoDbAgentsV1DatabaseRepository implements AgentsV1DatabaseReposi
     if (!deleteResult.acknowledged) {
       throw new Error('Failed to delete agent');
     }
+  }
+
+  public async listAll(): Promise<Array<IAgentV1Dto>> {
+    throw new Error('Method not implemented');
   }
 }

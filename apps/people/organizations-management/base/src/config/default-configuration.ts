@@ -1,12 +1,17 @@
 export const defaultConfiguration = {
   server: {
-    port: process.env.PORT || 8080,
-    nodeEnv: process.env.NODE_ENV || 'development',
+    port: process.env.PORT,
+    nodeEnv: process.env.NODE_ENV,
   },
   database: {
-    uri: process.env.MONGODB_DATABASE_URI || 'mongodb://localhost:27017',
-    name: process.env.MONGODB_DATABASE_NAME || 'organizations-management',
-    provider: process.env.DATABASE_PROVIDER || 'in-memory',
-    seed: process.env.DATABASE_SEED || 'false',
+    uri: process.env.MONGODB_DATABASE_URI,
+    name: process.env.MONGODB_DATABASE_NAME,
+    provider: process.env.DATABASE_PROVIDER,
+    seed: process.env.DATABASE_SEED,
+    seedFromExternalSource: process.env.DATABASE_SEED_FROM_EXTERNAL_SOURCE,
+  },
+  externalServices: {
+    multiInstitutionsV1BaseUrl: process.env.MULTI_INSTITUTIONS_V1_BASE_URL, // External source
+    multiCentralsV1BaseUrl: process.env.MULTI_CENTRALS_V1_BASE_URL, // External source
   },
 };

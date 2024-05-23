@@ -2,7 +2,7 @@ import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-en
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { IOrganizationV1Dto, OrganizationV1Entity } from './entity';
 
-export abstract class OrganizationsV1Repository {
+export abstract class OrganizationsV1DatabaseRepository {
   abstract generateUniqueId(): string;
   abstract create(inputDto: IOrganizationV1Dto): Promise<IOrganizationV1Dto>;
   abstract listPaginated(paginationDto: PaginationDto): Promise<IPaginatedEntities<OrganizationV1Entity>>;
@@ -10,4 +10,5 @@ export abstract class OrganizationsV1Repository {
   abstract findById(id: string): Promise<OrganizationV1Entity | null>;
   abstract getOrganizationsByOwnerId(id: string): Promise<Array<OrganizationV1Entity>>;
   abstract findByEmail(email: string): Promise<OrganizationV1Entity | null>;
+  abstract generateIndexes(): Promise<void>;
 }

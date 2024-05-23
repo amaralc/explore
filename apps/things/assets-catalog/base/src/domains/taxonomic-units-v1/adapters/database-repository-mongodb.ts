@@ -1,7 +1,7 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Collection, MongoError, ObjectId } from 'mongodb';
@@ -15,7 +15,7 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
   private collectionName = 'TaxonomicUnitV1';
 
   constructor(private readonly mongoDbDriver: MongoDbDriver) {
-    nativeLogger.info(`Successfully initialized ${this.constructor.name}`, {
+    winstonLogger.info(`Successfully initialized ${this.constructor.name}`, {
       scope: {
         moduleName: 'things-assets-catalog-base',
         className: this.constructor.name,
@@ -134,13 +134,13 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
       log.steps.push({ message: 'Attempting to generate indexes for TaxonomicUnitV1 collection' });
       await this.getCollection().createIndexes([{ key: { slug: 1 }, unique: true }]);
 
-      nativeLogger.info('Successfully generated indexes for TaxonomicUnitV1 collection');
+      winstonLogger.info('Successfully generated indexes for TaxonomicUnitV1 collection');
     } catch (error) {
       log.steps.push({
         message: 'Failed to create indexes for TaxonomicUnitV1 collection',
         metadata: { errorStack: error.stack },
       });
-      nativeLogger.error('Failed to create indexes for TaxonomicUnitV1 collection', log);
+      winstonLogger.error('Failed to create indexes for TaxonomicUnitV1 collection', log);
     }
   }
 

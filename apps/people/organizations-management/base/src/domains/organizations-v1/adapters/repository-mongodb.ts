@@ -2,17 +2,26 @@ import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-d
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Collection, ObjectId } from 'mongodb';
-import { OrganizationsV1Repository } from '../core/database-repository';
+import { OrganizationsV1DatabaseRepository } from '../core/database-repository';
 import { IOrganizationV1Dto, OrganizationV1Entity } from '../core/entity';
 
 type IMongoDbOrganization = { _id: ObjectId } & Omit<IOrganizationV1Dto, 'id'>;
 
-export class MongoDbOrganizationsV1Repository implements OrganizationsV1Repository {
+export class MongoDbOrganizationsV1Repository implements OrganizationsV1DatabaseRepository {
   mongoDbDriver: MongoDbDriver;
   collectionName = 'OrganizationsV1';
 
   constructor(mongoDbDriver: MongoDbDriver) {
     this.mongoDbDriver = mongoDbDriver;
+  }
+
+  public async generateIndexes(): Promise<void> {
+    await this.getCollection().createIndexes([
+      {
+        key: { nickname: 1 },
+        unique: true,
+      },
+    ]);
   }
 
   private getCollection(): Collection<IMongoDbOrganization> {

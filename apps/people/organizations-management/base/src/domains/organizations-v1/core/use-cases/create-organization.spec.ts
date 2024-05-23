@@ -3,13 +3,13 @@ import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-rep
 import { InMemoryAgentsV1Repository } from '../../../agents-v1/core/database-repository-in-memory';
 import { AgentV1Entity } from '../../../agents-v1/core/entity';
 import { fakeAgents, fakeAgentsByIdOrEmail } from '../../../agents-v1/core/fixtures';
-import { OrganizationsV1Repository } from '../database-repository';
+import { OrganizationsV1DatabaseRepository } from '../database-repository';
 import { InMemoryOrganizationsV1Repository } from '../database-repository-in-memory';
 import { IOrganizationV1Dto } from '../entity';
 import { CreateOrganizationV1InputDto, CreateOrganizationV1UseCase } from './create-organization';
 
 describe('Create OrganizationV1 with free plan subscription', () => {
-  let organizationsV1Repository: OrganizationsV1Repository;
+  let organizationsV1Repository: OrganizationsV1DatabaseRepository;
   let agentsV1Repository: AgentsV1DatabaseRepository;
   let createOrganizationUseCase: CreateOrganizationV1UseCase;
 
@@ -61,27 +61,6 @@ describe('Create OrganizationV1 with free plan subscription', () => {
     await createOrganizationUseCase.execute(createOrganizationInputDto);
     await expect(createOrganizationUseCase.execute(duplicatedNicknameOrganizationInputDto)).rejects.toThrow(
       'Organization with same nickname already exists',
-    );
-  });
-
-  it('should not allow creating two organizations with the same email', async () => {
-    const createOrganizationInputDto: CreateOrganizationV1InputDto = {
-      nickname: 'valid-organization-nickname',
-      email: 'new-organization@email.com',
-      ownerAgentId: fakeAgentsByIdOrEmail.get('fake-agent@email.com').id,
-      planSubscriptionName: 'FREE',
-    };
-
-    const duplicatedEmailOrganizationInputDto: CreateOrganizationV1InputDto = {
-      nickname: 'non-duplicated-organization-nickname',
-      email: createOrganizationInputDto.email,
-      ownerAgentId: fakeAgentsByIdOrEmail.get('fake-agent@email.com').id,
-      planSubscriptionName: 'FREE',
-    };
-
-    await createOrganizationUseCase.execute(createOrganizationInputDto);
-    await expect(createOrganizationUseCase.execute(duplicatedEmailOrganizationInputDto)).rejects.toThrow(
-      'Organization with same email already exists',
     );
   });
 

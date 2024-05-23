@@ -1,5 +1,5 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
@@ -11,6 +11,10 @@ export class InMemoryTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnit
 
   generateUniqueId() {
     return randomBytes(12).toString('hex');
+  }
+
+  deleteAll(): Promise<void> {
+    throw Error('Method not implemented');
   }
 
   async create(organizationV1Entity: TaxonomicUnitV1Entity): Promise<ITaxonomicUnitV1Dto> {
@@ -68,6 +72,6 @@ export class InMemoryTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnit
   }
 
   async generateIndexes() {
-    nativeLogger.info('No indexes to generate when using in-memory repository');
+    winstonLogger.info('No indexes to generate when using in-memory repository');
   }
 }

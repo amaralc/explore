@@ -10,6 +10,10 @@ export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {
     return randomBytes(14).toString('hex');
   }
 
+  listAll(): Promise<Array<IAgentV1Dto>> {
+    throw new Error('Method not implemented.');
+  }
+
   async generateIndexes() {
     console.log('No indexes to generate when using in-memory repository');
   }

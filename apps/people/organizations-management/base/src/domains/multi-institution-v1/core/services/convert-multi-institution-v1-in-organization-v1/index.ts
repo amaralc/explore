@@ -1,5 +1,5 @@
-import { hashIntegerIntoValidFirebaseUID } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-into-valid-firebase-id';
-import { hashIntegerIntoValidObjectId } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-into-valid-object-id';
+import { hashIntegerAndEntityNameIntoValidFirebaseUID } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-and-entity-name-into-valid-firebase-id';
+import { hashIntegerAndEntityNameIntoValidObjectId } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-and-entity-name-into-valid-object-id';
 import { stringToSlug } from '@peerlab/kernel/shared-ts-utils/string-to-slug';
 import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity';
 import { MultiInstitutionV1Entity } from '../../entity';
@@ -13,8 +13,8 @@ export class ConvertMultiInstitutionV1InOrganizationV1Service {
     MultiInstitutionV1Entity.validate(multiInstitutionV1Dto);
 
     const agentV1Dto = ConvertMultiInstitutionV1InAgentV1Service.execute(multiInstitutionV1Dto);
-    const id = hashIntegerIntoValidObjectId(multiInstitutionV1Dto.id);
-    const agentId = hashIntegerIntoValidFirebaseUID(multiInstitutionV1Dto.id);
+    const id = hashIntegerAndEntityNameIntoValidObjectId(multiInstitutionV1Dto.id, 'MultiInstitutionV1');
+    const agentId = hashIntegerAndEntityNameIntoValidFirebaseUID(multiInstitutionV1Dto.id, 'MultiInstitutionV1');
 
     const convertedOrganizationV1Dto: IOrganizationV1Dto = {
       id,

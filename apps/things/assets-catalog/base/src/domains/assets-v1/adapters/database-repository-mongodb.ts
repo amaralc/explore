@@ -1,7 +1,7 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Replace } from '@peerlab/kernel/shared-ts-utils/types/replace';
@@ -16,7 +16,7 @@ export class MongoDbAssetsV1DatabaseRepository implements AssetsV1DatabaseReposi
   private collectionName = 'AssetV1';
 
   constructor(private readonly mongoDbDriver: MongoDbDriver) {
-    nativeLogger.info(`Successfully initialized ${this.constructor.name}`, {
+    winstonLogger.info(`Successfully initialized ${this.constructor.name}`, {
       scope: {
         moduleName: 'things-assets-catalog-base',
         className: this.constructor.name,
@@ -136,7 +136,7 @@ export class MongoDbAssetsV1DatabaseRepository implements AssetsV1DatabaseReposi
           unique: true,
         },
       ]);
-      nativeLogger.info('Successfully generated indexes for AssetV1 collection');
+      winstonLogger.info('Successfully generated indexes for AssetV1 collection');
     } catch (error) {
       log.steps.push({
         message: 'Error while creating indexes for AssetV1 collection',
@@ -144,7 +144,7 @@ export class MongoDbAssetsV1DatabaseRepository implements AssetsV1DatabaseReposi
           errorStack: error.stack,
         },
       });
-      nativeLogger.error('Failed to create indexes for AssetV1 collection', log);
+      winstonLogger.error('Failed to create indexes for AssetV1 collection', log);
       throw error;
     }
   }

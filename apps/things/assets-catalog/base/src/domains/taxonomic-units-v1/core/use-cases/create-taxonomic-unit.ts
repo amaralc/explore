@@ -1,5 +1,5 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
 import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity, taxonomicUnitV1JsonSchema } from '../entity';
@@ -22,7 +22,7 @@ export class CreateTaxonomicUnitV1UseCase {
       steps: [{ message: 'Initializing CreateTaxonomicUnitV1UseCase...' }],
     };
 
-    nativeLogger.info('Initializing CreateTaxonomicUnitV1UseCase...', log);
+    winstonLogger.info('Initializing CreateTaxonomicUnitV1UseCase...', log);
   }
 
   public async execute(inputDto: CreateTaxonomicUnitV1InputDto): Promise<ITaxonomicUnitV1Dto> {
@@ -49,14 +49,14 @@ export class CreateTaxonomicUnitV1UseCase {
       log.steps.push({ message: 'Storing taxonomic unit in repository...' });
       const taxonomicUnitV1Dto = await this.taxonomicUnitsV1DatabaseRepository.create(newTaxonomicUnitV1Entity);
 
-      nativeLogger.info(`Taxonomic unit created: ${taxonomicUnitV1Dto.id}`);
+      winstonLogger.info(`Taxonomic unit created: ${taxonomicUnitV1Dto.id}`);
       return taxonomicUnitV1Dto;
     } catch (error) {
       log.steps.push({
         message: 'Error while creating taxonomic unit',
         metadata: { errorStack: error.stack, inputDto },
       });
-      nativeLogger.error('Error while creating taxonomic unit', log);
+      winstonLogger.error('Error while creating taxonomic unit', log);
       throw error;
     }
   }

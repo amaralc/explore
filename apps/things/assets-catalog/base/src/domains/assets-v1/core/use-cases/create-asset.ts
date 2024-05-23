@@ -1,5 +1,5 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
 import { TaxonomicUnitV1NotFoundError } from '../../../taxonomic-units-v1/core/errors';
@@ -28,7 +28,7 @@ export class CreateAssetV1UseCase {
       },
       steps: [],
     };
-    nativeLogger.info('Initializing CreateAssetV1UseCase...', log);
+    winstonLogger.info('Initializing CreateAssetV1UseCase...', log);
   }
 
   public async execute(inputDto: CreateAssetV1InputDto): Promise<IAssetV1Dto> {
@@ -70,11 +70,11 @@ export class CreateAssetV1UseCase {
       log.steps.push({ message: 'Storing asset in repository...' });
       const createdAssetDto = await this.assetsV1DatabaseRepository.create(assetV1Dto);
 
-      nativeLogger.info(`Successfully created asset ${createdAssetDto.id}`);
+      winstonLogger.info(`Successfully created asset ${createdAssetDto.id}`);
       return createdAssetDto;
     } catch (error) {
       log.steps.push({ message: 'Error while creating asset', metadata: { errorStack: error.stack } });
-      nativeLogger.error('Error while creating asset', log);
+      winstonLogger.error('Error while creating asset', log);
       throw error;
     }
   }

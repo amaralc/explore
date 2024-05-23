@@ -2,7 +2,7 @@ import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json
 import { Static, Type } from '@sinclair/typebox';
 import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-repository';
 import { AgentV1Entity } from '../../../agents-v1/core/entity';
-import { OrganizationsV1Repository } from '../database-repository';
+import { OrganizationsV1DatabaseRepository } from '../database-repository';
 import { IOrganizationV1Dto, OrganizationV1Entity, organizationV1JsonSchema } from '../entity';
 
 export const createOrgaNizationV1InputDtoSchema = Type.Object({
@@ -15,10 +15,13 @@ export const createOrgaNizationV1InputDtoSchema = Type.Object({
 export type CreateOrganizationV1InputDto = Static<typeof createOrgaNizationV1InputDtoSchema>;
 
 export class CreateOrganizationV1UseCase {
-  private organizationsV1Repository: OrganizationsV1Repository;
+  private organizationsV1Repository: OrganizationsV1DatabaseRepository;
   private agentsV1Repository: AgentsV1DatabaseRepository;
 
-  constructor(organizationsV1Repository: OrganizationsV1Repository, agentsV1Repository: AgentsV1DatabaseRepository) {
+  constructor(
+    organizationsV1Repository: OrganizationsV1DatabaseRepository,
+    agentsV1Repository: AgentsV1DatabaseRepository,
+  ) {
     this.organizationsV1Repository = organizationsV1Repository;
     this.agentsV1Repository = agentsV1Repository;
   }
@@ -30,11 +33,6 @@ export class CreateOrganizationV1UseCase {
     const ownerAgent = await this.agentsV1Repository.getAgentById(inputDto.ownerAgentId);
     if (!ownerAgent) {
       throw new Error('Owner not found');
-    }
-
-    const organizationWithSameEmail = await this.organizationsV1Repository.findByEmail(inputDto.email);
-    if (organizationWithSameEmail) {
-      throw new Error('Organization with same email already exists');
     }
 
     const organizationWithSameNickname = await this.organizationsV1Repository.findByNickname(inputDto.nickname);

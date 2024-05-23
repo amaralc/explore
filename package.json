@@ -179,6 +179,7 @@
     "@radix-ui/react-slot": "1.0.2",
     "@react-pdf/renderer": "3.1.12",
     "@reduxjs/toolkit": "1.9.5",
+    "@scalar/express-api-reference": "^0.4.49",
     "@sinclair/typebox": "0.32.15",
     "@swc/helpers": "0.5.3",
     "@types/cors": "2.8.17",
@@ -262,6 +263,7 @@
     "tslib": "2.3.0",
     "tss-react": "4.8.8",
     "unleash-proxy-client": "2.5.0",
+    "winston": "^3.13.0",
     "yup": "1.2.0",
     "zod": "3.22.2"
   },

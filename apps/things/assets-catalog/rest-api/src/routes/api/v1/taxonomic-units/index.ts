@@ -1,6 +1,6 @@
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config/configuration-manager';
 import { CreateTaxonomicUnitV1UseCase } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/use-cases/create-taxonomic-unit';
 import { TaxonomicUnitAlreadyExistsError } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/use-cases/create-taxonomic-unit.errors';
@@ -29,7 +29,7 @@ export class V1TaxonomicUnitsController {
       log.steps.push({ message: 'Binding context' });
       this.create = this.create.bind(this);
 
-      nativeLogger.info('Success instantiating V1TaxonomicUnitsController', log);
+      winstonLogger.info('Success instantiating V1TaxonomicUnitsController', log);
     } catch (error) {
       log.steps.push({
         message: 'Error while instantiating V1TaxonomicUnitsController',
@@ -38,7 +38,7 @@ export class V1TaxonomicUnitsController {
         },
       });
 
-      nativeLogger.error('Error while instantiating V1TaxonomicUnitsController', log);
+      winstonLogger.error('Error while instantiating V1TaxonomicUnitsController', log);
       throw error;
     }
   }
@@ -57,7 +57,7 @@ export class V1TaxonomicUnitsController {
       log.steps.push({ message: 'Executing createTaxonomicUnitV1UseCase' });
       const taxonomicUnit = await this.createTaxonomicUnitV1UseCase.execute(req.body);
 
-      nativeLogger.info(`Successfully created taxonomic unit ${taxonomicUnit.slug} with id ${taxonomicUnit.id}`);
+      winstonLogger.info(`Successfully created taxonomic unit ${taxonomicUnit.slug} with id ${taxonomicUnit.id}`);
       res.status(201).json(taxonomicUnit);
     } catch (error) {
       log.steps.push({
@@ -77,7 +77,7 @@ export class V1TaxonomicUnitsController {
         return;
       }
 
-      nativeLogger.error('Failed to create taxonomic unit', log);
+      winstonLogger.error('Failed to create taxonomic unit', log);
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }
