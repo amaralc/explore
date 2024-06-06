@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.84.0](https://github.com/amaralc/explore/compare/peerlab@0.83.0...peerlab@0.84.0) (2024-06-06)
+
+### Features
+
+- **EXPLORE:** add a skill-set map browser application using d3 ([37589a7](https://github.com/amaralc/explore/commit/37589a797d1705154a994526a440212e97c84107))
+
 ## [0.83.0](https://github.com/amaralc/explore/compare/peerlab@0.82.3...peerlab@0.83.0) (2024-05-23)
 
 ### Features
