@@ -6,7 +6,13 @@
     "name": "Calil Amaral",
     "email": "amaral.calil@gmail.com"
   },
+  "workspaces": [
+    "apps/**",
+    "libs/**"
+  ],
   "scripts": {
+    "people-skill-set-browser:build": "pnpm --filter ./apps/people/skill-set/browser run build",
+    "people-skill-set-browser:start": "pnpm --filter ./apps/people/skill-set/browser run start",
     "prepare": "husky install",
     "git:discard:all": "git checkout -- .",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
@@ -72,9 +78,11 @@
     "@swc/cli": "0.1.62",
     "@swc/core": "1.3.85",
     "@swc/jest": "0.2.20",
+    "@swc/plugin-emotion": "^2.5.67",
     "@testing-library/jest-dom": "6.1.3",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
+    "@types/d3": "^7.4.3",
     "@types/express": "4.17.17",
     "@types/jest": "29.4.4",
     "@types/js-cookie": "3.0.3",
@@ -85,9 +93,9 @@
     "@types/node": "18.19.31",
     "@types/nprogress": "0.2.0",
     "@types/numeral": "2.0.2",
-    "@types/react": "18.2.24",
+    "@types/react": "18.2.33",
     "@types/react-beautiful-dnd": "13.1.4",
-    "@types/react-dom": "18.2.9",
+    "@types/react-dom": "18.2.14",
     "@types/react-draft-wysiwyg": "1.13.4",
     "@types/react-redux": "7.1.25",
     "@types/react-slick": "0.23.10",
@@ -98,7 +106,8 @@
     "@vitejs/plugin-react": "4.2.1",
     "@vitejs/plugin-react-swc": "3.6.0",
     "@vitest/coverage-c8": "0.32.0",
-    "@vitest/ui": "0.34.7",
+    "@vitest/coverage-v8": "^1.0.4",
+    "@vitest/ui": "^1.0.4",
     "autoprefixer": "10.4.15",
     "babel-jest": "29.4.1",
     "cypress": "13.1.0",
@@ -130,7 +139,7 @@
     "vite": "5.2.8",
     "vite-plugin-dts": "3.5.3",
     "vite-tsconfig-paths": "4.2.0",
-    "vitest": "0.34.6"
+    "vitest": "^1.0.4"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "2.0.8",
@@ -179,7 +188,7 @@
     "@radix-ui/react-slot": "1.0.2",
     "@react-pdf/renderer": "3.1.12",
     "@reduxjs/toolkit": "1.9.5",
-    "@scalar/express-api-reference": "^0.4.49",
+    "@scalar/express-api-reference": "^0.4.45",
     "@sinclair/typebox": "0.32.15",
     "@swc/helpers": "0.5.3",
     "@types/cors": "2.8.17",
@@ -198,6 +207,7 @@
     "cobe": "0.6.3",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "cors": "2.8.5",
+    "d3": "6.7.0",
     "date-fns": "2.30.0",
     "dotenv": "16.4.5",
     "draft-js": "0.11.7",
