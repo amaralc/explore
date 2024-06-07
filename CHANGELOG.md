@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.85.0](https://github.com/amaralc/explore/compare/peerlab@0.84.0...peerlab@0.85.0) (2024-06-07)
+
+### Features
+
+- **EXPLORE:** enhance user experience with fine interactions and details ([fe6018b](https://github.com/amaralc/explore/commit/fe6018b3df34d8bcf63157c6c151d6d6c340da4a))
+
 ## [0.84.0](https://github.com/amaralc/explore/compare/peerlab@0.83.0...peerlab@0.84.0) (2024-06-06)
 
 ### Features
