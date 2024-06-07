@@ -4,15 +4,39 @@ import * as d3 from 'd3';
 import { forwardRef, useEffect } from 'react';
 import { INode } from './types';
 
+let linkExtension;
+let link;
+
 export const CladogramChart = forwardRef(
-  ({ node, selectChartElement }: { node: INode; selectChartElement: () => HTMLDivElement | null }, ref) => {
+  (
+    {
+      node,
+      selectChartElement,
+      showBranchLength,
+      handleSelectedSkill,
+    }: {
+      node: INode;
+      selectChartElement: () => HTMLDivElement | null;
+      showBranchLength: boolean;
+      handleSelectedSkill: (skill: string | null) => void;
+    },
+    ref,
+  ) => {
     const width = 954;
     const outerRadius = width / 2;
     const innerRadius = outerRadius - 170;
 
     const color = d3
       .scaleOrdinal()
-      .domain(['Soft Skills', 'Technical Skills', 'Frontend', 'Backend', 'DevOps', 'Shared Skills'])
+      .domain([
+        'Soft Skills',
+        'Technical Skills',
+        'Frontend Development',
+        'Backend Development',
+        'Mobile Development',
+        // 'DevOps',
+        // 'Shared Skills',
+      ])
       .range(d3.schemeCategory10);
 
     function maxLength(d: d3.HierarchyNode<INode>) {
@@ -108,7 +132,14 @@ export const CladogramChart = forwardRef(
         };
       }
 
-      return function (event, d) {
+      return function (event, d: d3.HierarchyNode<INode>) {
+        const ancestorsName = d
+          .ancestors()
+          .map((d) => d.data.name)
+          .reverse()
+          .filter((item, index) => index > 0)
+          .join(' > ');
+        handleSelectedSkill(ancestorsName);
         d3.select(this).classed('label--active', active);
         d3.select(d.linkExtensionNode).classed('link-extension--active', active).raise();
 
@@ -174,12 +205,21 @@ export const CladogramChart = forwardRef(
         svg.append('style').text(`
             .link--active { stroke: #000 !important; stroke-width: 1.5px; }
             .link-extension--active { stroke-opacity: .6; }
-            .label--active { font-weight: bold; }
+            .label--active { 
+              font-weight: bold; 
+              cursor: pointer; 
+              -webkit-touch-callout: none; /* iOS Safari */
+              -webkit-user-select: none; /* Safari */
+              -khtml-user-select: none; /* Konqueror HTML */
+              -moz-user-select: none; /* Old versions of Firefox */
+              -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */ 
+            }
             .subtree-label--active { opacity: 1;}
             .subtree-label--inactive { opacity: 0;}
           `);
 
-        const linkExtension = svg
+        linkExtension = svg
           .append('g')
           .attr('fill', 'none')
           .attr('stroke', '#000')
@@ -192,7 +232,7 @@ export const CladogramChart = forwardRef(
           })
           .attr('d', linkExtensionConstant);
 
-        const link = svg
+        link = svg
           .append('g')
           .attr('fill', 'none')
           .attr('stroke', '#000')
@@ -249,7 +289,19 @@ export const CladogramChart = forwardRef(
             }
           })
           .on('mouseover', mouseovered(true))
-          .on('mouseout', mouseovered(false));
+          .on('mouseout', mouseovered(false))
+          .on('click', (event, d) => {
+            const innerHtmlArray = event.target.innerHTML.split('');
+            if (innerHtmlArray.filter((item) => item === '⭐').length < 5) {
+              if (d.x < 180) {
+                event.target.innerHTML = '⭐ ' + event.target.innerHTML;
+              } else {
+                event.target.innerHTML = event.target.innerHTML + ' ⭐';
+              }
+            }
+          });
+
+        // Add sub tree labels
         svg
           .append('g')
           .selectAll('foreignObject')
@@ -311,12 +363,12 @@ export const CladogramChart = forwardRef(
             return wrapperDiv;
           })
           .classed('subtree-label--inactive', true);
+      }
 
-        update({ drawBranchLength: false, linkExtension, link, linkExtensionVariable, linkVariable });
+      if (link && linkExtension) {
+        update({ drawBranchLength: showBranchLength, linkExtension, link, linkExtensionVariable, linkVariable });
       }
     });
-
-    console.log(null);
 
     return null;
   },

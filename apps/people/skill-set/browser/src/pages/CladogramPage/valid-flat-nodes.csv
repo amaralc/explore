@@ -1,7 +1,0 @@
-id,parentId,name,length
-1,,Root,100
-2,1,Child1,50
-3,1,Child2,30
-4,2,Grandchild1,20
-5,2,Grandchild2,10
-6,3,Grandchild3,15

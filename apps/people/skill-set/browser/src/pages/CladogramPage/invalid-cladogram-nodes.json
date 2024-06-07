@@ -1,0 +1,435 @@
+{
+  "x": "Skills",
+  "length": 1.0,
+  "branchset": [
+    {
+      "name": "Soft Skills",
+      "length": 3.0,
+      "branchset": [
+        {
+          "name": "Organizational",
+          "length": 0.1,
+          "branchset": [
+            {
+              "name": "Adaptability",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Initiative",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Innovative Capability",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Results Oriented",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Team Work",
+              "length": 0.1,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Departmental",
+          "length": 0.1,
+          "branchset": [
+            {
+              "name": "Positive Attitude",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Commitment to Quality",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Growth Mindset",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Simplicity",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Effective Communication",
+              "length": 0.5,
+              "branchset": [
+                {
+                  "name": "Written",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Verbal",
+                  "length": 0.1,
+                  "branchset": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Technical Skills",
+      "length": 1.0,
+      "branchset": [
+        {
+          "name": "Frontend",
+          "length": 0.5,
+          "branchset": [
+            {
+              "name": "Styles and Structure",
+              "length": 0.1,
+              "branchset": [
+                {
+                  "name": "HTML",
+                  "length": 0.05,
+                  "branchset": []
+                },
+                {
+                  "name": "StyleSheet Languages",
+                  "length": 0.05,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Data Visualization",
+              "length": 0.1,
+              "branchset": [
+                {
+                  "name": "2D",
+                  "length": 0.1,
+                  "branchset": [
+                    {
+                      "name": "HighCharts",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Power BI",
+                      "length": 0.1,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3D",
+                  "length": 0.1,
+                  "branchset": [
+                    {
+                      "name": "Plotly",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "ThreeJS",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Shaders",
+                      "length": 0.1,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "React",
+              "length": 0.5,
+              "branchset": [
+                {
+                  "name": "Composition",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Hooks",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Hook Forms",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Redux",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "MaterialUI",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "NextJS",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Performance",
+                  "length": 0.1,
+                  "branchset": [
+                    {
+                      "name": "Code Splitting",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Tree Shaking",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Lazy Loading",
+                      "length": 0.1,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Browser APIs",
+              "length": 0.1,
+              "branchset": [
+                {
+                  "name": "DOM",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Web Storage",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Fetch API",
+                  "length": 0.1,
+                  "branchset": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Backend",
+          "length": 0.5,
+          "branchset": [
+            {
+              "name": "Databases",
+              "length": 0.5,
+              "branchset": [
+                {
+                  "name": "Idex Management",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "MQL",
+                  "length": 0.1,
+                  "branchset": [
+                    {
+                      "name": "MongoDB",
+                      "length": 0.1,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "SQL",
+                  "length": 0.1,
+                  "branchset": [
+                    {
+                      "name": "PostgreSQL",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "BigQuery",
+                      "length": 0.1,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "RESTful API Design",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Kafka",
+              "length": 0.1,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "DevOps",
+          "length": 0.5,
+          "branchset": [
+            {
+              "name": "Build Systems",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Information Security",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "Incident Response",
+              "length": 0.1,
+              "branchset": []
+            },
+            {
+              "name": "CI/CD",
+              "length": 0.1,
+              "branchset": [
+                {
+                  "name": "Terraform",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Docker",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Kubernetes",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Cloud Build",
+                  "length": 0.1,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Monitoring",
+              "length": 0.1,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Shared Skills",
+          "length": 10.0,
+          "branchset": [
+            {
+              "name": "Languages and Runtimes",
+              "length": 0.1,
+              "branchset": [
+                {
+                  "name": "NodeJS",
+                  "length": 0.1,
+                  "branchset": [
+                    {
+                      "name": "TypeScript",
+                      "length": 0.1,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Bundlers",
+                      "length": 0.1,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Python",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Shell",
+                  "length": 0.1,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Performance",
+              "length": 0.1,
+              "branchset": [
+                {
+                  "name": "Memory Profiling",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Performance Profiling",
+                  "length": 0.1,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Automated Testing",
+              "length": 0.05,
+              "branchset": [
+                {
+                  "name": "Unit Testing",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Integration Testing",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "End-to-End Testing",
+                  "length": 0.1,
+                  "branchset": []
+                },
+                {
+                  "name": "Performance Testing",
+                  "length": 0.1,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Software Architecture",
+              "length": 0.05,
+              "branchset": []
+            },
+            {
+              "name": "Clean Code",
+              "length": 0.05,
+              "branchset": []
+            },
+            {
+              "name": "Git",
+              "length": 0.05,
+              "branchset": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1869 @@
+{
+  "name": "Software Engineer",
+  "length": 0,
+  "description": "Software engineer skills",
+  "branchset": [
+    {
+      "name": "Technical Skills",
+      "length": 3,
+      "branchset": [
+        {
+          "name": "Frontend Development",
+          "length": 3,
+          "branchset": [
+            {
+              "name": "Browser APIs",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "DOM API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Document Object Model",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Document",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Element",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Node",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Event",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Fetch API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Native",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Requests",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Responses",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Headers",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Axios",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Storage API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Local Storage",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Session Storage",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "IndexedDB",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "WebSockets API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "WebSocket",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Geolocation API",
+                  "length": 3,
+                  "branchset": [
+                    {
+                      "name": "Geolocation",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Canvas API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "2D Context",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "WebGL",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Audio/Video API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "AudioContext",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Video Element",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "File API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "File",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "FileReader",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Blob",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Notifications API",
+                  "length": 3,
+                  "branchset": [
+                    {
+                      "name": "Notifications",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Service Worker API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "ServiceWorker",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Push API",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Cache API",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "WebRTC API",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "RTCPeerConnection",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "RTCDataChannel",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "MediaStream",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Battery Status API",
+                  "length": 3,
+                  "branchset": [
+                    {
+                      "name": "BatteryManager",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "HTML",
+              "length": 2,
+              "branchset": []
+            },
+            {
+              "name": "JavaScript",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "ES6+",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "TypeScript",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "DOM Manipulation",
+                  "length": 3,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "React",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Components",
+                  "length": 5,
+                  "branchset": [
+                    {
+                      "name": "Functional Components",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Class Components",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Hooks",
+                      "length": 5,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "State Management",
+                  "length": 5,
+                  "branchset": [
+                    {
+                      "name": "Context API",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Redux",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "Redux Toolkit",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Redux Thunk",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Redux Saga",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Routing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "React Router",
+                      "length": 5,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Forms",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "React Hook Form",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Testing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Vitest",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "React Testing Library",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Styling",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Responsive Design",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "StyleSheet Languages",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Styled Components",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Material UI",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Build Tools",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Webpack",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Babel",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Vite",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Performance Optimization",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Code Splitting",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Lazy Loading",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Memoization",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Backend Development",
+          "length": 3,
+          "branchset": [
+            {
+              "name": "Node.js",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Frameworks",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Express",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "NestJS",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Koa",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Database Integration",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "MongoDB",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Mongoose",
+                          "length": 3,
+                          "branchset": []
+                        },
+                        {
+                          "name": "mongodb",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "PostgreSQL",
+                      "length": 3,
+                      "branchset": [
+                        {
+                          "name": "Knex",
+                          "length": 3,
+                          "branchset": []
+                        },
+                        {
+                          "name": "TypeORM",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "API Development",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "REST",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "GraphQL",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Testing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Jest",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Mocha",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Chai",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Supertest",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Real-time Communication",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Socket.io",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "WebSockets",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Task Scheduling",
+                  "length": 3,
+                  "branchset": [
+                    {
+                      "name": "Node-cron",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Bull",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Performance",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Performance Monitoring",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Node.js Built-in Profiler",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Chrome Developer Tools",
+                          "length": 4,
+                          "branchset": [
+                            {
+                              "name": "Heap Snapshot",
+                              "length": 4,
+                              "branchset": []
+                            },
+                            {
+                              "name": "CPU Profiling",
+                              "length": 4,
+                              "branchset": []
+                            },
+                            {
+                              "name": "Memory Leak Detection",
+                              "length": 4,
+                              "branchset": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Prometheus",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Grafana",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Performance Optimization",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Event Loop Monitoring",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Async Hooks",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Clustering",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Load Balancing",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Caching",
+                          "length": 4,
+                          "branchset": [
+                            {
+                              "name": "Redis",
+                              "length": 4,
+                              "branchset": []
+                            },
+                            {
+                              "name": "Memcached",
+                              "length": 3,
+                              "branchset": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Profiling Tools",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Clinic.js",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Chrome Developer Tools",
+                          "length": 4,
+                          "branchset": [
+                            {
+                              "name": "Performance Tab",
+                              "length": 4,
+                              "branchset": []
+                            },
+                            {
+                              "name": "Memory Tab",
+                              "length": 4,
+                              "branchset": []
+                            },
+                            {
+                              "name": "Network Tab",
+                              "length": 4,
+                              "branchset": []
+                            },
+                            {
+                              "name": "JavaScript Profiler",
+                              "length": 4,
+                              "branchset": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Python",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Frameworks",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Django",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Flask",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "FastAPI",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Database Integration",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "SQLAlchemy",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Django ORM",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Peewee",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+
+                {
+                  "name": "API Development",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Django REST Framework",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Graphene-Python",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "FastAPI",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Testing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Pytest",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Unittest",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Django Test",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Asynchronous Programming",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Asyncio",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Aiohttp",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Celery",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Real-time Communication",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Django Channels",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "WebSockets",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Task Scheduling",
+                  "length": 3,
+                  "branchset": [
+                    {
+                      "name": "Celery Beat",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "APScheduler",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Performance Optimization",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Caching",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Redis",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Memcached",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Profiling",
+                      "length": 3,
+                      "branchset": [
+                        {
+                          "name": "cProfile",
+                          "length": 3,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Py-Spy",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mobile Development",
+          "length": 4,
+          "branchset": [
+            {
+              "name": "Android",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Languages",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Java",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Kotlin",
+                      "length": 5,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Frameworks and Libraries",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Android SDK",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Jetpack Compose",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Retrofit",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Dagger/Hilt",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Room",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Coroutines",
+                      "length": 5,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Architecture",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "MVVM",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "MVP",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Clean Architecture",
+                      "length": 5,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Testing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "JUnit",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Espresso",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Mockito",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "UI/UX",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Material Design",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "ConstraintLayout",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Navigation Component",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "iOS",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Languages",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Swift",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Objective-C",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Frameworks and Libraries",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "UIKit",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "SwiftUI",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Alamofire",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "CoreData",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Combine",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Architecture",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "MVVM",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "MVC",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "VIPER",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Testing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "XCTest",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Quick/Nimble",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Snapshot Testing",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "UI/UX",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Human Interface Guidelines",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Auto Layout",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Storyboards",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Kotlin Multiplatform Mobile (KMM)",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Core Concepts",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Shared Modules",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Expect/Actual Declarations",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Android Integration",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Shared Code with Android",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Android-specific Implementations",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "iOS Integration",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Shared Code with iOS",
+                      "length": 5,
+                      "branchset": []
+                    },
+                    {
+                      "name": "iOS-specific Implementations",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Multiplatform Libraries",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Ktor",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "SQLDelight",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Koin",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Build Tools",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Gradle",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "CocoaPods",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Testing",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Unit Testing",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Integration Testing",
+                      "length": 4,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Shared Skills",
+          "length": 4,
+          "branchset": [
+            {
+              "name": "Version Control",
+              "length": 3,
+              "branchset": [
+                {
+                  "name": "Git",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Bitbucket",
+                  "length": 3,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Testing",
+              "length": 3,
+              "branchset": [
+                {
+                  "name": "Unit Testing",
+                  "length": 3,
+                  "branchset": []
+                },
+                {
+                  "name": "Integration Testing",
+                  "length": 3,
+                  "branchset": []
+                },
+                {
+                  "name": "End-to-End Testing",
+                  "length": 3,
+                  "branchset": []
+                },
+                {
+                  "name": "Performance Testing",
+                  "length": 3,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "DevOps",
+              "length": 3,
+              "branchset": [
+                {
+                  "name": "CI/CD",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Cloud Build",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Bitbucket Pipelines",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Containerization",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Docker",
+                      "length": 4,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Kubernetes",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Monitoring",
+                  "length": 3,
+                  "branchset": [
+                    {
+                      "name": "Prometheus",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Grafana",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Cloud Logging",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "Cloud Monitoring",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Security",
+              "length": 3,
+              "branchset": [
+                {
+                  "name": "Web Security",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Web Development Vulnerabilities",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "Injection",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "SQL Injection",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "NoSQL Injection",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Command Injection",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "LDAP Injection",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cross-Site Scripting (XSS)",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "Reflected XSS",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Stored XSS",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "DOM-Based XSS",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cross-Site Request Forgery (CSRF)",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "CSRF Tokens",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "SameSite Cookies",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Authentication and Session Management",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "Session Fixation",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Broken Authentication",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Insecure Password Storage",
+                          "length": 5,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Security Misconfiguration",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "Default Configurations",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Open Directories",
+                          "length": 3,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Error Handling",
+                          "length": 3,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Sensitive Data Exposure",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "Data Encryption",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Transport Layer Protection",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Data Leak Prevention",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "XML External Entities (XXE)",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "External Entity Injection",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "XML Parsing",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Insecure Deserialization",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Object Injection",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Deserialization Attacks",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Using Components with Known Vulnerabilities",
+                      "length": 5,
+                      "branchset": [
+                        {
+                          "name": "Dependency Management",
+                          "length": 5,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Patch Management",
+                          "length": 5,
+                          "branchset": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Insufficient Logging and Monitoring",
+                      "length": 4,
+                      "branchset": [
+                        {
+                          "name": "Log Management",
+                          "length": 4,
+                          "branchset": []
+                        },
+                        {
+                          "name": "Intrusion Detection",
+                          "length": 4,
+                          "branchset": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Network Security",
+                  "length": 3,
+                  "branchset": []
+                },
+                {
+                  "name": "Cryptography",
+                  "length": 3,
+                  "branchset": []
+                },
+                {
+                  "name": "Authentication",
+                  "length": 4,
+                  "branchset": [
+                    {
+                      "name": "OAuth",
+                      "length": 3,
+                      "branchset": []
+                    },
+                    {
+                      "name": "JWT",
+                      "length": 3,
+                      "branchset": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Soft Skills",
+      "length": 5,
+      "branchset": [
+        {
+          "name": "Communication",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Verbal Communication",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Public Speaking",
+                  "length": 5,
+                  "branchset": []
+                },
+                {
+                  "name": "Meeting Participation",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Non-Verbal Communication",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Body Language",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Facial Expressions",
+                  "length": 3,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Written Communication",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Email Writing",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Technical Documentation",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Listening",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Active Listening",
+                  "length": 5,
+                  "branchset": []
+                },
+                {
+                  "name": "Feedback Reception",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Teamwork",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Collaboration",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Pair Programming",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Code Reviews",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Conflict Resolution",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Mediation",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Negotiation",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Problem Solving",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Analytical Thinking",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Root Cause Analysis",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Debugging",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Hypothesis Driven",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            },
+            {
+              "name": "Creative Thinking",
+              "length": 5,
+              "branchset": [
+                {
+                  "name": "Brainstorming",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Innovative Solutions",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Adaptability",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Learning New Skills",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Handling Change",
+              "length": 5,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Time Management",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Prioritization",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Scheduling",
+              "length": 4,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Leadership",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Mentoring",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Project Management",
+              "length": 4,
+              "branchset": [
+                {
+                  "name": "Agile Methodologies",
+                  "length": 4,
+                  "branchset": []
+                },
+                {
+                  "name": "Scrum Master",
+                  "length": 4,
+                  "branchset": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Creativity",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Idea Generation",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Design Thinking",
+              "length": 4,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Work Ethic",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Discipline",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Responsibility",
+              "length": 5,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Critical Thinking",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Analysis",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Evaluation",
+              "length": 4,
+              "branchset": []
+            }
+          ]
+        },
+        {
+          "name": "Interpersonal Skills",
+          "length": 5,
+          "branchset": [
+            {
+              "name": "Empathy",
+              "length": 5,
+              "branchset": []
+            },
+            {
+              "name": "Building Relationships",
+              "length": 4,
+              "branchset": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
