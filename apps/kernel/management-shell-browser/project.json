@@ -65,10 +65,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/kernel/management-shell-browser/**/*.{ts,tsx,js,jsx}"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "e2e": {
       "executor": "@nx/cypress:cypress",
@@ -85,6 +82,9 @@
     },
     "docker-build": {
       "command": "docker build -f apps/kernel/management-shell-browser/Dockerfile . -t kernel-management-shell-browser"
+    },
+    "docker-run": {
+      "command": "docker run --rm -p 80:80 kernel-management-shell-browser"
     }
   },
   "tags": []

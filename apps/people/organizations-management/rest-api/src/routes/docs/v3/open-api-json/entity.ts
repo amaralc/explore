@@ -7,6 +7,7 @@ import {
 import { UserV1Entity, userV1JsonSchema } from '../../../../../../base/src/domains/users-v1/core/entity';
 import { v1OrganizationsIdControllerSchema } from '../../../api/v1/organizations/[id]/index.docs';
 import { organizationsV1ControllerSchema } from '../../../api/v1/organizations/index.docs';
+import { organizationsV1SeedControllerSchema } from '../../../api/v1/organizations[:]seed/index.docs';
 
 export class OpenApiV3Entity extends OpenApiBuilder {
   constructor() {
@@ -29,6 +30,7 @@ export class OpenApiV3Entity extends OpenApiBuilder {
     this.addSchema(OrganizationV1Entity.name, organizationV1JsonSchema);
     this.addPath('/api/v1/organizations', organizationsV1ControllerSchema);
     this.addPath('/api/v1/organizations/{id}', v1OrganizationsIdControllerSchema);
+    this.addPath('/api/v1/organizations:seed', organizationsV1SeedControllerSchema);
 
     this.addSchema(UserV1Entity.name, userV1JsonSchema);
   }

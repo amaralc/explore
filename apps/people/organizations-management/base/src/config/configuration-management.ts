@@ -1,13 +1,21 @@
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
-import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
+import { ExtractEntitiesFromExternalSourceUseCase } from '../domains/_shared/core/use-cases/extract-entities-from-external-source';
 import { MongoDbAgentsV1DatabaseRepository } from '../domains/agents-v1/adapters/database-repository-mongodb';
-import { MultiFileSystemAgentsV1Repository } from '../domains/agents-v1/adapters/database-repository-multi-file-system';
-import { MultiRestApiAgentsV1DatabaseRepository } from '../domains/agents-v1/adapters/database-repository-multi-rest-api';
 import { AgentsV1DatabaseRepository } from '../domains/agents-v1/core/database-repository';
 import { fakeAgents } from '../domains/agents-v1/core/fixtures';
-import { MongoDbOrganizationsV1Repository } from '../domains/organizations-v1/adapters/repository-mongodb';
+import { FileSystemMultiCentralsV1Repository } from '../domains/multi-central-v1/adapters/database-repository-multi-file-system';
+import { RestApiMultiCentralsV1DatabaseRepository } from '../domains/multi-central-v1/adapters/database-repository-multi-rest-api';
+import { MultiCentralsV1DatabaseRepository } from '../domains/multi-central-v1/core/database-repository';
+import { FileSystemMultiInstitutionsV1Repository } from '../domains/multi-institution-v1/adapters/database-repository-multi-file-system';
+import { RestApiMultiInstitutionsV1DatabaseRepository } from '../domains/multi-institution-v1/adapters/database-repository-rest-api';
+import { MultiInstitutionsV1DatabaseRepository } from '../domains/multi-institution-v1/core/database-repository';
+import { MongoDbOrganizationsV1Repository } from '../domains/organizations-v1/adapters/database-repository-mongodb';
 import { OrganizationsV1DatabaseRepository } from '../domains/organizations-v1/core/database-repository';
+import { fakeOrganizations } from '../domains/organizations-v1/core/fixtures';
+import { CreateOrganizationV1UseCase } from '../domains/organizations-v1/core/use-cases/create-organization';
+import { FilterOrganizationsV1UseCase } from '../domains/organizations-v1/core/use-cases/filter-organizations';
+import { GetOrganizationV1ByIdUseCase } from '../domains/organizations-v1/core/use-cases/get-organization-by-id';
 import { defaultConfiguration } from './default-configuration';
 
 export type IAppConfiguration = typeof defaultConfiguration;
@@ -20,6 +28,14 @@ export class ConfigurationManager {
   repositories?: {
     organizationsV1: OrganizationsV1DatabaseRepository;
     agentsV1: AgentsV1DatabaseRepository;
+    multiInstitutionsV1: MultiInstitutionsV1DatabaseRepository;
+    multiCentralsV1: MultiCentralsV1DatabaseRepository;
+  };
+  useCases?: {
+    extractEntitiesFromExternalSource: ExtractEntitiesFromExternalSourceUseCase;
+    createOrganizationV1UseCase: CreateOrganizationV1UseCase;
+    filterOrganizationsV1: FilterOrganizationsV1UseCase;
+    getOrganizationV1ById: GetOrganizationV1ByIdUseCase;
   };
 
   constructor(configOverride: IAppConfiguration = defaultConfiguration) {
@@ -29,18 +45,17 @@ export class ConfigurationManager {
 
   async initialize() {
     if (['mongodb-in-memory', 'mongodb'].includes(this.config.database.provider)) {
-      console.log('Connecting to MongoDb...');
+      winstonLogger.info('Connecting to MongoDb...');
       const mongoDbDriver = new MongoDbDriver(this.getConfig().database.uri);
       this.databaseDriver = mongoDbDriver;
       await this.databaseDriver.connectToDatabase(this.getConfig().database.name);
-      console.log('Connected to MongoDb');
+      winstonLogger.info('Connected to MongoDb', {
+        scope: { moduleName: '', methodName: '' },
+        steps: [{ message: '', metadata: { databaseName: this.getConfig().database.name } }],
+      });
     }
 
     await this.initializeRepositories();
-
-    if (this.config.database.seedFromExternalSource === 'true') {
-      return await this.seedDatabaseFromExternalSource();
-    }
 
     if (this.config.database.seed === 'true') {
       return await this.seedDatabase();
@@ -68,93 +83,78 @@ export class ConfigurationManager {
       return;
     }
 
+    const multiInstitutionsV1BaseUrl = this.config.externalServices.multiInstitutionsV1BaseUrl;
+    const multiCentralsV1BaseUrl = this.config.externalServices.multiCentralsV1BaseUrl;
+
     if (this.config.server.nodeEnv === 'production') {
-      console.log('Production mode');
+      winstonLogger.info('Production mode');
       this.repositories = {
         organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
         agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
+        multiInstitutionsV1: new RestApiMultiInstitutionsV1DatabaseRepository(multiInstitutionsV1BaseUrl),
+        multiCentralsV1: new RestApiMultiCentralsV1DatabaseRepository(multiCentralsV1BaseUrl),
       };
 
       await this.repositories.agentsV1.generateIndexes();
+      await this.repositories.organizationsV1.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'development') {
-      console.log('Development mode');
+      winstonLogger.info('Development mode');
       this.repositories = {
         organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
         agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
+        multiInstitutionsV1: new FileSystemMultiInstitutionsV1Repository(),
+        multiCentralsV1: new FileSystemMultiCentralsV1Repository(),
       };
       await this.repositories.agentsV1.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'test') {
-      console.log('Test mode');
+      winstonLogger.info('Test mode');
       this.repositories = {
         organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
         agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
+        multiInstitutionsV1: new FileSystemMultiInstitutionsV1Repository(),
+        multiCentralsV1: new FileSystemMultiCentralsV1Repository(),
       };
       await this.repositories.agentsV1.generateIndexes();
     }
+
+    this.useCases = {
+      extractEntitiesFromExternalSource: new ExtractEntitiesFromExternalSourceUseCase(
+        this.repositories.multiInstitutionsV1,
+        this.repositories.multiCentralsV1,
+        this.repositories.agentsV1,
+        this.repositories.organizationsV1,
+      ),
+      createOrganizationV1UseCase: new CreateOrganizationV1UseCase(
+        this.repositories.organizationsV1,
+        this.repositories.agentsV1,
+      ),
+      getOrganizationV1ById: new GetOrganizationV1ByIdUseCase(this.repositories.organizationsV1),
+      filterOrganizationsV1: new FilterOrganizationsV1UseCase(
+        this.repositories.organizationsV1,
+        this.repositories.agentsV1,
+      ),
+    };
   }
 
   async getRepositories() {
     return this.repositories;
   }
 
-  async seedDatabase() {
-    if (this.config.server.nodeEnv !== 'production') {
-      console.log('Seeding database...');
-      const { count } = await this.repositories.agentsV1.createMany(fakeAgents);
-      console.log(`Total agents created: ${count}`);
-    }
+  async getUseCases() {
+    return this.useCases;
   }
 
-  async seedDatabaseFromExternalSource() {
-    const log: ILogMetadata = {
-      scope: { moduleName: ConfigurationManager.name, methodName: 'seedDatabaseFromExternalSource' },
-      steps: [{ message: 'Seeding database from external source...' }],
-    };
-
-    try {
-      log.steps.push({ message: 'Initializing external source agents repository...' });
-
-      let externalSourceAgentsV1DatabaseRepository: AgentsV1DatabaseRepository;
-
-      const source: 'rest-api' | 'file-system' = process.env['EXTERNAL_SOURCE'] as
-        | 'rest-api'
-        | 'file-system'
-        | undefined;
-
-      if (source === 'file-system') {
-        log.steps.push({ message: 'Reading external agents from file system...' });
-        const multiInstitutionsV1FilePath =
-          'apps/people/organizations-management/base/src/domains/multi-institution-v1/core/fixtures-content-usp-institutions.json';
-        const multiCentralsV1FilePath =
-          'apps/people/organizations-management/base/src/domains/multi-central-v1/core/fixtures-content-usp-centrals.json';
-        externalSourceAgentsV1DatabaseRepository = new MultiFileSystemAgentsV1Repository(
-          multiInstitutionsV1FilePath,
-          multiCentralsV1FilePath,
-        );
-      } else {
-        log.steps.push({ message: 'Reading external agents from multi rest api...' });
-        const multiInstitutionsV1BaseUrl = this.config.externalServices.multiInstitutionsV1BaseUrl;
-        const multiCentralsV1BaseUrl = this.config.externalServices.multiCentralsV1BaseUrl;
-        externalSourceAgentsV1DatabaseRepository = new MultiRestApiAgentsV1DatabaseRepository(
-          multiInstitutionsV1BaseUrl,
-          multiCentralsV1BaseUrl,
-        );
-      }
-
-      log.steps.push({ message: 'Listing agents from external source...' });
-      const agentsV1 = await externalSourceAgentsV1DatabaseRepository.listAll();
-
-      log.steps.push({ message: 'Storing external source agents in service datastore...' });
-      const { count } = await this.repositories.agentsV1.createMany(agentsV1);
-
-      nativeLogger.info(`Seeding database from external source completed. Total agents created: ${count}`, log);
-    } catch (error) {
-      log.steps.push({ message: 'Error seeding database from external source.', metadata: { error: error.stack } });
-      nativeLogger.error(`Error seeding database from external source: ${error.message}`, log);
+  async seedDatabase() {
+    if (this.config.server.nodeEnv !== 'production') {
+      winstonLogger.info('Seeding database with fake agents...');
+      const { count: agentsCount } = await this.repositories.agentsV1.createMany(fakeAgents);
+      winstonLogger.info(`Total fake agents created: ${agentsCount}`);
+      const { count: organizationsCount } = await this.repositories.organizationsV1.createMany(fakeOrganizations);
+      winstonLogger.info(`Total fake organizations created: ${organizationsCount}`);
     }
   }
 }

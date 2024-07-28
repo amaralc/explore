@@ -329,3 +329,25 @@ module "kernel-dev-docs-browser" {
 #   source_environment_project_id = var.production_environment_core_root_shell_graph_vercel_project_id
 #   depends_on                    = [module.people-researchers-peers-svc]
 # }
+
+
+# People Skill-Set Browser
+module "people-skill-set-browser" {
+  count                               = 1
+  source                              = "../../../people/skill-set/browser/iac"
+  docker_file_path                    = "apps/people/skill-set/browser/Dockerfile"
+  docker_image_name                   = "people-skill-set-browser"
+  domain_name                         = var.domain_name
+  depends_on                          = []
+  is_production_environment           = local.is_production_environment
+  source_environment_branch_name      = var.source_environment_branch_name
+  gcp_shell_project_id                = var.gcp_shell_project_id
+  gcp_project_id                      = module.gcp_project[0].project_id
+  environment_name                    = var.environment_name
+  branch_name                         = var.branch_name
+  gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
+  gcp_location                        = var.gcp_location
+  short_commit_sha                    = var.short_commit_sha
+  gcp_dns_managed_zone_name           = var.gcp_dns_managed_zone_name
+  source_environment_project_id       = var.production_environment_core_platform_shell_browser_vite_vercel_project_id
+}

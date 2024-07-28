@@ -2,11 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug people-skill-set-browser App",
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}/apps/people/skill-set/browser"
     },
     {
       "name": "Debug Express App",
@@ -17,7 +17,7 @@
       "runtimeArgs": [
         "nx",
         "run",
-        "people-organizations-management:serve"
+        "people-organizations-management-rest-api:serve"
       ],
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal",
@@ -41,6 +41,23 @@
       "restart": true,
       "sourceMaps": true,
       "outFiles": ["${workspaceFolder}/dist/apps/people/organizations-management/**/*.js"]
+    },
+    {
+      "name": "Inspect Browser App",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps/people/skill-set/browser",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "nx",
+        "run",
+        "people-skill-set-browser:serve"
+      ],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "restart": true,
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/dist/apps/people/skill-set/browser/**/*.js"]
     },
     {
       "name": "Attach to Service",

@@ -3,11 +3,11 @@ import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-d
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
-import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
+import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Collection, MongoError, ObjectId } from 'mongodb';
 import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity } from '../core/entity';
 import { TaxonomicUnitsV1DatabaseRepository } from '../core/repository-database';
-import { TaxonomicUnitAlreadyExistsError } from '../core/use-cases/create-taxonomic-unit.errors';
+import { TaxonomicUnitAlreadyExistsError } from '../core/use-cases/create-taxonomic-unit/errors';
 
 type IMongoDbTaxonomicUnitV1 = { _id: ObjectId } & Omit<ITaxonomicUnitV1Dto, 'id'>;
 
@@ -92,7 +92,7 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
     return entityDto;
   }
 
-  public async listPaginated(paginationDto: PaginationDto): Promise<IPaginatedEntities<ITaxonomicUnitV1Dto>> {
+  public async listPaginated(paginationDto: IPaginationV1Dto): Promise<IPaginatedEntities<ITaxonomicUnitV1Dto>> {
     const mongoDbDocuments = await this.getCollection()
       .find()
       .skip(paginationDto.page)

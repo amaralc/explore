@@ -5,9 +5,10 @@ locals {
 # PostgreSQL Database Management System
 # Reference: https://registry.terraform.io/providers/kislerdm/neon/latest/docs
 resource "neon_project" "instance" {
-  count     = local.is_production_environment ? 1 : 0
-  name      = var.environment_name
-  region_id = var.neon_project_location #"aws-eu-central-1"
+  count                     = local.is_production_environment ? 1 : 0
+  name                      = var.environment_name
+  region_id                 = var.neon_project_location #"aws-eu-central-1"
+  history_retention_seconds = 86399
 }
 
 resource "neon_branch" "instance" {

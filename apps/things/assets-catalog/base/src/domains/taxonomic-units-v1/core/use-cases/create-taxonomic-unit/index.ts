@@ -2,8 +2,8 @@ import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-l
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { Static, Type } from '@sinclair/typebox';
-import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity, taxonomicUnitV1JsonSchema } from '../entity';
-import { TaxonomicUnitsV1DatabaseRepository } from '../repository-database';
+import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity, taxonomicUnitV1JsonSchema } from '../../entity';
+import { TaxonomicUnitsV1DatabaseRepository } from '../../repository-database';
 
 export const createTaxonomicUnitV1InputDtoSchema = Type.Object({
   slug: taxonomicUnitV1JsonSchema.properties.slug,

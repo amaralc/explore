@@ -86,3 +86,6 @@ key.json
 
 # Content
 fixtures-content**.json
+
+# Parcel
+.parcel-cache

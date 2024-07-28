@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto';
-import { CreateManyResponseDto } from '../../_shared/types';
+import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
 import { AgentsV1DatabaseRepository } from './database-repository';
 import { AgentV1Entity, IAgentV1Dto } from './entity';
 
@@ -45,7 +45,7 @@ export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {
     return inputDto;
   }
 
-  async createMany(agents: AgentV1Entity[]): Promise<CreateManyResponseDto> {
+  async createMany(agents: AgentV1Entity[]): Promise<ICreateManyResponseDto> {
     const uniqueAgents = [...new Set(agents)];
     if (uniqueAgents.length !== agents.length) {
       throw new Error('Agents must be unique'); // TODO: fix this rule that is more strict than the one applied in the "create" method
@@ -59,6 +59,28 @@ export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {
     return {
       ids: agentIds,
       count: agents.length,
+    };
+  }
+
+  async upsertMany(agents: AgentV1Entity[]): Promise<IUpsertManyResponseDto> {
+    const insertedIds = [];
+    const upsertedIds = [];
+    for (const agent of agents) {
+      const existingAgent = this.inMemoryAgentsV1.find((existingAgent) => existingAgent.id === agent.id);
+      if (existingAgent) {
+        this.deleteById(agent.id);
+        upsertedIds.push(agent.id);
+      } else {
+        insertedIds.push(agent.id);
+      }
+      this.create(agent);
+    }
+
+    return {
+      insertedIds,
+      insertedCount: insertedIds.length,
+      upsertedIds,
+      upsertedCount: upsertedIds.length,
     };
   }
 
@@ -80,5 +102,9 @@ export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {
 
   async deleteById(id: string): Promise<void> {
     this.inMemoryAgentsV1 = this.inMemoryAgentsV1.filter((agent) => agent.id !== id);
+  }
+
+  async countAll(): Promise<number> {
+    return this.inMemoryAgentsV1.length;
   }
 }

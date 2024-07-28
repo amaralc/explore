@@ -1,6 +1,6 @@
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { ILogMetadata } from '../logs/application-logger';
-import { nativeLogger } from '../logs/native-logger';
+import { winstonLogger } from '../logs/winston-logger';
 
 export class MongoDbMemoryServer {
   mongoMemoryReplicaSet?: MongoMemoryReplSet;
@@ -34,7 +34,7 @@ export class MongoDbMemoryServer {
 
     await mongoMemoryServer.create();
     const databaseUri = mongoMemoryServer.getUri();
-    nativeLogger.info(`In memory database uri: ${databaseUri}`, log);
+    winstonLogger.info(`In memory database uri: ${databaseUri}`, log);
     return { databaseUri, mongoMemoryServer };
   }
 }

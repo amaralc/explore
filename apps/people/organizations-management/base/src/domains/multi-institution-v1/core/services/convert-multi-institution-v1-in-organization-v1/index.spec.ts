@@ -3,18 +3,15 @@ import { ConvertMultiInstitutionV1InOrganizationV1Service } from '.';
 import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity';
 import { IMultiInstitutionV1Dto } from '../../entity';
 import { multiInstitutionsV1Fixtures } from '../../fixtures';
-import { ConvertMultiInstitutionV1InAgentV1Service } from '../convert-multi-institution-v1-in-agent-v1';
 
 describe('ConvertMultiInstitutionV1InOrganizationV1Service', () => {
   it('should convert multi-institution-v1 in organization-v1 with valid attributes', () => {
     // Given
     multiInstitutionsV1Fixtures.forEach((multiInstitutionV1Fixture) => {
       // When
-      const agentV1Dto = ConvertMultiInstitutionV1InAgentV1Service.execute(multiInstitutionV1Fixture);
       const organizationV1Dto = ConvertMultiInstitutionV1InOrganizationV1Service.execute({
         multiInstitutionV1Dto: multiInstitutionV1Fixture,
         ownerAgentId: '0000000000000000000000000000',
-        agentV1Dto,
       });
 
       // Then
@@ -28,6 +25,7 @@ describe('ConvertMultiInstitutionV1InOrganizationV1Service', () => {
         email: expect.stringMatching(generatedEmailRegex),
         nickname: expect.stringMatching(generatedNicknameRegex),
         planSubscriptionName: 'FREE',
+        idPath: `/${organizationV1Dto.id}`, // Single path segment ending with the organization id
         createdAt: expect.stringMatching(iso8601DateFormat),
         updatedAt: expect.stringMatching(iso8601DateFormat),
       };
@@ -43,16 +41,13 @@ describe('ConvertMultiInstitutionV1InOrganizationV1Service', () => {
 
     multiInstitutionsV1Fixtures.forEach((multiInstitutionV1Fixture) => {
       // When
-      const agentV1Dto = ConvertMultiInstitutionV1InAgentV1Service.execute(multiInstitutionV1Fixture);
       const organizationV1DtoOutput1 = ConvertMultiInstitutionV1InOrganizationV1Service.execute({
         multiInstitutionV1Dto: multiInstitutionV1Fixture,
         ownerAgentId: fakeOwnerAgentId,
-        agentV1Dto,
       });
       const organizationV1DtoOutput2 = ConvertMultiInstitutionV1InOrganizationV1Service.execute({
         multiInstitutionV1Dto: multiInstitutionV1Fixture,
         ownerAgentId: fakeOwnerAgentId,
-        agentV1Dto,
       });
 
       // Then
@@ -70,16 +65,13 @@ describe('ConvertMultiInstitutionV1InOrganizationV1Service', () => {
 
     multiInstitutionsV1Fixtures.forEach((multiInstitutionV1Fixture, index, array) => {
       // When
-      const agentV1Dto = ConvertMultiInstitutionV1InAgentV1Service.execute(multiInstitutionV1Fixture);
       const organizationV1DtoOutput1 = ConvertMultiInstitutionV1InOrganizationV1Service.execute({
         multiInstitutionV1Dto: multiInstitutionV1Fixture,
         ownerAgentId: fakeOwnerAgentId,
-        agentV1Dto,
       });
       const organizationV1DtoOutput2 = ConvertMultiInstitutionV1InOrganizationV1Service.execute({
         multiInstitutionV1Dto: array[(index + 1) % array.length],
         ownerAgentId: fakeOwnerAgentId,
-        agentV1Dto,
       });
 
       // Then
@@ -129,11 +121,9 @@ describe('ConvertMultiInstitutionV1InOrganizationV1Service', () => {
     invalidMultiInstitutionV1DtoList.forEach((invalidMultiInstitutionV1Dto) => {
       // When
       const execute = () => {
-        const agentV1Dto = ConvertMultiInstitutionV1InAgentV1Service.execute(invalidMultiInstitutionV1Dto);
         ConvertMultiInstitutionV1InOrganizationV1Service.execute({
           multiInstitutionV1Dto: invalidMultiInstitutionV1Dto,
           ownerAgentId: '0000000000000000000000000000',
-          agentV1Dto,
         });
       };
 

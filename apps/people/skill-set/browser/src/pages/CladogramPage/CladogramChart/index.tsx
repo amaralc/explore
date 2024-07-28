@@ -2,7 +2,7 @@
 
 import * as d3 from 'd3';
 import { forwardRef, useEffect } from 'react';
-import { INode } from './types';
+import { ICladogramNode } from '../types';
 
 let linkExtension;
 let link;
@@ -12,19 +12,93 @@ export const CladogramChart = forwardRef(
     {
       node,
       selectChartElement,
-      showBranchLength,
       handleSelectedSkill,
+      showBranchLength,
+      showRadarChart,
     }: {
-      node: INode;
+      node: ICladogramNode;
       selectChartElement: () => HTMLDivElement | null;
-      showBranchLength: boolean;
       handleSelectedSkill: (skill: string | null) => void;
+      showBranchLength: boolean;
+      showRadarChart: boolean;
     },
     ref,
   ) => {
     const width = 954;
     const outerRadius = width / 2;
-    const innerRadius = outerRadius - 170;
+    const innerRadius = outerRadius - 130;
+    const radarChartInnerRadius = innerRadius * 0.5;
+    const radarChartRange = innerRadius - radarChartInnerRadius;
+
+    const setRadarChartGrid = (d: d3.Selection<SVGSVGElement, unknown, null, undefined>) => {
+      const circles = [];
+      for (let starCount = 0; starCount <= 5; starCount++) {
+        circles.push(
+          d
+            .append('circle')
+            .attr('cx', 0) // Adjusting to the center of the SVG (200, 200)
+            .attr('cy', 0)
+            .attr('r', radarChartInnerRadius + (1 / 5) * starCount * radarChartRange)
+            .attr('fill', 'blue')
+            .attr('fill-opacity', 0)
+            .attr('stroke', '#000'),
+        );
+      }
+      return circles;
+    };
+
+    const setRadarChartValues = (
+      d: d3.Selection<SVGSVGElement, unknown, null, undefined>,
+      root: d3.HierarchyNode<ICladogramNode>,
+    ) => {
+      const points = root.leaves();
+
+      // Add lines connecting the data points
+      const lineGenerator = d3
+        .line()
+        .x((d: d3.HierarchyNode<ICladogramNode>) => {
+          const stars = d.data.stars || 0;
+          const angle = (d.x * Math.PI) / 180;
+          const radius = radarChartInnerRadius + (1 / 5) * stars * radarChartRange;
+          return Math.cos(angle) * radius;
+        })
+        .y((d: d3.HierarchyNode<ICladogramNode>) => {
+          const stars = d.data.stars || 0;
+          const angle = (d.x * Math.PI) / 180;
+          const radius = radarChartInnerRadius + (1 / 5) * stars * radarChartRange;
+          return Math.sin(angle) * radius;
+        });
+
+      // Append circles for each point
+      points.forEach((point, index, array) => {
+        const circleColor = point.color;
+        const circleRadius = 3;
+        const angle = (point.x * Math.PI) / 180;
+        const stars = point.data.stars || 0;
+        const radius = radarChartInnerRadius + (1 / 5) * stars * radarChartRange;
+        const cx = Math.cos(angle) * radius;
+        const cy = Math.sin(angle) * radius;
+
+        const lastIndex = array.length - 1;
+        const nextPoint = index === lastIndex ? array[0] : array[index + 1];
+        const pointsArray = [point, nextPoint];
+        const linePathData = lineGenerator(pointsArray as any);
+
+        d.append('path')
+          .attr('d', linePathData)
+          .attr('fill', 'none')
+          .attr('stroke', circleColor)
+          .attr('stroke-width', 6);
+
+        d.append('circle')
+          .attr('cx', cx)
+          .attr('cy', cy)
+          .attr('r', circleRadius)
+          .attr('stroke', circleColor)
+          .attr('stroke-width', 2)
+          .attr('fill', '#fff');
+      });
+    };
 
     const color = d3
       .scaleOrdinal()
@@ -39,42 +113,44 @@ export const CladogramChart = forwardRef(
       ])
       .range(d3.schemeCategory10);
 
-    function maxLength(d: d3.HierarchyNode<INode>) {
+    function maxLength(d: d3.HierarchyNode<ICladogramNode>) {
       const mLength = d.data.length + (d.children ? d3.max(d.children, maxLength) : 0);
       return mLength;
     }
 
-    function setRadius(d: d3.HierarchyNode<INode> & { radius?: number }, y0: number, k: number) {
+    function setRadius(d: d3.HierarchyNode<ICladogramNode> & { radius?: number }, y0: number, k: number) {
       d.radius = (y0 += d.data.length) * k;
       if (d.children) d.children.forEach((d) => setRadius(d, y0, k));
     }
 
-    function setColor(d: d3.HierarchyNode<INode> & { color: unknown }) {
+    function setColor(d: d3.HierarchyNode<ICladogramNode> & { color: unknown }) {
       const name = d.data.name;
       d.color = color.domain().indexOf(name) >= 0 ? color(name) : d.parent ? d.parent.color : null;
-      if (d.children) d.children.forEach(setColor);
+      if (d.children) {
+        d.children.forEach(setColor);
+      }
     }
 
-    function linkVariable(d: d3.HierarchyNode<INode>) {
+    function linkVariable(d: d3.HierarchyNode<ICladogramNode>) {
       return linkStep(d.source.x, d.source.radius, d.target.x, d.target.radius);
     }
 
-    function linkConstant(d: d3.HierarchyNode<INode>) {
+    function linkConstant(d: d3.HierarchyNode<ICladogramNode>) {
       return linkStep(d.source.x, d.source.y, d.target.x, d.target.y);
     }
 
-    function linkExtensionVariable(d: d3.HierarchyNode<INode>) {
+    function linkExtensionVariable(d: d3.HierarchyNode<ICladogramNode>) {
       return linkStep(d.target.x, d.target.radius, d.target.x, innerRadius);
     }
 
-    function linkExtensionConstant(d: d3.HierarchyNode<INode>) {
+    function linkExtensionConstant(d: d3.HierarchyNode<ICladogramNode>) {
       return linkStep(d.target.x, d.target.y, d.target.x, innerRadius);
     }
 
     function linkStep(startAngle: number, startRadius: number, endAngle: number, endRadius: number) {
-      const c0 = Math.cos((startAngle = ((startAngle - 90) / 180) * Math.PI));
+      const c0 = Math.cos((startAngle = (startAngle / 180) * Math.PI));
       const s0 = Math.sin(startAngle);
-      const c1 = Math.cos((endAngle = ((endAngle - 90) / 180) * Math.PI));
+      const c1 = Math.cos((endAngle = (endAngle / 180) * Math.PI));
       const s1 = Math.sin(endAngle);
       return (
         'M' +
@@ -132,10 +208,16 @@ export const CladogramChart = forwardRef(
         };
       }
 
-      return function (event, d: d3.HierarchyNode<INode>) {
+      return function (event, d: d3.HierarchyNode<ICladogramNode>) {
         const ancestorsName = d
           .ancestors()
-          .map((d) => d.data.name)
+          .map((d) => {
+            if (!d.children || d.depth <= 2) {
+              return d.data.name;
+            }
+
+            return '...';
+          })
           .reverse()
           .filter((item, index) => index > 0)
           .join(' > ');
@@ -166,15 +248,39 @@ export const CladogramChart = forwardRef(
       return metrics.width;
     }
 
-    function update({ drawBranchLength, linkExtension, link, linkExtensionVariable, linkVariable }) {
+    function update({
+      drawBranchLength,
+      linkExtension,
+      link,
+      linkExtensionVariable,
+      linkVariable,
+      drawRadarChart,
+      radarChartGridItems,
+    }: {
+      drawBranchLength: boolean;
+      linkExtension: d3.Selection<SVGSVGElement, undefined, null, undefined>;
+      link: d3.Selection<SVGSVGElement, undefined, null, undefined>;
+      linkExtensionVariable: boolean;
+      linkVariable: number;
+      drawRadarChart: boolean;
+      radarChartGridItems: Array<d3.Selection<SVGCircleElement, undefined, null, undefined>>;
+    }) {
       const t = d3.transition().duration(750);
       linkExtension.transition(t).attr('d', drawBranchLength ? linkExtensionVariable : linkExtensionConstant);
       link.transition(t).attr('d', drawBranchLength ? linkVariable : linkConstant);
+      linkExtension.transition(t).attr('stroke-opacity', drawRadarChart ? 0 : 0.25);
+      link.transition(t).attr('stroke-opacity', drawRadarChart ? 0 : 0.5);
+
+      for (const item of radarChartGridItems) {
+        item.transition(t).attr('stroke-opacity', 0.1);
+      }
     }
 
     useEffect(() => {
+      const localNode = node;
+
       const root = d3
-        .hierarchy(node, (d) => d.branchset)
+        .hierarchy(localNode, (d) => d.branchset)
         .sum((d) => (d.branchset ? 0 : 1))
         .sort((a, b) => {
           if (a.value && b.value) {
@@ -184,7 +290,7 @@ export const CladogramChart = forwardRef(
         });
 
       d3
-        .cluster<INode>()
+        .cluster<ICladogramNode>()
         .size([360, innerRadius])
         .separation((a, b) => 1)(root);
       const length = root.length || 0;
@@ -192,6 +298,7 @@ export const CladogramChart = forwardRef(
       setRadius(root, length, k);
       setColor(root);
 
+      const radarChartGridElements: Array<d3.Selection<SVGSVGElement, unknown, null, undefined>> = [];
       const currentRef = selectChartElement();
       if (currentRef?.firstChild === null) {
         const svg = d3
@@ -236,6 +343,7 @@ export const CladogramChart = forwardRef(
           .append('g')
           .attr('fill', 'none')
           .attr('stroke', '#000')
+          .attr('opacity', 1)
           .selectAll('path')
           .data(root.links())
           .join('path')
@@ -259,14 +367,14 @@ export const CladogramChart = forwardRef(
               translation = d.y - (d.y - d.parent.y) / 2;
               rotation = d.x < 90 || (d.x > 180 && d.x < 270) ? 90 : -90;
             }
-            const css = `rotate(${d.x - 90}) translate(${translation},0)${
-              d.x < 180 ? '' : ' rotate(180)'
+            const css = `rotate(${d.x}) translate(${translation},0)${
+              d.x < 90 || d.x > 270 ? '' : ' rotate(180)'
             } rotate(${rotation})`;
             return css;
           })
           .attr('text-anchor', (d) => {
             const maximumBranchDepth = d.descendants().reduce((acc, curr) => Math.max(acc, curr.depth), 0);
-            return d.depth < maximumBranchDepth && d.parent ? 'middle' : d.x < 180 ? 'start' : 'end';
+            return d.depth < maximumBranchDepth && d.parent ? 'middle' : d.x < 90 || d.x > 270 ? 'start' : 'end';
           })
           .text((d) => {
             const maximumBranchDepth = d.descendants().reduce((acc, curr) => Math.max(acc, curr.depth), 0);
@@ -289,17 +397,7 @@ export const CladogramChart = forwardRef(
             }
           })
           .on('mouseover', mouseovered(true))
-          .on('mouseout', mouseovered(false))
-          .on('click', (event, d) => {
-            const innerHtmlArray = event.target.innerHTML.split('');
-            if (innerHtmlArray.filter((item) => item === '⭐').length < 5) {
-              if (d.x < 180) {
-                event.target.innerHTML = '⭐ ' + event.target.innerHTML;
-              } else {
-                event.target.innerHTML = event.target.innerHTML + ' ⭐';
-              }
-            }
-          });
+          .on('mouseout', mouseovered(false));
 
         // Add sub tree labels
         svg
@@ -325,14 +423,14 @@ export const CladogramChart = forwardRef(
               const width = getTextWidth({ text: word, fontSize: 8 }); // Get the width of each word
               return Math.max(max, width);
             }, 0);
-            const css = `rotate(${d.x - 90}) translate(${translation},0)${
-              d.x < 180 ? '' : ' rotate(180)'
+            const css = `rotate(${d.x}) translate(${translation},0)${
+              d.x > 90 && d.x < 270 ? '' : ' rotate(180)'
             } rotate(${rotation}) translate(-${(maxWidth + 20) / 2}, -${(countLines / 2 + 1) * 8})`; // Center the div (half of width and height)
             return css;
           })
           .attr('text-anchor', (d) => {
             const maximumBranchDepth = d.descendants().reduce((acc, curr) => Math.max(acc, curr.depth), 0);
-            return d.depth < maximumBranchDepth && d.parent ? 'middle' : d.x < 180 ? 'start' : 'end';
+            return d.depth < maximumBranchDepth && d.parent ? 'middle' : d.x < 90 || d.x > 270 ? 'start' : 'end';
           })
           .attr('width', (d) => {
             const words = d.data.name.replace(/_/g, ' ').split(' ');
@@ -363,10 +461,21 @@ export const CladogramChart = forwardRef(
             return wrapperDiv;
           })
           .classed('subtree-label--inactive', true);
+
+        radarChartGridElements.push(...setRadarChartGrid(svg));
+        setRadarChartValues(svg, root);
       }
 
       if (link && linkExtension) {
-        update({ drawBranchLength: showBranchLength, linkExtension, link, linkExtensionVariable, linkVariable });
+        update({
+          drawBranchLength: showBranchLength,
+          linkExtension,
+          link,
+          linkExtensionVariable,
+          linkVariable,
+          drawRadarChart: showRadarChart,
+          radarChartGridItems: radarChartGridElements,
+        });
       }
     });
 

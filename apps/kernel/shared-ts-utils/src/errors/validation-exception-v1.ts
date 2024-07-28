@@ -11,7 +11,7 @@ export class ValidationExceptionV1Error extends Error {
 }
 
 export class ValidationExceptionV2Error extends Error {
-  causes: Array<string>;
+  causes: Array<string> = [];
 
   constructor(errors: Array<ErrorObject>) {
     const exceptionMessage = 'Validation exception';

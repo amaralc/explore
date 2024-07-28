@@ -8,21 +8,27 @@ import { IConvertMultiUnitV1InOrganizationV1InputDto } from './dto';
 
 export class ConvertMultiUnitV1InOrganizationV1Service {
   static execute(inputDto: IConvertMultiUnitV1InOrganizationV1InputDto): IOrganizationV1Dto {
-    const { multiUnitV1Dto, ownerAgentId } = inputDto;
+    MultiUnitV1Entity.validate(inputDto);
 
-    MultiUnitV1Entity.validate(multiUnitV1Dto);
+    const agentV1Dto = ConvertMultiUnitV1InAgentV1Service.execute(inputDto);
+    const id = hashIntegerAndEntityNameIntoValidObjectId(inputDto.id, 'MultiUnitV1');
+    const agentId = hashIntegerAndEntityNameIntoValidFirebaseUID(inputDto.id, 'MultiUnitV1');
 
-    const agentV1Dto = ConvertMultiUnitV1InAgentV1Service.execute(multiUnitV1Dto);
-    const id = hashIntegerAndEntityNameIntoValidObjectId(multiUnitV1Dto.id, 'MultiUnitV1');
-    const agentId = hashIntegerAndEntityNameIntoValidFirebaseUID(multiUnitV1Dto.id, 'MultiUnitV1');
+    const ownerAgentId = hashIntegerAndEntityNameIntoValidFirebaseUID(inputDto.instituicao_id, 'MultiInstitutionV1');
+
+    const institutionV1OrganizationId = hashIntegerAndEntityNameIntoValidObjectId(
+      inputDto.instituicao_id,
+      'MultiInstitutionV1',
+    );
 
     const convertedOrganizationV1Dto: IOrganizationV1Dto = {
       id,
-      ownerAgentId: ownerAgentId,
+      ownerAgentId,
       agentId: agentId,
       email: agentV1Dto.email,
-      nickname: stringToSlug(multiUnitV1Dto.sigla + '-' + id),
+      nickname: stringToSlug(inputDto.sigla + '-' + id),
       planSubscriptionName: 'FREE',
+      idPath: `/${institutionV1OrganizationId}/${id}`,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };

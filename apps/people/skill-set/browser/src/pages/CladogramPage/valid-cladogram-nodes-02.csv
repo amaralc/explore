@@ -1,0 +1,53 @@
+level0,level1,level2,level3,level4,stars
+Mechanical Engineering,Soft Skills,Communication,Verbal Communication,Public Speaking,5
+Mechanical Engineering,Soft Skills,Communication,Verbal Communication,Interpersonal Skills,4
+Mechanical Engineering,Soft Skills,Communication,Written Communication,Report Writing,4
+Mechanical Engineering,Soft Skills,Communication,Written Communication,Technical Writing,4
+Mechanical Engineering,Soft Skills,Communication,Written Communication,Email Correspondence,3
+Mechanical Engineering,Soft Skills,Teamwork,Collaboration,Project Coordination,5
+Mechanical Engineering,Soft Skills,Teamwork,Collaboration,Conflict Resolution,4
+Mechanical Engineering,Soft Skills,Leadership,Project Management,Scheduling,5
+Mechanical Engineering,Soft Skills,Leadership,Project Management,Resource Allocation,4
+Mechanical Engineering,Soft Skills,Leadership,Project Management,Budget Management,4
+Mechanical Engineering,Soft Skills,Leadership,Team Leadership,Mentoring,5
+Mechanical Engineering,Soft Skills,Leadership,Team Leadership,Coaching,4
+Mechanical Engineering,Soft Skills,Leadership,Decision Making,Critical Thinking,5
+Mechanical Engineering,Soft Skills,Leadership,Decision Making,Problem Solving,5
+Mechanical Engineering,Soft Skills,Creativity,Innovative Thinking,Design Thinking,5
+Mechanical Engineering,Soft Skills,Creativity,Innovative Thinking,Brainstorming,4
+Mechanical Engineering,Technical Skills,Design,CAD Software,SolidWorks,5
+Mechanical Engineering,Technical Skills,Design,CAD Software,AutoCAD,5
+Mechanical Engineering,Technical Skills,Design,CAD Software,Inventor,4
+Mechanical Engineering,Technical Skills,Analysis,FEA Software,ANSYS,5
+Mechanical Engineering,Technical Skills,Analysis,FEA Software,Abaqus,4
+Mechanical Engineering,Technical Skills,Analysis,CFD Software,Fluent,5
+Mechanical Engineering,Technical Skills,Analysis,CFD Software,COMSOL,4
+Mechanical Engineering,Technical Skills,Materials,Material Science,Metallurgy,4
+Mechanical Engineering,Technical Skills,Materials,Material Science,Polymers,4
+Mechanical Engineering,Technical Skills,Materials,Material Science,Ceramics,4
+Mechanical Engineering,Technical Skills,Manufacturing,Processes,Machining,5
+Mechanical Engineering,Technical Skills,Manufacturing,Processes,Welding,5
+Mechanical Engineering,Technical Skills,Manufacturing,Processes,3D Printing,4
+Mechanical Engineering,Technical Skills,Manufacturing,Quality Control,Inspection,5
+Mechanical Engineering,Technical Skills,Manufacturing,Quality Control,Testing,5
+Mechanical Engineering,Technical Skills,Thermodynamics,Heat Transfer,Conduction,4
+Mechanical Engineering,Technical Skills,Thermodynamics,Heat Transfer,Convection,4
+Mechanical Engineering,Technical Skills,Thermodynamics,Heat Transfer,Radiation,4
+Mechanical Engineering,Technical Skills,Dynamics,Mechanics,Kinematics,5
+Mechanical Engineering,Technical Skills,Dynamics,Mechanics,Statics,5
+Mechanical Engineering,Technical Skills,Dynamics,Mechanics,Dynamics,5
+Mechanical Engineering,Technical Skills,Electronics,Control Systems,PLC Programming,4
+Mechanical Engineering,Technical Skills,Electronics,Control Systems,PID Control,4
+Mechanical Engineering,Technical Skills,Electronics,Control Systems,Robotics,5
+Mechanical Engineering,Technical Skills,Energy Systems,Power Generation,Renewable Energy,4
+Mechanical Engineering,Technical Skills,Energy Systems,Power Generation,Fossil Fuels,3
+Mechanical Engineering,Technical Skills,Energy Systems,Power Generation,Nuclear Energy,4
+Mechanical Engineering,Technical Skills,Fluid Mechanics,Hydraulics,Pumps,5
+Mechanical Engineering,Technical Skills,Fluid Mechanics,Hydraulics,Valves,4
+Mechanical Engineering,Technical Skills,Fluid Mechanics,Aerodynamics,Wind Tunnel Testing,4
+Mechanical Engineering,Technical Skills,Project Management,Software,Microsoft Project,5
+Mechanical Engineering,Technical Skills,Project Management,Software,Primavera,4
+Mechanical Engineering,Technical Skills,Project Management,Software,Asana,3
+Mechanical Engineering,Technical Skills,Safety,Standards,OSHA Regulations,5
+Mechanical Engineering,Technical Skills,Safety,Standards,ISO Standards,4
+Mechanical Engineering,Technical Skills,Safety,Standards,Risk Assessment,4

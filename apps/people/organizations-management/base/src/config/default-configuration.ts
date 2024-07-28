@@ -8,7 +8,6 @@ export const defaultConfiguration = {
     name: process.env.MONGODB_DATABASE_NAME,
     provider: process.env.DATABASE_PROVIDER,
     seed: process.env.DATABASE_SEED,
-    seedFromExternalSource: process.env.DATABASE_SEED_FROM_EXTERNAL_SOURCE,
   },
   externalServices: {
     multiInstitutionsV1BaseUrl: process.env.MULTI_INSTITUTIONS_V1_BASE_URL, // External source

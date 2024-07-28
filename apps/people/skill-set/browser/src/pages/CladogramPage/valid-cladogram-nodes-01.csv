@@ -1,0 +1,234 @@
+level0,level1,level2,level3,level4,level5,level6,level7,stars
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,DOM API,Document Object Model,Document,,5
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,DOM API,Document Object Model,Element,,4
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,DOM API,Document Object Model,Node,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,DOM API,Document Object Model,Event,,4
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Fetch API,Native,Requests,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Fetch API,Native,Responses,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Fetch API,Native,Headers,,2
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Fetch API,Axios,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Storage API,Local Storage,,,2
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Storage API,Session Storage,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Storage API,IndexedDB,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,WebSockets API,WebSocket,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Geolocation API,Geolocation,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Canvas API,2D Context,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Canvas API,WebGL,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Audio/Video API,AudioContext,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Audio/Video API,Video Element,,,2
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,File API,File,,,2
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,File API,FileReader,,,2
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,File API,Blob,,,3
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Notifications API,Notifications,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Service Worker API,ServiceWorker,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Service Worker API,Push API,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Service Worker API,Cache API,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,WebRTC API,RTCPeerConnection,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,WebRTC API,RTCDataChannel,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,WebRTC API,MediaStream,,,1
+Software Engineer,Technical Skills,Frontend Development,Browser APIs,Battery Status API,BatteryManager,,,1
+Software Engineer,Technical Skills,Frontend Development,HTML,,,,,0
+Software Engineer,Technical Skills,Frontend Development,JavaScript,ES6+,,,,3
+Software Engineer,Technical Skills,Frontend Development,JavaScript,TypeScript,,,,3
+Software Engineer,Technical Skills,Frontend Development,JavaScript,DOM Manipulation,,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Components,Functional Components,,,4
+Software Engineer,Technical Skills,Frontend Development,React,Components,Class Components,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Components,Hooks,,,4
+Software Engineer,Technical Skills,Frontend Development,React,State Management,Context API,,,2
+Software Engineer,Technical Skills,Frontend Development,React,State Management,Redux,Redux Toolkit,,4
+Software Engineer,Technical Skills,Frontend Development,React,State Management,Redux,Redux Thunk,,4
+Software Engineer,Technical Skills,Frontend Development,React,State Management,Redux,Redux Saga,,4
+Software Engineer,Technical Skills,Frontend Development,React,Routing,React Router,,,4
+Software Engineer,Technical Skills,Frontend Development,React,Forms,React Hook Form,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Testing,Vitest,,,4
+Software Engineer,Technical Skills,Frontend Development,React,Testing,React Testing Library,,,4
+Software Engineer,Technical Skills,Frontend Development,React,Styling,Responsive Design,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Styling,StyleSheet Languages,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Styling,Styled Components,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Styling,Material UI,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Build Tools,Webpack,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Build Tools,Babel,,,2
+Software Engineer,Technical Skills,Frontend Development,React,Build Tools,Vite,,,2
+Software Engineer,Technical Skills,Frontend Development,React,Performance Optimization,Code Splitting,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Performance Optimization,Lazy Loading,,,3
+Software Engineer,Technical Skills,Frontend Development,React,Performance Optimization,Memoization,,,4
+Software Engineer,Technical Skills,Backend Development,Node.js,Frameworks,Express,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Frameworks,NestJS,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Frameworks,Koa,,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Database Integration,MongoDB,Mongoose,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Database Integration,MongoDB,mongodb,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Database Integration,PostgreSQL,Knex,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Database Integration,PostgreSQL,TypeORM,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,API Development,REST,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,API Development,GraphQL,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Testing,Jest,,,4
+Software Engineer,Technical Skills,Backend Development,Node.js,Testing,Mocha,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Testing,Chai,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Testing,Supertest,,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Real-time Communication,Socket.io,,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Real-time Communication,WebSockets,,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Task Scheduling,Node-cron,,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Task Scheduling,Bull,,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Monitoring,Node.js Built-in Profiler,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Monitoring,Chrome Developer Tools,Heap Snapshot,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Monitoring,Chrome Developer Tools,CPU Profiling,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Monitoring,Chrome Developer Tools,Memory Leak Detection,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Monitoring,Prometheus,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Monitoring,Grafana,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Optimization,Event Loop Monitoring,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Optimization,Async Hooks,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Optimization,Clustering,,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Optimization,Load Balancing,,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Optimization,Caching,Redis,2
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Performance Optimization,Caching,Memcached,1
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Profiling Tools,Clinic.js,,1
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Profiling Tools,Chrome Developer Tools,Performance Tab,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Profiling Tools,Chrome Developer Tools,Memory Tab,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Profiling Tools,Chrome Developer Tools,Network Tab,3
+Software Engineer,Technical Skills,Backend Development,Node.js,Performance,Profiling Tools,Chrome Developer Tools,JavaScript Profiler,2
+Software Engineer,Technical Skills,Backend Development,Python,Frameworks,Django,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Frameworks,Flask,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Frameworks,FastAPI,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Database Integration,SQLAlchemy,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Database Integration,Django ORM,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Database Integration,Peewee,,,0
+Software Engineer,Technical Skills,Backend Development,Python,API Development,Django REST Framework,,,0
+Software Engineer,Technical Skills,Backend Development,Python,API Development,Graphene-Python,,,0
+Software Engineer,Technical Skills,Backend Development,Python,API Development,FastAPI,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Testing,Pytest,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Testing,Unittest,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Testing,Django Test,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Asynchronous Programming,Asyncio,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Asynchronous Programming,Aiohttp,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Asynchronous Programming,Celery,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Real-time Communication,Django Channels,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Real-time Communication,WebSockets,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Task Scheduling,Celery Beat,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Task Scheduling,APScheduler,,,0
+Software Engineer,Technical Skills,Backend Development,Python,Performance Optimization,Caching,Redis,,0
+Software Engineer,Technical Skills,Backend Development,Python,Performance Optimization,Caching,Memcached,,0
+Software Engineer,Technical Skills,Backend Development,Python,Performance Optimization,Profiling,cProfile,,0
+Software Engineer,Technical Skills,Backend Development,Python,Performance Optimization,Profiling,Py-Spy,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Languages,Java,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Languages,Kotlin,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Frameworks and Libraries,Android SDK,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Frameworks and Libraries,Jetpack Compose,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Frameworks and Libraries,Retrofit,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Frameworks and Libraries,Dagger/Hilt,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Frameworks and Libraries,Room,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Frameworks and Libraries,Coroutines,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Architecture,MVVM,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Architecture,MVP,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Architecture,Clean Architecture,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Testing,JUnit,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Testing,Espresso,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,Testing,Mockito,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,UI/UX,Material Design,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,UI/UX,ConstraintLayout,,,0
+Software Engineer,Technical Skills,Mobile Development,Android,UI/UX,Navigation Component,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Languages,Swift,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Languages,Objective-C,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Frameworks and Libraries,UIKit,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Frameworks and Libraries,SwiftUI,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Frameworks and Libraries,Alamofire,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Frameworks and Libraries,CoreData,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Frameworks and Libraries,Combine,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Architecture,MVVM,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Architecture,MVC,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Architecture,VIPER,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Testing,XCTest,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Testing,Quick/Nimble,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,Testing,Snapshot Testing,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,UI/UX,Human Interface Guidelines,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,UI/UX,Auto Layout,,,0
+Software Engineer,Technical Skills,Mobile Development,iOS,UI/UX,Storyboards,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Core Concepts,Shared Modules,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Core Concepts,Expect/Actual Declarations,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Android Integration,Shared Code with Android,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Android Integration,Android-specific Implementations,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),iOS Integration,Shared Code with iOS,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),iOS Integration,iOS-specific Implementations,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Multiplatform Libraries,Ktor,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Multiplatform Libraries,SQLDelight,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Multiplatform Libraries,Koin,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Build Tools,Gradle,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Build Tools,CocoaPods,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Testing,Unit Testing,,,0
+Software Engineer,Technical Skills,Mobile Development,Kotlin Multiplatform Mobile (KMM),Testing,Integration Testing,,,0
+Software Engineer,Technical Skills,Shared Skills,Version Control,Git,,,,0
+Software Engineer,Technical Skills,Shared Skills,Version Control,Bitbucket,,,,0
+Software Engineer,Technical Skills,Shared Skills,Testing,Unit Testing,,,,0
+Software Engineer,Technical Skills,Shared Skills,Testing,Integration Testing,,,,0
+Software Engineer,Technical Skills,Shared Skills,Testing,End-to-End Testing,,,,0
+Software Engineer,Technical Skills,Shared Skills,Testing,Performance Testing,,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,CI/CD,Cloud Build,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,CI/CD,Bitbucket Pipelines,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,Containerization,Docker,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,Containerization,Kubernetes,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,Monitoring,Prometheus,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,Monitoring,Grafana,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,Monitoring,Cloud Logging,,,0
+Software Engineer,Technical Skills,Shared Skills,DevOps,Monitoring,Cloud Monitoring,,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Security,,,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Injection,SQL Injection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Injection,NoSQL Injection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Injection,Command Injection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Injection,LDAP Injection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Cross-Site Scripting (XSS),Reflected XSS,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Cross-Site Scripting (XSS),Stored XSS,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Cross-Site Scripting (XSS),DOM-Based XSS,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Cross-Site Request Forgery (CSRF),CSRF Tokens,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Cross-Site Request Forgery (CSRF),SameSite Cookies,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Authentication and Session Management,Session Fixation,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Authentication and Session Management,Broken Authentication,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Authentication and Session Management,Insecure Password Storage,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Security Misconfiguration,Default Configurations,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Security Misconfiguration,Open Directories,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Security Misconfiguration,Error Handling,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Sensitive Data Exposure,Data Encryption,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Sensitive Data Exposure,Transport Layer Protection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Sensitive Data Exposure,Data Leak Prevention,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,XML External Entities (XXE),External Entity Injection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,XML External Entities (XXE),XML Parsing,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Insecure Deserialization,Object Injection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Insecure Deserialization,Deserialization Attacks,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Using Components with Known Vulnerabilities,Dependency Management,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Using Components with Known Vulnerabilities,Patch Management,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Insufficient Logging and Monitoring,Log Management,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Web Development Vulnerabilities,Insufficient Logging and Monitoring,Intrusion Detection,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Network Security,,,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Cryptography,,,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Authentication,OAuth,,,0
+Software Engineer,Technical Skills,Shared Skills,Security,Authentication,JWT,,,0
+Software Engineer,Soft Skills,Communication,Verbal Communication,Public Speaking,,,,0
+Software Engineer,Soft Skills,Communication,Verbal Communication,Meeting Participation,,,,0
+Software Engineer,Soft Skills,Communication,Non-Verbal Communication,Body Language,,,,0
+Software Engineer,Soft Skills,Communication,Non-Verbal Communication,Facial Expressions,,,,0
+Software Engineer,Soft Skills,Communication,Written Communication,Email Writing,,,,0
+Software Engineer,Soft Skills,Communication,Written Communication,Technical Documentation,,,,0
+Software Engineer,Soft Skills,Communication,Listening,Active Listening,,,,0
+Software Engineer,Soft Skills,Communication,Listening,Feedback Reception,,,,0
+Software Engineer,Soft Skills,Teamwork,Collaboration,Pair Programming,,,,0
+Software Engineer,Soft Skills,Teamwork,Collaboration,Code Reviews,,,,0
+Software Engineer,Soft Skills,Teamwork,Conflict Resolution,Mediation,,,,0
+Software Engineer,Soft Skills,Teamwork,Conflict Resolution,Negotiation,,,,0
+Software Engineer,Soft Skills,Problem Solving,Analytical Thinking,Root Cause Analysis,,,,0
+Software Engineer,Soft Skills,Problem Solving,Analytical Thinking,Debugging,,,,0
+Software Engineer,Soft Skills,Problem Solving,Analytical Thinking,Hypothesis Driven,,,,0
+Software Engineer,Soft Skills,Problem Solving,Creative Thinking,Brainstorming,,,,0
+Software Engineer,Soft Skills,Problem Solving,Creative Thinking,Innovative Solutions,,,,0
+Software Engineer,Soft Skills,Adaptability,Learning New Skills,,,,,0
+Software Engineer,Soft Skills,Adaptability,Handling Change,,,,,0
+Software Engineer,Soft Skills,Time Management,Prioritization,,,,,0
+Software Engineer,Soft Skills,Time Management,Scheduling,,,,,0
+Software Engineer,Soft Skills,Leadership,Mentoring,,,,,0
+Software Engineer,Soft Skills,Leadership,Project Management,Agile Methodologies,,,,0
+Software Engineer,Soft Skills,Leadership,Project Management,Scrum Master,,,,0
+Software Engineer,Soft Skills,Creativity,Idea Generation,,,,,0
+Software Engineer,Soft Skills,Creativity,Design Thinking,,,,,0
+Software Engineer,Soft Skills,Work Ethic,Discipline,,,,,0
+Software Engineer,Soft Skills,Work Ethic,Responsibility,,,,,0
+Software Engineer,Soft Skills,Critical Thinking,Analysis,,,,,0
+Software Engineer,Soft Skills,Critical Thinking,Evaluation,,,,,0
+Software Engineer,Soft Skills,Interpersonal Skills,Empathy,,,,,0
+Software Engineer,Soft Skills,Interpersonal Skills,Building Relationships,,,,,0

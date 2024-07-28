@@ -3,75 +3,225 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.85.0](https://github.com/amaralc/explore/compare/peerlab@0.84.0...peerlab@0.85.0) (2024-06-07)
-
-### Features
-
-- **EXPLORE:** enhance user experience with fine interactions and details ([fe6018b](https://github.com/amaralc/explore/commit/fe6018b3df34d8bcf63157c6c151d6d6c340da4a))
-
-## [0.84.0](https://github.com/amaralc/explore/compare/peerlab@0.83.0...peerlab@0.84.0) (2024-06-06)
-
-### Features
-
-- **EXPLORE:** add a skill-set map browser application using d3 ([37589a7](https://github.com/amaralc/explore/commit/37589a797d1705154a994526a440212e97c84107))
-
-## [0.83.0](https://github.com/amaralc/explore/compare/peerlab@0.82.3...peerlab@0.83.0) (2024-05-23)
-
-### Features
-
-- **PEER-698:** enhance entities extraction ([a4491c2](https://github.com/amaralc/explore/commit/a4491c2e5cf919c1445cc5081e245c77a4d54ed3))
-
-## [0.82.3](https://github.com/amaralc/explore/compare/peerlab@0.82.2...peerlab@0.82.3) (2024-05-13)
+## [0.90.4](https://github.com/amaralc/peerlab/compare/peerlab@0.90.3...peerlab@0.90.4) (2024-07-28)
 
 **Note:** Version bump only for package peerlab
 
-## [0.82.2](https://github.com/amaralc/explore/compare/peerlab@0.82.1...peerlab@0.82.2) (2024-05-12)
+## [0.90.3](https://github.com/amaralc/peerlab/compare/peerlab@0.90.2...peerlab@0.90.3) (2024-07-28)
 
 ### Bug Fixes
 
-- **PEER-698:** adjust conversion of central into agent and organization ([072052b](https://github.com/amaralc/explore/commit/072052bdf39ffe214872cdc743682a416428814c))
+- **PEER-697:** use correct pagination dto type ([3fb3a50](https://github.com/amaralc/peerlab/commit/3fb3a502bd10c7ca0db7a760eac5543bd7b2216f))
 
-## [0.82.1](https://github.com/amaralc/explore/compare/peerlab@0.82.0...peerlab@0.82.1) (2024-05-11)
+## [0.90.2](https://github.com/amaralc/peerlab/compare/peerlab@0.90.1...peerlab@0.90.2) (2024-07-28)
 
 ### Bug Fixes
 
-- **PEER-698:** adjust agent id generation and validate input ([9f59d16](https://github.com/amaralc/explore/commit/9f59d16dd1bcf61defa79e93e79f4b00661bf130))
+- **PEER-697:** add pagination to list organiations ([8c72cc2](https://github.com/amaralc/peerlab/commit/8c72cc2e9c1b0ece4eab0b17f2760b584ed4c294))
 
-## [0.82.0](https://github.com/amaralc/explore/compare/peerlab@0.81.1...peerlab@0.82.0) (2024-05-09)
+## [0.90.1](https://github.com/amaralc/peerlab/compare/peerlab@0.90.0...peerlab@0.90.1) (2024-07-27)
 
-### Features
+### Bug Fixes
 
-- **PEER-698:** convert multi institution in organization v1 ([a218147](https://github.com/amaralc/explore/commit/a2181476128f9716c4a173c8008f49eb5f34c0cf))
+- **PEER-714:** enable production environment ([0273188](https://github.com/amaralc/peerlab/commit/0273188b56aadb3289a4e25b9700e7c85c7cf0ff))
 
-## [0.81.1](https://github.com/amaralc/explore/compare/peerlab@0.81.0...peerlab@0.81.1) (2024-05-07)
-
-**Note:** Version bump only for package peerlab
-
-## [0.81.0](https://github.com/amaralc/explore/compare/peerlab@0.80.3...peerlab@0.81.0) (2024-05-05)
+## [0.90.0](https://github.com/amaralc/peerlab/compare/peerlab@0.89.1...peerlab@0.90.0) (2024-07-27)
 
 ### Features
 
-- **PEER-697:** convert multi institutions into agents and organizations ([465260e](https://github.com/amaralc/explore/commit/465260e849851bcca352ab32fca70ff816f9dde5))
+- **PEER-697:** add indexes to organization collection ([8342b1c](https://github.com/amaralc/peerlab/commit/8342b1c1f776566a81cb94fcaf0e49cf980ad1b3))
+- **PEER-697:** should filter organizations by ownerAgentId ([7bd2631](https://github.com/amaralc/peerlab/commit/7bd2631a7e6b9328c3e4f1a8149fb2ce1b0a99d3))
 
-## [0.80.3](https://github.com/amaralc/explore/compare/peerlab@0.80.2...peerlab@0.80.3) (2024-05-04)
+## [0.89.1](https://github.com/amaralc/peerlab/compare/peerlab@0.89.0...peerlab@0.89.1) (2024-07-26)
 
-**Note:** Version bump only for package peerlab
+### Bug Fixes
 
-## [0.80.2](https://github.com/amaralc/explore/compare/peerlab@0.80.1...peerlab@0.80.2) (2024-05-04)
+- **PEER-714:** shut down production environment temporarily ([f27eb6a](https://github.com/amaralc/peerlab/commit/f27eb6a935fcae9ff920f9e19b1cef4b136e8ce8))
 
-**Note:** Version bump only for package peerlab
-
-## [0.80.1](https://github.com/amaralc/explore/compare/peerlab@0.80.0...peerlab@0.80.1) (2024-05-04)
-
-**Note:** Version bump only for package peerlab
-
-## [0.80.0](https://github.com/amaralc/explore/compare/peerlab@0.59.1...peerlab@0.80.0) (2024-05-02)
+## [0.89.0](https://github.com/amaralc/peerlab/compare/peerlab@0.88.0...peerlab@0.89.0) (2024-07-25)
 
 ### Features
 
-- move latest peerlab improvements into the open ([2be06d4](https://github.com/amaralc/explore/commit/2be06d483860bf5088efb6cd90c67462deeff90c))
-- move latest peerlab improvements into the open ([a8ba3c1](https://github.com/amaralc/explore/commit/a8ba3c18fce3f84aaa4e32b8d5ecb868a202498c))
-- **PEER-668:** restructure, add organizations-management and refactor code ([2c303c4](https://github.com/amaralc/explore/commit/2c303c44a2ada8b672bddbb379bcffabf7a32d95))
+- **PEER-712:** add parent-child relationship to organization entity ([4063a25](https://github.com/amaralc/peerlab/commit/4063a255756b917997d0d51b8f2cc6a50b610c8d))
+
+## [0.88.0](https://github.com/amaralc/peerlab/compare/peerlab@0.88.0-beta.2...peerlab@0.88.0) (2024-07-21)
+
+### Features
+
+- **PEER-709:** upsert extracted entities instead of creating only ([eeb7c99](https://github.com/amaralc/peerlab/commit/eeb7c997fbc87fe3bb9c8f6549d7b18d439d2e08))
+
+## [0.88.0-beta.2](https://github.com/amaralc/peerlab/compare/peerlab@0.88.0-beta.1...peerlab@0.88.0-beta.2) (2024-07-20)
+
+### Bug Fixes
+
+- **PEER-703:** replace json file reader by rest api call in multi entities rest repositories ([372ff55](https://github.com/amaralc/peerlab/commit/372ff558f84268b4f7baeb4b29eca146c638be75))
+
+## [0.88.0-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.88.0-beta.0...peerlab@0.88.0-beta.1) (2024-07-20)
+
+### Bug Fixes
+
+- **PEER-703:** use post instead of put and adjust documentation for seeding organizations ([164132a](https://github.com/amaralc/peerlab/commit/164132a440135d1a86e967aaea2f85f10c0085e5))
+
+## [0.88.0-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.87.2-beta.1...peerlab@0.88.0-beta.0) (2024-07-20)
+
+### Features
+
+- **PEER-703:** seed organizations from rest api endpoint ([122c8b8](https://github.com/amaralc/peerlab/commit/122c8b882fdb7130dab208babae54c443cfbe1f8))
+
+## [0.87.2-beta.1](https://github.com/amaralc/peerlab/compare/peerlab@0.87.2-beta.0...peerlab@0.87.2-beta.1) (2024-07-02)
+
+### Bug Fixes
+
+- **PEER-702:** add limit to neon history retention ([27ac582](https://github.com/amaralc/peerlab/commit/27ac582e05c76ee8967d0903574f21e58cca21b9))
+- **PEER-702:** reduce history retention ([c4f0bae](https://github.com/amaralc/peerlab/commit/c4f0baea3f8e0d2ba854fd806d2f722fe86237e0))
+
+## [0.87.2-beta.0](https://github.com/amaralc/peerlab/compare/peerlab@0.87.1...peerlab@0.87.2-beta.0) (2024-07-02)
+
+### Bug Fixes
+
+- **PEER-689:** adjust eslint reference path ([36c8fe5](https://github.com/amaralc/peerlab/commit/36c8fe5322194a5afd328eb67af797a6e05ed82f))
+
+## [0.87.1](https://github.com/amaralc/peerlab/compare/peerlab@0.87.0...peerlab@0.87.1) (2024-07-02)
+
+### 🩹 Fixes
+
+- **PEER-689:** adjust git properties and remove old release commands ([5bf8d2fb](https://github.com/amaralc/peerlab/commit/5bf8d2fb))
+
+### ❤️ Thank You
+
+- amaralc @amaralc
+
+## [0.87.0](https://github.com/amaralc/peerlab/compare/peerlab@0.86.3...peerlab@0.87.0) (2024-07-02)
+
+### 🚀 Features
+
+- **PEER-689:** use nx release ([67a0d8e0](https://github.com/amaralc/peerlab/commit/67a0d8e0))
+
+### 🩹 Fixes
+
+- **PEER-689:** fix release tag pattern ([8c1e93c3](https://github.com/amaralc/peerlab/commit/8c1e93c3))
+- **PEER-689:** adjust commit message ([1a6bae93](https://github.com/amaralc/peerlab/commit/1a6bae93))
+- **PEER-699:** adjust tag pattern ([740246d3](https://github.com/amaralc/peerlab/commit/740246d3))
+
+### ❤️ Thank You
+
+- amaralc @amaralc
+
+## [0.86.3](https://github.com/amaralc/peerlab/compare/peerlab@0.86.2...peerlab@0.86.3) (2024-07-02)
+
+### Reverts
+
+- Revert "chore(PEER-699): upgrade nx" ([7743cc4](https://github.com/amaralc/peerlab/commit/7743cc4f551fd8af67be5e51ef95d053b83d35ee))
+
+## [0.86.2](https://github.com/amaralc/peerlab/compare/peerlab@0.86.1...peerlab@0.86.2) (2024-07-02)
+
+**Note:** Version bump only for package peerlab
+
+## [0.86.1](https://github.com/amaralc/peerlab/compare/peerlab@0.86.0...peerlab@0.86.1) (2024-06-23)
+
+### Bug Fixes
+
+- **EXPLORE:** adjust tf module import ([ea7f5e6](https://github.com/amaralc/peerlab/commit/ea7f5e6a5af27f18a62edb67af33bb590abf8bfd))
+
+## [0.86.0](https://github.com/amaralc/peerlab/compare/peerlab@0.85.0...peerlab@0.86.0) (2024-06-22)
+
+### Features
+
+- **EXPLORE:** add app shell and tabs with mantine ([f1267f0](https://github.com/amaralc/peerlab/commit/f1267f0f190def0d2dcfa4387a1a1b9515e4dfd8))
+- **EXPLORE:** add build artifacts and commands ([6d099d4](https://github.com/amaralc/peerlab/commit/6d099d4128595edfd2f278eeabc73b5e5a1b7512))
+- **EXPLORE:** add csv uploader ([8b85927](https://github.com/amaralc/peerlab/commit/8b859272f77de322ac3ef34f44a9ad67bd81053d))
+- **EXPLORE:** add folder structure and hover card to evaluate skills ([68f66a9](https://github.com/amaralc/peerlab/commit/68f66a90ad2b315529eeaba5fdba83e7f2fcc5d9))
+- **EXPLORE:** add legends to starts ([ca9b793](https://github.com/amaralc/peerlab/commit/ca9b7933474cf7dcbc08a6f48b99df714301ded1))
+- **EXPLORE:** add people skill set browser app ([0abb02a](https://github.com/amaralc/peerlab/commit/0abb02a89975fd330637e5af5e0a39aae58bff0a))
+- **EXPLORE:** add radar chart values and grid ([65f62d6](https://github.com/amaralc/peerlab/commit/65f62d62fa91aa2a9e550c8d4e263eba5a776a6c))
+- **EXPLORE:** add stars ([46098f8](https://github.com/amaralc/peerlab/commit/46098f8448ec145b3753891ff42bab6c49a220a9))
+- **EXPLORE:** add stars and description to the node model ([35f280b](https://github.com/amaralc/peerlab/commit/35f280b41feaa14e5696bceb0defb60f1f7e6722))
+- **EXPLORE:** allow csv file upload ([6ec4ba2](https://github.com/amaralc/peerlab/commit/6ec4ba2a6d2c01935dad8cf2b5293eaa804d183a))
+- **EXPLORE:** categorize skills ([479ef47](https://github.com/amaralc/peerlab/commit/479ef478ae69dedb816e77b4801af11d37a619f5))
+- **EXPLORE:** convert skill-set app in vite app ([23a6b00](https://github.com/amaralc/peerlab/commit/23a6b00c3652eb3c9182268d94d72d232ac07661))
+- **EXPLORE:** create people skill-set browser deployment ([5f6b9c5](https://github.com/amaralc/peerlab/commit/5f6b9c5cec6b85a245e81eb5beecf611138311cb))
+- **EXPLORE:** enhance style and user interactions ([98b1785](https://github.com/amaralc/peerlab/commit/98b17858b02ee87cc7db763e1c6a92b9e73d19a9))
+- **EXPLORE:** guide user to evaluate leaf skills ([b44fc44](https://github.com/amaralc/peerlab/commit/b44fc447c20a241f1815d1e6e6adbcfd8effd4be))
+- **EXPLORE:** show only parent category labels ([aad5a93](https://github.com/amaralc/peerlab/commit/aad5a93603cca207c4d9037014e058799b29f054))
+- **EXPLORE:** use skill set example ([fd5a8e2](https://github.com/amaralc/peerlab/commit/fd5a8e24deed936f025340428c34739347726781))
+- **PEER-698:** enhance entity extraction use case ([04e8ade](https://github.com/amaralc/peerlab/commit/04e8ade62827f8b9f57b2e7a06c595a61e32699f))
+
+### Bug Fixes
+
+- **EXPLORE:** adjust cladogram to radar chart orientation ([b6e9c41](https://github.com/amaralc/peerlab/commit/b6e9c4125eadf195ae14c9ef915e22e3c189a6f2))
+- **EXPLORE:** adjust node type import ([a7e1ddc](https://github.com/amaralc/peerlab/commit/a7e1ddc70988fa3802bfe7931e60ed44dec9acbd))
+- **EXPLORE:** adjust schema validator types ([a1d1784](https://github.com/amaralc/peerlab/commit/a1d17846c47fc09a27cdbbf0e35e9abdb616ea29))
+- **EXPLORE:** validate data with avj ([b4ebe5a](https://github.com/amaralc/peerlab/commit/b4ebe5aaf8356937a0e953b969c19493d63f94cf))
+
+## [0.85.0](https://github.com/amaralc/peerlab/compare/peerlab@0.84.1...peerlab@0.85.0) (2024-05-25)
+
+### Features
+
+- **PEER-698:** enhance data extraction use case ([dee67d3](https://github.com/amaralc/peerlab/commit/dee67d394653d5b086b6cf3bab1fb04acd1f8e35))
+
+## [0.84.1](https://github.com/amaralc/peerlab/compare/peerlab@0.84.0...peerlab@0.84.1) (2024-05-23)
+
+**Note:** Version bump only for package peerlab
+
+## [0.84.0](https://github.com/amaralc/peerlab/compare/peerlab@0.83.1...peerlab@0.84.0) (2024-05-22)
+
+### Features
+
+- **KAIZEN:** explore and enhance api reference with scalar ([d9be2cf](https://github.com/amaralc/peerlab/commit/d9be2cf3dbe158608806561403d1d6ffb4856734))
+- **KAIZEN:** explore and enhance logger using winston formatter ([eb189c9](https://github.com/amaralc/peerlab/commit/eb189c96ad6fbd89b6d8b48179b38bf5e42bd095))
+
+## [0.83.1](https://github.com/amaralc/peerlab/compare/peerlab@0.83.0...peerlab@0.83.1) (2024-05-20)
+
+**Note:** Version bump only for package peerlab
+
+## [0.83.0](https://github.com/amaralc/peerlab/compare/peerlab@0.82.3...peerlab@0.83.0) (2024-05-19)
+
+### Features
+
+- **PEER-698:** add units and departments as agents ([868622c](https://github.com/amaralc/peerlab/commit/868622c72e598828522e2dcc0ebc6809047462c3))
+
+## [0.82.3](https://github.com/amaralc/peerlab/compare/peerlab@0.82.2...peerlab@0.82.3) (2024-05-15)
+
+**Note:** Version bump only for package peerlab
+
+## [0.82.2](https://github.com/amaralc/peerlab/compare/peerlab@0.82.1...peerlab@0.82.2) (2024-05-15)
+
+### Bug Fixes
+
+- **PEER-698:** adjust centrals return type ([37acc96](https://github.com/amaralc/peerlab/commit/37acc960297c8505469de53de62dac95313368ca))
+- **PEER-698:** allow two agents with the same e-mail account ([37c8ac5](https://github.com/amaralc/peerlab/commit/37c8ac5c4f1a50602de501d5856c045af3a11cea))
+- **PEER-698:** reduce possibility of creating organizations with same id ([bc5cc5a](https://github.com/amaralc/peerlab/commit/bc5cc5a37ca4360dd41c0623095eba453e38ce47))
+
+## [0.82.1](https://github.com/amaralc/peerlab/compare/peerlab@0.82.0...peerlab@0.82.1) (2024-05-14)
+
+### Bug Fixes
+
+- **PEER-698:** switch base urls ([2b2192c](https://github.com/amaralc/peerlab/commit/2b2192cb7e9eeabdef9052541084c2055289c6ae))
+
+## [0.82.0](https://github.com/amaralc/peerlab/compare/peerlab@0.81.0...peerlab@0.82.0) (2024-05-14)
+
+### Features
+
+- **PEER-698:** enable seeding from external source ([a240a38](https://github.com/amaralc/peerlab/commit/a240a3805796bd63c01a7db5eec09bc8bb90dc8b))
+
+## [0.81.0](https://github.com/amaralc/peerlab/compare/peerlab@0.80.1...peerlab@0.81.0) (2024-05-14)
+
+### Features
+
+- **PEER-698:** add convertion services ([b642dc4](https://github.com/amaralc/peerlab/commit/b642dc4fb79fbd45493321e9fe03ec68902bd8dc))
+- **PEER-698:** get agents from external source ([51e158e](https://github.com/amaralc/peerlab/commit/51e158efeb615e99d78228c26b466b8e350a83a8))
+
+## [0.80.1](https://github.com/amaralc/peerlab/compare/peerlab@0.80.0...peerlab@0.80.1) (2024-05-07)
+
+### Bug Fixes
+
+- **PEER-689:** upgrade lerna cli ([a6f33f7](https://github.com/amaralc/peerlab/commit/a6f33f7518fdf45c42e465a85339422f49a2cb85))
+
+## [0.80.0](https://github.com/amaralc/peerlab/compare/peerlab@0.79.0...peerlab@0.80.0) (2024-05-05)
+
+### Features
+
+- **PEER-697:** convert multi institutions into agents and organizations ([a3248e1](https://github.com/amaralc/peerlab/commit/a3248e10e4d55d10a1f784ddbc1ed484ef7a382b))
 
 ## [0.79.0](https://github.com/amaralc/peerlab/compare/peerlab@0.79.0-beta.2...peerlab@0.79.0) (2024-05-02)
 

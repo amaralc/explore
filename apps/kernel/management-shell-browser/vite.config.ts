@@ -5,6 +5,14 @@ import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  root: __dirname,
+  build: {
+    outDir: '../../../dist/apps/kernel/management-shell-browser',
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
   cacheDir: '../../../node_modules/.vite/kernel-management-shell-browser',
   server: {
     port: 4200,
@@ -39,6 +47,11 @@ export default defineConfig({
   // },
 
   test: {
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../../coverage/apps/kernel/management-shell-browser',
+      provider: 'v8',
+    },
     globals: true,
     cache: {
       dir: '../../../node_modules/.vitest',

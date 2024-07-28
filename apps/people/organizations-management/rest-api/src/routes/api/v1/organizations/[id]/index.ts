@@ -1,5 +1,4 @@
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
-import { GetOrganizationV1ByIdUseCase } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/use-cases/get-organization-by-id';
 import express from 'express';
 
 export default class V1OrganizationsIdController {
@@ -14,9 +13,8 @@ export default class V1OrganizationsIdController {
 
   public async getOrganizationById(req: express.Request, res: express.Response) {
     try {
-      const repositories = await this.configurationManager.getRepositories();
-      const getOrganizationV1ByIdUseCase = new GetOrganizationV1ByIdUseCase(repositories.organizationsV1);
-      const organization = await getOrganizationV1ByIdUseCase.execute(req.params.id);
+      const { getOrganizationV1ById } = await this.configurationManager.getUseCases();
+      const organization = await getOrganizationV1ById.execute(req.params.id);
 
       if (!organization) {
         res.status(404).json({ message: 'Organization not found' });

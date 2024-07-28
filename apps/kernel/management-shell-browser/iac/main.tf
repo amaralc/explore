@@ -9,7 +9,7 @@
 # # The prefix VITE and FEATURE_FLAG were added only to make it easier to find the flag in all codebase,
 # # but if we opt to use unleash again, these prefixes are not needed
 # resource "unleash_feature_v2" "with_env_strategies" {
-#   name               = "VITE_PEER_547_FEATURE_FLAG_GOOGLE_SSO_ENABLED"
+#   name               = "VITE_FEATURE_FLAG_PEER_547_GOOGLE_SSO_ENABLED"
 #   description        = "Weather or not to enable Google SSO"
 #   type               = "release"
 #   project_id         = "default"
@@ -49,37 +49,40 @@
 locals {
   # Variables defined within module
   module_environment_variables = {
-    # VITE_UNLEASH_CLIENT_KEY                       = "fake-client-key" # unleash_api_token.management-shell-browser.secret is already being passed in the environment
+    "VITE_FEATURE_FLAG_AUTH_PROVIDER"                       = "firebase"
+    "VITE_FEATURE_FLAG_MOCK_APIS_ENABLED"                   = "false"
+    "VITE_FEATURE_FLAG_UNTITLED_SECTION_ENABLED"            = "false"
+    "VITE_FEATURE_FLAG_CONCEPTS_SECTION_ENABLED"            = "false"
+    "VITE_FEATURE_FLAG_PAGES_SECTION_ENABLED"               = "false"
+    "VITE_FEATURE_FLAG_MISC_SECTION_ENABLED"                = "false"
+    "VITE_FEATURE_FLAG_PEER_547_GOOGLE_SSO_ENABLED"         = "true"
+    "VITE_FEATURE_FLAG_PEER_547_SHOW_AUTH_ISSUER_ENABLED"   = "false"
+    "VITE_FEATURE_FLAG_PEER_547_EMAIL_AND_PASSWORD_ENABLED" = "false"
   }
 
-  # Variables defined outside module
-  external_environment_variables = var.environment_variables
-
   # Resulting environment variables
-  env_file_content = join("\n", [
-    for key, value in merge(var.environment_variables, local.module_environment_variables) : "${key}=${value}"
-  ])
+  environment_variables = merge(var.external_environment_variables, local.module_environment_variables)
 }
 
-# Create .env file in project's folder
-resource "local_file" "env_file" {
-  content  = local.env_file_content
-  filename = "${path.cwd}/../../../../apps/kernel/management-shell-browser/.env"
-}
 
 locals {
   image_name   = "${var.gcp_location}-docker.pkg.dev/${var.gcp_shell_project_id}/${var.gcp_docker_artifact_repository_name}/${var.docker_image_name}"
   build_script = <<EOF
-echo 'Building app...'
-pnpm nx run kernel-management-shell-browser:build --prod
+    echo 'Exporting environment variables...'
+    %{for key, value in local.environment_variables~}
+    export ${key}="${value}"
+    %{endfor}
 
-echo "Building image..."
-docker build -t ${local.image_name}:latest -t ${local.image_name}:${var.short_commit_sha} -f apps/kernel/management-shell-browser/Dockerfile .
+    echo 'Building app...'
+    pnpm nx run kernel-management-shell-browser:build --prod --skip-nx-cache
 
-gcloud auth configure-docker ${var.gcp_location}-docker.pkg.dev
-docker push ${local.image_name}:latest
-docker push ${local.image_name}:${var.short_commit_sha}
-EOF
+    echo "Building image..."
+    docker build -t ${local.image_name}:latest -t ${local.image_name}:${var.short_commit_sha} -f apps/kernel/management-shell-browser/Dockerfile . --no-cache
+
+    gcloud auth configure-docker ${var.gcp_location}-docker.pkg.dev
+    docker push ${local.image_name}:latest
+    docker push ${local.image_name}:${var.short_commit_sha}
+  EOF
 }
 
 module "nx_affected_log" {
@@ -89,6 +92,15 @@ module "nx_affected_log" {
   build_script     = ""
 }
 
+module "environment_variable_logs" {
+  source      = "../../../../libs/iac-modules/logger"
+  log_to_file = false
+  enabled     = true
+  log_map     = local.environment_variables
+  depends_on  = [module.nx_affected_log]
+}
+
+# TODO: for an unknown reason, the final cloud run service is not using the correct environment variables. We pruned all layers from the registry to make sure the latest image is being used, but the environment variables are not being updated. We need to investigate this issue.
 module "nx_affected" {
   source           = "../../../../libs/iac-modules/nx-affected"
   nx_project_name  = "kernel-management-shell-browser"

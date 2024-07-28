@@ -60,7 +60,7 @@ export class WinstonLogger implements ApplicationLogger {
   }
 
   warn(message: string, metadata?: ILogMetadata): void {
-    logger.warn(JSON.stringify({ level: 'warn', message, ...(metadata ?? {}), memoryUsage: process.memoryUsage() }));
+    logger.warning(JSON.stringify({ level: 'warn', message, ...(metadata ?? {}), memoryUsage: process.memoryUsage() }));
   }
 }
 

@@ -88,5 +88,20 @@
         "targetName": "lint"
       }
     }
-  ]
+  ],
+  "release": {
+    "releaseTagPattern": "peerlab@{version}",
+    "git": {
+      "commitMessage": "chore(release): [skip-github-pipeline]"
+    },
+    "version": {
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "projectChangelogs": false,
+      "workspaceChangelog": true
+    },
+    "projects": ["."],
+    "projectsRelationship": "fixed"
+  }
 }

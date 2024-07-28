@@ -1,7 +1,7 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
-import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
+import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
 import { IAssetV1Dto } from './entity';
 import { AssetsV1DatabaseRepository } from './repository-database';
@@ -40,7 +40,7 @@ export class InMemoryAssetsV1DatabaseRepository implements AssetsV1DatabaseRepos
     };
   }
 
-  async listPaginated(paginationDto: PaginationDto): Promise<IPaginatedEntities<IAssetV1Dto>> {
+  async listPaginated(paginationDto: IPaginationV1Dto): Promise<IPaginatedEntities<IAssetV1Dto>> {
     const totalAssets = this.inMemoryObjects.length;
     const MINIMUM_PAGE_NUMBER = 1;
     const totalPages = Math.ceil(totalAssets / paginationDto.limit) || MINIMUM_PAGE_NUMBER; // Starts from page 1

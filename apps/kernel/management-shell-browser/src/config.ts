@@ -1,4 +1,4 @@
-import { IConfig } from '@unleash/proxy-client-react';
+// import { IConfig } from '@unleash/proxy-client-react';
 
 export const enableDevTools = import.meta.env.VITE_ENABLE_REDUX_DEV_TOOLS === 'true';
 
@@ -35,17 +35,15 @@ export const mapboxConfig = {
 
 export const version = '6.4.2';
 
-export const unleashConfig: IConfig = {
-  url: import.meta.env.VITE_UNLEASH_FRONTEND_URL, // Your front-end API URL or the Unleash proxy's URL (https://<proxy-url>/proxy)
-  clientKey: import.meta.env.VITE_UNLEASH_CLIENT_KEY, // A client-side API token OR one of your proxy's designated client keys (previously known as proxy secrets)
-  appName: 'kernel-management-shell', // How often (in seconds) the client should poll the proxy for updates
-  refreshInterval: 15, // The name of your application. It's only used for identifying your application
-};
+// export const unleashConfig: IConfig = {
+//   url: import.meta.env.VITE_UNLEASH_FRONTEND_URL, // Your front-end API URL or the Unleash proxy's URL (https://<proxy-url>/proxy)
+//   clientKey: import.meta.env.VITE_UNLEASH_CLIENT_KEY, // A client-side API token OR one of your proxy's designated client keys (previously known as proxy secrets)
+//   appName: 'kernel-management-shell', // How often (in seconds) the client should poll the proxy for updates
+//   refreshInterval: 15, // The name of your application. It's only used for identifying your application
+// };
 
-export const featureFlags = {
-  authProvider: import.meta.env.VITE_FEATURE_FLAG_AUTH_PROVIDER as 'firebase' | 'auth0' | 'amplify' | 'jwt',
-  untitledSectionEnabled: import.meta.env.VITE_FEATURE_FLAG_UNTITLED_SECTION_ENABLED === 'true',
-  conceptsSectionEnabled: import.meta.env.VITE_FEATURE_FLAG_CONCEPTS_SECTION_ENABLED === 'true',
-  pagesSectionEnabled: import.meta.env.VITE_FEATURE_FLAG_PAGES_SECTION_ENABLED === 'true',
-  miscSectionEnabled: import.meta.env.VITE_FEATURE_FLAG_MISC_SECTION_ENABLED === 'true',
+export const servicesUrls = {
+  // TODO: Url should start with http:// or https://
+  VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL: import.meta.env
+    .VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL as string,
 };

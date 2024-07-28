@@ -1,12 +1,13 @@
 import { readJsonFile } from '@peerlab/kernel/shared-ts-utils/files/read-json-file';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { nativeLogger } from '@peerlab/kernel/shared-ts-utils/logs/native-logger';
+import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { MultiInstitutionsV1DatabaseRepository } from '../core/database-repository';
 import { IMultiInstitutionV1Dto, MultiInstitutionV1Entity } from '../core/entity';
 
 export class FileSystemMultiInstitutionsV1Repository implements MultiInstitutionsV1DatabaseRepository {
-  private multiInstitutionsV1FilePath =
-    'apps/people/organizations-management/base/src/domains/multi-institution-v1/core/fixtures-content-multi-institutions.json';
+  constructor(
+    private readonly multiInstitutionsV1JsonFilePath = 'apps/people/organizations-management/base/src/domains/_shared/core/use-cases/extract-entities-from-external-source/fixtures/multi-institutions-v1-response-body.json',
+  ) {}
 
   public async listAll(): Promise<Array<IMultiInstitutionV1Dto>> {
     const log: ILogMetadata = {
@@ -19,7 +20,7 @@ export class FileSystemMultiInstitutionsV1Repository implements MultiInstitution
 
     try {
       log.steps.push({ message: 'Listing multi institutions from external multi source...' });
-      const responseData = readJsonFile(this.multiInstitutionsV1FilePath) as Array<IMultiInstitutionV1Dto>;
+      const responseData = readJsonFile(this.multiInstitutionsV1JsonFilePath) as Array<IMultiInstitutionV1Dto>;
 
       log.steps.push({ message: 'Validating multi institutions...' });
       const multiInstitutionsV1DtoList = responseData.map((item) => {
@@ -38,21 +39,21 @@ export class FileSystemMultiInstitutionsV1Repository implements MultiInstitution
       }, {});
 
       log.steps.push({
-        message: 'Listing agents from external source...',
+        message: 'Listing multi institutions from external source...',
         metadata: {
           count: multiInstitutionsV1DtoList.length,
           institutionsByAchronym: multiInstitutionsV1ByAchronym,
         },
       });
 
-      nativeLogger.info('Success listing agents from external source', log);
+      winstonLogger.info('Success listing multi institutions from external source', log);
       return multiInstitutionsV1DtoList;
     } catch (error) {
       log.steps.push({
         message: 'Error reading multi institutions from external source.',
         metadata: { error: error.stack },
       });
-      nativeLogger.error(`Error seeding database from external source: ${error.message}`, log);
+      winstonLogger.error(`Error seeding database from external source: ${error.message}`, log);
     }
   }
 }

@@ -6,21 +6,37 @@ import { IConvertMultiCentralV1InOrganizationV1InputDto } from './dto';
 
 export class ConvertMultiCentralV1InOrganizationV1Service {
   static execute(inputDto: IConvertMultiCentralV1InOrganizationV1InputDto): IOrganizationV1Dto {
-    const { multiCentralV1Dto, agentV1Dto } = inputDto;
+    const id = hashIntegerAndEntityNameIntoValidObjectId(inputDto.id, 'MultiCentralV1');
+    const agentId = hashIntegerAndEntityNameIntoValidFirebaseUID(inputDto.id, 'MultiCentralV1');
 
-    const id = hashIntegerAndEntityNameIntoValidObjectId(multiCentralV1Dto.id, 'MultiCentralV1');
-    const unitId = multiCentralV1Dto.unidade_id;
-    const ownerAgentId = hashIntegerAndEntityNameIntoValidFirebaseUID(unitId, 'MultiUnitV1');
+    const institutionId = inputDto.instituicao_id;
+    const institutionOrganizationV1Id = hashIntegerAndEntityNameIntoValidObjectId(institutionId, 'MultiInstitutionV1');
+
+    const unitId = inputDto.unidade_id;
+    const unitAgentId = hashIntegerAndEntityNameIntoValidFirebaseUID(unitId, 'MultiUnitV1');
+    const unitOrganizationV1Id = hashIntegerAndEntityNameIntoValidObjectId(unitId, 'MultiUnitV1');
+    let ownerAgentId = unitAgentId;
+
+    let centralOrganizationV1IdPath = `/${institutionOrganizationV1Id}/${unitOrganizationV1Id}/${id}`;
+
+    const departmentId = inputDto.departamento_id;
+    if (departmentId) {
+      const departmentAgentId = hashIntegerAndEntityNameIntoValidFirebaseUID(departmentId, 'MultiDepartmentV1');
+      const departmentOrganizationV1Id = hashIntegerAndEntityNameIntoValidObjectId(departmentId, 'MultiDepartmentV1');
+      ownerAgentId = departmentAgentId;
+      centralOrganizationV1IdPath = `/${institutionOrganizationV1Id}/${unitOrganizationV1Id}/${departmentOrganizationV1Id}/${id}`;
+    }
 
     const convertedOrganizationV1Dto: IOrganizationV1Dto = {
       id,
-      ownerAgentId: ownerAgentId,
-      agentId: agentV1Dto.id,
-      email: multiCentralV1Dto.email,
-      nickname: stringToSlug(multiCentralV1Dto.sigla + '-' + id),
+      ownerAgentId,
+      agentId: agentId,
+      email: inputDto.email,
+      nickname: stringToSlug(inputDto.sigla + '-' + id),
       planSubscriptionName: 'FREE',
-      createdAt: new Date(multiCentralV1Dto.created).toISOString(),
-      updatedAt: new Date(multiCentralV1Dto.updated).toISOString(),
+      idPath: centralOrganizationV1IdPath,
+      createdAt: new Date(inputDto.created).toISOString(),
+      updatedAt: new Date(inputDto.updated).toISOString(),
     };
 
     return convertedOrganizationV1Dto;

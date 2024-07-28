@@ -17,6 +17,7 @@ const config: Config = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../../coverage/apps/people/organizations-management/rest-api',
+  testTimeout: 30000,
 };
 
 export default config;

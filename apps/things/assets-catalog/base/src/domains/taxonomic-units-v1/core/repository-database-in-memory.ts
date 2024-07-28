@@ -1,7 +1,7 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
-import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
+import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
 import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity } from './entity';
 import { TaxonomicUnitsV1DatabaseRepository } from './repository-database';
@@ -43,7 +43,7 @@ export class InMemoryTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnit
     };
   }
 
-  async listPaginated(paginationDto: PaginationDto): Promise<IPaginatedEntities<ITaxonomicUnitV1Dto>> {
+  async listPaginated(paginationDto: IPaginationV1Dto): Promise<IPaginatedEntities<ITaxonomicUnitV1Dto>> {
     const totalOrganizations = this.organizations.length;
     const MINIMUM_PAGE_NUMBER = 1;
     const totalPages = Math.ceil(totalOrganizations / paginationDto.limit) || MINIMUM_PAGE_NUMBER; // Starts from page 1

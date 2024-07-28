@@ -34,7 +34,7 @@ export class CreateAgentV1FromUserV1CreationEventUseCase {
       throw new Error('Agent with the same nickname already exists');
     }
 
-    const agentV1 = await this.agentsV1Repository.create(userAgent);
-    return agentV1;
+    await this.agentsV1Repository.create(userAgent);
+    return userAgent;
   }
 }

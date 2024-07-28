@@ -1,9 +1,9 @@
-import { AgentsV1DatabaseRepository } from '../../../agents-v1/core/database-repository';
-import { InMemoryAgentsV1Repository } from '../../../agents-v1/core/database-repository-in-memory';
-import { AgentV1Entity } from '../../../agents-v1/core/entity';
-import { OrganizationsV1DatabaseRepository } from '../database-repository';
-import { InMemoryOrganizationsV1Repository } from '../database-repository-in-memory';
-import { GetOrganizationV1ByIdUseCase } from './get-organization-by-id';
+import { GetOrganizationV1ByIdUseCase } from '.';
+import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
+import { InMemoryAgentsV1Repository } from '../../../../agents-v1/core/database-repository-in-memory';
+import { AgentV1Entity } from '../../../../agents-v1/core/entity';
+import { OrganizationsV1DatabaseRepository } from '../../database-repository';
+import { InMemoryOrganizationsV1Repository } from '../../database-repository-in-memory';
 
 describe('Get OrganizationV1', () => {
   let organizationsV1Repository: OrganizationsV1DatabaseRepository;
@@ -35,13 +35,15 @@ describe('Get OrganizationV1', () => {
       updatedAt: new Date().toISOString(),
     });
 
+    const newOrganizationId = organizationsV1Repository.generateUniqueId();
     const expectedOrganizationV1 = await organizationsV1Repository.create({
-      id: organizationsV1Repository.generateUniqueId(),
+      id: newOrganizationId,
       agentId: organizationAgent.id,
       email: 'valid-organization@email.com',
       nickname: 'valid-organization-nickname',
       planSubscriptionName: 'FREE',
-      ownerAgentId: 'fake-owner-id',
+      ownerAgentId: userAgent.id,
+      idPath: `/${newOrganizationId}`,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });

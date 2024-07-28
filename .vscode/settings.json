@@ -1,8 +1,8 @@
 {
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true,
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
   "files.associations": {
@@ -11,9 +11,7 @@
   "[no-auto-format]": {
     "editor.formatOnSave": false
   },
-  "cSpell.words": ["kafkajs", "nestjs", "Partitioner", "Partitioners"],
-  "eslint.validate": [
-    "json"
-  ],
+  "cSpell.words": ["branchset", "Cladogram", "kafkajs", "nestjs", "Partitioner", "Partitioners"],
+  "eslint.validate": ["json"],
   "testing.automaticallyOpenPeekView": "never"
 }

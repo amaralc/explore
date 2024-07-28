@@ -3,7 +3,7 @@ import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-l
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { ConfigurationManager } from '@peerlab/things/assets-catalog/base/config/configuration-manager';
 import { CreateTaxonomicUnitV1UseCase } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/use-cases/create-taxonomic-unit';
-import { TaxonomicUnitAlreadyExistsError } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/use-cases/create-taxonomic-unit.errors';
+import { TaxonomicUnitAlreadyExistsError } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/use-cases/create-taxonomic-unit/errors';
 import express from 'express';
 
 export class V1TaxonomicUnitsController {

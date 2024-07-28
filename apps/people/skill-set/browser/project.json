@@ -67,7 +67,8 @@
       "outputs": ["{options.outputFile}"]
     },
     "docker-build": {
-      "command": "docker build -f apps/people/skill-set/browser/Dockerfile . -t people-skill-set-browser"
+      "command": "docker build -f apps/people/skill-set/browser/Dockerfile . -t people-skill-set-browser",
+      "dependsOn": ["build"]
     },
     "docker-run": {
       "command": "docker run --rm -p 80:80 people-skill-set-browser"

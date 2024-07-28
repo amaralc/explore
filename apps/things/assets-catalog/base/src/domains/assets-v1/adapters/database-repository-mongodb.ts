@@ -3,7 +3,7 @@ import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-d
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
-import { PaginationDto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
+import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Replace } from '@peerlab/kernel/shared-ts-utils/types/replace';
 import { Collection, ObjectId } from 'mongodb';
 import { AssetV1Entity, IAssetV1Dto } from '../core/entity';
@@ -91,7 +91,7 @@ export class MongoDbAssetsV1DatabaseRepository implements AssetsV1DatabaseReposi
     return entityDto;
   }
 
-  public async listPaginated(paginationDto: PaginationDto): Promise<IPaginatedEntities<IAssetV1Dto>> {
+  public async listPaginated(paginationDto: IPaginationV1Dto): Promise<IPaginatedEntities<IAssetV1Dto>> {
     const mongoDbDocuments = await this.getCollection()
       .find()
       .skip(paginationDto.page)

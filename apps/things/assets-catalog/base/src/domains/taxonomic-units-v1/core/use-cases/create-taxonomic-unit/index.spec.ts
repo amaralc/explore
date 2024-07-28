@@ -1,11 +1,11 @@
 import { iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
-import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '../../adapters/database-repository-mongodb';
-import { ITaxonomicUnitV1Dto } from '../entity';
-import { TaxonomicUnitsV1DatabaseRepository } from '../repository-database';
-import { CreateTaxonomicUnitV1InputDto, CreateTaxonomicUnitV1UseCase } from './create-taxonomic-unit';
-import { TaxonomicUnitAlreadyExistsError } from './create-taxonomic-unit.errors';
+import { CreateTaxonomicUnitV1InputDto, CreateTaxonomicUnitV1UseCase } from '.';
+import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '../../../adapters/database-repository-mongodb';
+import { ITaxonomicUnitV1Dto } from '../../entity';
+import { TaxonomicUnitsV1DatabaseRepository } from '../../repository-database';
+import { TaxonomicUnitAlreadyExistsError } from './errors';
 
 describe('Create TaxonomicUnitV1 with free plan subscription', () => {
   let taxonomicUnitsV1DatabaseRepository: TaxonomicUnitsV1DatabaseRepository;

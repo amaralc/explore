@@ -104,7 +104,7 @@ fi
 
 if [ "$INSTALL_PACKAGE_MANAGER" == "true" ]; then
   # Install pnpm
-  npm install -g pnpm
+  npm install -g pnpm@9.6.0
 fi
 
 if [ "$INSTALL_DEPENDENCIES" == "true" ]; then

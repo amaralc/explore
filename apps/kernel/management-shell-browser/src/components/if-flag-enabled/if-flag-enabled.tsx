@@ -10,6 +10,7 @@ interface IfFlagEnabledProps {
 
 export const IfFlagEnabled: FC<IfFlagEnabledProps> = ({ flagName, children, fallback }) => {
   const localFallback = fallback || null;
+
   return (
     <ErrorBoundary fallback={localFallback}>
       <FlaggedComponent flagName={flagName} fallback={localFallback}>
