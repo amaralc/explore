@@ -3,11 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.91.0](https://github.com/amaralc/explore/compare/peerlab@0.85.0...peerlab@0.91.0) (2024-07-28)
+## [0.90.8](https://github.com/amaralc/peerlab/compare/peerlab@0.90.7...peerlab@0.90.8) (2024-08-01)
 
-### Features
+### Bug Fixes
 
-- **PEER:** bring latest updates from peerlab to explore ([19c053a](https://github.com/amaralc/explore/commit/19c053ada373a556a0b33fbda429b42a9bfa75d4))
+- **PEER-714:** enable destroyting mongodb server instance ([80bca3f](https://github.com/amaralc/peerlab/commit/80bca3f5066b7ebb23ebed773a69ef5d1c6db57c))
+
+## [0.90.7](https://github.com/amaralc/peerlab/compare/peerlab@0.90.6...peerlab@0.90.7) (2024-07-30)
+
+### Bug Fixes
+
+- **PEER-714:** shut down production environment ([8816b3a](https://github.com/amaralc/peerlab/commit/8816b3ac9a6828b03f6d612535864ab3bf381eef))
+
+## [0.90.6](https://github.com/amaralc/peerlab/compare/peerlab@0.90.5...peerlab@0.90.6) (2024-07-28)
+
+### Bug Fixes
+
+- **PEER-714:** shut down production environment ([99db493](https://github.com/amaralc/peerlab/commit/99db49336ed5c436f57bed184b20670ee074ea49))
+
+## [0.90.5](https://github.com/amaralc/peerlab/compare/peerlab@0.90.4...peerlab@0.90.5) (2024-07-28)
+
+### Bug Fixes
+
+- **PEER-697:** show empty results when there are no organizations ([d56f8bb](https://github.com/amaralc/peerlab/commit/d56f8bbf029de0112aad4e72c24b5b9ac765d074))
 
 ## [0.90.4](https://github.com/amaralc/peerlab/compare/peerlab@0.90.3...peerlab@0.90.4) (2024-07-28)
 

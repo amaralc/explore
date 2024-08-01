@@ -64,17 +64,38 @@ describe('POST /v1/organizations', () => {
     });
   });
 
-  it('[HTTP 200] should list organizations owned by an agent, with pagination', async () => {
-    const individualOwnerAgentId = fakeAgentsByIdOrEmail.get('fake-agent-owner-of-free-organization@email.com').id;
-    await request.get(`/api/v1/organizations?ownerAgentId=${individualOwnerAgentId}`).then((response) => {
-      expect(response.status).toEqual(200);
-      expect(response.body).toEqual({
-        page: 1,
-        pageSize: 10,
-        nextPage: null,
-        entities: [fakeOrganizationsByIdOrEmail.get('fake-organization-agent-root-01@email.com')],
+  it('[HTTP 200] should show empty results when there are no organizations', async () => {
+    // Agent with single organization
+    const agentThatOwnsSingleOrganization = fakeAgentsByIdOrEmail.get(
+      'fake-agent-owner-of-free-organization@email.com',
+    );
+
+    await request
+      .get(`/api/v1/organizations?page=2&limit=1&ownerAgentId=${agentThatOwnsSingleOrganization.id}`)
+      .then((response) => {
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual({
+          page: 2,
+          pageSize: 1,
+          nextPage: null,
+          entities: [],
+        });
       });
-    });
+  });
+
+  it('[HTTP 200] should list organizations owned by an agent with explicit and default pagination', async () => {
+    const individualOwnerAgentId = fakeAgentsByIdOrEmail.get('fake-agent-owner-of-free-organization@email.com').id;
+    await request
+      .get(`/api/v1/organizations?page=1&limit=1&ownerAgentId=${individualOwnerAgentId}`)
+      .then((response) => {
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual({
+          page: 1,
+          pageSize: 1,
+          nextPage: null,
+          entities: [fakeOrganizationsByIdOrEmail.get('fake-organization-agent-root-01@email.com')],
+        });
+      });
 
     const organizationOwnerAgentId = fakeAgentsByIdOrEmail.get('fake-organization-agent-root-01@email.com').id;
     await request.get(`/api/v1/organizations?ownerAgentId=${organizationOwnerAgentId}`).then((response) => {

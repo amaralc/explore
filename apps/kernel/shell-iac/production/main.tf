@@ -82,7 +82,7 @@ module "production-environment-name" {
 # Production Environment
 module "production" {
   source                              = "../environment"
-  count                               = 1
+  count                               = 0
   branch_name                         = "production"
   domain_name                         = var.domain_name
   environment_name                    = module.production-environment-name.value
@@ -106,12 +106,12 @@ module "production" {
 
 output "flag_management_url" {
   description = "Flag Management URL"
-  value       = module.production[0].kernel_flag_management_url
+  value       = length(module.production) > 0 ? module.production[0].kernel_flag_management_url : ""
 }
 
 output "flag_management_admin_api_token" {
   description = "Flag Management Admin API Token"
-  value       = module.production[0].kernel_flag_management_admin_api_token
+  value       = length(module.production) > 0 ? module.production[0].kernel_flag_management_admin_api_token : ""
   sensitive   = true
 }
 

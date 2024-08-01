@@ -185,9 +185,10 @@ export class MongoDbOrganizationsV1Repository implements OrganizationsV1Database
       .find(query, { limit: pagination.limit })
       .skip((pagination.page - 1) * pagination.limit)
       .toArray();
-    const totalCount = await this.getCollection().countDocuments();
+
+    const queryCount = await this.getCollection().countDocuments(query);
+    const nextPage = queryCount > (pagination.page + 1) * pagination.limit ? pagination.page + 1 : null;
     const domainOrganizations = organizations.map(this.mapMongoDbToDomain);
-    const nextPage = totalCount > (pagination.page + 1) * pagination.limit ? pagination.page + 1 : null;
     return {
       entities: domainOrganizations,
       nextPage,
