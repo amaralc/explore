@@ -1,12 +1,12 @@
-name: Deploy to production
+name: Deploy to Production
 
 on:
-  # create:
-  #   tags:
-  #     - "^peerlab@[0-9]+.[0-9]+.[0-9]+$"
-  push:
-    branches:
-      - production
+  create:
+    tags:
+      - "^peerlab@[0-9]+.[0-9]+.[0-9]+$"
+  # push:
+  #   branches:
+  #     - production
 
 jobs:
   build:
