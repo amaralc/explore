@@ -10,6 +10,8 @@
 # --domain-name
 # --github-username
 # --github-repository
+# --neon-api-key
+# --neon-project-location
 # --mongodb-atlas-org-id
 # --mongodb-atlas-public-key
 # --mongodb-atlas-private-key
@@ -59,6 +61,14 @@ case $i in                          # This starts a case statement, which checks
     ;;
     --mongodb-atlas-private-key=*)
     MONGODB_ATLAS_PRIVATE_KEY="${i#*=}"
+    shift
+    ;;
+    --neon-api-key=*)
+    NEON_API_KEY="${i#*=}"
+    shift
+    ;;
+    --neon-project-location=*)
+    NEON_PROJECT_LOCATION="${i#*=}"
     shift
     ;;
 esac                                # This ends the case statement.
@@ -124,6 +134,18 @@ fi
 if [ -z "$MONGODB_ATLAS_PRIVATE_KEY" ]
 then
     echo "Error: --mongodb-atlas-private-key flag is required"
+    exit 1
+fi
+
+if [ -z "$NEON_API_KEY" ]
+then
+    echo "Error: --neon-api-key flag is required"
+    exit 1
+fi
+
+if [ -z "$NEON_PROJECT_LOCATION" ]
+then
+    echo "Error: --neon-project-location flag is required"
     exit 1
 fi
 
@@ -238,6 +260,8 @@ gh secret set UNLEASH_AUTH_TOKEN -b "unleash-fake-token"
 gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID
 gh secret set MONGODB_ATLAS_PUBLIC_KEY -b $MONGODB_ATLAS_PUBLIC_KEY
 gh secret set MONGODB_ATLAS_PRIVATE_KEY -b $MONGODB_ATLAS_PRIVATE_KEY
+gh secret set NEON_API_KEY -b $NEON_API_KEY
+gh secret set NEON_PROJECT_LOCATION -b $NEON_PROJECT_LOCATION
 
 # Optional Nx Cloud setup (in use)
 NX_ACCESS_TOKEN="fake-nx-access-token"
