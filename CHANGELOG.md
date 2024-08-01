@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.92.2](https://github.com/amaralc/explore/compare/peerlab@0.92.1...peerlab@0.92.2) (2024-08-01)
+
+### Bug Fixes
+
+- **PEER-725:** shell-iac - add nx access token command ([278788b](https://github.com/amaralc/explore/commit/278788b64189455d127b67e248f519d07d40e2c6))
+
 ## [0.92.1](https://github.com/amaralc/explore/compare/peerlab@0.92.0...peerlab@0.92.1) (2024-08-01)
 
 ### Bug Fixes
