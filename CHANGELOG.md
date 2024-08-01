@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.92.0](https://github.com/amaralc/explore/compare/peerlab@0.85.0...peerlab@0.92.0) (2024-08-01)
+
+### Features
+
+- **PEER:** bring latest updates from peerlab to explore ([19c053a](https://github.com/amaralc/explore/commit/19c053ada373a556a0b33fbda429b42a9bfa75d4))
+
+### Bug Fixes
+
+- **PEER-697:** people - adjust pagination and data format and disable production environment ([3ddece9](https://github.com/amaralc/explore/commit/3ddece9cad2b54824100152e30b4171915556ed4))
+
+## [0.91.0](https://github.com/amaralc/explore/compare/peerlab@0.85.0...peerlab@0.91.0) (2024-08-01)
+
+### Features
+
+- **PEER:** bring latest updates from peerlab to explore ([19c053a](https://github.com/amaralc/explore/commit/19c053ada373a556a0b33fbda429b42a9bfa75d4))
+
+### Bug Fixes
+
+- **PEER-697:** people - adjust pagination and data format and disable production environment ([3ddece9](https://github.com/amaralc/explore/commit/3ddece9cad2b54824100152e30b4171915556ed4))
+
 ## [0.90.8](https://github.com/amaralc/peerlab/compare/peerlab@0.90.7...peerlab@0.90.8) (2024-08-01)
 
 ### Bug Fixes
