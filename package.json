@@ -283,7 +283,7 @@
     "unleash-proxy-client": "2.5.0",
     "winston": "^3.13.0",
     "yup": "1.2.0",
-    "zod": "3.22.2"
+    "zod": "3.22.3"
   },
   "volta": {
     "node": "18.16.0",
