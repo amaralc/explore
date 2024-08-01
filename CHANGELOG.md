@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.92.1](https://github.com/amaralc/explore/compare/peerlab@0.92.0...peerlab@0.92.1) (2024-08-01)
+
+### Bug Fixes
+
+- **PEER-723:** remove key ([a709b71](https://github.com/amaralc/explore/commit/a709b718b27e5d9b6d91516478b3b6fd54209786))
+- **PEER-725:** run build and deploy workflow on tag generation ([f67717c](https://github.com/amaralc/explore/commit/f67717c81717016a5b0e0502dc68a533f5df56e8))
+
 ## [0.92.0](https://github.com/amaralc/explore/compare/peerlab@0.85.0...peerlab@0.92.0) (2024-08-01)
 
 ### Features
