@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.92.4](https://github.com/amaralc/explore/compare/peerlab@0.92.3...peerlab@0.92.4) (2024-08-01)
+
+### Bug Fixes
+
+- **PEER-725:** remove atlassian compass deployment event temporarily ([689b3ca](https://github.com/amaralc/explore/commit/689b3cabd7981997858235495ecf992de9137781))
+
 ## [0.92.3](https://github.com/amaralc/explore/compare/peerlab@0.92.2...peerlab@0.92.3) (2024-08-01)
 
 ### Bug Fixes
