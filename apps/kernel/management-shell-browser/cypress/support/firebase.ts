@@ -68,7 +68,7 @@ export class IndexedDbFirebaseSessionRepository implements FirebaseSessionReposi
   db?: IDBDatabase;
   objectStore?: IDBObjectStore;
   mockSession: FirebaseSession = {
-    fbase_key: 'firebase:authUser:AIzaSyA-r-4omO75pg5DCorcAtYn74D-pcUJs9I:[DEFAULT]',
+    fbase_key: 'firebase:authUser:fake-key:[DEFAULT]',
     value: {
       // uid: 'JD0ioP6yebSpYrTCN3UJU91rgzf1',
       uid: fakeFirebaseUid,
@@ -76,7 +76,7 @@ export class IndexedDbFirebaseSessionRepository implements FirebaseSessionReposi
       emailVerified: true,
       displayName: fakeFullName,
       isAnonymous: false,
-      photoURL: 'https://lh3.googleusercontent.com/a/ACg8ocJ22raEJ9c3t1tfH0kqAKLqryBD6lAuHG7B-prM3ZPm=s96-c',
+      photoURL: 'https://lh3.googleusercontent.com/a/fake-identifier',
       providerData: [
         {
           providerId: 'google.com',
@@ -84,7 +84,7 @@ export class IndexedDbFirebaseSessionRepository implements FirebaseSessionReposi
           displayName: fakeFullName,
           email: fakeEmail,
           phoneNumber: null,
-          photoURL: 'https://lh3.googleusercontent.com/a/ACg8ocJ22raEJ9c3t1tfH0kqAKLqryBD6lAuHG7B-prM3ZPm=s96-c',
+          photoURL: 'https://lh3.googleusercontent.com/a/fake-identifier',
         },
       ],
       stsTokenManager: {
