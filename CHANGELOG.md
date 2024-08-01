@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.92.3](https://github.com/amaralc/explore/compare/peerlab@0.92.2...peerlab@0.92.3) (2024-08-01)
+
+### Bug Fixes
+
+- **PEER-725:** shell-iac - set neon attributes ([9d500be](https://github.com/amaralc/explore/commit/9d500be70f6cd823ffaca9a29940c91d4c3dc326))
+
 ## [0.92.2](https://github.com/amaralc/explore/compare/peerlab@0.92.1...peerlab@0.92.2) (2024-08-01)
 
 ### Bug Fixes
