@@ -239,12 +239,12 @@ gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID
 gh secret set MONGODB_ATLAS_PUBLIC_KEY -b $MONGODB_ATLAS_PUBLIC_KEY
 gh secret set MONGODB_ATLAS_PRIVATE_KEY -b $MONGODB_ATLAS_PRIVATE_KEY
 
-## Optional Nx Cloud setup
+# Optional Nx Cloud setup (in use)
 NX_ACCESS_TOKEN="fake-nx-access-token"
 gh secret set NX_ACCESS_TOKEN -b $NX_ACCESS_TOKEN
 
-## Optional Sonar Cloud setup
-# Not in use. We opted to integrate using "ClickOps" since it was an easy 2 clicks integration between SonarCloud and GitHub for public repositories
+# Optional Sonar Cloud setup (not in use)
+# We opted to integrate using "ClickOps" since it was an easy 2 clicks integration between SonarCloud and GitHub for public repositories
 # If in the future we wish to integrate programatically, check the docs: https://docs.sonarsource.com/sonarcloud/advanced-setup/ci-based-analysis/github-actions-for-sonarcloud/
 
 # SONAR_TOKEN="fake-sonar-coud-token"
