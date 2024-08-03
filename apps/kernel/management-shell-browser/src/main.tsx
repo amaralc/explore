@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { AppProviders } from './app-providers';
-import { AppRouter } from './app-router';
+import { App } from './app';
 
 const rootContainer = document.getElementById('root');
 
@@ -10,8 +9,4 @@ if (!rootContainer) {
 
 const root = createRoot(rootContainer);
 
-root.render(
-  <AppProviders>
-    <AppRouter />
-  </AppProviders>,
-);
+root.render(<App />);

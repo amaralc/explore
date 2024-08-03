@@ -1,36 +1,14 @@
-<!-- pt-BR -->
-
-# O que foi modificado?
-
-- Substitua este texto por uma descrição breve da modificação. Adicione mais tópicos se julgar necessário;
-- Adicione imagens de apoio para auxiliar na avaliação;
-
-### Links de referência e etapas para avaliação
-
-- Acesse o link http://localhost:3000/xxx/dma;
-- Clique no botão...;
-- Avalie que...;
-
-### Palavras-chave
-
-`Palavra-chave 1`, `Palavra-chave 2`, `Palavra-chave 3`
-
-# Por que foi modificado?
-
-- Substitua este texto por uma descrição breve dos motivos da alteração;
-- Adicione os tópicos que julgar necessário;
-
-# Como foi modificado ?
-
-- Substitua este texto por uma descrição breve da abordagem utilizada para implementar a mudança;
-- Adicione os tópicos que julgar necessário;
-
 <!-- en-US -->
 
-# What was modified?
+# What and why was modified?
 
-- Replace this text with a brief description of the modification. Add more topics if necessary;
-- Add supporting images to aid in the evaluation.
+- Replace this text with a brief description of the modification and reasons behind the change;
+- Add supporting images to aid in the evaluation if needed;
+
+# How was it modified?
+
+- Replace this text with a brief description of the approach used to implement the change;
+- Add the necessary topics.
 
 ### Reference links and evaluation steps
 
@@ -38,16 +16,20 @@
 - Click on the button...;
 - Evaluate that...
 
-### Keywords
+<!-- pt-BR -->
 
-`Keyword 1`, `Keyword 2`, `Keyword 3`
+# O que e como foi modificado?
 
-# Why was it modified?
+- Substitua este texto por uma descrição breve da modificação e razões que motivaram as alterações.
+- Adicione imagens de apoio para auxiliar na avaliação se necessário.
 
-- Replace this text with a brief description of the reasons for the change;
-- Add the necessary topics.
+# Como foi modificado ?
 
-# How was it modified?
+- Substitua este texto por uma descrição breve da abordagem utilizada para implementar a mudança;
+- Adicione os tópicos que julgar necessário;
 
-- Replace this text with a brief description of the approach used to implement the change;
-- Add the necessary topics.
+### Links de referência e etapas para avaliação
+
+- Acesse o link http://localhost:3000/xxx/dma;
+- Clique no botão...;
+- Avalie que...;

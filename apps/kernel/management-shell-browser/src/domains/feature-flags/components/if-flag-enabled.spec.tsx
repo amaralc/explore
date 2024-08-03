@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 // import * as UnleashClient from '@unleash/proxy-client-react';
-import { flagManager } from './flag-manager';
+import { flagManager } from '../flag-manager';
 import { IfFlagEnabled } from './if-flag-enabled';
 
 // Mock module for all tests
