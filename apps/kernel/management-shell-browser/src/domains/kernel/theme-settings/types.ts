@@ -1,4 +1,4 @@
-import type { ColorPreset, Contrast, Direction, PaletteMode } from '../../theme';
+import type { ColorPreset, Contrast, Direction, PaletteMode } from '../../shared/theme';
 
 type Layout = 'horizontal' | 'vertical';
 

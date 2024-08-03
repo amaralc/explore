@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../redux-store';
+import { useAppSelector } from '../../../../redux-store';
 import { IThemeSettingsRepository } from '../repository';
 
 export const reduxThemeSettingsRepository: IThemeSettingsRepository = {

@@ -1,5 +1,5 @@
 import { IUser } from './types';
 
-export interface IUserSessionRepository {
+export interface IUserRepository {
   useUser: () => IUser;
 }

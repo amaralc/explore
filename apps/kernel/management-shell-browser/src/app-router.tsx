@@ -1,19 +1,23 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
-import { SearchPage } from './domains/public/pages/search';
+import { ErrorBoundary } from './domains/kernel/errors/components/error-boundary';
+import { reduxUserSessionRepository } from './domains/people/user-session/adapters/redux-repository';
+import { PrivateRoute } from './domains/people/user-session/components/private-route';
+import { SignInPage } from './domains/people/user-session/pages/sign-in';
+import { UserProfilePage } from './domains/people/user/pages/profile';
+import { UserSettingsPage } from './domains/people/user/pages/settings';
+import { HomePage } from './domains/search/pages/home';
 import { Layout } from './domains/shared/components/layout';
 import { Dashboard } from './domains/shared/pages/dashboard';
-import { UserProfilePage } from './domains/user/pages/profile';
-import { UserSettingsPage } from './domains/user/pages/settings';
-import { SignInPage } from './domains/user/pages/sign-in';
 
 export const routes: Array<RouteObject> = [
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorBoundary fallback={null} />,
     children: [
       {
         index: true,
-        element: <SearchPage />,
+        element: <HomePage />,
       },
       {
         path: 'sign-in',
@@ -21,7 +25,7 @@ export const routes: Array<RouteObject> = [
       },
       {
         path: 'workspaces',
-        element: <Dashboard />,
+        element: <PrivateRoute element={<Dashboard />} userSessionRepository={reduxUserSessionRepository} />,
         children: [
           { path: 'profile', element: <UserProfilePage /> },
           { path: 'settings', element: <UserSettingsPage /> },

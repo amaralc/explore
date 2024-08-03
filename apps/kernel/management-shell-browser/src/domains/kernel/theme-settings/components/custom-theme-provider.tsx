@@ -2,7 +2,7 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { createTheme } from '../../../theme';
+import { createTheme } from '../../../shared/theme';
 import { ICustomThemeProviderProps } from './custom-theme-provider.types';
 import { TextDirectionRightToLeft } from './text-direction-right-to-left';
 

@@ -4,8 +4,3 @@ export interface IUser {
   avatarUrl: string;
   name: string;
 }
-
-export interface IUserSession {
-  user: IUser | null;
-  isAuthenticated: boolean;
-}

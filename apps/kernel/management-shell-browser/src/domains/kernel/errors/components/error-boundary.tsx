@@ -16,7 +16,7 @@ interface IErrorInfo {
 
 interface IErrorBoundaryProps {
   fallback: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onError?: (error: Error, errorInfo: IErrorInfo) => void;
 }
 
