@@ -1,12 +1,7 @@
 import { FC } from 'react';
-import { ErrorBoundary } from '../error-boundary';
+import { ErrorBoundary } from '../../errors/components/error-boundary';
 import { FlaggedComponent } from './flagged-component';
-
-interface IfFlagEnabledProps {
-  flagName: string;
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
-}
+import { IfFlagEnabledProps } from './if-flag-enabled.types';
 
 export const IfFlagEnabled: FC<IfFlagEnabledProps> = ({ flagName, children, fallback }) => {
   const localFallback = fallback || null;

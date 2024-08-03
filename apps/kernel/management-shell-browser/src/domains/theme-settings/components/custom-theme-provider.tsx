@@ -6,8 +6,8 @@ import { createTheme } from '../../../theme';
 import { ICustomThemeProviderProps } from './custom-theme-provider.types';
 import { TextDirectionRightToLeft } from './text-direction-right-to-left';
 
-export const CustomThemeProvider: React.FC<ICustomThemeProviderProps> = ({ children, settingsRepository }) => {
-  const settings = settingsRepository.useThemeSettings();
+export const CustomThemeProvider: React.FC<ICustomThemeProviderProps> = ({ children, themeSettingsRepository }) => {
+  const settings = themeSettingsRepository.useThemeSettings();
   const theme = createTheme({
     colorPreset: settings.colorPreset,
     contrast: settings.contrast,

@@ -2,7 +2,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import { ReducersMapObject, combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { enableDevTools } from '../config';
+import { enableDevTools } from '../../../config';
 
 export const TestWrapper = ({
   reducers = {},

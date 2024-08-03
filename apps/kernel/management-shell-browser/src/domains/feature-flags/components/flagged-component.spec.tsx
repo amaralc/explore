@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
-// import * as UnleashClient from '@unleash/proxy-client-react';
-import { flagManager } from './flag-manager';
+import { flagManager } from '../flag-manager';
 import { FlaggedComponent } from './flagged-component';
 
+// import * as UnleashClient from '@unleash/proxy-client-react';
 // Mock module for all tests
 // vi.mock('@unleash/proxy-client-react');
 

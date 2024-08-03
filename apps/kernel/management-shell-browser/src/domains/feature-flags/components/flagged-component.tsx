@@ -1,12 +1,7 @@
 // import { useFlag } from '@unleash/proxy-client-react';
 import { FC } from 'react';
-import { flagManager } from './flag-manager';
-
-interface FlaggedComponentProps {
-  flagName: string;
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
-}
+import { flagManager } from '../flag-manager';
+import { FlaggedComponentProps } from './flagged-component.types';
 
 export const FlaggedComponent: FC<FlaggedComponentProps> = ({ flagName, children, fallback }) => {
   const localFlag = flagManager.getDynamicFlag(flagName);

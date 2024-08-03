@@ -2,9 +2,11 @@ import { Suspense, type FC } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ErrorBoundary } from './components/error-boundary';
+import { ErrorBoundary } from './domains/errors/components/error-boundary';
+import { reduxThemeSettingsRepository } from './domains/theme-settings/adapters/redux-repository';
+import { CustomThemeProvider } from './domains/theme-settings/components/custom-theme-provider';
 import './global.css';
-import { store } from './store';
+import { store } from './redux-store';
 
 export const AppProviders: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -12,7 +14,11 @@ export const AppProviders: FC<{ children: React.ReactNode }> = ({ children }) =>
       <BrowserRouter>
         <Suspense>
           <ErrorBoundary fallback={null}>
-            <Provider store={store}>{children}</Provider>
+            <Provider store={store}>
+              <CustomThemeProvider themeSettingsRepository={reduxThemeSettingsRepository}>
+                {children}
+              </CustomThemeProvider>
+            </Provider>
           </ErrorBoundary>
         </Suspense>
       </BrowserRouter>
