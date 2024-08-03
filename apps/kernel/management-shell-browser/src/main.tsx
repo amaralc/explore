@@ -1,5 +1,7 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './app';
+import { browserRouter } from './app-router';
 
 const rootContainer = document.getElementById('root');
 
@@ -9,4 +11,8 @@ if (!rootContainer) {
 
 const root = createRoot(rootContainer);
 
-root.render(<App />);
+root.render(
+  <StrictMode>
+    <App router={browserRouter} />
+  </StrictMode>,
+);
