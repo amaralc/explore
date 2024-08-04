@@ -47,3 +47,9 @@ export const servicesUrls = {
   VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL: import.meta.env
     .VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL as string,
 };
+
+export const zitadelConfig = {
+  authority: import.meta.env.VITE_ZITADEL_AUTHORITY as string,
+  clientId: import.meta.env.VITE_ZITADEL_CLIENT_ID as string,
+  redirectUri: import.meta.env.VITE_ZITADEL_REDIRECT_URI as string,
+};

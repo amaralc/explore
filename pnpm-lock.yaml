@@ -188,6 +188,9 @@ importers:
       '@untitled-ui/icons-react':
         specifier: 0.1.1
         version: 0.1.1(@types/react@18.3.1)(react@18.3.1)
+      '@zitadel/react':
+        specifier: ^1.0.3
+        version: 1.0.3
       ajv:
         specifier: 8.12.0
         version: 8.12.0
@@ -317,6 +320,9 @@ importers:
       numeral:
         specifier: 2.0.6
         version: 2.0.6
+      oidc-client-ts:
+        specifier: 2.4.0
+        version: 2.4.0
       openapi3-ts:
         specifier: 4.2.2
         version: 4.2.2
@@ -7806,6 +7812,9 @@ packages:
     resolution: {integrity: sha512-aiATs7pSutzda/rq8fnuPwTglyVwjM22bNnK2ZgjrpAjQHSSl3lztd2f9evst1W/qnC58DRz7T7QndUDumAR4Q==}
     engines: {node: '>=14.15.0'}
 
+  '@zitadel/react@1.0.3':
+    resolution: {integrity: sha512-WCNJ2Xv1edI0JteZN6npKbmpqQc5vO5akJJxV/KxDH/xGl821EFszddKhR0m1uvlN/dwmc/QhT7HMN7pGtAlzQ==}
+
   '@zkochan/js-yaml@0.0.6':
     resolution: {integrity: sha512-nzvgl3VfhcELQ8LyVrYOru+UtAy1nrygk2+AGbTm8a5YcO6o8lSjAT+pfg3vJWxIoZKOUhrK6UU7xW/+00kQrg==}
     hasBin: true
@@ -12820,6 +12829,9 @@ packages:
   jws@4.0.0:
     resolution: {integrity: sha512-KDncfTmOZoOMTFG4mBlG0qUIOlc03fmzH+ru6RgYVZhPkyiy/92Owlt/8UEN+a4TXR1FQetfIpJE8ApdvdVxTg==}
 
+  jwt-decode@3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+
   kafkajs@2.2.4:
     resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
     engines: {node: '>=14.0.0'}
@@ -14420,6 +14432,10 @@ packages:
 
   ohash@1.1.3:
     resolution: {integrity: sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==}
+
+  oidc-client-ts@2.4.0:
+    resolution: {integrity: sha512-WijhkTrlXK2VvgGoakWJiBdfIsVGz6CFzgjNNqZU1hPKV2kyeEaJgLs7RwuiSp2WhLfWBQuLvr2SxVlZnk3N1w==}
+    engines: {node: '>=12.13.0'}
 
   on-finished@2.3.0:
     resolution: {integrity: sha512-ikqdkGAAyf/X/gPhXGvfgAytDZtDbr+bkNUJ0N9h5MI/dmdgCs3l6hoHrcUv41sRKew3jIwrp4qQDXiK99Utww==}
@@ -31058,6 +31074,10 @@ snapshots:
       js-yaml: 3.14.1
       tslib: 2.6.3
 
+  '@zitadel/react@1.0.3':
+    dependencies:
+      oidc-client-ts: 2.4.0
+
   '@zkochan/js-yaml@0.0.6':
     dependencies:
       argparse: 2.0.1
@@ -37458,7 +37478,7 @@ snapshots:
       temp: 0.8.4
       write-file-atomic: 2.4.3
     optionalDependencies:
-      '@babel/preset-env': 7.25.0(@babel/core@7.14.5)
+      '@babel/preset-env': 7.25.0(@babel/core@7.24.9)
     transitivePeerDependencies:
       - supports-color
 
@@ -37663,6 +37683,8 @@ snapshots:
       jwa: 2.0.0
       safe-buffer: 5.2.1
     optional: true
+
+  jwt-decode@3.1.2: {}
 
   kafkajs@2.2.4: {}
 
@@ -40200,6 +40222,11 @@ snapshots:
   obuf@1.1.2: {}
 
   ohash@1.1.3: {}
+
+  oidc-client-ts@2.4.0:
+    dependencies:
+      crypto-js: 4.2.0
+      jwt-decode: 3.1.2
 
   on-finished@2.3.0:
     dependencies:

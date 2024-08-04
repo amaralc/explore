@@ -1,0 +1,1 @@
+docker compose -f ./apps/kernel/security-iam-svc/docker-compose-zitadel.yaml up -d
