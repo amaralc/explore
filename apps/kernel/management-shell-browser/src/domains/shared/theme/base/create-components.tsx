@@ -1,7 +1,7 @@
 import { inputLabelClasses } from '@mui/material/InputLabel';
 import { tableCellClasses } from '@mui/material/TableCell';
-import type { Components } from '@mui/material/styles/components';
 import { createTheme } from '@mui/material/styles';
+import type { Components } from '@mui/material/styles/components';
 
 // Used only to create transitions
 const muiTheme = createTheme();
@@ -20,7 +20,7 @@ export const createComponents = (): Components => {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: '12px',
+          borderRadius: '8px',
           textTransform: 'none',
         },
         sizeSmall: {
@@ -78,13 +78,7 @@ export const createComponents = (): Components => {
     MuiCheckbox: {
       defaultProps: {
         checkedIcon: (
-          <svg
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path
               clipRule="evenodd"
               d="M9 3.5C5.68629 3.5 3 6.18629 3 9.5V15.5C3 18.8137 5.68629 21.5 9 21.5H15C18.3137 21.5 21 18.8137 21 15.5V9.5C21 6.18629 18.3137 3.5 15 3.5H9ZM16.7179 10.1961C17.1024 9.79966 17.0926 9.16657 16.6961 8.7821C16.2997 8.39763 15.6666 8.40737 15.2821 8.80385L10.6667 13.5635L8.7179 11.5539C8.33343 11.1574 7.70034 11.1476 7.30385 11.5321C6.90737 11.9166 6.89763 12.5497 7.2821 12.9461L9.94877 15.6961C10.1371 15.8904 10.3961 16 10.6667 16C10.9372 16 11.1962 15.8904 11.3846 15.6961L16.7179 10.1961Z"
@@ -95,32 +89,12 @@ export const createComponents = (): Components => {
         ),
         color: 'primary',
         icon: (
-          <svg
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              height="16"
-              rx="5"
-              stroke="currentColor"
-              strokeWidth="2"
-              width="16"
-              x="4"
-              y="4.5"
-            />
+          <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <rect height="16" rx="5" stroke="currentColor" strokeWidth="2" width="16" x="4" y="4.5" />
           </svg>
         ),
         indeterminateIcon: (
-          <svg
-            fill="none"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
             <path
               clipRule="evenodd"
               d="M9 5.5H15C17.2091 5.5 19 7.29086 19 9.5V15.5C19 17.7091 17.2091 19.5 15 19.5H9C6.79086 19.5 5 17.7091 5 15.5V9.5C5 7.29086 6.79086 5.5 9 5.5ZM3 9.5C3 6.18629 5.68629 3.5 9 3.5H15C18.3137 3.5 21 6.18629 21 9.5V15.5C21 18.8137 18.3137 21.5 15 21.5H9C5.68629 21.5 3 18.8137 3 15.5V9.5ZM8 11.5C7.44772 11.5 7 11.9477 7 12.5C7 13.0523 7.44772 13.5 8 13.5H16C16.5523 13.5 17 13.0523 17 12.5C17 11.9477 16.5523 11.5 16 11.5H8Z"

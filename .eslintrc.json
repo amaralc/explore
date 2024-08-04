@@ -1,10 +1,19 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nx"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
       "rules": {
         "@nx/enforce-module-boundaries": [
           "error",
@@ -14,7 +23,9 @@
             "depConstraints": [
               {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
               }
             ]
           }
@@ -22,33 +33,54 @@
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nx/typescript"
+      ],
       "rules": {
-        "@typescript-eslint/ban-ts-comment": ["warn", {
-          "ts-expect-error": "allow-with-description",
-          "ts-ignore": "allow-with-description",
-          "ts-nocheck": "allow-with-description",
-          "ts-check": "allow-with-description",
-          "minimumDescriptionLength": 3
-        }]
+        "@typescript-eslint/ban-ts-comment": [
+          "warn",
+          {
+            "ts-expect-error": "allow-with-description",
+            "ts-ignore": "allow-with-description",
+            "ts-nocheck": "allow-with-description",
+            "ts-check": "allow-with-description",
+            "minimumDescriptionLength": 3
+          }
+        ]
       }
     },
     {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nx/javascript"],
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nx/javascript"
+      ],
       "rules": {
-        "@typescript-eslint/ban-ts-comment": ["warn", {
-          "ts-expect-error": "allow-with-description",
-          "ts-ignore": "allow-with-description",
-          "ts-nocheck": "allow-with-description",
-          "ts-check": "allow-with-description",
-          "minimumDescriptionLength": 3
-        }]
+        "@typescript-eslint/ban-ts-comment": [
+          "warn",
+          {
+            "ts-expect-error": "allow-with-description",
+            "ts-ignore": "allow-with-description",
+            "ts-nocheck": "allow-with-description",
+            "ts-check": "allow-with-description",
+            "minimumDescriptionLength": 3
+          }
+        ]
       }
     },
     {
-      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.spec.js",
+        "*.spec.jsx"
+      ],
       "env": {
         "jest": true
       },
@@ -59,5 +91,8 @@
       "parser": "jsonc-eslint-parser",
       "rules": {}
     }
+  ],
+  "extends": [
+    "plugin:storybook/recommended"
   ]
 }
