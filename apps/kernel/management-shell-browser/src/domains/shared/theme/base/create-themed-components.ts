@@ -1,4 +1,3 @@
-import { alpha } from '@mui/system/colorManipulator';
 import { backdropClasses } from '@mui/material/Backdrop';
 import { filledInputClasses } from '@mui/material/FilledInput';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
@@ -7,17 +6,19 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { common } from '@mui/material/colors';
 import type { Components } from '@mui/material/styles/components';
 import type { PaletteColor, PaletteOptions } from '@mui/material/styles/createPalette';
+import { alpha } from '@mui/system/colorManipulator';
 
 interface Config {
   palette: PaletteOptions;
+  themeMode: 'light' | 'dark';
 }
 
-export const createComponents = ({ palette }: Config): Components => {
+export const createThemedComponents = ({ palette, themeMode }: Config): Components => {
   return {
     MuiAvatar: {
       styleOverrides: {
         root: {
-          backgroundColor: palette.neutral![300],
+          backgroundColor: palette.neutral![themeMode === 'light' ? 200 : 300],
           color: common.black,
         },
       },
@@ -26,7 +27,10 @@ export const createComponents = ({ palette }: Config): Components => {
       styleOverrides: {
         root: {
           [`&:not(.${backdropClasses.invisible})`]: {
-            backgroundColor: alpha(common.black, 0.5),
+            backgroundColor: alpha(
+              themeMode === 'light' ? palette.neutral![900] : common.black,
+              themeMode === 'light' ? 0.75 : 0.5,
+            ),
           },
         },
       },
@@ -35,7 +39,10 @@ export const createComponents = ({ palette }: Config): Components => {
       styleOverrides: {
         root: {
           [`&.${paperClasses.elevation1}`]: {
-            boxShadow: '0px 5px 22px rgba(0, 0, 0, 0.08), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.06)',
+            boxShadow:
+              themeMode === 'light'
+                ? '0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03)'
+                : '0px 5px 22px rgba(0, 0, 0, 0.08), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.06)',
           },
         },
       },
@@ -46,7 +53,7 @@ export const createComponents = ({ palette }: Config): Components => {
           color: palette.action!.active,
         },
         root: {
-          borderColor: palette.neutral![700],
+          borderColor: palette.neutral![themeMode === 'light' ? 200 : 700],
         },
       },
     },
@@ -80,7 +87,7 @@ export const createComponents = ({ palette }: Config): Components => {
     MuiFilledInput: {
       styleOverrides: {
         root: {
-          borderColor: palette.divider,
+          borderColor: themeMode === 'light' ? palette.neutral![200] : palette.divider,
           '&:hover': {
             backgroundColor: palette.action!.hover,
           },
@@ -105,7 +112,7 @@ export const createComponents = ({ palette }: Config): Components => {
           '&:hover': {
             backgroundColor: palette.action!.hover,
             [`& .${outlinedInputClasses.notchedOutline}`]: {
-              borderColor: palette.divider,
+              borderColor: themeMode === 'light' ? palette.neutral![200] : palette.divider,
             },
           },
           [`&.${outlinedInputClasses.focused}`]: {
@@ -123,7 +130,7 @@ export const createComponents = ({ palette }: Config): Components => {
           },
         },
         notchedOutline: {
-          borderColor: palette.divider,
+          borderColor: themeMode === 'light' ? palette.neutral![200] : palette.divider,
         },
       },
     },
@@ -149,8 +156,8 @@ export const createComponents = ({ palette }: Config): Components => {
       styleOverrides: {
         root: {
           [`& .${tableCellClasses.root}`]: {
-            backgroundColor: palette.neutral![800],
-            color: palette.neutral![400],
+            backgroundColor: themeMode === 'light' ? palette.neutral![50] : palette.neutral![800],
+            color: themeMode === 'light' ? palette.neutral![700] : palette.neutral![400],
           },
         },
       },
