@@ -1,5 +1,5 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
-import { ErrorBoundary } from './domains/kernel/errors/components/error-boundary';
+import { ErrorBoundary } from '../../shared-ui-components/src/lib/errors/error-boundary';
 import { reduxUserSessionRepository } from './domains/people/user-session/adapters/redux-repository';
 import { PrivateRoute } from './domains/people/user-session/components/private-route';
 import { SignInPage } from './domains/people/user-session/pages/sign-in';

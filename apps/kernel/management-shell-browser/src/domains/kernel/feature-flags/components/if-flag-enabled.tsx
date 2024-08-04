@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ErrorBoundary } from '../../errors/components/error-boundary';
+import { ErrorBoundary } from '../../../../../../shared-ui-components/src/lib/errors/error-boundary';
 import { FlaggedComponent } from './flagged-component';
 import { IfFlagEnabledProps } from './if-flag-enabled.types';
 
