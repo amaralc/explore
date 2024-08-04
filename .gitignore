@@ -89,3 +89,5 @@ fixtures-content**.json
 
 # Parcel
 .parcel-cache
+
+storybook-static

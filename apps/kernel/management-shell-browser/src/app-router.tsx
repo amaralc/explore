@@ -2,7 +2,7 @@ import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from '../../shared-ui-components/src/lib/errors/error-boundary';
 import { reduxUserSessionRepository } from './domains/people/user-session/adapters/redux-repository';
 import { PrivateRoute } from './domains/people/user-session/components/private-route';
-import { SignInPage } from './domains/people/user-session/pages/sign-in';
+import { SignInPage } from './domains/people/user-session/pages/sign-in/sign-in-page';
 import { UserProfilePage } from './domains/people/user/pages/profile';
 import { UserSettingsPage } from './domains/people/user/pages/settings';
 import { HomePage } from './domains/search/pages/home';

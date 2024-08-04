@@ -6,10 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "jsxImportSource": "@emotion/react",
-    "types": [
-      "vite/client",
-      "vitest"
-    ]
+    "types": ["vite/client", "vitest"]
   },
   "files": [],
   "include": [],
@@ -22,6 +19,9 @@
     },
     {
       "path": "./cypress/tsconfig.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
     }
   ],
   "extends": "../../../tsconfig.base.json"
