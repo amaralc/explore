@@ -11,7 +11,7 @@ export const userSessionSlice = createSlice({
   name: 'userSession',
   initialState,
   reducers: {
-    authenticationSuccess: (state, action: PayloadAction<IUser>) => {
+    setUserSession: (state, action: PayloadAction<IUser | null>) => {
       state.user = action.payload;
       state.isAuthenticated = true;
     },

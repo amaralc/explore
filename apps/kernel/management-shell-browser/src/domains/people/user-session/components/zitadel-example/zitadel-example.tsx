@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { zitadelConfig } from '../../../../../config';
-import Callback from './components/callback';
+import { OpenIdConnectCallback } from '../open-id-connect-callback';
 import Login from './components/login';
 
 function App() {
@@ -46,8 +46,8 @@ function App() {
             <Route
               path="/callback"
               element={
-                <Callback
-                  authenticated={authenticated}
+                <OpenIdConnectCallback
+                  isAuthenticated={authenticated}
                   setAuth={setAuthenticated}
                   handleLogout={signout}
                   userManager={zitadel.userManager}

@@ -1,3 +1,3 @@
 export interface IOauthSignInFormProps {
-  providers: Array<'google' | 'orcid' | 'microsoft' | 'passkey' | 'saml-sso'>;
+  providers: Array<'google' | 'orcid' | 'microsoft' | 'passkey' | 'saml-sso' | 'zitadel'>;
 }

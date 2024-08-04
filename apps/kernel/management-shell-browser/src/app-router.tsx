@@ -2,6 +2,7 @@ import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from '../../shared-ui-components/src/lib/errors/error-boundary';
 import { reduxUserSessionRepository } from './domains/people/user-session/adapters/redux-repository';
 import { PrivateRoute } from './domains/people/user-session/components/private-route';
+import { ZitadelAuthCallback } from './domains/people/user-session/components/zitadel-auth-callback';
 import { SignInPage } from './domains/people/user-session/pages/sign-in/page';
 import { UserProfilePage } from './domains/people/user/pages/profile';
 import { UserSettingsPage } from './domains/people/user/pages/settings';
@@ -20,8 +21,12 @@ export const routes: Array<RouteObject> = [
         element: <HomePage />,
       },
       {
-        path: 'sign-in',
+        path: 'auth/sign-in',
         element: <SignInPage />,
+      },
+      {
+        path: 'auth/callback/zitadel',
+        element: <ZitadelAuthCallback userSessionRepository={reduxUserSessionRepository} />,
       },
       {
         path: 'workspaces',

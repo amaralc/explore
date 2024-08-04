@@ -9,6 +9,13 @@
       "webRoot": "${workspaceFolder}/apps/people/skill-set/browser"
     },
     {
+      "name": "Debug kernel-management-shell-browser App",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/apps/kernel/management-shell-browser"
+    },
+    {
       "name": "Debug Express App",
       "type": "node",
       "request": "launch",

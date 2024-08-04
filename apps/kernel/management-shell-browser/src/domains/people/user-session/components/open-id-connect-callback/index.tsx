@@ -1,24 +1,17 @@
-import { User, UserManager } from 'oidc-client-ts';
-import { useEffect, useState } from 'react';
+import { User } from 'oidc-client-ts';
+import { FC, useEffect, useState } from 'react';
+import { IOpenIdConnectCallbackProps } from './types';
 
-type Props = {
-  authenticated: boolean | null;
-  setAuth: (authenticated: boolean | null) => void;
-  userManager: UserManager;
-  handleLogout: any;
-};
-
-const Callback = ({
-  authenticated,
+export const OpenIdConnectCallback: FC<IOpenIdConnectCallbackProps> = ({
+  isAuthenticated,
   setAuth,
   userManager,
-
   handleLogout,
-}: Props) => {
+}) => {
   const [userInfo, setUserInfo] = useState<User | null>(null);
 
   useEffect(() => {
-    if (authenticated === null) {
+    if (isAuthenticated === null) {
       userManager
         .signinRedirectCallback()
         .then((user: User) => {
@@ -33,7 +26,7 @@ const Callback = ({
           setAuth(false);
         });
     }
-    if (authenticated === true && userInfo === null) {
+    if (isAuthenticated === true && userInfo === null) {
       userManager
         .getUser()
         .then((user) => {
@@ -48,8 +41,8 @@ const Callback = ({
           setAuth(false);
         });
     }
-  }, [authenticated, userManager, setAuth]);
-  if (authenticated === true && userInfo) {
+  }, [isAuthenticated, userManager, setAuth]);
+  if (isAuthenticated === true && userInfo) {
     return (
       <div className="user">
         <h2>Welcome, {userInfo.profile.name}!</h2>
@@ -66,5 +59,3 @@ const Callback = ({
     return <div>Loading...</div>;
   }
 };
-
-export default Callback;
