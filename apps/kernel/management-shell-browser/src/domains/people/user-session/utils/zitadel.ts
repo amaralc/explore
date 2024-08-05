@@ -1,10 +1,10 @@
 import { ZitadelConfig, createZitadelAuth } from '@zitadel/react';
-import { zitadelConfig } from '../../../../config';
+import { oidcConfig } from '../../../../config';
 
 const config: ZitadelConfig = {
-  authority: zitadelConfig.authority, // ,'http://localhost:8080',
-  client_id: zitadelConfig.clientId,
-  redirect_uri: zitadelConfig.redirectUri, //'http://localhost:4200/auth/callback',
+  authority: oidcConfig.authority, // ,'http://localhost:8080',
+  client_id: oidcConfig.clientId,
+  redirect_uri: oidcConfig.redirectUri, //'http://localhost:4200/auth/callback',
 };
 
 export const zitadel = createZitadelAuth(config);

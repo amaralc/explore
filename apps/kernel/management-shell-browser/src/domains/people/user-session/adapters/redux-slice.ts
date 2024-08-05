@@ -5,6 +5,7 @@ import { IUserSession } from '../types';
 const initialState: IUserSession = {
   isAuthenticated: false,
   user: null,
+  isLoading: false,
 };
 
 export const userSessionSlice = createSlice({

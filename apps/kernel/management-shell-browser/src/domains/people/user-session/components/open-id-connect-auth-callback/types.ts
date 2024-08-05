@@ -1,5 +1,5 @@
 import { IUserSessionRepository } from '../../repository';
 
-export interface IZitadelAuthCallbackProps {
+export interface IOpenIdConnectAuthCallbackProps {
   userSessionRepository: IUserSessionRepository;
 }
