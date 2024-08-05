@@ -4,6 +4,6 @@ describe('Authentication', () => {
   });
 
   it('should redirect non-authenticated user to sign-in page', () => {
-    cy.url().should('include', '/sign-in');
+    cy.url().should('include', '/auth/sign-in');
   });
 });

@@ -20,6 +20,6 @@ type Story = StoryObj<typeof OauthSignInForm>;
 export const Primary: Story = {
   name: 'With Google and ORCID providers',
   args: {
-    providers: ['google', 'orcid'],
+    providers: ['google', 'orcid', 'zitadel'],
   },
 };
