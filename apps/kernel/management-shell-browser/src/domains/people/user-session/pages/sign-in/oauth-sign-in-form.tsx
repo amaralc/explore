@@ -23,11 +23,14 @@ export const OauthSignInForm: FC<IOauthSignInFormProps> = ({ providers }) => {
         }}
       >
         <Stack spacing={2} width={340}>
+          {providers.includes('zitadel') && <ZitadelSignInButton />}
+
           {providers.includes('google') && (
             <SsoSignInButton
               label={'Continue with Google'}
               borderColor={'#EA4335'}
-              icon={<GoogleIcon />}
+              icon={<GoogleIcon color={theme.palette.neutral[300]} />}
+              disabled
               onClick={() => console.log('google')}
             />
           )}
@@ -36,7 +39,8 @@ export const OauthSignInForm: FC<IOauthSignInFormProps> = ({ providers }) => {
             <SsoSignInButton
               label={'Continue with ORCID'}
               borderColor={'#a6ce39'}
-              icon={<OrcidIcon />}
+              icon={<OrcidIcon color={theme.palette.neutral[300]} />}
+              disabled
               onClick={() => console.log('orcid')}
             />
           )}
@@ -45,12 +49,11 @@ export const OauthSignInForm: FC<IOauthSignInFormProps> = ({ providers }) => {
             <SsoSignInButton
               label={'Continue with Microsoft'}
               borderColor={'#05a6f0'}
-              icon={<MicrosoftIcon />}
+              icon={<MicrosoftIcon color={theme.palette.neutral[300]} />}
+              disabled
               onClick={() => console.log('microsoft')}
             />
           )}
-
-          {providers.includes('zitadel') && <ZitadelSignInButton />}
 
           {providers.includes('passkey') || providers.includes('saml-sso') ? <Divider /> : null}
 
@@ -59,6 +62,7 @@ export const OauthSignInForm: FC<IOauthSignInFormProps> = ({ providers }) => {
               label={'Login with Passkey'}
               borderColor={theme.palette.common.black}
               icon={<KeyIcon />}
+              disabled
               onClick={() => console.log('passkey')}
             />
           )}
@@ -68,6 +72,7 @@ export const OauthSignInForm: FC<IOauthSignInFormProps> = ({ providers }) => {
               label={'Login with SAML SSO'}
               borderColor={theme.palette.common.black}
               icon={<LockOutlinedIcon />}
+              disabled
               onClick={() => console.log('saml-sso')}
             />
           )}
