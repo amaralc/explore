@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.93.0](https://github.com/amaralc/explore/compare/peerlab@0.92.4...peerlab@0.93.0) (2024-08-06)
+
+### Features
+
+- **PEER-729:** add theme settings domain elements ([02e9d27](https://github.com/amaralc/explore/commit/02e9d2783f22ec528e6cb71dc3584cd15b69b297))
+- **PEER-729:** setup app provider with basic redux store ([0e6dd8c](https://github.com/amaralc/explore/commit/0e6dd8ccc10d0237ae5e2eb2d1427467f16467b4))
+- **PEER-729:** use custom theme and refactor folder structure ([0d1dcb7](https://github.com/amaralc/explore/commit/0d1dcb7cf4e6ccd8a3e1c7309551e73c08fe73cb))
+- **PEER-730:** experiment with json-schema form for fake sign-in form ([a9d2369](https://github.com/amaralc/explore/commit/a9d2369443af18dcb61d3d37e34f98f706a85e41))
+- **PEER-732:** add router with draft sign-in search and dashboard pages ([e77cf86](https://github.com/amaralc/explore/commit/e77cf8687ee20c605d6d839710bc6c7de3e07931))
+- **PEER-735:** configure storybook and add ui for sso form with different providers ([8e07e50](https://github.com/amaralc/explore/commit/8e07e502e8ee3f53e5862f2dc3c17f61cf00fc95))
+- **PEER-736:** introduce zitadel to replace firebase ([91b066f](https://github.com/amaralc/explore/commit/91b066fc6e898b891739d68b0217a1e1fdd82203))
+- **PEER-737:** start configuring app to use oidc client with zitadel ([8449c40](https://github.com/amaralc/explore/commit/8449c40b0e1bd98bb4480976c079cdf3335275b9))
+- **PEER-739:** only allow sign-in with enabled providers ([f966f91](https://github.com/amaralc/explore/commit/f966f91c42b61ca7d1d383dc2b5a64904b26e3e1))
+
+### Bug Fixes
+
+- apps/people/skill-set/browser/Dockerfile to reduce vulnerabilities ([f505c83](https://github.com/amaralc/explore/commit/f505c835c692a6d67267782b941cb322bfa92fde))
+- apps/things/assets-catalog/rest-api/Dockerfile to reduce vulnerabilities ([bd56b6c](https://github.com/amaralc/explore/commit/bd56b6ce5f06472cc7b9385d8de955982e571cb1))
+- **PEER-737:** use react-oidc-context to manage user session ([43ac3dc](https://github.com/amaralc/explore/commit/43ac3dc00f8474fe029686b8781c6a358926d031))
+
 ## [0.92.4](https://github.com/amaralc/explore/compare/peerlab@0.92.3...peerlab@0.92.4) (2024-08-01)
 
 ### Bug Fixes
