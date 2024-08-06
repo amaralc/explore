@@ -10,6 +10,7 @@ export const ZitadelSignInButton = () => {
       label={'Continue with ZITADEL'}
       borderColor={'#ff8f00'}
       icon={<ZitadelIcon />}
+      disabled={false}
       onClick={() => auth.signinRedirect()}
     />
   );
