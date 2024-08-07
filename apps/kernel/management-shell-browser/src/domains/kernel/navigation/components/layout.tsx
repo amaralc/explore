@@ -1,6 +1,8 @@
 import { FC } from 'react';
+import { Outlet } from 'react-router-dom';
 import { ContextBar } from '../../../people/user-session/components/context/context-bar';
 import { ContextNavigation } from '../../../people/user-session/components/context/context-navigation';
+import { LayoutContent } from './layout-content';
 import { LayoutFooter } from './layout-footer';
 import { LayoutHeader } from './layout-header';
 import { LayoutRoot } from './layout-root';
@@ -11,6 +13,7 @@ const Layout = {
   Header: LayoutHeader,
   Footer: LayoutFooter,
   SideBar: LayoutSideBar,
+  Content: LayoutContent,
 };
 
 export const AppLayout: FC = () => {
@@ -21,6 +24,10 @@ export const AppLayout: FC = () => {
         <ContextNavigation />
       </Layout.Header>
       <Layout.SideBar />
+      <Layout.Content>
+        {/* Render nested route */}
+        <Outlet />
+      </Layout.Content>
       <Layout.Footer />
     </Layout.Root>
   );
