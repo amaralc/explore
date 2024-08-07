@@ -1,6 +1,6 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from '../../shared-ui-components/src/lib/errors/error-boundary';
-import { Layout } from './domains/kernel/navigation/components/layout';
+import { AppLayout } from './domains/kernel/navigation/components/layout';
 import { reduxUserSessionRepository } from './domains/people/user-session/adapters/redux-repository';
 import { OpenIdConnectAuthCallback } from './domains/people/user-session/components/open-id-connect-auth-callback';
 import { PrivateRoute } from './domains/people/user-session/components/private-route';
@@ -13,7 +13,7 @@ import { Dashboard } from './domains/shared/pages/dashboard';
 export const routes: Array<RouteObject> = [
   {
     path: '/',
-    element: <Layout />,
+    element: <AppLayout />,
     errorElement: <ErrorBoundary fallback={null} />,
     children: [
       {

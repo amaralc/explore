@@ -1,18 +1,27 @@
-import { FC, ReactNode } from 'react';
-import { Outlet } from 'react-router-dom';
+import { FC } from 'react';
+import { ContextBar } from '../../../people/user-session/components/context/context-bar';
+import { ContextNavigation } from '../../../people/user-session/components/context/context-navigation';
 import { LayoutFooter } from './layout-footer';
 import { LayoutHeader } from './layout-header';
 import { LayoutRoot } from './layout-root';
 import { LayoutSideBar } from './layout-sidebar';
 
-export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+const Layout = {
+  Root: LayoutRoot,
+  Header: LayoutHeader,
+  Footer: LayoutFooter,
+  SideBar: LayoutSideBar,
+};
+
+export const AppLayout: FC = () => {
   return (
-    <LayoutRoot>
-      <LayoutHeader />
-      <LayoutSideBar />
-      {children}
-      <LayoutFooter />
-      <Outlet />
-    </LayoutRoot>
+    <Layout.Root>
+      <Layout.Header>
+        <ContextBar />
+        <ContextNavigation />
+      </Layout.Header>
+      <Layout.SideBar />
+      <Layout.Footer />
+    </Layout.Root>
   );
 };
