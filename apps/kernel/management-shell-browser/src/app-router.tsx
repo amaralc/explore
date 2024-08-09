@@ -29,7 +29,7 @@ export const routes: Array<RouteObject> = [
         element: <OpenIdConnectAuthCallback userSessionRepository={reduxUserSessionRepository} />,
       },
       {
-        path: 'workspaces',
+        path: 'overview',
         element: <PrivateRoute element={<Dashboard />} userSessionRepository={reduxUserSessionRepository} />,
         children: [
           { path: 'profile', element: <UserProfilePage /> },

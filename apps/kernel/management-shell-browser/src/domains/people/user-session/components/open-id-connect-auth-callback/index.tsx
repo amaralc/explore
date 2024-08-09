@@ -17,7 +17,7 @@ export const OpenIdConnectAuthCallback: FC<IOpenIdConnectAuthCallbackProps> = ({
   }
 
   if (auth.isAuthenticated) {
-    return <Navigate to="/workspaces" />;
+    return <Navigate to="/overview" />;
   }
 
   return <Navigate to="/auth/sign-in" />;
