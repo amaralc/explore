@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.94.0](https://github.com/amaralc/explore/compare/peerlab@0.93.0...peerlab@0.94.0) (2024-08-17)
+
+### Features
+
+- **PEER-745:** add a type generator script to convert json-schemas in types ([2321c42](https://github.com/amaralc/explore/commit/2321c4292447271f2b7926dd06fb373879e45268))
+- **PEER-745:** add a type generator script to convert json-schemas in types ([3a40dbd](https://github.com/amaralc/explore/commit/3a40dbddaa99bc265235ac0f0f51a7036b403a24))
+
 ## [0.93.0](https://github.com/amaralc/explore/compare/peerlab@0.92.4...peerlab@0.93.0) (2024-08-06)
 
 ### Features
