@@ -1,7 +1,7 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
-import { IAssetV1Dto } from './entity';
+import { IAssetV1Dto } from './entity.schema.types';
 
 export abstract class AssetsV1DatabaseRepository {
   abstract generateUniqueId(): string;

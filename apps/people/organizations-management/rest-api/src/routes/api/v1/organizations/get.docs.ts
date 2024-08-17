@@ -1,11 +1,6 @@
-import { agentV1JsonSchema } from '@peerlab/people/organizations-management/base/domains/agents-v1/core/entity';
-import { organizationV1JsonSchema } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/entity';
-import { Type } from '@sinclair/typebox';
+import agentV1JsonSchema from '@peerlab/people/organizations-management/base/domains/agents-v1/core/entity.schema';
 import { OperationObject } from 'openapi3-ts/oas30';
-
-const filteredOrganizationsSchema = Type.Array(organizationV1JsonSchema, {
-  description: 'Filtered organizations v1',
-});
+import filteredOrganizationsSchema from './get.docs.schema';
 
 export const getOrganizationsV1Schema: OperationObject = {
   tags: ['/v1/organizations'],

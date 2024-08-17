@@ -1,45 +1,6 @@
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import { Static, Type } from '@sinclair/typebox';
-
-export const userV1JsonSchema = Type.Object({
-  id: Type.String({
-    minLength: 28,
-    maxLength: 28,
-    pattern: '^[A-Za-z0-9]{28}$',
-    description: 'The unique identifier for a user, expected to be 28 characters long.',
-  }),
-  email: Type.String({
-    format: 'email',
-    description: 'The email address of the user.',
-  }),
-  emailVerified: Type.Boolean({
-    description: "Flag indicating whether the user's email address has been verified.",
-  }),
-  displayName: Type.String({
-    description: 'The display name of the user.',
-  }),
-  photoURL: Type.Optional(
-    Type.String({
-      format: 'uri',
-      description: "The URL of the user's photo.",
-    }),
-  ),
-  disabled: Type.Boolean({
-    description: 'Flag indicating whether the user account is disabled.',
-  }),
-  createdAt: Type.String({
-    format: 'date-time',
-    description: 'The creation date and time of the user account.',
-    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z$',
-  }),
-  updatedAt: Type.String({
-    format: 'date-time',
-    description: 'The last update date and time of the user account.',
-    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z$',
-  }),
-});
-
-export type IUserV1Dto = Static<typeof userV1JsonSchema>;
+import userV1JsonSchema from './entity.schema';
+import { IUserV1Dto } from './entity.schema.types';
 
 export class UserV1Entity {
   id: string;

@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { firebaseIdFormat, iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
-import { IOrganizationV1Dto, OrganizationV1Entity } from './entity';
+import { OrganizationV1Entity } from './entity';
+import { IOrganizationV1Dto } from './entity.schema.types';
 
 describe('OrganizationV1Entity', () => {
   it('should create a valid organization entity', async () => {

@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+pnpm generate-types
 pnpm test:unit
 pnpm nx run kernel-shell-iac:production-terraform-init --skip-nx-cache
 pnpm nx run kernel-shell-iac:production-terraform-validate --skip-nx-cache

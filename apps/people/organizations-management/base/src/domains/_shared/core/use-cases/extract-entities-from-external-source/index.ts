@@ -1,7 +1,7 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
-import { IAgentV1Dto } from '../../../../agents-v1/core/entity';
+import { IAgentV1Dto } from '../../../../agents-v1/core/entity.schema.types';
 import { MultiCentralsV1DatabaseRepository } from '../../../../multi-central-v1/core/database-repository';
 import { ConvertMultiCentralV1InAgentV1Service } from '../../../../multi-central-v1/core/services/convert-multi-central-v1-in-agent-v1';
 import { ConvertMultiCentralV1InOrganizationV1Service } from '../../../../multi-central-v1/core/services/convet-multi-central-v1-in-organization-v1';

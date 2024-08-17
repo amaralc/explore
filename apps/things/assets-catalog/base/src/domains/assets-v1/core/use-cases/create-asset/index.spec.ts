@@ -1,13 +1,14 @@
 import { faker } from '@faker-js/faker';
 import { iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
-import { TaxonomicUnitV1NotFoundError } from '../../../taxonomic-units-v1/core/errors';
-import { TaxonomicUnitsV1DatabaseRepository } from '../../../taxonomic-units-v1/core/repository-database';
-import { InMemoryTaxonomicUnitsV1DatabaseRepository } from '../../../taxonomic-units-v1/core/repository-database-in-memory';
-import { IAssetV1Dto } from '../entity';
-import { AssetsV1DatabaseRepository } from '../repository-database';
-import { InMemoryAssetsV1DatabaseRepository } from '../repository-database-in-memory';
-import { CreateAssetV1InputDto, CreateAssetV1UseCase } from './create-asset';
+import { CreateAssetV1UseCase } from '.';
+import { TaxonomicUnitV1NotFoundError } from '../../../../taxonomic-units-v1/core/errors';
+import { TaxonomicUnitsV1DatabaseRepository } from '../../../../taxonomic-units-v1/core/repository-database';
+import { InMemoryTaxonomicUnitsV1DatabaseRepository } from '../../../../taxonomic-units-v1/core/repository-database-in-memory';
+import { IAssetV1Dto } from '../../entity.schema.types';
+import { AssetsV1DatabaseRepository } from '../../repository-database';
+import { InMemoryAssetsV1DatabaseRepository } from '../../repository-database-in-memory';
+import { ICreateAssetV1InputDto } from './input-dto.schema.types';
 
 describe('CreateAssetV1UseCase', () => {
   let assetsV1DatabaseRepository: AssetsV1DatabaseRepository;
@@ -26,7 +27,7 @@ describe('CreateAssetV1UseCase', () => {
   it('should not create asset associated to a nonexisting taxonomic unit', async () => {
     const nonExistingTaxonomicUnitSlug = 'nonexistent-taxonomic-unit-slug';
 
-    const createAssetV1InputDto: CreateAssetV1InputDto = {
+    const createAssetV1InputDto: ICreateAssetV1InputDto = {
       taxonomicUnitSlug: nonExistingTaxonomicUnitSlug,
       name: 'Valid Asset Name',
       tags: ['valid-fake-tag'],
@@ -47,7 +48,7 @@ describe('CreateAssetV1UseCase', () => {
       updatedAt: new Date().toISOString(),
     });
 
-    const createAssetV1InputDto: CreateAssetV1InputDto = {
+    const createAssetV1InputDto: ICreateAssetV1InputDto = {
       taxonomicUnitSlug: validTaxonomicUnitSlug,
       name: 'Valid Asset Name',
       tags: ['1.invalid.tag'],
@@ -68,7 +69,7 @@ describe('CreateAssetV1UseCase', () => {
       updatedAt: new Date().toISOString(),
     });
 
-    const createAssetV1InputDto: CreateAssetV1InputDto = {
+    const createAssetV1InputDto: ICreateAssetV1InputDto = {
       taxonomicUnitSlug: validTaxonomicUnitSlug,
       name: invalidAssetName as unknown as string, // should fail
       tags: ['valid-fake-tag'],
@@ -89,7 +90,7 @@ describe('CreateAssetV1UseCase', () => {
       updatedAt: new Date().toISOString(),
     });
 
-    const createAssetV1InputDto: CreateAssetV1InputDto = {
+    const createAssetV1InputDto: ICreateAssetV1InputDto = {
       taxonomicUnitSlug,
       name: 'Valid Asset Name',
       tags: ['valid-fake-tag'],

@@ -2,7 +2,7 @@ import { randomBytes } from 'crypto';
 import { CreateAgentV1FromUserV1CreationEventUseCase } from '.';
 import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
 import { InMemoryAgentsV1Repository } from '../../../../agents-v1/core/database-repository-in-memory';
-import { IAgentV1Dto } from '../../../../agents-v1/core/entity';
+import { IAgentV1Dto } from '../../../../agents-v1/core/entity.schema.types';
 import { fakeAgents } from '../../../../agents-v1/core/fixtures';
 import { UserV1AuthenticationEventDto, UsersV1EventsRepository } from '../../events-repository';
 import { InMemoryUsersV1EventsRepository } from '../../events-repository-in-memory';

@@ -1,19 +1,13 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import { Static, Type } from '@sinclair/typebox';
-import { TaxonomicUnitV1NotFoundError } from '../../../taxonomic-units-v1/core/errors';
-import { TaxonomicUnitsV1DatabaseRepository } from '../../../taxonomic-units-v1/core/repository-database';
-import { AssetV1Entity, IAssetV1Dto, assetV1JsonSchema } from '../entity';
-import { AssetsV1DatabaseRepository } from '../repository-database';
-
-export const createAssetV1InputDtoSchema = Type.Object({
-  name: assetV1JsonSchema.properties.name,
-  taxonomicUnitSlug: assetV1JsonSchema.properties.taxonomicUnitSlug,
-  tags: assetV1JsonSchema.properties.tags,
-});
-
-export type CreateAssetV1InputDto = Static<typeof createAssetV1InputDtoSchema>;
+import { TaxonomicUnitV1NotFoundError } from '../../../../taxonomic-units-v1/core/errors';
+import { TaxonomicUnitsV1DatabaseRepository } from '../../../../taxonomic-units-v1/core/repository-database';
+import { AssetV1Entity } from '../../entity';
+import { IAssetV1Dto } from '../../entity.schema.types';
+import { AssetsV1DatabaseRepository } from '../../repository-database';
+import createAssetV1InputDtoSchema from './input-dto.schema';
+import { ICreateAssetV1InputDto } from './input-dto.schema.types';
 
 export class CreateAssetV1UseCase {
   constructor(
@@ -31,7 +25,7 @@ export class CreateAssetV1UseCase {
     winstonLogger.info('Initializing CreateAssetV1UseCase...', log);
   }
 
-  public async execute(inputDto: CreateAssetV1InputDto): Promise<IAssetV1Dto> {
+  public async execute(inputDto: ICreateAssetV1InputDto): Promise<IAssetV1Dto> {
     const log: ILogMetadata = {
       scope: {
         moduleName: 'assets-v1',

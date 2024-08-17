@@ -1,7 +1,8 @@
 import { randomBytes } from 'crypto';
 import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
 import { AgentsV1DatabaseRepository } from './database-repository';
-import { AgentV1Entity, IAgentV1Dto } from './entity';
+import { AgentV1Entity } from './entity';
+import { IAgentV1Dto } from './entity.schema.types';
 
 export class InMemoryAgentsV1Repository implements AgentsV1DatabaseRepository {
   private inMemoryAgentsV1: Array<AgentV1Entity> = [];

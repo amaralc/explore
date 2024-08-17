@@ -1,7 +1,7 @@
 import { firebaseIdFormat, iso8601DateFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { ConvertMultiDepartmentV1InOrganizationV1Service } from '.';
-import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity';
-import { IMultiDepartmentV1Dto } from '../../entity';
+import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity.schema.types';
+import { IMultiDepartmentV1Dto } from '../../entity.schema.types';
 import { multiDepartmentsV1Fixtures } from '../../fixtures';
 
 describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {

@@ -1,5 +1,6 @@
 import { randomBytes } from 'crypto';
-import { AssetV1Entity, IAssetV1Dto } from './entity';
+import { AssetV1Entity } from './entity';
+import { IAssetV1Dto } from './entity.schema.types';
 
 export const fakeAssetsV1: Array<IAssetV1Dto> = [
   new AssetV1Entity({
