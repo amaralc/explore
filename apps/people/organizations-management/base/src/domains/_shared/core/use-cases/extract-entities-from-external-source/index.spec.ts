@@ -3,7 +3,7 @@ import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mon
 import { ExtractEntitiesFromExternalSourceUseCase } from '.';
 import { MongoDbAgentsV1DatabaseRepository } from '../../../../agents-v1/adapters/database-repository-mongodb';
 import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
-import { IAgentV1Dto } from '../../../../agents-v1/core/entity';
+import { IAgentV1Dto } from '../../../../agents-v1/core/entity.schema.types';
 import { FileSystemMultiCentralsV1Repository } from '../../../../multi-central-v1/adapters/database-repository-multi-file-system';
 import { MultiCentralsV1DatabaseRepository } from '../../../../multi-central-v1/core/database-repository';
 import { FileSystemMultiInstitutionsV1Repository } from '../../../../multi-institution-v1/adapters/database-repository-multi-file-system';

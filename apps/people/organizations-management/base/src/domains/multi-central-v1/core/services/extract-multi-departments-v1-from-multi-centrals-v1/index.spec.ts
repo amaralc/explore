@@ -1,5 +1,5 @@
-import { IMultiDepartmentV1Dto } from '../../../../multi-department-v1/core/entity';
-import { IMultiCentralV1Dto } from '../../entity';
+import { IMultiDepartmentV1Dto } from '../../../../multi-department-v1/core/entity.schema.types';
+import { IMultiCentralV1Dto } from '../../entity.schema.types';
 import { multiCentralsV1Fixtures } from '../../fixtures';
 import { ExtractMultiDepartmentsV1FromMultiCentralsV1Service } from './index';
 

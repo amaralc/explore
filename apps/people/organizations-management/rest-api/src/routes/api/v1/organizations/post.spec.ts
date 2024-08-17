@@ -3,7 +3,7 @@ import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-d
 import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
 import { fakeAgentsByIdOrEmail } from '@peerlab/people/organizations-management/base/domains/agents-v1/core/fixtures';
-import { IOrganizationV1Dto } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/entity';
+import { IOrganizationV1Dto } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/entity.schema.types';
 import { CreateOrganizationV1InputDto } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/use-cases/create-organization';
 import { randomBytes } from 'crypto';
 import supertest from 'supertest';

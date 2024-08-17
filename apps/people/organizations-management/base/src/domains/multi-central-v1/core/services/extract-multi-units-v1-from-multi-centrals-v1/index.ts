@@ -1,5 +1,5 @@
-import { IMultiUnitV1Dto } from '../../../../multi-unit-v1/core/entity';
-import { IMultiCentralV1Dto } from '../../entity';
+import { IMultiUnitV1Dto } from '../../../../multi-unit-v1/core/entity.schema.types';
+import { IMultiCentralV1Dto } from '../../entity.schema.types';
 
 export class ExtractMultiUnitsV1FromMultiCentralsV1Service {
   static execute(multiCentralsV1DtoList: Array<IMultiCentralV1Dto>): Array<IMultiUnitV1Dto> {

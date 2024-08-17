@@ -2,7 +2,7 @@ import { IPaginatedEntitiesV2 } from '@peerlab/kernel/shared-ts-utils/paginated-
 import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
 import { OrganizationsV1DatabaseRepository } from '../../database-repository';
 import { IFilterOrganizationV1InputDto } from '../../database-repository.types';
-import { IOrganizationV1Dto } from '../../entity';
+import { IOrganizationV1Dto } from '../../entity.schema.types';
 import { OwnerAgentNotFoundError } from '../../errors';
 
 export class FilterOrganizationsV1UseCase {

@@ -1,4 +1,4 @@
-import { organizationV1JsonSchema } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/entity';
+import organizationV1JsonSchema from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/entity.schema';
 import { OperationObject } from 'openapi3-ts/oas30';
 
 export const getV1OrganizationIdSchema: OperationObject = {

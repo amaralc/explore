@@ -1,7 +1,7 @@
 import { firebaseIdFormat, iso8601DateFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { randomBytes } from 'crypto';
 import { ConvertMultiUnitV1InAgentV1Service } from '.';
-import { IMultiUnitV1Dto } from '../../entity';
+import { IMultiUnitV1Dto } from '../../entity.schema.types';
 
 describe('ConvertMultiUnitV1InAgentV1Service', () => {
   it('should convert a multi-unit-v1 dto to the same agent-v1 dto given the same input', () => {

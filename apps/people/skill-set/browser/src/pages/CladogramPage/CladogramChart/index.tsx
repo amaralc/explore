@@ -2,7 +2,7 @@
 
 import * as d3 from 'd3';
 import { forwardRef, useEffect } from 'react';
-import { ICladogramNode } from '../types';
+import { ICladogramNode } from '../entity.schema.types';
 
 let linkExtension;
 let link;

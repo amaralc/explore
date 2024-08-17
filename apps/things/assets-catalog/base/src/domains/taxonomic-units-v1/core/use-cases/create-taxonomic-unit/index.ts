@@ -1,15 +1,11 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import { Static, Type } from '@sinclair/typebox';
-import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity, taxonomicUnitV1JsonSchema } from '../../entity';
+import { TaxonomicUnitV1Entity } from '../../entity';
+import { ITaxonomicUnitV1Dto } from '../../entity.schema.types';
 import { TaxonomicUnitsV1DatabaseRepository } from '../../repository-database';
-
-export const createTaxonomicUnitV1InputDtoSchema = Type.Object({
-  slug: taxonomicUnitV1JsonSchema.properties.slug,
-});
-
-export type CreateTaxonomicUnitV1InputDto = Static<typeof createTaxonomicUnitV1InputDtoSchema>;
+import createTaxonomicUnitV1InputDtoSchema from './input-dto.schema';
+import { ICreateTaxonomicUnitV1InputDto } from './input-dto.schema.types';
 
 export class CreateTaxonomicUnitV1UseCase {
   constructor(private readonly taxonomicUnitsV1DatabaseRepository: TaxonomicUnitsV1DatabaseRepository) {
@@ -25,7 +21,7 @@ export class CreateTaxonomicUnitV1UseCase {
     winstonLogger.info('Initializing CreateTaxonomicUnitV1UseCase...', log);
   }
 
-  public async execute(inputDto: CreateTaxonomicUnitV1InputDto): Promise<ITaxonomicUnitV1Dto> {
+  public async execute(inputDto: ICreateTaxonomicUnitV1InputDto): Promise<ITaxonomicUnitV1Dto> {
     const log: ILogMetadata = {
       scope: {
         moduleName: 'domains/taxonomic-units-v1',

@@ -1,7 +1,7 @@
 import { hashIntegerAndEntityNameIntoValidFirebaseUID } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-and-entity-name-into-valid-firebase-id';
 import { hashIntegerAndEntityNameIntoValidObjectId } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-and-entity-name-into-valid-object-id';
 import { stringToSlug } from '@peerlab/kernel/shared-ts-utils/string-to-slug';
-import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity';
+import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity.schema.types';
 import { MultiUnitV1Entity } from '../../entity';
 import { ConvertMultiUnitV1InAgentV1Service } from '../convert-multi-unit-v1-in-agent-v1';
 import { IConvertMultiUnitV1InOrganizationV1InputDto } from './dto';

@@ -4,7 +4,8 @@ import { IconCsv } from '@tabler/icons-react';
 import { ErrorObject } from 'ajv';
 import Papa from 'papaparse';
 import React, { useState } from 'react';
-import { ICladogramNode, nodeSchema } from '../types';
+import nodeSchema from '../entity.schema';
+import { ICladogramNode } from '../entity.schema.types';
 
 interface ICsvCladogramNodeUploaderProps {
   setJsonCladogramContent: (node: ICladogramNode) => void;

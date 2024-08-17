@@ -1,6 +1,7 @@
 import { hashIntegerAndEntityNameIntoValidFirebaseUID } from '@peerlab/kernel/shared-ts-utils/crypto/hash-integer-and-entity-name-into-valid-firebase-id';
 import { stringToSlug } from '@peerlab/kernel/shared-ts-utils/string-to-slug';
-import { AgentV1Entity, IAgentV1Dto } from '../../../../agents-v1/core/entity';
+import { AgentV1Entity } from '../../../../agents-v1/core/entity';
+import { IAgentV1Dto } from '../../../../agents-v1/core/entity.schema.types';
 import { IConvertMultiDepartmentV1InAgentV1InputDto } from './dto';
 
 export class ConvertMultiDepartmentV1InAgentV1Service {

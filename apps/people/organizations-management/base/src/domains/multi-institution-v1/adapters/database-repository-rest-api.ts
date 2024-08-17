@@ -1,7 +1,8 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { MultiInstitutionsV1DatabaseRepository } from '../core/database-repository';
-import { IMultiInstitutionV1Dto, MultiInstitutionV1Entity } from '../core/entity';
+import { MultiInstitutionV1Entity } from '../core/entity';
+import { IMultiInstitutionV1Dto } from '../core/entity.schema.types';
 
 export class RestApiMultiInstitutionsV1DatabaseRepository implements MultiInstitutionsV1DatabaseRepository {
   constructor(private readonly multiInstitutionsV1BaseUrl: string) {}

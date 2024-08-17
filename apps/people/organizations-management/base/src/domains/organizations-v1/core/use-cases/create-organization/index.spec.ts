@@ -6,7 +6,7 @@ import { AgentV1Entity } from '../../../../agents-v1/core/entity';
 import { fakeAgents, fakeAgentsByIdOrEmail } from '../../../../agents-v1/core/fixtures';
 import { OrganizationsV1DatabaseRepository } from '../../database-repository';
 import { InMemoryOrganizationsV1Repository } from '../../database-repository-in-memory';
-import { IOrganizationV1Dto } from '../../entity';
+import { IOrganizationV1Dto } from '../../entity.schema.types';
 
 describe('Create OrganizationV1 with free plan subscription', () => {
   let organizationsV1Repository: OrganizationsV1DatabaseRepository;
