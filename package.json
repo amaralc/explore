@@ -210,7 +210,6 @@
     "@rjsf/utils": "^5.19.4",
     "@rjsf/validator-ajv8": "^5.19.4",
     "@scalar/express-api-reference": "^0.4.45",
-    "@sinclair/typebox": "0.32.15",
     "@swc/helpers": "0.5.3",
     "@tabler/icons-react": "^3.5.0",
     "@types/cors": "2.8.17",
