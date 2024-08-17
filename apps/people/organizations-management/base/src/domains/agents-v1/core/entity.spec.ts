@@ -1,6 +1,7 @@
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { randomBytes } from 'crypto';
-import { AgentV1Entity, IAgentV1Dto } from './entity';
+import { AgentV1Entity } from './entity';
+import { IAgentV1Dto } from './entity.schema.types';
 
 describe('AgentV1Entity', () => {
   it('should not create an agent with an invalid email', async () => {

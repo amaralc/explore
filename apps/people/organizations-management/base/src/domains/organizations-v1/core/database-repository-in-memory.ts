@@ -8,7 +8,7 @@ import {
 import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
 import { OrganizationsV1DatabaseRepository } from './database-repository';
 import { IFilterOrganizationV1InputDto } from './database-repository.types';
-import { IOrganizationV1Dto } from './entity';
+import { IOrganizationV1Dto } from './entity.schema.types';
 
 export class InMemoryOrganizationsV1Repository implements OrganizationsV1DatabaseRepository {
   constructor(private organizations: Array<IOrganizationV1Dto> = []) {}

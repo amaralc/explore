@@ -20,7 +20,7 @@ import { FoldingTreeStructure } from './FoldingTreeStructure';
 import { LabeledStars } from './LabeledStars';
 import { ToggleBranchLengthButton } from './ToggleBranchLengthButton';
 import { TogglePropertyButton } from './TogglePropertyButton';
-import { ICladogramNode } from './types';
+import { ICladogramNode } from './entity.schema.types';
 
 export const CladogramPage = () => {
   const ref = useRef<HTMLDivElement | null>(null);

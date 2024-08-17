@@ -1,5 +1,5 @@
 import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
-import { IAgentV1Dto } from './entity';
+import { IAgentV1Dto } from './entity.schema.types';
 
 export abstract class AgentsV1DatabaseRepository {
   abstract generateUniqueId(): string;

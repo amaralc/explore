@@ -2,7 +2,7 @@ import { IPaginatedEntities, IPaginatedEntitiesV2 } from '@peerlab/kernel/shared
 import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
 import { IFilterOrganizationV1InputDto } from './database-repository.types';
-import { IOrganizationV1Dto } from './entity';
+import { IOrganizationV1Dto } from './entity.schema.types';
 
 export abstract class OrganizationsV1DatabaseRepository {
   abstract generateUniqueId(): string;

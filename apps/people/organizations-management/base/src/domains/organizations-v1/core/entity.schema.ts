@@ -1,9 +1,9 @@
 import { JSONSchema } from 'json-schema-to-typescript';
 import agentV1JsonSchema from '../../agents-v1/core/entity.schema';
 
-const schema = {
+const organizationV1JsonSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
-  title: 'IOrganizationV1DtoSchema',
+  title: 'IOrganizationV1Dto',
   type: 'object',
   properties: {
     id: {
@@ -68,4 +68,4 @@ const schema = {
   additionalProperties: false,
 } as const satisfies JSONSchema;
 
-export default schema;
+export default organizationV1JsonSchema;

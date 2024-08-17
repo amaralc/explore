@@ -2,14 +2,10 @@ import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/erro
 import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-entity';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import 'reflect-metadata';
-import schema from './entity.schema';
-import { IOrganizationV1DtoSchema } from './entity.schema.types';
+import organizationV1JsonSchema from './entity.schema';
+import { IOrganizationV1Dto } from './entity.schema.types';
 
-export const organizationV1JsonSchema = schema;
-
-export type IOrganizationV1Dto = IOrganizationV1DtoSchema;
-
-export class OrganizationV1Entity {
+export class OrganizationV1Entity implements IOrganizationV1Dto {
   id: string;
   nickname: string;
   email: string;

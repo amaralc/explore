@@ -1,13 +1,13 @@
 import { firebaseIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { ConvertMultiCentralV1InOrganizationV1Service } from '.';
+import { IMultiCentralV1Dto } from '../../entity.schema.types';
 import { multiCentralsV1Fixtures } from '../../fixtures';
-import { IConvertMultiCentralV1InOrganizationV1InputDto } from './dto';
 
 describe('ConvertMultiCentralV1InOrganizationV1Service', () => {
   it('should convert multi-central-v1 in organization-v1 with valid attributes', () => {
     // Given
     const multiCentralV1Dto = multiCentralsV1Fixtures[0];
-    const inputDto: IConvertMultiCentralV1InOrganizationV1InputDto = multiCentralV1Dto;
+    const inputDto: IMultiCentralV1Dto = multiCentralV1Dto;
 
     // When
     const organizationV1Dto = ConvertMultiCentralV1InOrganizationV1Service.execute(inputDto);

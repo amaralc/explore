@@ -5,7 +5,8 @@ import { Collection, ObjectId } from 'mongodb';
 import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
 import { OrganizationsV1DatabaseRepository } from '../core/database-repository';
 import { IFilterOrganizationV1InputDto } from '../core/database-repository.types';
-import { IOrganizationV1Dto, OrganizationV1Entity } from '../core/entity';
+import { OrganizationV1Entity } from '../core/entity';
+import { IOrganizationV1Dto } from '../core/entity.schema.types';
 
 type IMongoDbOrganization = { _id: ObjectId } & Omit<IOrganizationV1Dto, 'id'>;
 

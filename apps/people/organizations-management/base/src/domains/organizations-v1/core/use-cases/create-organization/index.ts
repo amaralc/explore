@@ -4,7 +4,7 @@ import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json
 import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
 import { AgentV1Entity } from '../../../../agents-v1/core/entity';
 import { OrganizationsV1DatabaseRepository } from '../../database-repository';
-import { IOrganizationV1Dto, OrganizationV1Entity } from '../../entity';
+import { OrganizationV1Entity } from '../../entity';
 import { OwnerAgentNotFoundError } from '../../errors';
 import {
   DuplicatedIndividualAgentEmailError,
@@ -12,6 +12,7 @@ import {
   FreeOrganizationLimitReachedError,
 } from './errors';
 
+import { IOrganizationV1Dto } from '../../entity.schema.types';
 import schema from './input-dto.schema';
 import { ICreateOrganizationV1InputDtoSchema } from './input-dto.schema.types';
 

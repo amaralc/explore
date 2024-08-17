@@ -1,6 +1,6 @@
 import { UserRecord } from 'firebase-admin/auth';
 import { UsersV1DatabaseRepository } from '../core/database-repository';
-import { IUserV1Dto } from '../core/entity';
+import { IUserV1Dto } from '../core/entity.schema.types';
 import { UserV1AuthenticationEventDto } from '../core/events-repository';
 
 export class FirebaseUsersV1DatabaseRepository implements UsersV1DatabaseRepository {

@@ -8,9 +8,9 @@
 /**
  * Filtered organizations v1
  */
-export type IFilteredOrganizationsV1OutputDto = IOrganizationV1DtoSchema[];
+export type IFilteredOrganizationsV1OutputDto = IOrganizationV1Dto[];
 
-export interface IOrganizationV1DtoSchema {
+export interface IOrganizationV1Dto {
   /**
    * The unique identifier of an agent as a hexadecimal string of 24 characters.
    */

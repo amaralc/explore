@@ -1,29 +1,7 @@
 import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-entity';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import { Static, Type } from '@sinclair/typebox';
-
-export const multiDepartmentV1Schema = Type.Object({
-  id: Type.Integer({
-    minimum: 0,
-    maximum: 4294967295,
-    description: 'The unique identifier of the department as an integer',
-  }),
-  instituicao_id: Type.Integer({
-    minimum: 0,
-    maximum: 4294967295,
-    description: 'The unique identifier of the institution that the department belongs to as an integer',
-  }),
-  unidade_id: Type.Integer({
-    minimum: 0,
-    maximum: 4294967295,
-    description: 'The unique identifier of the unit that the department belongs to as an integer',
-  }),
-  nome: Type.String({
-    description: 'The name of the department',
-  }),
-});
-
-export type IMultiDepartmentV1Dto = Static<typeof multiDepartmentV1Schema>;
+import multiDepartmentV1Schema from './entity.schema';
+import { IMultiDepartmentV1Dto } from './entity.schema.types';
 
 export class MultiDepartmentV1Entity {
   constructor(inputDto: IMultiDepartmentV1Dto) {

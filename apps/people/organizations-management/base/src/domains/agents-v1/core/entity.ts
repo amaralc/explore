@@ -1,11 +1,9 @@
 import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-entity';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import { Type } from '@sinclair/typebox';
 import { randomBytes } from 'crypto';
+import { JSONSchema } from 'json-schema-to-typescript';
 import agentV1JsonSchema from './entity.schema';
-import { IAgentV1Dto as IGeneratedAgentV1Dto } from './entity.schema.types';
-
-export type IAgentV1Dto = IGeneratedAgentV1Dto;
+import { IAgentV1Dto } from './entity.schema.types';
 
 export class AgentV1Entity {
   id: string;
@@ -25,7 +23,7 @@ export class AgentV1Entity {
   }
 
   static generateNicknameFromEmail(email: string) {
-    const emailSchema = Type.String({ format: 'email' });
+    const emailSchema = { format: 'email', type: 'string' } as const satisfies JSONSchema;
     schemaValidator.validateOrReject(emailSchema, email);
 
     // Get email prefix

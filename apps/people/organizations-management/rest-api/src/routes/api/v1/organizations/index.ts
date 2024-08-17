@@ -1,15 +1,13 @@
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
-import {
-  defaultPaginationV1Dto,
-  urlQueryParamsPaginationV1DtoSchema,
-} from '@peerlab/kernel/shared-ts-utils/pagination-dto';
+import { defaultPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
 import { OwnerAgentNotFoundError } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/errors';
 import { FreeOrganizationLimitReachedError } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/use-cases/create-organization/errors';
 import express from 'express';
+import getOrganizationsV1UrlQueryParamsJsonSchema from './get-request.schema';
 
 export default class V1OrganizationsController {
   configurationManager: ConfigurationManager;
@@ -66,18 +64,8 @@ export default class V1OrganizationsController {
       steps: [],
     };
     try {
-      log.steps.push({ message: 'Validate pagination parameters' });
-      const paginationParameters = {
-        page: req.query.page, // This can also be an array or undefined and that's why we are going to validate it
-        limit: req.query.limit, // This can also be an array or undefined and that's why we are going to validate it
-      };
-      schemaValidator.validateOrReject(urlQueryParamsPaginationV1DtoSchema, paginationParameters);
-
       log.steps.push({ message: 'Validate query parameters' });
-      const queryParameters = {
-        ownerAgentId: req.query.ownerAgentId,
-      };
-      schemaValidator.validateOrReject(urlQueryParamsPaginationV1DtoSchema, queryParameters);
+      schemaValidator.validateOrReject(getOrganizationsV1UrlQueryParamsJsonSchema, req.query);
 
       log.steps.push({ message: 'Initialize and execute use case' });
       const { filterOrganizationsV1 } = await this.configurationManager.getUseCases();

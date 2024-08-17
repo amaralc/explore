@@ -1,7 +1,7 @@
 import { Group, HoverCard, Rating, RenderTreeNodePayload, Tooltip, Tree, TreeNodeData } from '@mantine/core';
 import { IconFile, IconFolder, IconFolderOpen, IconLeaf } from '@tabler/icons-react';
 import { LabeledStars } from '../LabeledStars';
-import { ICladogramNode } from '../types';
+import { ICladogramNode } from '../entity.schema.types';
 
 interface FileIconProps {
   name: string;

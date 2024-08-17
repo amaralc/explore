@@ -3,7 +3,7 @@ import { IconDownload } from '@tabler/icons-react';
 import { saveAs } from 'file-saver';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
-import { ICladogramNode } from '../types';
+import { ICladogramNode } from '../entity.schema.types';
 
 const CladogramCSVDownloader = ({ node }: { node: ICladogramNode | null }) => {
   const [csvData, setCsvData] = useState<string | null>(null);

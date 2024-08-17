@@ -1,4 +1,4 @@
-import { IMultiUnitV1Dto } from './entity';
+import { IMultiUnitV1Dto } from './entity.schema.types';
 
 export const multiUnitsV1Fixtures: Array<IMultiUnitV1Dto> = [
   {

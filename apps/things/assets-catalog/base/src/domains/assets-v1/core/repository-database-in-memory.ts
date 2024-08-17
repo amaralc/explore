@@ -3,7 +3,7 @@ import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logg
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { randomBytes } from 'crypto';
-import { IAssetV1Dto } from './entity';
+import { IAssetV1Dto } from './entity.schema.types';
 import { AssetsV1DatabaseRepository } from './repository-database';
 
 export class InMemoryAssetsV1DatabaseRepository implements AssetsV1DatabaseRepository {

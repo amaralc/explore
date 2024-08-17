@@ -3,7 +3,8 @@ import { randomBytes } from 'crypto';
 import { Collection } from 'mongodb';
 import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/types';
 import { AgentsV1DatabaseRepository } from '../core/database-repository';
-import { AgentV1Entity, IAgentV1Dto } from '../core/entity';
+import { AgentV1Entity } from '../core/entity';
+import { IAgentV1Dto } from '../core/entity.schema.types';
 
 type IMongoDbAgentV1 = { _id: string } & Omit<IAgentV1Dto, 'id'>; // We are going to use the same id for both MongoDB and Firebase as string
 

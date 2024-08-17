@@ -2,7 +2,8 @@ import { readJsonFile } from '@peerlab/kernel/shared-ts-utils/files/read-json-fi
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { MultiInstitutionsV1DatabaseRepository } from '../core/database-repository';
-import { IMultiInstitutionV1Dto, MultiInstitutionV1Entity } from '../core/entity';
+import { MultiInstitutionV1Entity } from '../core/entity';
+import { IMultiInstitutionV1Dto } from '../core/entity.schema.types';
 
 export class FileSystemMultiInstitutionsV1Repository implements MultiInstitutionsV1DatabaseRepository {
   constructor(

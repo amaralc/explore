@@ -5,7 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface IOrganizationV1DtoSchema {
+export interface IOrganizationV1Dto {
   /**
    * The unique identifier of an agent as a hexadecimal string of 24 characters.
    */
