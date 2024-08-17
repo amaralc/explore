@@ -1,11 +1,10 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import { Static, Type } from '@sinclair/typebox';
 import { AgentsV1DatabaseRepository } from '../../../../agents-v1/core/database-repository';
 import { AgentV1Entity } from '../../../../agents-v1/core/entity';
 import { OrganizationsV1DatabaseRepository } from '../../database-repository';
-import { IOrganizationV1Dto, OrganizationV1Entity, organizationV1JsonSchema } from '../../entity';
+import { IOrganizationV1Dto, OrganizationV1Entity } from '../../entity';
 import { OwnerAgentNotFoundError } from '../../errors';
 import {
   DuplicatedIndividualAgentEmailError,
@@ -13,14 +12,11 @@ import {
   FreeOrganizationLimitReachedError,
 } from './errors';
 
-export const createOrgaNizationV1InputDtoSchema = Type.Object({
-  nickname: organizationV1JsonSchema.properties.nickname,
-  ownerAgentId: organizationV1JsonSchema.properties.ownerAgentId,
-  email: organizationV1JsonSchema.properties.email,
-  planSubscriptionName: organizationV1JsonSchema.properties.planSubscriptionName, // If it wasn't for the CustomEnum I could use Type.Pick
-});
+import schema from './input-dto.schema';
+import { ICreateOrganizationV1InputDtoSchema } from './input-dto.schema.types';
 
-export type CreateOrganizationV1InputDto = Static<typeof createOrgaNizationV1InputDtoSchema>;
+export const createOrgaNizationV1InputDtoSchema = schema;
+export type CreateOrganizationV1InputDto = ICreateOrganizationV1InputDtoSchema;
 
 export class CreateOrganizationV1UseCase {
   private organizationsV1Repository: OrganizationsV1DatabaseRepository;

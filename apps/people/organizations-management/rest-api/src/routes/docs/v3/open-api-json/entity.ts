@@ -1,5 +1,6 @@
+import agentV1DtoJsonSchema from '@peerlab/people/organizations-management/base/domains/agents-v1/core/entity.schema';
 import { OpenApiBuilder } from 'openapi3-ts/oas30';
-import { AgentV1Entity, agentV1JsonSchema } from '../../../../../../base/src/domains/agents-v1/core/entity';
+import { AgentV1Entity } from '../../../../../../base/src/domains/agents-v1/core/entity';
 import {
   OrganizationV1Entity,
   organizationV1JsonSchema,
@@ -25,9 +26,9 @@ export class OpenApiV3Entity extends OpenApiBuilder {
       description: 'Local server',
     });
 
-    this.addSchema(AgentV1Entity.name, agentV1JsonSchema);
-
+    this.addSchema(AgentV1Entity.name, agentV1DtoJsonSchema);
     this.addSchema(OrganizationV1Entity.name, organizationV1JsonSchema);
+
     this.addPath('/api/v1/organizations', organizationsV1ControllerSchema);
     this.addPath('/api/v1/organizations/{id}', v1OrganizationsIdControllerSchema);
     this.addPath('/api/v1/organizations:seed', organizationsV1SeedControllerSchema);
