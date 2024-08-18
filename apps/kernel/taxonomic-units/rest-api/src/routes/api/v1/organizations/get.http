@@ -1,0 +1,6 @@
+@BASE_URL=http://localhost:8080
+@OWNER_AGENT_ID=000000fdfb4c7f839a0bee440000
+
+## Filter by agent id
+GET {{BASE_URL}}/api/v1/organizations?ownerAgentId={{OWNER_AGENT_ID}} HTTP/1.1
+Content-Type: application/json

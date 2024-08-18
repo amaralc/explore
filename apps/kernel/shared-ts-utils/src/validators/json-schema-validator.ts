@@ -1,6 +1,7 @@
-import Ajv, { ErrorObject, Schema } from 'ajv';
+import Ajv, { AnySchemaObject, ErrorObject, Schema } from 'ajv';
 import addFormats from 'ajv-formats';
 import { ValidationExceptionV2Error } from '../errors/validation-exception-v1';
+import jsonSchemaMetaSchemaV4 from './json-schema-draft-07.schema';
 
 export class SchemaValidator {
   private readonly ajv: Ajv;
@@ -44,6 +45,8 @@ export class SchemaValidator {
         'binary',
       ],
     );
+
+    this.ajv.addMetaSchema(jsonSchemaMetaSchemaV4, 'http://json-schema.org/draft-04/schema#');
   }
 
   public validate(
@@ -76,6 +79,10 @@ export class SchemaValidator {
     if (!isValid) {
       throw new ValidationExceptionV2Error(errors);
     }
+  }
+
+  public addMetaSchema(schema: AnySchemaObject, key: string) {
+    this.ajv.addMetaSchema(schema, key);
   }
 }
 
