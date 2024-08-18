@@ -66,4 +66,19 @@ describe('TaxonomicUnitV1Entity', () => {
         }),
     ).toThrow(ValidationExceptionV2Error);
   });
+
+  it.each([1, ['incorrect'], 'wrong', undefined, NaN])(
+    'should not create taxonomic unit v1 if schema does not conform with json schema',
+    (invalidSchema) => {
+      expect(
+        () =>
+          new TaxonomicUnitV1Entity({
+            version: 1,
+            name: 'valid-taxonomic-unit-name',
+            // @ts-ignore
+            schema: invalidSchema,
+          }),
+      ).toThrow(ValidationExceptionV2Error);
+    },
+  );
 });
