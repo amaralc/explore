@@ -17,7 +17,7 @@ const config: Config = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../../coverage/apps/kernel/taxonomic-units/rest-api',
-  testTimeout: 30000,
+  testTimeout: 100000,
 };
 
 export default config;

@@ -1,21 +1,11 @@
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
-import { ExtractEntitiesFromExternalSourceUseCase } from '../domains/_shared/core/use-cases/extract-entities-from-external-source';
-import { MongoDbAgentsV1DatabaseRepository } from '../domains/agents-v1/adapters/database-repository-mongodb';
-import { AgentsV1DatabaseRepository } from '../domains/agents-v1/core/database-repository';
-import { fakeAgents } from '../domains/agents-v1/core/fixtures';
-import { FileSystemMultiCentralsV1Repository } from '../domains/multi-central-v1/adapters/database-repository-multi-file-system';
-import { RestApiMultiCentralsV1DatabaseRepository } from '../domains/multi-central-v1/adapters/database-repository-multi-rest-api';
-import { MultiCentralsV1DatabaseRepository } from '../domains/multi-central-v1/core/database-repository';
-import { FileSystemMultiInstitutionsV1Repository } from '../domains/multi-institution-v1/adapters/database-repository-multi-file-system';
-import { RestApiMultiInstitutionsV1DatabaseRepository } from '../domains/multi-institution-v1/adapters/database-repository-rest-api';
-import { MultiInstitutionsV1DatabaseRepository } from '../domains/multi-institution-v1/core/database-repository';
-import { MongoDbOrganizationsV1Repository } from '../domains/taxonomic-unit-v1/adapters/database-repository-mongodb';
-import { OrganizationsV1DatabaseRepository } from '../domains/taxonomic-unit-v1/core/database-repository';
-import { fakeOrganizations } from '../domains/taxonomic-unit-v1/core/fixtures';
-import { CreateOrganizationV1UseCase } from '../domains/taxonomic-unit-v1/core/use-cases/create-organization';
-import { FilterOrganizationsV1UseCase } from '../domains/taxonomic-unit-v1/core/use-cases/filter-organizations';
-import { GetOrganizationV1ByIdUseCase } from '../domains/taxonomic-unit-v1/core/use-cases/get-organization-by-id';
+import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '../domains/taxonomic-unit-v1/adapters/database-repository-mongodb';
+import { TaxonomicUnitsV1DatabaseRepository } from '../domains/taxonomic-unit-v1/core/database-repository';
+import { fakeTaxonomicUnitsV1 } from '../domains/taxonomic-unit-v1/core/fixtures';
+import { CreateFirstVersionOfTaxonomicUnitV1UseCase } from '../domains/taxonomic-unit-v1/core/use-cases/create-first-version';
+import { FilterTaxonomicUnitsV1UseCase } from '../domains/taxonomic-unit-v1/core/use-cases/filter';
+import { GetTaxonomicUnitV1ByIdUseCase } from '../domains/taxonomic-unit-v1/core/use-cases/get-by-id';
 import { defaultConfiguration } from './default-configuration';
 
 export type IAppConfiguration = typeof defaultConfiguration;
@@ -26,16 +16,12 @@ export class ConfigurationManager {
   isProduction: boolean;
   databaseDriver: MongoDbDriver;
   repositories?: {
-    organizationsV1: OrganizationsV1DatabaseRepository;
-    agentsV1: AgentsV1DatabaseRepository;
-    multiInstitutionsV1: MultiInstitutionsV1DatabaseRepository;
-    multiCentralsV1: MultiCentralsV1DatabaseRepository;
+    taxonomicUnitsV1: TaxonomicUnitsV1DatabaseRepository;
   };
   useCases?: {
-    extractEntitiesFromExternalSource: ExtractEntitiesFromExternalSourceUseCase;
-    createOrganizationV1UseCase: CreateOrganizationV1UseCase;
-    filterOrganizationsV1: FilterOrganizationsV1UseCase;
-    getOrganizationV1ById: GetOrganizationV1ByIdUseCase;
+    createFirstVersionOfTaxonomicUnitV1UseCase: CreateFirstVersionOfTaxonomicUnitV1UseCase;
+    filterOrganizationsV1: FilterTaxonomicUnitsV1UseCase;
+    getTaxonomicUnitV1ById: GetTaxonomicUnitV1ByIdUseCase;
   };
 
   constructor(configOverride: IAppConfiguration = defaultConfiguration) {
@@ -83,60 +69,37 @@ export class ConfigurationManager {
       return;
     }
 
-    const multiInstitutionsV1BaseUrl = this.config.externalServices.multiInstitutionsV1BaseUrl;
-    const multiCentralsV1BaseUrl = this.config.externalServices.multiCentralsV1BaseUrl;
-
     if (this.config.server.nodeEnv === 'production') {
       winstonLogger.info('Production mode');
       this.repositories = {
-        organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
-        agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
-        multiInstitutionsV1: new RestApiMultiInstitutionsV1DatabaseRepository(multiInstitutionsV1BaseUrl),
-        multiCentralsV1: new RestApiMultiCentralsV1DatabaseRepository(multiCentralsV1BaseUrl),
+        taxonomicUnitsV1: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
       };
 
-      await this.repositories.agentsV1.generateIndexes();
-      await this.repositories.organizationsV1.generateIndexes();
+      await this.repositories.taxonomicUnitsV1.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'development') {
       winstonLogger.info('Development mode');
       this.repositories = {
-        organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
-        agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
-        multiInstitutionsV1: new FileSystemMultiInstitutionsV1Repository(),
-        multiCentralsV1: new FileSystemMultiCentralsV1Repository(),
+        taxonomicUnitsV1: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
       };
-      await this.repositories.agentsV1.generateIndexes();
+      await this.repositories.taxonomicUnitsV1.generateIndexes();
     }
 
     if (this.config.server.nodeEnv === 'test') {
       winstonLogger.info('Test mode');
       this.repositories = {
-        organizationsV1: new MongoDbOrganizationsV1Repository(this.getDatabaseDriver()),
-        agentsV1: new MongoDbAgentsV1DatabaseRepository(this.getDatabaseDriver()),
-        multiInstitutionsV1: new FileSystemMultiInstitutionsV1Repository(),
-        multiCentralsV1: new FileSystemMultiCentralsV1Repository(),
+        taxonomicUnitsV1: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
       };
-      await this.repositories.agentsV1.generateIndexes();
+      await this.repositories.taxonomicUnitsV1.generateIndexes();
     }
 
     this.useCases = {
-      extractEntitiesFromExternalSource: new ExtractEntitiesFromExternalSourceUseCase(
-        this.repositories.multiInstitutionsV1,
-        this.repositories.multiCentralsV1,
-        this.repositories.agentsV1,
-        this.repositories.organizationsV1,
+      createFirstVersionOfTaxonomicUnitV1UseCase: new CreateFirstVersionOfTaxonomicUnitV1UseCase(
+        this.repositories.taxonomicUnitsV1,
       ),
-      createOrganizationV1UseCase: new CreateOrganizationV1UseCase(
-        this.repositories.organizationsV1,
-        this.repositories.agentsV1,
-      ),
-      getOrganizationV1ById: new GetOrganizationV1ByIdUseCase(this.repositories.organizationsV1),
-      filterOrganizationsV1: new FilterOrganizationsV1UseCase(
-        this.repositories.organizationsV1,
-        this.repositories.agentsV1,
-      ),
+      getTaxonomicUnitV1ById: new GetTaxonomicUnitV1ByIdUseCase(this.repositories.taxonomicUnitsV1),
+      filterOrganizationsV1: new FilterTaxonomicUnitsV1UseCase(this.repositories.taxonomicUnitsV1),
     };
   }
 
@@ -150,11 +113,10 @@ export class ConfigurationManager {
 
   async seedDatabase() {
     if (this.config.server.nodeEnv !== 'production') {
-      winstonLogger.info('Seeding database with fake agents...');
-      const { count: agentsCount } = await this.repositories.agentsV1.createMany(fakeAgents);
-      winstonLogger.info(`Total fake agents created: ${agentsCount}`);
-      const { count: organizationsCount } = await this.repositories.organizationsV1.createMany(fakeOrganizations);
-      winstonLogger.info(`Total fake organizations created: ${organizationsCount}`);
+      winstonLogger.info('Seeding database with fake taxonomic units...');
+      const { count: taxonomicUnitsV1Count } =
+        await this.repositories.taxonomicUnitsV1.createMany(fakeTaxonomicUnitsV1);
+      winstonLogger.info(`Total fake taxonomic units created: ${taxonomicUnitsV1Count}`);
     }
   }
 }

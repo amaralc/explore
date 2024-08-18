@@ -1,60 +1,64 @@
-import { randomBytes } from 'crypto';
-import { fakeAgentsByIdOrEmail } from '../../agents-v1/core/fixtures';
-import { OrganizationV1Entity } from './entity';
+import { faker } from '@faker-js/faker';
+import { TaxonomicUnitV1Entity } from './entity';
+import { ITaxonomicUnitV1 } from './entity.schema.types';
 
-const fakeIndividualAgent01 = fakeAgentsByIdOrEmail.get('fake-agent-owner-of-free-organization@email.com');
-
-const fakeOrganizationAgentRoot01 = fakeAgentsByIdOrEmail.get('fake-organization-agent-root-01@email.com');
-const fakeOrganizationAgentRoot01Id = randomBytes(12).toString('hex');
-const fakeOrganization01 = new OrganizationV1Entity({
-  agentId: fakeOrganizationAgentRoot01.id,
-  email: fakeOrganizationAgentRoot01.email,
-  nickname: fakeOrganizationAgentRoot01.nickname,
-  id: fakeOrganizationAgentRoot01Id,
-  idPath: `/${fakeOrganizationAgentRoot01Id}`,
-  ownerAgentId: fakeIndividualAgent01.id,
-  planSubscriptionName: 'FREE',
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
+const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
+  id: faker.database.mongodbObjectId().toString(),
+  version: 1,
+  name: faker.lorem.slug(3),
+  schema: {
+    properties: {
+      parentId: {
+        type: 'string',
+      },
+    },
+  },
 });
 
-const fakeOrganizationAgentChild01 = fakeAgentsByIdOrEmail.get('fake-organization-agent-child-01@email.com');
-const fakeOrganizationAgentChild01Id = randomBytes(12).toString('hex');
-const fakeOrganization02 = new OrganizationV1Entity({
-  agentId: fakeOrganizationAgentChild01.id,
-  email: fakeOrganizationAgentChild01.email,
-  nickname: fakeOrganizationAgentChild01.nickname,
-  id: fakeOrganizationAgentChild01Id,
-  idPath: `/${fakeOrganizationAgentRoot01Id}/${fakeOrganizationAgentChild01Id}`,
-  ownerAgentId: fakeOrganization01.agentId,
-  planSubscriptionName: 'FREE',
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
+const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
+  id: faker.database.mongodbObjectId().toString(),
+  version: 2,
+  name: faker.lorem.slug(2),
+  schema: {
+    properties: {
+      parentId: {
+        type: 'string',
+      },
+      name: {
+        oneOf: [{ type: 'string' }, { type: 'null' }],
+      },
+    },
+    required: ['parentId', 'name'],
+  },
 });
 
-const fakeOrganizationAgentChild02 = fakeAgentsByIdOrEmail.get('fake-organization-agent-child-02@email.com');
-const fakeOrganizationAgentChild02Id = randomBytes(12).toString('hex');
-const fakeOrganization03 = new OrganizationV1Entity({
-  agentId: fakeOrganizationAgentChild02.id,
-  email: fakeOrganizationAgentChild02.email,
-  nickname: fakeOrganizationAgentChild02.nickname,
-  id: fakeOrganizationAgentChild02Id,
-  idPath: `/${fakeOrganizationAgentRoot01Id}/${fakeOrganizationAgentChild02Id}`,
-  ownerAgentId: fakeOrganization01.agentId,
-  planSubscriptionName: 'FREE',
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
+const fakeTaxonomicUnit03 = new TaxonomicUnitV1Entity({
+  id: faker.database.mongodbObjectId().toString(),
+  version: 1,
+  name: faker.lorem.slug(2),
+  schema: {
+    properties: {
+      name: {
+        type: 'string',
+      },
+    },
+    required: ['name'],
+  },
 });
 
-export const fakeOrganizations = [fakeOrganization01, fakeOrganization02, fakeOrganization03];
+export const fakeTaxonomicUnitsV1 = [
+  fakeTaxonomicUnit01.getDto(),
+  fakeTaxonomicUnit02.getDto(),
+  fakeTaxonomicUnit03.getDto(),
+];
 
-const organizationV1ByIdOrEmail: Map<string, OrganizationV1Entity> = new Map();
-fakeOrganizations.forEach((agent) => {
-  if (organizationV1ByIdOrEmail.has(agent.id) || organizationV1ByIdOrEmail.has(agent.email)) {
-    throw new Error(`Agent with id ${agent.id} or email ${agent.email} already exists`);
+const taxonomicUnitsV1ByNameOrId: Map<string, ITaxonomicUnitV1> = new Map();
+fakeTaxonomicUnitsV1.forEach((entityDto) => {
+  if (taxonomicUnitsV1ByNameOrId.has(entityDto.id) || taxonomicUnitsV1ByNameOrId.has(entityDto.name)) {
+    throw new Error(`Taxonomic Unit with id ${entityDto.id} or name ${entityDto.name} already exists`);
   }
-  organizationV1ByIdOrEmail.set(agent.id, agent);
-  organizationV1ByIdOrEmail.set(agent.email, agent);
+  taxonomicUnitsV1ByNameOrId.set(entityDto.id, entityDto);
+  taxonomicUnitsV1ByNameOrId.set(entityDto.name, entityDto);
 });
 
-export const fakeOrganizationsByIdOrEmail = organizationV1ByIdOrEmail;
+export const fakeTaxonomicUnitsByNameOrId = taxonomicUnitsV1ByNameOrId;

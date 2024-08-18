@@ -11,15 +11,7 @@
   "[no-auto-format]": {
     "editor.formatOnSave": false
   },
-  "cSpell.words": [
-    "branchset",
-    "Cladogram",
-    "kafkajs",
-    "nestjs",
-    "Partitioner",
-    "Partitioners",
-    "zitadel"
-  ],
+  "cSpell.words": ["branchset", "Cladogram", "kafkajs", "nestjs", "Partitioner", "Partitioners", "zitadel"],
   "eslint.validate": ["json"],
   "testing.automaticallyOpenPeekView": "never"
 }

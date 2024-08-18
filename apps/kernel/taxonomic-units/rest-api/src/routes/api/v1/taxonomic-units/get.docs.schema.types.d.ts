@@ -13,6 +13,10 @@ export type SchemaArray = [HttpJsonSchemaOrgDraft04Schema, ...HttpJsonSchemaOrgD
  * @minItems 1
  */
 export type StringArray = [string, ...string[]];
+/**
+ * Filtered Taxonomic Units V1
+ */
+export type IFilteredTaxonomicUnitV1List = ITaxonomicUnitV1[];
 
 export interface ITaxonomicUnitV1 {
   /**

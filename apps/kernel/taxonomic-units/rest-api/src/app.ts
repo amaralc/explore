@@ -3,9 +3,8 @@ import express from 'express';
 import * as path from 'path';
 
 import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/config/configuration-management';
-import V1OrganizationsController from './routes/api/v1/organizations';
-import V1OrganizationsIdController from './routes/api/v1/organizations/[id]';
-import V1OrganizationsSeedController from './routes/api/v1/organizations[:]seed';
+import { V1TaxonomicUnitsController } from './routes/api/v1/taxonomic-units';
+import { V1TaxonomicUnitByIdController } from './routes/api/v1/taxonomic-units/[id]';
 import OpenApiV3Controller from './routes/docs/v3/open-api-json';
 import { validateCors } from './utils/enable-cors';
 
@@ -27,15 +26,12 @@ export const bootstrapApplication = async (configurationManager: ConfigurationMa
     const openApiV3Controller = new OpenApiV3Controller();
     router.get('/docs/v3/open-api-json', openApiV3Controller.getOpenApiV3JsonSpecification);
 
-    const v1OrganizationsController = new V1OrganizationsController(configurationManager);
-    router.post('/api/v1/organizations', v1OrganizationsController.createOrganization);
-    router.get('/api/v1/organizations', v1OrganizationsController.filterOrganizationsV1);
+    const v1TaxonomicUnitsController = new V1TaxonomicUnitsController(configurationManager);
+    router.post('/api/v1/taxonomic-units', v1TaxonomicUnitsController.createFirstVersion);
+    router.get('/api/v1/taxonomic-units', v1TaxonomicUnitsController.filter);
 
-    const v1OrganizationsSeedController = new V1OrganizationsSeedController(configurationManager);
-    router.post('/api/v1/organizations[:]seed', v1OrganizationsSeedController.seedOrganizationsFromExternalSource);
-
-    const v1OrganizationsIdController = new V1OrganizationsIdController(configurationManager);
-    router.get('/api/v1/organizations/:id', v1OrganizationsIdController.getOrganizationById);
+    const v1TaxonomicUnitByIdController = new V1TaxonomicUnitByIdController(configurationManager);
+    router.get('/api/v1/taxonomic-units/:id', v1TaxonomicUnitByIdController.getById);
 
     // Initialize routes
     app.use(router);

@@ -1,5 +1,7 @@
-export class OwnerAgentNotFoundError extends Error {
-  constructor(message = 'Owner agent not found') {
-    super(message);
-  }
-}
+export class DuplicatedTaxonomicUnitV1NameError extends Error {}
+
+export class DuplicatedTaxonomicUnitIdError extends Error {}
+
+export class UniqueTaxonomicUnitV1NameAndVersionError extends Error {}
+
+export class TaxonomicUnitV1NotFoundError extends Error {}

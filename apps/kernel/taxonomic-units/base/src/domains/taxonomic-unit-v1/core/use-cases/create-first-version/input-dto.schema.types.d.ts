@@ -14,12 +14,7 @@ export type SchemaArray = [HttpJsonSchemaOrgDraft04Schema, ...HttpJsonSchemaOrgD
  */
 export type StringArray = [string, ...string[]];
 
-export interface ITaxonomicUnitV1 {
-  /**
-   * The unique identifier of a taxonomic unit as a hexadecimal string of 24 characters.
-   */
-  id: string;
-  version: number;
+export interface ICreateFirstVersionOfTaxonomicUnitV1InputDto {
   name: string;
   schema: HttpJsonSchemaOrgDraft04Schema;
 }
