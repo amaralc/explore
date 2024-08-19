@@ -47,11 +47,11 @@ export class InMemoryTaxonomicUnitsV1Repository implements TaxonomicUnitsV1Datab
     };
   }
 
-  async upsertMany(entityDtoList: Array<ITaxonomicUnitV1>): Promise<IUpsertManyResponseDto> {
+  async upsertMany(entityDtoArray: Array<ITaxonomicUnitV1>): Promise<IUpsertManyResponseDto> {
     const insertedIds = [];
     const upsertedIds = [];
-    for (const entityDto of entityDtoList) {
-      const existingInstance = this.entityDtoList.find((entityDto) => entityDto.id === entityDto.id);
+    for (const entityDto of entityDtoArray) {
+      const existingInstance = this.entityDtoList.find((item) => item.id === entityDto.id);
       if (existingInstance) {
         this.deleteById(entityDto.id);
         upsertedIds.push(entityDto.id);

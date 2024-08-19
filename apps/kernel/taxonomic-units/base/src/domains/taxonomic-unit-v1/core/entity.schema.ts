@@ -16,6 +16,6 @@ const taxonomicUnitV1JsonSchema = {
   },
   required: ['name', 'schema', 'version', 'id'],
   additionalProperties: false,
-} as const satisfies JSONSchema;
+} as const satisfies JSONSchema; // TODO: if we use v7 here the type generator will not work currently
 
 export default taxonomicUnitV1JsonSchema;

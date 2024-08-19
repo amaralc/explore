@@ -5,7 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface IGetOrganizationsV1UrlQueryParams {
+export interface IGetTaxonomicUnitsV1UrlQueryParams {
   /**
    * The page number. It must be an integer greater than or equal to 1 and less than or equal to 4294967295.
    */
