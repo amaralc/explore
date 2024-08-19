@@ -110,7 +110,8 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
   }
 
   public async findOneByName(name: string): Promise<ITaxonomicUnitV1 | null> {
-    const mongoDbDocument = await this.getCollection().findOne({ name });
+    // Using $eq operator to avoid js injection attacks. The input was already validated in an upper layer but it is better to be sure we are safe in every layer.
+    const mongoDbDocument = await this.getCollection().findOne({ name: { $eq: name } });
     if (!mongoDbDocument) {
       return null;
     }
