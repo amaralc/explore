@@ -1,0 +1,9 @@
+{
+  "name": "kernel-taxonomic-units-iac",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kernel/taxonomic-units-iac",
+  "projectType": "application",
+  "targets": {},
+  "tags": [],
+  "implicitDependencies": ["kernel-taxonomic-units-rest-api"]
+}

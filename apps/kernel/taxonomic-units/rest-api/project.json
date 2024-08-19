@@ -1,0 +1,62 @@
+{
+  "name": "kernel-taxonomic-units-rest-api",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kernel/taxonomic-units/rest-api/src",
+  "projectType": "application",
+  "targets": {
+    "setup": {
+      "command": "cp apps/kernel/taxonomic-units/rest-api/.env.example apps/kernel/taxonomic-units/.env"
+    },
+    "docker-build": {
+      "command": "docker build -f apps/kernel/taxonomic-units/rest-api/Dockerfile . -t kernel-taxonomic-units-rest-api"
+    },
+    "docker-run": {
+      "command": "docker run -p 8080:8080 --name kernel-taxonomic-units-rest-api kernel-taxonomic-units-rest-api"
+    },
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/kernel/taxonomic-units/rest-api",
+        "main": "apps/kernel/taxonomic-units/rest-api/src/main.ts",
+        "tsConfig": "apps/kernel/taxonomic-units/rest-api/tsconfig.app.json",
+        "assets": ["apps/kernel/taxonomic-units/rest-api/src/assets"],
+        "webpackConfig": "apps/kernel/taxonomic-units/rest-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "kernel-taxonomic-units-rest-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "kernel-taxonomic-units-rest-api:build:development"
+        },
+        "production": {
+          "buildTarget": "kernel-taxonomic-units-rest-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/kernel/taxonomic-units/rest-api/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

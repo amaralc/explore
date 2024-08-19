@@ -1,0 +1,64 @@
+import { faker } from '@faker-js/faker';
+import { TaxonomicUnitV1Entity } from './entity';
+import { ITaxonomicUnitV1 } from './entity.schema.types';
+
+const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
+  id: faker.database.mongodbObjectId().toString(),
+  version: 1,
+  name: faker.lorem.slug(3),
+  schema: {
+    properties: {
+      parentId: {
+        type: 'string',
+      },
+    },
+  },
+});
+
+const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
+  id: faker.database.mongodbObjectId().toString(),
+  version: 2,
+  name: faker.lorem.slug(2),
+  schema: {
+    properties: {
+      parentId: {
+        type: 'string',
+      },
+      name: {
+        oneOf: [{ type: 'string' }, { type: 'null' }],
+      },
+    },
+    required: ['parentId', 'name'],
+  },
+});
+
+const fakeTaxonomicUnit03 = new TaxonomicUnitV1Entity({
+  id: faker.database.mongodbObjectId().toString(),
+  version: 1,
+  name: faker.lorem.slug(2),
+  schema: {
+    properties: {
+      name: {
+        type: 'string',
+      },
+    },
+    required: ['name'],
+  },
+});
+
+export const fakeTaxonomicUnitsV1 = [
+  fakeTaxonomicUnit01.getDto(),
+  fakeTaxonomicUnit02.getDto(),
+  fakeTaxonomicUnit03.getDto(),
+];
+
+const taxonomicUnitsV1ByNameOrId: Map<string, ITaxonomicUnitV1> = new Map();
+fakeTaxonomicUnitsV1.forEach((entityDto) => {
+  if (taxonomicUnitsV1ByNameOrId.has(entityDto.id) || taxonomicUnitsV1ByNameOrId.has(entityDto.name)) {
+    throw new Error(`Taxonomic Unit with id ${entityDto.id} or name ${entityDto.name} already exists`);
+  }
+  taxonomicUnitsV1ByNameOrId.set(entityDto.id, entityDto);
+  taxonomicUnitsV1ByNameOrId.set(entityDto.name, entityDto);
+});
+
+export const fakeTaxonomicUnitsByNameOrId = taxonomicUnitsV1ByNameOrId;
