@@ -136,7 +136,9 @@ resource "google_cloud_run_service_iam_member" "public" {
   service  = google_cloud_run_v2_service.instance.name     # The name of the service to which the IAM policy will be applied
   location = google_cloud_run_v2_service.instance.location # The location of the service to which the IAM policy will be applied
   role     = "roles/run.invoker"                           # The role to be granted
-  member   = "allUsers"                                    # The user, group, or service account who will have the role granted. In this case, all users.
+
+  # TODO: fix possible vulnerability, and allow only our proxy to access this service (PEER-750)
+  member = "allUsers" # The user, group, or service account who will have the role granted. In this case, all users.
 }
 
 locals {
