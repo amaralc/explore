@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.95.0](https://github.com/amaralc/explore/compare/peerlab@0.94.0...peerlab@0.95.0) (2024-08-19)
+
+### Features
+
+- **PEER-747:** add generic taxonomic units ([43b8ad9](https://github.com/amaralc/explore/commit/43b8ad9160af457408e7b162050e62f0dcab5fcb))
+- **PEER-747:** add rest api for managing generic taxonomic units ([094029f](https://github.com/amaralc/explore/commit/094029ff62251ab619afb185faf0e7bfe5869afa))
+
+### Bug Fixes
+
+- **PEER-748:** avoid js injection in no sql query ([5120019](https://github.com/amaralc/explore/commit/51200190cda0337a1d85edeef7d107409cb67fcb))
+- **PEER-749:** avoid denial of service in ajv limiting to the first error ([2578e67](https://github.com/amaralc/explore/commit/2578e676293bbb829c806ca2ef77c2fe7474177b))
+
 ## [0.94.0](https://github.com/amaralc/explore/compare/peerlab@0.93.0...peerlab@0.94.0) (2024-08-17)
 
 ### Features
