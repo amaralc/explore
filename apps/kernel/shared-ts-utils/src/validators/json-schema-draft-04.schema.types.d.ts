@@ -10,7 +10,7 @@ export type PositiveIntegerDefault0 = PositiveInteger;
 /**
  * @minItems 1
  */
-export type SchemaArray = [JsonSchemaV4MetaSchema, ...JsonSchemaV4MetaSchema[]];
+export type SchemaArray = [IJsonSchemaMetaSchemaV4, ...IJsonSchemaMetaSchemaV4[]];
 /**
  * @minItems 1
  */
@@ -18,9 +18,9 @@ export type StringArray = [string, ...string[]];
 export type SimpleTypes = "array" | "boolean" | "integer" | "null" | "number" | "object" | "string";
 
 /**
- * Core schema meta-schema
+ * Core schema meta-schema v4
  */
-export interface JsonSchemaV4MetaSchema {
+export interface IJsonSchemaMetaSchemaV4 {
   id?: string;
   $schema?: string;
   title?: string;
@@ -34,26 +34,26 @@ export interface JsonSchemaV4MetaSchema {
   maxLength?: PositiveInteger;
   minLength?: PositiveIntegerDefault0;
   pattern?: string;
-  additionalItems?: boolean | JsonSchemaV4MetaSchema;
-  items?: JsonSchemaV4MetaSchema | SchemaArray;
+  additionalItems?: boolean | IJsonSchemaMetaSchemaV4;
+  items?: IJsonSchemaMetaSchemaV4 | SchemaArray;
   maxItems?: PositiveInteger;
   minItems?: PositiveIntegerDefault0;
   uniqueItems?: boolean;
   maxProperties?: PositiveInteger;
   minProperties?: PositiveIntegerDefault0;
   required?: StringArray;
-  additionalProperties?: boolean | JsonSchemaV4MetaSchema;
+  additionalProperties?: boolean | IJsonSchemaMetaSchemaV4;
   definitions?: {
-    [k: string]: JsonSchemaV4MetaSchema;
+    [k: string]: IJsonSchemaMetaSchemaV4;
   };
   properties?: {
-    [k: string]: JsonSchemaV4MetaSchema;
+    [k: string]: IJsonSchemaMetaSchemaV4;
   };
   patternProperties?: {
-    [k: string]: JsonSchemaV4MetaSchema;
+    [k: string]: IJsonSchemaMetaSchemaV4;
   };
   dependencies?: {
-    [k: string]: JsonSchemaV4MetaSchema | StringArray;
+    [k: string]: IJsonSchemaMetaSchemaV4 | StringArray;
   };
   /**
    * @minItems 1
@@ -64,6 +64,6 @@ export interface JsonSchemaV4MetaSchema {
   allOf?: SchemaArray;
   anyOf?: SchemaArray;
   oneOf?: SchemaArray;
-  not?: JsonSchemaV4MetaSchema;
+  not?: IJsonSchemaMetaSchemaV4;
   [k: string]: unknown;
 }

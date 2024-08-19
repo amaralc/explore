@@ -1,10 +1,10 @@
 import { JSONSchema } from 'json-schema-to-typescript';
 
 const jsonSchemaMetaSchemaV4 = {
-  $id: 'http://json-schema.org/draft-04/schema#',
+  id: 'http://json-schema.org/draft-04/schema#',
   $schema: 'http://json-schema.org/draft-04/schema#',
-  description: 'Core schema meta-schema',
-  title: 'JsonSchemaV4MetaSchema',
+  title: 'IJsonSchemaMetaSchemaV4',
+  description: 'Core schema meta-schema v4',
   definitions: {
     schemaArray: {
       type: 'array',
@@ -46,6 +46,7 @@ const jsonSchemaMetaSchemaV4 = {
     multipleOf: {
       type: 'number',
       minimum: 0,
+      // Our ajv uses v7 where exclusive minimum is a number. TODO: upgrade type generator to use v7 and then use full v7
       // exclusiveMinimum: true,
     },
     maximum: {
