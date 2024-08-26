@@ -1,5 +1,8 @@
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
+import { MongoDbTaxonomicUnitInstancesV1DatabaseRepository } from '../domains/taxonomic-unit-instance-v1/adapters/database-repository-mongodb';
+import { TaxonomicUnitInstancesV1DatabaseRepository } from '../domains/taxonomic-unit-instance-v1/core/database-repository';
+import { CreateTaxonomicUnitV1InstanceUseCase } from '../domains/taxonomic-unit-instance-v1/core/use-cases/create-instance';
 import { MongoDbTaxonomicUnitsV1DatabaseRepository } from '../domains/taxonomic-unit-v1/adapters/database-repository-mongodb';
 import { TaxonomicUnitsV1DatabaseRepository } from '../domains/taxonomic-unit-v1/core/database-repository';
 import { fakeTaxonomicUnitsV1 } from '../domains/taxonomic-unit-v1/core/fixtures';
@@ -17,11 +20,13 @@ export class ConfigurationManager {
   databaseDriver: MongoDbDriver;
   repositories?: {
     taxonomicUnitsV1: TaxonomicUnitsV1DatabaseRepository;
+    taxonomicUnitInstancesV1: TaxonomicUnitInstancesV1DatabaseRepository;
   };
   useCases?: {
     createFirstVersionOfTaxonomicUnitV1UseCase: CreateFirstVersionOfTaxonomicUnitV1UseCase;
     filterOrganizationsV1: FilterTaxonomicUnitsV1UseCase;
     getTaxonomicUnitV1ById: GetTaxonomicUnitV1ByIdUseCase;
+    createTaxonomicUnitV1Instance: CreateTaxonomicUnitV1InstanceUseCase;
   };
 
   constructor(configOverride: IAppConfiguration = defaultConfiguration) {
@@ -73,6 +78,7 @@ export class ConfigurationManager {
       winstonLogger.info('Production mode');
       this.repositories = {
         taxonomicUnitsV1: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
+        taxonomicUnitInstancesV1: new MongoDbTaxonomicUnitInstancesV1DatabaseRepository(this.getDatabaseDriver()),
       };
 
       await this.repositories.taxonomicUnitsV1.generateIndexes();
@@ -82,6 +88,7 @@ export class ConfigurationManager {
       winstonLogger.info('Development mode');
       this.repositories = {
         taxonomicUnitsV1: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
+        taxonomicUnitInstancesV1: new MongoDbTaxonomicUnitInstancesV1DatabaseRepository(this.getDatabaseDriver()),
       };
       await this.repositories.taxonomicUnitsV1.generateIndexes();
     }
@@ -90,6 +97,7 @@ export class ConfigurationManager {
       winstonLogger.info('Test mode');
       this.repositories = {
         taxonomicUnitsV1: new MongoDbTaxonomicUnitsV1DatabaseRepository(this.getDatabaseDriver()),
+        taxonomicUnitInstancesV1: new MongoDbTaxonomicUnitInstancesV1DatabaseRepository(this.getDatabaseDriver()),
       };
       await this.repositories.taxonomicUnitsV1.generateIndexes();
     }
@@ -100,6 +108,10 @@ export class ConfigurationManager {
       ),
       getTaxonomicUnitV1ById: new GetTaxonomicUnitV1ByIdUseCase(this.repositories.taxonomicUnitsV1),
       filterOrganizationsV1: new FilterTaxonomicUnitsV1UseCase(this.repositories.taxonomicUnitsV1),
+      createTaxonomicUnitV1Instance: new CreateTaxonomicUnitV1InstanceUseCase(
+        this.repositories.taxonomicUnitsV1,
+        this.repositories.taxonomicUnitInstancesV1,
+      ),
     };
   }
 

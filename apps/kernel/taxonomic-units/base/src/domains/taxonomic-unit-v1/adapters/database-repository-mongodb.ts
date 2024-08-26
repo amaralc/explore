@@ -109,9 +109,20 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
     };
   }
 
-  public async findOneByName(name: string): Promise<ITaxonomicUnitV1 | null> {
+  public async findManyByName(name: string): Promise<Array<ITaxonomicUnitV1>> {
     // Using $eq operator to avoid js injection attacks. The input was already validated in an upper layer but it is better to be sure we are safe in every layer.
-    const mongoDbDocument = await this.getCollection().findOne({ name: { $eq: name } });
+    const mongoDbDocuments = await this.getCollection()
+      .find({ name: { $eq: name } })
+      .toArray();
+
+    const entityDtoList = mongoDbDocuments.map((mongoDbDocument) => this.mapMongoDbToDomain(mongoDbDocument));
+
+    return entityDtoList;
+  }
+
+  async findOneByNameAndVersion(name: string, version: number): Promise<ITaxonomicUnitV1> {
+    const mongoDbDocument = await this.getCollection().findOne({ name: { $eq: name }, version: { $eq: version } });
+
     if (!mongoDbDocument) {
       return null;
     }

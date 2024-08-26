@@ -5,34 +5,37 @@ import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/confi
 import { TaxonomicUnitV1NotFoundError } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/core/errors';
 import express from 'express';
 
-export class V1TaxonomicUnitByIdController {
+export class V1TaxonomicUnitInstancesController {
   configurationManager: ConfigurationManager;
-  private entityName = 'TaxonomicUnitV1';
+  private entityName = 'TaxonomicUnitInstanceV1';
 
   constructor(configurationManager: ConfigurationManager) {
     this.configurationManager = configurationManager;
 
     // Make sure to bind the methods to the class to have access to the configuration manager
-    this.getById = this.getById.bind(this);
+    this.create = this.create.bind(this);
   }
 
-  public async getById(req: express.Request<{ id: string }>, res: express.Response): Promise<void> {
+  public async create(req: express.Request, res: express.Response): Promise<void> {
     const log: ILogMetadata = {
       scope: {
-        moduleName: V1TaxonomicUnitByIdController.name,
-        methodName: 'getById',
+        moduleName: V1TaxonomicUnitInstancesController.name,
+        methodName: 'create',
       },
       steps: [],
     };
     try {
       log.steps.push({ message: 'Initialize use case' });
-      const { getTaxonomicUnitV1ById } = await this.configurationManager.getUseCases();
+      const { createTaxonomicUnitV1Instance } = await this.configurationManager.getUseCases();
 
-      log.steps.push({ message: 'Execute use case', metadata: { id: req.params.id } });
-      const entityDtoList = await getTaxonomicUnitV1ById.execute(req.params.id);
+      log.steps.push({ message: 'Execute use case', metadata: { name: req.body.name } });
+      const entityDto = await createTaxonomicUnitV1Instance.execute({
+        schema: req.body.schema,
+        data: req.body.data,
+      });
 
-      winstonLogger.info(`Success getting entity by id ${req.params.id}`, log);
-      res.status(200).json(entityDtoList);
+      winstonLogger.info(`Success creating entity with name ${this.entityName}`, log);
+      res.status(201).json(entityDto);
     } catch (error) {
       this.handleError(error, res, log);
     }
