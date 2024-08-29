@@ -4,6 +4,21 @@ import path from 'node:path';
 import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
+const deriveFileNameFromChunkInfo = (chunkInfo: { facadeModuleId: string | null }): string => {
+  if (!chunkInfo.facadeModuleId) {
+    return 'assets/js/[name]-[hash].js';
+  }
+
+  const basename = path.basename(chunkInfo.facadeModuleId);
+  if (basename.startsWith('@')) {
+    return 'assets/js/[name]-[hash].js';
+  }
+
+  const ext = path.extname(chunkInfo.facadeModuleId);
+  const outputFileName = chunkInfo.facadeModuleId.replace(__dirname, 'assets/js').replace(ext, '.js');
+  return outputFileName;
+};
+
 export default defineConfig({
   root: __dirname,
   build: {
@@ -11,6 +26,13 @@ export default defineConfig({
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        chunkFileNames: deriveFileNameFromChunkInfo,
+        entryFileNames: deriveFileNameFromChunkInfo,
+        assetFileNames: 'assets/[ext]/[name].[ext]',
+      },
     },
   },
   cacheDir: '../../../node_modules/.vite/kernel-management-shell-browser',
