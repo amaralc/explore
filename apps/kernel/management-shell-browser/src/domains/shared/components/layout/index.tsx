@@ -14,6 +14,9 @@ export const Layout = () => {
           <li>
             <Link to="workspaces">Workspaces Dashboard</Link>
           </li>
+          <li>
+            <Link to="public">Public Page</Link>
+          </li>
           {auth.isAuthenticated && <button onClick={() => auth.removeUser()}>Log out</button>}
         </ul>
       </nav>
