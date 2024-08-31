@@ -32,7 +32,7 @@ export class CreateFirstVersionOfTaxonomicUnitV1UseCase {
 
       log.steps.push({ message: 'Find one by name by name', metadata: { name: inputDto.name } });
       const entityDtoList = await this.taxonomicUnitsV1DatabaseRepository.findManyByName(inputDto.name);
-      if (entityDtoList !== null) {
+      if (entityDtoList.length > 0) {
         throw new DuplicatedTaxonomicUnitV1NameError(
           `${this.entityTitle} with name '${inputDto.name}' already exists. If you want to version your entity, use the resource /v1/taxonomic-units/${inputDto.name}/versions`,
         );
