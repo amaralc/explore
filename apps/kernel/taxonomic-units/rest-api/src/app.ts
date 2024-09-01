@@ -3,6 +3,7 @@ import express from 'express';
 import * as path from 'path';
 
 import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/config/configuration-management';
+import { V1TaxonomicUnitInstancesController } from './routes/api/v1/taxonomic-unit-instances';
 import { V1TaxonomicUnitsController } from './routes/api/v1/taxonomic-units';
 import { V1TaxonomicUnitByIdController } from './routes/api/v1/taxonomic-units/[id]';
 import OpenApiV3Controller from './routes/docs/v3/open-api-json';
@@ -32,6 +33,9 @@ export const bootstrapApplication = async (configurationManager: ConfigurationMa
 
     const v1TaxonomicUnitByIdController = new V1TaxonomicUnitByIdController(configurationManager);
     router.get('/api/v1/taxonomic-units/:id', v1TaxonomicUnitByIdController.getById);
+
+    const v1TaxonomicUnitInstancesController = new V1TaxonomicUnitInstancesController(configurationManager);
+    router.post('/api/v1/taxonomic-unit-instances', v1TaxonomicUnitInstancesController.create);
 
     // Initialize routes
     app.use(router);

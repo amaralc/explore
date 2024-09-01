@@ -1,6 +1,6 @@
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
 import 'reflect-metadata';
-import organizationV1JsonSchema from './entity.schema';
+import entitySchema from './entity.schema';
 import { ITaxonomicUnitV1 } from './entity.schema.types';
 
 export class TaxonomicUnitV1Entity {
@@ -12,7 +12,7 @@ export class TaxonomicUnitV1Entity {
   }
 
   static validate(inputDto: ITaxonomicUnitV1) {
-    schemaValidator.validateOrReject(organizationV1JsonSchema, inputDto);
+    schemaValidator.validateOrReject(entitySchema, inputDto);
   }
 
   getDto(): ITaxonomicUnitV1 {

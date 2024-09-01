@@ -1,7 +1,7 @@
 import { JSONSchema } from 'json-schema-to-typescript';
 
 const jsonSchemaMetaSchemaV4 = {
-  id: 'http://json-schema.org/draft-04/schema#',
+  $id: 'http://json-schema.org/draft-04/schema#',
   $schema: 'http://json-schema.org/draft-04/schema#',
   title: 'IJsonSchemaMetaSchemaV4',
   description: 'Core schema meta-schema v4',

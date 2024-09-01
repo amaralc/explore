@@ -1,36 +1,41 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/config/configuration-management';
 import { RestExpressSharedResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/_shared/adapters/rest-express-error-handler';
+import { RestExpressTaxonomicUnitInstanceV1ResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-instance-v1/adapters/rest-express-error-handler';
 import { RestExpressTaxonomicUnitV1ResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/adapters/rest-express-error-handler';
 import express from 'express';
 
-export class V1TaxonomicUnitByIdController {
+export class V1TaxonomicUnitInstancesController {
   configurationManager: ConfigurationManager;
 
   constructor(configurationManager: ConfigurationManager) {
     this.configurationManager = configurationManager;
 
     // Make sure to bind the methods to the class to have access to the configuration manager
-    this.getById = this.getById.bind(this);
+    this.create = this.create.bind(this);
   }
 
-  public async getById(req: express.Request<{ id: string }>, res: express.Response): Promise<void> {
+  public async create(req: express.Request, res: express.Response): Promise<void> {
     const log: ILogMetadata = {
+      message: '',
       scope: {
-        moduleName: V1TaxonomicUnitByIdController.name,
-        methodName: 'getById',
+        moduleName: V1TaxonomicUnitInstancesController.name,
+        methodName: 'create',
       },
       steps: [],
     };
     try {
       log.steps.push({ message: 'Initialize use case' });
-      const { getTaxonomicUnitV1ById } = await this.configurationManager.getUseCases();
+      const { createTaxonomicUnitV1Instance } = await this.configurationManager.getUseCases();
 
-      log.steps.push({ message: 'Execute use case', metadata: { id: req.params.id } });
-      const entityDto = await getTaxonomicUnitV1ById.execute(req.params.id);
+      log.steps.push({ message: 'Execute use case', metadata: { name: req.body.name } });
+      const entityDto = await createTaxonomicUnitV1Instance.execute({
+        schema: req.body.schema,
+        data: req.body.data,
+      });
 
-      log.message = `Success getting entity by id ${req.params.id}`;
-      await RestExpressTaxonomicUnitV1ResponseHandler.handleGetByIdSuccess(entityDto, res, log);
+      log.message = `Success creating entity of schema name ${entityDto.schema.name}`;
+      await RestExpressTaxonomicUnitInstanceV1ResponseHandler.handleCreateSuccess(entityDto, res, log);
     } catch (error) {
       await RestExpressTaxonomicUnitV1ResponseHandler.handleNotFoundError(error, res, log);
       await RestExpressSharedResponseHandler.handleClientValidationError(error, res, log);

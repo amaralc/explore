@@ -5,7 +5,11 @@ import { ICreateManyResponseDto, IUpsertManyResponseDto } from '../../_shared/ty
 import { TaxonomicUnitsV1DatabaseRepository } from '../core/database-repository';
 import { IFilterTaxonomicUnitsV1InputDto } from '../core/database-repository.types';
 import { ITaxonomicUnitV1 } from '../core/entity.schema.types';
-import { DuplicatedTaxonomicUnitIdError, UniqueTaxonomicUnitV1NameAndVersionError } from '../core/errors';
+import {
+  DuplicatedTaxonomicUnitIdError,
+  TaxonomicUnitV1NotFoundError,
+  UniqueTaxonomicUnitV1NameAndVersionError,
+} from '../core/errors';
 
 export class InMemoryTaxonomicUnitsV1Repository implements TaxonomicUnitsV1DatabaseRepository {
   constructor(private entityDtoList: Array<ITaxonomicUnitV1> = []) {}
@@ -74,9 +78,17 @@ export class InMemoryTaxonomicUnitsV1Repository implements TaxonomicUnitsV1Datab
     return entityDto || null;
   }
 
-  async findOneByName(name: string): Promise<ITaxonomicUnitV1 | null> {
-    const entityDto = this.entityDtoList.find((entityDto) => entityDto.name === name);
-    return entityDto || null;
+  async findManyByName(name: string): Promise<Array<ITaxonomicUnitV1>> {
+    const entityDtoList = this.entityDtoList.filter((entityDto) => entityDto.name === name);
+    return entityDtoList;
+  }
+
+  async findOneByNameAndVersion(name: string, version: number): Promise<ITaxonomicUnitV1> {
+    const entityDto = this.entityDtoList.find((entityDto) => entityDto.name === name && entityDto.version === version);
+    if (!entityDto) {
+      throw new TaxonomicUnitV1NotFoundError(`Taxonomic Unit with name ${name} and version ${version} not found`);
+    }
+    return entityDto;
   }
 
   async deleteById(id: string): Promise<void> {

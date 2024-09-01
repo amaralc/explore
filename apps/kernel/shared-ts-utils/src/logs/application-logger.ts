@@ -13,6 +13,7 @@ export type ILogScope = {
 export type ILogMetadata = {
   scope: ILogScope;
   steps: Array<ILogStep>;
+  message?: string;
 };
 
 export abstract class ApplicationLogger {

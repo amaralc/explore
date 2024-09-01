@@ -5,20 +5,22 @@ import { ITaxonomicUnitV1 } from './entity.schema.types';
 const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
   id: faker.database.mongodbObjectId().toString(),
   version: 1,
-  name: faker.lorem.slug(3),
+  name: 'fake-taxonomic-unit-01',
   schema: {
     properties: {
       parentId: {
         type: 'string',
       },
     },
+    additionalProperties: false,
+    required: ['parentId'],
   },
 });
 
 const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
   id: faker.database.mongodbObjectId().toString(),
   version: 2,
-  name: faker.lorem.slug(2),
+  name: 'fake-taxonomic-unit-02',
   schema: {
     properties: {
       parentId: {
@@ -35,7 +37,7 @@ const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
 const fakeTaxonomicUnit03 = new TaxonomicUnitV1Entity({
   id: faker.database.mongodbObjectId().toString(),
   version: 1,
-  name: faker.lorem.slug(2),
+  name: 'fake-taxonomic-unit-03',
   schema: {
     properties: {
       name: {

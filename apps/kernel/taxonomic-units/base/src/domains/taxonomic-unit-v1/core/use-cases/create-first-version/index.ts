@@ -31,10 +31,10 @@ export class CreateFirstVersionOfTaxonomicUnitV1UseCase {
       schemaValidator.validateOrReject(schema, inputDto);
 
       log.steps.push({ message: 'Find one by name by name', metadata: { name: inputDto.name } });
-      const entityDtoWithSameName = await this.taxonomicUnitsV1DatabaseRepository.findOneByName(inputDto.name);
-      if (entityDtoWithSameName !== null) {
+      const entityDtoList = await this.taxonomicUnitsV1DatabaseRepository.findManyByName(inputDto.name);
+      if (entityDtoList.length > 0) {
         throw new DuplicatedTaxonomicUnitV1NameError(
-          `${this.entityTitle} with name '${inputDto.name}' already exists. If you want to version your entity, use the resource /v1/taxonomic-units/${entityDtoWithSameName.id}/versions`,
+          `${this.entityTitle} with name '${inputDto.name}' already exists. If you want to version your entity, use the resource /v1/taxonomic-units/${inputDto.name}/versions`,
         );
       }
 
