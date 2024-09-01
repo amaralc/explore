@@ -3,6 +3,7 @@ import { TaxonomicUnitsV1DatabaseRepository } from '../../../../taxonomic-unit-v
 import { TaxonomicUnitV1NotFoundError } from '../../../../taxonomic-unit-v1/core/errors';
 import { TaxonomicUnitInstancesV1DatabaseRepository } from '../../database-repository';
 import { TaxonomicUnitInstanceV1Entity } from '../../entity';
+import { ITaxonomicUnitInstanceV1 } from '../../entity.schema.types';
 import createTaxonomicUnitV1InstanceJsonSchema from './input-dto.schema';
 import { ICreateTaxonomicUnitV1InstanceInputDto } from './input-dto.schema.types';
 
@@ -12,7 +13,7 @@ export class CreateTaxonomicUnitV1InstanceUseCase {
     private readonly taxonomicUnitInstancesV1DatabaseRepository: TaxonomicUnitInstancesV1DatabaseRepository,
   ) {}
 
-  async execute(inputDto: ICreateTaxonomicUnitV1InstanceInputDto): Promise<unknown> {
+  async execute(inputDto: ICreateTaxonomicUnitV1InstanceInputDto): Promise<ITaxonomicUnitInstanceV1> {
     const taxonomicUnitV1Dto = await this.taxonomicUnitsV1DatabaseRepository.findOneByNameAndVersion(
       inputDto.schema.name,
       inputDto.schema.version,

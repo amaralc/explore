@@ -1,13 +1,12 @@
-import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
-import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/config/configuration-management';
-import { TaxonomicUnitV1NotFoundError } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/core/errors';
+import { RestExpressSharedResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/_shared/adapters/rest-express-error-handler';
+import { RestExpressTaxonomicUnitInstanceV1ResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-instance-v1/adapters/rest-express-error-handler';
+import { RestExpressTaxonomicUnitV1ResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/adapters/rest-express-error-handler';
 import express from 'express';
 
 export class V1TaxonomicUnitInstancesController {
   configurationManager: ConfigurationManager;
-  private entityName = 'TaxonomicUnitInstanceV1';
 
   constructor(configurationManager: ConfigurationManager) {
     this.configurationManager = configurationManager;
@@ -18,6 +17,7 @@ export class V1TaxonomicUnitInstancesController {
 
   public async create(req: express.Request, res: express.Response): Promise<void> {
     const log: ILogMetadata = {
+      message: '',
       scope: {
         moduleName: V1TaxonomicUnitInstancesController.name,
         methodName: 'create',
@@ -34,31 +34,12 @@ export class V1TaxonomicUnitInstancesController {
         data: req.body.data,
       });
 
-      winstonLogger.info(`Success creating entity with name ${this.entityName}`, log);
-      res.status(201).json(entityDto);
+      log.message = `Success creating entity of schema name ${entityDto.schema.name}`;
+      await RestExpressTaxonomicUnitInstanceV1ResponseHandler.handleCreateSuccess(entityDto, res, log);
     } catch (error) {
-      this.handleError(error, res, log);
+      await RestExpressTaxonomicUnitV1ResponseHandler.handleNotFoundError(error, res, log);
+      await RestExpressSharedResponseHandler.handleClientValidationError(error, res, log);
+      await RestExpressSharedResponseHandler.handleServerError(error, res, log);
     }
-  }
-
-  private handleError(error: unknown, res: express.Response, log: ILogMetadata) {
-    if (error instanceof TaxonomicUnitV1NotFoundError) {
-      winstonLogger.warn(error.message, log);
-      return res.status(404).json({ message: error.message });
-    }
-
-    if (error instanceof ValidationExceptionV2Error) {
-      winstonLogger.warn(error.message, log);
-      return res.status(400).json({ message: error.message });
-    }
-
-    if (error instanceof Error) {
-      log.steps.push({ message: 'Error', metadata: { errorStack: error.stack } });
-    } else {
-      log.steps.push({ message: 'Error', metadata: { error } });
-    }
-
-    winstonLogger.error(`Error getting ${this.entityName} by its name`, log);
-    return res.status(500).json({ message: 'Something went wrong' });
   }
 }
