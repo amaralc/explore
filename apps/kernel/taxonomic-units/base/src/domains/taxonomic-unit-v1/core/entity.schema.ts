@@ -12,7 +12,7 @@ const taxonomicUnitV1JsonSchema = {
     },
     version: { type: 'integer', minimum: 1 },
     name: { type: 'string', pattern: '^(?:[a-z0-9]+(?:-[a-z0-9]+)*){4,}$' },
-    schema: { $ref: 'http://json-schema.org/draft-04/schema' }, // First you should add the $ref as a key to ajv meta schema
+    schema: { $ref: 'http://json-schema.org/draft-04/schema#' }, // First you should add the $ref as a key to ajv meta schema
   },
   required: ['name', 'schema', 'version', 'id'],
   additionalProperties: false,

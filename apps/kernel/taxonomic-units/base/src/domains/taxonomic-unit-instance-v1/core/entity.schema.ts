@@ -1,3 +1,4 @@
+import jsonSchemaMetaSchemaV4 from '@peerlab/kernel/shared-ts-utils/validators/json-schema-draft-04.schema';
 import { JSONSchema } from 'json-schema-to-typescript';
 
 const taxonomicUnitInstanceV1JsonSchema = {
@@ -19,9 +20,7 @@ const taxonomicUnitInstanceV1JsonSchema = {
       additionalProperties: false,
       required: ['name', 'version'],
     },
-    data: {
-      type: 'object', // Any object
-    },
+    data: jsonSchemaMetaSchemaV4,
   },
   required: ['data', 'schema', 'id'],
   additionalProperties: false,

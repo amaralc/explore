@@ -13,7 +13,7 @@ export const postTaxonomicUnitsV1Schema: OperationObject = {
   },
   responses: {
     200: {
-      description: 'Organization created',
+      description: 'Taxonomic Unit Created',
       content: {
         'application/json': {
           schema: taxonomicUnitV1JsonSchema,
