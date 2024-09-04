@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.96.0](https://github.com/amaralc/explore/compare/peerlab@0.95.0...peerlab@0.96.0) (2024-09-04)
+
+### Features
+
+- **PEER-751:** create taxonomic unit instances ([#26](https://github.com/amaralc/explore/issues/26)) ([d757c92](https://github.com/amaralc/explore/commit/d757c92ed1142b1ba29a7d437919fa89adb34251))
+
+### Bug Fixes
+
+- **peer-751:** add mandatory type to fixture schema ([eccb7d4](https://github.com/amaralc/explore/commit/eccb7d4ec210b937e17a2dc650541f43189c24b6))
+- **PEER-751:** adjust url pattern to conform with google api design guide ([ba247df](https://github.com/amaralc/explore/commit/ba247df5f3dc47a0591ff0aa676ab117c970fd4a))
+- **PEER-752:** reproduce type error ([d47b776](https://github.com/amaralc/explore/commit/d47b7764c6922245000880d2d306e115c68cc441))
+
 ## [0.95.0](https://github.com/amaralc/explore/compare/peerlab@0.94.0...peerlab@0.95.0) (2024-08-19)
 
 ### Features
