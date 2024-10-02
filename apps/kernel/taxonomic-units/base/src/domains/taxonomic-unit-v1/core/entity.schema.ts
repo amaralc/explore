@@ -12,9 +12,15 @@ const taxonomicUnitV1JsonSchema = {
     },
     version: { type: 'integer', minimum: 1 },
     name: { type: 'string', pattern: '^(?:[a-z0-9]+(?:-[a-z0-9]+)*){4,}$' },
+    lineageIdPath: {
+      type: 'string',
+      description:
+        'The taxonomic lineage of a taxon (taxonomic unit) from the root to the taxon itself, as represented by a path of ids in the hierarchy',
+      pattern: '^/([0-9a-fA-F]{24})(?:/([0-9a-fA-F]{24}))*$',
+    },
     schema: { $ref: 'http://json-schema.org/draft-04/schema#' }, // First you should add the $ref as a key to ajv meta schema
   },
-  required: ['name', 'schema', 'version', 'id'],
+  required: ['name', 'schema', 'version', 'id', 'lineageIdPath'],
   additionalProperties: false,
 } as const satisfies JSONSchema; // TODO: if we use v7 here the type generator will not work currently
 

@@ -2,10 +2,12 @@ import { faker } from '@faker-js/faker';
 import { TaxonomicUnitV1Entity } from './entity';
 import { ITaxonomicUnitV1 } from './entity.schema.types';
 
+const id01 = faker.database.mongodbObjectId().toString();
 const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
-  id: faker.database.mongodbObjectId().toString(),
+  id: id01,
   version: 1,
   name: 'fake-taxonomic-unit-01',
+  lineageIdPath: '/' + id01,
   schema: {
     type: 'object',
     properties: {
@@ -18,10 +20,12 @@ const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
   },
 });
 
+const id02 = faker.database.mongodbObjectId().toString();
 const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
-  id: faker.database.mongodbObjectId().toString(),
+  id: id02,
   version: 2,
   name: 'fake-taxonomic-unit-02',
+  lineageIdPath: '/' + id01 + '/' + id02,
   schema: {
     type: 'object',
     properties: {
@@ -36,10 +40,12 @@ const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
   },
 });
 
+const id03 = faker.database.mongodbObjectId().toString();
 const fakeTaxonomicUnit03 = new TaxonomicUnitV1Entity({
-  id: faker.database.mongodbObjectId().toString(),
+  id: id03,
   version: 1,
   name: 'fake-taxonomic-unit-03',
+  lineageIdPath: '/' + id03,
   schema: {
     properties: {
       name: {

@@ -17,6 +17,10 @@ export type StringArray = [string, ...string[]];
 export interface ICreateFirstVersionOfTaxonomicUnitV1InputDto {
   name: string;
   schema: HttpJsonSchemaOrgDraft04Schema;
+  /**
+   * The unique identifier of the parent taxonomic unit, as a hexadecimal string of 24 characters. If the value is null, the taxon is the root of a taxonomic hierarchy
+   */
+  parentId: string | null;
 }
 /**
  * Core schema meta-schema

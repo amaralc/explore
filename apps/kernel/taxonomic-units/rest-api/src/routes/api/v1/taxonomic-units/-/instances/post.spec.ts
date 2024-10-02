@@ -139,6 +139,9 @@ describe('POST /api/v1/taxonomic-units/-/instances', () => {
             schema: { name: requestBody.schema.name, version: requestBody.schema.version },
             data: { parentId: requestBody.data.parentId },
           });
+        })
+        .catch((error) => {
+          throw error;
         });
     },
   );

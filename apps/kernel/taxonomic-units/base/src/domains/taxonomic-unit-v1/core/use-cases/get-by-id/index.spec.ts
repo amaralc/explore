@@ -17,6 +17,7 @@ describe('GetTaxonomicUnitV1ByIdUseCase', () => {
     const expectedEntityDto = await taxonomicUnitsV1DatabaseRepository.create({
       id: newEntityId,
       version: 1,
+      lineageIdPath: `/${newEntityId}`,
       schema: {
         properties: {
           parentId: {

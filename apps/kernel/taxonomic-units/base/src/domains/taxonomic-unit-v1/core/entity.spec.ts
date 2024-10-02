@@ -10,6 +10,7 @@ describe('TaxonomicUnitV1Entity', () => {
       id: validId,
       version: 1,
       name: 'valid-taxonomic-unit-name',
+      lineageIdPath: `/${validId}`,
       schema: {
         properties: {
           parentId: {
@@ -24,6 +25,7 @@ describe('TaxonomicUnitV1Entity', () => {
       id: validId,
       version: 1,
       name: 'valid-taxonomic-unit-name',
+      lineageIdPath: `/${validId}`,
       schema: {
         properties: {
           parentId: {
@@ -42,6 +44,7 @@ describe('TaxonomicUnitV1Entity', () => {
           id: validId,
           version: invalidVersion,
           name: 'valid-taxonomic-unit-name',
+          lineageIdPath: `/${validId}`,
           schema: {
             properties: {
               parentId: {
@@ -59,6 +62,7 @@ describe('TaxonomicUnitV1Entity', () => {
       () =>
         new TaxonomicUnitV1Entity({
           id: validId,
+          lineageIdPath: `/${validId}`,
           version: 1,
           name: invalidName,
           schema: {
