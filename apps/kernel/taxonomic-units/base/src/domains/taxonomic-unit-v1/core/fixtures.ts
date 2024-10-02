@@ -7,6 +7,7 @@ const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
   version: 1,
   name: 'fake-taxonomic-unit-01',
   schema: {
+    type: 'object',
     properties: {
       parentId: {
         type: 'string',
@@ -22,6 +23,7 @@ const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
   version: 2,
   name: 'fake-taxonomic-unit-02',
   schema: {
+    type: 'object',
     properties: {
       parentId: {
         type: 'string',

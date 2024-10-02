@@ -60,19 +60,19 @@ describe('POST /api/v1/taxonomic-units/-/instances', () => {
       });
   });
 
-  it.only.each([
+  it.each([
     {
       name: 'fake-name-01',
     },
-    // {
-    //   parentId: 1,
-    // },
-    // {
-    //   parentId: null,
-    // },
-    // {
-    //   parentId: undefined,
-    // },
+    {
+      parentId: 1,
+    },
+    {
+      parentId: null,
+    },
+    {
+      parentId: undefined,
+    },
   ])(
     '[HTTP 400] should prevent the creation of a new taxonomic unit instance if data does not conform to version and schema',
     async (requestBodyData) => {
