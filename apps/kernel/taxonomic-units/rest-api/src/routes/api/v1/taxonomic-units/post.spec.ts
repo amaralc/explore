@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { MongoDbDriver } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-driver';
 import { MongoDbMemoryServer } from '@peerlab/kernel/shared-ts-utils/drivers/mongodb-memory-server';
@@ -43,6 +44,7 @@ describe('POST /v1/taxonomic-units', () => {
   it('should create an entity using the REST API, responding with 201 HTTP status', async () => {
     const requestBody: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: 'fake-name',
+      parentId: null,
       schema: {
         type: 'object',
         properties: {
@@ -62,20 +64,23 @@ describe('POST /v1/taxonomic-units', () => {
       .send(requestBody)
       .then((response) => {
         expect(response.status).toEqual(201);
+        expect(response.body.id).toMatch(mongoDbIdFormat);
 
         const expectedResponseBody: ITaxonomicUnitV1 = {
           id: expect.stringMatching(mongoDbIdFormat),
           name: requestBody.name,
           schema: requestBody.schema,
           version: 1,
+          lineageIdPath: `/${response.body.id}`,
         };
         expect(response.body).toEqual(expectedResponseBody);
       });
   });
 
-  it.skip('should not create entity if a version already exists, responding with 409 HTTP status', async () => {
+  it('should not create entity if a version already exists, responding with 409 HTTP status', async () => {
     const requestBody: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: fakeTaxonomicUnitsV1[0].name,
+      parentId: null,
       schema: {
         type: 'object',
         properties: {
@@ -95,6 +100,32 @@ describe('POST /v1/taxonomic-units', () => {
       .send(requestBody)
       .then((response) => {
         expect(response.status).toEqual(409);
+      });
+  });
+
+  it('should throw a 404 error if parent taxonomic unit does not exist', async () => {
+    const requestBody = {
+      name: 'fake-name',
+      parentId: faker.database.mongodbObjectId().toString(),
+      schema: {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string',
+          },
+          parentId: {
+            type: 'string',
+          },
+        },
+        required: ['name'],
+      },
+    };
+    await request
+      .post(`/api/v1/taxonomic-units`)
+      .send(requestBody)
+      .then((response) => {
+        expect(response.status).toEqual(404);
+        expect(response.body.message).toEqual(`Parent taxonomic unit with id '${requestBody.parentId}' was not found`);
       });
   });
 

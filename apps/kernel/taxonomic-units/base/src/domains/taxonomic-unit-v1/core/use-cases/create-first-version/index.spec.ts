@@ -1,4 +1,4 @@
-import { mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
+import { lineageIdPathFormat, mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { CreateFirstVersionOfTaxonomicUnitV1UseCase } from '.';
 import { InMemoryTaxonomicUnitsV1Repository } from '../../../adapters/database-repository-in-memory';
 import { TaxonomicUnitsV1DatabaseRepository } from '../../database-repository';
@@ -17,6 +17,7 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
   it('should create and persist a valid entity', async () => {
     const createEntityInputDto: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: 'valid-taxonomic-unit-name',
+      parentId: null,
       schema: {
         properties: {
           parentId: {
@@ -30,6 +31,7 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
     const expectedCreatedEntity: ITaxonomicUnitV1 = {
       id: expect.stringMatching(mongoDbIdFormat),
       version: 1,
+      lineageIdPath: expect.stringMatching(lineageIdPathFormat),
       schema: {
         properties: {
           parentId: {
@@ -49,6 +51,7 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
     const validName = 'valid-taxonomic-unit-name';
     const createOrganizationInputDto: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: validName,
+      parentId: null,
       schema: {
         properties: {
           parentId: {
@@ -61,6 +64,7 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
 
     const duplicatedNicknameOrganizationInputDto: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: validName,
+      parentId: null,
       schema: {
         properties: {
           parentId: {

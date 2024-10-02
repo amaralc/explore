@@ -32,7 +32,7 @@ export class V1TaxonomicUnitByIdController {
       log.message = `Success getting entity by id ${req.params.id}`;
       await RestExpressTaxonomicUnitV1ResponseHandler.handleGetByIdSuccess(entityDto, res, log);
     } catch (error) {
-      await RestExpressTaxonomicUnitV1ResponseHandler.handleNotFoundError(error, res, log);
+      await RestExpressTaxonomicUnitV1ResponseHandler.handleErrors(error, res, log);
       await RestExpressSharedResponseHandler.handleClientValidationError(error, res, log);
       await RestExpressSharedResponseHandler.handleServerError(error, res, log);
     }

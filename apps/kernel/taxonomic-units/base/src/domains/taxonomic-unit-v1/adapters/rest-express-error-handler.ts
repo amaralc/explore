@@ -2,7 +2,11 @@ import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-l
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import express from 'express';
 import { ITaxonomicUnitV1 } from '../core/entity.schema.types';
-import { TaxonomicUnitV1NotFoundError } from '../core/errors';
+import {
+  DuplicatedTaxonomicUnitV1NameError,
+  ParentTaxonomicUnitNotFoundError,
+  TaxonomicUnitV1NotFoundError,
+} from '../core/errors';
 
 export class RestExpressTaxonomicUnitV1ResponseHandler {
   static async handleGetByIdSuccess(entityDto: ITaxonomicUnitV1, res: express.Response, log: ILogMetadata) {
@@ -14,13 +18,22 @@ export class RestExpressTaxonomicUnitV1ResponseHandler {
     return res.status(201).json(entityDto);
   }
 
-  static async handleNotFoundError(error: unknown, res: express.Response, log: ILogMetadata) {
+  static async handleErrors(error: unknown, res: express.Response, log: ILogMetadata) {
     if (res.writableEnded) {
       return;
     }
     if (error instanceof TaxonomicUnitV1NotFoundError) {
       winstonLogger.warn(error.message, log);
       return res.status(404).json({ message: error.message });
+    }
+    if (error instanceof ParentTaxonomicUnitNotFoundError) {
+      winstonLogger.warn(error.message, log);
+      return res.status(404).json({ message: error.message });
+    }
+
+    if (error instanceof DuplicatedTaxonomicUnitV1NameError) {
+      winstonLogger.warn(error.message, log);
+      return res.status(409).json({ message: error.message });
     }
   }
 }

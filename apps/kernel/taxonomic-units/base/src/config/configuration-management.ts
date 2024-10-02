@@ -24,7 +24,7 @@ export class ConfigurationManager {
   };
   useCases?: {
     createFirstVersionOfTaxonomicUnitV1UseCase: CreateFirstVersionOfTaxonomicUnitV1UseCase;
-    filterOrganizationsV1: FilterTaxonomicUnitsV1UseCase;
+    filterTaxonomicUnitsV1UseCase: FilterTaxonomicUnitsV1UseCase;
     getTaxonomicUnitV1ById: GetTaxonomicUnitV1ByIdUseCase;
     createTaxonomicUnitV1Instance: CreateTaxonomicUnitV1InstanceUseCase;
   };
@@ -107,7 +107,7 @@ export class ConfigurationManager {
         this.repositories.taxonomicUnitsV1,
       ),
       getTaxonomicUnitV1ById: new GetTaxonomicUnitV1ByIdUseCase(this.repositories.taxonomicUnitsV1),
-      filterOrganizationsV1: new FilterTaxonomicUnitsV1UseCase(this.repositories.taxonomicUnitsV1),
+      filterTaxonomicUnitsV1UseCase: new FilterTaxonomicUnitsV1UseCase(this.repositories.taxonomicUnitsV1),
       createTaxonomicUnitV1Instance: new CreateTaxonomicUnitV1InstanceUseCase(
         this.repositories.taxonomicUnitsV1,
         this.repositories.taxonomicUnitInstancesV1,

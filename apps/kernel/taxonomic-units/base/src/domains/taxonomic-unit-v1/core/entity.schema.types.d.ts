@@ -21,6 +21,10 @@ export interface ITaxonomicUnitV1 {
   id: string;
   version: number;
   name: string;
+  /**
+   * The taxonomic lineage of a taxon (taxonomic unit) from the root to the taxon itself, as represented by a path of ids in the hierarchy
+   */
+  lineageIdPath: string;
   schema: HttpJsonSchemaOrgDraft04Schema;
 }
 /**
