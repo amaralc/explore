@@ -1,7 +1,7 @@
 import { CreateManyResponseDto } from '@peerlab/kernel/shared-ts-utils/create-many-response-dto';
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
-import { ITaxonomicUnitV1Dto } from './entity';
+import { ITaxonomicUnitV1Dto } from './entity.schema.types';
 
 export abstract class TaxonomicUnitsV1DatabaseRepository {
   abstract generateUniqueId(): string;

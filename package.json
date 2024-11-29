@@ -13,7 +13,7 @@
   "scripts": {
     "people-skill-set-browser:build": "pnpm --filter ./apps/people/skill-set/browser run build",
     "people-skill-set-browser:start": "pnpm --filter ./apps/people/skill-set/browser run start",
-    "prepare": "husky install",
+    "prepare": "husky install && sh setup-after-install.sh",
     "git:discard:all": "git checkout -- .",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
@@ -254,7 +254,7 @@
     "lodash.throttle": "4.1.1",
     "mapbox-gl": "2.15.0",
     "mongodb": "6.4.0",
-    "mongodb-memory-server": "9.1.7",
+    "mongodb-memory-server": "10.1.2",
     "mongoose": "6.11.3",
     "mui-one-time-password-input": "1.1.2",
     "next": "14.2.1",
@@ -309,9 +309,8 @@
     "zod": "3.22.3"
   },
   "volta": {
-    "node": "18.16.0",
-    "npm": "8.19.4",
-    "yarn": "1.22.19",
-    "pnpm": "8.6.7"
+    "node": "22.11.0",
+    "npm": "10.9.0",
+    "pnpm": "9.14.2"
   }
 }

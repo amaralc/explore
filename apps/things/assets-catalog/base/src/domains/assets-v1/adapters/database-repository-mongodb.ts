@@ -6,7 +6,8 @@ import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-en
 import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Replace } from '@peerlab/kernel/shared-ts-utils/types/replace';
 import { Collection, ObjectId } from 'mongodb';
-import { AssetV1Entity, IAssetV1Dto } from '../core/entity';
+import { AssetV1Entity } from '../core/entity';
+import { IAssetV1Dto } from '../core/entity.schema.types';
 import { AssetsV1DatabaseRepository } from '../core/repository-database';
 
 type IAssetV1DtoWithDates = Replace<IAssetV1Dto, { createdAt: Date; updatedAt: Date }>;
