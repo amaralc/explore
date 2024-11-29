@@ -1,7 +1,8 @@
-import { AssetV1Entity, assetV1JsonSchema } from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/entity';
+import taxonomicUnitV1JsonSchema from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/core/entity.schema';
+import { AssetV1Entity } from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/entity';
+import assetV1JsonSchema from '@peerlab/things/assets-catalog/base/domains/assets-v1/core/entity.schema';
 import {
   TaxonomicUnitV1Entity,
-  taxonomicUnitV1JsonSchema,
 } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/entity';
 import { OpenApiBuilder } from 'openapi3-ts/oas30';
 import { assetsV1ControllerSchema } from '../../../api/v1/assets/index.docs';

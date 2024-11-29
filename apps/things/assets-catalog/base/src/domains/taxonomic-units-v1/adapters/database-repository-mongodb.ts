@@ -5,7 +5,8 @@ import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logg
 import { IPaginatedEntities } from '@peerlab/kernel/shared-ts-utils/paginated-entities';
 import { IPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
 import { Collection, MongoError, ObjectId } from 'mongodb';
-import { ITaxonomicUnitV1Dto, TaxonomicUnitV1Entity } from '../core/entity';
+import { TaxonomicUnitV1Entity } from '../core/entity';
+import { ITaxonomicUnitV1Dto } from '../core/entity.schema.types';
 import { TaxonomicUnitsV1DatabaseRepository } from '../core/repository-database';
 import { TaxonomicUnitAlreadyExistsError } from '../core/use-cases/create-taxonomic-unit/errors';
 

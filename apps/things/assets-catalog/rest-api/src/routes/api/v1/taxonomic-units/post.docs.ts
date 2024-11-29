@@ -1,5 +1,4 @@
-import { taxonomicUnitV1JsonSchema } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/entity';
-import { createTaxonomicUnitV1InputDtoSchema } from '@peerlab/things/assets-catalog/base/domains/taxonomic-units-v1/core/use-cases/create-taxonomic-unit';
+import { default as createTaxonomicUnitV1InputDtoSchema, default as taxonomicUnitV1JsonSchema } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/core/entity.schema';
 import { OperationObject } from 'openapi3-ts/oas30';
 
 export const postTaxonomicUnitV1Schema: OperationObject = {
