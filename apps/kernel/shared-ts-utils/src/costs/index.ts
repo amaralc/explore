@@ -1,17 +1,8 @@
-abstract class AbstractCostManager {
-  abstract countBytes(inputDto: unknown): number | null;
+import { costStructurePerGbInUSD } from './config';
 
-  abstract calculateCostInUSD(inputDto: unknown): number;
-}
+export { costStructurePerGbInUSD };
 
-const costStructurePerGbInUSD = {
-  logging: {
-    traffic: 0,
-    monthlyStorage: 0.5,
-  },
-} as const;
-
-export class CostManager implements AbstractCostManager {
+export class CostManager {
   constructor(private readonly costStructure: typeof costStructurePerGbInUSD) {}
 
   calculateCostInUSD(inputDto: unknown): number {
