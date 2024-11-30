@@ -2,7 +2,7 @@
 # References:
 # - https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/
 # - https://www.youtube.com/watch?v=vo-NnGHdZFc&ab_channel=Yes%21DoIT
-FROM nginx:1.27.1-alpine-slim
+FROM nginx:1.27.2-alpine-slim
 
 ## Built-in environment variables
 
