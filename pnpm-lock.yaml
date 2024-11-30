@@ -518,7 +518,7 @@ importers:
         version: 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(cypress@13.13.1)(js-yaml@4.1.0)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)
       '@nx/vite':
         specifier: 19.0.0
-        version: 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)
+        version: 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)
       '@nx/web':
         specifier: 19.0.0
         version: 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)
@@ -548,7 +548,7 @@ importers:
         version: 7.6.20(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       '@storybook/react-vite':
         specifier: 7.6.20
-        version: 7.6.20(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+        version: 7.6.20(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       '@storybook/test-runner':
         specifier: ^0.13.0
         version: 0.13.0(@swc/helpers@0.5.3)(@types/node@18.19.31)(encoding@0.1.13)(ts-node@10.9.1(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(typescript@5.5.4))
@@ -656,10 +656,10 @@ importers:
         version: 7.9.0(eslint@8.57.0)(typescript@5.5.4)
       '@vitejs/plugin-react':
         specifier: 4.2.1
-        version: 4.2.1(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+        version: 4.2.1(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       '@vitejs/plugin-react-swc':
         specifier: 3.6.0
-        version: 3.6.0(@swc/helpers@0.5.3)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+        version: 3.6.0(@swc/helpers@0.5.3)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       '@vitest/coverage-c8':
         specifier: 0.32.0
         version: 0.32.0(vitest@1.6.0)
@@ -760,14 +760,14 @@ importers:
         specifier: 4.1.1
         version: 4.1.1(file-loader@6.2.0(webpack@5.93.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(esbuild@0.18.20)))(webpack@5.93.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(esbuild@0.18.20))
       vite:
-        specifier: 5.2.8
-        version: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+        specifier: 5.2.14
+        version: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
       vite-plugin-dts:
         specifier: ~3.8.1
-        version: 3.8.3(@types/node@18.19.31)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+        version: 3.8.3(@types/node@18.19.31)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       vite-tsconfig-paths:
         specifier: 4.2.0
-        version: 4.2.0(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+        version: 4.2.0(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       vitest:
         specifier: 1.6.0
         version: 1.6.0(@types/node@18.19.31)(@vitest/ui@1.6.0)(jsdom@22.1.0)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
@@ -18421,8 +18421,8 @@ packages:
       vite:
         optional: true
 
-  vite@5.2.8:
-    resolution: {integrity: sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==}
+  vite@5.2.14:
+    resolution: {integrity: sha512-TFQLuwWLPms+NBNlh0D9LZQ+HXW471COABxw/9TEUBrjuHMo9BrYBPrN/SYAwIuVL+rLerycxiLT41t4f5MZpA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -19432,7 +19432,7 @@ snapshots:
       '@aws-sdk/types': 3.609.0
       '@aws-sdk/util-locate-window': 3.568.0
       '@smithy/util-utf8': 2.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-crypto/sha256-js@1.2.2':
@@ -19451,7 +19451,7 @@ snapshots:
     dependencies:
       '@aws-crypto/util': 5.2.0
       '@aws-sdk/types': 3.609.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-crypto/supports-web-crypto@1.0.0':
@@ -19464,7 +19464,7 @@ snapshots:
 
   '@aws-crypto/supports-web-crypto@5.2.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-crypto/util@1.2.2':
@@ -19483,13 +19483,13 @@ snapshots:
     dependencies:
       '@aws-sdk/types': 3.609.0
       '@smithy/util-utf8': 2.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/abort-controller@3.186.0':
     dependencies:
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/abort-controller@3.6.1':
     dependencies:
@@ -20024,7 +20024,7 @@ snapshots:
       '@smithy/util-middleware': 3.0.3
       '@smithy/util-retry': 3.0.3
       '@smithy/util-utf8': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
     optional: true
@@ -20061,7 +20061,7 @@ snapshots:
       '@aws-sdk/util-user-agent-node': 3.186.0
       '@aws-sdk/util-utf8-browser': 3.186.0
       '@aws-sdk/util-utf8-node': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
 
@@ -20291,7 +20291,7 @@ snapshots:
       '@smithy/smithy-client': 3.1.11
       '@smithy/types': 3.3.0
       fast-xml-parser: 4.2.5
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/credential-provider-cognito-identity@3.620.0':
@@ -20309,7 +20309,7 @@ snapshots:
     dependencies:
       '@aws-sdk/property-provider': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/credential-provider-env@3.6.1':
     dependencies:
@@ -20344,7 +20344,7 @@ snapshots:
       '@aws-sdk/property-provider': 3.186.0
       '@aws-sdk/types': 3.186.0
       '@aws-sdk/url-parser': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/credential-provider-imds@3.6.1':
     dependencies:
@@ -20361,7 +20361,7 @@ snapshots:
       '@aws-sdk/property-provider': 3.186.0
       '@aws-sdk/shared-ini-file-loader': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
 
@@ -20442,7 +20442,7 @@ snapshots:
       '@aws-sdk/property-provider': 3.186.0
       '@aws-sdk/shared-ini-file-loader': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/credential-provider-process@3.6.1':
     dependencies:
@@ -20467,7 +20467,7 @@ snapshots:
       '@aws-sdk/property-provider': 3.186.0
       '@aws-sdk/shared-ini-file-loader': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
 
@@ -20489,7 +20489,7 @@ snapshots:
     dependencies:
       '@aws-sdk/property-provider': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/credential-provider-web-identity@3.609.0(@aws-sdk/client-sts@3.620.0)':
     dependencies:
@@ -20528,7 +20528,7 @@ snapshots:
       '@aws-crypto/crc32': 2.0.0
       '@aws-sdk/types': 3.186.0
       '@aws-sdk/util-hex-encoding': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/eventstream-handler-node@3.186.0':
     dependencies:
@@ -20583,7 +20583,7 @@ snapshots:
     dependencies:
       '@aws-sdk/eventstream-codec': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/eventstream-serde-universal@3.6.1':
     dependencies:
@@ -20643,7 +20643,7 @@ snapshots:
 
   '@aws-sdk/is-array-buffer@3.186.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/is-array-buffer@3.6.1':
     dependencies:
@@ -20717,7 +20717,7 @@ snapshots:
       '@aws-sdk/types': 3.609.0
       '@smithy/protocol-http': 4.1.0
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/middleware-location-constraint@3.6.1':
@@ -20739,7 +20739,7 @@ snapshots:
     dependencies:
       '@aws-sdk/types': 3.609.0
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/middleware-recursion-detection@3.186.0':
@@ -20753,7 +20753,7 @@ snapshots:
       '@aws-sdk/types': 3.609.0
       '@smithy/protocol-http': 4.1.0
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/middleware-retry@3.186.0':
@@ -20790,7 +20790,7 @@ snapshots:
       '@aws-sdk/protocol-http': 3.186.0
       '@aws-sdk/signature-v4': 3.186.0
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/middleware-serde@3.186.0':
     dependencies:
@@ -20849,7 +20849,7 @@ snapshots:
       '@aws-sdk/util-endpoints': 3.614.0
       '@smithy/protocol-http': 4.1.0
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/node-config-provider@3.186.0':
@@ -20885,7 +20885,7 @@ snapshots:
   '@aws-sdk/property-provider@3.186.0':
     dependencies:
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/property-provider@3.6.1':
     dependencies:
@@ -20906,7 +20906,7 @@ snapshots:
     dependencies:
       '@aws-sdk/types': 3.186.0
       '@aws-sdk/util-uri-escape': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/querystring-builder@3.6.1':
     dependencies:
@@ -20917,7 +20917,7 @@ snapshots:
   '@aws-sdk/querystring-parser@3.186.0':
     dependencies:
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/querystring-parser@3.6.1':
     dependencies:
@@ -20931,7 +20931,7 @@ snapshots:
       '@smithy/types': 3.3.0
       '@smithy/util-config-provider': 3.0.0
       '@smithy/util-middleware': 3.0.3
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/s3-request-presigner@3.6.1':
@@ -20951,7 +20951,7 @@ snapshots:
   '@aws-sdk/shared-ini-file-loader@3.186.0':
     dependencies:
       '@aws-sdk/types': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/shared-ini-file-loader@3.6.1':
     dependencies:
@@ -20964,7 +20964,7 @@ snapshots:
       '@aws-sdk/util-hex-encoding': 3.186.0
       '@aws-sdk/util-middleware': 3.186.0
       '@aws-sdk/util-uri-escape': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/signature-v4@3.6.1':
     dependencies:
@@ -20993,7 +20993,7 @@ snapshots:
       '@smithy/property-provider': 3.1.3
       '@smithy/shared-ini-file-loader': 3.1.4
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/types@3.186.0': {}
@@ -21066,7 +21066,7 @@ snapshots:
   '@aws-sdk/util-buffer-from@3.186.0':
     dependencies:
       '@aws-sdk/is-array-buffer': 3.186.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-buffer-from@3.6.1':
     dependencies:
@@ -21075,7 +21075,7 @@ snapshots:
 
   '@aws-sdk/util-config-provider@3.186.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-create-request@3.6.1':
     dependencies:
@@ -21105,7 +21105,7 @@ snapshots:
       '@aws-sdk/types': 3.609.0
       '@smithy/types': 3.3.0
       '@smithy/util-endpoints': 2.0.5
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/util-format-url@3.6.1':
@@ -21116,7 +21116,7 @@ snapshots:
 
   '@aws-sdk/util-hex-encoding@3.186.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-hex-encoding@3.6.1':
     dependencies:
@@ -21124,15 +21124,15 @@ snapshots:
 
   '@aws-sdk/util-locate-window@3.568.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-middleware@3.186.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-uri-escape@3.186.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-uri-escape@3.6.1':
     dependencies:
@@ -21155,7 +21155,7 @@ snapshots:
       '@aws-sdk/types': 3.609.0
       '@smithy/types': 3.3.0
       bowser: 2.11.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/util-user-agent-node@3.186.0':
@@ -21175,7 +21175,7 @@ snapshots:
       '@aws-sdk/types': 3.609.0
       '@smithy/node-config-provider': 3.1.4
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@aws-sdk/util-utf8-browser@3.186.0':
@@ -21184,7 +21184,7 @@ snapshots:
 
   '@aws-sdk/util-utf8-browser@3.259.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@aws-sdk/util-utf8-browser@3.6.1':
     dependencies:
@@ -25248,13 +25248,13 @@ snapshots:
       '@types/yargs': 17.0.32
       chalk: 4.1.2
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.5.4)
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     optionalDependencies:
       typescript: 5.5.4
 
@@ -26327,9 +26327,9 @@ snapshots:
       - '@swc/core'
       - debug
 
-  '@nrwl/vite@19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)':
+  '@nrwl/vite@19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)':
     dependencies:
-      '@nx/vite': 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)
+      '@nx/vite': 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)
     transitivePeerDependencies:
       - '@babel/traverse'
       - '@swc-node/register'
@@ -26898,16 +26898,16 @@ snapshots:
       - typescript
       - verdaccio
 
-  '@nx/vite@19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)':
+  '@nx/vite@19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)':
     dependencies:
-      '@nrwl/vite': 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)
+      '@nrwl/vite': 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))(vitest@1.6.0)
       '@nx/devkit': 19.0.0(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))
       '@nx/js': 19.0.0(@babel/traverse@7.25.1)(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3))(@types/node@18.19.31)(nx@19.0.0(@swc-node/register@1.8.0(@swc/core@1.3.85(@swc/helpers@0.5.3))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.3.85(@swc/helpers@0.5.3)))(typescript@5.5.4)
       '@phenomnomnominal/tsquery': 5.0.1(typescript@5.5.4)
       '@swc/helpers': 0.5.3
       enquirer: 2.3.6
       tsconfig-paths: 4.2.0
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
       vitest: 1.6.0(@types/node@18.19.31)(@vitest/ui@1.6.0)(jsdom@22.1.0)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - '@babel/traverse'
@@ -27717,7 +27717,7 @@ snapshots:
 
   '@react-native-community/cli-debugger-ui@13.6.9':
     dependencies:
-      serve-static: 1.15.0
+      serve-static: 1.16.0
     transitivePeerDependencies:
       - supports-color
 
@@ -27789,7 +27789,7 @@ snapshots:
       errorhandler: 1.5.1
       nocache: 3.0.4
       pretty-format: 26.6.2
-      serve-static: 1.15.0
+      serve-static: 1.16.0
       ws: 6.2.3
     transitivePeerDependencies:
       - bufferutil
@@ -27949,7 +27949,7 @@ snapshots:
       nullthrows: 1.1.1
       open: 7.4.2
       selfsigned: 2.4.1
-      serve-static: 1.15.0
+      serve-static: 1.16.0
       temp-dir: 2.0.0
       ws: 6.2.3
     transitivePeerDependencies:
@@ -28724,7 +28724,7 @@ snapshots:
   '@smithy/abort-controller@3.1.1':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/config-resolver@3.0.5':
@@ -28733,7 +28733,7 @@ snapshots:
       '@smithy/types': 3.3.0
       '@smithy/util-config-provider': 3.0.0
       '@smithy/util-middleware': 3.0.3
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/core@2.3.1':
@@ -28745,7 +28745,7 @@ snapshots:
       '@smithy/smithy-client': 3.1.11
       '@smithy/types': 3.3.0
       '@smithy/util-middleware': 3.0.3
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/credential-provider-imds@3.2.0':
@@ -28763,7 +28763,7 @@ snapshots:
       '@smithy/querystring-builder': 3.0.3
       '@smithy/types': 3.3.0
       '@smithy/util-base64': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/hash-node@3.0.3':
@@ -28771,30 +28771,30 @@ snapshots:
       '@smithy/types': 3.3.0
       '@smithy/util-buffer-from': 3.0.0
       '@smithy/util-utf8': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/invalid-dependency@3.0.3':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/is-array-buffer@2.2.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/is-array-buffer@3.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/middleware-content-length@3.0.5':
     dependencies:
       '@smithy/protocol-http': 4.1.0
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/middleware-endpoint@3.1.0':
@@ -28805,7 +28805,7 @@ snapshots:
       '@smithy/types': 3.3.0
       '@smithy/url-parser': 3.0.3
       '@smithy/util-middleware': 3.0.3
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/middleware-retry@3.0.13':
@@ -28817,20 +28817,20 @@ snapshots:
       '@smithy/types': 3.3.0
       '@smithy/util-middleware': 3.0.3
       '@smithy/util-retry': 3.0.3
-      tslib: 2.6.3
+      tslib: 2.8.1
       uuid: 9.0.1
     optional: true
 
   '@smithy/middleware-serde@3.0.3':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/middleware-stack@3.0.3':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/node-config-provider@3.1.4':
@@ -28838,7 +28838,7 @@ snapshots:
       '@smithy/property-provider': 3.1.3
       '@smithy/shared-ini-file-loader': 3.1.4
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/node-http-handler@3.1.4':
@@ -28847,7 +28847,7 @@ snapshots:
       '@smithy/protocol-http': 4.1.0
       '@smithy/querystring-builder': 3.0.3
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/property-provider@3.1.3':
@@ -28859,20 +28859,20 @@ snapshots:
   '@smithy/protocol-http@4.1.0':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/querystring-builder@3.0.3':
     dependencies:
       '@smithy/types': 3.3.0
       '@smithy/util-uri-escape': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/querystring-parser@3.0.3':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/service-error-classification@3.0.3':
@@ -28883,7 +28883,7 @@ snapshots:
   '@smithy/shared-ini-file-loader@3.1.4':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/signature-v4@4.1.0':
@@ -28895,7 +28895,7 @@ snapshots:
       '@smithy/util-middleware': 3.0.3
       '@smithy/util-uri-escape': 3.0.0
       '@smithy/util-utf8': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/smithy-client@3.1.11':
@@ -28905,7 +28905,7 @@ snapshots:
       '@smithy/protocol-http': 4.1.0
       '@smithy/types': 3.3.0
       '@smithy/util-stream': 3.1.3
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/types@3.3.0':
@@ -28917,41 +28917,41 @@ snapshots:
     dependencies:
       '@smithy/querystring-parser': 3.0.3
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-base64@3.0.0':
     dependencies:
       '@smithy/util-buffer-from': 3.0.0
       '@smithy/util-utf8': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-body-length-browser@3.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-body-length-node@3.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-buffer-from@2.2.0':
     dependencies:
       '@smithy/is-array-buffer': 2.2.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-buffer-from@3.0.0':
     dependencies:
       '@smithy/is-array-buffer': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-config-provider@3.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-defaults-mode-browser@3.0.13':
@@ -28960,7 +28960,7 @@ snapshots:
       '@smithy/smithy-client': 3.1.11
       '@smithy/types': 3.3.0
       bowser: 2.11.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-defaults-mode-node@3.0.13':
@@ -28971,32 +28971,32 @@ snapshots:
       '@smithy/property-provider': 3.1.3
       '@smithy/smithy-client': 3.1.11
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-endpoints@2.0.5':
     dependencies:
       '@smithy/node-config-provider': 3.1.4
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-hex-encoding@3.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-middleware@3.0.3':
     dependencies:
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-retry@3.0.3':
     dependencies:
       '@smithy/service-error-classification': 3.0.3
       '@smithy/types': 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-stream@3.1.3':
@@ -29008,24 +29008,24 @@ snapshots:
       '@smithy/util-buffer-from': 3.0.0
       '@smithy/util-hex-encoding': 3.0.0
       '@smithy/util-utf8': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-uri-escape@3.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-utf8@2.3.0':
     dependencies:
       '@smithy/util-buffer-from': 2.2.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@smithy/util-utf8@3.0.0':
     dependencies:
       '@smithy/util-buffer-from': 3.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     optional: true
 
   '@stitches/react@1.2.8(react@18.3.1)':
@@ -29196,7 +29196,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@storybook/builder-vite@7.6.20(encoding@0.1.13)(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
+  '@storybook/builder-vite@7.6.20(encoding@0.1.13)(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
     dependencies:
       '@storybook/channels': 7.6.20
       '@storybook/client-logger': 7.6.20
@@ -29214,7 +29214,7 @@ snapshots:
       fs-extra: 11.2.0
       magic-string: 0.30.10
       rollup: 3.29.4
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -29525,18 +29525,18 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/react-vite@7.6.20(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
+  '@storybook/react-vite@7.6.20(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       '@rollup/pluginutils': 5.1.0(rollup@4.19.1)
-      '@storybook/builder-vite': 7.6.20(encoding@0.1.13)(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+      '@storybook/builder-vite': 7.6.20(encoding@0.1.13)(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       '@storybook/react': 7.6.20(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
-      '@vitejs/plugin-react': 3.1.0(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
+      '@vitejs/plugin-react': 3.1.0(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))
       magic-string: 0.30.10
       react: 18.3.1
       react-docgen: 7.0.3
       react-dom: 18.3.1(react@18.3.1)
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -31048,32 +31048,32 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 18.3.1
 
-  '@vitejs/plugin-react-swc@3.6.0(@swc/helpers@0.5.3)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
+  '@vitejs/plugin-react-swc@3.6.0(@swc/helpers@0.5.3)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
     dependencies:
       '@swc/core': 1.7.3(@swc/helpers@0.5.3)
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@vitejs/plugin-react@3.1.0(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
+  '@vitejs/plugin-react@3.1.0(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/plugin-transform-react-jsx-self': 7.24.7(@babel/core@7.24.9)
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.24.9)
       magic-string: 0.27.0
       react-refresh: 0.14.2
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react@4.2.1(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
+  '@vitejs/plugin-react@4.2.1(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3))':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/plugin-transform-react-jsx-self': 7.24.7(@babel/core@7.24.9)
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.24.9)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -45025,7 +45025,7 @@ snapshots:
       debug: 4.3.6(supports-color@8.1.1)
       pathe: 1.1.2
       picocolors: 1.0.1
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -45036,7 +45036,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-dts@3.8.3(@types/node@18.19.31)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)):
+  vite-plugin-dts@3.8.3(@types/node@18.19.31)(rollup@4.19.1)(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)):
     dependencies:
       '@microsoft/api-extractor': 7.43.0(@types/node@18.19.31)
       '@rollup/pluginutils': 5.1.0(rollup@4.19.1)
@@ -45047,24 +45047,24 @@ snapshots:
       typescript: 5.5.4
       vue-tsc: 1.8.27(typescript@5.5.4)
     optionalDependencies:
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-tsconfig-paths@4.2.0(typescript@5.5.4)(vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)):
+  vite-tsconfig-paths@4.2.0(typescript@5.5.4)(vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)):
     dependencies:
       debug: 4.3.6(supports-color@8.1.1)
       globrex: 0.1.2
       tsconfck: 2.1.2(typescript@5.5.4)
     optionalDependencies:
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3):
+  vite@5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.39
@@ -45096,7 +45096,7 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.2.8(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
+      vite: 5.2.14(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
       vite-node: 1.6.0(@types/node@18.19.31)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.31.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
