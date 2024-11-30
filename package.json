@@ -257,7 +257,7 @@
     "mongodb-memory-server": "10.1.2",
     "mongoose": "6.11.3",
     "mui-one-time-password-input": "1.1.2",
-    "next": "14.2.1",
+    "next": "14.2.10",
     "nextra": "2.7.1",
     "nextra-theme-docs": "2.7.1",
     "nock": "13.5.4",
