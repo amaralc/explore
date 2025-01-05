@@ -255,7 +255,7 @@
     "mapbox-gl": "2.15.0",
     "mongodb": "6.4.0",
     "mongodb-memory-server": "10.1.2",
-    "mongoose": "6.11.3",
+    "mongoose": "6.13.5",
     "mui-one-time-password-input": "1.1.2",
     "next": "15.0.3",
     "nextra": "2.7.1",
