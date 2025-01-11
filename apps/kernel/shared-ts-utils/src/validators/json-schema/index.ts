@@ -111,43 +111,30 @@ export class SchemaValidator {
   ): { errors: string[]; errorsText: string } {
     const errors: string[] = [];
 
-    function checkTypeCompatibility(reader: any, writer: any, path: string, errors: Array<string>) {
+    function checkTypeCompatibility(reader: any, writer: any, path: string, errors: Array<string>): Array<string> {
       // Check unions (oneOf)
       if (writer.oneOf && reader.oneOf) {
-        // Writer's union must be subset of reader's union
-        for (const writerSubSchema of writer.oneOf) {
-          let foundMatch = false;
-
-          // Check if writer's union schema is a subset of reader's union schema and not if each is compatible
-          let subErrors = []
-          for (const readerSubSchema of reader.oneOf) {
-            subErrors = checkTypeCompatibility(readerSubSchema, writerSubSchema, path, subErrors);
-          }
-
-          if (subErrors.length < reader.oneOf.length) {
-            foundMatch = true;
-          }
-
-          if (!foundMatch) {
+        const writerSubSchemaIsSubset = writer.oneOf.every(writerSubSchema => {
+          const readerSubSchemaIsCompatible = reader.oneOf.some(readerSubSchema => {
+            return checkTypeCompatibility(readerSubSchema, writerSubSchema, path, []).length === 0;
+          });
+          if (!readerSubSchemaIsCompatible) {
             errors.push(`${path}: Writer union schema is not compatible with any reader union schema`);
           }
-        }
+          return readerSubSchemaIsCompatible;
+        });
 
-        return errors;
+        if (!writerSubSchemaIsSubset) {
+          return errors;
+        }
       } else if (reader.oneOf && !writer.oneOf) {
-        let foundMatch = false;
-        let subErrors = []
-        for (const readerSubSchema of reader.oneOf) {
-          subErrors = checkTypeCompatibility(readerSubSchema, writer, path, subErrors);
-        }
-        if (subErrors.length < reader.oneOf.length) {
-          foundMatch = true;
-        }
-        if (!foundMatch) {
+        const readerSubSchemaHasCompatibleWriterSchema = reader.oneOf.some(readerSubSchema => {
+          return checkTypeCompatibility(readerSubSchema, writer, path, []).length === 0;
+        });
+
+        if (!readerSubSchemaHasCompatibleWriterSchema) {
           errors.push(`${path}: Reader union schema does not contain a schema that is compatible with the writer schema`);
         }
-
-        return errors;
       }
 
       // If writer doesn't specify type, it's compatible
