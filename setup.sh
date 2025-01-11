@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# Setup environment variables
-cp apps/things/assets-catalog/rest-api/.env.example apps/things/assets-catalog/rest-api/.env
-cp apps/kernel/taxonomic-units/rest-api/.env.example apps/kernel/taxonomic-units/rest-api/.env
-cp apps/people/organizations-management/rest-api/.env.example apps/people/organizations-management/rest-api/.env
+# Install nvm and setup node version according to .nvmrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | NVM_DIR="$HOME/.nvm" bash -s -- --no-color --skip-extra-prompts
 
-echo "Building app..."
-pnpm nx run-many --target=build --all --skip-nx-cache
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-echo "Copying .env.example..."
-cp apps/things/assets-catalog/rest-api/.env.example dist/apps/things/assets-catalog/rest-api/.env
+# Install node version from .nvmrc
+nvm install
 
-docker compose -f ./docker-compose.yml up
+# Enable corepack (https://nodejs.org/api/corepack.html)
+corepack enable
 
-# sleep 5
-# # Reference: https://dynamox.atlassian.net/wiki/spaces/DYX/pages/955187256/Testes+de+Carga
-# K6_WEB_DASHBOARD=true k6 run standard-load.js
+# Install package manager
+corepack install
+
+# Install dependencies using corepack
+corepack pnpm install

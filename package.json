@@ -10,10 +10,11 @@
     "apps/**",
     "libs/**"
   ],
+  "packageManager": "pnpm@9.15.3",
   "scripts": {
     "people-skill-set-browser:build": "pnpm --filter ./apps/people/skill-set/browser run build",
     "people-skill-set-browser:start": "pnpm --filter ./apps/people/skill-set/browser run start",
-    "prepare": "husky install && sh setup-after-install.sh",
+    "prepare": "sh setup-after-install.sh",
     "git:discard:all": "git checkout -- .",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
     "release:no-push": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js --no-push",
@@ -47,7 +48,7 @@
     "start:back-end": "nx run-many --target=serve --projects=researchers-peers-svc-rest-api,service-consumer --parallel --maxParallel=2",
     "e2e:back-end": "nx e2e core-peers-svc-e2e",
     "e2e:front-end": "nx e2e service-mfe-e2e",
-    "generate-types": "npx ts-node --compilerOptions '{\"resolveJsonModule\":true}' apps/kernel/shared-ts-utils/src/types/type-generator.ts"
+    "generate-types": "pnpx ts-node --compilerOptions '{\"resolveJsonModule\":true}' apps/kernel/shared-ts-utils/src/types/type-generator.ts"
   },
   "private": true,
   "devDependencies": {
@@ -180,7 +181,7 @@
     "@fullcalendar/react": "6.1.8",
     "@fullcalendar/timegrid": "6.1.8",
     "@fullcalendar/timeline": "6.1.8",
-    "@google-cloud/functions-framework": "3.3.0",
+    "@google-cloud/functions-framework": "3.4.5",
     "@hookform/resolvers": "3.3.1",
     "@mantine/core": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
