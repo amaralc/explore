@@ -1,7 +1,7 @@
 import { JSONSchema } from 'json-schema-to-typescript';
 
 const taxonomicUnitInstanceV1JsonSchema = {
-  $schema: 'http://json-schema.org/draft-04/schema#',
+  $schema: 'http://json-schema.org/draft-07/schema#',
   title: 'ITaxonomicUnitInstanceV1',
   type: 'object',
   properties: {
@@ -20,7 +20,7 @@ const taxonomicUnitInstanceV1JsonSchema = {
       required: ['name', 'version'],
     },
     data: {
-      $ref: 'http://json-schema.org/draft-04/schema#',
+      $ref: 'http://json-schema.org/draft-07/schema#',
     },
   },
   required: ['data', 'schema', 'id'],

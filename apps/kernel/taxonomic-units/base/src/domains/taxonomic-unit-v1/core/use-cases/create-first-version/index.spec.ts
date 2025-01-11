@@ -18,7 +18,19 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
     const createEntityInputDto: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: 'valid-taxonomic-unit-name',
       parentId: null,
-      schema: {
+      metadataSchema: {
+        type: 'object',
+        properties: {
+          parentId: {
+            type: 'string',
+          },
+        },
+        required: ['parentId'],
+      },
+      metadata: {
+        parentId: 'valid-parent-id',
+      },
+      instanceSchema: {
         properties: {
           parentId: {
             type: 'string',
@@ -32,7 +44,19 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
       id: expect.stringMatching(mongoDbIdFormat),
       version: 1,
       lineageIdPath: expect.stringMatching(lineageIdPathFormat),
-      schema: {
+      metadataSchema: {
+        type: 'object',
+        properties: {
+          parentId: {
+            type: 'string',
+          },
+        },
+        required: ['parentId'],
+      },
+      metadata: {
+        parentId: 'valid-parent-id',
+      },
+      instanceSchema: {
         properties: {
           parentId: {
             type: 'string',
@@ -52,7 +76,11 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
     const createOrganizationInputDto: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: validName,
       parentId: null,
-      schema: {
+      metadataSchema: {
+        type: 'object',
+      },
+      metadata: {},
+      instanceSchema: {
         properties: {
           parentId: {
             type: 'string',
@@ -65,7 +93,11 @@ describe('CreateFirstVersionOfTaxonomicUnitV1UseCase', () => {
     const duplicatedNicknameOrganizationInputDto: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: validName,
       parentId: null,
-      schema: {
+      metadataSchema: {
+        type: 'object',
+      },
+      metadata: {},
+      instanceSchema: {
         properties: {
           parentId: {
             type: 'string',

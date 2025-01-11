@@ -2,7 +2,7 @@ import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/erro
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { defaultPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
 import { OwnerAgentNotFoundError } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/errors';
 import { FreeOrganizationLimitReachedError } from '@peerlab/people/organizations-management/base/domains/organizations-v1/core/use-cases/create-organization/errors';

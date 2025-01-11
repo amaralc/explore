@@ -1,5 +1,5 @@
 import { FileInput, rem } from '@mantine/core';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { IconCsv } from '@tabler/icons-react';
 import { ErrorObject } from 'ajv';
 import Papa from 'papaparse';

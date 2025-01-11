@@ -1,7 +1,6 @@
 import Ajv, { AnySchemaObject, ErrorObject, Schema } from 'ajv';
 import addFormats from 'ajv-formats';
 import { ValidationExceptionV2Error } from '../../errors/validation-exception-v1';
-import jsonSchemaMetaSchemaV4 from './json-schema-draft-04.schema';
 
 export class InvalidJsonSchemaError extends Error { }
 
@@ -57,7 +56,7 @@ export class SchemaValidator {
     );
 
     // Add reference meta schema v4 to allow reference to other schemas
-    this.ajv.addMetaSchema(jsonSchemaMetaSchemaV4, 'http://json-schema.org/draft-04/schema#');
+    // this.ajv.addMetaSchema(jsonSchemaMetaSchemaV4, 'http://json-schema.org/draft-04/schema#');
   }
 
   public validate(

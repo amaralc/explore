@@ -7,7 +7,9 @@ const createFirstVersionOfTaxonomicUnitV1JsonSchema = {
   type: 'object',
   properties: {
     name: entityDtoSchema.properties.name,
-    schema: entityDtoSchema.properties.schema,
+    instanceSchema: entityDtoSchema.properties.instanceSchema,
+    metadataSchema: entityDtoSchema.properties.metadataSchema,
+    metadata: entityDtoSchema.properties.metadata,
     parentId: {
       anyOf: [
         {
@@ -20,7 +22,7 @@ const createFirstVersionOfTaxonomicUnitV1JsonSchema = {
         'The unique identifier of the parent taxonomic unit, as a hexadecimal string of 24 characters. If the value is null, the taxon is the root of a taxonomic hierarchy',
     },
   },
-  required: ['name', 'schema', 'parentId'],
+  required: ['name', 'instanceSchema', 'metadataSchema', 'metadata', 'parentId'],
   additionalProperties: false,
 } as const satisfies JSONSchema;
 

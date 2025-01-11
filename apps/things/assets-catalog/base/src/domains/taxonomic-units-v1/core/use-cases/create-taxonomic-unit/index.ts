@@ -1,6 +1,6 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { TaxonomicUnitV1Entity } from '../../entity';
 import { ITaxonomicUnitV1Dto } from '../../entity.schema.types';
 import { TaxonomicUnitsV1DatabaseRepository } from '../../repository-database';

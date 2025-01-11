@@ -8,7 +8,11 @@ const fakeTaxonomicUnit01 = new TaxonomicUnitV1Entity({
   version: 1,
   name: 'fake-taxonomic-unit-01',
   lineageIdPath: '/' + id01,
-  schema: {
+  metadataSchema: {
+    type: 'object'
+  },
+  metadata: {},
+  instanceSchema: {
     type: 'object',
     properties: {
       parentId: {
@@ -26,7 +30,11 @@ const fakeTaxonomicUnit02 = new TaxonomicUnitV1Entity({
   version: 2,
   name: 'fake-taxonomic-unit-02',
   lineageIdPath: '/' + id01 + '/' + id02,
-  schema: {
+  metadataSchema: {
+    type: 'object'
+  },
+  metadata: {},
+  instanceSchema: {
     type: 'object',
     properties: {
       parentId: {
@@ -46,7 +54,11 @@ const fakeTaxonomicUnit03 = new TaxonomicUnitV1Entity({
   version: 1,
   name: 'fake-taxonomic-unit-03',
   lineageIdPath: '/' + id03,
-  schema: {
+  metadataSchema: {
+    type: 'object'
+  },
+  metadata: {},
+  instanceSchema: {
     properties: {
       name: {
         type: 'string',

@@ -1,7 +1,7 @@
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { ConfigurationManager } from '@peerlab/people/organizations-management/base/config/configuration-management';
 import { TemporaryAccountHolderNotFoundError } from '@peerlab/people/organizations-management/base/domains/_shared/core/use-cases/extract-entities-from-external-source/errors';
 import express from 'express';

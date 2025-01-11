@@ -5,74 +5,19 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+import { JSONSchema7 } from "json-schema";
+
+export type CoreSchemaMetaSchema = JSONSchema7;
 /**
  * @minItems 1
  */
-export type SchemaArray = [HttpJsonSchemaOrgDraft04Schema, ...HttpJsonSchemaOrgDraft04Schema[]];
-/**
- * @minItems 1
- */
-export type StringArray = [string, ...string[]];
+export type SchemaArray = [CoreSchemaMetaSchema, ...CoreSchemaMetaSchema[]];
+export type StringArray = string[];
 
 export interface ICreateTaxonomicUnitV1InstanceInputDto {
   schema: {
     version: number;
     name: string;
   };
-  data: HttpJsonSchemaOrgDraft04Schema;
-}
-/**
- * Core schema meta-schema
- */
-export interface HttpJsonSchemaOrgDraft04Schema {
-  id?: string;
-  $schema?: string;
-  title?: string;
-  description?: string;
-  default?: unknown;
-  multipleOf?: number;
-  maximum?: number;
-  exclusiveMaximum?: boolean;
-  minimum?: number;
-  exclusiveMinimum?: boolean;
-  maxLength?: number;
-  minLength?: number;
-  pattern?: string;
-  additionalItems?: boolean | HttpJsonSchemaOrgDraft04Schema;
-  items?: HttpJsonSchemaOrgDraft04Schema | SchemaArray;
-  maxItems?: number;
-  minItems?: number;
-  uniqueItems?: boolean;
-  maxProperties?: number;
-  minProperties?: number;
-  required?: StringArray;
-  additionalProperties?: boolean | HttpJsonSchemaOrgDraft04Schema;
-  definitions?: {
-    [k: string]: HttpJsonSchemaOrgDraft04Schema;
-  };
-  properties?: {
-    [k: string]: HttpJsonSchemaOrgDraft04Schema;
-  };
-  patternProperties?: {
-    [k: string]: HttpJsonSchemaOrgDraft04Schema;
-  };
-  dependencies?: {
-    [k: string]: HttpJsonSchemaOrgDraft04Schema | StringArray;
-  };
-  /**
-   * @minItems 1
-   */
-  enum?: [unknown, ...unknown[]];
-  type?:
-    | ("array" | "boolean" | "integer" | "null" | "number" | "object" | "string")
-    | [
-        "array" | "boolean" | "integer" | "null" | "number" | "object" | "string",
-        ...("array" | "boolean" | "integer" | "null" | "number" | "object" | "string")[]
-      ];
-  format?: string;
-  allOf?: SchemaArray;
-  anyOf?: SchemaArray;
-  oneOf?: SchemaArray;
-  not?: HttpJsonSchemaOrgDraft04Schema;
-  [k: string]: unknown;
+  data: unknown;
 }

@@ -1,5 +1,5 @@
 import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-entity';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import multiCentralV1Schema from './entity.schema';
 import { IMultiCentralV1Dto } from './entity.schema.types';
 

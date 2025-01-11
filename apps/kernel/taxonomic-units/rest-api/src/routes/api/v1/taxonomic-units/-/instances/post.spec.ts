@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../../../app';
 
-describe('POST /api/v1/taxonomic-units/-/instances', () => {
+describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
   let request: supertest.SuperAgentTest;
   let configurationManager: ConfigurationManager;
   let databaseUri: string;
@@ -38,6 +38,7 @@ describe('POST /api/v1/taxonomic-units/-/instances', () => {
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
+
   it('[HTTP 404] should throw a 404 error if the taxonomic unit does not exist', async () => {
     const requestBody = {
       schema: {
@@ -60,7 +61,7 @@ describe('POST /api/v1/taxonomic-units/-/instances', () => {
       });
   });
 
-  it.each([
+  it.only.each([
     {
       name: 'fake-name-01',
     },

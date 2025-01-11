@@ -18,7 +18,19 @@ describe('GetTaxonomicUnitV1ByIdUseCase', () => {
       id: newEntityId,
       version: 1,
       lineageIdPath: `/${newEntityId}`,
-      schema: {
+      metadataSchema: {
+        type: 'object',
+        properties: {
+          parentId: {
+            type: 'string',
+          },
+        },
+        required: ['parentId'],
+      },
+      metadata: {
+        parentId: 'valid-parent-id',
+      },
+      instanceSchema: {
         properties: {
           parentId: {
             type: 'string',
