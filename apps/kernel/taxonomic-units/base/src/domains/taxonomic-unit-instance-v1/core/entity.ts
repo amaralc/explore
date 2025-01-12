@@ -1,5 +1,6 @@
 import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { ITaxonomicUnitV1 } from '../../taxonomic-unit-v1/core/entity.schema.types';
+import { InstanceDataDoesNotConformWithInstanceSchemaError } from './errors';
 
 interface IInputDto {
   instanceData: unknown;
@@ -21,7 +22,10 @@ export class TaxonomicUnitInstanceV1Entity {
 
   private validateDataFormat() {
     const entitySchema = this.taxonomicUnitV1Dto.instanceSchema;
-    schemaValidator.validateOrReject(entitySchema, this.dto); // Validate data schema
+    const { errors, errorsText } = schemaValidator.validate(entitySchema, this.dto); // Validate data schema
+    if (errors.length > 0) {
+      throw new InstanceDataDoesNotConformWithInstanceSchemaError(errorsText);
+    }
   }
 
   getDto(): unknown {
