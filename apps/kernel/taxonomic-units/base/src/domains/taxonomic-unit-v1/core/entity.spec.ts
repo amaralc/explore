@@ -456,45 +456,7 @@ describe('TaxonomicUnitV1Entity', () => {
 
     it('should create child that have all required properties from parent', () => {
       const parentId = faker.database.mongodbObjectId().toString();
-      const parentTaxonomicUnitDto: ITaxonomicUnitV1 = {
-        id: parentId,
-        version: 1,
-        name: 'valid-taxonomic-unit-name',
-        lineageIdPath: `/${parentId}`,
-        metadataSchema: {
-          type: 'object',
-          additionalProperties: false,
-          properties: {
-            name: {
-              type: 'string',
-            },
-            color: {
-              type: 'string',
-              enum: ['blue'],
-            },
-            ownerId: {
-              anyOf: [
-                { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
-                { type: 'null' }
-              ]
-            }
-          },
-          required: ['name'],
-        },
-        metadata: {
-          name: 'valid-metadata-name',
-          color: 'blue',
-          ownerId: null
-        },
-        instanceSchema: {
-          properties: {
-            parentId: {
-              type: 'string',
-            },
-          },
-          required: ['name'],
-        },
-      };
+      const parentTaxonomicUnitDto = taxonomicUnitV1Factory.create().getDto();
 
       const childId = faker.database.mongodbObjectId().toString();
       const childTaxonomicUnitDto: ITaxonomicUnitV1 = {
