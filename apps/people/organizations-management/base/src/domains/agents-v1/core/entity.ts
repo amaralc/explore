@@ -1,5 +1,5 @@
 import { getDtoFromEntity } from '@peerlab/kernel/shared-ts-utils/get-dto-from-entity';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { randomBytes } from 'crypto';
 import { JSONSchema } from 'json-schema-to-typescript';
 import agentV1JsonSchema from './entity.schema';

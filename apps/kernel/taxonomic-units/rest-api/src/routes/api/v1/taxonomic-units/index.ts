@@ -1,7 +1,7 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
 import { defaultPaginationV1Dto } from '@peerlab/kernel/shared-ts-utils/pagination-dto';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/config/configuration-management';
 import { RestExpressTaxonomicUnitV1ResponseHandler } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/adapters/rest-express-error-handler';
 import express from 'express';

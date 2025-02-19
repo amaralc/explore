@@ -34,7 +34,7 @@ export class V1TaxonomicUnitInstancesController {
         data: req.body.data,
       });
 
-      log.message = `Success creating entity of schema name ${entityDto.schema.name}`;
+      log.message = `Success creating entity of schema name ${req.body.schema.name}`;
       await RestExpressTaxonomicUnitInstanceV1ResponseHandler.handleCreateSuccess(entityDto, res, log);
     } catch (error) {
       await RestExpressTaxonomicUnitV1ResponseHandler.handleErrors(error, res, log);

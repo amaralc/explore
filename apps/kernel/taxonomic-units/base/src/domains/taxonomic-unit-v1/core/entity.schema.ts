@@ -1,7 +1,7 @@
-import { JSONSchema } from 'json-schema-to-typescript';
+import { JSONSchema4 } from 'json-schema';
 
 const taxonomicUnitV1JsonSchema = {
-  $schema: 'http://json-schema.org/draft-04/schema#',
+  $schema: 'http://json-schema.org/draft-07/schema#',
   title: 'ITaxonomicUnitV1',
   type: 'object',
   properties: {
@@ -18,10 +18,14 @@ const taxonomicUnitV1JsonSchema = {
         'The taxonomic lineage of a taxon (taxonomic unit) from the root to the taxon itself, as represented by a path of ids in the hierarchy',
       pattern: '^/([0-9a-fA-F]{24})(?:/([0-9a-fA-F]{24}))*$',
     },
-    schema: { $ref: 'http://json-schema.org/draft-04/schema#' }, // First you should add the $ref as a key to ajv meta schema
+    metadata: {
+      anyOf: [{ type: 'null' }, { type: 'object' }, { type: 'array' }, { type: 'string' }, { type: 'number' }, { type: 'boolean' }, { type: 'integer' }],
+    },
+    metadataSchema: { $ref: 'http://json-schema.org/draft-07/schema#' },
+    instanceSchema: { $ref: 'http://json-schema.org/draft-07/schema#' }, // First you should add the $ref as a key to ajv meta schema
   },
-  required: ['name', 'schema', 'version', 'id', 'lineageIdPath'],
+  required: ['name', 'instanceSchema', 'metadataSchema', 'metadata', 'version', 'id', 'lineageIdPath'],
   additionalProperties: false,
-} as const satisfies JSONSchema; // TODO: if we use v7 here the type generator will not work currently
+} as const satisfies JSONSchema4; // TODO: if we use v7 here the type generator will not work currently
 
 export default taxonomicUnitV1JsonSchema;

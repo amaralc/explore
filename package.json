@@ -10,7 +10,7 @@
     "apps/**",
     "libs/**"
   ],
-  "packageManager": "pnpm@9.15.3",
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
     "people-skill-set-browser:build": "pnpm --filter ./apps/people/skill-set/browser run build",
     "people-skill-set-browser:start": "pnpm --filter ./apps/people/skill-set/browser run start",
@@ -308,10 +308,5 @@
     "winston": "^3.13.0",
     "yup": "1.2.0",
     "zod": "3.22.3"
-  },
-  "volta": {
-    "node": "22.11.0",
-    "npm": "10.9.0",
-    "pnpm": "9.14.2"
   }
 }

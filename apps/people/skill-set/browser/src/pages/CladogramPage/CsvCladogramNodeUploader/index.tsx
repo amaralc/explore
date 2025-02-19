@@ -1,5 +1,5 @@
 import { FileInput, rem } from '@mantine/core';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { IconCsv } from '@tabler/icons-react';
 import { ErrorObject } from 'ajv';
 import Papa from 'papaparse';
@@ -31,8 +31,8 @@ export const CsvCladogramNodeUploader: React.FC<ICsvCladogramNodeUploaderProps> 
           complete: (results) => {
             try {
               const json = convertCsvToCladogramNode(results.data);
-              const { errors, isValid } = schemaValidator.validate(nodeSchema, json);
-              if (isValid) {
+              const { errors } = schemaValidator.validate(nodeSchema, json);
+              if (errors.length === 0) {
                 setJsonCladogramContent(json);
                 setValidationErrors(null);
               } else {

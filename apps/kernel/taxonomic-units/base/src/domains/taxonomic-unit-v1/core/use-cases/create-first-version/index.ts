@@ -1,6 +1,6 @@
 import { ILogMetadata } from '@peerlab/kernel/shared-ts-utils/logs/application-logger';
 import { winstonLogger } from '@peerlab/kernel/shared-ts-utils/logs/winston-logger';
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import { TaxonomicUnitsV1DatabaseRepository } from '../../database-repository';
 import { TaxonomicUnitV1Entity } from '../../entity';
 
@@ -57,9 +57,11 @@ export class CreateFirstVersionOfTaxonomicUnitV1UseCase {
       const newEntity = new TaxonomicUnitV1Entity({
         id: newId,
         name: inputDto.name,
-        schema: inputDto.schema,
+        instanceSchema: inputDto.instanceSchema,
         version: 1,
         lineageIdPath: lineageIdPath,
+        metadataSchema: inputDto.metadataSchema,
+        metadata: inputDto.metadata,
       });
 
       log.steps.push({ message: 'Save first version in entity repository' });

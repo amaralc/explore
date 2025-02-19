@@ -1,21 +1,34 @@
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
-import 'reflect-metadata';
-import { HttpJsonSchemaOrgDraft04Schema } from '../../taxonomic-unit-v1/core/entity.schema.types';
-import { ITaxonomicUnitInstanceV1 } from './entity.schema.types';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
+import { ITaxonomicUnitV1 } from '../../taxonomic-unit-v1/core/entity.schema.types';
+import { InstanceDataDoesNotConformWithInstanceSchemaError } from './errors';
+
+interface IInputDto {
+  instanceData: unknown;
+  taxonomicUnitV1Dto: ITaxonomicUnitV1;
+}
 
 export class TaxonomicUnitInstanceV1Entity {
-  private dto: ITaxonomicUnitInstanceV1;
+  private dto: unknown;
+  private taxonomicUnitV1Dto: ITaxonomicUnitV1;
 
-  constructor(dataSchema: HttpJsonSchemaOrgDraft04Schema, inputDto: ITaxonomicUnitInstanceV1) {
-    TaxonomicUnitInstanceV1Entity.validate(dataSchema, inputDto);
-    this.dto = inputDto;
+  constructor(inputDto: IInputDto) {
+    this.dto = inputDto.instanceData;
+    this.taxonomicUnitV1Dto = inputDto.taxonomicUnitV1Dto;
   }
 
-  static validate(dataSchema: HttpJsonSchemaOrgDraft04Schema, inputDto: ITaxonomicUnitInstanceV1) {
-    schemaValidator.validateOrReject(dataSchema, inputDto.data); // Validate data schema
+  validate() {
+    this.validateDataFormat();
   }
 
-  getDto(): ITaxonomicUnitInstanceV1 {
+  private validateDataFormat() {
+    const entitySchema = this.taxonomicUnitV1Dto.instanceSchema;
+    const { errors, errorsText } = schemaValidator.validate(entitySchema, this.dto); // Validate data schema
+    if (errors.length > 0) {
+      throw new InstanceDataDoesNotConformWithInstanceSchemaError(errorsText);
+    }
+  }
+
+  getDto(): unknown {
     return this.dto;
   }
 }

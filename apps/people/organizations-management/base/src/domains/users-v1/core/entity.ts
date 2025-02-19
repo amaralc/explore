@@ -1,4 +1,4 @@
-import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema-validator';
+import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json-schema';
 import userV1JsonSchema from './entity.schema';
 import { IUserV1Dto } from './entity.schema.types';
 
