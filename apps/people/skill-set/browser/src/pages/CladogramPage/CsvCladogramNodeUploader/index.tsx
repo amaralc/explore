@@ -31,8 +31,8 @@ export const CsvCladogramNodeUploader: React.FC<ICsvCladogramNodeUploaderProps> 
           complete: (results) => {
             try {
               const json = convertCsvToCladogramNode(results.data);
-              const { errors, isValid } = schemaValidator.validate(nodeSchema, json);
-              if (isValid) {
+              const { errors } = schemaValidator.validate(nodeSchema, json);
+              if (errors.length === 0) {
                 setJsonCladogramContent(json);
                 setValidationErrors(null);
               } else {

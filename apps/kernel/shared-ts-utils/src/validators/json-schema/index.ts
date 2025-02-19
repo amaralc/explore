@@ -114,8 +114,8 @@ export class SchemaValidator {
     function checkTypeCompatibility(reader: any, writer: any, path: string, errors: Array<string>): Array<string> {
       // Check unions (oneOf)
       if (writer.oneOf && reader.oneOf) {
-        const writerSubSchemaIsSubset = writer.oneOf.every(writerSubSchema => {
-          const readerSubSchemaIsCompatible = reader.oneOf.some(readerSubSchema => {
+        const writerSubSchemaIsSubset = writer.oneOf.every((writerSubSchema: Schema) => {
+          const readerSubSchemaIsCompatible = reader.oneOf.some((readerSubSchema: Schema) => {
             return checkTypeCompatibility(readerSubSchema, writerSubSchema, path, []).length === 0;
           });
           if (!readerSubSchemaIsCompatible) {
@@ -128,7 +128,7 @@ export class SchemaValidator {
           return errors;
         }
       } else if (reader.oneOf && !writer.oneOf) {
-        const readerSubSchemaHasCompatibleWriterSchema = reader.oneOf.some(readerSubSchema => {
+        const readerSubSchemaHasCompatibleWriterSchema = reader.oneOf.some((readerSubSchema: Schema) => {
           return checkTypeCompatibility(readerSubSchema, writer, path, []).length === 0;
         });
 
@@ -273,7 +273,7 @@ export class SchemaValidator {
         errorsText: errors.join('\n'),
       };
     } catch (error) {
-      throw new InvalidJsonSchemaError(`Invalid JSON Schema: ${error.message}`);
+      throw new InvalidJsonSchemaError(`Invalid JSON Schema: ${(error as Error).message}`);
     }
   }
 }
