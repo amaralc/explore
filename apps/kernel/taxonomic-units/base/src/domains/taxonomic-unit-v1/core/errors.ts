@@ -12,4 +12,4 @@ export class InvalidTaxonomicUnitV1InputDtoError extends Error { }
 
 export class MetadataDoesNotMatchMetadataSchemaError extends Error { }
 
-export class ChildMetadataSchemaIsNotBackwardsCompatibleWithParentMetadataSchemaError extends Error { }
+export class ChildMetadataSchemaIsNotForwardCompatibleWithParentMetadataSchemaError extends Error { }

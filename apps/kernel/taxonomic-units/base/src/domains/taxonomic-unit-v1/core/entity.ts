@@ -2,7 +2,7 @@ import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json
 import entitySchema from './entity.schema';
 import { ITaxonomicUnitV1 } from './entity.schema.types';
 import {
-  ChildMetadataSchemaIsNotBackwardsCompatibleWithParentMetadataSchemaError,
+  ChildMetadataSchemaIsNotForwardCompatibleWithParentMetadataSchemaError,
   InvalidTaxonomicUnitV1InputDtoError,
   MetadataDoesNotMatchMetadataSchemaError
 } from './errors';
@@ -46,9 +46,9 @@ export class TaxonomicUnitV1Entity {
     const childMetadataSchema = this.dto.metadataSchema;
 
     // Check if root schema types are compatible
-    const { errors, errorsText } = schemaValidator.checkBackwardsCompatibility(parentMetadataSchema, childMetadataSchema)
+    const { errors, errorsText } = schemaValidator.checkForwardCompatibility(parentMetadataSchema, childMetadataSchema)
     if (errors.length > 0) {
-      throw new ChildMetadataSchemaIsNotBackwardsCompatibleWithParentMetadataSchemaError(errorsText);
+      throw new ChildMetadataSchemaIsNotForwardCompatibleWithParentMetadataSchemaError(errorsText);
     }
   }
 
