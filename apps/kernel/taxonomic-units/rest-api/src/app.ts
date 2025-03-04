@@ -11,8 +11,6 @@ import { validateCors } from './utils/enable-cors';
 
 export const bootstrapApplication = async (configurationManager: ConfigurationManager) => {
   try {
-    // Initialize configuration manager (database connections, etc.)
-    await import('dotenv').then((dotenv) => dotenv.config());
     await configurationManager.initialize();
 
     // Initialize Express application

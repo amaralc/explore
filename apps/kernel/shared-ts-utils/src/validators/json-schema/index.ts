@@ -105,7 +105,7 @@ export class SchemaValidator {
     this.ajv.addMetaSchema(schema, key);
   }
 
-  public checkBackwardsCompatibility(
+  public checkForwardCompatibility(
     readerSchema: Schema,
     writerSchema: Schema,
   ): { errors: string[]; errorsText: string } {

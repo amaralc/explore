@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import { TaxonomicUnitV1Entity } from './entity';
 import { ITaxonomicUnitV1 } from './entity.schema.types';
-import { ChildMetadataSchemaIsNotBackwardsCompatibleWithParentMetadataSchemaError, InvalidTaxonomicUnitV1InputDtoError, MetadataDoesNotMatchMetadataSchemaError } from './errors';
+import { ChildMetadataSchemaIsNotForwardCompatibleWithParentMetadataSchemaError, InvalidTaxonomicUnitV1InputDtoError, MetadataDoesNotMatchMetadataSchemaError } from './errors';
 import { taxonomicUnitV1Factory } from './factory';
 
 describe('TaxonomicUnitV1Entity', () => {
@@ -269,7 +269,7 @@ describe('TaxonomicUnitV1Entity', () => {
         },
       }
 
-      expect(() => new TaxonomicUnitV1Entity(childTaxonomicUnitDto, parentTaxonomicUnitDto)).toThrow(ChildMetadataSchemaIsNotBackwardsCompatibleWithParentMetadataSchemaError);
+      expect(() => new TaxonomicUnitV1Entity(childTaxonomicUnitDto, parentTaxonomicUnitDto)).toThrow(ChildMetadataSchemaIsNotForwardCompatibleWithParentMetadataSchemaError);
     });
 
     /**
@@ -451,7 +451,7 @@ describe('TaxonomicUnitV1Entity', () => {
         instanceSchema: parentTaxonomicUnitDto.instanceSchema,
       };
 
-      expect(() => new TaxonomicUnitV1Entity(childTaxonomicUnitDto, parentTaxonomicUnitDto)).toThrow(ChildMetadataSchemaIsNotBackwardsCompatibleWithParentMetadataSchemaError);
+      expect(() => new TaxonomicUnitV1Entity(childTaxonomicUnitDto, parentTaxonomicUnitDto)).toThrow(ChildMetadataSchemaIsNotForwardCompatibleWithParentMetadataSchemaError);
     });
 
     it('should create child that have all required properties from parent', () => {

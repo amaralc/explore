@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 export const defaultConfiguration = {
   server: {
     port: process.env.PORT,

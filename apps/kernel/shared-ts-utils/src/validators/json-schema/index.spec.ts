@@ -15,14 +15,14 @@ describe('JSON Schema Backwards Compatibility', () => {
     it('should allow integer to number promotion', () => {
       const writer: Schema = { type: 'integer' };
       const reader: Schema = { type: 'number' };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0);
     });
 
     it('should not allow number to integer demotion', () => {
       const writer: Schema = { type: 'number' };
       const reader: Schema = { type: 'integer' };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0]).toContain('Type mismatch');
     });
@@ -31,14 +31,14 @@ describe('JSON Schema Backwards Compatibility', () => {
       it('should allow writer with more restrictive minLength', () => {
         const writer: Schema = { type: 'string', minLength: 5 };
         const reader: Schema = { type: 'string', minLength: 3 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(0);
       });
 
       it('should not allow writer with less restrictive minLength', () => {
         const writer: Schema = { type: 'string', minLength: 2 };
         const reader: Schema = { type: 'string', minLength: 5 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(1);
         expect(result.errors[0]).toContain('minLength');
       });
@@ -46,7 +46,7 @@ describe('JSON Schema Backwards Compatibility', () => {
       it('should allow writer with more restrictive maxLength', () => {
         const writer: Schema = { type: 'string', maxLength: 10 };
         const reader: Schema = { type: 'string', maxLength: 15 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(0);
       });
     });
@@ -55,14 +55,14 @@ describe('JSON Schema Backwards Compatibility', () => {
       it('should allow writer with more restrictive minimum', () => {
         const writer: Schema = { type: 'number', minimum: 5 };
         const reader: Schema = { type: 'number', minimum: 0 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(0);
       });
 
       it('should not allow writer with less restrictive minimum', () => {
         const writer: Schema = { type: 'number', minimum: 0 };
         const reader: Schema = { type: 'number', minimum: 5 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(1);
         expect(result.errors[0]).toContain('minimum');
       });
@@ -70,14 +70,14 @@ describe('JSON Schema Backwards Compatibility', () => {
       it('should allow writer with more restrictive maximum', () => {
         const writer: Schema = { type: 'number', maximum: 5 };
         const reader: Schema = { type: 'number', maximum: 10 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(0);
       });
 
       it('should not allow writer with less restrictive maximum', () => {
         const writer: Schema = { type: 'number', maximum: 15 };
         const reader: Schema = { type: 'number', maximum: 5 };
-        const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+        const result = schemaValidator.checkForwardCompatibility(reader, writer);
         expect(result.errors).toHaveLength(1);
         expect(result.errors[0]).toContain('maximum');
       });
@@ -96,7 +96,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         properties: { name: { type: 'string' } },
         additionalProperties: true
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0);
     });
 
@@ -111,7 +111,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         properties: { name: { type: 'string' } },
         additionalProperties: false
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0]).toContain('closed content model');
     });
@@ -133,7 +133,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         },
         required: ['name', 'age']
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1); // Reader requires more properties
     });
   });
@@ -150,7 +150,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         items: { type: 'string' },
         minItems: 1
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0);
     });
 
@@ -170,7 +170,7 @@ describe('JSON Schema Backwards Compatibility', () => {
           { type: 'boolean' }
         ]
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0);
     });
   });
@@ -185,7 +185,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         type: 'string',
         enum: ['red', 'blue', 'green']
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0);
     });
 
@@ -198,7 +198,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         type: 'string',
         enum: ['red', 'blue', 'green']
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0]).toContain('enum');
     });
@@ -219,7 +219,7 @@ describe('JSON Schema Backwards Compatibility', () => {
           { type: 'boolean' }
         ]
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0);
     });
 
@@ -237,7 +237,7 @@ describe('JSON Schema Backwards Compatibility', () => {
           { type: 'number' }
         ]
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0]).toContain('union');
     });
@@ -271,7 +271,7 @@ describe('JSON Schema Backwards Compatibility', () => {
           }
         }
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1); // Reader requires age property
     });
 
@@ -298,7 +298,7 @@ describe('JSON Schema Backwards Compatibility', () => {
           required: ['id']
         }
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(0); // Integer to number promotion is allowed
     });
   });
@@ -312,7 +312,7 @@ describe('JSON Schema Backwards Compatibility', () => {
         type: 'string'
       };
       expect(() => {
-        schemaValidator.checkBackwardsCompatibility(reader, writer);
+        schemaValidator.checkForwardCompatibility(reader, writer);
       }).toThrow('Invalid JSON Schema');
     });
 
@@ -329,7 +329,7 @@ describe('JSON Schema Backwards Compatibility', () => {
           age: { type: 'number' }
         }
       };
-      const result = schemaValidator.checkBackwardsCompatibility(reader, writer);
+      const result = schemaValidator.checkForwardCompatibility(reader, writer);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0]).toContain('Type mismatch');
       expect(result.errorsText).toBeDefined();
