@@ -1,3 +1,4 @@
 .prettierignore
 .docusaurus/
 /.nx/cache
+/dist

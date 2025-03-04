@@ -1,8 +1,10 @@
 import { createLogger, format, transports } from 'winston';
 import { ApplicationLogger, ILogMetadata } from './application-logger';
+import 'dotenv/config';
 
 // Define the log file path
-const logFilePath = process.env['LOG_FILE_PATH'] || 'output.log';
+const logToConsole = process.env['LOG_TO_CONSOLE'] === 'true';
+const logFilePath = process.env['LOG_FILE_PATH'];
 
 const logLevels = {
   emerg: 0,
@@ -32,17 +34,21 @@ const myFormat = () =>
 const logger = createLogger({
   levels: logLevels,
   format: myFormat(),
-  transports: [
-    // - Write all logs with importance level of `info` or less to `combined.log`
-    new transports.File({ filename: logFilePath }),
-  ],
+  transports: [],
 });
+
+if(logFilePath) {
+  logger.add(
+    // - Write all logs with importance level of `info` or less to filepath
+    new transports.File({ filename: logFilePath }),
+  );
+}
 
 //
 // If we're not in production then log to the `console` with the format:
 // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
 //
-if (process.env.NODE_ENV === 'production') {
+if (logToConsole) {
   logger.add(
     new transports.Console({
       format: myFormat(),
