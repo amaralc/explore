@@ -15,13 +15,44 @@
       "command": "docker run -p 8080:8080 --name kernel-taxonomic-units-rest-api kernel-taxonomic-units-rest-api"
     },
     "build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "esbuild apps/kernel/taxonomic-units/rest-api/src/main.ts --bundle --platform=node --target=node10.4 --tsconfig=apps/kernel/taxonomic-units/rest-api/tsconfig.app.json --outfile=dist/apps/kernel/taxonomic-units/rest-api/main.js"
-      },
+      "executor": "@nx/esbuild:esbuild",
       "outputs": [
-        "{workspaceRoot}/dist/apps/kernel/taxonomic-units/rest-api"
-      ]
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/kernel/taxonomic-units/rest-api",
+        "format": [
+          "cjs"
+        ],
+        "bundle": false,
+        "main": "apps/kernel/taxonomic-units/rest-api/src/main.ts",
+        "tsConfig": "apps/kernel/taxonomic-units/rest-api/tsconfig.app.json",
+        "assets": [
+          "apps/kernel/taxonomic-units/rest-api/src/assets"
+        ],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "minify": true,
+          "bundle": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
     },
     "serve": {
       "executor": "@nx/js:node",
