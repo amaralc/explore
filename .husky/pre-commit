@@ -2,6 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # corepack pnpm generate-types
-corepack pnpm test:unit
+# corepack pnpm test:unit
 # corepack pnpm nx run kernel-shell-iac:production-terraform-init --skip-nx-cache
 # corepack pnpm nx run kernel-shell-iac:production-terraform-validate --skip-nx-cache

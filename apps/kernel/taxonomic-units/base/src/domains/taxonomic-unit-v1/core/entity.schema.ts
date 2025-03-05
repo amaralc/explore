@@ -1,4 +1,4 @@
-import { JSONSchema4 } from 'json-schema';
+import { JSONSchema7 } from 'json-schema';
 
 const taxonomicUnitV1JsonSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
@@ -26,6 +26,6 @@ const taxonomicUnitV1JsonSchema = {
   },
   required: ['name', 'instanceSchema', 'metadataSchema', 'metadata', 'version', 'id', 'lineageIdPath'],
   additionalProperties: false,
-} as const satisfies JSONSchema4; // TODO: if we use v7 here the type generator will not work currently
+} as const satisfies JSONSchema7;
 
 export default taxonomicUnitV1JsonSchema;
