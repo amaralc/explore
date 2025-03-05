@@ -15,6 +15,10 @@ export const bootstrapApplication = async (configurationManager: ConfigurationMa
 
     // Initialize Express application
     const app = express();
+
+    // Avoid disclosing sensitive information about the framework (https://cwe.mitre.org/data/definitions/200.html)
+    app.disable('x-powered-by');
+
     app.use('/assets', express.static(path.join(__dirname, 'assets')));
     app.use(cors(validateCors));
     app.use(express.json());
