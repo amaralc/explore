@@ -81,7 +81,7 @@ module "production-environment-name" {
 
 # Production Environment
 module "production" {
-  source                              = "../environment"
+  source                              = "../environment/v1.0.0"
   count                               = 0
   branch_name                         = "production"
   domain_name                         = var.domain_name

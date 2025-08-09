@@ -30,7 +30,7 @@ data "google_project" "core_platform_shell_iac" {
 # Preview Environment
 module "preview-environment" {
   count                                                                     = local.preview_environments_enabled == true ? 1 : 0
-  source                                                                    = "../environment"
+  source                                                                    = "../environment/v1.0.0"
   branch_name                                                               = var.branch_name
   environment_name                                                          = var.environment_name
   owner_account_email                                                       = var.owner_account_email
