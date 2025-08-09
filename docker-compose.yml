@@ -109,7 +109,7 @@ services:
           memory: '512MB'
 
   things-assets-catalog-rest-api:
-    image: node:18.17.1
+    image: node:24.3.0-alpine
     volumes:
       - ./:/app
     working_dir: /app

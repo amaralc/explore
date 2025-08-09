@@ -1,5 +1,5 @@
 # Start recipe from base image
-FROM node:18.20.7-alpine
+FROM node:24.3.0-alpine
 
 ## Built-in environment variables
 ENV PORT="8080"
