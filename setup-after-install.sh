@@ -16,6 +16,10 @@ pnpm nx run-many --target=build --all --skip-nx-cache
 
 echo "Copying .env.example..."
 cp apps/things/assets-catalog/rest-api/.env.example dist/apps/things/assets-catalog/rest-api/.env
+cp .env.example .env
+
+echo "Creating log file..."
+touch explore.log
 
 # docker compose -f ./docker-compose.yml up -d
 
