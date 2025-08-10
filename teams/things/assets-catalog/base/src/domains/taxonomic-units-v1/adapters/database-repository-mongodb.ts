@@ -84,7 +84,7 @@ export class MongoDbTaxonomicUnitsV1DatabaseRepository implements TaxonomicUnits
   }
 
   public async findBySlug(slug: string): Promise<ITaxonomicUnitV1Dto | null> {
-    const mongoDbDocument = await this.getCollection().findOne({ slug });
+    const mongoDbDocument = await this.getCollection().findOne({ slug: { $eq: slug } });
     if (!mongoDbDocument) {
       return null;
     }
