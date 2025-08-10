@@ -40,7 +40,10 @@ Communication, Adaptability, Resilience, Courage, Respect, Continuous Learning a
 - ci(auth): We need to manually enable the Google auth client through Firebase Console in order to sign in with google in our applications.
 - ci(build) Error: Error while updating cloudfunction configuration: Error waiting for Updating CloudFunctions Function: Error code 3, message: Build failed: This project is using pnpm but you have not included the Functions Framework in your dependencies. Please add it by running: 'pnpm add @google-cloud/functions-framework'.; Error ID: 5b6dc8b5. (+1)
 
-# Foundation
+# Features by Team and Delivery Channel
+
+Team: Kernel
+Channels: Codebase, Infrastructure
 
 - [ ] CI/CD
   - [x] Manage cloud infrastructure with code;
@@ -49,9 +52,8 @@ Communication, Adaptability, Resilience, Courage, Respect, Continuous Learning a
   - [x] Manage feature toggles;
   - [ ] Validate preview environment;
 
-# Delivery Channels
-
-## Web Browser
+Team: People
+Channels: Web Browser, APIs
 
 - [ ] Auth
   - [x] Sign in with Google;
