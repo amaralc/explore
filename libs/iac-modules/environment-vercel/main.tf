@@ -14,7 +14,7 @@ resource "vercel_project" "instance" {
   install_command  = var.install_command                  # "pnpm install"
   dev_command      = var.dev_command                      # "npx nx serve core-platform-shell-browser"
   build_command    = var.build_command                    # "npx nx build core-platform-shell-browser --prod"                  # Check the project.json file to check the name of the app
-  output_directory = var.output_directory                 # "dist/apps/core/platform-shell-browser/.next"                      # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
+  output_directory = var.output_directory                 # "dist/teams/core/platform-shell-browser/.next"                      # Build locally to check the output directory (generally similar to the path to the app, but under dist/ folder)
   ignore_command   = var.ignore_command                   # "if [ $VERCEL_ENV == 'production' ]; then exit 1; else exit 0; fi" # Prevent default integration from creating previews for this project. Useful to fine tool the preview generation (reference: https://neon.tech/blog/branching-with-preview-environments)
 }
 

@@ -30,7 +30,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/kernel/shell-iac/production/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel/shell-iac/production/credentials.json
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -65,7 +65,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/kernel/flag-management/Dockerfile
+          file: ./teams/kernel/flag-management/Dockerfile
           push: true
           # no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -76,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/people/researchers-peers-svc/rest-api/Dockerfile
+          file: ./teams/people/researchers-peers-svc/rest-api/Dockerfile
           push: true
           # no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -87,7 +87,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/kernel/management-shell-browser/Dockerfile
+          file: ./teams/kernel/management-shell-browser/Dockerfile
           push: true
           # no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -98,7 +98,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./apps/kernel/assets-catalog/rest-api/Dockerfile
+          file: ./teams/kernel/assets-catalog/rest-api/Dockerfile
           push: true
           # no-cache: true # TODO: Check if this is necessary
           # build-args: BRANCH_NAME=${{ env.branch_name }} # Comment out this line if you don't need to use nx remote cache within your container
@@ -129,7 +129,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > apps/kernel/shell-iac/production/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel/shell-iac/production/credentials.json
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -157,7 +157,7 @@ jobs:
 
       - name: Authenticate with gcloud cli
         run: |
-          gcloud auth activate-service-account --key-file=apps/kernel/shell-iac/production/credentials.json
+          gcloud auth activate-service-account --key-file=teams/kernel/shell-iac/production/credentials.json
 
       - name: Override fake nx token
         run: |
@@ -206,13 +206,13 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: apps/kernel/shell-iac/production
+        working-directory: teams/kernel/shell-iac/production
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: apps/kernel/shell-iac/production
+        working-directory: teams/kernel/shell-iac/production
 
       - name: Terraform apply kernel-flag-management only
         if: false # Disabled while we do not decide weather to use unleash or not
@@ -240,7 +240,7 @@ jobs:
           # echo "Saving flag management url and token..."
           # echo "unleash_api_url=$(terraform output flag_management_url)" >> $GITHUB_ENV
           # echo "unleash_auth_token=$(terraform output flag_management_admin_api_token)" >> $GITHUB_ENV
-        working-directory: apps/kernel/shell-iac/production
+        working-directory: teams/kernel/shell-iac/production
 
       - name: Terraform Plan
         run: |
@@ -264,13 +264,13 @@ jobs:
             -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" \
             -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" \
             -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" \
-        working-directory: apps/kernel/shell-iac/production
+        working-directory: teams/kernel/shell-iac/production
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: apps/kernel/shell-iac/production
+        working-directory: teams/kernel/shell-iac/production
 
       - name: Emmit Compass Deployment event
         run: |
@@ -296,4 +296,4 @@ jobs:
       #       -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" \
       #       -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" \
       #       -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" \
-      #   working-directory: apps/kernel/shell-iac/production
+      #   working-directory: teams/kernel/shell-iac/production

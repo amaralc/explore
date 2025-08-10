@@ -33,7 +33,7 @@ module "postgresql_dbms" {
 
 # # Researchers Peers Microservice
 # module "researchers-peers" {
-#   source                              = "../../../apps/researchers/peers/svc-iac"
+#   source                              = "../../../teams/researchers/peers/svc-iac"
 #   environment_name                    = local.environment_name
 #   gcp_project_id                      = var.gcp_project_id
 #   gcp_location                        = var.gcp_location
@@ -47,20 +47,20 @@ module "postgresql_dbms" {
 
 # # Application Shell
 # module "core-platform-shell-browser" {
-#   source           = "../../../apps/core/platform-shell-browser/iac/production" # The path to the module
+#   source           = "../../../teams/core/platform-shell-browser/iac/production" # The path to the module
 #   environment_name = var.branch_name                                            # The name of the branch
 #   depends_on       = [module.researchers-peers]
 # }
 
 # # Documentation with Docusaurus
 # module "dx-dev-docs-browser" {
-#   source           = "../../../apps/dx/dev-docs-browser/iac/production" # The path to the module
+#   source           = "../../../teams/dx/dev-docs-browser/iac/production" # The path to the module
 #   environment_name = var.branch_name                                    # The name of the branch
 #   depends_on       = [module.researchers-peers]
 # }
 
 # # Nx Graph
 # module "core-root-shell-graph" {
-#   source           = "../../../apps/kernel/system-graph-browser/iac/production" # The path to the module
+#   source           = "../../../teams/kernel/system-graph-browser/iac/production" # The path to the module
 #   environment_name = var.branch_name                                      # The name of the branch
 # }

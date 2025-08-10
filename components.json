@@ -4,8 +4,8 @@
   "rsc": false,
   "tsx": true,
   "tailwind": {
-    "config": "apps/core-platform-shell-browser-vite/tailwind.config.js",
-    "css": "apps/core-platform-shell-browser-vite/src/index.css",
+    "config": "teams/core-platform-shell-browser-vite/tailwind.config.js",
+    "css": "teams/core-platform-shell-browser-vite/src/index.css",
     "baseColor": "slate",
     "cssVariables": true
   },

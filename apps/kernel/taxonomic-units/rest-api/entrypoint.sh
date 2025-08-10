@@ -1,1 +1,0 @@
-node dist/apps/kernel/taxonomic-units/rest-api/main.js

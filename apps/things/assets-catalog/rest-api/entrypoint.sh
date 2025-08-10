@@ -1,1 +1,0 @@
-node dist/apps/things/assets-catalog/rest-api/main.js

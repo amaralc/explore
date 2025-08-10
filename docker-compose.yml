@@ -115,12 +115,12 @@ services:
     working_dir: /app
     ports:
       - 8080:8080
-    command: 'dist/apps/things/assets-catalog/rest-api/main.js'
+    command: 'dist/teams/things/assets-catalog/rest-api/main.js'
     depends_on:
       - mongodb
       # - kafka
     env_file:
-      - dist/apps/things/assets-catalog/rest-api/.env
+      - dist/teams/things/assets-catalog/rest-api/.env
     deploy:
       resources:
         limits:

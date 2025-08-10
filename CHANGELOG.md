@@ -50,8 +50,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- apps/people/skill-set/browser/Dockerfile to reduce vulnerabilities ([f505c83](https://github.com/amaralc/explore/commit/f505c835c692a6d67267782b941cb322bfa92fde))
-- apps/things/assets-catalog/rest-api/Dockerfile to reduce vulnerabilities ([bd56b6c](https://github.com/amaralc/explore/commit/bd56b6ce5f06472cc7b9385d8de955982e571cb1))
+- teams/people/skill-set/browser/Dockerfile to reduce vulnerabilities ([f505c83](https://github.com/amaralc/explore/commit/f505c835c692a6d67267782b941cb322bfa92fde))
+- teams/things/assets-catalog/rest-api/Dockerfile to reduce vulnerabilities ([bd56b6c](https://github.com/amaralc/explore/commit/bd56b6ce5f06472cc7b9385d8de955982e571cb1))
 - **PEER-737:** use react-oidc-context to manage user session ([43ac3dc](https://github.com/amaralc/explore/commit/43ac3dc00f8474fe029686b8781c6a358926d031))
 
 ## [0.92.4](https://github.com/amaralc/explore/compare/peerlab@0.92.3...peerlab@0.92.4) (2024-08-01)
