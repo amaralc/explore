@@ -12,7 +12,7 @@ locals {
 }
 
 module "environment" {
-  source                              = "../environment"
+  source                              = "../environment/v1.0.0"
   environment_name                    = local.environment_name
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name

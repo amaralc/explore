@@ -6,65 +6,77 @@
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}/apps/people/skill-set/browser"
+      "webRoot": "${workspaceFolder}/teams/people/skill-set/browser"
     },
     {
       "name": "Debug kernel-management-shell-browser App",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}/apps/kernel/management-shell-browser"
+      "webRoot": "${workspaceFolder}/teams/kernel/management-shell-browser"
     },
     {
       "name": "Debug Express App",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/apps/people/organizations-management",
+      "cwd": "${workspaceFolder}/teams/people/organizations-management",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "nx",
         "run",
         "people-organizations-management-rest-api:serve"
       ],
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "console": "integratedTerminal",
       "restart": true,
       "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/dist/apps/people/organizations-management/**/*.js"]
+      "outFiles": [
+        "${workspaceFolder}/dist/teams/people/organizations-management/**/*.js"
+      ]
     },
     {
       "name": "Test Express App",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/apps/people/organizations-management",
+      "cwd": "${workspaceFolder}/teams/people/organizations-management",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "nx",
         "run",
         "people-organizations-management-base:test"
       ],
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "console": "integratedTerminal",
       "restart": true,
       "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/dist/apps/people/organizations-management/**/*.js"]
+      "outFiles": [
+        "${workspaceFolder}/dist/teams/people/organizations-management/**/*.js"
+      ]
     },
     {
       "name": "Inspect Browser App",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/apps/people/skill-set/browser",
+      "cwd": "${workspaceFolder}/teams/people/skill-set/browser",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "nx",
         "run",
         "people-skill-set-browser:serve"
       ],
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "console": "integratedTerminal",
       "restart": true,
       "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/dist/apps/people/skill-set/browser/**/*.js"]
+      "outFiles": [
+        "${workspaceFolder}/dist/teams/people/skill-set/browser/**/*.js"
+      ]
     },
     {
       "name": "Attach to Service",

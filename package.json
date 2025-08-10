@@ -7,13 +7,13 @@
     "email": "amaral.calil@gmail.com"
   },
   "workspaces": [
-    "apps/**",
+    "teams/**",
     "libs/**"
   ],
   "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "people-skill-set-browser:build": "pnpm --filter ./apps/people/skill-set/browser run build",
-    "people-skill-set-browser:start": "pnpm --filter ./apps/people/skill-set/browser run start",
+    "people-skill-set-browser:build": "pnpm --filter ./teams/people/skill-set/browser run build",
+    "people-skill-set-browser:start": "pnpm --filter ./teams/people/skill-set/browser run start",
     "prepare": "sh setup-after-install.sh",
     "git:discard:all": "git checkout -- .",
     "release": "lerna version --yes --conventional-commits --changelog-preset ./changelog-preset.config.js",
@@ -41,14 +41,14 @@
     "start:example:prisma": "pnpm env:setup && pnpm prisma:generate:postgres && pnpm prisma:migrate:dev && nx run-many --target=serve --all=true",
     "build:researchers-peers-svc-rest-api": "pnpm prisma:generate:postgres && pnpm nx run researchers-peers-svc-rest-api:build",
     "build:service-consumer": "pnpm prisma:generate:postgres && pnpm nx run service-consumer:build",
-    "researchers-peers-svc-rest-api:serve:production": "node dist/apps/researchers/peers/svc-rest-api/main.js",
+    "researchers-peers-svc-rest-api:serve:production": "node dist/teams/researchers/peers/svc-rest-api/main.js",
     "researchers-peers-svc-rest-api:serve": "make researchers-peers-svc-rest-api-serve",
     "service-consumer:serve": "make service-consumer-serve",
     "start": "pnpm nx run-many --target=serve --all=true",
     "start:back-end": "nx run-many --target=serve --projects=researchers-peers-svc-rest-api,service-consumer --parallel --maxParallel=2",
     "e2e:back-end": "nx e2e core-peers-svc-e2e",
     "e2e:front-end": "nx e2e service-mfe-e2e",
-    "generate-types": "pnpx ts-node --compilerOptions '{\"resolveJsonModule\":true}' apps/kernel/shared-ts-utils/src/types/type-generator.ts"
+    "generate-types": "pnpx ts-node --compilerOptions '{\"resolveJsonModule\":true}' teams/kernel/shared-ts-utils/src/types/type-generator.ts"
   },
   "private": true,
   "devDependencies": {

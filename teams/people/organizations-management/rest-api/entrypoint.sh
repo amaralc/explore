@@ -1,0 +1,1 @@
+node dist/teams/people/organizations-management/rest-api/main.js

@@ -15,17 +15,17 @@ config:
 
 researchers-peers-svc-docker-build:
 #	sudo docker build -t researchers-peers-svc:latest --build-arg SSH_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
-	sudo docker build -t researchers-peers-svc:latest -f apps/researchers/peers/svc-rest-api/Dockerfile .
+	sudo docker build -t researchers-peers-svc:latest -f teams/researchers/peers/svc-rest-api/Dockerfile .
 
 researchers-peers-svc-docker-build-no-cache:
 #	sudo docker build -t researchers-peers-svc:latest --build-arg SSH_PRIVATE_KEY="$$(cat ~/.ssh/id_rsa)" --no-cache .
-	sudo docker build -t researchers-peers-svc:latest -f apps/researchers/peers/svc-rest-api/Dockerfile --no-cache .
+	sudo docker build -t researchers-peers-svc:latest -f teams/researchers/peers/svc-rest-api/Dockerfile --no-cache .
 
 researchers-peers-svc-rest-api-docker-run:
-	docker run -it --rm -p 8080:8080 researchers-peers-svc:latest bash apps/researchers/peers/svc/rest-api/run-build.sh
+	docker run -it --rm -p 8080:8080 researchers-peers-svc:latest bash teams/researchers/peers/svc/rest-api/run-build.sh
 
 researchers-peers-svc-consumer-docker-run:
-	docker run -it --rm -p 8080:8080 researchers-peers-svc:latest bash apps/researchers/peers/svc/consumer/run-build.sh
+	docker run -it --rm -p 8080:8080 researchers-peers-svc:latest bash teams/researchers/peers/svc/consumer/run-build.sh
 
 # Application
 researchers-peers-svc-prisma-postgresql-setup:
@@ -33,7 +33,7 @@ researchers-peers-svc-prisma-postgresql-setup:
 
 researchers-peers-svc-rest-api-serve:
 	# The .env in root folder make it possible to use env variables within .env file
-	cp .env.example apps/researchers/peers/svc-rest-api/.env && make researchers-peers-svc-prisma-postgresql-setup && yarn nx serve researchers-peers-svc-rest-api
+	cp .env.example teams/researchers/peers/svc-rest-api/.env && make researchers-peers-svc-prisma-postgresql-setup && yarn nx serve researchers-peers-svc-rest-api
 
 researchers-peers-svc-consumer-with-api-serve:
 	# The .env in root folder make it possible to use env variables within .env file
@@ -44,28 +44,28 @@ researchers-peers-svc-consumer-serve:
 	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve service-consumer
 
 terraform-init-staging:
-	cd apps/core/platform-shell-iac/staging && terraform init -upgrade
+	cd teams/core/platform-shell-iac/staging && terraform init -upgrade
 
 terraform-plan-staging:
-	cd apps/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars
+	cd teams/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars
 
 terraform-apply-staging:
-	cd apps/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars
+	cd teams/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars
 
 terraform-apply-staging-auto-approve:
-	cd apps/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars -auto-approve
+	cd teams/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars -auto-approve
 
 terraform-plan-staging-out:
-	cd apps/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
+	cd teams/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
 
 terraform-destroy-staging:
-	cd apps/core/platform-shell-iac/staging && terraform destroy -var-file=env.tfvars
+	cd teams/core/platform-shell-iac/staging && terraform destroy -var-file=env.tfvars
 
 kong-postgres:
-	COMPOSE_PROFILES=database KONG_DATABASE=postgres docker compose -f apps/kernel/api-gateway/docker-compose-kong.yml up -d
+	COMPOSE_PROFILES=database KONG_DATABASE=postgres docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml up -d
 
 kong-dbless:
-	docker compose -f apps/kernel/api-gateway/docker-compose-kong.yml up -d 
+	docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml up -d 
 
 clean:
-	docker compose -f apps/kernel/api-gateway/docker-compose-kong.yml down -v
+	docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml down -v

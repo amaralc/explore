@@ -1,0 +1,68 @@
+{
+  "name": "things-assets-catalog-rest-api",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "teams/things/assets-catalog/rest-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/teams/things/assets-catalog/rest-api",
+        "main": "teams/things/assets-catalog/rest-api/src/main.ts",
+        "tsConfig": "teams/things/assets-catalog/rest-api/tsconfig.app.json",
+        "assets": [
+          "teams/things/assets-catalog/rest-api/src/assets"
+        ],
+        "webpackConfig": "teams/things/assets-catalog/rest-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "things-assets-catalog-rest-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "things-assets-catalog-rest-api:build:development"
+        },
+        "production": {
+          "buildTarget": "things-assets-catalog-rest-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "teams/things/assets-catalog/rest-api/jest.config.ts"
+      }
+    },
+    "docker-build": {
+      "command": "docker build -f teams/things/assets-catalog/rest-api/Dockerfile . -t things-assets-catalog-rest-api",
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "docker-run": {
+      "command": "docker run -p 8080:8080 things-assets-catalog-rest-api",
+      "dependsOn": []
+    }
+  },
+  "tags": []
+}

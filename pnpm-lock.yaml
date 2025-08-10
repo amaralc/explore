@@ -781,21 +781,21 @@ importers:
         specifier: 1.6.1
         version: 1.6.1(@types/node@18.19.31)(@vitest/ui@1.6.0)(jsdom@22.1.0)(less@4.1.3)(sass@1.77.8)(stylus@0.59.0)(terser@5.39.0)
 
-  apps/archive/platform-shell-browser: {}
-
-  apps/kernel/management-shell-browser: {}
-
-  apps/kernel/shared-ui-components: {}
-
-  apps/people/researchers-peers-svc/consumer: {}
-
-  apps/people/researchers-peers-svc/rest-api: {}
-
   libs/docusaurus: {}
 
   libs/researchers/peers/adapters: {}
 
   libs/researchers/peers/core: {}
+
+  teams/archive/platform-shell-browser: {}
+
+  teams/kernel/management-shell-browser: {}
+
+  teams/kernel/shared-ui-components: {}
+
+  teams/people/researchers-peers-svc/consumer: {}
+
+  teams/people/researchers-peers-svc/rest-api: {}
 
 packages:
 

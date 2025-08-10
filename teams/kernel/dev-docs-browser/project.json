@@ -1,0 +1,32 @@
+{
+  "name": "kernel-dev-docs-browser",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": [
+    "docusaurus",
+    "people-researchers-peers-svc-rest-api"
+  ],
+  "sourceRoot": "teams/kernel/dev-docs-browser/src",
+  "targets": {
+    "build-docs": {
+      "executor": "@peerlab/docusaurus:browser",
+      "options": {
+        "outputPath": "dist/teams/kernel/dev-docs-browser"
+      }
+    },
+    "serve": {
+      "executor": "@peerlab/docusaurus:dev-server",
+      "options": {
+        "port": 4300
+      }
+    },
+    "serve:production": {
+      "executor": "@peerlab/docusaurus:serve",
+      "options": {
+        "port": 4300,
+        "outputPath": "dist/teams/kernel/dev-docs-browser"
+      }
+    }
+  },
+  "tags": []
+}

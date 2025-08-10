@@ -1,0 +1,1 @@
+node dist/teams/things/assets-catalog/rest-api/main.js
