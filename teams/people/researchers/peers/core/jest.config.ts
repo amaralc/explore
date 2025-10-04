@@ -13,5 +13,5 @@ export default {
   },
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/researchers/peers/core',
+  coverageDirectory: '../../../../coverage/teams/people/researchers/peers/core',
 };

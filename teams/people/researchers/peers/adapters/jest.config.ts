@@ -12,5 +12,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/researchers/peers/adapters',
+  coverageDirectory: '../../../../coverage/teams/people/researchers/peers/adapters',
 };

@@ -29,7 +29,7 @@ COPY bun.lockb /app/bun.lockb
 COPY /node_modules /app/node_modules
 COPY /dist/teams/people/researchers-peers-svc/rest-api /app/dist/teams/people/researchers-peers-svc/rest-api
 COPY /teams/people/researchers-peers-svc/rest-api/entrypoint.sh /app/teams/people/researchers-peers-svc/rest-api/entrypoint.sh
-COPY /libs/researchers/peers/adapters/src/database/infra/prisma /app/libs/researchers/peers/adapters/src/database/infra/prisma
+COPY /teams/people/researchers/peers/adapters/src/database/infra/prisma /app/teams/people/researchers/peers/adapters/src/database/infra/prisma
 
 # Make the bash script executable
 RUN chmod +x /app/teams/people/researchers-peers-svc/rest-api/entrypoint.sh
