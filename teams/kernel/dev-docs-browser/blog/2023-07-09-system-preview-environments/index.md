@@ -124,7 +124,7 @@ The preview `main.tf` file is responsible for calling an environment module that
 # Preview Environment
 module "preview-environment-01" {
   count                                                                = local.preview_environments_enabled == true ? 1 : 0
-  source                                                               = "../../../../libs/iac-modules/environment"
+  source                                                               = "../../../../teams/iac-modules/environment"
   branch_name                                                          = "feature/example-branch-name"
   source_environment_branch_name                                       = local.source_environment_branch_name
   source_environment_dbms_instance_id                                  = data.google_sql_database_instance.production.id

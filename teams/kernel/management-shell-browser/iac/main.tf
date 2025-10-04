@@ -86,14 +86,14 @@ locals {
 }
 
 module "nx_affected_log" {
-  source           = "../../../../libs/iac-modules/nx-affected"
+  source           = "../../iac-modules/nx-affected"
   nx_project_name  = "kernel-management-shell-browser"
   short_commit_sha = var.short_commit_sha
   build_script     = ""
 }
 
 module "environment_variable_logs" {
-  source      = "../../../../libs/iac-modules/logger"
+  source      = "../../iac-modules/logger"
   log_to_file = false
   enabled     = true
   log_map     = local.environment_variables
@@ -102,7 +102,7 @@ module "environment_variable_logs" {
 
 # TODO: for an unknown reason, the final cloud run service is not using the correct environment variables. We pruned all layers from the registry to make sure the latest image is being used, but the environment variables are not being updated. We need to investigate this issue.
 module "nx_affected" {
-  source           = "../../../../libs/iac-modules/nx-affected"
+  source           = "../../iac-modules/nx-affected"
   nx_project_name  = "kernel-management-shell-browser"
   short_commit_sha = var.short_commit_sha
   build_script     = local.build_script
@@ -110,7 +110,7 @@ module "nx_affected" {
 }
 
 module "service_account" {
-  source                    = "../../../../libs/iac-modules/gcp-service-account"
+  source                    = "../../iac-modules/gcp-service-account"
   gcp_project_id            = var.gcp_project_id
   service_name              = var.docker_image_name
   environment_name          = substr(var.environment_name, 0, 63)
@@ -120,7 +120,7 @@ module "service_account" {
 
 # Add permissions to service account
 module "service_account_permissions" {
-  source              = "../../../../libs/iac-modules/gcp-account-permissions" // path to the module
+  source              = "../../iac-modules/gcp-account-permissions" // path to the module
   gcp_project_id      = var.gcp_project_id
   account_email       = module.service_account.instance.email
   account_member_type = "serviceAccount"

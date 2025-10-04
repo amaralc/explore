@@ -12,14 +12,14 @@ locals {
 }
 
 # module "nx_affected_log" {
-#   source           = "../../../../libs/iac-modules/nx-affected"
+#   source           = "../../../../teams/iac-modules/nx-affected"
 #   nx_project_name  = "kernel-flag-management"
 #   short_commit_sha = var.short_commit_sha
 #   build_script     = ""
 # }
 
 # module "nx_affected" {
-#   source           = "../../../../libs/iac-modules/nx-affected"
+#   source           = "../../../../teams/iac-modules/nx-affected"
 #   nx_project_name  = "kernel-flag-management"
 #   short_commit_sha = var.short_commit_sha
 #   build_script     = local.build_script
@@ -27,7 +27,7 @@ locals {
 # }
 
 module "database_and_access_management" {
-  source                         = "../../../../libs/iac-modules/service-with-postgresql-access"
+  source                         = "../../iac-modules/service-with-postgresql-access"
   service_name                   = var.service_name
   environment_name               = var.environment_name
   dbms_instance_host             = var.dbms_instance_host

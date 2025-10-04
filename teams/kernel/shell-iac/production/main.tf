@@ -46,7 +46,7 @@ module "environments_folders" {
 }
 
 module "core_platform_shell_iac_apis" {
-  source         = "../../../../libs/iac-modules/gcp-apis"
+  source         = "../../iac-modules/gcp-apis"
   gcp_project_id = var.gcp_project_id
   apis = [
     "cloudresourcemanager.googleapis.com",
@@ -75,7 +75,7 @@ resource "google_dns_managed_zone" "root_domain" {
 }
 
 module "production-environment-name" {
-  source                  = "../../../../libs/iac-modules/environment-name"
+  source                  = "../../iac-modules/environment-name"
   environment_name_prefix = "production"
 }
 
