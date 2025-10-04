@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.97.0](https://github.com/amaralc/explore/compare/peerlab@0.96.0...peerlab@0.97.0) (2025-10-04)
+
+### Features
+
+- **PEER-754:** add basic cost manager ([0912717](https://github.com/amaralc/explore/commit/091271758568c822afae591d09e8b04f9bd5fc1e))
+- **PEER-755:** add hierarchical relationships between taxons ([2c329c4](https://github.com/amaralc/explore/commit/2c329c4d42ffa8e86480b265f01cf5b82e47c85a))
+- **PEER-759:** add backwards compatibility validation to schema validator ([0198b56](https://github.com/amaralc/explore/commit/0198b5689bd56355df4228307394aafc79372e32))
+
+### Bug Fixes
+
+- adjust dependencies and references ([2c6c20b](https://github.com/amaralc/explore/commit/2c6c20b16e77abdba06417073065c7e23d442072))
+- apps/kernel/api-gateway/Dockerfile to reduce vulnerabilities ([09f451c](https://github.com/amaralc/explore/commit/09f451c75348d056effcee48997f5a46ad543d80))
+- apps/kernel/api-gateway/Dockerfile to reduce vulnerabilities ([8000779](https://github.com/amaralc/explore/commit/8000779107b16b783a565aa7e690cac5bd054298))
+- apps/kernel/api-gateway/Dockerfile to reduce vulnerabilities ([47950de](https://github.com/amaralc/explore/commit/47950def8137784a73c25b401f1060bac864938e))
+- apps/kernel/dev-docs-browser/Dockerfile to reduce vulnerabilities ([3092e41](https://github.com/amaralc/explore/commit/3092e41bda78c3a778fc6a3667343ac3fa204710))
+- apps/kernel/dev-docs-browser/Dockerfile to reduce vulnerabilities ([36f7fb3](https://github.com/amaralc/explore/commit/36f7fb33d087961df261a501679072b85450d812))
+- apps/kernel/dev-docs-browser/Dockerfile to reduce vulnerabilities ([05c3341](https://github.com/amaralc/explore/commit/05c33410cadf75d811cbe98645bbbc5f88b6e684))
+- apps/kernel/management-shell-browser/Dockerfile to reduce vulnerabilities ([a05c05c](https://github.com/amaralc/explore/commit/a05c05cd2c6324740d7c780b9188a69a365de27d))
+- apps/kernel/management-shell-browser/Dockerfile to reduce vulnerabilities ([a7b7307](https://github.com/amaralc/explore/commit/a7b73076042bf62ec67f9b437563ac109020b24b))
+- apps/kernel/management-shell-browser/Dockerfile to reduce vulnerabilities ([466c2d9](https://github.com/amaralc/explore/commit/466c2d9e4b361986ffbdd3d52709ba2e312d33e8))
+- apps/people/organizations-management/rest-api/Dockerfile to reduce vulnerabilities ([f202454](https://github.com/amaralc/explore/commit/f20245491e26cb565a46c9a568f817475d58c0fa))
+- apps/people/organizations-management/rest-api/Dockerfile to reduce vulnerabilities ([c298538](https://github.com/amaralc/explore/commit/c29853831ff437970e661a7784b5772c951a0c3a))
+- apps/people/skill-set/browser/Dockerfile to reduce vulnerabilities ([63e9a72](https://github.com/amaralc/explore/commit/63e9a7286a0fb1ab92b131214d10e5be830cc78a))
+- apps/people/skill-set/browser/Dockerfile to reduce vulnerabilities ([9335fce](https://github.com/amaralc/explore/commit/9335fce050b960588126945617d2c83ee0de0de0))
+- apps/people/skill-set/browser/Dockerfile to reduce vulnerabilities ([3c6d970](https://github.com/amaralc/explore/commit/3c6d9700caac0548a6f51a82c1281bba92f7a92c))
+- apps/things/assets-catalog/rest-api/Dockerfile to reduce vulnerabilities ([5b14e33](https://github.com/amaralc/explore/commit/5b14e3399c1812f06a9829b612694410ec7c3653))
+- eliminate nosql injection vulnerability ([284fcea](https://github.com/amaralc/explore/commit/284fcea620ebe992698dd6eb490f36d657a95e98))
+- **KAIZEN:** upgrade mongodb in memory and adjust imports ([445dd06](https://github.com/amaralc/explore/commit/445dd06758b17b913ea24db8a628e3a9be4e2a5f))
+- **PEER-756:** reduce setup and onboarding time ([e17ba62](https://github.com/amaralc/explore/commit/e17ba625d8c68ab457f6c1a5d88f5ae5423271e8))
+- **PEER-756:** remove need to initialize docker containers durring installation ([35d866b](https://github.com/amaralc/explore/commit/35d866b5445166f2992680658da5bf6a49686c77))
+- **PEER-759:** adjust instance initialization based on taxon schema ([a287a03](https://github.com/amaralc/explore/commit/a287a03ab7f47087478b1abd263ac5e90049724f))
+- **PEER-759:** adjust types ([8025d11](https://github.com/amaralc/explore/commit/8025d11c1e10ff9803305f8c2142c5c331d9c0fb))
+- **PEER-759:** reduce duplicates ([5aad825](https://github.com/amaralc/explore/commit/5aad825618d39245d0fe12237bed878ed40057bc))
+- **PEER-759:** refactor function to reduce cognitive complexity of compatibility check ([b3f0656](https://github.com/amaralc/explore/commit/b3f0656243cf22ee359eb9c75cc78395a5164061))
+- **PEER-759:** use pnpm 10 ([a1a95af](https://github.com/amaralc/explore/commit/a1a95af19815ccbdcd1768438765941132ec2fb3))
+- **PEER-760:** taxonomic unit instanceSchema should define the format of the entire instance ([980dec2](https://github.com/amaralc/explore/commit/980dec2cd4cfa26f06fef84171caae6f0bdaa70b))
+- **PEER-770:** rename backwards to forward compatibility ([0dc1988](https://github.com/amaralc/explore/commit/0dc1988650e3199db24a761d156d5d9ef82c8b78))
+- **PEER-770:** use json schema 7 ([fc2e291](https://github.com/amaralc/explore/commit/fc2e291c897384a82177d207ae240876e5f29654))
+- **PEER-771:** use esbuild to bundle taxonomic units rest api ([99e83e9](https://github.com/amaralc/explore/commit/99e83e974ad5af9748f6e62bcb15f54a778b3d8b))
+- **PEER-771:** use esbuild to generate functions bundle ([2285eef](https://github.com/amaralc/explore/commit/2285eef0bb363ea7357032f0a5b3e8114d470fee))
+- **PEER-771:** use nx project.json to build with esbuild ([2ea15b8](https://github.com/amaralc/explore/commit/2ea15b88170d2fed9cc224421fb88d82556dd118))
+- **PEER-772:** avoid information exposure ([91781d0](https://github.com/amaralc/explore/commit/91781d0654aeee2d8358731480a03fad987b263e))
+- set node 24.5.0 ([e617940](https://github.com/amaralc/explore/commit/e617940d90573b370f89881574385e3c0bcc2fe4))
+- upgrade nodejs to 24 ([2b0d8e6](https://github.com/amaralc/explore/commit/2b0d8e68870cfd50f16a91527940d58481a6fade))
+
 ## [0.96.0](https://github.com/amaralc/explore/compare/peerlab@0.95.0...peerlab@0.96.0) (2024-09-04)
 
 ### Features
