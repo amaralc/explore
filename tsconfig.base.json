@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "@peerlab/core/management-shell-browser/shared-ui/*": [
-        "libs/core/management-shell-browser/shared-ui/src/lib/*"
+        "teams/kernel/management-shell-browser/shared-ui/src/lib/*"
       ],
       "@peerlab/docusaurus": [
         "teams/kernel/docusaurus/src/index.ts"
@@ -40,10 +40,10 @@
         "teams/people/organizations-management/base/src/*"
       ],
       "@peerlab/researchers/peers/adapters/*": [
-        "libs/researchers/peers/adapters/src/*"
+        "teams/people/researchers/peers/adapters/src/*"
       ],
       "@peerlab/researchers/peers/core/*": [
-        "libs/researchers/peers/core/src/*"
+        "teams/people/researchers/peers/core/src/*"
       ],
       "@peerlab/root/*": [
         "./*"

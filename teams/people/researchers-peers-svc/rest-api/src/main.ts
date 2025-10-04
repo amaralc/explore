@@ -25,7 +25,7 @@ const runMigration = async () => {
     'migrate',
     'deploy',
     '--schema',
-    'libs/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma',
+    'teams/people/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma',
   ];
 
   return new Promise<void>((resolve, reject) => {
@@ -63,7 +63,7 @@ const setupOpenApi = (app: INestApplication) => {
   SwaggerModule.setup('docs', app, document);
 };
 
-// npx prisma migrate deploy --schema libs/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
+// npx prisma migrate deploy --schema teams/people/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
 
 const bootstrap = async () => {
   const app = await NestFactory.create(ApiModule, {

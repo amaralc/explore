@@ -9,7 +9,7 @@ cp teams/kernel/taxonomic-units/rest-api/.env.example teams/kernel/taxonomic-uni
 cp teams/people/organizations-management/rest-api/.env.example teams/people/organizations-management/rest-api/.env
 
 echo "Generating database clients..."
-pnpm prisma generate --schema libs/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
+pnpm prisma generate --schema teams/people/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
 
 echo "Building app..."
 pnpm nx run-many --target=build --all --skip-nx-cache

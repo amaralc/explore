@@ -29,7 +29,7 @@ researchers-peers-svc-consumer-docker-run:
 
 # Application
 researchers-peers-svc-prisma-postgresql-setup:
-	yarn prisma generate --schema libs/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
+	yarn prisma generate --schema teams/people/researchers/peers/adapters/src/database/infra/prisma/postgresql.schema.prisma
 
 researchers-peers-svc-rest-api-serve:
 	# The .env in root folder make it possible to use env variables within .env file
