@@ -1,6 +1,6 @@
 # Nx Graph
 module "instance" {
-  source                           = "../../../../libs/iac-modules/environment-vercel"
+  source                           = "../../../../teams/iac-modules/environment-vercel"
   count                            = var.is_service_enabled ? 1 : 0 # Disable module
   project_name                     = "core-platform-shell-browser"
   framework                        = "nextjs"

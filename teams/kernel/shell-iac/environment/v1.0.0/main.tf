@@ -9,7 +9,7 @@ output "branch_name" {
 
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
 module "gcp_project" {
-  source                        = "../../../../libs/iac-modules/gcp-project"
+  source                        = "../../../iac-modules/gcp-project"
   count                         = local.is_production_environment ? 1 : 0 # Enable project creation for production environments only
   is_production_environment     = local.is_production_environment
   gcp_billing_account_id        = var.gcp_billing_account_id
@@ -63,7 +63,7 @@ module "gcp_project" {
 
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
-  source           = "../../../../libs/iac-modules/gcp-vpc"
+  source           = "../../../iac-modules/gcp-vpc"
   count            = local.is_production_environment ? 1 : 0 # Enabled in production and preview environments
   environment_name = var.environment_name                    # Limit the name to 24 characters
   gcp_project_id   = module.gcp_project[0].project_id
@@ -76,7 +76,7 @@ output "vpc" {
 }
 
 module "postgresql_dbms" {
-  source                         = "../../../../libs/iac-modules/postgresql-dbms-environment"
+  source                         = "../../../iac-modules/postgresql-dbms-environment"
   count                          = local.is_production_environment ? 1 : 0
   environment_name               = var.environment_name
   source_environment_branch_name = var.source_environment_branch_name
@@ -100,7 +100,7 @@ module "postgresql_dbms" {
 
 module "postgresql_dbms_logs" {
   count  = length(module.postgresql_dbms) > 0 ? 1 : 0
-  source = "../../../../libs/iac-modules/logger"
+  source = "../../../iac-modules/logger"
   log_map = {
     postgresql_dbms_provider = module.postgresql_dbms[0].provider
     username                 = module.postgresql_dbms[0].root_username
@@ -129,7 +129,7 @@ resource "mongodbatlas_project_ip_access_list" "public" {
 
 # Identity and Access Management (IAM) Service
 module "kernel-security-iam-svc" {
-  source            = "../../../kernel/security-iam-svc/iac"
+  source            = "../../../security-iam-svc/iac"
   count             = local.is_production_environment ? 1 : 0 # Enabled in production environments only
   domain_name       = var.domain_name
   gcp_project_id    = module.gcp_project[0].project_id
@@ -139,7 +139,7 @@ module "kernel-security-iam-svc" {
 
 module "kernel-flag-management" {
   count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Enabled in production
-  source                              = "../../../kernel/flag-management/iac"
+  source                              = "../../../flag-management/iac"
   service_name                        = "kernel-flag-management"
   domain_name                         = var.domain_name
   branch_name                         = var.branch_name
@@ -183,7 +183,7 @@ output "kernel_flag_management_admin_api_token" {
 
 # Organizations Management Microservice
 module "people-organizations-management" {
-  source                              = "../../../people/organizations-management/iac"
+  source                              = "../../../../people/organizations-management/iac"
   count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 1 : 0 # Disable module in preview environments
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
@@ -207,7 +207,7 @@ module "people-organizations-management" {
 
 # Assets Catalog Microservice
 module "things-assets-catalog" {
-  source                              = "../../../things/assets-catalog/iac"
+  source                              = "../../../../things/assets-catalog/iac"
   count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 1 : 0 # Disable module in preview environments
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
@@ -231,7 +231,7 @@ module "things-assets-catalog" {
 
 # Researchers Peers Microservice
 module "people-researchers-peers-svc" {
-  source                              = "../../../people/researchers-peers-svc/iac"
+  source                              = "../../../../people/researchers-peers-svc/iac"
   count                               = local.is_production_environment ? 0 : 0 # Disable module in preview environments
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
@@ -261,7 +261,7 @@ module "people-researchers-peers-svc" {
 # Management Shell
 module "kernel-management-shell-browser" {
   count                               = 1
-  source                              = "../../../kernel/management-shell-browser/iac"
+  source                              = "../../../management-shell-browser/iac"
   docker_file_path                    = "teams/kernel/management-shell-browser/Dockerfile"
   docker_image_name                   = "kernel-management-shell-browser"
   domain_name                         = var.domain_name
@@ -294,7 +294,7 @@ module "kernel-management-shell-browser" {
 # # Docs
 module "kernel-dev-docs-browser" {
   count                               = 1
-  source                              = "../../../kernel/dev-docs-browser/iac"
+  source                              = "../../../dev-docs-browser/iac"
   docker_file_path                    = "teams/kernel/dev-docs-browser/Dockerfile"
   service_name                        = "kernel-dev-docs-browser"
   domain_name                         = var.domain_name
@@ -312,7 +312,7 @@ module "kernel-dev-docs-browser" {
   source_environment_project_id       = var.production_environment_core_platform_shell_browser_vite_vercel_project_id
 }
 # module "kernel-dev-docs-browser" {
-#   source                        = "../../../kernel/dev-docs-browser/iac"
+#   source                        = "../../../dev-docs-browser/iac"
 #   is_service_enabled            = false
 #   is_production_environment     = local.is_production_environment
 #   branch_name                   = var.branch_name
@@ -322,7 +322,7 @@ module "kernel-dev-docs-browser" {
 
 # # Graph
 # module "kernel-system-graph-browser" {
-#   source                        = "../../../kernel/system-graph-browser/iac"
+#   source                        = "../../../system-graph-browser/iac"
 #   is_service_enabled            = false
 #   is_production_environment     = local.is_production_environment
 #   branch_name                   = var.branch_name
@@ -334,7 +334,7 @@ module "kernel-dev-docs-browser" {
 # People Skill-Set Browser
 module "people-skill-set-browser" {
   count                               = 1
-  source                              = "../../../people/skill-set/browser/iac"
+  source                              = "../../../../people/skill-set/browser/iac"
   docker_file_path                    = "teams/people/skill-set/browser/Dockerfile"
   docker_image_name                   = "people-skill-set-browser"
   domain_name                         = var.domain_name

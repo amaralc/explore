@@ -1,5 +1,5 @@
 module "instance" {
-  source                           = "../../../../libs/iac-modules/environment-vercel"
+  source                           = "../../iac-modules/environment-vercel"
   count                            = var.is_service_enabled ? 1 : 0 # Disable module
   project_name                     = "kernel-system-graph-browser"
   framework                        = null

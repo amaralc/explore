@@ -17,7 +17,7 @@
 # }
 
 module "service_account" {
-  source                    = "../../../../libs/iac-modules/gcp-service-account"
+  source                    = "../../iac-modules/gcp-service-account"
   gcp_project_id            = var.gcp_project_id
   service_name              = var.service_name
   environment_name          = substr(var.environment_name, 0, 63)
@@ -27,7 +27,7 @@ module "service_account" {
 
 # Add permissions to service account
 module "service_account_permissions" {
-  source              = "../../../../libs/iac-modules/gcp-account-permissions" // path to the module
+  source              = "../../iac-modules/gcp-account-permissions" // path to the module
   gcp_project_id      = var.gcp_project_id
   account_email       = module.service_account.instance.email
   account_member_type = "serviceAccount"

@@ -4,7 +4,7 @@ locals {
 }
 
 module "mongodb_instance" {
-  source                     = "../../../../libs/iac-modules/mongodb-dbms-environment"
+  source                     = "../../iac-modules/mongodb-dbms-environment"
   count                      = local.is_production_environment ? 1 : 0 # Disabled module
   mongodb_dbms_instance_type = "SERVERLESS"
   instance_name              = local.service_name
@@ -14,7 +14,7 @@ module "mongodb_instance" {
 }
 
 module "mongodb_database_and_access_management" {
-  source                         = "../../../../libs/iac-modules/service-with-mongodb-access"
+  source                         = "../../iac-modules/service-with-mongodb-access"
   gcp_project_id                 = var.gcp_project_id
   service_name                   = local.service_name
   environment_name               = var.environment_name

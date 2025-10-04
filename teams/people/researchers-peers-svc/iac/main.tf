@@ -4,7 +4,7 @@ locals {
 }
 
 module "database_and_access_management" {
-  source                         = "../../../../libs/iac-modules/service-with-postgresql-access"
+  source                         = "../../../kernel/iac-modules/service-with-postgresql-access"
   gcp_project_id                 = var.gcp_project_id
   service_name                   = local.service_name
   environment_name               = var.environment_name

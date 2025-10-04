@@ -14,14 +14,14 @@ EOF
 }
 
 module "nx_affected_log" {
-  source           = "../../../../../libs/iac-modules/nx-affected"
+  source           = "../../../../kernel/iac-modules/nx-affected"
   nx_project_name  = var.service_component_name
   short_commit_sha = var.short_commit_sha
   build_script     = ""
 }
 
 module "nx_affected" {
-  source           = "../../../../../libs/iac-modules/nx-affected"
+  source           = "../../../../kernel/iac-modules/nx-affected"
   nx_project_name  = var.service_component_name
   short_commit_sha = var.short_commit_sha
   build_script     = local.build_script

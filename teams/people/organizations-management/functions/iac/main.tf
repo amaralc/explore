@@ -14,7 +14,7 @@ EOF
 }
 
 module "nx_affected" {
-  source           = "../../../../../libs/iac-modules/nx-affected"
+  source           = "../../../../kernel/iac-modules/nx-affected"
   nx_project_name  = var.service_component_name
   short_commit_sha = var.short_commit_sha
   build_script     = local.build_script
@@ -42,7 +42,7 @@ EOF
 # ............
 
 module "zip_functions" {
-  source           = "../../../../../libs/iac-modules/zip"
+  source           = "../../../../kernel/iac-modules/zip"
   zip_input_path   = local.relative_build_output_path
   short_commit_sha = var.short_commit_sha
   depends_on       = [module.nx_affected]
