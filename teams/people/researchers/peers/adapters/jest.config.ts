@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
   displayName: 'researchers-peers-adapters',
-  preset: '../../../../jest.preset.js',
+  preset: '../../../../../jest.preset.js',
   globals: {},
   transform: {
     '^.+\\.[tj]s$': [
