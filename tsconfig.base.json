@@ -22,7 +22,7 @@
         "libs/core/management-shell-browser/shared-ui/src/lib/*"
       ],
       "@peerlab/docusaurus": [
-        "libs/docusaurus/src/index.ts"
+        "teams/kernel/docusaurus/src/index.ts"
       ],
       "@peerlab/kernel/management-shell-browser/*": [
         "teams/kernel/management-shell-browser/src/*"
