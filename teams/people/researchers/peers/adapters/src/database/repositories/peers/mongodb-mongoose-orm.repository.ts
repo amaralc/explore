@@ -60,7 +60,8 @@ export class MongoDbMongooseOrmPeersDatabaseRepository implements PeersDatabaseR
   async listPaginated(listPaginatedPeerDto: ListPaginatedPeersDto) {
     const { limit, page } = listPaginatedPeerDto;
     const localLimit = limit || pagination.defaultLimit;
-    const localOffset = page ? page - 1 : pagination.defaultPage - 1;
+    const localPage = page || pagination.defaultPage;
+    const localOffset = (localPage - 1) * localLimit;
 
     const mongooseEntities = await this.peerModel.find().skip(localOffset).limit(localLimit);
 
