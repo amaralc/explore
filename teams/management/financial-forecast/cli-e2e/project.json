@@ -1,0 +1,23 @@
+{
+  "name": "management-financial-forecast-cli-e2e",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": [
+    "management-financial-forecast-cli"
+  ],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{e2eProjectRoot}"
+      ],
+      "options": {
+        "jestConfig": "teams/management/financial-forecast/cli-e2e/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "dependsOn": [
+        "management-financial-forecast-cli:build"
+      ]
+    }
+  }
+}
