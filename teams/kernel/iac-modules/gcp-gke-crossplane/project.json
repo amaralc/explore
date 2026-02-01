@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-gcp-gke-crossplane",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "teams/kernel/iac-modules/gcp-gke-crossplane",
+  "projectType": "library",
+  "implicitDependencies": ["iac-modules-gcp-gke-cluster"],
+  "targets": {},
+  "tags": []
+}
