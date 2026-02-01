@@ -1,312 +1,259 @@
-# module "auth_provider_and_persistence" {
-#   source            = "./auth"
-#   application_title = var.application_title
-#   gcp_project_id    = var.gcp_project_id
-# }
+# Security IAM Service - Orchestrator
+# Deploys GKE cluster, Crossplane, and Logto IAM service
 
 locals {
-  service_name                = "kernel-security-iam-svc"
-  support_account_email       = "support@${var.domain_name}" # This group cannot be created using terraform. See project-setup.sh script for more details.
-  service_account_credentials = jsondecode(file("credentials.json"))
-  service_account_email       = local.service_account_credentials.client_email
+  logto_endpoint       = "https://logto.${var.domain_name}"
+  logto_admin_endpoint = "https://logto-admin.${var.domain_name}"
 }
 
-# Identity Aware-Proxy brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
-# The support email has limitations as described in the documentation: "Can be either a user or group email. When a user email is specified, the caller must be the user with the associated email address. When a group email is specified, the caller can be either a user or a service account which is an owner of the specified group in Cloud Identity.
-# In order to create a group programmatically you will need to use the cli (check our setup-project.sh script).
-resource "google_iap_brand" "instance" {
-  application_title = var.application_title
-  support_email     = local.support_account_email # Group email
-  project           = var.gcp_project_id
+# =============================================================================
+# Layer 1: GKE Autopilot Cluster
+# =============================================================================
+
+module "gke_cluster" {
+  source                     = "../../iac-modules/gcp-gke-cluster"
+  environment_name           = var.environment_name
+  gcp_project_id             = var.gcp_project_id
+  gcp_location               = var.gcp_location
+  gcp_network_id             = var.gcp_network_id
+  enable_deletion_protection = false
 }
 
-resource "google_firebase_project" "auth" {
-  provider   = google-beta
-  project    = var.gcp_project_id
-  depends_on = [google_iap_brand.instance]
+# =============================================================================
+# Layer 2: Crossplane Bootstrap
+# =============================================================================
+
+module "crossplane" {
+  source                 = "../../iac-modules/gcp-gke-crossplane"
+  gcp_project_id         = var.gcp_project_id
+  gcp_location           = var.gcp_location
+  environment_name       = var.environment_name
+  cluster_endpoint       = module.gke_cluster.cluster_endpoint
+  cluster_ca_certificate = module.gke_cluster.cluster_ca_certificate
+
+  depends_on = [module.gke_cluster]
 }
 
-# Creates an Identity Platform config.
-# Also enables Firebase Authentication with Identity Platform in the project if not already enabled
-resource "google_identity_platform_config" "auth" {
-  provider = google-beta
-  project  = var.gcp_project_id
+# =============================================================================
+# Layer 3: Crossplane-managed PostgreSQL database
+# =============================================================================
 
-  # For example, you can configure to auto-delete Anonymous users.
-  autodelete_anonymous_users = true # TODO: check what this means
+# PostgreSQL 17 for Logto
+module "logto_database" {
+  source               = "../../iac-modules/crossplane-postgresql"
+  gcp_project_id       = var.gcp_project_id
+  gcp_location         = var.gcp_location
+  environment_name     = var.environment_name
+  provider_config_name = module.crossplane.provider_config_name
+  database_name        = "logto"
+  namespace            = "logto"
+  postgresql_version   = "POSTGRES_17"
 
-  authorized_domains = [
-    "localhost",
-    "${var.gcp_project_id}.firebaseapp.com",
-    "kernel-management-shell-browser.${var.domain_name}"
-  ]
+  depends_on = [module.crossplane]
+}
 
-  sign_in {
-    allow_duplicate_emails = false
-    email {
-      enabled           = true
-      password_required = false
+# =============================================================================
+# Layer 4: Logto Kubernetes resources
+# =============================================================================
+
+resource "kubernetes_namespace_v1" "logto" {
+  metadata {
+    name = "logto"
+    labels = {
+      "app.kubernetes.io/part-of"   = "security-iam-svc"
+      "app.kubernetes.io/component" = "logto"
+      "team"                        = "kernel"
+    }
+  }
+}
+
+resource "kubernetes_config_map_v1" "logto" {
+  metadata {
+    name      = "logto-config"
+    namespace = kubernetes_namespace_v1.logto.metadata[0].name
+  }
+  data = {
+    TRUST_PROXY_HEADER = "1"
+    ENDPOINT           = local.logto_endpoint
+    ADMIN_ENDPOINT     = local.logto_admin_endpoint
+  }
+}
+
+resource "kubernetes_deployment_v1" "logto" {
+  metadata {
+    name      = "logto"
+    namespace = kubernetes_namespace_v1.logto.metadata[0].name
+    labels = {
+      app                         = "logto"
+      "app.kubernetes.io/name"    = "logto"
+      "app.kubernetes.io/part-of" = "security-iam-svc"
+    }
+  }
+  spec {
+    replicas = 1
+    selector {
+      match_labels = {
+        app = "logto"
+      }
+    }
+    template {
+      metadata {
+        labels = {
+          app                      = "logto"
+          "app.kubernetes.io/name" = "logto"
+        }
+      }
+      spec {
+        init_container {
+          name    = "logto-seed"
+          image   = "svhd/logto:latest"
+          command = ["sh", "-c", "npm run cli db seed -- --swe"]
+          env_from {
+            secret_ref {
+              name = "logto-db-credentials"
+            }
+          }
+          env_from {
+            config_map_ref {
+              name = kubernetes_config_map_v1.logto.metadata[0].name
+            }
+          }
+          resources {
+            requests = {
+              memory = "256Mi"
+              cpu    = "250m"
+            }
+            limits = {
+              memory = "512Mi"
+              cpu    = "500m"
+            }
+          }
+        }
+        container {
+          name  = "logto"
+          image = "svhd/logto:latest"
+          port {
+            name           = "app"
+            container_port = 3001
+            protocol       = "TCP"
+          }
+          port {
+            name           = "admin"
+            container_port = 3002
+            protocol       = "TCP"
+          }
+          env_from {
+            secret_ref {
+              name = "logto-db-credentials"
+            }
+          }
+          env_from {
+            config_map_ref {
+              name = kubernetes_config_map_v1.logto.metadata[0].name
+            }
+          }
+          liveness_probe {
+            http_get {
+              path = "/api/status"
+              port = 3001
+            }
+            initial_delay_seconds = 30
+            period_seconds        = 10
+          }
+          readiness_probe {
+            http_get {
+              path = "/api/status"
+              port = 3001
+            }
+            initial_delay_seconds = 15
+            period_seconds        = 5
+          }
+          resources {
+            requests = {
+              memory = "256Mi"
+              cpu    = "250m"
+            }
+            limits = {
+              memory = "512Mi"
+              cpu    = "500m"
+            }
+          }
+        }
+      }
     }
   }
 
-  depends_on = [google_firebase_project.auth]
+  depends_on = [module.logto_database]
 }
 
-# Add iap client
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_client
-# Manually add Google Identity Aware Proxy (IAP) client after the first terraform run, from Firebase console.
-# Access https://console.firebase.google.com/project/PROJECT_ID/authentication/providers and add a Google client manually
-# Firebase will create the oauth iap client automatically.
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/iap_client
-# resource "google_iap_client" "instance" {
-#   display_name = "kernel-security-iam-svc"
-#   brand        = google_iap_brand.instance.name
-# }
-
-# Origins:
-# # http://localhost
-# # http://localhost:5000
-# # "https://${var.gcp_project_id}.firebaseapp.com"
-
-# Redirect:
-# # "https://${var.gcp_project_id}.firebaseapp.com/__/auth/handler"
-
-
-# We are adding this resource manually since it results in the automatic creation of the google oauth client.
-# # Reference: https://firebase.google.com/codelabs/firebase-terraform#5
-# resource "google_identity_platform_default_supported_idp_config" "google_sign_in" {
-#   count   = (var.gcp_google_oauth_iap_client_id != null && var.gcp_google_oauth_iap_client_secret != null) ? 1 : 0 # Id and secrets should exist prior to the usage of this resource. They are both automatically created when creating the firebase resource.
-#   project = var.gcp_project_id
-
-#   enabled       = true
-#   idp_id        = "google.com"
-#   client_id     = var.gcp_google_oauth_iap_client_id     # IMPORTANT: This is the client id that was created automatically during the creation of the firebase resource. You should add it manually to your terraform variables since we could not find a way to get it automatically yet.
-#   client_secret = var.gcp_google_oauth_iap_client_secret # IMPORTANT: This is the client secret that was created automatically during the creation of the firebase resource. You should add it manually to your terraform variables since we could not find a way to get it automatically yet.
-
-#   depends_on = [
-#     google_firebase_project.auth,
-#     google_identity_platform_project_default_config.auth
-#   ]
-# }
-
-# Creates a Firebase Web App in the new project created above.
-# https://firebase.google.com/docs/projects/terraform/get-started
-resource "google_firebase_web_app" "kernel-management-shell-browser-vite" {
-  provider     = google-beta
-  project      = var.gcp_project_id
-  display_name = "kernel-management-shell-browser-vite"
-
-  # The other App types (Android and Apple) use "DELETE" by default.
-  # Web apps don't use "DELETE" by default due to backward-compatibility.
-  deletion_policy = "DELETE"
-
-  # Wait for Firebase to be enabled in the Google Cloud project before creating this App.
-  depends_on = [
-    google_firebase_project.auth,
-  ]
-}
-
-output "firebase_app_id" {
-  value       = google_firebase_web_app.kernel-management-shell-browser-vite.app_id
-  description = "The firebase web app id"
-  sensitive   = true
-}
-
-# # # # Get web app config (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/firebase_web_app.html)
-# # # data "google_firebase_web_app_config" "basic" {
-# # #   provider   = google-beta
-# # #   web_app_id = google_firebase_web_app.kernel-management-shell-browser.app_id
-# # # }
-
-# locals {
-#   app_id         = google_firebase_web_app.kernel-management-shell-browser.app_id
-#   auth_domain    = "${var.gcp_project_id}.firebaseapp.com"
-#   project_id     = var.gcp_project_id
-#   storage_bucket = "${var.gcp_project_id}.appspot.com"
-# }
-
-# data "google_iap_client" "kernel-security-iam-svc" {
-#   provider  = google-beta
-#   brand     = "projects/${var.gcp_project_id}/brands/${google_iap_brand.instance.id}"
-#   client_id = var.gcp_google_oauth_iap_client_id
-# }
-
-# # # Create Browser API key
-# # resource "google_apikeys_key" "primary" {
-# #   name         = "kernel-management-shell-browser"
-# #   display_name = "kernel-management-shell-browser"
-# #   project      = var.gcp_project_id
-
-# #   restrictions {
-# #     api_targets {
-# #       service = "firebase.googleapis.com"
-# #     }
-
-# #     api_targets {
-# #       service = "identitytoolkit.googleapis.com"
-# #     }
-
-# #     browser_key_restrictions {
-# #       allowed_referrers = ["kernel-management-shell-browser.vercel.app", "localhost:4200"]
-# #     }
-# #   }
-# # }
-
-
-
-
-# resource "google_identity_platform_default_supported_idp_config" "microsoft_sign_in" {
-#   provider = google-beta
-#   project  = var.gcp_project_id
-
-#   enabled       = true
-#   idp_id        = "microsoft.com"
-#   client_id     = google_iap_client.instance.client_id
-#   client_secret = google_iap_client.instance.secret # Reference: https://firebase.google.com/codelabs/firebase-terraform#5
-
-#   depends_on = [
-#     google_identity_platform_config.auth
-#   ]
-# }
-
-# # # Add oauth idp config
-# # resource "google_identity_platform_oauth_idp_config" "instance" {
-# #   name          = "oidc.google.public"
-# #   display_name  = google_iap_client.instance.display_name
-# #   issuer        = "google"
-# #   client_id     = google_iap_client.instance.client_id
-# #   client_secret = google_iap_client.instance.secret
-# #   enabled       = true
-# #   depends_on    = [google_identity_platform_config.auth]
-# # }
-
-
-# # # Initialize firebase project
-# # resource "google_firebase_project" "instance" {
-# #   project  = var.gcp_project_id
-# #   provider = google-beta
-# #   depends_on = []
-# # }
-
-# resource "auth0_connection" "google_oauth2" {
-#   name     = "Google-OAuth2-Connection"
-#   strategy = "google-oauth2"
-
-#   options {
-#     client_id     = google_iap_client.instance.client_id
-#     client_secret = google_iap_client.instance.secret
-#     allowed_audiences = [
-#       "localhost",
-#       "kernel-management-shell-browser-vite.vercel.app"
-#     ]
-#     scopes                   = ["email", "profile"]
-#     set_user_root_attributes = "on_each_login"
-#     non_persistent_attrs     = ["ethnicity", "gender"]
-#   }
-# }
-
-# resource "zitadel_org" "peerlab" {
-#   name = "peerlab"
-# }
-
-# resource "zitadel_project" "kernel-security-iam-svc" {
-#   name   = "kernel-security-iam-svc"
-#   org_id = zitadel_org.peerlab.id
-# }
-
-# # Add Zitadel OIDC application for single page application
-# # https://zitadel.com/docs/guides/integrate/login-users
-# # https://zitadel.com/docs/examples/login/react#react-setup
-# resource "zitadel_application_oidc" "core-management-browser-vite" {
-#   project_id = zitadel_project.kernel-security-iam-svc.id
-#   org_id     = zitadel_org.peerlab.id
-
-#   name                        = "core-management-browser-vite-oidc"
-#   redirect_uris               = ["http://localhost:4200/dashboard"]
-#   response_types              = ["OIDC_RESPONSE_TYPE_CODE"]
-#   grant_types                 = ["OIDC_GRANT_TYPE_AUTHORIZATION_CODE"]
-#   post_logout_redirect_uris   = ["http://localhost:4200"]
-#   app_type                    = "OIDC_APP_TYPE_USER_AGENT"
-#   auth_method_type            = "OIDC_AUTH_METHOD_TYPE_NONE" # TODO - Review this setting
-#   version                     = "OIDC_VERSION_1_0"
-#   clock_skew                  = "0s"
-#   dev_mode                    = true # TODO - Review this setting
-#   access_token_type           = "OIDC_TOKEN_TYPE_BEARER"
-#   access_token_role_assertion = false
-#   id_token_role_assertion     = false
-#   id_token_userinfo_assertion = false
-#   additional_origins          = [] # TODO - Review this setting
-# }
-
-
-# # https://zitadel.com/docs/guides/integrate/identity-providers/google
-# resource "zitadel_idp_google" "instance" {
-#   name                = "Google"
-#   client_id           = var.gcp_google_oauth_iap_client_id
-#   client_secret       = var.gcp_google_oauth_iap_client_secret
-#   scopes              = ["openid", "profile", "email"]
-#   is_linking_allowed  = false
-#   is_creation_allowed = true
-#   is_auto_creation    = false
-#   is_auto_update      = true
-# }
-
-
-# Get web app config (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/firebase_web_app.html)
-# This option started to fail as of 2024-03-29 (https://github.com/amaralc/peerlab/actions/runs/8495162275/job/23271143389) 
-# data "google_firebase_web_app_config" "basic" {
-#   provider   = google-beta
-#   web_app_id = google_firebase_web_app.kernel-management-shell-browser-vite.app_id
-# }
-
-# # Alternative implementation 1: calling the API directly (https://firebase.google.com/docs/reference/firebase-management/rest/v1beta1/projects.webApps/getConfig)
-# resource "null_resource" "firebase_web_app_config" {
-#   triggers = {
-#     app_id = google_firebase_web_app.kernel-management-shell-browser-vite.app_id
-#   }
-
-#   provisioner "local-exec" {
-#     command = "bash ${path.module}/get-firebase-webapp-config.sh ${var.gcp_project_id} ${google_firebase_web_app.kernel-management-shell-browser-vite.app_id} > ${path.module}/firebase-webapp-config.json"
-#   }
-# }
-
-# Alternative implementation 2: get the token using the cli and get the webapp config using an http resource
-data "external" "gcloud_access_token_json" {
-  program = ["sh", "-c", "gcloud auth print-access-token | jq -R '{token: .}'"]
-}
-
-data "http" "get_webapp_config" {
-  url    = "https://firebase.googleapis.com/v1beta1/projects/${var.gcp_project_id}/webApps/${google_firebase_web_app.kernel-management-shell-browser-vite.app_id}/config"
-  method = "GET"
-
-  # Optional request headers
-  request_headers = {
-    Accept        = "application/json"
-    Authorization = "Bearer ${data.external.gcloud_access_token_json.result.token}"
+resource "kubernetes_service_v1""logto" {
+  metadata {
+    name      = "logto"
+    namespace = kubernetes_namespace_v1.logto.metadata[0].name
+  }
+  spec {
+    selector = {
+      app = "logto"
+    }
+    port {
+      name        = "app"
+      port        = 3001
+      target_port = 3001
+      protocol    = "TCP"
+    }
+    port {
+      name        = "admin"
+      port        = 3002
+      target_port = 3002
+      protocol    = "TCP"
+    }
+    type = "ClusterIP"
   }
 }
 
-output "firebase_api_key" {
-  value       = jsondecode(data.http.get_webapp_config.response_body)["apiKey"]
-  description = "The firebase api key"
-}
-
-output "firebase_auth_domain" {
-  value       = "${var.gcp_project_id}.firebaseapp.com"
-  description = "The firebase auth domain"
-}
-
-output "firebase_project_id" {
-  value       = var.gcp_project_id
-  description = "The firebase project id"
-}
-
-output "firebase_storage_bucket" {
-  value       = "${var.gcp_project_id}.appspot.com"
-  description = "The firebase storage bucket"
-}
-
-output "firebase_messaging_sender_id" {
-  value       = jsondecode(data.http.get_webapp_config.response_body)["messagingSenderId"]
-  description = "The firebase messaging sender id"
+resource "kubernetes_ingress_v1" "logto" {
+  metadata {
+    name      = "logto"
+    namespace = kubernetes_namespace_v1.logto.metadata[0].name
+    annotations = {
+      "kubernetes.io/ingress.global-static-ip-name" = "logto-ip"
+      "networking.gke.io/managed-certificates"       = "logto-cert"
+    }
+  }
+  spec {
+    rule {
+      host = "logto.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "logto"
+              port {
+                number = 3001
+              }
+            }
+          }
+        }
+      }
+    }
+    rule {
+      host = "logto-admin.${var.domain_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "logto"
+              port {
+                number = 3002
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

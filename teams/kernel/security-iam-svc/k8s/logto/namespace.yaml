@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: logto
+  labels:
+    app.kubernetes.io/part-of: security-iam-svc
+    app.kubernetes.io/component: logto
+    team: kernel
