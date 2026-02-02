@@ -38,4 +38,4 @@ if [ "$INSTALL_JQ" == "true" ]; then
 fi
 
 # Overrite token from nx.json
-jq --arg access_token "$ACCESS_TOKEN" '.nxCloudAccessToken = $access_token' nx.json > tmp.$$.json && mv tmp.$$.json nx.json
+jq --arg access_token "$ACCESS_TOKEN" '.tasksRunnerOptions.default.options.accessToken = $access_token' nx.json > tmp.$$.json && mv tmp.$$.json nx.json
