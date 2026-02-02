@@ -8,7 +8,8 @@ PROFILE="peerlab-iam"
 echo "=== PeerLab IAM - Local Development Setup ==="
 echo "Using minikube profile: ${PROFILE}"
 
-# Generate a random password for the local PostgreSQL instance
+# Generate random credentials for the local PostgreSQL instance
+PG_USERNAME="pguser_$(openssl rand -hex 4)"
 PG_PASSWORD="$(openssl rand -base64 24 | tr -d '/+=' | head -c 32)"
 
 # 1. Create minikube cluster
@@ -27,6 +28,7 @@ kubectl create namespace logto --context="${PROFILE}" --dry-run=client -o yaml |
   kubectl apply -f - --context="${PROFILE}"
 kubectl create secret generic postgresql-credentials \
   --namespace logto \
+  --from-literal=POSTGRES_USER="${PG_USERNAME}" \
   --from-literal=POSTGRES_PASSWORD="${PG_PASSWORD}" \
   --dry-run=client -o yaml | kubectl apply -f - --context="${PROFILE}"
 kubectl apply -f "${SCRIPT_DIR}/local-postgresql-logto.yaml" --context="${PROFILE}"
@@ -38,7 +40,7 @@ echo ""
 echo "[3/4] Deploying Logto..."
 kubectl create secret generic logto-db-credentials \
   --namespace logto \
-  --from-literal=DB_URL="postgres://postgres:${PG_PASSWORD}@postgresql.logto.svc.cluster.local:5432/logto" \
+  --from-literal=DB_URL="postgres://${PG_USERNAME}:${PG_PASSWORD}@postgresql.logto.svc.cluster.local:5432/logto" \
   --dry-run=client -o yaml | kubectl apply -f - --context="${PROFILE}"
 
 kubectl apply -f "${K8S_DIR}/logto/configmap.yaml" --context="${PROFILE}"
