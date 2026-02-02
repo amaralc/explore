@@ -3,6 +3,8 @@ import { schemaValidator } from '@peerlab/kernel/shared-ts-utils/validators/json
 import assetV1JsonSchema from './entity.schema';
 import { IAssetV1Dto } from './entity.schema.types';
 
+// Entity
+
 export class AssetV1Entity implements IAssetV1Dto {
   id: string;
   name: string;
