@@ -18,6 +18,7 @@ spec:
         app: logto
         app.kubernetes.io/name: logto
     spec:
+      automountServiceAccountToken: false
       initContainers:
         - name: logto-seed
           image: svhd/logto:latest

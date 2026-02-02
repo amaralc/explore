@@ -19,6 +19,7 @@ spec:
       labels:
         app: postgresql
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: postgresql
           image: postgres:17-alpine
