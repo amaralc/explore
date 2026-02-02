@@ -35,8 +35,12 @@ export class PeersRestController {
 
   @Get()
   async findAll(@Query() paginationQuery: PaginationQueryDto): Promise<GetPeersResponseDto> {
-    const peers = await this.listPaginatedPeersService.execute(paginationQuery);
-    return { peers };
+    try {
+      const peers = await this.listPaginatedPeersService.execute(paginationQuery);
+      return { peers };
+    } catch (e) {
+      throw new GlobalAppHttpException(e);
+    }
   }
 
   @Get('/mock')

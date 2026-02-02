@@ -51,7 +51,8 @@ describe('[peers] ListPaginatedPeersService', () => {
 
     const planSubscriptions = await listPaginatedPeersService.execute({});
     const localPlanSubscriptions = [...localPeersTestDatabaseRepository];
-    const expectedPlanSubscriptions = localPlanSubscriptions.slice(PAGE - 1, LIMIT);
+    const offset = (PAGE - 1) * LIMIT;
+    const expectedPlanSubscriptions = localPlanSubscriptions.slice(offset, offset + LIMIT);
 
     expect(planSubscriptions.length).toBeLessThanOrEqual(LIMIT);
     expect(planSubscriptions).toEqual(expectedPlanSubscriptions);
@@ -63,9 +64,39 @@ describe('[peers] ListPaginatedPeersService', () => {
 
     const planSubscriptions = await listPaginatedPeersService.execute({ limit: LIMIT, page: PAGE });
     const localPlanSubscriptions = [...localPeersTestDatabaseRepository];
-    const expectedPlanSubscriptions = localPlanSubscriptions.slice(PAGE - 1, LIMIT);
+    const offset = (PAGE - 1) * LIMIT;
+    const expectedPlanSubscriptions = localPlanSubscriptions.slice(offset, offset + LIMIT);
 
     expect(planSubscriptions.length).toBeLessThanOrEqual(LIMIT);
     expect(planSubscriptions).toEqual(expectedPlanSubscriptions);
+  });
+
+  it('should correctly paginate across multiple pages', async () => {
+    const LIMIT = 5;
+    
+    // Test page 1
+    const page1Results = await listPaginatedPeersService.execute({ limit: LIMIT, page: 1 });
+    const localPlanSubscriptions = [...localPeersTestDatabaseRepository];
+    const expectedPage1 = localPlanSubscriptions.slice(0, 5);
+    expect(page1Results).toEqual(expectedPage1);
+
+    // Test page 2
+    const page2Results = await listPaginatedPeersService.execute({ limit: LIMIT, page: 2 });
+    const expectedPage2 = localPlanSubscriptions.slice(5, 10);
+    expect(page2Results).toEqual(expectedPage2);
+
+    // Test page 3
+    const page3Results = await listPaginatedPeersService.execute({ limit: LIMIT, page: 3 });
+    const expectedPage3 = localPlanSubscriptions.slice(10, 15);
+    expect(page3Results).toEqual(expectedPage3);
+
+    // Verify no overlap between pages
+    const page1Ids = page1Results.map(p => p.id);
+    const page2Ids = page2Results.map(p => p.id);
+    const page3Ids = page3Results.map(p => p.id);
+    
+    expect(page1Ids.some(id => page2Ids.includes(id))).toBe(false);
+    expect(page2Ids.some(id => page3Ids.includes(id))).toBe(false);
+    expect(page1Ids.some(id => page3Ids.includes(id))).toBe(false);
   });
 });
