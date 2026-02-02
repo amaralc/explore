@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.98.0-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.97.0...peerlab@0.98.0-beta.0) (2026-02-02)
+
+### Features
+
+- add reference to firebase alternative logto ([398ef52](https://github.com/amaralc/explore/commit/398ef528ed3222013282d66a3e28fc44fd8d678a))
+- **crossplane-postgresql:** add Crossplane PostgreSQL module with v2 pipeline mode ([4b9631b](https://github.com/amaralc/explore/commit/4b9631b366caf09fae7a95f4bd00b0af14c2f78a))
+- **gcp-gke-cluster:** add GKE cluster Terraform module ([f138116](https://github.com/amaralc/explore/commit/f138116ed0e91b92c43eafc64c16cd398a821c36))
+- **gcp-gke-crossplane:** add Crossplane installation Terraform module ([5c8e914](https://github.com/amaralc/explore/commit/5c8e91416562cd1fb0987eca63d81313ec8977fb))
+- **security-iam-svc:** add Logto IAM service with IaC, K8s manifests, and local setup ([f57efc4](https://github.com/amaralc/explore/commit/f57efc494a6a3981bae51ee323a66afca47c3d4c))
+- **shell-iac:** add IAM service reference to environment module ([8d95f72](https://github.com/amaralc/explore/commit/8d95f727009299e0220fc67213eb1aa641d5f5fd))
+
+### Bug Fixes
+
+- correct pagination offset calculation in peers repositories ([d3df2e3](https://github.com/amaralc/explore/commit/d3df2e3105c922ea4d89fe9df517e78b7ac5a7ba))
+- **gcp-gke-cluster:** add VPC flow logs and private cluster config ([61692eb](https://github.com/amaralc/explore/commit/61692ebeedeadd41f10f9b34d5272ea823f2b305))
+- **gcp-gke-cluster:** enable private endpoint for GKE control plane ([bf9da0b](https://github.com/amaralc/explore/commit/bf9da0b6a9ad391df5206b030f11469a4539ed08))
+- **security-iam-svc:** disable service account token automounting in pods ([5e848e2](https://github.com/amaralc/explore/commit/5e848e2f0bf636fc6279e91c59748fd7545c9b04))
+- **security-iam-svc:** pin Logto image version and add storage requests ([697496a](https://github.com/amaralc/explore/commit/697496aa9cd93972f10c100125248bcf309a9b23))
+- **security-iam-svc:** replace hardcoded PostgreSQL password with generated secret ([fc8c335](https://github.com/amaralc/explore/commit/fc8c33515f01d984dd4c5590ebd17c97dd5eaf76))
+- **security-iam-svc:** replace hardcoded PostgreSQL username with generated secret ([61c4bab](https://github.com/amaralc/explore/commit/61c4bab4434e0dcf4ca22866b278a3da98197830))
+
+### Reverts
+
+- Revert "ci: remove pnpm store cache for now" ([601760a](https://github.com/amaralc/explore/commit/601760a9ed69195f2506ff3a6788e83016cb1902))
+
 ## [0.97.0](https://github.com/amaralc/explore/compare/peerlab@0.96.0...peerlab@0.97.0) (2025-10-04)
 
 ### Features
