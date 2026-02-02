@@ -28,7 +28,10 @@ spec:
             - name: POSTGRES_USER
               value: postgres
             - name: POSTGRES_PASSWORD
-              value: p0stgr3s
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-credentials
+                  key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               value: logto
           readinessProbe:
