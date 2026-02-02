@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-crossplane-postgresql",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "teams/kernel/iac-modules/crossplane-postgresql",
+  "projectType": "library",
+  "implicitDependencies": ["iac-modules-gcp-gke-crossplane"],
+  "targets": {},
+  "tags": []
+}

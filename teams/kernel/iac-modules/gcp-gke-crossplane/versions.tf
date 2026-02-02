@@ -8,12 +8,12 @@ terraform {
       source = "hashicorp/google-beta"
     }
 
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-    }
-
     helm = {
       source = "hashicorp/helm"
+    }
+
+    kubernetes = {
+      source = "hashicorp/kubernetes"
     }
   }
 }

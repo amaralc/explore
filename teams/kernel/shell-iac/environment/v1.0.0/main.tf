@@ -38,7 +38,8 @@ module "gcp_project" {
     "dns.googleapis.com",
     "cloudfunctions.googleapis.com", # Enable Cloud Functions API (create functions that react to firebase user creations and other)
     "eventarc.googleapis.com",       # Enable Eventarc API (allow reactions to firebase user creations)
-    "cloudbuild.googleapis.com"      # Enable Cloud Build API (necessary for building the function)
+    "cloudbuild.googleapis.com",     # Enable Cloud Build API (necessary for building the function)
+    "container.googleapis.com"       # Enable GKE API (for Kubernetes cluster provisioning)
     # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
@@ -129,12 +130,14 @@ resource "mongodbatlas_project_ip_access_list" "public" {
 
 # Identity and Access Management (IAM) Service
 module "kernel-security-iam-svc" {
-  source            = "../../../security-iam-svc/iac"
-  count             = local.is_production_environment ? 1 : 0 # Enabled in production environments only
-  domain_name       = var.domain_name
-  gcp_project_id    = module.gcp_project[0].project_id
-  application_title = local.is_production_environment ? "Peerlab AC" : "Peerlab AC Preview ${module.gcp_project[0].project_id}"
-  depends_on        = [module.gcp_project]
+  source           = "../../../security-iam-svc/iac"
+  count            = local.is_production_environment ? 1 : 0 # Enabled in production environments only
+  domain_name      = var.domain_name
+  gcp_project_id   = module.gcp_project[0].project_id
+  gcp_location     = var.gcp_location
+  environment_name = var.environment_name
+  gcp_network_id   = module.vpc[0].network_id
+  depends_on       = [module.gcp_project, module.vpc]
 }
 
 module "kernel-flag-management" {

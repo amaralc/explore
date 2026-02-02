@@ -13,12 +13,20 @@ variable "environment_name" {
   type        = string
 }
 
-variable "domain_name" {
-  description = "The domain name for IAM service endpoints"
+variable "cluster_endpoint" {
+  description = "The GKE cluster endpoint"
   type        = string
+  sensitive   = true
 }
 
-variable "gcp_network_id" {
-  description = "The VPC network ID (from the vpc module)"
+variable "cluster_ca_certificate" {
+  description = "The base64-encoded CA certificate of the GKE cluster"
   type        = string
+  sensitive   = true
+}
+
+variable "crossplane_version" {
+  description = "The Crossplane Helm chart version"
+  type        = string
+  default     = "1.15.0"
 }
