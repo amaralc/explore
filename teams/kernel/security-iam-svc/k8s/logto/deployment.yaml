@@ -21,7 +21,7 @@ spec:
       automountServiceAccountToken: false
       initContainers:
         - name: logto-seed
-          image: svhd/logto:latest
+          image: svhd/logto:1.36.0
           command: ["sh", "-c", "npm run cli db seed -- --swe"]
           envFrom:
             - secretRef:
@@ -32,12 +32,14 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
+              ephemeral-storage: "128Mi"
             limits:
               memory: "512Mi"
               cpu: "500m"
+              ephemeral-storage: "256Mi"
       containers:
         - name: logto
-          image: svhd/logto:latest
+          image: svhd/logto:1.36.0
           ports:
             - name: app
               containerPort: 3001
@@ -66,6 +68,8 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
+              ephemeral-storage: "128Mi"
             limits:
               memory: "512Mi"
               cpu: "500m"
+              ephemeral-storage: "256Mi"

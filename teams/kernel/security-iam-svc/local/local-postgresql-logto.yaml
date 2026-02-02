@@ -47,9 +47,11 @@ spec:
             requests:
               memory: "128Mi"
               cpu: "100m"
+              ephemeral-storage: "128Mi"
             limits:
               memory: "256Mi"
               cpu: "250m"
+              ephemeral-storage: "256Mi"
 ---
 apiVersion: v1
 kind: Service
