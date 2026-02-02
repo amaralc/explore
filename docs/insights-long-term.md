@@ -1,0 +1,104 @@
+# Long-Term Insights
+
+Top 100 insights from this repository.
+
+1. Team-based directories mirror Conway's Law and domain ownership.
+2. Hexagonal architecture separates core logic from framework adapters.
+3. TDD (RED-GREEN-REFACTOR) drives the entire development workflow.
+4. Toyota Kata improvement cycles drive deliberate experimentation.
+5. KAIZEN commit tags signal continuous improvement work.
+6. The Repository pattern abstracts persistence behind interfaces.
+7. Dynamic modules select providers at runtime via environment variables.
+8. In-memory repositories make unit tests fast and deterministic.
+9. Strategy pattern governs database, event, and IAM provider switching.
+10. REST APIs and event consumers scale independently as separate projects.
+11. DORA metrics are tracked via Atlassian Compass deployment events.
+12. Small, single-concern commits reduce batch size and risk.
+13. A/B testing eliminates opinion-based infrastructure decisions.
+14. Core domain libraries have zero framework runtime dependencies.
+15. Terraform modules are composable, testable, and reusable.
+16. Crossplane provisions cloud resources as Kubernetes-native objects.
+17. NestJS Testing Module enables isolated dependency injection in tests.
+18. E2E tests verify the full Kafka-to-HTTP pipeline end to end.
+19. GKE Autopilot eliminates node management overhead entirely.
+20. Private clusters hide the API server from the public internet.
+21. Secrets are generated at runtime, never hardcoded in manifests.
+22. Kafka provides durable, ordered event streaming between services.
+23. API stability levels communicate change risk to consumers.
+24. Developer onboarding time reduction is treated as a Kaizen goal.
+25. Conventional commits drive automated versioning and changelogs.
+26. NX orchestrates tasks, caches results, and tracks dependencies.
+27. NX Cloud remote caching reduces CI execution time by 95%.
+28. Shared utilities library prevents cross-team code duplication.
+29. Module boundary rules prevent circular dependency formation.
+30. Init containers separate database seeding from application runtime.
+31. Liveness and readiness probes ensure healthy traffic routing.
+32. Service account token automounting is disabled by default.
+33. Kubernetes Secrets store credentials, ConfigMaps store config.
+34. Default PostgreSQL superuser name is replaced with random values.
+35. Event handlers validate payloads before any processing occurs.
+36. Event topic names are centralized as domain constants.
+37. Prisma is the primary ORM with migration-managed schemas.
+38. Schema changes require explicit client regeneration before builds.
+39. URI versioning enables safe, parallel API evolution.
+40. OpenAPI docs are auto-generated from NestJS decorators.
+41. Faker.js generates realistic test data instead of static strings.
+42. Error paths are tested with the same rigor as happy paths.
+43. Blog posts document lessons learned from each improvement cycle.
+44. Cognitive complexity reduction is an explicit refactoring target.
+45. Technical debt is managed through explicit archiving, not neglect.
+46. Parameterized modules serve multiple consumers from one source.
+47. IaC targets integrate into the NX build dependency graph.
+48. Environment-specific naming prevents resource collisions.
+49. Resource requests and limits enforce predictable pod scheduling.
+50. HorizontalPodAutoscaler provides elastic CPU-based scaling.
+51. ClusterIP services restrict traffic to cluster-internal paths.
+52. Managed certificates automate TLS provisioning and renewal.
+53. VPC flow logging captures network telemetry for security analysis.
+54. Cloud NAT handles egress for private nodes without public IPs.
+55. API key guards protect service-to-service REST endpoints.
+56. NoSQL injection vulnerabilities are actively found and eliminated.
+57. Error responses are sanitized to prevent information exposure.
+58. Dockerfile vulnerabilities are tracked and remediated via Snyk.
+59. NX Cloud tokens use placeholder replacement to prevent leakage.
+60. Event error logging captures topic, partition, and message context.
+61. Multiple Kafka transporter strategies are supported via config.
+62. Consumer groups enable horizontal scaling of event processing.
+63. Multi-database support validates the adapter pattern boundary.
+64. Database-per-service isolation prevents cross-domain data coupling.
+65. Both Neon and Cloud SQL are supported as PostgreSQL providers.
+66. Repository methods map ORM entities to domain entities cleanly.
+67. Stability levels communicate API maturity to consumers.
+68. Error messages are centralized in constant objects per domain.
+69. Affected-only CI runs skip unchanged projects entirely.
+70. PNPM workspaces auto-discover packages via glob patterns.
+71. TypeScript path aliases provide clean cross-project imports.
+72. Multiple build tools (Webpack, Vite, esbuild) serve their targets.
+73. Release tags trigger deployment pipelines automatically.
+74. Terraform auto-approve runs only in CI, never locally.
+75. Deployment events feed DORA metric dashboards via Compass.
+76. Makefile targets wrap complex commands into one-liners.
+77. Docker Compose provides a production-like local data layer.
+78. Container resource limits ensure reproducibility across machines.
+79. Redux Toolkit with Entity Adapter normalizes frontend state.
+80. Type-safe Redux hooks infer store types automatically.
+81. Emotion CSS-in-JS with insertion points controls style ordering.
+82. Vite resolves workspace path aliases for browser builds.
+83. VS Code settings enforce formatting and organize imports on save.
+84. Prettier and EditorConfig standardize style across all editors.
+85. ts-expect-error requires a description to prevent blind suppression.
+86. Pre-commit hooks exist but are opt-in for developer flexibility.
+87. Bilingual PR templates capture What, Why, and How.
+88. Structured JSON logging enables machine parsing without regex.
+89. Middleware latency tracking quantifies per-request performance.
+90. Shared UI component library ensures visual consistency.
+91. Archive directory marks deprecated code as explicitly historical.
+92. Test configuration is centralized via NX Jest presets.
+93. Named inputs exclude test files from build cache invalidation.
+94. Schema validation tests enforce backward compatibility on changes.
+95. Minikube profiles isolate local development clusters per project.
+96. Terraform state is managed remotely, never locally.
+97. Provider versions are pinned in each module's versions.tf file.
+98. Implicit NX dependencies enforce IaC provisioning order.
+99. External documentation links enrich API operation specs.
+100. Terratest validates infrastructure before deployment.
