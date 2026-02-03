@@ -19,10 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Override fake nx token
-        run: |
-          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
-
       - name: Get short commit hash
         run: |
           SHORT_SHA=${{ github.sha }}
@@ -105,9 +101,6 @@ jobs:
           tags: |
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/things-assets-catalog-rest-api:${{ env.short_commit_sha }}
 
-      - name: Override nx token back to fake value # Avoid leaking the token
-        run: |
-          bash scripts/nx/set-token.sh --access-token=fake-token
   deploy:
     # needs: [build]
     if: true # Enabled
@@ -158,10 +151,6 @@ jobs:
       - name: Authenticate with gcloud cli
         run: |
           gcloud auth activate-service-account --key-file=teams/kernel/shell-iac/production/credentials.json
-
-      - name: Override fake nx token
-        run: |
-          bash scripts/nx/set-token.sh --access-token=${{ secrets.NX_ACCESS_TOKEN }}
 
       - name: Install Node.js
         uses: actions/setup-node@v3

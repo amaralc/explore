@@ -78,7 +78,6 @@
       }
     }
   },
-  "nxCloudAccessToken": "fake-token",
   "plugins": [
     {
       "plugin": "@nx/vite/plugin",
