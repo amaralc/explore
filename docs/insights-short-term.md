@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-03 20:25 UTC] Staged WIP on main transfers to feature branches via checkout -b
+- [2026-02-03 20:25 UTC] Closes #N in commit messages auto-links PRs to GitHub issues
 - [2026-02-03 20:18 UTC] Explicit workflow permissions fix CodeQL missing-permissions alerts
 - [2026-02-03 20:18 UTC] Unnumbered bullet lists avoid full-file renumbering on insert
 - [2026-02-03 20:18 UTC] UTC timestamps in logs ensure timezone-independent consistency
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-10-03 13:49 UTC] Regular Dockerfile rebuilds prevent stale base image drift
 - [2024-10-02 14:14 UTC] Dependabot batches dependency upgrades by ecosystem automatically
 - [2024-10-02 11:13 UTC] Hierarchical taxon relationships enable parent-child data modeling
-- [2024-10-02 11:10 UTC] Axios 1.7.7 patches request header injection vulnerability
-- [2024-10-02 10:59 UTC] Taxon hierarchy enables flexible classification tree structures
