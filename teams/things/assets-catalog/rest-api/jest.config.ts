@@ -7,7 +7,7 @@ export default {
   setupFiles: ['<rootDir>/src/support/test-setup.ts'],
   testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]s$': '@swc/jest',
+    '^.+\\.[tj]s$': ['@swc/jest', { jsc: { target: 'es2022' } }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../../coverage/teams/things/assets-catalog/base',
