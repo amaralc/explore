@@ -120,6 +120,5 @@
     },
     "projects": ["."],
     "projectsRelationship": "fixed"
-  },
-  "useLegacyCache": true
+  }
 }
