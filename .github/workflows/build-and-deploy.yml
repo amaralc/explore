@@ -8,6 +8,9 @@ on:
   #   branches:
   #     - production
 
+permissions:
+  contents: read
+
 jobs:
   build:
     if: false # Disabled
