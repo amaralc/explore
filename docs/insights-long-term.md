@@ -1,6 +1,6 @@
 # Long-Term Insights
 
-Top 100 insights from this repository.
+Key insights from this repository.
 
 1. Team-based directories mirror Conway's Law and domain ownership.
 2. Hexagonal architecture separates core logic from framework adapters.
@@ -68,7 +68,7 @@ Top 100 insights from this repository.
 64. Database-per-service isolation prevents cross-domain data coupling.
 65. Both Neon and Cloud SQL are supported as PostgreSQL providers.
 66. Repository methods map ORM entities to domain entities cleanly.
-67. Stability levels communicate API maturity to consumers.
+67. The test pyramid targets ~80% unit, ~15% integration, ~5% E2E tests.
 68. Error messages are centralized in constant objects per domain.
 69. Affected-only CI runs skip unchanged projects entirely.
 70. PNPM workspaces auto-discover packages via glob patterns.
@@ -76,17 +76,17 @@ Top 100 insights from this repository.
 72. Multiple build tools (Webpack, Vite, esbuild) serve their targets.
 73. Release tags trigger deployment pipelines automatically.
 74. Terraform auto-approve runs only in CI, never locally.
-75. Deployment events feed DORA metric dashboards via Compass.
-76. Makefile targets wrap complex commands into one-liners.
+75. Flaky tests erode trust; even 1% flakiness causes teams to ignore results.
+76. Tests should verify resulting state, not implementation interactions.
 77. Docker Compose provides a production-like local data layer.
-78. Container resource limits ensure reproducibility across machines.
+78. Tests target public APIs so internal refactors never break them.
 79. Redux Toolkit with Entity Adapter normalizes frontend state.
-80. Type-safe Redux hooks infer store types automatically.
-81. Emotion CSS-in-JS with insertion points controls style ordering.
-82. Vite resolves workspace path aliases for browser builds.
+80. Real implementations are preferred over test doubles for higher fidelity.
+81. DAMP (Descriptive And Meaningful Phrases) trumps DRY in test code.
+82. Configuration changes are the leading cause of major outages at scale.
 83. VS Code settings enforce formatting and organize imports on save.
 84. Prettier and EditorConfig standardize style across all editors.
-85. ts-expect-error requires a description to prevent blind suppression.
+85. Fakes must pass contract tests run against both fake and real implementations.
 86. Pre-commit hooks exist but are opt-in for developer flexibility.
 87. Bilingual PR templates capture What, Why, and How.
 88. Structured JSON logging enables machine parsing without regex.
@@ -96,9 +96,9 @@ Top 100 insights from this repository.
 92. Test configuration is centralized via NX Jest presets.
 93. Named inputs exclude test files from build cache invalidation.
 94. Schema validation tests enforce backward compatibility on changes.
-95. Minikube profiles isolate local development clusters per project.
+95. Chaos engineering reveals resilience gaps through continuous fault injection.
 96. Terraform state is managed remotely, never locally.
 97. Provider versions are pinned in each module's versions.tf file.
 98. Implicit NX dependencies enforce IaC provisioning order.
-99. External documentation links enrich API operation specs.
+99. Pairwise integration tests scale better than monolithic end-to-end flows.
 100. Terratest validates infrastructure before deployment.
