@@ -141,6 +141,8 @@
     "jest": "30.0.5",
     "jest-environment-jsdom": "30.0.5",
     "jest-environment-node": "29.4.1",
+    "jest-util": "30.0.5",
+    "jiti": "2.4.2",
     "jsdom": "22.1.0",
     "jsonc-eslint-parser": "2.3.0",
     "lerna": "8.1.2",
@@ -158,8 +160,7 @@
     "vite": "7.3.1",
     "vite-plugin-dts": "4.5.4",
     "vite-tsconfig-paths": "4.2.0",
-    "vitest": "1.6.1",
-    "jest-util": "30.0.5"
+    "vitest": "1.6.1"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "2.0.8",

@@ -729,6 +729,9 @@ importers:
       jest-util:
         specifier: 30.0.5
         version: 30.0.5
+      jiti:
+        specifier: 2.4.2
+        version: 2.4.2
       jsdom:
         specifier: 22.1.0
         version: 22.1.0
@@ -36089,8 +36092,8 @@ snapshots:
     dependencies:
       '@volar/language-core': 1.11.1
       '@volar/source-map': 1.11.1
-      '@vue/compiler-dom': 3.4.34
-      '@vue/shared': 3.4.34
+      '@vue/compiler-dom': 3.5.27
+      '@vue/shared': 3.5.27
       computeds: 0.0.1
       minimatch: 9.0.5
       muggle-string: 0.3.1
