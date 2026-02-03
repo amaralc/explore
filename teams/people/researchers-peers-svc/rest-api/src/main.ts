@@ -9,7 +9,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { configDto } from '@peerlab/researchers/peers/adapters/config.dto';
 import { ApiModule } from '@peerlab/researchers/peers/adapters/controllers/rest-api/api.module';
 import { NativeLogger } from '@peerlab/researchers/peers/core/shared/logs/native-logger';
-import { version } from '@peerlab/root/package.json';
+import { version } from '../package.json';
 import { spawn } from 'child_process';
 import { exit } from 'process';
 import { ApiKeyGuard } from './guards/api-key.guard';

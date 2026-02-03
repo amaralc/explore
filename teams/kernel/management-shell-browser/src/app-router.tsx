@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
-import { ErrorBoundary } from '../../shared-ui-components/src/lib/errors/error-boundary';
+import { ErrorBoundary } from '@peerlab/kernel/shared-ui-components/lib/errors/error-boundary';
 import { reduxUserSessionRepository } from './domains/people/user-session/adapters/redux-repository';
 import { OpenIdConnectAuthCallback } from './domains/people/user-session/components/open-id-connect-auth-callback';
 import { PrivateRoute } from './domains/people/user-session/components/private-route';
