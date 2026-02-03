@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
+- [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
 - [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
 - [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 - [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-10-22 01:46 UTC] NestJS config bump to 3.3.0 enables typed config validation
 - [2024-10-08 00:49 UTC] Express 4.21.0 patches path traversal vulnerabilities
 - [2024-10-04 14:57 UTC] Dev docs Dockerfile rebuilt on patched base image
-- [2024-10-04 14:55 UTC] API gateway Dockerfile rebuilt for October security patches
-- [2024-10-04 14:53 UTC] Management shell Dockerfile rebuilt for Q4 security cycle
