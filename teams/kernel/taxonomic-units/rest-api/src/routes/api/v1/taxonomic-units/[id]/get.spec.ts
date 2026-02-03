@@ -3,12 +3,10 @@ import { ConfigurationManager } from '@peerlab/kernel/taxonomic-units/base/confi
 import { fakeTaxonomicUnitsV1 } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/core/fixtures';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../../app';
-
 describe('GET /api/v1/taxonomic-units/{id}', () => {
   let request: supertest.SuperAgentTest;
   let configurationManager: ConfigurationManager;
   let databaseUri: string;
-
   beforeAll(async () => {
     configurationManager = new ConfigurationManager();
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
@@ -22,15 +20,12 @@ describe('GET /api/v1/taxonomic-units/{id}', () => {
       },
     });
   });
-
   beforeEach(async () => {
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
-
   it('should get an existing organization by its id', async () => {
     const existingTaxonomicUnitV1 = fakeTaxonomicUnitsV1[0];
-
     await request.get(`/api/v1/taxonomic-units/${existingTaxonomicUnitV1.id}`).then((response) => {
       expect(response.status).toEqual(200);
       expect(response.body).toEqual(existingTaxonomicUnitV1);

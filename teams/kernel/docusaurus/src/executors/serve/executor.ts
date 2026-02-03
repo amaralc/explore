@@ -7,7 +7,7 @@ import { join } from 'path';
 import { ServeExecutorSchema } from './schema';
 
 export default async function* runExecutor(options: ServeExecutorSchema, context: ExecutorContext) {
-  const projectRoot = path.join(context.root, context.workspace.projects[context.projectName ?? ''].root);
+  const projectRoot = path.join(context.root, context.projectsConfigurations.projects[context.projectName ?? ''].root);
   const port = options.port.toString();
 
   await serve(projectRoot, {

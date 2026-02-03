@@ -92,3 +92,4 @@ fixtures-content**.json
 .parcel-cache
 
 storybook-static
+vite.config.*.timestamp*

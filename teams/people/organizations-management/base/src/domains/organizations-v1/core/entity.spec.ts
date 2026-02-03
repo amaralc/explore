@@ -3,11 +3,9 @@ import { firebaseIdFormat, iso8601DateFormat, mongoDbIdFormat } from '@peerlab/k
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { OrganizationV1Entity } from './entity';
 import { IOrganizationV1Dto } from './entity.schema.types';
-
 describe('OrganizationV1Entity', () => {
   it('should create a valid organization entity', async () => {
     const fakeOrganizationId = faker.string.hexadecimal({ length: 24, prefix: '' });
-
     const organizationV1InputDto: IOrganizationV1Dto = {
       id: fakeOrganizationId,
       ownerAgentId: faker.string.hexadecimal({ length: 28, prefix: '' }),
@@ -19,7 +17,6 @@ describe('OrganizationV1Entity', () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-
     expect(new OrganizationV1Entity(organizationV1InputDto)).toEqual({
       id: expect.stringMatching(mongoDbIdFormat),
       ownerAgentId: expect.stringMatching(firebaseIdFormat),
@@ -32,7 +29,6 @@ describe('OrganizationV1Entity', () => {
       updatedAt: expect.stringMatching(iso8601DateFormat),
     });
   });
-
   it.each(['invalid-id', faker.string.hexadecimal({ length: 28, prefix: '' })])(
     'should not create organization entity with invalid id',
     (invalidId) => {
@@ -52,7 +48,6 @@ describe('OrganizationV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it.each(['/invalid-id-path', `/${faker.string.hexadecimal({ length: 28, prefix: '' })}`])(
     'should not create organization entity with invalid id',
     (invalidIdPath) => {
@@ -72,12 +67,10 @@ describe('OrganizationV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it('should not create organization entity with idPath that does not end with its own id', () => {
     const organizationId = faker.string.hexadecimal({ length: 24, prefix: '' });
     const otherOrganizationId = faker.string.hexadecimal({ length: 24, prefix: '' });
     const invalidPath = `/${otherOrganizationId}`;
-
     expect(
       () =>
         new OrganizationV1Entity({
@@ -93,7 +86,6 @@ describe('OrganizationV1Entity', () => {
         }),
     ).toThrow(ValidationExceptionV2Error);
   });
-
   it.each(['invalid-owner-agent-id', faker.database.mongodbObjectId().toString()])(
     'should not create organization entity with invalid owner agent id',
     (invalidOwnerAgentId) => {
@@ -114,7 +106,6 @@ describe('OrganizationV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it.each(['invalid-agent-id', faker.database.mongodbObjectId().toString()])(
     'should not create organization entity with invalid agent id',
     (invalidAgentId) => {
@@ -135,12 +126,10 @@ describe('OrganizationV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it.each(['invalid-email', 'a', 'a@b', '--@.com'])(
     'should not create organization entity with invalid emails',
     (invalidEmail) => {
       const fakeOrganizationId = faker.number.hex(24);
-
       expect(
         () =>
           new OrganizationV1Entity({
@@ -157,7 +146,6 @@ describe('OrganizationV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it.each(['x', 'invalid.nickname', 'invalid/nickname', '-invalid-', '--/inv'])(
     'should not create organization entity with invalid nicknames',
     (invalidNickname) => {
@@ -178,7 +166,6 @@ describe('OrganizationV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it('should not create organization entity with invalid nickname', () => {
     const fakeOrganizationId = faker.database.mongodbObjectId().toString();
     expect(

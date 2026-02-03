@@ -1,12 +1,21 @@
-import { Preview } from '@storybook/react';
+import { Preview } from '@storybook/react-vite';
 
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'white',
-      values: [{ name: 'white', value: '#ffffff' }],
+      options: {
+        white: { name: 'white', value: '#ffffff' }
+      }
     },
   },
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'white'
+    }
+  },
+
+  tags: ['autodocs']
 };
 
 export default preview;

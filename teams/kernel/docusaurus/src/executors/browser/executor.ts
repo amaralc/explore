@@ -5,7 +5,7 @@ import { join } from 'path';
 import { BrowserExecutorSchema } from './schema';
 
 export default async function* runExecutor(options: BrowserExecutorSchema, context: ExecutorContext) {
-  const projectRoot = path.join(context.root, context.workspace.projects[context.projectName ?? ''].root);
+  const projectRoot = path.join(context.root, context.projectsConfigurations.projects[context.projectName ?? ''].root);
 
   try {
     await build(projectRoot, {

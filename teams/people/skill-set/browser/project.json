@@ -3,12 +3,11 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "teams/people/skill-set/browser/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/teams/people/skill-set/browser",
@@ -57,10 +56,8 @@
       }
     },
     "test": {
-      "executor": "@nx/vite:test",
-      "outputs": [
-        "{workspaceRoot}/coverage/teams/people/skill-set/browser"
-      ],
+      "executor": "@nx/vitest:test",
+      "outputs": ["{workspaceRoot}/coverage/teams/people/skill-set/browser"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/teams/people/skill-set/browser"
@@ -68,19 +65,14 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "docker-build": {
       "command": "docker build -f teams/people/skill-set/browser/Dockerfile . -t people-skill-set-browser",
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     },
     "docker-run": {
       "command": "docker run --rm -p 80:80 people-skill-set-browser"
     }
-  },
-  "tags": []
+  }
 }

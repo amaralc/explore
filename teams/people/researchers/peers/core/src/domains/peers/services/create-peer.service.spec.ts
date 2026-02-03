@@ -6,13 +6,11 @@ import { PeersDatabaseRepository } from '../repositories/database.repository';
 import { InMemoryPeersEventsRepository } from '../repositories/events-in-memory.repository';
 import { PeersEventsRepository } from '../repositories/events.repository';
 import { CreatePeerService } from './create-peer.service';
-
 describe('[peers] CreatePeerService', () => {
-  const fakeName = faker.name.fullName();
-  const fakeUsername = faker.internet.userName(fakeName);
+  const fakeName = faker.person.fullName();
+  const fakeUsername = faker.internet.userName({ firstName: fakeName });
   let service: CreatePeerService;
   let databaseRepository: PeersDatabaseRepository;
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -21,35 +19,29 @@ describe('[peers] CreatePeerService', () => {
         { provide: PeersEventsRepository, useClass: InMemoryPeersEventsRepository },
       ],
     }).compile();
-
     service = module.get<CreatePeerService>(CreatePeerService);
     databaseRepository = module.get<PeersDatabaseRepository>(PeersDatabaseRepository);
   });
-
   it('should create a new peer', async () => {
     const peer = await service.execute({
       name: fakeName,
       username: fakeUsername,
     });
-
     const databaseRepositoryPeer = await databaseRepository.findByUsername(fakeUsername);
-
     expect(databaseRepositoryPeer?.username).toEqual(fakeUsername);
     expect(peer.username).toEqual(fakeUsername);
     expect(peer.name).toEqual(fakeName);
   });
-
   it('should throw conflict exception if username is already being used', async () => {
     await service.execute({
       name: fakeName,
       username: fakeUsername,
     });
-
     await expect(
       service.execute({
         name: 'Other Name',
         username: fakeUsername,
-      })
+      }),
     ).rejects.toThrow(ConflictException);
   });
 });

@@ -6,7 +6,7 @@ import * as path from 'path';
 import { DevServerExecutorSchema } from './schema';
 
 export default async function* runExecutor(options: DevServerExecutorSchema, context: ExecutorContext) {
-  const projectRoot = path.join(context.root, context.workspace.projects[context.projectName ?? ''].root);
+  const projectRoot = path.join(context.root, context.projectsConfigurations.projects[context.projectName ?? ''].root);
   const port = options.port.toString();
 
   await start(projectRoot, {

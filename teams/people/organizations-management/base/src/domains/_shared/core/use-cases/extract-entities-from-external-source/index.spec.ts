@@ -10,32 +10,26 @@ import { FileSystemMultiInstitutionsV1Repository } from '../../../../multi-insti
 import { MultiInstitutionsV1DatabaseRepository } from '../../../../multi-institution-v1/core/database-repository';
 import { MongoDbOrganizationsV1Repository } from '../../../../organizations-v1/adapters/database-repository-mongodb';
 import { OrganizationsV1DatabaseRepository } from '../../../../organizations-v1/core/database-repository';
-
 describe('ExtractEntitiesFromExternalSourceUseCase', () => {
   let extractEntitiesFromExternalSourceUseCase: ExtractEntitiesFromExternalSourceUseCase;
   let multiInstitutionsV1DatabaseRepository: MultiInstitutionsV1DatabaseRepository;
   let multiCentralsV1DatabaseRepository: MultiCentralsV1DatabaseRepository;
   let agentsV1DatabaseRepository: AgentsV1DatabaseRepository;
   let organizationsV1DatabaseRepository: OrganizationsV1DatabaseRepository;
-
   const databaseName = 'test-database';
   let mongoDbMemoryServer: MongoDbMemoryServer;
   let mongoDbDriver: MongoDbDriver;
-
   let fakeAccountHolderAgent: null | IAgentV1Dto = null;
-
   beforeAll(async () => {
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
     mongoDbMemoryServer = result.mongoMemoryServer;
     mongoDbDriver = new MongoDbDriver(result.databaseUri);
     await mongoDbDriver.connectToDatabase(databaseName);
-  });
-
+  }, 120_000);
   beforeEach(async () => {
     // Given
     await mongoDbDriver.dropDatabase(databaseName);
     agentsV1DatabaseRepository = new MongoDbAgentsV1DatabaseRepository(mongoDbDriver);
-
     const createdAt = new Date().toISOString();
     fakeAccountHolderAgent = await agentsV1DatabaseRepository.create({
       nickname: 'fake-account-holder',
@@ -45,7 +39,6 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
       id: agentsV1DatabaseRepository.generateUniqueId(),
       type: 'ORGANIZATION',
     });
-
     organizationsV1DatabaseRepository = new MongoDbOrganizationsV1Repository(mongoDbDriver);
     multiInstitutionsV1DatabaseRepository = new FileSystemMultiInstitutionsV1Repository();
     multiCentralsV1DatabaseRepository = new FileSystemMultiCentralsV1Repository();
@@ -56,34 +49,28 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
       organizationsV1DatabaseRepository,
     );
   });
-
   afterAll(async () => {
     await mongoDbDriver.disconnect();
     await mongoDbMemoryServer.stop();
   });
-
   it('should create the same number of agents-v1 and organizations-v1', async () => {
     // When
     const { extractedCentralsCount, extractedDepartmentsCount, extractedInstitutionsCount, extractedUnitsCount } =
       await extractEntitiesFromExternalSourceUseCase.execute(fakeAccountHolderAgent.id);
-
     // Then
     const agentsCount = await agentsV1DatabaseRepository.countAll();
     const agentsCountExceptAccountHolder = agentsCount - 1;
     expect(agentsCountExceptAccountHolder).toEqual(
       extractedCentralsCount + extractedDepartmentsCount + extractedInstitutionsCount + extractedUnitsCount,
     );
-
     const organizationsCount = await organizationsV1DatabaseRepository.countAll();
     expect(organizationsCount).toEqual(
       extractedCentralsCount + extractedDepartmentsCount + extractedInstitutionsCount + extractedUnitsCount,
     );
   });
-
   it('should create the correct agent-v1 per organization-v1', async () => {
     // When
     await extractEntitiesFromExternalSourceUseCase.execute(fakeAccountHolderAgent.id);
-
     // Then
     const paginatedOrganizations = await organizationsV1DatabaseRepository.listPaginated({ limit: 20, page: 1 });
     for (const organization of paginatedOrganizations.entities) {
@@ -93,7 +80,6 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
       expect(agentNicknamePrefix).toEqual(organizationNicknamePrefix);
     }
   });
-
   it('should update entities in dataset if they already exist', async () => {
     // When (use case executed twice, with different source values)
     const firstExtractionResult = await extractEntitiesFromExternalSourceUseCase.execute(fakeAccountHolderAgent.id);
@@ -103,7 +89,6 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
       extractedInstitutionsCount: 3,
       extractedUnitsCount: 2,
     });
-
     const multiInstitutionsV1UpdatedDatabaseRepository = new FileSystemMultiInstitutionsV1Repository(
       'teams/people/organizations-management/base/src/domains/_shared/core/use-cases/extract-entities-from-external-source/fixtures/multi-institutions-v1-updated-response-body.json',
     );
@@ -119,7 +104,6 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
     const secondExtractionResult = await extractEntitiesFromExternalSourceUpdatedUseCase.execute(
       fakeAccountHolderAgent.id,
     );
-
     // Then
     expect(secondExtractionResult).toEqual({
       extractedCentralsCount: 4,
@@ -135,14 +119,11 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
       expect(agentNicknamePrefix).toEqual(organizationNicknamePrefix);
     }
   });
-
   it('should populate organizations with parent-child relationship', async () => {
     // Given
-
     // When
     await extractEntitiesFromExternalSourceUseCase.execute(fakeAccountHolderAgent.id);
     const idPathRegex = /^\/([0-9a-fA-F]{24})(?:\/([0-9a-fA-F]{24}))*$/;
-
     // Then
     const paginatedOrganizations = await organizationsV1DatabaseRepository.listPaginated({ limit: 20, page: 1 });
     for (const organization of paginatedOrganizations.entities) {

@@ -3,15 +3,12 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "teams/kernel/management-shell-browser/src",
   "projectType": "application",
-  "implicitDependencies": [
-    "kernel-security-iam-svc"
-  ],
+  "tags": [],
+  "implicitDependencies": ["kernel-security-iam-svc"],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/teams/kernel/management-shell-browser",
@@ -60,10 +57,8 @@
       }
     },
     "test": {
-      "executor": "@nx/vite:test",
-      "outputs": [
-        "{workspaceRoot}/coverage/teams/kernel/management-shell-browser"
-      ],
+      "executor": "@nx/vitest:test",
+      "outputs": ["{workspaceRoot}/coverage/teams/kernel/management-shell-browser"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/teams/kernel/management-shell-browser"
@@ -71,9 +66,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "e2e": {
       "executor": "@nx/cypress:cypress",
@@ -94,6 +87,5 @@
     "docker-run": {
       "command": "docker run --rm -p 80:80 kernel-management-shell-browser"
     }
-  },
-  "tags": []
+  }
 }

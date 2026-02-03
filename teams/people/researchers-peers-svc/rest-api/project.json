@@ -3,13 +3,12 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "teams/people/researchers-peers-svc/rest-api/src",
   "projectType": "application",
+  "tags": [],
   "implicitDependencies": [],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "target": "node",
         "compiler": "tsc",
@@ -20,13 +19,8 @@
           {
             "name": "@nestjs/swagger/plugin",
             "options": {
-              "dtoFileNameSuffix": [
-                "entity.ts",
-                "dto.ts"
-              ],
-              "controllerFileNameSuffix": [
-                "controller.ts"
-              ],
+              "dtoFileNameSuffix": ["entity.ts", "dto.ts"],
+              "controllerFileNameSuffix": ["controller.ts"],
               "classValidatorShim": true,
               "dtoKeyOfComment": "description",
               "controllerKeyOfComment": "description",
@@ -34,9 +28,7 @@
             }
           }
         ],
-        "assets": [
-          "teams/people/researchers-peers-svc/rest-api/src/assets"
-        ],
+        "assets": ["teams/people/researchers-peers-svc/rest-api/src/assets"],
         "webpackConfig": "teams/people/researchers-peers-svc/rest-api/webpack.config.js",
         "babelUpwardRootMode": true
       },
@@ -61,15 +53,11 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ]
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "teams/people/researchers-peers-svc/rest-api/jest.config.ts",
         "passWithNoTests": true
@@ -87,6 +75,5 @@
     "docker-run": {
       "command": "docker run -d -p 8080:8080 --name people-researchers-peers-svc-rest-api people-researchers-peers-svc-rest-api"
     }
-  },
-  "tags": []
+  }
 }

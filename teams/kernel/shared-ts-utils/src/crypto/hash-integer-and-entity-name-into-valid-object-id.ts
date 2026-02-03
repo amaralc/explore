@@ -17,7 +17,7 @@ export const hashIntegerAndEntityNameIntoValidObjectId = (integer: number, entit
 
   // Create a hash from the integer for uniqueness
   const hash = createHash('sha256');
-  hash.update(Buffer.from(integer.toString() + entityName));
+  hash.update(integer.toString() + entityName);
   const bytes = hash.digest();
 
   // Convert the integer to a buffer for the timestamp (use a static date as an example)
@@ -31,5 +31,10 @@ export const hashIntegerAndEntityNameIntoValidObjectId = (integer: number, entit
   const counter = bytes.subarray(5, 8);
 
   // Concatenate all parts to form the ObjectID
-  return Buffer.concat([timestampBuffer, machineId, processId, counter]).toString('hex');
+  const result = new Uint8Array(12);
+  result.set(timestampBuffer, 0);
+  result.set(machineId, 4);
+  result.set(processId, 7);
+  result.set(counter, 9);
+  return Buffer.from(result).toString('hex');
 };

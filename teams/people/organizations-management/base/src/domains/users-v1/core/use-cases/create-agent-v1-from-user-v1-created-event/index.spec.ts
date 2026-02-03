@@ -6,19 +6,16 @@ import { IAgentV1Dto } from '../../../../agents-v1/core/entity.schema.types';
 import { fakeAgents } from '../../../../agents-v1/core/fixtures';
 import { UserV1AuthenticationEventDto, UsersV1EventsRepository } from '../../events-repository';
 import { InMemoryUsersV1EventsRepository } from '../../events-repository-in-memory';
-
 describe('createAgentV1FromUserV1CreatedEvent', () => {
   let agentsV1Repository: AgentsV1DatabaseRepository;
   let usersV1EventsRepository: UsersV1EventsRepository;
   let useCase: CreateAgentV1FromUserV1CreationEventUseCase;
-
   beforeEach(async () => {
     agentsV1Repository = new InMemoryAgentsV1Repository();
     usersV1EventsRepository = new InMemoryUsersV1EventsRepository();
     agentsV1Repository.createMany(fakeAgents);
     useCase = new CreateAgentV1FromUserV1CreationEventUseCase(agentsV1Repository, usersV1EventsRepository);
   });
-
   it('should create an agent from a user created event', async () => {
     const userCreatedEvent: UserV1AuthenticationEventDto = {
       displayName: 'New User',
@@ -32,9 +29,7 @@ describe('createAgentV1FromUserV1CreatedEvent', () => {
       providerData: [],
       uid: randomBytes(14).toString('hex'), // 28 characters hex string
     };
-
     const createdAgentV1 = await useCase.execute(userCreatedEvent);
-
     const expectedAgentV1: IAgentV1Dto = {
       createdAt: new Date(userCreatedEvent.metadata.createdAt).toISOString(),
       email: userCreatedEvent.email,
@@ -43,10 +38,8 @@ describe('createAgentV1FromUserV1CreatedEvent', () => {
       type: 'INDIVIDUAL',
       updatedAt: new Date(userCreatedEvent.metadata.lastSignedInAt).toISOString(),
     };
-
     expect(createdAgentV1).toEqual(expectedAgentV1);
   });
-
   it('should not create an individual agent if an agent with the same email already exists', async () => {
     const userCreatedEvent: UserV1AuthenticationEventDto = {
       displayName: 'New User',
@@ -60,7 +53,6 @@ describe('createAgentV1FromUserV1CreatedEvent', () => {
       providerData: [],
       uid: randomBytes(14).toString('hex'), // 24 characters hex string
     };
-
     await expect(useCase.execute(userCreatedEvent)).rejects.toThrow('Agent with same email already exists');
   });
 });

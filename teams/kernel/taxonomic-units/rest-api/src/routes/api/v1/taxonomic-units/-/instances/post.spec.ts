@@ -6,14 +6,12 @@ import { ITaxonomicUnitInstanceV1 } from '@peerlab/kernel/taxonomic-units/base/d
 import { ObjectId } from 'mongodb';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../../../app';
-
 describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
   let request: supertest.SuperAgentTest;
   let configurationManager: ConfigurationManager;
   let databaseUri: string;
   let testMongoDbDriver: MongoDbDriver;
   const databaseName = 'test-taxonomic-units';
-
   beforeAll(async () => {
     configurationManager = new ConfigurationManager();
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
@@ -21,11 +19,9 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
     testMongoDbDriver = new MongoDbDriver(databaseUri);
     await testMongoDbDriver.connectToDatabase(databaseName);
   });
-
   beforeEach(async () => {
     // Drop the database before each test
     await testMongoDbDriver.dropDatabase(databaseName);
-
     // Override the default configuration with in memory database configuration
     configurationManager.setConfig({
       ...configurationManager.getConfig(),
@@ -38,7 +34,6 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
-
   it('[HTTP 404] should throw a 404 error if the taxonomic unit does not exist', async () => {
     const requestBody = {
       schema: {
@@ -49,7 +44,6 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
         name: 'fake-name-01',
       },
     };
-
     await request
       .post(`/api/v1/taxonomic-units/-/instances`)
       .send(requestBody)
@@ -60,7 +54,6 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
         );
       });
   });
-
   it.only.each([
     {
       name: 'fake-name-01',
@@ -84,7 +77,6 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
         },
         data: requestBodyData,
       };
-
       await request
         .post(`/api/v1/taxonomic-units/-/instances`)
         .send(requestBody)
@@ -94,7 +86,6 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
         });
     },
   );
-
   it.each([
     {
       parentId: 'fake-parent-id',
@@ -109,7 +100,6 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
         },
         data: requestBodyData,
       };
-
       await request
         .post(`/api/v1/taxonomic-units/-/instances`)
         .send(requestBody)
@@ -125,11 +115,9 @@ describe.skip('POST /api/v1/taxonomic-units/-/instances', () => {
               parentId: requestBody.data.parentId,
             },
           });
-
           const collection = testMongoDbDriver.getCollection<ITaxonomicUnitInstanceV1>('TaxonomicUnitInstanceV1');
           const document = await collection.findOne({ _id: new ObjectId(response.body.id as string) });
           expect(document).not.toBeNull();
-
           const entityDto = {
             schema: document.schema,
             data: document.data,
