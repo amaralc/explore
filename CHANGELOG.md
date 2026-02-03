@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.98.0-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.0...peerlab@0.98.0-beta.1) (2026-02-03)
+
+### Features
+
+- add Claude Code stop hook to maintain insight docs ([ee5cc3f](https://github.com/amaralc/explore/commit/ee5cc3f4487b85e6d2fc007f334d3a8f0ff91b4b)), closes [#151](https://github.com/amaralc/explore/issues/151)
+
+### Bug Fixes
+
+- address SonarCloud code smells ([f38cbd1](https://github.com/amaralc/explore/commit/f38cbd1822bf3ec5b137dc45fdee3c31aad832c8))
+- **deps:** upgrade lerna 8.1.2 to 9.0.3 for nx 22 compatibility ([af3092e](https://github.com/amaralc/explore/commit/af3092e968fff1d4f0500765d46013871dd77550)), closes [#156](https://github.com/amaralc/explore/issues/156)
+- increase MongoDB memory server timeout in taxonomic-unit tests ([3cc9520](https://github.com/amaralc/explore/commit/3cc9520d9eb6d0c4142218ee99b79b0fe2c4cede)), closes [#149](https://github.com/amaralc/explore/issues/149)
+- replace deprecated faker.js APIs and increase MongoDB memory server timeout ([f00daa6](https://github.com/amaralc/explore/commit/f00daa6dcaecca2555da0acca8d16a0807c6f3f3))
+- replace removed ExecutorContext.workspace with projectsConfigurations ([8c22e9c](https://github.com/amaralc/explore/commit/8c22e9c269db37f042d35573bbd6708d9f5af100))
+- resolve CI failure from invalid Nx Cloud token on Dependabot PRs ([2f5c23a](https://github.com/amaralc/explore/commit/2f5c23a4bbea5f62cb750973a3f6402c8b04c0f3)), closes [#147](https://github.com/amaralc/explore/issues/147)
+- resolve lint failures caused by cross-boundary imports and archived project ([21d3645](https://github.com/amaralc/explore/commit/21d3645dc6654dc23e1d634e1d3615fd57556681)), closes [#145](https://github.com/amaralc/explore/issues/145)
+- resolve unit test failures from Node 24 and ESM compat ([7556808](https://github.com/amaralc/explore/commit/75568081947ca39c450e624a2c1faa0ed55fedce))
+
 ## [0.98.0-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.97.0...peerlab@0.98.0-beta.0) (2026-02-02)
 
 ### Features
