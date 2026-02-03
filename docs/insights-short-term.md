@@ -2,103 +2,103 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
-1. [2026-02-02 12:50] Pinned container image versions prevent unexpected runtime behavior changes
-2. [2026-02-02 12:44] Blog posts consolidate security hardening lessons into shareable knowledge
-3. [2026-02-02 12:36] Private GKE endpoints block control plane access from public internet
-4. [2026-02-02 12:33] Disabling token automounting reduces pod-level attack surface
-5. [2026-02-02 12:27] Generated secrets for DB usernames eliminate credential reuse risk
-6. [2026-02-02 12:10] Generated secrets for DB passwords remove hardcoded values from manifests
-7. [2026-02-02 12:01] VPC flow logs and private cluster config improve network observability
-8. [2026-02-01 00:55] Makefile targets for IAM setup/teardown simplify local development
-9. [2026-02-01 00:55] Shell IaC references IAM service module for environment composition
-10. [2026-02-01 00:54] Logto IAM service bundles IaC, K8s manifests, and local setup together
-11. [2026-02-01 00:54] Crossplane PostgreSQL v2 pipeline mode provisions DBs as K8s objects
-12. [2026-02-01 00:54] Crossplane installation via Terraform bridges IaC and K8s-native tools
-13. [2026-02-01 00:54] GKE cluster Terraform module encapsulates cluster provisioning logic
-14. [2026-02-01 00:53] IAM provider evaluation blog documents decision rationale publicly
-15. [2026-02-01 00:53] Implementation plans recorded before coding reduce wasted effort
-16. [2026-01-31 08:36] CLAUDE.md file gives AI assistants project-specific context
-17. [2025-10-21 22:49] Socket.dev integration validates supply chain security of dependencies
-18. [2025-10-04 19:27] Logto identified as open-source Firebase Auth alternative
-19. [2025-10-04 17:48] Conventional releases with Lerna automate changelog generation
-20. [2025-10-04 17:48] Adjusting dependencies after refactors keeps the build graph consistent
-21. [2025-10-04 12:21] Moving researchers lib aligns code location with team ownership
-22. [2025-10-04 12:12] Docusaurus executor in kernel team centralizes shared build tooling
-23. [2025-10-04 12:07] IaC modules under kernel team reflect infrastructure as shared concern
-24. [2025-10-04 11:29] Pinning Node.js to 24.5.0 ensures consistent runtime across envs
-25. [2025-10-04 11:28] Documenting AI impressions captures emerging tool evaluations
-26. [2025-08-10 11:13] Team-based folder structure replaces flat app-centric layout
-27. [2025-08-10 11:07] NoSQL injection vulnerability eliminated via input sanitization
-28. [2025-08-10 10:35] README improvements reduce onboarding friction for new contributors
-29. [2025-08-10 10:16] Renaming apps/ to teams/ encodes Conway's Law in the file tree
-30. [2025-08-09 20:57] Versioning environments as v1.0.0 enables parallel environment evolution
-31. [2025-08-09 19:03] Upgrading to Node 24 keeps runtime aligned with LTS schedule
-32. [2025-08-09 18:54] Explicit delivery channels clarify deployment target per service
-33. [2025-08-09 18:54] Node.js 24 upgrade required coordinated dependency adjustments
-34. [2025-08-09 18:53] Preset log files standardize local debugging output paths
-35. [2025-03-11 07:31] Organizing procedures into dedicated folders improves discoverability
-36. [2025-03-11 04:50] Enhanced PostgreSQL replication docs support disaster recovery planning
-37. [2025-03-11 04:14] PostgreSQL replication documentation captures operational knowledge
-38. [2025-03-05 06:27] Bumping Vitest to 1.6.1 patches test runner stability issues
-39. [2025-03-05 05:56] Sanitized error responses prevent information exposure to attackers
-40. [2025-03-04 08:23] esbuild generates smaller, faster function bundles than Webpack
-41. [2025-03-04 08:07] JSON Schema 7 adoption standardizes validation across services
-42. [2025-03-04 07:56] Bumping esbuild to 0.25.0 enables latest bundler optimizations
-43. [2025-03-04 07:48] Mongoose upgrade to 7.8.6 resolves known security vulnerabilities
-44. [2025-03-04 07:44] NX project.json build targets replace custom esbuild scripts
-45. [2025-03-03 21:14] esbuild bundles taxonomic units REST API with minimal config
-46. [2025-03-03 17:29] Renaming to forward compatibility clarifies schema evolution intent
-47. [2025-02-25 06:57] Dockerfile vulnerability fixes reduce container attack surface
-48. [2025-02-22 07:58] Org management API Dockerfile patched for known CVEs
-49. [2025-02-19 08:20] Nanoid bumped to 3.3.8 to patch ID generation vulnerability
-50. [2025-02-19 08:19] Snyk automated PRs continuously remediate known vulnerabilities
-51. [2025-02-19 08:17] Backward compatibility validation ensures safe schema evolution
-52. [2025-02-19 08:15] PNPM 10 upgrade modernizes package management tooling
-53. [2025-02-19 08:03] Type adjustments after upgrades maintain strict compilation checks
-54. [2025-02-13 05:51] Dev docs browser Dockerfile patched to reduce vulnerabilities
-55. [2025-02-11 06:16] API gateway Dockerfile updated for latest base image security fixes
-56. [2025-02-11 06:14] Management shell Dockerfile patched to reduce container vulns
-57. [2025-02-08 07:05] Skill set browser Dockerfile hardened against known CVEs
-58. [2025-01-12 14:37] Instance entity tests validate initialization from taxon schemas
-59. [2025-01-12 14:36] Instance initialization logic derived from taxon schema definition
-60. [2025-01-12 14:33] Duplicate reduction keeps domain model lean and unambiguous
-61. [2025-01-11 19:19] Refactoring reduces cognitive complexity of compatibility checks
-62. [2025-01-11 19:09] Instance schema defines the format of the entire instance object
-63. [2025-01-11 16:27] Backward compatibility validation added to JSON schema validator
-64. [2025-01-11 10:34] Setup speed improvements shorten feedback loop for developers
-65. [2025-01-11 10:27] Removing Docker init requirement speeds up fresh installations
-66. [2025-01-11 10:20] Reduced setup time directly improves developer onboarding speed
-67. [2024-12-09 23:35] Nanoid 3.3.8 patches predictable ID generation vulnerability
-68. [2024-11-30 23:34] Next.js 15.0.3 upgrade enables latest React server components
-69. [2024-11-30 20:31] Express 4.21.0 merge resolves upstream security patch
-70. [2024-11-30 20:29] Vite 5.2.14 merge patches dev server security vulnerabilities
-71. [2024-11-30 20:26] Express 4.20.0 intermediate merge validates upgrade path
-72. [2024-11-30 20:24] Next.js 14.2.10 merge backports critical security patches
-73. [2024-11-30 20:22] Snyk merge batches consolidate multiple vulnerability fixes at once
-74. [2024-11-30 20:16] NestJS config 3.3.0 adds typed environment variable support
-75. [2024-11-30 20:15] Firebase 10.9.0 resolves authentication SDK deprecation warnings
-76. [2024-11-30 20:15] Rollup 3.29.5 patches bundler vulnerability in tree-shaking
-77. [2024-11-30 20:15] http-proxy-middleware 2.0.7 fixes request smuggling vector
-78. [2024-11-30 20:13] Cost manager feature enables cloud spend tracking and reporting
-79. [2024-11-30 20:07] Tests and code splitting improve cost manager maintainability
-80. [2024-11-28 21:17] KAIZEN upgrade and setup improve continuous improvement tooling
-81. [2024-11-28 21:13] MongoDB in-memory upgrade aligns test infrastructure with drivers
-82. [2024-10-21 22:46] NestJS config bump to 3.3.0 enables typed config validation
-83. [2024-10-07 21:49] Express 4.21.0 patches path traversal vulnerabilities
-84. [2024-10-04 11:57] Dev docs Dockerfile rebuilt on patched base image
-85. [2024-10-04 11:55] API gateway Dockerfile rebuilt for October security patches
-86. [2024-10-04 11:53] Management shell Dockerfile rebuilt for Q4 security cycle
-87. [2024-10-04 11:52] Skill set browser Dockerfile rebuilt for Q4 base image patches
-88. [2024-10-03 10:49] Regular Dockerfile rebuilds prevent stale base image drift
-89. [2024-10-02 11:14] Dependabot batches dependency upgrades by ecosystem automatically
-90. [2024-10-02 08:13] Hierarchical taxon relationships enable parent-child data modeling
-91. [2024-10-02 08:10] Axios 1.7.7 patches request header injection vulnerability
-92. [2024-10-02 07:59] Taxon hierarchy enables flexible classification tree structures
-93. [2024-09-21 01:45] Basic cost manager lays foundation for infrastructure spend tracking
-94. [2024-09-09 09:32] Org management Dockerfile patched for September security cycle
-95. [2024-09-03 22:25] Mandatory type in fixture schema enforces test data consistency
-96. [2024-09-02 22:00] Axios 1.7.7 upgrade resolves SSRF vulnerability in HTTP client
-97. [2024-09-01 22:48] URL patterns adjusted to conform with Google API design guide
-98. [2024-09-01 20:23] Taxonomic unit instances enable dynamic, schema-driven data records
-99. [2024-09-01 14:02] Removing duplicate express error handlers simplifies middleware stack
-100. [2024-08-31 20:11] Comparing with list property instead of null prevents false matches
+- [2026-02-03 20:25 UTC] Staged WIP on main transfers to feature branches via checkout -b
+- [2026-02-03 20:25 UTC] Closes #N in commit messages auto-links PRs to GitHub issues
+- [2026-02-03 20:18 UTC] Explicit workflow permissions fix CodeQL missing-permissions alerts
+- [2026-02-03 20:18 UTC] Unnumbered bullet lists avoid full-file renumbering on insert
+- [2026-02-03 20:18 UTC] UTC timestamps in logs ensure timezone-independent consistency
+- [2026-02-03 20:15 UTC] CodeQL needs a baseline run on main before PR checks work
+- [2026-02-03 20:15 UTC] CodeQL workflow scans both JS/TS and GitHub Actions languages
+- [2026-02-03 19:30 UTC] SWE book testing principles replace narrow tooling details in insights
+- [2026-02-03 19:30 UTC] Deduplicating insight lists increases signal-to-noise ratio
+- [2026-02-03 19:30 UTC] External engineering literature enriches project knowledge base
+- [2026-02-02 15:50 UTC] Pinned container image versions prevent unexpected runtime behavior changes
+- [2026-02-02 15:44 UTC] Blog posts consolidate security hardening lessons into shareable knowledge
+- [2026-02-02 15:36 UTC] Private GKE endpoints block control plane access from public internet
+- [2026-02-02 15:33 UTC] Disabling token automounting reduces pod-level attack surface
+- [2026-02-02 15:27 UTC] Generated secrets for DB usernames eliminate credential reuse risk
+- [2026-02-02 15:10 UTC] Generated secrets for DB passwords remove hardcoded values from manifests
+- [2026-02-02 15:01 UTC] VPC flow logs and private cluster config improve network observability
+- [2026-02-01 03:55 UTC] Makefile targets for IAM setup/teardown simplify local development
+- [2026-02-01 03:55 UTC] Shell IaC references IAM service module for environment composition
+- [2026-02-01 03:54 UTC] Logto IAM service bundles IaC, K8s manifests, and local setup together
+- [2026-02-01 03:54 UTC] Crossplane PostgreSQL v2 pipeline mode provisions DBs as K8s objects
+- [2026-02-01 03:54 UTC] Crossplane installation via Terraform bridges IaC and K8s-native tools
+- [2026-02-01 03:54 UTC] GKE cluster Terraform module encapsulates cluster provisioning logic
+- [2026-02-01 03:53 UTC] IAM provider evaluation blog documents decision rationale publicly
+- [2026-02-01 03:53 UTC] Implementation plans recorded before coding reduce wasted effort
+- [2026-01-31 11:36 UTC] CLAUDE.md file gives AI assistants project-specific context
+- [2025-10-22 01:49 UTC] Socket.dev integration validates supply chain security of dependencies
+- [2025-10-04 22:27 UTC] Logto identified as open-source Firebase Auth alternative
+- [2025-10-04 20:48 UTC] Conventional releases with Lerna automate changelog generation
+- [2025-10-04 20:48 UTC] Adjusting dependencies after refactors keeps the build graph consistent
+- [2025-10-04 15:21 UTC] Moving researchers lib aligns code location with team ownership
+- [2025-10-04 15:12 UTC] Docusaurus executor in kernel team centralizes shared build tooling
+- [2025-10-04 15:07 UTC] IaC modules under kernel team reflect infrastructure as shared concern
+- [2025-10-04 14:29 UTC] Pinning Node.js to 24.5.0 ensures consistent runtime across envs
+- [2025-10-04 14:28 UTC] Documenting AI impressions captures emerging tool evaluations
+- [2025-08-10 14:13 UTC] Team-based folder structure replaces flat app-centric layout
+- [2025-08-10 14:07 UTC] NoSQL injection vulnerability eliminated via input sanitization
+- [2025-08-10 13:35 UTC] README improvements reduce onboarding friction for new contributors
+- [2025-08-10 13:16 UTC] Renaming apps/ to teams/ encodes Conway's Law in the file tree
+- [2025-08-09 23:57 UTC] Versioning environments as v1.0.0 enables parallel environment evolution
+- [2025-08-09 22:03 UTC] Upgrading to Node 24 keeps runtime aligned with LTS schedule
+- [2025-08-09 21:54 UTC] Explicit delivery channels clarify deployment target per service
+- [2025-08-09 21:54 UTC] Node.js 24 upgrade required coordinated dependency adjustments
+- [2025-08-09 21:53 UTC] Preset log files standardize local debugging output paths
+- [2025-03-11 10:31 UTC] Organizing procedures into dedicated folders improves discoverability
+- [2025-03-11 07:50 UTC] Enhanced PostgreSQL replication docs support disaster recovery planning
+- [2025-03-11 07:14 UTC] PostgreSQL replication documentation captures operational knowledge
+- [2025-03-05 09:27 UTC] Bumping Vitest to 1.6.1 patches test runner stability issues
+- [2025-03-05 08:56 UTC] Sanitized error responses prevent information exposure to attackers
+- [2025-03-04 11:23 UTC] esbuild generates smaller, faster function bundles than Webpack
+- [2025-03-04 11:07 UTC] JSON Schema 7 adoption standardizes validation across services
+- [2025-03-04 10:56 UTC] Bumping esbuild to 0.25.0 enables latest bundler optimizations
+- [2025-03-04 10:48 UTC] Mongoose upgrade to 7.8.6 resolves known security vulnerabilities
+- [2025-03-04 10:44 UTC] NX project.json build targets replace custom esbuild scripts
+- [2025-03-04 00:14 UTC] esbuild bundles taxonomic units REST API with minimal config
+- [2025-03-03 20:29 UTC] Renaming to forward compatibility clarifies schema evolution intent
+- [2025-02-25 09:57 UTC] Dockerfile vulnerability fixes reduce container attack surface
+- [2025-02-22 10:58 UTC] Org management API Dockerfile patched for known CVEs
+- [2025-02-19 11:20 UTC] Nanoid bumped to 3.3.8 to patch ID generation vulnerability
+- [2025-02-19 11:19 UTC] Snyk automated PRs continuously remediate known vulnerabilities
+- [2025-02-19 11:17 UTC] Backward compatibility validation ensures safe schema evolution
+- [2025-02-19 11:15 UTC] PNPM 10 upgrade modernizes package management tooling
+- [2025-02-19 11:03 UTC] Type adjustments after upgrades maintain strict compilation checks
+- [2025-02-13 08:51 UTC] Dev docs browser Dockerfile patched to reduce vulnerabilities
+- [2025-02-11 09:16 UTC] API gateway Dockerfile updated for latest base image security fixes
+- [2025-02-11 09:14 UTC] Management shell Dockerfile patched to reduce container vulns
+- [2025-02-08 10:05 UTC] Skill set browser Dockerfile hardened against known CVEs
+- [2025-01-12 17:37 UTC] Instance entity tests validate initialization from taxon schemas
+- [2025-01-12 17:36 UTC] Instance initialization logic derived from taxon schema definition
+- [2025-01-12 17:33 UTC] Duplicate reduction keeps domain model lean and unambiguous
+- [2025-01-11 22:19 UTC] Refactoring reduces cognitive complexity of compatibility checks
+- [2025-01-11 22:09 UTC] Instance schema defines the format of the entire instance object
+- [2025-01-11 19:27 UTC] Backward compatibility validation added to JSON schema validator
+- [2025-01-11 13:34 UTC] Setup speed improvements shorten feedback loop for developers
+- [2025-01-11 13:27 UTC] Removing Docker init requirement speeds up fresh installations
+- [2025-01-11 13:20 UTC] Reduced setup time directly improves developer onboarding speed
+- [2024-12-10 02:35 UTC] Nanoid 3.3.8 patches predictable ID generation vulnerability
+- [2024-12-01 02:34 UTC] Next.js 15.0.3 upgrade enables latest React server components
+- [2024-11-30 23:31 UTC] Express 4.21.0 merge resolves upstream security patch
+- [2024-11-30 23:29 UTC] Vite 5.2.14 merge patches dev server security vulnerabilities
+- [2024-11-30 23:26 UTC] Express 4.20.0 intermediate merge validates upgrade path
+- [2024-11-30 23:24 UTC] Next.js 14.2.10 merge backports critical security patches
+- [2024-11-30 23:22 UTC] Snyk merge batches consolidate multiple vulnerability fixes at once
+- [2024-11-30 23:16 UTC] NestJS config 3.3.0 adds typed environment variable support
+- [2024-11-30 23:15 UTC] Firebase 10.9.0 resolves authentication SDK deprecation warnings
+- [2024-11-30 23:15 UTC] Rollup 3.29.5 patches bundler vulnerability in tree-shaking
+- [2024-11-30 23:15 UTC] http-proxy-middleware 2.0.7 fixes request smuggling vector
+- [2024-11-30 23:13 UTC] Cost manager feature enables cloud spend tracking and reporting
+- [2024-11-30 23:07 UTC] Tests and code splitting improve cost manager maintainability
+- [2024-11-29 00:17 UTC] KAIZEN upgrade and setup improve continuous improvement tooling
+- [2024-11-29 00:13 UTC] MongoDB in-memory upgrade aligns test infrastructure with drivers
+- [2024-10-22 01:46 UTC] NestJS config bump to 3.3.0 enables typed config validation
+- [2024-10-08 00:49 UTC] Express 4.21.0 patches path traversal vulnerabilities
+- [2024-10-04 14:57 UTC] Dev docs Dockerfile rebuilt on patched base image
+- [2024-10-04 14:55 UTC] API gateway Dockerfile rebuilt for October security patches
+- [2024-10-04 14:53 UTC] Management shell Dockerfile rebuilt for Q4 security cycle
+- [2024-10-04 14:52 UTC] Skill set browser Dockerfile rebuilt for Q4 base image patches
+- [2024-10-03 13:49 UTC] Regular Dockerfile rebuilds prevent stale base image drift
+- [2024-10-02 14:14 UTC] Dependabot batches dependency upgrades by ecosystem automatically
+- [2024-10-02 11:13 UTC] Hierarchical taxon relationships enable parent-child data modeling
