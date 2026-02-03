@@ -107,7 +107,6 @@
     }
   ],
   "release": {
-    "releaseTagPattern": "peerlab@{version}",
     "git": {
       "commitMessage": "chore(release): [skip-github-pipeline]"
     },
@@ -119,6 +118,9 @@
       "workspaceChangelog": true
     },
     "projects": ["."],
-    "projectsRelationship": "fixed"
+    "projectsRelationship": "fixed",
+    "releaseTag": {
+      "pattern": "peerlab@{version}"
+    }
   }
 }
