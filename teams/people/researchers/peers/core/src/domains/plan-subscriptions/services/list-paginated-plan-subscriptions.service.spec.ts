@@ -28,7 +28,7 @@ describe('[plan-subscriptions] ListPaginatedPlanSubscriptions', () => {
     for (let i = 0; i < 20; i++) {
       const planSubscription = await databaseRepository.create({
         email: faker.internet.email(),
-        plan: faker.random.word(),
+        plan: faker.word.sample(),
       });
       repositoryPlanSubscriptions.push(planSubscription);
     }

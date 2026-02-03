@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 import axios from 'axios';
 describe('[POST] /peers', () => {
-  const fakeName = faker.name.fullName();
-  const fakeUsername = faker.internet.userName(fakeName);
+  const fakeName = faker.person.fullName();
+  const fakeUsername = faker.internet.userName({ firstName: fakeName });
   it('[201] should create new peer', async () => {
     const res = await axios.post(
       `/peers`,

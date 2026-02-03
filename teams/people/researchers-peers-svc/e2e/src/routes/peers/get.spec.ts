@@ -19,8 +19,8 @@ describe('[GET] /peers', () => {
     await producer.connect();
     const userCreatedMessages = [];
     for (let i = 0; i < 10; i++) {
-      const fakeFullName = faker.name.fullName();
-      const fakeUsername = faker.internet.userName(fakeFullName);
+      const fakeFullName = faker.person.fullName();
+      const fakeUsername = faker.internet.userName({ firstName: fakeFullName });
       const userCreatedMessageValue = {
         user: {
           id: randomUUID(),

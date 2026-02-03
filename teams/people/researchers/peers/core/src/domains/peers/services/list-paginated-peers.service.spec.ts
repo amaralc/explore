@@ -24,10 +24,10 @@ describe('[peers] ListPaginatedPeersService', () => {
     listPaginatedPeersService = module.get<ListPaginatedPeersService>(ListPaginatedPeersService);
     databaseRepository = module.get<PeersDatabaseRepository>(PeersDatabaseRepository);
     for (let i = 0; i < 20; i++) {
-      const fakeFullName = faker.name.fullName();
+      const fakeFullName = faker.person.fullName();
       const planSubscription = await databaseRepository.create({
         name: fakeFullName,
-        username: faker.internet.userName(fakeFullName),
+        username: faker.internet.userName({ firstName: fakeFullName }),
       });
       localPeersTestDatabaseRepository.push(planSubscription);
     }

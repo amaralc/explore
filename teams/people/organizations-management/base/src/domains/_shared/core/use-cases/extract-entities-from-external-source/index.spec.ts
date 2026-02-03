@@ -25,7 +25,7 @@ describe('ExtractEntitiesFromExternalSourceUseCase', () => {
     mongoDbMemoryServer = result.mongoMemoryServer;
     mongoDbDriver = new MongoDbDriver(result.databaseUri);
     await mongoDbDriver.connectToDatabase(databaseName);
-  });
+  }, 120_000);
   beforeEach(async () => {
     // Given
     await mongoDbDriver.dropDatabase(databaseName);

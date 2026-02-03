@@ -10,8 +10,8 @@ import { InMemoryPeersDatabaseRepository } from '../repositories/database-in-mem
 import { PeersDatabaseRepository } from '../repositories/database.repository';
 import { HandleUserCreatedService } from './handle-user-created.service';
 describe('[peers] HandleUserCreatedService', () => {
-  const fakeName = faker.name.fullName();
-  const fakeUsername = faker.internet.userName(fakeName);
+  const fakeName = faker.person.fullName();
+  const fakeUsername = faker.internet.userName({ firstName: fakeName });
   let service: HandleUserCreatedService;
   let databaseRepository: PeersDatabaseRepository;
   let partialMessage: Pick<IKafkaMessage, 'key' | 'attributes' | 'offset' | 'timestamp'>;

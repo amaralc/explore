@@ -23,10 +23,10 @@ describe('[peers] DeleteAllPeersService', () => {
     service = module.get<DeleteAllPeersService>(DeleteAllPeersService);
     databaseRepository = module.get<PeersDatabaseRepository>(PeersDatabaseRepository);
     for (let i = 0; i < numberOfFakePeers; i++) {
-      const fakeFullName = faker.name.fullName();
+      const fakeFullName = faker.person.fullName();
       const planSubscription = await databaseRepository.create({
         name: fakeFullName,
-        username: faker.internet.userName(fakeFullName),
+        username: faker.internet.userName({ firstName: fakeFullName }),
       });
       localPeersTestDatabaseRepository.push(planSubscription);
     }

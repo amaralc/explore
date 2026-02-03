@@ -7,8 +7,8 @@ import { InMemoryPeersEventsRepository } from '../repositories/events-in-memory.
 import { PeersEventsRepository } from '../repositories/events.repository';
 import { CreatePeerService } from './create-peer.service';
 describe('[peers] CreatePeerService', () => {
-  const fakeName = faker.name.fullName();
-  const fakeUsername = faker.internet.userName(fakeName);
+  const fakeName = faker.person.fullName();
+  const fakeUsername = faker.internet.userName({ firstName: fakeName });
   let service: CreatePeerService;
   let databaseRepository: PeersDatabaseRepository;
   beforeEach(async () => {
