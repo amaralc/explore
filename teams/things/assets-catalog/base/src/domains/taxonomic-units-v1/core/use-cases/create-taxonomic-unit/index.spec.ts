@@ -17,7 +17,7 @@ describe('Create TaxonomicUnitV1 with free plan subscription', () => {
     mongoDbMemoryServer = result.mongoMemoryServer;
     mongoDbDriver = new MongoDbDriver(result.databaseUri);
     await mongoDbDriver.connectToDatabase('test-database');
-  });
+  }, 30000);
   beforeEach(async () => {
     taxonomicUnitsV1DatabaseRepository = new MongoDbTaxonomicUnitsV1DatabaseRepository(mongoDbDriver);
     await taxonomicUnitsV1DatabaseRepository.generateIndexes();
@@ -29,7 +29,7 @@ describe('Create TaxonomicUnitV1 with free plan subscription', () => {
   afterAll(async () => {
     await mongoDbDriver.disconnect();
     await mongoDbMemoryServer.stop();
-  });
+  }, 15000);
   it('should create a taxonomic unit', async () => {
     const createOrganizationInputDto: ICreateTaxonomicUnitV1InputDto = {
       slug: 'valid-taxonomic-unit-slug',
