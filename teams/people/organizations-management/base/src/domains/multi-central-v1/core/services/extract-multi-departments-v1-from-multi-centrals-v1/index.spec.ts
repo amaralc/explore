@@ -2,7 +2,6 @@ import { IMultiDepartmentV1Dto } from '../../../../multi-department-v1/core/enti
 import { IMultiCentralV1Dto } from '../../entity.schema.types';
 import { multiCentralsV1Fixtures } from '../../fixtures';
 import { ExtractMultiDepartmentsV1FromMultiCentralsV1Service } from './index';
-
 describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
   it('should extract multi-departments-v1 from multi-centrals-v1 with valid attributes', () => {
     // Given
@@ -17,10 +16,8 @@ describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
         },
       },
     ];
-
     // When
     const multiDepartmentsV1 = ExtractMultiDepartmentsV1FromMultiCentralsV1Service.execute(multiCentralsV1DtoList);
-
     // Then
     const expectedMultiDepartmentsV1: Array<IMultiDepartmentV1Dto> = [
       multiCentralsV1Fixtures[0].departamento,
@@ -29,10 +26,8 @@ describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
         id: 2,
       },
     ];
-
     expect(multiDepartmentsV1).toEqual(expectedMultiDepartmentsV1);
   });
-
   it('should only extract unique departments', () => {
     // Given
     const multiCentralsV1DtoList: Array<IMultiCentralV1Dto> = [
@@ -43,10 +38,8 @@ describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
         departamento: multiCentralsV1Fixtures[0].departamento,
       },
     ];
-
     // When
     const multiDepartmentsV1 = ExtractMultiDepartmentsV1FromMultiCentralsV1Service.execute(multiCentralsV1DtoList);
-
     // Then
     const expectedMultiDepartmentsV1: Array<IMultiDepartmentV1Dto> = [
       {
@@ -56,10 +49,8 @@ describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
         nome: 'Fake Department',
       },
     ];
-
     expect(multiDepartmentsV1).toEqual(expectedMultiDepartmentsV1);
   });
-
   it('should discard null departments', () => {
     // Given
     const multiCentralsV1DtoList: Array<IMultiCentralV1Dto> = [
@@ -70,10 +61,8 @@ describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
         departamento: null,
       },
     ];
-
     // When
     const multiDepartmentsV1 = ExtractMultiDepartmentsV1FromMultiCentralsV1Service.execute(multiCentralsV1DtoList);
-
     // Then
     const expectedMultiDepartmentsV1: Array<IMultiDepartmentV1Dto> = [
       {
@@ -83,7 +72,6 @@ describe('ExtractMultiDepartmentsV1FromMultiCentralsV1ServiceService', () => {
         nome: 'Fake Department',
       },
     ];
-
     expect(multiDepartmentsV1).toEqual(expectedMultiDepartmentsV1);
   });
 });

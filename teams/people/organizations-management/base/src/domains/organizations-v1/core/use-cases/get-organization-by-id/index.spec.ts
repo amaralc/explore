@@ -4,18 +4,15 @@ import { InMemoryAgentsV1Repository } from '../../../../agents-v1/core/database-
 import { AgentV1Entity } from '../../../../agents-v1/core/entity';
 import { OrganizationsV1DatabaseRepository } from '../../database-repository';
 import { InMemoryOrganizationsV1Repository } from '../../database-repository-in-memory';
-
 describe('Get OrganizationV1', () => {
   let organizationsV1Repository: OrganizationsV1DatabaseRepository;
   let getOrganizationV1ByIdUseCase: GetOrganizationV1ByIdUseCase;
   let agentsV1DatabaseRepository: AgentsV1DatabaseRepository;
-
   beforeEach(async () => {
     organizationsV1Repository = new InMemoryOrganizationsV1Repository();
     getOrganizationV1ByIdUseCase = new GetOrganizationV1ByIdUseCase(organizationsV1Repository);
     agentsV1DatabaseRepository = new InMemoryAgentsV1Repository();
   });
-
   it('should get an organization by its id', async () => {
     const userAgent = await agentsV1DatabaseRepository.create({
       id: agentsV1DatabaseRepository.generateUniqueId(),
@@ -25,7 +22,6 @@ describe('Get OrganizationV1', () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
-
     const organizationAgent = await agentsV1DatabaseRepository.create({
       id: agentsV1DatabaseRepository.generateUniqueId(),
       nickname: 'valid-organization-nickname',
@@ -34,7 +30,6 @@ describe('Get OrganizationV1', () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
-
     const newOrganizationId = organizationsV1Repository.generateUniqueId();
     const expectedOrganizationV1 = await organizationsV1Repository.create({
       id: newOrganizationId,
@@ -47,7 +42,6 @@ describe('Get OrganizationV1', () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
-
     const organizationById = await getOrganizationV1ByIdUseCase.execute(expectedOrganizationV1.id);
     expect(expectedOrganizationV1).toEqual(organizationById);
   });

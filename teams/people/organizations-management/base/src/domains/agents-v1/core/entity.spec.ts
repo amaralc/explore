@@ -2,7 +2,6 @@ import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/erro
 import { randomBytes } from 'crypto';
 import { AgentV1Entity } from './entity';
 import { IAgentV1Dto } from './entity.schema.types';
-
 describe('AgentV1Entity', () => {
   it('should not create an agent with an invalid email', async () => {
     expect(
@@ -17,7 +16,6 @@ describe('AgentV1Entity', () => {
         }),
     ).toThrow(ValidationExceptionV2Error);
   });
-
   it.each(['x', 'invalid.nickname', 'invalid/nickname', '-invalid-', '--/inv'])(
     'should not create organization entity with invalid nicknames',
     (invalidNickname) => {
@@ -34,7 +32,6 @@ describe('AgentV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it('should not create an agent with nickname generated with an invalid email', async () => {
     expect(
       () =>
@@ -48,7 +45,6 @@ describe('AgentV1Entity', () => {
         }),
     ).toThrow(ValidationExceptionV2Error);
   });
-
   it('should not allow creating agents with dates that do not conform to ISO date format', async () => {
     expect(
       () =>
@@ -62,7 +58,6 @@ describe('AgentV1Entity', () => {
         }),
     ).toThrow(ValidationExceptionV2Error);
   });
-
   it.each(['lessthan28characters', 'justalittlemorethan28characters', 'with-some.special/characters'])(
     'should not create agent with invalid id',
     async (invalidId) => {
@@ -79,7 +74,6 @@ describe('AgentV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it('should not allow creating agents with invalid type', async () => {
     expect(
       () =>
@@ -93,7 +87,6 @@ describe('AgentV1Entity', () => {
         }),
     ).toThrow(ValidationExceptionV2Error);
   });
-
   it('should create an agent with valid input', async () => {
     expect(
       () =>
@@ -106,7 +99,6 @@ describe('AgentV1Entity', () => {
           type: 'INDIVIDUAL',
         }),
     ).not.toThrow(ValidationExceptionV2Error);
-
     expect(
       () =>
         new AgentV1Entity({

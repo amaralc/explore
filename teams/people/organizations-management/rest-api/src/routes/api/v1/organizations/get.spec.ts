@@ -9,14 +9,12 @@ import {
 import { randomBytes } from 'crypto';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../app';
-
 describe('POST /v1/organizations', () => {
   let request: supertest.SuperAgentTest;
   let configurationManager: ConfigurationManager;
   let databaseUri: string;
   let testMongoDbDriver: MongoDbDriver;
   const databaseName = 'test-organizations-management';
-
   beforeAll(async () => {
     configurationManager = new ConfigurationManager();
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
@@ -24,11 +22,9 @@ describe('POST /v1/organizations', () => {
     testMongoDbDriver = new MongoDbDriver(databaseUri);
     await testMongoDbDriver.connectToDatabase(databaseName);
   });
-
   beforeEach(async () => {
     // Drop the database before each test
     await testMongoDbDriver.dropDatabase(databaseName);
-
     // Override the default configuration with in memory database configuration
     configurationManager.setConfig({
       ...configurationManager.getConfig(),
@@ -41,7 +37,6 @@ describe('POST /v1/organizations', () => {
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
-
   it('[HTTP 200] should list all organizations, with pagination', async () => {
     await request.get('/api/v1/organizations').then((response) => {
       expect(response.status).toEqual(200);
@@ -52,7 +47,6 @@ describe('POST /v1/organizations', () => {
         entities: fakeOrganizations,
       });
     });
-
     await request.get('/api/v1/organizations?page=1&limit=1').then((response) => {
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({
@@ -63,13 +57,11 @@ describe('POST /v1/organizations', () => {
       });
     });
   });
-
   it('[HTTP 200] should show empty results when there are no organizations', async () => {
     // Agent with single organization
     const agentThatOwnsSingleOrganization = fakeAgentsByIdOrEmail.get(
       'fake-agent-owner-of-free-organization@email.com',
     );
-
     await request
       .get(`/api/v1/organizations?page=2&limit=1&ownerAgentId=${agentThatOwnsSingleOrganization.id}`)
       .then((response) => {
@@ -82,7 +74,6 @@ describe('POST /v1/organizations', () => {
         });
       });
   });
-
   it('[HTTP 200] should list organizations owned by an agent with explicit and default pagination', async () => {
     const individualOwnerAgentId = fakeAgentsByIdOrEmail.get('fake-agent-owner-of-free-organization@email.com').id;
     await request
@@ -96,7 +87,6 @@ describe('POST /v1/organizations', () => {
           entities: [fakeOrganizationsByIdOrEmail.get('fake-organization-agent-root-01@email.com')],
         });
       });
-
     const organizationOwnerAgentId = fakeAgentsByIdOrEmail.get('fake-organization-agent-root-01@email.com').id;
     await request.get(`/api/v1/organizations?ownerAgentId=${organizationOwnerAgentId}`).then((response) => {
       expect(response.status).toEqual(200);
@@ -111,7 +101,6 @@ describe('POST /v1/organizations', () => {
       });
     });
   });
-
   it('[HTTP 404] should show error message when owner agent is not found', async () => {
     const nonExistingOwnerAgentId = randomBytes(14).toString('hex');
     await request.get(`/api/v1/organizations?ownerAgentId=${nonExistingOwnerAgentId}`).then((response) => {
@@ -119,7 +108,6 @@ describe('POST /v1/organizations', () => {
       expect(response.body.message).toEqual(`Owner agent with id ${nonExistingOwnerAgentId} not found`);
     });
   });
-
   it.todo('[HTTP 401] should respond with error message when user is not authenticated');
   it.todo('[HTTP 403] should respond with error message when user is not authorized');
 });

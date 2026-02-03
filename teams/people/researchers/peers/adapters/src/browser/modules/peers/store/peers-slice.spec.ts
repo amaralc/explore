@@ -1,18 +1,14 @@
 import { peersAdapter, peersReducer } from './peers-slice';
-
 describe('peers reducer', () => {
   it('should handle initial state', () => {
     const expected = peersAdapter.getInitialState({
       loadingStatus: 'not loaded',
       error: null,
     });
-
     expect(peersReducer(undefined, { type: '' })).toEqual(expected);
   });
-
   // it('should handle fetchPeerss', () => {
   //   let state = peersReducer(undefined, fetchPeers.pending(null, null));
-
   //   expect(state).toEqual(
   //     expect.objectContaining({
   //       loadingStatus: 'loading',
@@ -20,7 +16,6 @@ describe('peers reducer', () => {
   //       entities: {},
   //     })
   //   );
-
   //   state = peersReducer(
   //     state,
   //     fetchPeers.fulfilled(
@@ -42,7 +37,6 @@ describe('peers reducer', () => {
   //       null
   //     )
   //   );
-
   //   expect(state).toEqual(
   //     expect.objectContaining({
   //       loadingStatus: 'loaded',
@@ -50,9 +44,7 @@ describe('peers reducer', () => {
   //       entities: { 1: { id: 1 } },
   //     })
   //   );
-
   //   state = peersReducer(state, fetchPeers.rejected(new Error('Uh oh'), null, null));
-
   //   expect(state).toEqual(
   //     expect.objectContaining({
   //       loadingStatus: 'error',

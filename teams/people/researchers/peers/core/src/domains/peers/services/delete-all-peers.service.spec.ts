@@ -6,13 +6,11 @@ import { PeerEntity } from '../entities/peer/entity';
 import { InMemoryPeersDatabaseRepository } from '../repositories/database-in-memory.repository';
 import { PeersDatabaseRepository } from '../repositories/database.repository';
 import { DeleteAllPeersService } from './delete-all-peers.service';
-
 describe('[peers] DeleteAllPeersService', () => {
   const numberOfFakePeers = 5;
   let service: DeleteAllPeersService;
   let databaseRepository: PeersDatabaseRepository;
   const localPeersTestDatabaseRepository: PeerEntity[] = [];
-
   beforeAll(async () => {
     jest.clearAllMocks();
     const module: TestingModule = await Test.createTestingModule({
@@ -22,10 +20,8 @@ describe('[peers] DeleteAllPeersService', () => {
         { provide: PeersDatabaseRepository, useClass: InMemoryPeersDatabaseRepository },
       ],
     }).compile();
-
     service = module.get<DeleteAllPeersService>(DeleteAllPeersService);
     databaseRepository = module.get<PeersDatabaseRepository>(PeersDatabaseRepository);
-
     for (let i = 0; i < numberOfFakePeers; i++) {
       const fakeFullName = faker.name.fullName();
       const planSubscription = await databaseRepository.create({
@@ -35,7 +31,6 @@ describe('[peers] DeleteAllPeersService', () => {
       localPeersTestDatabaseRepository.push(planSubscription);
     }
   });
-
   it('should delete all peers', async () => {
     expect((await databaseRepository.listPaginated({})).length).toEqual(numberOfFakePeers);
     await service.execute();
