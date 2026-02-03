@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
 - [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 - [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
 - [2026-02-03 22:17 UTC] lerna 9.x required for nx >=21.5.3 project graph compatibility
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-10-04 14:57 UTC] Dev docs Dockerfile rebuilt on patched base image
 - [2024-10-04 14:55 UTC] API gateway Dockerfile rebuilt for October security patches
 - [2024-10-04 14:53 UTC] Management shell Dockerfile rebuilt for Q4 security cycle
-- [2024-10-04 14:52 UTC] Skill set browser Dockerfile rebuilt for Q4 base image patches
