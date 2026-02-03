@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppProviders } from '../../../../../app-providers';
 
 import { OauthSignInForm } from './oauth-sign-in-form';

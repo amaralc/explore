@@ -1,9 +1,13 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { createRequire } from "node:module";
 import type { StorybookConfig } from '@storybook/react-vite';
 import { dirname, join } from 'path';
 
+const require = createRequire(import.meta.url);
+
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [getAbsolutePath('@storybook/addon-essentials'), getAbsolutePath('@storybook/addon-interactions')],
+  addons: [getAbsolutePath("@storybook/addon-docs")],
 
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
@@ -12,11 +16,7 @@ const config: StorybookConfig = {
         viteConfigPath: 'vite.config.ts',
       },
     },
-  },
-
-  docs: {
-    autodocs: true,
-  },
+  }
 };
 
 export default config;
