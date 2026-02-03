@@ -2,6 +2,10 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
+- [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
+- [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
+- [2026-02-03 22:17 UTC] lerna 9.x required for nx >=21.5.3 project graph compatibility
 - [2026-02-03 20:25 UTC] Staged WIP on main transfers to feature branches via checkout -b
 - [2026-02-03 20:25 UTC] Closes #N in commit messages auto-links PRs to GitHub issues
 - [2026-02-03 20:18 UTC] Explicit workflow permissions fix CodeQL missing-permissions alerts
@@ -98,7 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-10-04 14:57 UTC] Dev docs Dockerfile rebuilt on patched base image
 - [2024-10-04 14:55 UTC] API gateway Dockerfile rebuilt for October security patches
 - [2024-10-04 14:53 UTC] Management shell Dockerfile rebuilt for Q4 security cycle
-- [2024-10-04 14:52 UTC] Skill set browser Dockerfile rebuilt for Q4 base image patches
-- [2024-10-03 13:49 UTC] Regular Dockerfile rebuilds prevent stale base image drift
-- [2024-10-02 14:14 UTC] Dependabot batches dependency upgrades by ecosystem automatically
-- [2024-10-02 11:13 UTC] Hierarchical taxon relationships enable parent-child data modeling
