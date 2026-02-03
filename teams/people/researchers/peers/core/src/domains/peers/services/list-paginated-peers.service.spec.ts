@@ -75,10 +75,10 @@ describe('[peers] ListPaginatedPeersService', () => {
     expect(page3Results).toEqual(expectedPage3);
     // Verify no overlap between pages
     const page1Ids = page1Results.map((p) => p.id);
-    const page2Ids = page2Results.map((p) => p.id);
-    const page3Ids = page3Results.map((p) => p.id);
-    expect(page1Ids.some((id) => page2Ids.includes(id))).toBe(false);
-    expect(page2Ids.some((id) => page3Ids.includes(id))).toBe(false);
-    expect(page1Ids.some((id) => page3Ids.includes(id))).toBe(false);
+    const page2Ids = new Set(page2Results.map((p) => p.id));
+    const page3Ids = new Set(page3Results.map((p) => p.id));
+    expect(page1Ids.some((id) => page2Ids.has(id))).toBe(false);
+    expect([...page2Ids].some((id) => page3Ids.has(id))).toBe(false);
+    expect(page1Ids.some((id) => page3Ids.has(id))).toBe(false);
   });
 });
