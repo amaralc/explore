@@ -2,6 +2,15 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
+- [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
+- [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
+- [2026-02-04 02:00 UTC] GitHub issues track Dependabot failures needing manual resolution
+- [2026-02-04 01:50 UTC] Nextra 2.7.1 powers the kernel/dev-docs-browser documentation site
+- [2026-02-04 01:45 UTC] `pnpm view <pkg> versions --json` lists all published npm versions
+- [2026-02-04 01:45 UTC] Override vulnerable transitive dep directly, not parent, for safer fixes
+- [2026-02-04 01:30 UTC] Dependabot cannot update transitive deps when using pnpm
+- [2026-02-04 01:30 UTC] `pnpm.overrides` pins transitive dependency versions in lockfile
 - [2026-02-03 23:10 UTC] Removing custom CodeQL workflow resolves conflict with default setup
 - [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
 - [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
@@ -93,8 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-11-30 23:24 UTC] Next.js 14.2.10 merge backports critical security patches
 - [2024-11-30 23:22 UTC] Snyk merge batches consolidate multiple vulnerability fixes at once
 - [2024-11-30 23:16 UTC] NestJS config 3.3.0 adds typed environment variable support
-- [2024-11-30 23:15 UTC] Firebase 10.9.0 resolves authentication SDK deprecation warnings
-- [2024-11-30 23:15 UTC] Rollup 3.29.5 patches bundler vulnerability in tree-shaking
-- [2024-11-30 23:15 UTC] http-proxy-middleware 2.0.7 fixes request smuggling vector
-- [2024-11-30 23:13 UTC] Cost manager feature enables cloud spend tracking and reporting
-- [2024-11-30 23:07 UTC] Tests and code splitting improve cost manager maintainability
+

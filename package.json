@@ -262,8 +262,6 @@
     "mongoose": "7.8.6",
     "mui-one-time-password-input": "1.1.2",
     "next": "16.1.6",
-    "nextra": "2.7.1",
-    "nextra-theme-docs": "2.7.1",
     "nock": "13.5.4",
     "nprogress": "0.2.0",
     "numeral": "2.0.6",
@@ -311,5 +309,10 @@
     "winston": "^3.13.0",
     "yup": "1.2.0",
     "zod": "3.22.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "katex": ">=0.16.21"
+    }
   }
 }
