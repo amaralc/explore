@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
+- [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
 - [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
 - [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
 - [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
@@ -100,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-11-30 23:29 UTC] Vite 5.2.14 merge patches dev server security vulnerabilities
 - [2024-11-30 23:26 UTC] Express 4.20.0 intermediate merge validates upgrade path
 - [2024-11-30 23:24 UTC] Next.js 14.2.10 merge backports critical security patches
-- [2024-11-30 23:22 UTC] Snyk merge batches consolidate multiple vulnerability fixes at once
-- [2024-11-30 23:16 UTC] NestJS config 3.3.0 adds typed environment variable support
 
