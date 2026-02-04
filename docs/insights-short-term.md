@@ -2,6 +2,18 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
+- [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
+- [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
+- [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
+- [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
+- [2026-02-05 02:45 UTC] NX Release `workspaceChangelog.file` configures CHANGELOG.md generation
+- [2026-02-05 02:45 UTC] `--git-commit=false --git-tag=false` creates local release without push
+- [2026-02-05 02:45 UTC] `nx release --specifier=prerelease --preid=beta` creates beta versions
+- [2026-02-05 02:45 UTC] PR #171 migrates from Lerna to NX Release, eliminating dep conflicts
+- [2026-02-05 02:45 UTC] Issue #170 tracks Lerna deprecation with Toyota Kata target condition
+- [2026-02-05 02:30 UTC] NX Release (`nx release`) replaces Lerna for versioning and changelogs
+- [2026-02-05 02:30 UTC] Removing Lerna eliminates its bundled nx transitive dependency conflicts
 - [2026-02-05 02:15 UTC] Sustainability vision: leanest path to value, no waste, no quality compromise
 - [2026-02-05 02:00 UTC] Catchy visions use active voice: system finds/fixes, software adapts
 - [2026-02-05 01:45 UTC] Concise vision statements fuse multiple influences into one phrase
@@ -86,21 +98,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 19:30 UTC] External engineering literature enriches project knowledge base
 - [2026-02-02 15:50 UTC] Pinned container image versions prevent unexpected runtime behavior changes
 - [2026-02-02 15:44 UTC] Blog posts consolidate security hardening lessons into shareable knowledge
-- [2026-02-02 15:36 UTC] Private GKE endpoints block control plane access from public internet
-- [2026-02-02 15:33 UTC] Disabling token automounting reduces pod-level attack surface
-- [2026-02-02 15:27 UTC] Generated secrets for DB usernames eliminate credential reuse risk
-- [2026-02-02 15:10 UTC] Generated secrets for DB passwords remove hardcoded values from manifests
-- [2026-02-02 15:01 UTC] VPC flow logs and private cluster config improve network observability
-- [2026-02-01 03:55 UTC] Makefile targets for IAM setup/teardown simplify local development
-- [2026-02-01 03:55 UTC] Shell IaC references IAM service module for environment composition
-- [2026-02-01 03:54 UTC] Logto IAM service bundles IaC, K8s manifests, and local setup together
-- [2026-02-01 03:54 UTC] Crossplane PostgreSQL v2 pipeline mode provisions DBs as K8s objects
-- [2026-02-01 03:54 UTC] Crossplane installation via Terraform bridges IaC and K8s-native tools
-- [2026-02-01 03:54 UTC] GKE cluster Terraform module encapsulates cluster provisioning logic
-- [2026-02-01 03:53 UTC] IAM provider evaluation blog documents decision rationale publicly
-- [2026-02-01 03:53 UTC] Implementation plans recorded before coding reduce wasted effort
-- [2026-01-31 11:36 UTC] CLAUDE.md file gives AI assistants project-specific context
-- [2025-10-22 01:49 UTC] Socket.dev integration validates supply chain security of dependencies
-- [2025-10-04 22:27 UTC] Logto identified as open-source Firebase Auth alternative
-- [2025-10-04 20:48 UTC] Conventional releases with Lerna automate changelog generation
 

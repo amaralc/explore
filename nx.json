@@ -118,13 +118,11 @@
       "conventionalCommits": true
     },
     "changelog": {
-      "projectChangelogs": false,
-      "workspaceChangelog": true
+      "workspaceChangelog": {
+        "file": "CHANGELOG.md",
+        "createRelease": "github"
+      }
     },
-    "projects": ["."],
-    "projectsRelationship": "fixed",
-    "releaseTag": {
-      "pattern": "peerlab@{version}"
-    }
+    "releaseTagPattern": "peerlab@{version}"
   }
 }
