@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 03:45 UTC] Focus, Flow and Joy vision ties team satisfaction to Toyota Kata north stars
 - [2026-02-05 03:35 UTC] `{workspaceRoot}` interpolation resolves custom renderer paths in nx.json config
 - [2026-02-05 03:30 UTC] NX Release custom renderers extend ChangelogRenderer to add version comparison links
 - [2026-02-05 03:25 UTC] Lerna auto-generates version comparison links in changelogs; NX Release omits them
@@ -97,5 +98,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 20:15 UTC] CodeQL needs a baseline run on main before PR checks work
 - [2026-02-03 20:15 UTC] CodeQL workflow scans both JS/TS and GitHub Actions languages
 - [2026-02-03 19:30 UTC] SWE book testing principles replace narrow tooling details in insights
-- [2026-02-03 19:30 UTC] Deduplicating insight lists increases signal-to-noise ratio
 

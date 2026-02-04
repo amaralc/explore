@@ -24,6 +24,7 @@ Communication, Adaptability, Resilience, Courage, Respect, Continuous Learning a
 - **Security**: Secure by design, compliant by default — a system that find and fix its own weaknesses faster than any attacker ever could.
 - **Agility**: Software so easy to change that adapting to new demands is the default, not the exception.
 - **Sustainability**: The leanest path to value — no wasted effort, no unnecessary cost, no compromise on quality.
+- **Focus, Flow and Joy**: A team so aligned and engaged that focus is natural, flow is the norm, and joy is the proof that the work matters.
 
 # Setup
 
