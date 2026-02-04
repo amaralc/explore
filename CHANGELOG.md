@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.99.1](https://github.com/amaralc/explore/compare/peerlab@0.99.0...peerlab@0.99.1) (2026-02-04)
+
+### Bug Fixes
+
+- pin transitive deps and add pnpm.overrides to eliminate critical/high vulns ([ca4318c](https://github.com/amaralc/explore/commit/ca4318c54027d6c1f4f7fe65d5d5e896d63406d9)), closes [#167](https://github.com/amaralc/explore/issues/167)
+- set node-forge to v >= 1.3.2 ([c31960c](https://github.com/amaralc/explore/commit/c31960cc1c852e22601f5e0718373da46cdbb881))
+- update and upgrade vulnerable dependencies ([f344c2a](https://github.com/amaralc/explore/commit/f344c2a38c262c04d2e777ff592cbe0984d8cfa9))
+- update pnpm lock ([2b56610](https://github.com/amaralc/explore/commit/2b5661098fb5232b9c97be7a41196a3b99949d2a))
+- upgrade vitest to 4 and fix kafka custom transport ([2cb3a48](https://github.com/amaralc/explore/commit/2cb3a485eae4a2cc28aade930b62a20fc9e21295))
+
 ## [0.99.0](https://github.com/amaralc/explore/compare/peerlab@0.98.0...peerlab@0.99.0) (2026-02-04)
 
 ### Features
