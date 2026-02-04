@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 18:30 UTC] Hook additionalContext must nest inside hookSpecificOutput object
 - [2026-02-04 12:58 UTC] SessionStart hooks inject file content as context via additionalContext JSON
 - [2026-02-04 12:58 UTC] Claude Code hooks have 12 trigger types for lifecycle automation
 - [2026-02-04 04:15 UTC] Promoted fork PR token and pull_request_target security to long-term
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-02-19 11:19 UTC] Snyk automated PRs continuously remediate known vulnerabilities
 - [2025-02-19 11:17 UTC] Backward compatibility validation ensures safe schema evolution
 - [2025-02-19 11:15 UTC] PNPM 10 upgrade modernizes package management tooling
-- [2025-02-19 11:03 UTC] Type adjustments after upgrades maintain strict compilation checks
 

@@ -19,5 +19,8 @@ if [ -f "$LONG_TERM" ]; then
 fi
 
 jq -n --arg short "$SHORT_CONTENT" --arg long "$LONG_CONTENT" '{
-  additionalContext: ("## Project Insights (loaded at session start)\n\n### Long-Term Insights\n" + $long + "\n\n### Short-Term Insights\n" + $short)
+  hookSpecificOutput: {
+    hookEventName: "SessionStart",
+    additionalContext: ("## Project Insights (loaded at session start)\n\n### Long-Term Insights\n" + $long + "\n\n### Short-Term Insights\n" + $short)
+  }
 }'
