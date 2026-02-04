@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
+- [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
 - [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
 - [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
 - [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
@@ -96,10 +98,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 19:30 UTC] External engineering literature enriches project knowledge base
 - [2026-02-02 15:50 UTC] Pinned container image versions prevent unexpected runtime behavior changes
 - [2026-02-02 15:44 UTC] Blog posts consolidate security hardening lessons into shareable knowledge
-- [2026-02-02 15:36 UTC] Private GKE endpoints block control plane access from public internet
-- [2026-02-02 15:33 UTC] Disabling token automounting reduces pod-level attack surface
-- [2026-02-02 15:27 UTC] Generated secrets for DB usernames eliminate credential reuse risk
-- [2026-02-02 15:10 UTC] Generated secrets for DB passwords remove hardcoded values from manifests
-- [2026-02-02 15:01 UTC] VPC flow logs and private cluster config improve network observability
-- [2026-02-01 03:55 UTC] Makefile targets for IAM setup/teardown simplify local development
 
