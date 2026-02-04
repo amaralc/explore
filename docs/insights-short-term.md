@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 21:12 UTC] `gh api graphql addProjectV2ItemById` links issues to GitHub Projects
+- [2026-02-04 21:08 UTC] Map CI/CD pain points to DORA metrics for measurable target conditions
+- [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
 - [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
 - [2026-02-05 04:15 UTC] Unified current-vs-target tables replace separate condition sections in Kata docs
 - [2026-02-05 04:00 UTC] Milestone templates standardize Toyota Kata target conditions for reuse
@@ -95,7 +98,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 22:17 UTC] lerna 9.x required for nx >=21.5.3 project graph compatibility
 - [2026-02-03 20:25 UTC] Staged WIP on main transfers to feature branches via checkout -b
 - [2026-02-03 20:25 UTC] Closes #N in commit messages auto-links PRs to GitHub issues
-- [2026-02-03 20:18 UTC] Explicit workflow permissions fix CodeQL missing-permissions alerts
-- [2026-02-03 20:18 UTC] Unnumbered bullet lists avoid full-file renumbering on insert
-- [2026-02-03 20:18 UTC] UTC timestamps in logs ensure timezone-independent consistency
 
