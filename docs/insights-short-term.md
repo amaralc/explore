@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 04:15 UTC] Promoted fork PR token and pull_request_target security to long-term
+- [2026-02-04 04:10 UTC] CI workflow permission security identified as gap in long-term insights
 - [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
 - [2026-02-04 03:50 UTC] GitHub downgrades GITHUB_TOKEN to read-only for fork PR runs
 - [2026-02-04 03:50 UTC] `pull_request_target` grants base repo permissions; avoid write perms
@@ -100,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-02-19 11:03 UTC] Type adjustments after upgrades maintain strict compilation checks
 - [2025-02-13 08:51 UTC] Dev docs browser Dockerfile patched to reduce vulnerabilities
 - [2025-02-11 09:16 UTC] API gateway Dockerfile updated for latest base image security fixes
-- [2025-02-11 09:14 UTC] Management shell Dockerfile patched to reduce container vulns
-- [2025-02-08 10:05 UTC] Skill set browser Dockerfile hardened against known CVEs
 
