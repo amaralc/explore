@@ -1,15 +1,3 @@
-## 0.100.0 (2026-02-04)
-
-### 🚀 Features
-
-- migrate from Lerna to NX Release ([#170](https://github.com/amaralc/explore/issues/170))
-- add graduate scripts for NX Release ([a017c51](https://github.com/amaralc/explore/commit/a017c51))
-
-### ❤️ Thank You
-
-- amaralc @amaralc
-- Claude Sonnet 4.5
-
 # Change Log
 
 All notable changes to this project will be documented in this file.
