@@ -55,7 +55,7 @@ jobs:
         run: pnpm nx affected --target=lint --base=origin/main --head=HEAD
 
       - name: Test
-        run: pnpm nx affected --target=test --base=origin/main --head=HEAD
+        run: pnpm nx affected --target=test --base=origin/main --head=HEAD --silent
 
       - name: Build
         run: pnpm nx affected --target=build --base=origin/main --head=HEAD
