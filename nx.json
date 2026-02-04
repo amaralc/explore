@@ -153,12 +153,13 @@
     },
     "changelog": {
       "workspaceChangelog": {
-        "file": "CHANGELOG.md",
-        "createRelease": "github",
-        "authors": false,
-        "applyUsernameToAuthors": false,
-        "commitReferences": true,
-        "versionTitleDate": true
+        "renderer": "{workspaceRoot}/tools/changelog-renderer.ts",
+        "renderOptions": {
+          "authors": false,
+          "applyUsernameToAuthors": false,
+          "commitReferences": true,
+          "versionTitleDate": true
+        }
       }
     },
     "releaseTagPattern": "peerlab@{version}"
