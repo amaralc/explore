@@ -19,7 +19,7 @@ export class KafkaCustomTransport extends ServerKafka implements CustomTransport
     const consumerSubscribeOptions = this.options?.subscribe || {};
     const subscribeToPattern = async (pattern: string) =>
       consumer.subscribe({
-        topic: pattern,
+        topics: [pattern],
         ...consumerSubscribeOptions,
       });
     await Promise.all(registeredPatterns.map(subscribeToPattern));

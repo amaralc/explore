@@ -101,4 +101,4 @@ Key insights from this repository.
 97. Terraform state is managed remotely, never locally.
 98. Provider versions are pinned in each module's versions.tf file.
 99. Implicit NX dependencies enforce IaC provisioning order.
-100. Pairwise integration tests scale better than monolithic end-to-end flows.
+100. Cap pnpm.overrides with upper major bound to prevent breaking resolutions.

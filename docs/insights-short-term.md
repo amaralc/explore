@@ -2,6 +2,13 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 00:15 UTC] Vitest 1.x incompatible with Vite 7.x; SSR internals changed across majors
+- [2026-02-05 00:15 UTC] `__vite_ssr_exportName__` error signals Vite/Vitest version mismatch
+- [2026-02-05 00:15 UTC] KafkaJS `ConsumerSubscribeTopics` changed `topic` to `topics` (array)
+- [2026-02-05 00:15 UTC] Dep upgrades for vulns can break build/test via API changes in new majors
+- [2026-02-04 23:45 UTC] Unbounded override `>=1.1.12` resolved brace-expansion to v4, broke minimatch
+- [2026-02-04 23:45 UTC] Cap pnpm.overrides with `<next-major` to prevent cross-major resolution
+- [2026-02-04 23:45 UTC] brace-expansion v1 exports callable function; v4 has different API shape
 - [2026-02-04 23:15 UTC] Issue #167 tracks eliminating all critical and high severity vulns
 - [2026-02-04 23:15 UTC] `pnpm audit --audit-level <level>` filters vulns by severity threshold
 - [2026-02-04 23:15 UTC] 78 npm vulns found: 3 critical, 32 high, mostly in transitive deps
@@ -95,11 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-08-09 22:03 UTC] Upgrading to Node 24 keeps runtime aligned with LTS schedule
 - [2025-08-09 21:54 UTC] Explicit delivery channels clarify deployment target per service
 - [2025-08-09 21:54 UTC] Node.js 24 upgrade required coordinated dependency adjustments
-- [2025-08-09 21:53 UTC] Preset log files standardize local debugging output paths
-- [2025-03-11 10:31 UTC] Organizing procedures into dedicated folders improves discoverability
-- [2025-03-11 07:50 UTC] Enhanced PostgreSQL replication docs support disaster recovery planning
-- [2025-03-11 07:14 UTC] PostgreSQL replication documentation captures operational knowledge
-- [2025-03-05 09:27 UTC] Bumping Vitest to 1.6.1 patches test runner stability issues
-- [2025-03-05 08:56 UTC] Sanitized error responses prevent information exposure to attackers
-- [2025-03-04 11:23 UTC] esbuild generates smaller, faster function bundles than Webpack
 
