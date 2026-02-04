@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
 - [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
 - [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
 - [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-11-30 23:31 UTC] Express 4.21.0 merge resolves upstream security patch
 - [2024-11-30 23:29 UTC] Vite 5.2.14 merge patches dev server security vulnerabilities
 - [2024-11-30 23:26 UTC] Express 4.20.0 intermediate merge validates upgrade path
-- [2024-11-30 23:24 UTC] Next.js 14.2.10 merge backports critical security patches
 
