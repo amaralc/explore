@@ -153,6 +153,7 @@
     },
     "changelog": {
       "workspaceChangelog": {
+        "renderer": "{workspaceRoot}/tools/changelog-renderer.ts",
         "renderOptions": {
           "authors": false,
           "applyUsernameToAuthors": false,
