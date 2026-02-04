@@ -26,7 +26,7 @@ Key insights from this repository.
 22. Kafka provides durable, ordered event streaming between services.
 23. API stability levels communicate change risk to consumers.
 24. Developer onboarding time reduction is treated as a Kaizen goal.
-25. Conventional commits drive automated versioning and changelogs.
+25. NX Release handles versioning, changelogs, and releases via conventional commits.
 26. NX orchestrates tasks, caches results, and tracks dependencies.
 27. NX Cloud remote caching reduces CI execution time by 95%.
 28. Shared utilities library prevents cross-team code duplication.
