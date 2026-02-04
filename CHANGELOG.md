@@ -1,3 +1,21 @@
+## 0.100.0 (2026-02-04)
+
+### 🚀 Features
+
+- migrate from Lerna to NX Release ([#170](https://github.com/amaralc/explore/issues/170))
+- add graduate scripts for NX Release ([a017c51](https://github.com/amaralc/explore/commit/a017c51))
+
+### 🩹 Fixes
+
+- update and version projects independently removing contributors for privacy ([261b6fd](https://github.com/amaralc/explore/commit/261b6fd))
+- minimize exposure removing names from changelog ([3cedb4a](https://github.com/amaralc/explore/commit/3cedb4a))
+- remove authors from changelog ([6b8e7f9](https://github.com/amaralc/explore/commit/6b8e7f9))
+
+### ❤️ Thank You
+
+- amaralc @amaralc
+- Claude Sonnet 4.5
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
