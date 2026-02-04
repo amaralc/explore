@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 22:30 UTC] node-forge ASN.1 CVEs (2025-12816, 66031, 66030) patched via override
+- [2026-02-04 22:30 UTC] `>=` in pnpm.overrides resolves to latest matching release
 - [2026-02-04 19:00 UTC] Team Topologies stream-aligned type fits domain-delivery teams
 - [2026-02-04 19:00 UTC] Team README format: Type, Mission, Vision captures identity concisely
 - [2026-02-04 19:00 UTC] People team owns researchers, orgs, and member interactions
@@ -100,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-03-04 10:44 UTC] NX project.json build targets replace custom esbuild scripts
 - [2025-03-04 00:14 UTC] esbuild bundles taxonomic units REST API with minimal config
 - [2025-03-03 20:29 UTC] Renaming to forward compatibility clarifies schema evolution intent
-- [2025-02-25 09:57 UTC] Dockerfile vulnerability fixes reduce container attack surface
-- [2025-02-22 10:58 UTC] Org management API Dockerfile patched for known CVEs
 
