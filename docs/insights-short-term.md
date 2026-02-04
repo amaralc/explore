@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-03 23:10 UTC] Removing custom CodeQL workflow resolves conflict with default setup
 - [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
 - [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
 - [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
@@ -97,8 +98,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2024-11-30 23:15 UTC] http-proxy-middleware 2.0.7 fixes request smuggling vector
 - [2024-11-30 23:13 UTC] Cost manager feature enables cloud spend tracking and reporting
 - [2024-11-30 23:07 UTC] Tests and code splitting improve cost manager maintainability
-- [2024-11-29 00:17 UTC] KAIZEN upgrade and setup improve continuous improvement tooling
-- [2024-11-29 00:13 UTC] MongoDB in-memory upgrade aligns test infrastructure with drivers
-- [2024-10-22 01:46 UTC] NestJS config bump to 3.3.0 enables typed config validation
-- [2024-10-08 00:49 UTC] Express 4.21.0 patches path traversal vulnerabilities
-- [2024-10-04 14:57 UTC] Dev docs Dockerfile rebuilt on patched base image
