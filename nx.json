@@ -152,7 +152,6 @@
       "conventionalCommits": true
     },
     "changelog": {
-      "authors": false,
       "workspaceChangelog": {
         "file": "CHANGELOG.md",
         "createRelease": "github",
@@ -160,6 +159,14 @@
         "applyUsernameToAuthors": false,
         "commitReferences": true,
         "versionTitleDate": true
+      },
+      "projectChangelogs": {
+        "renderOptions": {
+          "authors": false,
+          "applyUsernameToAuthors": false,
+          "commitReferences": true,
+          "versionTitleDate": true
+        }
       }
     },
     "releaseTagPattern": "peerlab@{version}"
