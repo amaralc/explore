@@ -2,8 +2,6 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
-- [2026-02-05 03:35 UTC] NX Release `projectsRelationship: independent` enables per-project versioning
-- [2026-02-05 03:30 UTC] NX Release `renderOptions.contributors: false` excludes names from changelog
 - [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
 - [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
 - [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
@@ -98,4 +96,6 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 19:30 UTC] SWE book testing principles replace narrow tooling details in insights
 - [2026-02-03 19:30 UTC] Deduplicating insight lists increases signal-to-noise ratio
 - [2026-02-03 19:30 UTC] External engineering literature enriches project knowledge base
+- [2026-02-02 15:50 UTC] Pinned container image versions prevent unexpected runtime behavior changes
+- [2026-02-02 15:44 UTC] Blog posts consolidate security hardening lessons into shareable knowledge
 
