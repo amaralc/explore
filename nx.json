@@ -111,6 +111,7 @@
     }
   ],
   "release": {
+    "projectsRelationship": "independent",
     "git": {
       "commitMessage": "chore(release): [skip-github-pipeline]"
     },
@@ -120,9 +121,13 @@
     "changelog": {
       "workspaceChangelog": {
         "file": "CHANGELOG.md",
-        "createRelease": "github"
-      }
+        "createRelease": "github",
+        "renderOptions": {
+          "contributors": false
+        }
+      },
+      "projectChangelogs": true
     },
-    "releaseTagPattern": "peerlab@{version}"
+    "releaseTagPattern": "{projectName}@{version}"
   }
 }
