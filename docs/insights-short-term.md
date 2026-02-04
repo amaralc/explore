@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 12:58 UTC] SessionStart hooks inject file content as context via additionalContext JSON
+- [2026-02-04 12:58 UTC] Claude Code hooks have 12 trigger types for lifecycle automation
 - [2026-02-04 04:15 UTC] Promoted fork PR token and pull_request_target security to long-term
 - [2026-02-04 04:10 UTC] CI workflow permission security identified as gap in long-term insights
 - [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
@@ -100,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-02-19 11:17 UTC] Backward compatibility validation ensures safe schema evolution
 - [2025-02-19 11:15 UTC] PNPM 10 upgrade modernizes package management tooling
 - [2025-02-19 11:03 UTC] Type adjustments after upgrades maintain strict compilation checks
-- [2025-02-13 08:51 UTC] Dev docs browser Dockerfile patched to reduce vulnerabilities
-- [2025-02-11 09:16 UTC] API gateway Dockerfile updated for latest base image security fixes
 
