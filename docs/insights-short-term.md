@@ -2,6 +2,27 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
+- [2026-02-04 03:15 UTC] NX cache job gates deploy to ensure lint/test/build pass first
+- [2026-02-04 03:15 UTC] GitHub env with NX read-write token enables shared cache across jobs
+- [2026-02-04 03:15 UTC] `needs:` in Actions enforces job execution order and dependency gating
+- [2026-02-04 03:10 UTC] Modernizing action versions (v3->v4) aligns deploy with CI patterns
+- [2026-02-04 03:10 UTC] Using .nvmrc for Node version avoids hardcoded drift across workflows
+- [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
+- [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
+- [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
+- [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
+- [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
+- [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
+- [2026-02-04 02:00 UTC] GitHub issues track Dependabot failures needing manual resolution
+- [2026-02-04 01:50 UTC] Nextra 2.7.1 powers the kernel/dev-docs-browser documentation site
+- [2026-02-04 01:45 UTC] `pnpm view <pkg> versions --json` lists all published npm versions
+- [2026-02-04 01:45 UTC] Override vulnerable transitive dep directly, not parent, for safer fixes
+- [2026-02-04 01:30 UTC] Dependabot cannot update transitive deps when using pnpm
+- [2026-02-04 01:30 UTC] `pnpm.overrides` pins transitive dependency versions in lockfile
+- [2026-02-03 23:10 UTC] Removing custom CodeQL workflow resolves conflict with default setup
+- [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
+- [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
 - [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
 - [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 - [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
@@ -81,24 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-01-11 19:27 UTC] Backward compatibility validation added to JSON schema validator
 - [2025-01-11 13:34 UTC] Setup speed improvements shorten feedback loop for developers
 - [2025-01-11 13:27 UTC] Removing Docker init requirement speeds up fresh installations
-- [2025-01-11 13:20 UTC] Reduced setup time directly improves developer onboarding speed
-- [2024-12-10 02:35 UTC] Nanoid 3.3.8 patches predictable ID generation vulnerability
-- [2024-12-01 02:34 UTC] Next.js 15.0.3 upgrade enables latest React server components
-- [2024-11-30 23:31 UTC] Express 4.21.0 merge resolves upstream security patch
-- [2024-11-30 23:29 UTC] Vite 5.2.14 merge patches dev server security vulnerabilities
-- [2024-11-30 23:26 UTC] Express 4.20.0 intermediate merge validates upgrade path
-- [2024-11-30 23:24 UTC] Next.js 14.2.10 merge backports critical security patches
-- [2024-11-30 23:22 UTC] Snyk merge batches consolidate multiple vulnerability fixes at once
-- [2024-11-30 23:16 UTC] NestJS config 3.3.0 adds typed environment variable support
-- [2024-11-30 23:15 UTC] Firebase 10.9.0 resolves authentication SDK deprecation warnings
-- [2024-11-30 23:15 UTC] Rollup 3.29.5 patches bundler vulnerability in tree-shaking
-- [2024-11-30 23:15 UTC] http-proxy-middleware 2.0.7 fixes request smuggling vector
-- [2024-11-30 23:13 UTC] Cost manager feature enables cloud spend tracking and reporting
-- [2024-11-30 23:07 UTC] Tests and code splitting improve cost manager maintainability
-- [2024-11-29 00:17 UTC] KAIZEN upgrade and setup improve continuous improvement tooling
-- [2024-11-29 00:13 UTC] MongoDB in-memory upgrade aligns test infrastructure with drivers
-- [2024-10-22 01:46 UTC] NestJS config bump to 3.3.0 enables typed config validation
-- [2024-10-08 00:49 UTC] Express 4.21.0 patches path traversal vulnerabilities
-- [2024-10-04 14:57 UTC] Dev docs Dockerfile rebuilt on patched base image
-- [2024-10-04 14:55 UTC] API gateway Dockerfile rebuilt for October security patches
-- [2024-10-04 14:53 UTC] Management shell Dockerfile rebuilt for Q4 security cycle
+

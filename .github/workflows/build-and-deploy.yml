@@ -12,6 +12,54 @@ permissions:
   contents: read
 
 jobs:
+  nx-cache:
+    runs-on: ubuntu-latest
+    environment: main
+
+    env:
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm prisma:generate:postgres
+
+      - name: Lint
+        run: pnpm nx run-many --target=lint --all=true
+
+      - name: Test
+        run: pnpm nx run-many --target=test --all=true
+
+      - name: Build
+        run: pnpm nx run-many --target=build --all=true
+
   build:
     if: false # Disabled
     runs-on: ubuntu-latest
@@ -105,16 +153,19 @@ jobs:
             ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_DOCKER_ARTIFACT_REPOSITORY_NAME }}/things-assets-catalog-rest-api:${{ env.short_commit_sha }}
 
   deploy:
-    # needs: [build]
+    needs: [nx-cache]
     if: true # Enabled
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ${{ github.workspace }}
 
+    env:
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Checkout all branches and tags
 
@@ -156,23 +207,19 @@ jobs:
           gcloud auth activate-service-account --key-file=teams/kernel/shell-iac/production/credentials.json
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version-file: '.nvmrc'
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: '8.9.1'
-          run_install: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Get pnpm store directory
         shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Cache pnpm store
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
