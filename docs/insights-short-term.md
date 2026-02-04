@@ -2,6 +2,12 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 23:15 UTC] Issue #167 tracks eliminating all critical and high severity vulns
+- [2026-02-04 23:15 UTC] `pnpm audit --audit-level <level>` filters vulns by severity threshold
+- [2026-02-04 23:15 UTC] 78 npm vulns found: 3 critical, 32 high, mostly in transitive deps
+- [2026-02-04 23:15 UTC] Combining pnpm audit with Dependabot alerts gives full vuln coverage
+- [2026-02-04 23:15 UTC] `@nestjs/devtools-integration` pulls in 2 critical sandboxjs vulns
+- [2026-02-04 23:15 UTC] Docusaurus 2.x is a major source of high-severity transitive vulns
 - [2026-02-04 22:30 UTC] node-forge ASN.1 CVEs (2025-12816, 66031, 66030) patched via override
 - [2026-02-04 22:30 UTC] `>=` in pnpm.overrides resolves to latest matching release
 - [2026-02-04 19:00 UTC] Team Topologies stream-aligned type fits domain-delivery teams
@@ -96,10 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-03-05 09:27 UTC] Bumping Vitest to 1.6.1 patches test runner stability issues
 - [2025-03-05 08:56 UTC] Sanitized error responses prevent information exposure to attackers
 - [2025-03-04 11:23 UTC] esbuild generates smaller, faster function bundles than Webpack
-- [2025-03-04 11:07 UTC] JSON Schema 7 adoption standardizes validation across services
-- [2025-03-04 10:56 UTC] Bumping esbuild to 0.25.0 enables latest bundler optimizations
-- [2025-03-04 10:48 UTC] Mongoose upgrade to 7.8.6 resolves known security vulnerabilities
-- [2025-03-04 10:44 UTC] NX project.json build targets replace custom esbuild scripts
-- [2025-03-04 00:14 UTC] esbuild bundles taxonomic units REST API with minimal config
-- [2025-03-03 20:29 UTC] Renaming to forward compatibility clarifies schema evolution intent
 
