@@ -60,45 +60,45 @@ Key insights from this repository.
 56. NoSQL injection vulnerabilities are actively found and eliminated.
 57. Error responses are sanitized to prevent information exposure.
 58. Dockerfile vulnerabilities are tracked and remediated via Snyk.
-59. NX Cloud tokens use placeholder replacement to prevent leakage.
-60. Fork PR tokens are read-only; CI write permissions only affect collaborators.
-61. Avoid write permissions on pull_request_target to prevent supply chain attacks.
-62. Event error logging captures topic, partition, and message context.
-63. Multiple Kafka transporter strategies are supported via config.
-64. Consumer groups enable horizontal scaling of event processing.
-65. Multi-database support validates the adapter pattern boundary.
-66. Database-per-service isolation prevents cross-domain data coupling.
-67. Both Neon and Cloud SQL are supported as PostgreSQL providers.
-68. Repository methods map ORM entities to domain entities cleanly.
-69. The test pyramid targets ~80% unit, ~15% integration, ~5% E2E tests.
-70. Error messages are centralized in constant objects per domain.
-71. Affected-only CI runs skip unchanged projects entirely.
-72. PNPM workspaces auto-discover packages via glob patterns.
-73. TypeScript path aliases provide clean cross-project imports.
-74. Multiple build tools (Webpack, Vite, esbuild) serve their targets.
-75. Release tags trigger deployment pipelines automatically.
-76. Terraform auto-approve runs only in CI, never locally.
-77. Flaky tests erode trust; even 1% flakiness causes teams to ignore results.
-78. Tests should verify resulting state, not implementation interactions.
-79. Docker Compose provides a production-like local data layer.
-80. Tests target public APIs so internal refactors never break them.
-81. Redux Toolkit with Entity Adapter normalizes frontend state.
-82. Real implementations are preferred over test doubles for higher fidelity.
-83. DAMP (Descriptive And Meaningful Phrases) trumps DRY in test code.
-84. Configuration changes are the leading cause of major outages at scale.
-85. Fakes must pass contract tests run against both fake and real implementations.
-86. Pre-commit hooks exist but are opt-in for developer flexibility.
-87. Bilingual PR templates capture What, Why, and How.
-88. Structured JSON logging enables machine parsing without regex.
-89. Middleware latency tracking quantifies per-request performance.
-90. Shared UI component library ensures visual consistency.
-91. Archive directory marks deprecated code as explicitly historical.
-92. Test configuration is centralized via NX Jest presets.
-93. Named inputs exclude test files from build cache invalidation.
-94. Schema validation tests enforce backward compatibility on changes.
-95. Chaos engineering reveals resilience gaps through continuous fault injection.
-96. Terraform state is managed remotely, never locally.
-97. Provider versions are pinned in each module's versions.tf file.
-98. Implicit NX dependencies enforce IaC provisioning order.
-99. Pairwise integration tests scale better than monolithic end-to-end flows.
-100. Terratest validates infrastructure before deployment.
+59. Regular `pnpm audit` and `pnpm audit fix` catch npm vuln drift early.
+60. NX Cloud tokens use placeholder replacement to prevent leakage.
+61. Fork PR tokens are read-only; CI write permissions only affect collaborators.
+62. Avoid write permissions on pull_request_target to prevent supply chain attacks.
+63. Event error logging captures topic, partition, and message context.
+64. Multiple Kafka transporter strategies are supported via config.
+65. Consumer groups enable horizontal scaling of event processing.
+66. Multi-database support validates the adapter pattern boundary.
+67. Database-per-service isolation prevents cross-domain data coupling.
+68. Both Neon and Cloud SQL are supported as PostgreSQL providers.
+69. Repository methods map ORM entities to domain entities cleanly.
+70. The test pyramid targets ~80% unit, ~15% integration, ~5% E2E tests.
+71. Error messages are centralized in constant objects per domain.
+72. Affected-only CI runs skip unchanged projects entirely.
+73. PNPM workspaces auto-discover packages via glob patterns.
+74. TypeScript path aliases provide clean cross-project imports.
+75. Multiple build tools (Webpack, Vite, esbuild) serve their targets.
+76. Release tags trigger deployment pipelines automatically.
+77. Terraform auto-approve runs only in CI, never locally.
+78. Flaky tests erode trust; even 1% flakiness causes teams to ignore results.
+79. Tests should verify resulting state, not implementation interactions.
+80. Docker Compose provides a production-like local data layer.
+81. Tests target public APIs so internal refactors never break them.
+82. Redux Toolkit with Entity Adapter normalizes frontend state.
+83. Real implementations are preferred over test doubles for higher fidelity.
+84. DAMP (Descriptive And Meaningful Phrases) trumps DRY in test code.
+85. Configuration changes are the leading cause of major outages at scale.
+86. Fakes must pass contract tests run against both fake and real implementations.
+87. Pre-commit hooks exist but are opt-in for developer flexibility.
+88. Bilingual PR templates capture What, Why, and How.
+89. Structured JSON logging enables machine parsing without regex.
+90. Middleware latency tracking quantifies per-request performance.
+91. Shared UI component library ensures visual consistency.
+92. Archive directory marks deprecated code as explicitly historical.
+93. Test configuration is centralized via NX Jest presets.
+94. Named inputs exclude test files from build cache invalidation.
+95. Schema validation tests enforce backward compatibility on changes.
+96. Chaos engineering reveals resilience gaps through continuous fault injection.
+97. Terraform state is managed remotely, never locally.
+98. Provider versions are pinned in each module's versions.tf file.
+99. Implicit NX dependencies enforce IaC provisioning order.
+100. Cap pnpm.overrides with upper major bound to prevent breaking resolutions.
