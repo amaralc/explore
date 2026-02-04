@@ -61,31 +61,31 @@ Key insights from this repository.
 57. Error responses are sanitized to prevent information exposure.
 58. Dockerfile vulnerabilities are tracked and remediated via Snyk.
 59. NX Cloud tokens use placeholder replacement to prevent leakage.
-60. Event error logging captures topic, partition, and message context.
-61. Multiple Kafka transporter strategies are supported via config.
-62. Consumer groups enable horizontal scaling of event processing.
-63. Multi-database support validates the adapter pattern boundary.
-64. Database-per-service isolation prevents cross-domain data coupling.
-65. Both Neon and Cloud SQL are supported as PostgreSQL providers.
-66. Repository methods map ORM entities to domain entities cleanly.
-67. The test pyramid targets ~80% unit, ~15% integration, ~5% E2E tests.
-68. Error messages are centralized in constant objects per domain.
-69. Affected-only CI runs skip unchanged projects entirely.
-70. PNPM workspaces auto-discover packages via glob patterns.
-71. TypeScript path aliases provide clean cross-project imports.
-72. Multiple build tools (Webpack, Vite, esbuild) serve their targets.
-73. Release tags trigger deployment pipelines automatically.
-74. Terraform auto-approve runs only in CI, never locally.
-75. Flaky tests erode trust; even 1% flakiness causes teams to ignore results.
-76. Tests should verify resulting state, not implementation interactions.
-77. Docker Compose provides a production-like local data layer.
-78. Tests target public APIs so internal refactors never break them.
-79. Redux Toolkit with Entity Adapter normalizes frontend state.
-80. Real implementations are preferred over test doubles for higher fidelity.
-81. DAMP (Descriptive And Meaningful Phrases) trumps DRY in test code.
-82. Configuration changes are the leading cause of major outages at scale.
-83. VS Code settings enforce formatting and organize imports on save.
-84. Prettier and EditorConfig standardize style across all editors.
+60. Fork PR tokens are read-only; CI write permissions only affect collaborators.
+61. Avoid write permissions on pull_request_target to prevent supply chain attacks.
+62. Event error logging captures topic, partition, and message context.
+63. Multiple Kafka transporter strategies are supported via config.
+64. Consumer groups enable horizontal scaling of event processing.
+65. Multi-database support validates the adapter pattern boundary.
+66. Database-per-service isolation prevents cross-domain data coupling.
+67. Both Neon and Cloud SQL are supported as PostgreSQL providers.
+68. Repository methods map ORM entities to domain entities cleanly.
+69. The test pyramid targets ~80% unit, ~15% integration, ~5% E2E tests.
+70. Error messages are centralized in constant objects per domain.
+71. Affected-only CI runs skip unchanged projects entirely.
+72. PNPM workspaces auto-discover packages via glob patterns.
+73. TypeScript path aliases provide clean cross-project imports.
+74. Multiple build tools (Webpack, Vite, esbuild) serve their targets.
+75. Release tags trigger deployment pipelines automatically.
+76. Terraform auto-approve runs only in CI, never locally.
+77. Flaky tests erode trust; even 1% flakiness causes teams to ignore results.
+78. Tests should verify resulting state, not implementation interactions.
+79. Docker Compose provides a production-like local data layer.
+80. Tests target public APIs so internal refactors never break them.
+81. Redux Toolkit with Entity Adapter normalizes frontend state.
+82. Real implementations are preferred over test doubles for higher fidelity.
+83. DAMP (Descriptive And Meaningful Phrases) trumps DRY in test code.
+84. Configuration changes are the leading cause of major outages at scale.
 85. Fakes must pass contract tests run against both fake and real implementations.
 86. Pre-commit hooks exist but are opt-in for developer flexibility.
 87. Bilingual PR templates capture What, Why, and How.
