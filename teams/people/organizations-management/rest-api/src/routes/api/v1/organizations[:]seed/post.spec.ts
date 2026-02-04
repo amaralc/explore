@@ -4,13 +4,11 @@ import { fakeAgentsByIdOrEmail } from '@peerlab/people/organizations-management/
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../app';
 import { ISeedOrganizationsFromExternalSourceInputDto } from './post.types';
-
 describe('POST /v1/organizations:seed', () => {
   let request: supertest.SuperAgentTest;
   let configurationManager: ConfigurationManager;
   let databaseUri: string;
   const databaseName = 'test-database';
-
   beforeAll(async () => {
     configurationManager = new ConfigurationManager();
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
@@ -25,16 +23,13 @@ describe('POST /v1/organizations:seed', () => {
       },
     });
   });
-
   afterEach(async () => {
     await configurationManager.databaseDriver.dropDatabase(databaseName);
   });
-
   beforeEach(async () => {
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
-
   it.each([
     { sourceName: 'invalid-source-name', agentAccountHolderId: 'invalid-account-holder-id' },
     { sourceName: 'USP_MULTI', agentAccountHolderId: 'invalid-account-id' },
@@ -50,16 +45,13 @@ describe('POST /v1/organizations:seed', () => {
         expect(response.status).toEqual(400);
       });
   });
-
   it('should throw not found error for non-existent account holders', async () => {
     const agentsV1Repository = (await configurationManager.getRepositories()).agentsV1;
     const nonExistentAccountId = agentsV1Repository.generateUniqueId();
-
     const requestBody: ISeedOrganizationsFromExternalSourceInputDto = {
       sourceName: 'USP_MULTI',
       agentAccountHolderId: nonExistentAccountId,
     };
-
     await request
       .post('/api/v1/organizations:seed')
       .send(requestBody)
@@ -67,14 +59,12 @@ describe('POST /v1/organizations:seed', () => {
         expect(response.status).toEqual(404);
       });
   });
-
   it('should extract and store organizations from external source', async () => {
     const accountHolder = fakeAgentsByIdOrEmail.get('fake-agent-owner-of-free-organization@email.com');
     const requestBody: ISeedOrganizationsFromExternalSourceInputDto = {
       sourceName: 'USP_MULTI',
       agentAccountHolderId: accountHolder.id,
     };
-
     await request
       .post('/api/v1/organizations:seed')
       .send(requestBody)
@@ -88,14 +78,12 @@ describe('POST /v1/organizations:seed', () => {
         });
       });
   });
-
   it.only('should update entities in dataset if they already exist', async () => {
     const accountHolder = fakeAgentsByIdOrEmail.get('fake-agent-owner-of-free-organization@email.com');
     const requestBody: ISeedOrganizationsFromExternalSourceInputDto = {
       sourceName: 'USP_MULTI',
       agentAccountHolderId: accountHolder.id,
     };
-
     await request
       .post('/api/v1/organizations:seed')
       .send(requestBody)
@@ -108,7 +96,6 @@ describe('POST /v1/organizations:seed', () => {
           extractedUnitsCount: 2,
         });
       });
-
     await request
       .post('/api/v1/organizations:seed')
       .send(requestBody)

@@ -1,7 +1,6 @@
-import { ITaxonomicUnitV1 } from "../../taxonomic-unit-v1/core/entity.schema.types";
+import { ITaxonomicUnitV1 } from '../../taxonomic-unit-v1/core/entity.schema.types';
 import { TaxonomicUnitInstanceV1Entity } from './entity';
 import { InstanceDataDoesNotConformWithInstanceSchemaError } from './errors';
-
 describe('TaxonomicUnitInstanceV1Entity', () => {
   it('should initialize entity without throwing errors', () => {
     const taxonomicUnitV1InputDto: ITaxonomicUnitV1 = {
@@ -11,7 +10,7 @@ describe('TaxonomicUnitInstanceV1Entity', () => {
       lineageIdPath: `/${'valid-id'}`,
       metadata: {},
       metadataSchema: {
-        type: 'object'
+        type: 'object',
       },
       instanceSchema: {
         type: 'object',
@@ -23,10 +22,10 @@ describe('TaxonomicUnitInstanceV1Entity', () => {
         required: ['name'],
       },
     };
-
-    expect(() => new TaxonomicUnitInstanceV1Entity({ taxonomicUnitV1Dto: taxonomicUnitV1InputDto, instanceData: {} })).not.toThrow();
+    expect(
+      () => new TaxonomicUnitInstanceV1Entity({ taxonomicUnitV1Dto: taxonomicUnitV1InputDto, instanceData: {} }),
+    ).not.toThrow();
   });
-
   it('should throw error when data does not conform with instance schema', () => {
     const taxonomicUnitV1InputDto: ITaxonomicUnitV1 = {
       id: 'valid-id',
@@ -35,7 +34,7 @@ describe('TaxonomicUnitInstanceV1Entity', () => {
       lineageIdPath: `/${'valid-id'}`,
       metadata: {},
       metadataSchema: {
-        type: 'object'
+        type: 'object',
       },
       instanceSchema: {
         type: 'object',
@@ -47,10 +46,11 @@ describe('TaxonomicUnitInstanceV1Entity', () => {
         required: ['parentId'],
       },
     };
-
-    expect(() => new TaxonomicUnitInstanceV1Entity({
-      taxonomicUnitV1Dto: taxonomicUnitV1InputDto,
-      instanceData: { parentId: 1 }
-    }).validate()).toThrowError(InstanceDataDoesNotConformWithInstanceSchemaError);
+    expect(() =>
+      new TaxonomicUnitInstanceV1Entity({
+        taxonomicUnitV1Dto: taxonomicUnitV1InputDto,
+        instanceData: { parentId: 1 },
+      }).validate(),
+    ).toThrow(InstanceDataDoesNotConformWithInstanceSchemaError);
   });
 });

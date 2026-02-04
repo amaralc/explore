@@ -1,0 +1,105 @@
+# Short-Term Insights
+
+Latest 100 insights derived from recent project activity, newest first.
+
+- [2026-02-04 19:00 UTC] Team Topologies stream-aligned type fits domain-delivery teams
+- [2026-02-04 19:00 UTC] Team README format: Type, Mission, Vision captures identity concisely
+- [2026-02-04 19:00 UTC] People team owns researchers, orgs, and member interactions
+- [2026-02-04 19:00 UTC] Things team owns assets, equipment, tools, and materials catalog
+- [2026-02-04 18:30 UTC] Hook additionalContext must nest inside hookSpecificOutput object
+- [2026-02-04 12:58 UTC] SessionStart hooks inject file content as context via additionalContext JSON
+- [2026-02-04 12:58 UTC] Claude Code hooks have 12 trigger types for lifecycle automation
+- [2026-02-04 04:15 UTC] Promoted fork PR token and pull_request_target security to long-term
+- [2026-02-04 04:10 UTC] CI workflow permission security identified as gap in long-term insights
+- [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
+- [2026-02-04 03:50 UTC] GitHub downgrades GITHUB_TOKEN to read-only for fork PR runs
+- [2026-02-04 03:50 UTC] `pull_request_target` grants base repo permissions; avoid write perms
+- [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
+- [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
+- [2026-02-04 03:30 UTC] Issue #165 tracks merging CI and CodeQL into one PR workflow
+- [2026-02-04 03:30 UTC] Per-job permissions scope access when combining workflows
+- [2026-02-04 03:30 UTC] CodeQL schedule/push triggers need preservation when merging
+- [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
+- [2026-02-04 03:15 UTC] NX cache job gates deploy to ensure lint/test/build pass first
+- [2026-02-04 03:15 UTC] GitHub env with NX read-write token enables shared cache across jobs
+- [2026-02-04 03:15 UTC] `needs:` in Actions enforces job execution order and dependency gating
+- [2026-02-04 03:10 UTC] Modernizing action versions (v3->v4) aligns deploy with CI patterns
+- [2026-02-04 03:10 UTC] Using .nvmrc for Node version avoids hardcoded drift across workflows
+- [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
+- [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
+- [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
+- [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
+- [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
+- [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
+- [2026-02-04 02:00 UTC] GitHub issues track Dependabot failures needing manual resolution
+- [2026-02-04 01:50 UTC] Nextra 2.7.1 powers the kernel/dev-docs-browser documentation site
+- [2026-02-04 01:45 UTC] `pnpm view <pkg> versions --json` lists all published npm versions
+- [2026-02-04 01:45 UTC] Override vulnerable transitive dep directly, not parent, for safer fixes
+- [2026-02-04 01:30 UTC] Dependabot cannot update transitive deps when using pnpm
+- [2026-02-04 01:30 UTC] `pnpm.overrides` pins transitive dependency versions in lockfile
+- [2026-02-03 23:10 UTC] Removing custom CodeQL workflow resolves conflict with default setup
+- [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
+- [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
+- [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
+- [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
+- [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
+- [2026-02-03 22:17 UTC] lerna 9.x required for nx >=21.5.3 project graph compatibility
+- [2026-02-03 20:25 UTC] Staged WIP on main transfers to feature branches via checkout -b
+- [2026-02-03 20:25 UTC] Closes #N in commit messages auto-links PRs to GitHub issues
+- [2026-02-03 20:18 UTC] Explicit workflow permissions fix CodeQL missing-permissions alerts
+- [2026-02-03 20:18 UTC] Unnumbered bullet lists avoid full-file renumbering on insert
+- [2026-02-03 20:18 UTC] UTC timestamps in logs ensure timezone-independent consistency
+- [2026-02-03 20:15 UTC] CodeQL needs a baseline run on main before PR checks work
+- [2026-02-03 20:15 UTC] CodeQL workflow scans both JS/TS and GitHub Actions languages
+- [2026-02-03 19:30 UTC] SWE book testing principles replace narrow tooling details in insights
+- [2026-02-03 19:30 UTC] Deduplicating insight lists increases signal-to-noise ratio
+- [2026-02-03 19:30 UTC] External engineering literature enriches project knowledge base
+- [2026-02-02 15:50 UTC] Pinned container image versions prevent unexpected runtime behavior changes
+- [2026-02-02 15:44 UTC] Blog posts consolidate security hardening lessons into shareable knowledge
+- [2026-02-02 15:36 UTC] Private GKE endpoints block control plane access from public internet
+- [2026-02-02 15:33 UTC] Disabling token automounting reduces pod-level attack surface
+- [2026-02-02 15:27 UTC] Generated secrets for DB usernames eliminate credential reuse risk
+- [2026-02-02 15:10 UTC] Generated secrets for DB passwords remove hardcoded values from manifests
+- [2026-02-02 15:01 UTC] VPC flow logs and private cluster config improve network observability
+- [2026-02-01 03:55 UTC] Makefile targets for IAM setup/teardown simplify local development
+- [2026-02-01 03:55 UTC] Shell IaC references IAM service module for environment composition
+- [2026-02-01 03:54 UTC] Logto IAM service bundles IaC, K8s manifests, and local setup together
+- [2026-02-01 03:54 UTC] Crossplane PostgreSQL v2 pipeline mode provisions DBs as K8s objects
+- [2026-02-01 03:54 UTC] Crossplane installation via Terraform bridges IaC and K8s-native tools
+- [2026-02-01 03:54 UTC] GKE cluster Terraform module encapsulates cluster provisioning logic
+- [2026-02-01 03:53 UTC] IAM provider evaluation blog documents decision rationale publicly
+- [2026-02-01 03:53 UTC] Implementation plans recorded before coding reduce wasted effort
+- [2026-01-31 11:36 UTC] CLAUDE.md file gives AI assistants project-specific context
+- [2025-10-22 01:49 UTC] Socket.dev integration validates supply chain security of dependencies
+- [2025-10-04 22:27 UTC] Logto identified as open-source Firebase Auth alternative
+- [2025-10-04 20:48 UTC] Conventional releases with Lerna automate changelog generation
+- [2025-10-04 20:48 UTC] Adjusting dependencies after refactors keeps the build graph consistent
+- [2025-10-04 15:21 UTC] Moving researchers lib aligns code location with team ownership
+- [2025-10-04 15:12 UTC] Docusaurus executor in kernel team centralizes shared build tooling
+- [2025-10-04 15:07 UTC] IaC modules under kernel team reflect infrastructure as shared concern
+- [2025-10-04 14:29 UTC] Pinning Node.js to 24.5.0 ensures consistent runtime across envs
+- [2025-10-04 14:28 UTC] Documenting AI impressions captures emerging tool evaluations
+- [2025-08-10 14:13 UTC] Team-based folder structure replaces flat app-centric layout
+- [2025-08-10 14:07 UTC] NoSQL injection vulnerability eliminated via input sanitization
+- [2025-08-10 13:35 UTC] README improvements reduce onboarding friction for new contributors
+- [2025-08-10 13:16 UTC] Renaming apps/ to teams/ encodes Conway's Law in the file tree
+- [2025-08-09 23:57 UTC] Versioning environments as v1.0.0 enables parallel environment evolution
+- [2025-08-09 22:03 UTC] Upgrading to Node 24 keeps runtime aligned with LTS schedule
+- [2025-08-09 21:54 UTC] Explicit delivery channels clarify deployment target per service
+- [2025-08-09 21:54 UTC] Node.js 24 upgrade required coordinated dependency adjustments
+- [2025-08-09 21:53 UTC] Preset log files standardize local debugging output paths
+- [2025-03-11 10:31 UTC] Organizing procedures into dedicated folders improves discoverability
+- [2025-03-11 07:50 UTC] Enhanced PostgreSQL replication docs support disaster recovery planning
+- [2025-03-11 07:14 UTC] PostgreSQL replication documentation captures operational knowledge
+- [2025-03-05 09:27 UTC] Bumping Vitest to 1.6.1 patches test runner stability issues
+- [2025-03-05 08:56 UTC] Sanitized error responses prevent information exposure to attackers
+- [2025-03-04 11:23 UTC] esbuild generates smaller, faster function bundles than Webpack
+- [2025-03-04 11:07 UTC] JSON Schema 7 adoption standardizes validation across services
+- [2025-03-04 10:56 UTC] Bumping esbuild to 0.25.0 enables latest bundler optimizations
+- [2025-03-04 10:48 UTC] Mongoose upgrade to 7.8.6 resolves known security vulnerabilities
+- [2025-03-04 10:44 UTC] NX project.json build targets replace custom esbuild scripts
+- [2025-03-04 00:14 UTC] esbuild bundles taxonomic units REST API with minimal config
+- [2025-03-03 20:29 UTC] Renaming to forward compatibility clarifies schema evolution intent
+- [2025-02-25 09:57 UTC] Dockerfile vulnerability fixes reduce container attack surface
+- [2025-02-22 10:58 UTC] Org management API Dockerfile patched for known CVEs
+

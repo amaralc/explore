@@ -31,9 +31,10 @@ export class InMemoryPeersDatabaseRepository implements PeersDatabaseRepository 
   async listPaginated(listPaginatedPeersDto: ListPaginatedPeersDto) {
     const { limit, page } = listPaginatedPeersDto;
     const localLimit = limit || pagination.defaultLimit;
-    const localOffset = page ? page - 1 : pagination.defaultPage - 1;
+    const localPage = page || pagination.defaultPage;
+    const localOffset = (localPage - 1) * localLimit;
 
-    const inMemoryPeers = [...this.peers].slice(localOffset, localLimit);
+    const inMemoryPeers = [...this.peers].slice(localOffset, localOffset + localLimit);
     const peerEntities = inMemoryPeers.map((inMemoryPeer) => new PeerEntity({ ...inMemoryPeer }));
     return peerEntities;
   }

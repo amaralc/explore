@@ -69,3 +69,10 @@ kong-dbless:
 
 clean:
 	docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml down -v
+
+# IAM Service (Logto on Kubernetes)
+iam-local-setup:
+	bash teams/kernel/security-iam-svc/local/setup-local.sh
+
+iam-local-teardown:
+	bash teams/kernel/security-iam-svc/local/teardown-local.sh

@@ -49,7 +49,8 @@ export class PostgreSqlPrismaOrmPeersDatabaseRepository implements PeersDatabase
   async listPaginated(listPaginatedPlanSubscriptionsDto: ListPaginatedPeersDto) {
     const { limit, page } = listPaginatedPlanSubscriptionsDto;
     const localLimit = limit || pagination.defaultLimit;
-    const localOffset = page ? page - 1 : pagination.defaultPage - 1;
+    const localPage = page || pagination.defaultPage;
+    const localOffset = (localPage - 1) * localLimit;
 
     const prismaEntities = await this.postgreSqlPrismaOrmService.peers.findMany({
       skip: localOffset,

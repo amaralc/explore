@@ -24,14 +24,14 @@ export class TaxonomicUnitV1Entity {
   }
 
   validateInputDto() {
-    let { errors, errorsText } = schemaValidator.validate(entitySchema, this.dto);
+    const { errors, errorsText } = schemaValidator.validate(entitySchema, this.dto);
     if (errors.length > 0) {
       throw new InvalidTaxonomicUnitV1InputDtoError(errorsText);
     }
   }
 
   validateMetadata() {
-    let { errors, errorsText } = schemaValidator.validate(this.dto.metadataSchema, this.dto.metadata);
+    const { errors, errorsText } = schemaValidator.validate(this.dto.metadataSchema, this.dto.metadata);
     if (errors.length > 0) {
       throw new MetadataDoesNotMatchMetadataSchemaError(errorsText);
     }

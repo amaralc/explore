@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logto
+  namespace: logto
+  labels:
+    app: logto
+    app.kubernetes.io/name: logto
+    app.kubernetes.io/part-of: security-iam-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logto
+  template:
+    metadata:
+      labels:
+        app: logto
+        app.kubernetes.io/name: logto
+    spec:
+      automountServiceAccountToken: false
+      initContainers:
+        - name: logto-seed
+          image: svhd/logto:1.36.0
+          command: ["sh", "-c", "npm run cli db seed -- --swe"]
+          envFrom:
+            - secretRef:
+                name: logto-db-credentials
+            - configMapRef:
+                name: logto-config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+              ephemeral-storage: "128Mi"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+              ephemeral-storage: "256Mi"
+      containers:
+        - name: logto
+          image: svhd/logto:1.36.0
+          ports:
+            - name: app
+              containerPort: 3001
+              protocol: TCP
+            - name: admin
+              containerPort: 3002
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: logto-db-credentials
+            - configMapRef:
+                name: logto-config
+          livenessProbe:
+            httpGet:
+              path: /api/status
+              port: 3001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: 3001
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+              ephemeral-storage: "128Mi"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+              ephemeral-storage: "256Mi"

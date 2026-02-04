@@ -1,9 +1,20 @@
 {
   "name": "kernel-security-iam-svc",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "teams/security/iam",
+  "sourceRoot": "teams/kernel/security-iam-svc",
   "projectType": "application",
-  "implicitDependencies": [],
-  "targets": {},
+  "implicitDependencies": [
+    "iac-modules-gcp-gke-cluster",
+    "iac-modules-gcp-gke-crossplane",
+    "iac-modules-crossplane-postgresql"
+  ],
+  "targets": {
+    "local-setup": {
+      "command": "bash teams/kernel/security-iam-svc/local/setup-local.sh"
+    },
+    "local-teardown": {
+      "command": "bash teams/kernel/security-iam-svc/local/teardown-local.sh"
+    }
+  },
   "tags": []
 }

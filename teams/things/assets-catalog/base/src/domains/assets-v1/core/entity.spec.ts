@@ -2,12 +2,10 @@ import { faker } from '@faker-js/faker';
 import { mongoDbIdFormat } from '@peerlab/kernel/shared-ts-utils/date-formats';
 import { ValidationExceptionV2Error } from '@peerlab/kernel/shared-ts-utils/errors/validation-exception-v1';
 import { AssetV1Entity } from './entity';
-
 describe('AssetV1Entity', () => {
   it('should create a valid taxonomic unit entity', async () => {
     const createdAt = new Date().toISOString();
     const updatedAt = new Date().toISOString();
-
     expect(
       new AssetV1Entity({
         id: faker.database.mongodbObjectId().toString(),
@@ -26,7 +24,6 @@ describe('AssetV1Entity', () => {
       updatedAt,
     });
   });
-
   it.each(['id', 'invalid-id', 'a23f0a-x1af3a'])(
     'should not create taxonomic unit entity with invalid id',
     (invalidId) => {
@@ -43,7 +40,6 @@ describe('AssetV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it.each(['x', 'invalid.slug', 'invalid/slug', '-invalid-', '--/inv'])(
     'should not create taxonomic unit entity with invalid taxonomic unit slug',
     (invalidTaxonomicUnitSlug) => {
@@ -60,7 +56,6 @@ describe('AssetV1Entity', () => {
       ).toThrow(ValidationExceptionV2Error);
     },
   );
-
   it.each(['x', 'invalid.slug', 'invalid/slug', '-invalid-', '--/inv', ''])(
     'should not create taxonomic unit entity with invalid tags',
     (invalidTaxonomicUnitSlug) => {

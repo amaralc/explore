@@ -8,7 +8,6 @@
 # --install-node (optional) "true" or "false" (default is "false")
 # --install-package-manager (optional) "true" or "false" (default is "false")
 # --install-dependencies (optional) "true" or "false" (default is "false")
-# --nx-cloud-access-token (optional)
 
 # Call this script with the following command: bash scripts/nx/check-if-app-was-affected.sh --project-name=$PROJECT_NAME --file-path=$FILE_PATH --fail-if-canceled=true --install-node=true --install-package-manager=true --install-dependencies=true
 # Obs.: this script assumes that you are already authenticated with gcloud CLI.
@@ -44,10 +43,6 @@ case $i in                          # This starts a case statement, which checks
     INSTALL_DEPENDENCIES="${i#*=}"
     shift
     ;;
-    --nx-cloud-access-token=*)
-    NX_CLOUD_ACCESS_TOKEN="${i#*=}"
-    shift
-    ;;
 esac                                # This ends the case statement.
 done                                # This ends the loop block.
 
@@ -78,11 +73,6 @@ fi
 
 if [ "$INSTALL_DEPENDENCIES" != "true" ]; then
   INSTALL_DEPENDENCIES="false"
-fi
-
-# Set nx cloud token to make use of remote caches
-if [ "$NX_CLOUD_ACCESS_TOKEN" != "" ]; then
-  bash scripts/nx/set-token.sh --access-token=$NX_CLOUD_ACCESS_TOKEN --install-jq=true
 fi
 
 # This is only necessary if you are running this script in a CI environment such as gh actions or cloud build step
@@ -152,7 +142,3 @@ else
   fi
 fi
 
-# Override nx cloud script with fake token
-if [ "$NX_CLOUD_ACCESS_TOKEN" != "" ]; then
-  bash scripts/nx/set-token.sh --access-token=fake-token
-fi

@@ -8,14 +8,12 @@ import { fakeTaxonomicUnitsV1 } from '@peerlab/kernel/taxonomic-units/base/domai
 import { ICreateFirstVersionOfTaxonomicUnitV1InputDto } from '@peerlab/kernel/taxonomic-units/base/domains/taxonomic-unit-v1/core/use-cases/create-first-version/input-dto.schema.types';
 import supertest from 'supertest';
 import { bootstrapApplication } from '../../../../app';
-
 describe.skip('POST /v1/taxonomic-units', () => {
   let request: supertest.SuperAgentTest;
   let configurationManager: ConfigurationManager;
   let databaseUri: string;
   let testMongoDbDriver: MongoDbDriver;
   const databaseName = 'test-taxonomic-units';
-
   beforeAll(async () => {
     configurationManager = new ConfigurationManager();
     const result = await MongoDbMemoryServer.initializeInMemoryDatabase();
@@ -32,15 +30,12 @@ describe.skip('POST /v1/taxonomic-units', () => {
     testMongoDbDriver = new MongoDbDriver(databaseUri);
     await testMongoDbDriver.connectToDatabase(databaseName);
   });
-
   beforeEach(async () => {
     // Drop the database before each test
     await testMongoDbDriver.dropDatabase(databaseName);
-
     const { app } = await bootstrapApplication(configurationManager);
     request = supertest.agent(app);
   });
-
   it('should create an entity using the REST API, responding with 201 HTTP status', async () => {
     const requestBody: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: 'fake-name',
@@ -62,14 +57,12 @@ describe.skip('POST /v1/taxonomic-units', () => {
         required: ['name'],
       },
     };
-
     await request
       .post('/api/v1/taxonomic-units')
       .send(requestBody)
       .then((response) => {
         expect(response.status).toEqual(201);
         expect(response.body.id).toMatch(mongoDbIdFormat);
-
         const expectedResponseBody: ITaxonomicUnitV1 = {
           id: expect.stringMatching(mongoDbIdFormat),
           name: requestBody.name,
@@ -79,12 +72,11 @@ describe.skip('POST /v1/taxonomic-units', () => {
           metadataSchema: {
             type: 'object',
           },
-          metadata: {}
+          metadata: {},
         };
         expect(response.body).toEqual(expectedResponseBody);
       });
   });
-
   it('should not create entity if a version already exists, responding with 409 HTTP status', async () => {
     const requestBody: ICreateFirstVersionOfTaxonomicUnitV1InputDto = {
       name: fakeTaxonomicUnitsV1[0].name,
@@ -106,7 +98,6 @@ describe.skip('POST /v1/taxonomic-units', () => {
         required: ['name'],
       },
     };
-
     await request
       .post('/api/v1/taxonomic-units')
       .send(requestBody)
@@ -114,7 +105,6 @@ describe.skip('POST /v1/taxonomic-units', () => {
         expect(response.status).toEqual(409);
       });
   });
-
   it('should throw a 404 error if parent taxonomic unit does not exist', async () => {
     const requestBody = {
       name: 'fake-name',
@@ -140,7 +130,6 @@ describe.skip('POST /v1/taxonomic-units', () => {
         expect(response.body.message).toEqual(`Parent taxonomic unit with id '${requestBody.parentId}' was not found`);
       });
   });
-
   it.todo('should not allow unauthorized requests, responding with 401 HTTP status');
   it.todo('should not allow unauthenticated requests, responding with 403 HTTP status');
 });

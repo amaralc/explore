@@ -3,14 +3,12 @@ import { ConvertMultiDepartmentV1InOrganizationV1Service } from '.';
 import { IOrganizationV1Dto } from '../../../../organizations-v1/core/entity.schema.types';
 import { IMultiDepartmentV1Dto } from '../../entity.schema.types';
 import { multiDepartmentsV1Fixtures } from '../../fixtures';
-
 describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
   it('should convert the same multi-department-v1 in the same organization-v1 with correct ids', () => {
     // When
     const multiDepartmentV1Fixture = multiDepartmentsV1Fixtures[0];
     const organizationV1Dto = ConvertMultiDepartmentV1InOrganizationV1Service.execute(multiDepartmentV1Fixture);
     const organizationV1Dto2 = ConvertMultiDepartmentV1InOrganizationV1Service.execute(multiDepartmentV1Fixture);
-
     // Then
     const expectedOrganizationV1Dto: IOrganizationV1Dto = {
       id: '0000000066fbcd429b53a794',
@@ -23,9 +21,7 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
       createdAt: expect.stringMatching(iso8601DateFormat),
       updatedAt: expect.stringMatching(iso8601DateFormat),
     };
-
     expect(organizationV1Dto).toEqual(expectedOrganizationV1Dto);
-
     // Objects should be equal except for createdAt and updatedAt
     expect({ ...organizationV1Dto, createdAt: undefined, updatedAt: undefined }).toEqual({
       ...organizationV1Dto2,
@@ -34,18 +30,15 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
     });
     expect(organizationV1Dto.ownerAgentId).not.toEqual(organizationV1Dto.agentId);
   });
-
   it('should convert multi-department-v1 in organization-v1 with valid attributes', () => {
     // Given
     multiDepartmentsV1Fixtures.forEach((multiDepartmentV1Fixture) => {
       // When
       const organizationV1Dto = ConvertMultiDepartmentV1InOrganizationV1Service.execute(multiDepartmentV1Fixture);
-
       // Then
       const generatedEmailRegex = /^placeholder-([a-f0-9]{28})@email\.com$/; // Starts with 'placeholder-', followed by a hexadecimal string of 28 characters (firebase id format), and ends with '@email.com'
       const generatedNicknameRegex = /-([a-f0-9]{24})$/; // Ends with a hexadecimal string of 24 characters that represents the multi-department-v1 id (mongodb id format)
       const mongoDbIdPathDepartmentRegex = /^\/([a-f0-9]{24})\/([a-f0-9]{24})\/([a-f0-9]{24})$/; // Starts with '/', followed by 3 hexadecimal strings of 24 characters (mongodb id format)
-
       const expectedOrganizationV1Dto: IOrganizationV1Dto = {
         id: expect.stringMatching(mongoDbIdFormat),
         ownerAgentId: expect.stringMatching(firebaseIdFormat),
@@ -57,12 +50,10 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
         createdAt: expect.stringMatching(iso8601DateFormat),
         updatedAt: expect.stringMatching(iso8601DateFormat),
       };
-
       expect(organizationV1Dto).toEqual(expectedOrganizationV1Dto);
       expect(organizationV1Dto.ownerAgentId).not.toEqual(organizationV1Dto.agentId);
     });
   });
-
   it('should convert the same multi-department-v1 in the same organization-v1 with the same input', () => {
     // Given
     multiDepartmentsV1Fixtures.forEach((multiDepartmentV1Fixture) => {
@@ -71,7 +62,6 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
         ConvertMultiDepartmentV1InOrganizationV1Service.execute(multiDepartmentV1Fixture);
       const organizationV1DtoOutput2 =
         ConvertMultiDepartmentV1InOrganizationV1Service.execute(multiDepartmentV1Fixture);
-
       // Then
       expect(organizationV1DtoOutput1).toEqual({
         ...organizationV1DtoOutput2,
@@ -80,21 +70,17 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
       });
     });
   });
-
   it('should convert different multi-department-v1 in different organization-v1 with different inputs', () => {
     const comparisons = [];
-
     // Given
     multiDepartmentsV1Fixtures.forEach((multiDepartmentV1Fixture, index, array) => {
       // When
       const organizationV1DtoOutput1 =
         ConvertMultiDepartmentV1InOrganizationV1Service.execute(multiDepartmentV1Fixture);
-
       const nextIndex = index + 1 === array.length ? 0 : index + 1;
       const nextItem = array[nextIndex];
       comparisons.push({ current: multiDepartmentV1Fixture, next: nextItem });
       const organizationV1DtoOutput2 = ConvertMultiDepartmentV1InOrganizationV1Service.execute(nextItem);
-
       // Then
       expect(organizationV1DtoOutput1).not.toEqual({
         ...organizationV1DtoOutput2,
@@ -103,7 +89,6 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
       });
     });
   });
-
   it('should throw an error when multi-department-v1 dto is invalid', () => {
     // Given
     const invalidMultiDepartmentV1DtoList = [
@@ -146,13 +131,11 @@ describe('ConvertMultiDepartmentV1InOrganizationV1Service', () => {
         unidade_id: -1,
       },
     ] as unknown as Array<IMultiDepartmentV1Dto>;
-
     invalidMultiDepartmentV1DtoList.forEach((invalidMultiDepartmentV1Dto) => {
       // When
       const execute = () => {
         ConvertMultiDepartmentV1InOrganizationV1Service.execute(invalidMultiDepartmentV1Dto);
       };
-
       // Then
       expect(execute).toThrow();
     });

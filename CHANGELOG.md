@@ -3,6 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.99.0](https://github.com/amaralc/explore/compare/peerlab@0.98.0...peerlab@0.99.0) (2026-02-04)
+
+### Features
+
+- add load insights hook ([729ae9e](https://github.com/amaralc/explore/commit/729ae9ee066b3b291a8eef497801b12a5272a0a5))
+
+### Bug Fixes
+
+- **ci:** merge CodeQL into CI workflow for PR runs ([1c741af](https://github.com/amaralc/explore/commit/1c741af77a9a929e43c439f0837bdf522b13ac17)), closes [#165](https://github.com/amaralc/explore/issues/165)
+- **ci:** upgrade CodeQL actions from v3 to v4 ([12a106f](https://github.com/amaralc/explore/commit/12a106fb75fda7fe1f494bea86659db93bfdf833))
+- inject context on session start ([8388154](https://github.com/amaralc/explore/commit/8388154700bab318335ef25ae15c93035c1ea23c))
+
+## [0.98.0](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.5...peerlab@0.98.0) (2026-02-04)
+
+### Bug Fixes
+
+- **ci:** add NX cache population job to build-and-deploy pipeline ([22661f2](https://github.com/amaralc/explore/commit/22661f227f6df25ebe64d666780a4e41b86c61c2)), closes [#163](https://github.com/amaralc/explore/issues/163)
+- **ci:** re-add CodeQL workflow for code scanning ([6a24c46](https://github.com/amaralc/explore/commit/6a24c4665688b72713c7f4af470b9598d35b81e2)), closes [#161](https://github.com/amaralc/explore/issues/161)
+- **deps:** override katex transitive dep to patch vulnerability ([5074dd3](https://github.com/amaralc/explore/commit/5074dd369dc44b15bc442a4296c0ce1ae2514e12)), closes [#159](https://github.com/amaralc/explore/issues/159)
+- **deps:** remove unused nextra deps and update insights ([bad70fb](https://github.com/amaralc/explore/commit/bad70fb767f7182b315607b41c6ada7aae88eb63))
+
+## [0.98.0-beta.5](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.4...peerlab@0.98.0-beta.5) (2026-02-04)
+
+### Bug Fixes
+
+- remove custom CodeQL workflow to resolve conflict with default setup ([b90ab9f](https://github.com/amaralc/explore/commit/b90ab9fe1c964dd98b24f284766dce9a0b9b55aa))
+
+## [0.98.0-beta.4](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.3...peerlab@0.98.0-beta.4) (2026-02-03)
+
+**Note:** Version bump only for package peerlab
+
+## [0.98.0-beta.3](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.2...peerlab@0.98.0-beta.3) (2026-02-03)
+
+**Note:** Version bump only for package peerlab
+
+## [0.98.0-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.1...peerlab@0.98.0-beta.2) (2026-02-03)
+
+**Note:** Version bump only for package peerlab
+
+## [0.98.0-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.0...peerlab@0.98.0-beta.1) (2026-02-03)
+
+### Features
+
+- add Claude Code stop hook to maintain insight docs ([ee5cc3f](https://github.com/amaralc/explore/commit/ee5cc3f4487b85e6d2fc007f334d3a8f0ff91b4b)), closes [#151](https://github.com/amaralc/explore/issues/151)
+
+### Bug Fixes
+
+- address SonarCloud code smells ([f38cbd1](https://github.com/amaralc/explore/commit/f38cbd1822bf3ec5b137dc45fdee3c31aad832c8))
+- **deps:** upgrade lerna 8.1.2 to 9.0.3 for nx 22 compatibility ([af3092e](https://github.com/amaralc/explore/commit/af3092e968fff1d4f0500765d46013871dd77550)), closes [#156](https://github.com/amaralc/explore/issues/156)
+- increase MongoDB memory server timeout in taxonomic-unit tests ([3cc9520](https://github.com/amaralc/explore/commit/3cc9520d9eb6d0c4142218ee99b79b0fe2c4cede)), closes [#149](https://github.com/amaralc/explore/issues/149)
+- replace deprecated faker.js APIs and increase MongoDB memory server timeout ([f00daa6](https://github.com/amaralc/explore/commit/f00daa6dcaecca2555da0acca8d16a0807c6f3f3))
+- replace removed ExecutorContext.workspace with projectsConfigurations ([8c22e9c](https://github.com/amaralc/explore/commit/8c22e9c269db37f042d35573bbd6708d9f5af100))
+- resolve CI failure from invalid Nx Cloud token on Dependabot PRs ([2f5c23a](https://github.com/amaralc/explore/commit/2f5c23a4bbea5f62cb750973a3f6402c8b04c0f3)), closes [#147](https://github.com/amaralc/explore/issues/147)
+- resolve lint failures caused by cross-boundary imports and archived project ([21d3645](https://github.com/amaralc/explore/commit/21d3645dc6654dc23e1d634e1d3615fd57556681)), closes [#145](https://github.com/amaralc/explore/issues/145)
+- resolve unit test failures from Node 24 and ESM compat ([7556808](https://github.com/amaralc/explore/commit/75568081947ca39c450e624a2c1faa0ed55fedce))
+
+## [0.98.0-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.97.0...peerlab@0.98.0-beta.0) (2026-02-02)
+
+### Features
+
+- add reference to firebase alternative logto ([398ef52](https://github.com/amaralc/explore/commit/398ef528ed3222013282d66a3e28fc44fd8d678a))
+- **crossplane-postgresql:** add Crossplane PostgreSQL module with v2 pipeline mode ([4b9631b](https://github.com/amaralc/explore/commit/4b9631b366caf09fae7a95f4bd00b0af14c2f78a))
+- **gcp-gke-cluster:** add GKE cluster Terraform module ([f138116](https://github.com/amaralc/explore/commit/f138116ed0e91b92c43eafc64c16cd398a821c36))
+- **gcp-gke-crossplane:** add Crossplane installation Terraform module ([5c8e914](https://github.com/amaralc/explore/commit/5c8e91416562cd1fb0987eca63d81313ec8977fb))
+- **security-iam-svc:** add Logto IAM service with IaC, K8s manifests, and local setup ([f57efc4](https://github.com/amaralc/explore/commit/f57efc494a6a3981bae51ee323a66afca47c3d4c))
+- **shell-iac:** add IAM service reference to environment module ([8d95f72](https://github.com/amaralc/explore/commit/8d95f727009299e0220fc67213eb1aa641d5f5fd))
+
+### Bug Fixes
+
+- correct pagination offset calculation in peers repositories ([d3df2e3](https://github.com/amaralc/explore/commit/d3df2e3105c922ea4d89fe9df517e78b7ac5a7ba))
+- **gcp-gke-cluster:** add VPC flow logs and private cluster config ([61692eb](https://github.com/amaralc/explore/commit/61692ebeedeadd41f10f9b34d5272ea823f2b305))
+- **gcp-gke-cluster:** enable private endpoint for GKE control plane ([bf9da0b](https://github.com/amaralc/explore/commit/bf9da0b6a9ad391df5206b030f11469a4539ed08))
+- **security-iam-svc:** disable service account token automounting in pods ([5e848e2](https://github.com/amaralc/explore/commit/5e848e2f0bf636fc6279e91c59748fd7545c9b04))
+- **security-iam-svc:** pin Logto image version and add storage requests ([697496a](https://github.com/amaralc/explore/commit/697496aa9cd93972f10c100125248bcf309a9b23))
+- **security-iam-svc:** replace hardcoded PostgreSQL password with generated secret ([fc8c335](https://github.com/amaralc/explore/commit/fc8c33515f01d984dd4c5590ebd17c97dd5eaf76))
+- **security-iam-svc:** replace hardcoded PostgreSQL username with generated secret ([61c4bab](https://github.com/amaralc/explore/commit/61c4bab4434e0dcf4ca22866b278a3da98197830))
+
+### Reverts
+
+- Revert "ci: remove pnpm store cache for now" ([601760a](https://github.com/amaralc/explore/commit/601760a9ed69195f2506ff3a6788e83016cb1902))
+
 ## [0.97.0](https://github.com/amaralc/explore/compare/peerlab@0.96.0...peerlab@0.97.0) (2025-10-04)
 
 ### Features

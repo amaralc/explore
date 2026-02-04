@@ -2,7 +2,7 @@ import { ReactNode, Suspense, type FC } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from 'react-oidc-context';
 import { Provider } from 'react-redux';
-import { ErrorBoundary } from '../../shared-ui-components/src/lib/errors/error-boundary';
+import { ErrorBoundary } from '@peerlab/kernel/shared-ui-components/lib/errors/error-boundary';
 import { oidcConfig } from './config';
 import { reduxThemeSettingsRepository } from './domains/kernel/theme-settings/adapters/redux-repository';
 import { CustomThemeProvider } from './domains/kernel/theme-settings/components/custom-theme-provider';
