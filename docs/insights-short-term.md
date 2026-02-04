@@ -2,6 +2,14 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
+- [2026-02-04 03:50 UTC] GitHub downgrades GITHUB_TOKEN to read-only for fork PR runs
+- [2026-02-04 03:50 UTC] `pull_request_target` grants base repo permissions; avoid write perms
+- [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
+- [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
+- [2026-02-04 03:30 UTC] Issue #165 tracks merging CI and CodeQL into one PR workflow
+- [2026-02-04 03:30 UTC] Per-job permissions scope access when combining workflows
+- [2026-02-04 03:30 UTC] CodeQL schedule/push triggers need preservation when merging
 - [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
 - [2026-02-04 03:15 UTC] NX cache job gates deploy to ensure lint/test/build pass first
 - [2026-02-04 03:15 UTC] GitHub env with NX read-write token enables shared cache across jobs
@@ -94,12 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-02-11 09:16 UTC] API gateway Dockerfile updated for latest base image security fixes
 - [2025-02-11 09:14 UTC] Management shell Dockerfile patched to reduce container vulns
 - [2025-02-08 10:05 UTC] Skill set browser Dockerfile hardened against known CVEs
-- [2025-01-12 17:37 UTC] Instance entity tests validate initialization from taxon schemas
-- [2025-01-12 17:36 UTC] Instance initialization logic derived from taxon schema definition
-- [2025-01-12 17:33 UTC] Duplicate reduction keeps domain model lean and unambiguous
-- [2025-01-11 22:19 UTC] Refactoring reduces cognitive complexity of compatibility checks
-- [2025-01-11 22:09 UTC] Instance schema defines the format of the entire instance object
-- [2025-01-11 19:27 UTC] Backward compatibility validation added to JSON schema validator
-- [2025-01-11 13:34 UTC] Setup speed improvements shorten feedback loop for developers
-- [2025-01-11 13:27 UTC] Removing Docker init requirement speeds up fresh installations
 
