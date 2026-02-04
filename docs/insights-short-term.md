@@ -2,6 +2,21 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 02:15 UTC] Sustainability vision: leanest path to value, no waste, no quality compromise
+- [2026-02-05 02:00 UTC] Catchy visions use active voice: system finds/fixes, software adapts
+- [2026-02-05 01:45 UTC] Concise vision statements fuse multiple influences into one phrase
+- [2026-02-05 01:30 UTC] Agility vision: software that flows like water and is easy to change (Beck)
+- [2026-02-05 01:15 UTC] Issue #169 reframed as 3-month target condition with current-vs-target metrics
+- [2026-02-05 01:15 UTC] README Toyota Kata Visions section holds perennial north-star goals
+- [2026-02-05 01:15 UTC] Target conditions use current-vs-target metric tables for measurability
+- [2026-02-05 01:00 UTC] Toyota Kata vision is perennial; target conditions are time-bound
+- [2026-02-05 01:00 UTC] GH issues suit target conditions; visions belong in persistent docs
+- [2026-02-05 01:00 UTC] GitHub Projects custom fields + insights charts track metrics natively
+- [2026-02-05 00:45 UTC] Toyota Kata visions separate outcome metrics from process metrics
+- [2026-02-05 00:45 UTC] MTTD and MTTR quantify vulnerability detection and remediation speed
+- [2026-02-05 00:30 UTC] Issue #169 sets security vision: patch vulns before external discovery
+- [2026-02-05 00:30 UTC] Toyota Kata vision label categorizes long-term target conditions in GH issues
+- [2026-02-05 00:30 UTC] Security SLA targets per severity level quantify patching urgency
 - [2026-02-05 00:15 UTC] Vitest 1.x incompatible with Vite 7.x; SSR internals changed across majors
 - [2026-02-05 00:15 UTC] `__vite_ssr_exportName__` error signals Vite/Vitest version mismatch
 - [2026-02-05 00:15 UTC] KafkaJS `ConsumerSubscribeTopics` changed `topic` to `topics` (array)
@@ -88,18 +103,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-10-22 01:49 UTC] Socket.dev integration validates supply chain security of dependencies
 - [2025-10-04 22:27 UTC] Logto identified as open-source Firebase Auth alternative
 - [2025-10-04 20:48 UTC] Conventional releases with Lerna automate changelog generation
-- [2025-10-04 20:48 UTC] Adjusting dependencies after refactors keeps the build graph consistent
-- [2025-10-04 15:21 UTC] Moving researchers lib aligns code location with team ownership
-- [2025-10-04 15:12 UTC] Docusaurus executor in kernel team centralizes shared build tooling
-- [2025-10-04 15:07 UTC] IaC modules under kernel team reflect infrastructure as shared concern
-- [2025-10-04 14:29 UTC] Pinning Node.js to 24.5.0 ensures consistent runtime across envs
-- [2025-10-04 14:28 UTC] Documenting AI impressions captures emerging tool evaluations
-- [2025-08-10 14:13 UTC] Team-based folder structure replaces flat app-centric layout
-- [2025-08-10 14:07 UTC] NoSQL injection vulnerability eliminated via input sanitization
-- [2025-08-10 13:35 UTC] README improvements reduce onboarding friction for new contributors
-- [2025-08-10 13:16 UTC] Renaming apps/ to teams/ encodes Conway's Law in the file tree
-- [2025-08-09 23:57 UTC] Versioning environments as v1.0.0 enables parallel environment evolution
-- [2025-08-09 22:03 UTC] Upgrading to Node 24 keeps runtime aligned with LTS schedule
-- [2025-08-09 21:54 UTC] Explicit delivery channels clarify deployment target per service
-- [2025-08-09 21:54 UTC] Node.js 24 upgrade required coordinated dependency adjustments
 

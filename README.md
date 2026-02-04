@@ -19,6 +19,12 @@ A world where universities are as popular as shopping centers and the scientific
 
 Communication, Adaptability, Resilience, Courage, Respect, Continuous Learning and Experimentation.
 
+## Toyota Kata — Visions
+
+- **Security**: Secure by design, compliant by default — a system that find and fix its own weaknesses faster than any attacker ever could.
+- **Agility**: Software so easy to change that adapting to new demands is the default, not the exception.
+- **Sustainability**: The leanest path to value — no wasted effort, no unnecessary cost, no compromise on quality.
+
 # Setup
 
 ## Requirements
