@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.99.0](https://github.com/amaralc/explore/compare/peerlab@0.98.0...peerlab@0.99.0) (2026-02-04)
+
+### Features
+
+- add load insights hook ([729ae9e](https://github.com/amaralc/explore/commit/729ae9ee066b3b291a8eef497801b12a5272a0a5))
+
+### Bug Fixes
+
+- **ci:** merge CodeQL into CI workflow for PR runs ([1c741af](https://github.com/amaralc/explore/commit/1c741af77a9a929e43c439f0837bdf522b13ac17)), closes [#165](https://github.com/amaralc/explore/issues/165)
+- **ci:** upgrade CodeQL actions from v3 to v4 ([12a106f](https://github.com/amaralc/explore/commit/12a106fb75fda7fe1f494bea86659db93bfdf833))
+- inject context on session start ([8388154](https://github.com/amaralc/explore/commit/8388154700bab318335ef25ae15c93035c1ea23c))
+
 ## [0.98.0](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.5...peerlab@0.98.0) (2026-02-04)
 
 ### Bug Fixes
