@@ -23,6 +23,8 @@
     "release:publish": "nx release publish",
     "prerelease": "nx release --skip-publish --specifier=prerelease --preid=beta",
     "prerelease:no-push": "nx release --skip-publish --specifier=prerelease --preid=beta --git-commit=false --git-tag=false",
+    "graduate": "nx release --skip-publish",
+    "graduate:no-push": "nx release --skip-publish --git-commit=false --git-tag=false",
     "preminor": "nx release --skip-publish --specifier=preminor --preid=beta",
     "preminor:no-push": "nx release --skip-publish --specifier=preminor --preid=beta --git-commit=false --git-tag=false",
     "premajor": "nx release --skip-publish --specifier=premajor --preid=beta",
