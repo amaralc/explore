@@ -145,6 +145,7 @@
     }
   ],
   "release": {
+    "versionPlans": true,
     "git": {
       "commitMessage": "chore(release): [skip-github-pipeline]"
     },
@@ -153,14 +154,6 @@
     },
     "changelog": {
       "workspaceChangelog": {
-        "file": "CHANGELOG.md",
-        "createRelease": "github",
-        "authors": false,
-        "applyUsernameToAuthors": false,
-        "commitReferences": true,
-        "versionTitleDate": true
-      },
-      "projectChangelogs": {
         "renderOptions": {
           "authors": false,
           "applyUsernameToAuthors": false,
