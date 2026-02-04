@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.98.0-beta.5](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.4...peerlab@0.98.0-beta.5) (2026-02-04)
+
+### Bug Fixes
+
+- remove custom CodeQL workflow to resolve conflict with default setup ([b90ab9f](https://github.com/amaralc/explore/commit/b90ab9fe1c964dd98b24f284766dce9a0b9b55aa))
+
 ## [0.98.0-beta.4](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.3...peerlab@0.98.0-beta.4) (2026-02-03)
 
 **Note:** Version bump only for package peerlab
