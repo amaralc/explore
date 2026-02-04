@@ -178,10 +178,20 @@ Always run `pnpm prisma:generate:postgres` after schema changes and before build
 
 ## Release Management
 
-- Uses conventional commits with Lerna
-- Automated changelog generation
+- Uses NX Release with conventional commits
+- Automated CHANGELOG.md generation via custom renderer (changelog-preset.config.js)
 - Release tags follow pattern: `peerlab@{version}`
-- Commands: `pnpm release`, `pnpm prerelease`
+- Fixed versioning across all projects
+- Commands:
+  - `pnpm release`: Create release with version bump and changelog
+  - `pnpm release:no-push`: Create release without committing/tagging
+  - `pnpm prerelease`: Create beta prerelease
+  - `pnpm preminor`: Create preminor version with beta preid
+  - `pnpm premajor`: Create premajor version with beta preid
+  - `pnpm release:version`: Run version bump only
+  - `pnpm release:changelog`: Generate changelog only
+  - `pnpm release:publish`: Publish packages (when needed)
+  - All commands support `:no-push` variants for local testing
 
 ## Environment Variables
 
