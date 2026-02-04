@@ -2,6 +2,10 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 19:00 UTC] Team Topologies stream-aligned type fits domain-delivery teams
+- [2026-02-04 19:00 UTC] Team README format: Type, Mission, Vision captures identity concisely
+- [2026-02-04 19:00 UTC] People team owns researchers, orgs, and member interactions
+- [2026-02-04 19:00 UTC] Things team owns assets, equipment, tools, and materials catalog
 - [2026-02-04 18:30 UTC] Hook additionalContext must nest inside hookSpecificOutput object
 - [2026-02-04 12:58 UTC] SessionStart hooks inject file content as context via additionalContext JSON
 - [2026-02-04 12:58 UTC] Claude Code hooks have 12 trigger types for lifecycle automation
@@ -98,8 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-03-03 20:29 UTC] Renaming to forward compatibility clarifies schema evolution intent
 - [2025-02-25 09:57 UTC] Dockerfile vulnerability fixes reduce container attack surface
 - [2025-02-22 10:58 UTC] Org management API Dockerfile patched for known CVEs
-- [2025-02-19 11:20 UTC] Nanoid bumped to 3.3.8 to patch ID generation vulnerability
-- [2025-02-19 11:19 UTC] Snyk automated PRs continuously remediate known vulnerabilities
-- [2025-02-19 11:17 UTC] Backward compatibility validation ensures safe schema evolution
-- [2025-02-19 11:15 UTC] PNPM 10 upgrade modernizes package management tooling
 
