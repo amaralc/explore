@@ -1,20 +1,3 @@
-## 0.3.0 (2026-02-04)
-
-### 🩹 Fixes
-
-- upgrade vitest to 4 and fix kafka custom transport ([2cb3a48](https://github.com/amaralc/explore/commit/2cb3a48))
-- correct pagination offset calculation in peers repositories ([d3df2e3](https://github.com/amaralc/explore/commit/d3df2e3))
-- adjust dependencies and references ([2c6c20b](https://github.com/amaralc/explore/commit/2c6c20b))
-
-### 🧱 Updated Dependencies
-
-- Updated researchers-peers-core to 0.2.0
-
-### ❤️ Thank You
-
-- amaralc @amaralc
-- Calil Amaral @amaralc
-
 # Change Log
 
 All notable changes to this project will be documented in this file.

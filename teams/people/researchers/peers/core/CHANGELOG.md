@@ -1,18 +1,3 @@
-## 0.2.0 (2026-02-04)
-
-### 🩹 Fixes
-
-- address SonarCloud code smells ([f38cbd1](https://github.com/amaralc/explore/commit/f38cbd1))
-- replace deprecated faker.js APIs and increase MongoDB memory server timeout ([f00daa6](https://github.com/amaralc/explore/commit/f00daa6))
-- correct pagination offset calculation in peers repositories ([d3df2e3](https://github.com/amaralc/explore/commit/d3df2e3))
-- adjust dependencies and references ([2c6c20b](https://github.com/amaralc/explore/commit/2c6c20b))
-
-### ❤️ Thank You
-
-- amaralc @amaralc
-- Calil Amaral @amaralc
-- Claude Opus 4.5
-
 # Change Log
 
 All notable changes to this project will be documented in this file.
