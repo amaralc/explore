@@ -152,6 +152,7 @@
       "conventionalCommits": true
     },
     "changelog": {
+      "authors": false,
       "workspaceChangelog": {
         "file": "CHANGELOG.md",
         "createRelease": "github",
