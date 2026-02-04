@@ -2,6 +2,12 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
+- [2026-02-04 03:15 UTC] NX cache job gates deploy to ensure lint/test/build pass first
+- [2026-02-04 03:15 UTC] GitHub env with NX read-write token enables shared cache across jobs
+- [2026-02-04 03:15 UTC] `needs:` in Actions enforces job execution order and dependency gating
+- [2026-02-04 03:10 UTC] Modernizing action versions (v3->v4) aligns deploy with CI patterns
+- [2026-02-04 03:10 UTC] Using .nvmrc for Node version avoids hardcoded drift across workflows
 - [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
 - [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
 - [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
@@ -96,10 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2025-01-11 19:27 UTC] Backward compatibility validation added to JSON schema validator
 - [2025-01-11 13:34 UTC] Setup speed improvements shorten feedback loop for developers
 - [2025-01-11 13:27 UTC] Removing Docker init requirement speeds up fresh installations
-- [2025-01-11 13:20 UTC] Reduced setup time directly improves developer onboarding speed
-- [2024-12-10 02:35 UTC] Nanoid 3.3.8 patches predictable ID generation vulnerability
-- [2024-12-01 02:34 UTC] Next.js 15.0.3 upgrade enables latest React server components
-- [2024-11-30 23:31 UTC] Express 4.21.0 merge resolves upstream security patch
-- [2024-11-30 23:29 UTC] Vite 5.2.14 merge patches dev server security vulnerabilities
-- [2024-11-30 23:26 UTC] Express 4.20.0 intermediate merge validates upgrade path
 
