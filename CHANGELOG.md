@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.98.0](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.5...peerlab@0.98.0) (2026-02-04)
+
+### Bug Fixes
+
+- **ci:** add NX cache population job to build-and-deploy pipeline ([22661f2](https://github.com/amaralc/explore/commit/22661f227f6df25ebe64d666780a4e41b86c61c2)), closes [#163](https://github.com/amaralc/explore/issues/163)
+- **ci:** re-add CodeQL workflow for code scanning ([6a24c46](https://github.com/amaralc/explore/commit/6a24c4665688b72713c7f4af470b9598d35b81e2)), closes [#161](https://github.com/amaralc/explore/issues/161)
+- **deps:** override katex transitive dep to patch vulnerability ([5074dd3](https://github.com/amaralc/explore/commit/5074dd369dc44b15bc442a4296c0ce1ae2514e12)), closes [#159](https://github.com/amaralc/explore/issues/159)
+- **deps:** remove unused nextra deps and update insights ([bad70fb](https://github.com/amaralc/explore/commit/bad70fb767f7182b315607b41c6ada7aae88eb63))
+
 ## [0.98.0-beta.5](https://github.com/amaralc/explore/compare/peerlab@0.98.0-beta.4...peerlab@0.98.0-beta.5) (2026-02-04)
 
 ### Bug Fixes
