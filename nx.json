@@ -155,9 +155,7 @@
       "workspaceChangelog": {
         "file": "CHANGELOG.md",
         "createRelease": "github",
-        "renderOptions": {
-          "contributors": false
-        }
+        "authors": false
       }
     },
     "releaseTagPattern": "peerlab@{version}"
