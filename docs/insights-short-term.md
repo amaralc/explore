@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
 - [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
 - [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
 - [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
@@ -97,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
 - [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
 - [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
-- [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
 
 
