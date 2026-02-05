@@ -26,8 +26,11 @@ body:
     id: expected-result
     attributes:
       label: Expected Result
-      description: What do you expect to happen? How will you measure it?
-      placeholder: We expect that... and will measure by...
+      description: "What do you expect to happen? Be specific so you can tell if the result matches your expectation."
+      placeholder: |
+        e.g., We expect the audit to show fewer than 10 high-severity vulnerabilities
+        e.g., We expect the test to pass after adding null check on line 42
+        e.g., We expect to understand why the API returns 500 by reading the logs
     validations:
       required: true
 
