@@ -31,11 +31,11 @@ Set a 3-month horizon from the start date. Toyota Kata challenges are time-bound
 Copy everything below into the GitHub milestone description:
 
 ```markdown
-# Vision
+## Vision
 
 <1 sentence describing vision according to README.md>
 
-# Target Outcome
+## Target Outcome
 
 <1-2 sentences describing the desired end state. Use active voice and focus on what success looks like.>
 
@@ -65,15 +65,6 @@ Copy everything below into the GitHub milestone description:
 | Mean Time to Remediate (MTTR) — high | <Target> |
 | <Frequency or cadence metric> | <Target> |
 | <Quality or pass rate metric> | <Target> |
-
-## Known Obstacles
-
-- <High-level blocker categories — detail in obstacle issues>
-
-## First Steps
-
-- [ ] <Create target-condition issue(s) with current-vs-target metrics>
-- [ ] <Identify and document initial obstacles>
 ```
 
 ---

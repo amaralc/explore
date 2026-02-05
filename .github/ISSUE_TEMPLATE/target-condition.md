@@ -16,6 +16,8 @@ assignees: ''
 
 ## Qualitative Description
 
+<!-- Chose either the example table below, or BDD rules, and scenarios to describe current vs. target qualitative condition (both are valid) -->
+
 | Aspect | Current | Target |
 |--------|---------|--------|
 | Detection approach | <e.g., Reactive, manual> | <e.g., Automated, continuous> |
@@ -40,11 +42,3 @@ assignees: ''
 | Mean Time to Remediate (MTTR) — high | <Current> | <Target> |
 | <Frequency or cadence metric> | <Current> | <Target> |
 | <Quality or pass rate metric> | <Current> | <Target> |
-
-## Obstacles (Known)
-
-- <!-- Constraint outside direct control -->
-- <!-- Tool limitation -->
-- <!-- Upstream dependency risk -->
-- <!-- Known technical debt -->
-- <!-- Third-party dependency issue -->

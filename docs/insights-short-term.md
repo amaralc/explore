@@ -2,6 +2,14 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 21:35 UTC] Query orphaned issues via `--json | jq 'select(.milestone == null)'` for batch triage
+- [2026-02-05 21:15 UTC] Link closed issues to target-condition parents via `addSubIssue` for hierarchical tracking
+- [2026-02-05 20:45 UTC] Use BDD scenarios in obstacles to describe current blocking state, not desired outcomes
+- [2026-02-05 20:35 UTC] Target-condition issues reference README Toyota Kata Visions for the Vision section
+- [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
+- [2026-02-05 20:20 UTC] `gh issue edit` accepts multiple issue numbers for batch label/title updates
+- [2026-02-05 20:15 UTC] `gh issue edit --body` with heredoc enables batch issue updates to match templates
+- [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
 - [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
 - [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
 - [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
@@ -90,13 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 03:30 UTC] Per-job permissions scope access when combining workflows
 - [2026-02-04 03:30 UTC] CodeQL schedule/push triggers need preservation when merging
 - [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
-- [2026-02-04 03:15 UTC] NX cache job gates deploy to ensure lint/test/build pass first
-- [2026-02-04 03:15 UTC] GitHub env with NX read-write token enables shared cache across jobs
-- [2026-02-04 03:15 UTC] `needs:` in Actions enforces job execution order and dependency gating
-- [2026-02-04 03:10 UTC] Modernizing action versions (v3->v4) aligns deploy with CI patterns
-- [2026-02-04 03:10 UTC] Using .nvmrc for Node version avoids hardcoded drift across workflows
-- [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
-- [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
-- [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
 
 

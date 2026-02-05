@@ -1,4 +1,4 @@
-<!-- en-US -->
+<!-- any-pr -->
 
 # What and why was modified?
 
@@ -16,20 +16,20 @@
 - Click on the button...;
 - Evaluate that...
 
-<!-- pt-BR -->
+<!-- experiment record pr -->
 
-# O que e como foi modificado?
+## Experiment Record
 
-- Substitua este texto por uma descrição breve da modificação e razões que motivaram as alterações.
-- Adicione imagens de apoio para auxiliar na avaliação se necessário.
+| Field | Details |
+|-------|---------|
+| **Date and step** | _See title and interation or date field_ |
+| **Expected result and how to measure** | <!-- What do you expect? How will you know? --> |
+| **Coach** | <ul><li>[ ] N/A</li><li>[ ] @<!-- github handle --></li></ul> |
+| **Type of experiment** | <ul><li>[ ] Go and see</li><li>[ ] Exploratory</li><li>[ ] Testing hypothesis</li></ul> |
+| **What happened** | <!-- Actual outcome. Include data if available. --> |
+| **What did we learn** | <!-- Key insight. How does this change our understanding? --> |
 
-# Como foi modificado ?
 
-- Substitua este texto por uma descrição breve da abordagem utilizada para implementar a mudança;
-- Adicione os tópicos que julgar necessário;
+## Next step
 
-### Links de referência e etapas para avaliação
-
-- Acesse o link http://localhost:3000/xxx/dma;
-- Clique no botão...;
-- Avalie que...;
+<!-- Based on what we learned, what is the next experiment? Link to the new issue if created. -->
