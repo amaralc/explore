@@ -29,11 +29,11 @@ body:
       value: |
         | Aspect | Current | Target |
         |--------|---------|--------|
-        | Detection approach | | |
-        | Remediation process | | |
-        | Coverage scope | | |
-        | CI enforcement | | |
-        | Policy definition | | |
+        | Detection approach | e.g., Reactive, manual | e.g., Automated, continuous |
+        | Remediation process | e.g., Ad-hoc, unbounded | e.g., SLA-driven, tracked |
+        | Coverage scope | e.g., Direct deps only | e.g., Full transitive tree |
+        | CI enforcement | e.g., No gates | e.g., Blocking audit gate |
+        | Policy definition | e.g., Undefined SLAs | e.g., Severity-based SLAs |
     validations:
       required: true
 
@@ -45,8 +45,8 @@ body:
       value: |
         | Metric | Current | Target |
         |--------|---------|--------|
-        | | | |
-        | | | |
+        | e.g., Critical vulnerabilities | e.g., 3 | e.g., 0 |
+        | e.g., Test coverage % | e.g., 65% | e.g., 80% |
     validations:
       required: true
 
@@ -58,9 +58,9 @@ body:
       value: |
         | Metric | Current | Target |
         |--------|---------|--------|
-        | Mean Time to Detect (MTTD) | | |
-        | Mean Time to Remediate (MTTR) — critical | | |
-        | Mean Time to Remediate (MTTR) — high | | |
-        | | | |
+        | Mean Time to Detect (MTTD) | e.g., 7 days | e.g., 1 day |
+        | Mean Time to Remediate (MTTR) — critical | e.g., 14 days | e.g., 3 days |
+        | Mean Time to Remediate (MTTR) — high | e.g., 30 days | e.g., 7 days |
+        | e.g., Deployment frequency | e.g., weekly | e.g., daily |
     validations:
       required: false
