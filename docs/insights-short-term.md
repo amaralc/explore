@@ -2,6 +2,31 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 22:10 UTC] YAML issue forms add dropdowns, inputs, and validation over markdown templates
+- [2026-02-05 21:50 UTC] Bug templates use BDD Gherkin to contrast current (buggy) vs target (expected) behavior
+- [2026-02-05 21:45 UTC] PR templates with experiment records link Toyota Kata experiments to code changes
+- [2026-02-05 21:35 UTC] Query orphaned issues via `--json | jq 'select(.milestone == null)'` for batch triage
+- [2026-02-05 21:15 UTC] Link closed issues to target-condition parents via `addSubIssue` for hierarchical tracking
+- [2026-02-05 20:45 UTC] Use BDD scenarios in obstacles to describe current blocking state, not desired outcomes
+- [2026-02-05 20:35 UTC] Target-condition issues reference README Toyota Kata Visions for the Vision section
+- [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
+- [2026-02-05 20:20 UTC] `gh issue edit` accepts multiple issue numbers for batch label/title updates
+- [2026-02-05 20:15 UTC] `gh issue edit --body` with heredoc enables batch issue updates to match templates
+- [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
+- [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
+- [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
+- [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
+- [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
+- [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
+- [2026-02-05 13:00 UTC] GitHub templates map 1:1 to Toyota Kata artifacts: challenge, target, obstacle, experiment
+- [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
+- [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
+- [2026-02-05 12:15 UTC] Target-condition issue templates mirror milestone descriptions as umbrella tracking issues
+- [2026-02-05 11:45 UTC] Incremental PRs with remaining-work checklists ship partial progress without blocking
+- [2026-02-05 11:20 UTC] Issue templates for obstacle and experiment map Toyota Kata coaching cycle to GitHub
+- [2026-02-05 08:00 UTC] YAML issue templates in `.github/ISSUE_TEMPLATE/` auto-apply labels and standardize structure
+- [2026-02-05 07:30 UTC] Obstacle issues track blockers on the path to milestone target conditions
+- [2026-02-05 07:00 UTC] `gh issue delete <num> --yes` enables batch issue cleanup via shell loop
 - [2026-02-05 06:00 UTC] Skill `!` backtick syntax injects live CLI output as context at invocation time
 - [2026-02-05 05:30 UTC] `addSubIssue` GraphQL mutation links experiment issues as children of obstacles
 - [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
@@ -73,30 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
 - [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
 - [2026-02-04 03:30 UTC] Issue #165 tracks merging CI and CodeQL into one PR workflow
-- [2026-02-04 03:30 UTC] Per-job permissions scope access when combining workflows
-- [2026-02-04 03:30 UTC] CodeQL schedule/push triggers need preservation when merging
-- [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
-- [2026-02-04 03:15 UTC] NX cache job gates deploy to ensure lint/test/build pass first
-- [2026-02-04 03:15 UTC] GitHub env with NX read-write token enables shared cache across jobs
-- [2026-02-04 03:15 UTC] `needs:` in Actions enforces job execution order and dependency gating
-- [2026-02-04 03:10 UTC] Modernizing action versions (v3->v4) aligns deploy with CI patterns
-- [2026-02-04 03:10 UTC] Using .nvmrc for Node version avoids hardcoded drift across workflows
-- [2026-02-04 02:50 UTC] PR #162 re-adds CodeQL workflow with JS/TS and Actions scanning
-- [2026-02-04 02:45 UTC] `git show <commit>^:<file>` recovers content deleted in prior commits
-- [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
-- [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
-- [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
-- [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
-- [2026-02-04 02:00 UTC] GitHub issues track Dependabot failures needing manual resolution
-- [2026-02-04 01:50 UTC] Nextra 2.7.1 powers the kernel/dev-docs-browser documentation site
-- [2026-02-04 01:45 UTC] `pnpm view <pkg> versions --json` lists all published npm versions
-- [2026-02-04 01:45 UTC] Override vulnerable transitive dep directly, not parent, for safer fixes
-- [2026-02-04 01:30 UTC] Dependabot cannot update transitive deps when using pnpm
-- [2026-02-04 01:30 UTC] `pnpm.overrides` pins transitive dependency versions in lockfile
-- [2026-02-03 23:10 UTC] Removing custom CodeQL workflow resolves conflict with default setup
-- [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
-- [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
-- [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
-- [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 
 

@@ -1,0 +1,39 @@
+name: Obstacle
+description: Toyota Kata obstacle standing between current condition and target condition
+title: "Obstacle: "
+labels: ["obstacle"]
+body:
+  - type: textarea
+    id: obstacle-description
+    attributes:
+      label: Obstacle Description
+      description: Describe what is preventing progress toward the target condition. Be specific and observable. Use BDD Gherkin syntax if helpful.
+      placeholder: |
+        What is blocking progress?
+
+        Optional BDD format:
+        Given <context>
+        When <trigger>
+        Then <current blocking state>
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-blocks
+    attributes:
+      label: Why It Blocks Progress
+      description: Explain how this obstacle prevents reaching the target condition
+      placeholder: This blocks progress because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-experiments
+    attributes:
+      label: Suggested Experiments
+      description: List small steps to learn more about or address this obstacle
+      placeholder: |
+        - [ ] Smallest step to learn more
+        - [ ] Next experiment
+    validations:
+      required: false
