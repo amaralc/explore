@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 22:35 UTC] Experiment outcomes should compare actual vs expected and capture what surprised you
+- [2026-02-05 22:30 UTC] Experiment expected results must be specific enough to verify against actual outcomes
+- [2026-02-05 22:25 UTC] Kata experiment steps must be small, learning-focused, and actionable now
 - [2026-02-05 22:15 UTC] Pre-filled table examples in YAML forms guide users toward complete submissions
 - [2026-02-05 22:10 UTC] YAML issue forms add dropdowns, inputs, and validation over markdown templates
 - [2026-02-05 21:50 UTC] Bug templates use BDD Gherkin to contrast current (buggy) vs target (expected) behavior
@@ -95,8 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 04:10 UTC] CI workflow permission security identified as gap in long-term insights
 - [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
 - [2026-02-04 03:50 UTC] GitHub downgrades GITHUB_TOKEN to read-only for fork PR runs
-- [2026-02-04 03:50 UTC] `pull_request_target` grants base repo permissions; avoid write perms
-- [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
-- [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
 
 
