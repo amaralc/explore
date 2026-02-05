@@ -2,6 +2,13 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 23:40 UTC] Batch-verify all citations before finalizing; editions and co-authors often differ
+- [2026-02-05 23:30 UTC] Verify book authors via web search before adding citations to references
+- [2026-02-05 23:25 UTC] Kata Practice Guide and Level Up Agile complement theory with hands-on exercises
+- [2026-02-05 23:20 UTC] JIT reference format: Author (Year) *Title*, Edition, Publisher: Location
+- [2026-02-05 23:15 UTC] Reference sections linking practices to foundational books ground team conventions
+- [2026-02-05 23:10 UTC] `.github/DISCUSSIONS.md` serves as the welcome README for the GitHub Discussions tab
+- [2026-02-05 23:05 UTC] Discussions host open conversations; Issues track actionable work like bugs and experiments
 - [2026-02-05 22:50 UTC] Template chooser config.yml guides contributors to the right issue template
 - [2026-02-05 22:45 UTC] `gh pr create` with heredoc body enables quick PRs from multi-commit branches
 - [2026-02-05 22:35 UTC] Experiment outcomes should compare actual vs expected and capture what surprised you
@@ -95,12 +102,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 18:30 UTC] Hook additionalContext must nest inside hookSpecificOutput object
 - [2026-02-04 12:58 UTC] SessionStart hooks inject file content as context via additionalContext JSON
 - [2026-02-04 12:58 UTC] Claude Code hooks have 12 trigger types for lifecycle automation
-- [2026-02-04 04:15 UTC] Promoted fork PR token and pull_request_target security to long-term
-- [2026-02-04 04:10 UTC] CI workflow permission security identified as gap in long-term insights
-- [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
-- [2026-02-04 03:50 UTC] GitHub downgrades GITHUB_TOKEN to read-only for fork PR runs
-- [2026-02-04 03:50 UTC] `pull_request_target` grants base repo permissions; avoid write perms
-- [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
-- [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
 
 
