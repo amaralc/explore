@@ -219,7 +219,7 @@
     "@unleash/proxy-client-react": "3.6.0",
     "@untitled-ui/icons-react": "0.1.1",
     "@zitadel/react": "1.0.3",
-    "ajv": "8.12.0",
+    "ajv": "8.17.1",
     "ajv-formats": "3.0.1",
     "apexcharts": "3.41.0",
     "aws-amplify": "5.3.3",
