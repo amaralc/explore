@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 22:10 UTC] YAML issue forms add dropdowns, inputs, and validation over markdown templates
 - [2026-02-05 21:50 UTC] Bug templates use BDD Gherkin to contrast current (buggy) vs target (expected) behavior
 - [2026-02-05 21:45 UTC] PR templates with experiment records link Toyota Kata experiments to code changes
 - [2026-02-05 21:35 UTC] Query orphaned issues via `--json | jq 'select(.milestone == null)'` for batch triage
@@ -97,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
 - [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
 - [2026-02-04 03:30 UTC] Issue #165 tracks merging CI and CodeQL into one PR workflow
-- [2026-02-04 03:30 UTC] Per-job permissions scope access when combining workflows
 
 

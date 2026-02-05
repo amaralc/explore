@@ -1,0 +1,77 @@
+name: Bug
+description: Report undesired behavior using BDD to describe current vs expected
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: current-condition
+    attributes:
+      label: Current Condition (Undesired Behavior)
+      description: Describe the bug using BDD Gherkin syntax
+      placeholder: |
+        Given <preconditions>
+        When <action or trigger>
+        Then <what actually happens — the bug>
+      render: gherkin
+    validations:
+      required: true
+
+  - type: textarea
+    id: target-condition
+    attributes:
+      label: Target Condition (Expected Behavior)
+      description: Describe what should happen instead
+      placeholder: |
+        Given <same preconditions>
+        When <same action or trigger>
+        Then <what should happen instead>
+      render: gherkin
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Provide steps to reproduce the bug
+      placeholder: |
+        1. First step
+        2. Next step
+        3. Observe the bug
+    validations:
+      required: true
+
+  - type: input
+    id: branch-version
+    attributes:
+      label: Branch/Version
+      description: Which branch or version are you using?
+      placeholder: "e.g., main, v1.2.3"
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you running?
+      placeholder: "e.g., macOS 14.0, Ubuntu 22.04"
+    validations:
+      required: false
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node Version
+      description: What Node.js version are you using?
+      placeholder: "e.g., 20.x"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Screenshots, logs, error messages, or any other relevant information
+    validations:
+      required: false

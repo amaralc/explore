@@ -1,0 +1,66 @@
+name: Target Condition
+description: Toyota Kata target condition umbrella issue linked to a milestone
+title: "Target Condition: "
+labels: ["target-condition"]
+body:
+  - type: input
+    id: vision
+    attributes:
+      label: Vision
+      description: 1 sentence describing vision according to README.md
+      placeholder: "e.g., Software that flows like water..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: direction
+    attributes:
+      label: Direction
+      description: 1-2 sentences describing the desired shift. Use active voice.
+      placeholder: "Move from X to Y..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: qualitative-description
+    attributes:
+      label: Qualitative Description
+      description: Use either the table format or BDD rules/scenarios to describe current vs target
+      value: |
+        | Aspect | Current | Target |
+        |--------|---------|--------|
+        | Detection approach | | |
+        | Remediation process | | |
+        | Coverage scope | | |
+        | CI enforcement | | |
+        | Policy definition | | |
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome-metrics
+    attributes:
+      label: Outcome Metrics
+      description: Measurable outcomes with current baseline and target values
+      value: |
+        | Metric | Current | Target |
+        |--------|---------|--------|
+        | | | |
+        | | | |
+    validations:
+      required: true
+
+  - type: textarea
+    id: process-metrics
+    attributes:
+      label: Process Metrics
+      description: Process measurements with current baseline and target values
+      value: |
+        | Metric | Current | Target |
+        |--------|---------|--------|
+        | Mean Time to Detect (MTTD) | | |
+        | Mean Time to Remediate (MTTR) — critical | | |
+        | Mean Time to Remediate (MTTR) — high | | |
+        | | | |
+    validations:
+      required: false
