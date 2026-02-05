@@ -257,8 +257,8 @@ importers:
         specifier: 8.12.0
         version: 8.12.0
       ajv-formats:
-        specifier: 2.1.1
-        version: 2.1.1(ajv@8.12.0)
+        specifier: 3.0.1
+        version: 3.0.1(ajv@8.12.0)
       apexcharts:
         specifier: 3.41.0
         version: 3.41.0
@@ -32860,6 +32860,10 @@ snapshots:
       ajv: 8.13.0
 
   ajv-formats@2.1.1(ajv@8.12.0):
+    optionalDependencies:
+      ajv: 8.12.0
+
+  ajv-formats@3.0.1(ajv@8.12.0):
     optionalDependencies:
       ajv: 8.12.0
 
