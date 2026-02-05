@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
+- [2026-02-04 21:30 UTC] GitHub Projects iterations need manual date config for exact quarter alignment
 - [2026-02-04 21:12 UTC] `gh api graphql addProjectV2ItemById` links issues to GitHub Projects
 - [2026-02-04 21:08 UTC] Map CI/CD pain points to DORA metrics for measurable target conditions
 - [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
@@ -96,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 - [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
 - [2026-02-03 22:17 UTC] lerna 9.x required for nx >=21.5.3 project graph compatibility
-- [2026-02-03 20:25 UTC] Staged WIP on main transfers to feature branches via checkout -b
-- [2026-02-03 20:25 UTC] Closes #N in commit messages auto-links PRs to GitHub issues
+
 

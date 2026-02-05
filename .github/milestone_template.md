@@ -29,13 +29,15 @@ Set a 3-month horizon from the start date. Toyota Kata target conditions are tim
 Copy everything below into the GitHub milestone description:
 
 ```markdown
-## Target Condition (Toyota Kata) — 3 months
+# Vision
 
-### Direction
+<1 sentence describing vision according to README.md>
+
+# Direction
 
 <1-2 sentences describing the desired shift. Use active voice: "Move from X to Y.">
 
-### Qualitative Description
+## Qualitative Description
 
 | Aspect | Current | Target |
 |--------|---------|--------|
@@ -45,14 +47,14 @@ Copy everything below into the GitHub milestone description:
 | CI enforcement | <e.g., No gates> | <e.g., Blocking audit gate> |
 | Policy definition | <e.g., Undefined SLAs> | <e.g., Severity-based SLAs> |
 
-### Outcome Metrics
+## Outcome Metrics
 
 | Metric | Current | Target |
 |--------|---------|--------|
 | <What you want to improve> | <Measured baseline> | <Concrete target> |
 | <Coverage or count> | <Current value> | <Target value> |
 
-### Process Metrics
+## Process Metrics
 
 | Metric | Current | Target |
 |--------|---------|--------|
@@ -62,7 +64,7 @@ Copy everything below into the GitHub milestone description:
 | <Frequency or cadence metric> | <Current> | <Target> |
 | <Quality or pass rate metric> | <Current> | <Target> |
 
-### Obstacles (Known)
+## Obstacles (Known)
 
 - <Constraint outside direct control>
 - <Tool limitation>
@@ -70,7 +72,7 @@ Copy everything below into the GitHub milestone description:
 - <Known technical debt>
 - <Third-party dependency issue>
 
-### First Experiments
+## First Experiments
 
 - [ ] <Smallest step that moves toward the target condition>
 - [ ] <Address the most urgent items first>
