@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 22:50 UTC] Template chooser config.yml guides contributors to the right issue template
+- [2026-02-05 22:45 UTC] `gh pr create` with heredoc body enables quick PRs from multi-commit branches
 - [2026-02-05 22:35 UTC] Experiment outcomes should compare actual vs expected and capture what surprised you
 - [2026-02-05 22:30 UTC] Experiment expected results must be specific enough to verify against actual outcomes
 - [2026-02-05 22:25 UTC] Kata experiment steps must be small, learning-focused, and actionable now
@@ -22,7 +24,6 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
 - [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
 - [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
-- [2026-02-05 13:00 UTC] GitHub templates map 1:1 to Toyota Kata artifacts: challenge, target, obstacle, experiment
 - [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
 - [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
 - [2026-02-05 12:15 UTC] Target-condition issue templates mirror milestone descriptions as umbrella tracking issues
@@ -98,5 +99,8 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 04:10 UTC] CI workflow permission security identified as gap in long-term insights
 - [2026-02-04 04:00 UTC] CodeQL Action v3 deprecated Dec 2026; upgraded to v4 in both workflows
 - [2026-02-04 03:50 UTC] GitHub downgrades GITHUB_TOKEN to read-only for fork PR runs
+- [2026-02-04 03:50 UTC] `pull_request_target` grants base repo permissions; avoid write perms
+- [2026-02-04 03:40 UTC] PR #166 implements CI and CodeQL workflow merge for PR runs
+- [2026-02-04 03:40 UTC] Separate workflows per trigger type preserve independent scheduling
 
 

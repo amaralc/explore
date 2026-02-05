@@ -89,7 +89,7 @@ Key insights from this repository.
 85. Configuration changes are the leading cause of major outages at scale.
 86. Fakes must pass contract tests run against both fake and real implementations.
 87. Pre-commit hooks exist but are opt-in for developer flexibility.
-88. Bilingual PR templates capture What, Why, and How.
+88. GitHub issue templates map 1:1 to Toyota Kata artifacts: challenge, target, obstacle, experiment.
 89. Structured JSON logging enables machine parsing without regex.
 90. Middleware latency tracking quantifies per-request performance.
 91. Shared UI component library ensures visual consistency.
