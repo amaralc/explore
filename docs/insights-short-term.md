@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
 - [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
 - [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
 - [2026-02-05 13:00 UTC] GitHub templates map 1:1 to Toyota Kata artifacts: challenge, target, obstacle, experiment
@@ -97,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 02:35 UTC] Issue #161 tracks re-adding CodeQL workflow after PR #158 removal
 - [2026-02-04 02:25 UTC] Restore unintended side-effect changes before committing targeted fixes
 - [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
-- [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
 
 
