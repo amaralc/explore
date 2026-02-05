@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
 - [2026-02-05 13:00 UTC] GitHub templates map 1:1 to Toyota Kata artifacts: challenge, target, obstacle, experiment
 - [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
 - [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
@@ -97,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 02:15 UTC] `pnpm install --ignore-scripts` updates lockfile without prepare hooks
 - [2026-02-04 02:15 UTC] pnpm install may prune deps not directly imported by workspace packages
 - [2026-02-04 02:00 UTC] GitHub issues track Dependabot failures needing manual resolution
-- [2026-02-04 01:50 UTC] Nextra 2.7.1 powers the kernel/dev-docs-browser documentation site
 
 
