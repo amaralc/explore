@@ -2,6 +2,10 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 11:20 UTC] Issue templates for obstacle and experiment map Toyota Kata coaching cycle to GitHub
+- [2026-02-05 08:00 UTC] YAML issue templates in `.github/ISSUE_TEMPLATE/` auto-apply labels and standardize structure
+- [2026-02-05 07:30 UTC] Obstacle issues track blockers on the path to milestone target conditions
+- [2026-02-05 07:00 UTC] `gh issue delete <num> --yes` enables batch issue cleanup via shell loop
 - [2026-02-05 06:00 UTC] Skill `!` backtick syntax injects live CLI output as context at invocation time
 - [2026-02-05 05:30 UTC] `addSubIssue` GraphQL mutation links experiment issues as children of obstacles
 - [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
@@ -94,9 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 01:30 UTC] Dependabot cannot update transitive deps when using pnpm
 - [2026-02-04 01:30 UTC] `pnpm.overrides` pins transitive dependency versions in lockfile
 - [2026-02-03 23:10 UTC] Removing custom CodeQL workflow resolves conflict with default setup
-- [2026-02-03 22:47 UTC] `gh api` PATCH disables CodeQL default setup to allow advanced workflow
-- [2026-02-03 22:45 UTC] CodeQL default and advanced setup conflict; only one can be active
-- [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
-- [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 
 
