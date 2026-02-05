@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 21:45 UTC] PR templates with experiment records link Toyota Kata experiments to code changes
 - [2026-02-05 21:35 UTC] Query orphaned issues via `--json | jq 'select(.milestone == null)'` for batch triage
 - [2026-02-05 21:15 UTC] Link closed issues to target-condition parents via `addSubIssue` for hierarchical tracking
 - [2026-02-05 20:45 UTC] Use BDD scenarios in obstacles to describe current blocking state, not desired outcomes
@@ -97,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 03:30 UTC] Issue #165 tracks merging CI and CodeQL into one PR workflow
 - [2026-02-04 03:30 UTC] Per-job permissions scope access when combining workflows
 - [2026-02-04 03:30 UTC] CodeQL schedule/push triggers need preservation when merging
-- [2026-02-04 03:20 UTC] Issue #163 tracks adding NX cache job to build-and-deploy pipeline
 
 
