@@ -9,6 +9,18 @@ body:
         ## Context
         - **Target condition:** see linked milestone
         - **Obstacle being addressed:** see parent issue
+  
+  - type: textarea
+    id: step
+    attributes:
+      label: Next Step
+      description: "What is the next step? Should be: (1) small enough to complete quickly, (2) designed to learn something specific about the obstacle, (3) something you can do now."
+      placeholder: |
+        e.g., Run `pnpm audit` to identify current vulnerability count
+        e.g., Pair with @teammate to understand the authentication flow
+        e.g., Add a single unit test for the failing edge case
+    validations:
+      required: true
 
   - type: textarea
     id: expected-result
