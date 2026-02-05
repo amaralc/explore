@@ -59,8 +59,11 @@ body:
     id: what-happened
     attributes:
       label: What Happened
-      description: Actual outcome. Include data if available.
-      placeholder: The actual result was...
+      description: "Actual outcome compared to expectation. Did it match? What surprised you?"
+      placeholder: |
+        e.g., The audit showed 32 high-severity vulnerabilities, not 10 as expected
+        e.g., The test passed, confirming the null check was the issue
+        e.g., Logs revealed the 500 is caused by a timeout, not a null pointer
     validations:
       required: false
 
@@ -68,16 +71,22 @@ body:
     id: what-learned
     attributes:
       label: What Did We Learn
-      description: Key insight. How does this change our understanding?
-      placeholder: We learned that...
+      description: "Key insight that changes our understanding of the obstacle or path forward."
+      placeholder: |
+        e.g., Most vulnerabilities come from a single deprecated dependency
+        e.g., The edge case only occurs when the user has no saved preferences
+        e.g., The timeout happens because the external API has a 2s delay
     validations:
       required: false
 
   - type: textarea
-    id: next-step
+    id: follow-up
     attributes:
-      label: Next Step
-      description: Based on what we learned, what is the next experiment? Link to the new issue if created.
-      placeholder: The next experiment is...
+      label: Follow-up Experiment
+      description: "Based on what we learned, what's the next small step? Link to the new experiment issue."
+      placeholder: |
+        e.g., Next: Remove deprecated dependency and re-run audit → #123
+        e.g., Next: Add default preferences for new users → #124
+        e.g., Obstacle resolved - no follow-up needed
     validations:
       required: false
