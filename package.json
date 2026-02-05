@@ -72,7 +72,7 @@
     "@nx/node": "22.4.4",
     "@nx/plugin": "22.4.4",
     "@nx/react": "22.4.4",
-    "@nx/storybook": "22.4.4",
+    "@nx/storybook": "22.4.5",
     "@nx/vite": "22.4.4",
     "@nx/vitest": "22.4.4",
     "@nx/web": "22.4.4",
