@@ -1,6 +1,6 @@
-# Milestone Template v2 (Toyota Kata Target Condition)
+# Milestone Template v2 (Toyota Kata Challenge)
 
-> Based on [M01 - Target Condition: Zero critical/high vulnerabilities with automated detection and patching](https://github.com/amaralc/explore/milestone/1)
+> Milestones define the challenge (desired outcome). Target conditions, obstacles, and experiments are tracked in linked issues.
 
 Use this template when creating a new GitHub milestone. Copy the description section into the milestone description field.
 
@@ -8,19 +8,21 @@ Use this template when creating a new GitHub milestone. Copy the description sec
 
 ## Milestone Title
 
-`Target Condition: <concise outcome statement>`
+`Challenge: <concise outcome statement that clearly describe in a catchy sentense the desired outcome>`
 
-**Naming convention:** `M<number> - <title>` (e.g., `M01 - Reduce dependency vulnerability noise`)
+**Naming convention:** `<title>` (e.g., `A new lab every day`)
 
 ## Labels
 
-Assign relevant labels to the milestone issues:
-- `target-condition` — marks the umbrella issue tracking the target condition itself
+Assign relevant labels to milestone issues:
+- `target-condition` — issues tracking measurable current-vs-target metrics
+- `obstacle` — issues documenting blockers to progress
+- `experiment` — issues testing ideas to address obstacles
 - Domain labels (e.g., `security`, `infra`, `dx`) — categorize the area of improvement
 
 ## Due Date
 
-Set a 3-month horizon from the start date. Toyota Kata target conditions are time-bound.
+Set a 3-month horizon from the start date. Toyota Kata challenges are time-bound.
 
 ---
 
@@ -33,52 +35,45 @@ Copy everything below into the GitHub milestone description:
 
 <1 sentence describing vision according to README.md>
 
-# Direction
+# Target Outcome
 
-<1-2 sentences describing the desired shift. Use active voice: "Move from X to Y.">
+<1-2 sentences describing the desired end state. Use active voice and focus on what success looks like.>
 
-## Qualitative Description
+## Qualitative Targets
 
-| Aspect | Current | Target |
-|--------|---------|--------|
-| Detection approach | <e.g., Reactive, manual> | <e.g., Automated, continuous> |
-| Remediation process | <e.g., Ad-hoc, unbounded> | <e.g., SLA-driven, tracked> |
-| Coverage scope | <e.g., Direct deps only> | <e.g., Full transitive tree> |
-| CI enforcement | <e.g., No gates> | <e.g., Blocking audit gate> |
-| Policy definition | <e.g., Undefined SLAs> | <e.g., Severity-based SLAs> |
+| Aspect | Target |
+|--------|--------|
+| Detection approach | <e.g., Automated, continuous> |
+| Remediation process | <e.g., SLA-driven, tracked> |
+| Coverage scope | <e.g., Full transitive tree> |
+| CI enforcement | <e.g., Blocking audit gate> |
+| Policy definition | <e.g., Severity-based SLAs> |
 
-## Outcome Metrics
+## Outcome Targets
 
-| Metric | Current | Target |
-|--------|---------|--------|
-| <What you want to improve> | <Measured baseline> | <Concrete target> |
-| <Coverage or count> | <Current value> | <Target value> |
+| Metric | Target |
+|--------|--------|
+| <What you want to improve> | <Concrete target> |
+| <Coverage or count> | <Target value> |
 
-## Process Metrics
+## Process Targets
 
-| Metric | Current | Target |
-|--------|---------|--------|
-| Mean Time to Detect (MTTD) | <Current> | <Target> |
-| Mean Time to Remediate (MTTR) — critical | <Current> | <Target> |
-| Mean Time to Remediate (MTTR) — high | <Current> | <Target> |
-| <Frequency or cadence metric> | <Current> | <Target> |
-| <Quality or pass rate metric> | <Current> | <Target> |
+| Metric | Target |
+|--------|--------|
+| Mean Time to Detect (MTTD) | <Target> |
+| Mean Time to Remediate (MTTR) — critical | <Target> |
+| Mean Time to Remediate (MTTR) — high | <Target> |
+| <Frequency or cadence metric> | <Target> |
+| <Quality or pass rate metric> | <Target> |
 
-## Obstacles (Known)
+## Known Obstacles
 
-- <Constraint outside direct control>
-- <Tool limitation>
-- <Upstream dependency risk>
-- <Known technical debt>
-- <Third-party dependency issue>
+- <High-level blocker categories — detail in obstacle issues>
 
-## First Experiments
+## First Steps
 
-- [ ] <Smallest step that moves toward the target condition>
-- [ ] <Address the most urgent items first>
-- [ ] <Evaluate alternative tools or approaches>
-- [ ] <Automate a currently manual process>
-- [ ] <Establish baseline measurements>
+- [ ] <Create target-condition issue(s) with current-vs-target metrics>
+- [ ] <Identify and document initial obstacles>
 ```
 
 ---
@@ -87,8 +82,9 @@ Copy everything below into the GitHub milestone description:
 
 Each milestone should have:
 
-1. **Umbrella issue** (label: `target-condition`) — tracks the overall target condition with the same description as the milestone. This issue stays open for the duration of the milestone.
-2. **Experiment issues** — individual, actionable tasks derived from the "First Experiments" checklist and obstacles encountered along the way. Close these as experiments complete.
+1. **Target-condition issues** (label: `target-condition`) — track specific measurable targets with current-vs-target metrics. Multiple target conditions may exist per milestone.
+2. **Obstacle issues** (label: `obstacle`) — document blockers with their own current-vs-target analysis.
+3. **Experiment issues** (label: `experiment`) — individual, actionable tasks to address obstacles. Close as experiments complete.
 
 ### Issue Linking Convention
 
@@ -101,8 +97,8 @@ Each milestone should have:
 ## Lifecycle
 
 1. **Create milestone** with title, description (from template above), and due date
-2. **Open umbrella issue** with `target-condition` label, assigned to the milestone
-3. **Run first experiments** — open issues for each, link to milestone
-4. **Review obstacles** — as new obstacles surface, add them to the umbrella issue and create experiment issues
-5. **Measure progress** — update the Current column in all three tables as conditions change
-6. **Close milestone** when target metrics are met or the time box expires (document outcomes either way)
+2. **Open target-condition issues** with current-vs-target metrics, assigned to the milestone
+3. **Document obstacles** — create obstacle issues for blockers identified
+4. **Run experiments** — open experiment issues to address obstacles
+5. **Measure progress** — update current values in target-condition and obstacle issues
+6. **Close milestone** when success criteria are met or the time box expires (document outcomes)
