@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-05 05:30 UTC] `addSubIssue` GraphQL mutation links experiment issues as children of obstacles
 - [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
 - [2026-02-04 21:30 UTC] GitHub Projects iterations need manual date config for exact quarter alignment
 - [2026-02-04 21:12 UTC] `gh api graphql addProjectV2ItemById` links issues to GitHub Projects
@@ -97,6 +98,5 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-03 22:23 UTC] `fix/<issue-num>-<desc>` branch naming links fixes to tracked issues
 - [2026-02-03 22:17 UTC] lerna 8.x bundles nx@18.x, incompatible with @nx/* v22 plugins
 - [2026-02-03 22:17 UTC] `pnpm why <pkg>` reveals transitive dependency version conflicts
-- [2026-02-03 22:17 UTC] lerna 9.x required for nx >=21.5.3 project graph compatibility
 
 
