@@ -2,6 +2,16 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-06 23:05 UTC] GitHub Actions `create` event fires on branches too; use `push` with `tags` instead
+- [2026-02-06 23:00 UTC] `git reset HEAD <file>` unstages files to exclude them from commits
+- [2026-02-06 22:55 UTC] GitHub Actions jobs need `environment: <name>` to access environment-scoped secrets
+- [2026-02-06 22:50 UTC] `gh api repos/{owner}/{repo}/environments/{name} -X PUT` creates GitHub environments
+- [2026-02-06 22:45 UTC] `gh secret set --env <name>` scopes secrets to specific GitHub environments
+- [2026-02-06 22:40 UTC] `gh secret set` adds secrets to repos; PAT creation requires GitHub web UI
+- [2026-02-06 22:35 UTC] GitHub Actions runners need `git config user.name/email` before committing
+- [2026-02-06 22:30 UTC] `[skip-github-pipeline]` in release commits prevents CI workflow infinite loops
+- [2026-02-06 20:50 UTC] Experiment expected-result tables with Aspect|Expected columns enable multi-criteria pass/fail
+- [2026-02-06 20:45 UTC] `gh issue create --milestone` requires milestone title, not number
 - [2026-02-06 00:00 UTC] Consolidate duplicate pnpm.overrides entries into single unbounded patterns
 - [2026-02-05 23:40 UTC] Batch-verify all citations before finalizing; editions and co-authors often differ
 - [2026-02-05 23:30 UTC] Verify book authors via web search before adding citations to references
@@ -93,15 +103,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 23:15 UTC] 78 npm vulns found: 3 critical, 32 high, mostly in transitive deps
 - [2026-02-04 23:15 UTC] Combining pnpm audit with Dependabot alerts gives full vuln coverage
 - [2026-02-04 23:15 UTC] `@nestjs/devtools-integration` pulls in 2 critical sandboxjs vulns
-- [2026-02-04 23:15 UTC] Docusaurus 2.x is a major source of high-severity transitive vulns
-- [2026-02-04 22:30 UTC] node-forge ASN.1 CVEs (2025-12816, 66031, 66030) patched via override
-- [2026-02-04 22:30 UTC] `>=` in pnpm.overrides resolves to latest matching release
-- [2026-02-04 19:00 UTC] Team Topologies stream-aligned type fits domain-delivery teams
-- [2026-02-04 19:00 UTC] Team README format: Type, Mission, Vision captures identity concisely
-- [2026-02-04 19:00 UTC] People team owns researchers, orgs, and member interactions
-- [2026-02-04 19:00 UTC] Things team owns assets, equipment, tools, and materials catalog
-- [2026-02-04 18:30 UTC] Hook additionalContext must nest inside hookSpecificOutput object
-- [2026-02-04 12:58 UTC] SessionStart hooks inject file content as context via additionalContext JSON
-- [2026-02-04 12:58 UTC] Claude Code hooks have 12 trigger types for lifecycle automation
-
-
