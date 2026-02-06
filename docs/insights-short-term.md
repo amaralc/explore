@@ -2,6 +2,12 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-06 23:45 UTC] GitHub Actions tag filters use glob patterns (`*`), not regex (`^$`, `+`)
+- [2026-02-06 23:40 UTC] NX Release requires `git.push: true` in config or `--git-push` flag to push commits/tags
+- [2026-02-06 23:35 UTC] Verify uncommitted changes match the issue before creating a linked branch
+- [2026-02-06 23:30 UTC] `gh issue comment` adds lessons learned to experiment issues for future reference
+- [2026-02-06 23:25 UTC] Schedule-only triggers for security scans reduce CI noise without sacrificing coverage
+- [2026-02-06 23:20 UTC] Same commit triggers multiple workflows independently; check workflow name to distinguish runs
 - [2026-02-06 23:15 UTC] Add explicit `permissions: contents: read` to workflows for least-privilege security
 - [2026-02-06 23:10 UTC] Pin GitHub Actions to full commit SHAs with `# vX` comments for supply chain security
 - [2026-02-06 23:05 UTC] GitHub Actions `create` event fires on branches too; use `push` with `tags` instead
@@ -96,9 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 00:15 UTC] Vitest 1.x incompatible with Vite 7.x; SSR internals changed across majors
 - [2026-02-05 00:15 UTC] `__vite_ssr_exportName__` error signals Vite/Vitest version mismatch
 - [2026-02-05 00:15 UTC] KafkaJS `ConsumerSubscribeTopics` changed `topic` to `topics` (array)
-- [2026-02-05 00:15 UTC] Dep upgrades for vulns can break build/test via API changes in new majors
-- [2026-02-04 23:45 UTC] Unbounded override `>=1.1.12` resolved brace-expansion to v4, broke minimatch
-- [2026-02-04 23:45 UTC] Cap pnpm.overrides with `<next-major` to prevent cross-major resolution
-- [2026-02-04 23:45 UTC] brace-expansion v1 exports callable function; v4 has different API shape
-- [2026-02-04 23:15 UTC] Issue #167 tracks eliminating all critical and high severity vulns
-- [2026-02-04 23:15 UTC] `pnpm audit --audit-level <level>` filters vulns by severity threshold
