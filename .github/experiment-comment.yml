@@ -1,0 +1,63 @@
+# Experiment Comment Template
+# Use this structure when commenting on experiment outcomes
+
+# ## What Happened
+# Actual outcome compared to expectation. Did it match? What surprised you?
+#
+# Examples:
+# - The audit showed 32 high-severity vulnerabilities, not 10 as expected
+# - The test passed, confirming the null check was the issue
+# - Logs revealed the 500 is caused by a timeout, not a null pointer
+
+# ## What Did We Learn
+# Key insight that changes our understanding of the obstacle or path forward.
+#
+# Examples:
+# - Most vulnerabilities come from a single deprecated dependency
+# - The edge case only occurs when the user has no saved preferences
+# - The timeout happens because the external API has a 2s delay
+
+# ## Follow-up Experiment
+# Based on what we learned, what's the next small step? Link to the new experiment issue.
+#
+# Examples:
+# - Next: Remove deprecated dependency and re-run audit → #123
+# - Next: Add default preferences for new users → #124
+# - Obstacle resolved - no follow-up needed
+
+fields:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What Happened
+      description: "Actual outcome compared to expectation. Did it match? What surprised you?"
+      placeholder: |
+        e.g., The audit showed 32 high-severity vulnerabilities, not 10 as expected
+        e.g., The test passed, confirming the null check was the issue
+        e.g., Logs revealed the 500 is caused by a timeout, not a null pointer
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-learned
+    attributes:
+      label: What Did We Learn
+      description: "Key insight that changes our understanding of the obstacle or path forward."
+      placeholder: |
+        e.g., Most vulnerabilities come from a single deprecated dependency
+        e.g., The edge case only occurs when the user has no saved preferences
+        e.g., The timeout happens because the external API has a 2s delay
+    validations:
+      required: false
+
+  - type: textarea
+    id: follow-up
+    attributes:
+      label: Follow-up Experiment
+      description: "Based on what we learned, what's the next small step? Link to the new experiment issue."
+      placeholder: |
+        e.g., Next: Remove deprecated dependency and re-run audit → #123
+        e.g., Next: Add default preferences for new users → #124
+        e.g., Obstacle resolved - no follow-up needed
+    validations:
+      required: false
