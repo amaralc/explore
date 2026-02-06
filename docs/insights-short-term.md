@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-06 23:10 UTC] Pin GitHub Actions to full commit SHAs with `# vX` comments for supply chain security
 - [2026-02-06 23:05 UTC] GitHub Actions `create` event fires on branches too; use `push` with `tags` instead
 - [2026-02-06 23:00 UTC] `git reset HEAD <file>` unstages files to exclude them from commits
 - [2026-02-06 22:55 UTC] GitHub Actions jobs need `environment: <name>` to access environment-scoped secrets
@@ -101,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 23:15 UTC] Issue #167 tracks eliminating all critical and high severity vulns
 - [2026-02-04 23:15 UTC] `pnpm audit --audit-level <level>` filters vulns by severity threshold
 - [2026-02-04 23:15 UTC] 78 npm vulns found: 3 critical, 32 high, mostly in transitive deps
-- [2026-02-04 23:15 UTC] Combining pnpm audit with Dependabot alerts gives full vuln coverage
-- [2026-02-04 23:15 UTC] `@nestjs/devtools-integration` pulls in 2 critical sandboxjs vulns
