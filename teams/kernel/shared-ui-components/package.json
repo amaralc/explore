@@ -1,6 +1,6 @@
 {
   "name": "@peerlab/kernel/shared-ui-components",
-  "version": "0.100.0",
+  "version": "0.100.1",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {

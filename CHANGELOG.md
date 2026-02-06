@@ -1,3 +1,10 @@
+## [0.100.1](https://github.com/amaralc/explore/compare/peerlab@0.100.0...peerlab@0.100.1) (2026-02-06)
+
+### 🩹 Fixes
+
+- update lockfile ([4cda6c7](https://github.com/amaralc/explore/commit/4cda6c7))
+- **deps:** upgrade @nyariv/sandboxjs to >=0.8.29 ([#226](https://github.com/amaralc/explore/issues/226))
+
 ## [0.100.0](https://github.com/amaralc/explore/compare/peerlab@0.99.2...peerlab@0.100.0) (2026-02-04)
 
 ### 🚀 Features
