@@ -1,3 +1,17 @@
+## [0.100.2-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.1...peerlab@0.100.2-beta.0) (2026-02-06)
+
+### 🚀 Features
+
+- **ci:** separate PR validation and CI release workflows ([#213](https://github.com/amaralc/explore/issues/213))
+
+### 🩹 Fixes
+
+- **ci:** stop running deploy to production workflow on all prs ([55ff47e](https://github.com/amaralc/explore/commit/55ff47e))
+- **ci:** pin GitHub Actions to commit SHAs for supply chain security ([ce5f4d0](https://github.com/amaralc/explore/commit/ce5f4d0))
+- **ci:** avoid duplicate run of codeql and security scans ([757f85b](https://github.com/amaralc/explore/commit/757f85b))
+- **ci:** add --git-push to prerelease and graduate scripts ([#213](https://github.com/amaralc/explore/issues/213))
+- **ci:** use explicit git push instead of NX Release --git-push ([030293a](https://github.com/amaralc/explore/commit/030293a))
+
 ## [0.100.1](https://github.com/amaralc/explore/compare/peerlab@0.100.0...peerlab@0.100.1) (2026-02-06)
 
 ### 🩹 Fixes
