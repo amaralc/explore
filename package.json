@@ -161,7 +161,7 @@
   },
   "dependencies": {
     "@commitlint/cli": "17.4.2",
-    "@commitlint/config-conventional": "17.4.2",
+    "@commitlint/config-conventional": "20.4.1",
     "@docusaurus/core": "2.4.1",
     "@docusaurus/preset-classic": "2.4.1",
     "@docusaurus/theme-mermaid": "2.4.1",
