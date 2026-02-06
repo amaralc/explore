@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-06 00:00 UTC] Consolidate duplicate pnpm.overrides entries into single unbounded patterns
 - [2026-02-05 23:40 UTC] Batch-verify all citations before finalizing; editions and co-authors often differ
 - [2026-02-05 23:30 UTC] Verify book authors via web search before adding citations to references
 - [2026-02-05 23:25 UTC] Kata Practice Guide and Level Up Agile complement theory with hands-on exercises

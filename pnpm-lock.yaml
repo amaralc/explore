@@ -63,13 +63,12 @@ overrides:
   undici@<6.23.0: '>=6.23.0'
   vite@>=5.0.0 <5.4.16: '>=5.4.16'
   tar@<7.5.7: '>=7.5.7'
-  '@nyariv/sandboxjs@<0.8.26': '>=0.8.26'
   diff@>=4.0.0 <4.0.4: '>=4.0.4'
   diff@>=5.0.0 <5.2.2: '>=5.2.2'
   fast-xml-parser@>=4.3.6 <=5.3.3: '>=5.3.4'
   validator@<13.15.22: '>=13.15.22'
   js-yaml@>=4.0.0 <4.1.1: '>=4.1.1'
-  '@nyariv/sandboxjs@<=0.8.26': '>=0.8.27'
+  '@nyariv/sandboxjs': '>=0.8.29'
   '@isaacs/brace-expansion@<=5.0.0': '>=5.0.1'
 
 importers:
