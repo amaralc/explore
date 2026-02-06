@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-06 23:55 UTC] NX Release --git-push is unreliable in CI; use explicit git push commands instead
 - [2026-02-06 23:45 UTC] GitHub Actions tag filters use glob patterns (`*`), not regex (`^$`, `+`)
 - [2026-02-06 23:40 UTC] NX Release requires `git.push: true` in config or `--git-push` flag to push commits/tags
 - [2026-02-06 23:35 UTC] Verify uncommitted changes match the issue before creating a linked branch
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 00:30 UTC] Security SLA targets per severity level quantify patching urgency
 - [2026-02-05 00:15 UTC] Vitest 1.x incompatible with Vite 7.x; SSR internals changed across majors
 - [2026-02-05 00:15 UTC] `__vite_ssr_exportName__` error signals Vite/Vitest version mismatch
-- [2026-02-05 00:15 UTC] KafkaJS `ConsumerSubscribeTopics` changed `topic` to `topics` (array)
