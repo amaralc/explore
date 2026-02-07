@@ -1,3 +1,7 @@
+## [0.100.4](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.7...peerlab@0.100.4) (2026-02-07)
+
+This release promotes peerlab@0.100.4-beta.7 to stable.
+
 ## [0.100.4-beta.7](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.6...peerlab@0.100.4-beta.7) (2026-02-07)
 
 This was a version bump only, there were no code changes.
