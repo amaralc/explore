@@ -1,3 +1,10 @@
+## [0.100.3](https://github.com/amaralc/explore/compare/peerlab@0.100.3-beta.0...peerlab@0.100.3) (2026-02-07)
+
+### 🩹 Fixes
+
+- adjust nx json ([02f011c](https://github.com/amaralc/explore/commit/02f011c))
+- set manifest root to update ([6c1e550](https://github.com/amaralc/explore/commit/6c1e550))
+
 ## [0.100.3-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.2-beta.2...peerlab@0.100.3-beta.0) (2026-02-07)
 
 ### 🩹 Fixes
