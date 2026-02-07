@@ -1,11 +1,15 @@
 {
   "name": "peerlab",
-  "version": "0.100.4-beta.3",
+  "version": "0.100.4-beta.6",
   "license": "MIT",
   "author": {
     "name": "Calil Amaral",
     "email": "amaral.calil@gmail.com"
   },
+  "workspaces": [
+    "teams/**",
+    "libs/**"
+  ],
   "packageManager": "pnpm@10.0.0",
   "scripts": {
     "people-skill-set-browser:build": "pnpm --filter ./teams/people/skill-set/browser run build",
@@ -14,11 +18,17 @@
     "git:discard:all": "git checkout -- .",
     "release": "nx release --skip-publish",
     "release:no-push": "nx release --skip-publish --git-commit=false --git-tag=false",
+    "release:version": "nx release version",
     "release:changelog": "nx release changelog",
     "release:publish": "nx release publish",
     "prerelease": "nx release --skip-publish --specifier=prerelease --preid=beta",
     "prerelease:no-push": "nx release --skip-publish --specifier=prerelease --preid=beta --git-commit=false --git-tag=false",
     "graduate": "nx release --skip-publish",
+    "graduate:no-push": "nx release --skip-publish --git-commit=false --git-tag=false",
+    "preminor": "nx release --skip-publish --specifier=preminor --preid=beta",
+    "preminor:no-push": "nx release --skip-publish --specifier=preminor --preid=beta --git-commit=false --git-tag=false",
+    "premajor": "nx release --skip-publish --specifier=premajor --preid=beta",
+    "premajor:no-push": "nx release --skip-publish --specifier=premajor --preid=beta --git-commit=false --git-tag=false",
     "consumer-with-api:serve": "make consumer-with-api-serve",
     "test:unit": "nx run-many --target=test --all=true",
     "env:setup": "cp .env.example .env",

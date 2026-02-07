@@ -1,5 +1,5 @@
-import DefaultChangelogRenderer from 'nx/release/changelog-renderer';
 import { execSync } from 'child_process';
+import DefaultChangelogRenderer from 'nx/release/changelog-renderer';
 
 const TAG_PREFIX = 'peerlab@';
 
@@ -27,6 +27,7 @@ export default class ChangelogRenderer extends DefaultChangelogRenderer {
 
     return `${headingLevel} ${this.changelogEntryVersion}${dateStr}`;
   }
+
 
   /**
    * When graduating a prerelease to stable, emit a summary instead of
