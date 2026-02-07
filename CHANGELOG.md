@@ -1,3 +1,9 @@
+## [0.100.4-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.3-beta.0...peerlab@0.100.4-beta.0) (2026-02-07)
+
+### 🩹 Fixes
+
+- detect graduation in changelog renderer to avoid duplicate entries ([f5ee605](https://github.com/amaralc/explore/commit/f5ee605))
+
 ## [0.100.3](https://github.com/amaralc/explore/compare/peerlab@0.100.3-beta.0...peerlab@0.100.3) (2026-02-07)
 
 ### 🩹 Fixes
