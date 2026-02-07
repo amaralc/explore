@@ -1,3 +1,7 @@
+## [0.100.4-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.1...peerlab@0.100.4-beta.2) (2026-02-07)
+
+This was a version bump only, there were no code changes.
+
 ## [0.100.4-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.0...peerlab@0.100.4-beta.1) (2026-02-07)
 
 ### 🩹 Fixes
