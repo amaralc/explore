@@ -1,0 +1,11 @@
+name: 'Log GCP_TEST Input'
+description: 'A reusable action to log the GCP_TEST input'
+inputs:
+  GCP_TEST:
+    description: 'Input for GCP_TEST'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh "${{ inputs.GCP_TEST }}"
+      shell: bash
