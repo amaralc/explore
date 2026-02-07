@@ -149,7 +149,10 @@
       "commitMessage": "chore(release): [skip-github-pipeline]"
     },
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "manifestRootsToUpdate": [
+        "{workspaceRoot}"
+      ]
     },
     "changelog": {
       "workspaceChangelog": {
