@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-07 21:00 UTC] Archived workflow files eventually cause more confusion than they prevent; prefer deletion
 - [2026-02-07 20:30 UTC] Docker Compose `${VAR:?msg}` substitution removes hardcoded secrets with fail-fast validation
 - [2026-02-07 20:15 UTC] Override `renderChangesByType()` to replace duplicated commit lists with graduation summaries
 - [2026-02-07 20:00 UTC] Renderers can detect graduation by comparing current stable version against previous prerelease tag
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 01:15 UTC] Issue #169 reframed as 3-month target condition with current-vs-target metrics
 - [2026-02-05 01:15 UTC] README Toyota Kata Visions section holds perennial north-star goals
 - [2026-02-05 01:15 UTC] Target conditions use current-vs-target metric tables for measurability
-- [2026-02-05 01:00 UTC] Toyota Kata vision is perennial; target conditions are time-bound
 
