@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-07 19:15 UTC] `manifestRootsToUpdate: ["."]` redirects NX Release version writes to root package.json
 - [2026-02-07 18:45 UTC] NX Release `projects: ["."]` fails silently without root project.json; omit for defaults
 - [2026-02-07 18:30 UTC] NX Release enforces `currentVersionResolver: "git-tag"` when using conventional commits
 - [2026-02-07 17:50 UTC] `nx release` without --specifier ignores prerelease tags; resolves from latest stable
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 01:00 UTC] GitHub Projects custom fields + insights charts track metrics natively
 - [2026-02-05 00:45 UTC] Toyota Kata visions separate outcome metrics from process metrics
 - [2026-02-05 00:45 UTC] MTTD and MTTR quantify vulnerability detection and remediation speed
-- [2026-02-05 00:30 UTC] Issue #169 sets security vision: patch vulns before external discovery
 
