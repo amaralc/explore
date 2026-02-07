@@ -23,7 +23,7 @@
     "release:publish": "nx release publish",
     "prerelease": "nx release --skip-publish --specifier=prerelease --preid=beta",
     "prerelease:no-push": "nx release --skip-publish --specifier=prerelease --preid=beta --git-commit=false --git-tag=false",
-    "graduate": "nx release --skip-publish --specifier=$(node -p \"require('./package.json').version.replace(/-.*/, '')\")",
+    "graduate": "nx release --skip-publish",
     "preminor": "nx release --skip-publish --specifier=preminor --preid=beta",
     "preminor:no-push": "nx release --skip-publish --specifier=preminor --preid=beta --git-commit=false --git-tag=false",
     "premajor": "nx release --skip-publish --specifier=premajor --preid=beta",

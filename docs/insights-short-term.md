@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-07 18:45 UTC] NX Release `projects: ["."]` fails silently without root project.json; omit for defaults
 - [2026-02-07 18:30 UTC] NX Release enforces `currentVersionResolver: "git-tag"` when using conventional commits
 - [2026-02-07 17:50 UTC] `nx release` without --specifier ignores prerelease tags; resolves from latest stable
 - [2026-02-07 00:00 UTC] GitHub Actions job-level permissions override workflow-level defaults
