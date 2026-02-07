@@ -1,6 +1,6 @@
 {
   "name": "@peerlab/docusaurus",
-  "version": "0.100.2-beta.0",
+  "version": "0.100.2-beta.1",
   "type": "commonjs",
   "executors": "./executors.json"
 }
