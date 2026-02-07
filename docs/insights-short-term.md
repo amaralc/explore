@@ -102,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 00:45 UTC] Toyota Kata visions separate outcome metrics from process metrics
 - [2026-02-05 00:45 UTC] MTTD and MTTR quantify vulnerability detection and remediation speed
 - [2026-02-05 00:30 UTC] Issue #169 sets security vision: patch vulns before external discovery
-- [2026-02-05 00:30 UTC] Toyota Kata vision label categorizes long-term target conditions in GH issues
 
