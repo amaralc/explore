@@ -1,3 +1,12 @@
+## [0.100.2-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.2-beta.1...peerlab@0.100.2-beta.2) (2026-02-07)
+
+### 🩹 Fixes
+
+- experiment to graduate prerelease ([60b4b41](https://github.com/amaralc/explore/commit/60b4b41))
+- set pnpm workspaces with root as project ([c5c1084](https://github.com/amaralc/explore/commit/c5c1084))
+- leave root project only ([243eb40](https://github.com/amaralc/explore/commit/243eb40))
+- **ci:** use nx release with correct workspace config ([436e2c5](https://github.com/amaralc/explore/commit/436e2c5))
+
 ## [0.100.2-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.2-beta.0...peerlab@0.100.2-beta.1) (2026-02-07)
 
 This was a version bump only, there were no code changes.
