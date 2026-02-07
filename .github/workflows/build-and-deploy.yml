@@ -8,11 +8,10 @@ on:
   #   branches:
   #     - production
 
-permissions:
-  contents: read
-
 jobs:
   nx-cache:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     environment: main
 
@@ -62,6 +61,8 @@ jobs:
 
   build:
     if: false # Disabled
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     # environment:
     #   name: core-platform-shell-iac-preview
@@ -155,6 +156,8 @@ jobs:
   deploy:
     needs: [nx-cache]
     if: true # Enabled
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     defaults:
       run:
