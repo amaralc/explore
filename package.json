@@ -6,6 +6,10 @@
     "name": "Calil Amaral",
     "email": "amaral.calil@gmail.com"
   },
+  "workspaces": [
+    "teams/**",
+    "libs/**"
+  ],
   "packageManager": "pnpm@10.0.0",
   "scripts": {
     "people-skill-set-browser:build": "pnpm --filter ./teams/people/skill-set/browser run build",
