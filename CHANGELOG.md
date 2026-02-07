@@ -1,38 +1,20 @@
-## [0.100.4-beta.3](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.2...peerlab@0.100.4-beta.3) (2026-02-07)
+## [0.100.2](https://github.com/amaralc/explore/compare/peerlab@0.100.2-beta.2...peerlab@0.100.2) (2026-02-07)
+
+### 🚀 Features
+
+- **ci:** separate PR validation and CI release workflows ([#213](https://github.com/amaralc/explore/issues/213))
 
 ### 🩹 Fixes
 
-- remove docker-compose files with hardcoded credentials ([#133](https://github.com/amaralc/explore/issues/133), [#135](https://github.com/amaralc/explore/issues/135))
-
-## [0.100.4-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.1...peerlab@0.100.4-beta.2) (2026-02-07)
-
-This was a version bump only, there were no code changes.
-
-## [0.100.4-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.0...peerlab@0.100.4-beta.1) (2026-02-07)
-
-### 🩹 Fixes
-
-- detect graduation in changelog renderer to avoid duplicate entries" ([630c81c](https://github.com/amaralc/explore/commit/630c81c))
-
-## [0.100.4-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.3-beta.0...peerlab@0.100.4-beta.0) (2026-02-07)
-
-### 🩹 Fixes
-
-- detect graduation in changelog renderer to avoid duplicate entries ([f5ee605](https://github.com/amaralc/explore/commit/f5ee605))
-
-## [0.100.3](https://github.com/amaralc/explore/compare/peerlab@0.100.3-beta.0...peerlab@0.100.3) (2026-02-07)
-
-### 🩹 Fixes
-
-- adjust nx json ([02f011c](https://github.com/amaralc/explore/commit/02f011c))
-- set manifest root to update ([6c1e550](https://github.com/amaralc/explore/commit/6c1e550))
-
-## [0.100.3-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.2-beta.2...peerlab@0.100.3-beta.0) (2026-02-07)
-
-### 🩹 Fixes
-
-- adjust nx json ([02f011c](https://github.com/amaralc/explore/commit/02f011c))
-- set manifest root to update ([6c1e550](https://github.com/amaralc/explore/commit/6c1e550))
+- experiment to graduate prerelease ([60b4b41](https://github.com/amaralc/explore/commit/60b4b41))
+- set pnpm workspaces with root as project ([c5c1084](https://github.com/amaralc/explore/commit/c5c1084))
+- leave root project only ([243eb40](https://github.com/amaralc/explore/commit/243eb40))
+- **ci:** stop running deploy to production workflow on all prs ([55ff47e](https://github.com/amaralc/explore/commit/55ff47e))
+- **ci:** pin GitHub Actions to commit SHAs for supply chain security ([ce5f4d0](https://github.com/amaralc/explore/commit/ce5f4d0))
+- **ci:** avoid duplicate run of codeql and security scans ([757f85b](https://github.com/amaralc/explore/commit/757f85b))
+- **ci:** add --git-push to prerelease and graduate scripts ([#213](https://github.com/amaralc/explore/issues/213))
+- **ci:** use explicit git push instead of NX Release --git-push ([030293a](https://github.com/amaralc/explore/commit/030293a))
+- **ci:** use nx release with correct workspace config ([436e2c5](https://github.com/amaralc/explore/commit/436e2c5))
 
 ## [0.100.2-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.2-beta.1...peerlab@0.100.2-beta.2) (2026-02-07)
 
