@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-07 18:30 UTC] NX Release enforces `currentVersionResolver: "git-tag"` when using conventional commits
 - [2026-02-07 17:50 UTC] `nx release` without --specifier ignores prerelease tags; resolves from latest stable
 - [2026-02-07 00:00 UTC] GitHub Actions job-level permissions override workflow-level defaults
 - [2026-02-06 23:55 UTC] NX Release --git-push is unreliable in CI; use explicit git push commands instead
