@@ -28,6 +28,37 @@ export default class ChangelogRenderer extends DefaultChangelogRenderer {
     return `${headingLevel} ${this.changelogEntryVersion}${dateStr}`;
   }
 
+  /**
+   * When graduating a prerelease to stable, emit a summary instead of
+   * repeating the same commits already listed under the beta entry.
+   */
+  protected override renderChangesByType(): string[] {
+    const previousVersion = this.findPreviousVersion();
+    if (previousVersion && this.isGraduation(previousVersion)) {
+      return [
+        '',
+        `This release promotes ${TAG_PREFIX}${previousVersion} to stable.`,
+      ];
+    }
+    return super.renderChangesByType();
+  }
+
+  /**
+   * A graduation is when the current version is stable and the previous
+   * version is a prerelease of the same major.minor.patch.
+   */
+  private isGraduation(previousVersion: string): boolean {
+    const currentVersion = this.changelogEntryVersion.replace(/^v/, '');
+    const isCurrentStable = !currentVersion.includes('-');
+    const isPreviousPrerelease = previousVersion.includes('-');
+    if (!isCurrentStable || !isPreviousPrerelease) {
+      return false;
+    }
+    // Check that the stable part matches (e.g. 0.100.3-beta.0 → 0.100.3)
+    const previousStable = previousVersion.replace(/-.*/, '');
+    return currentVersion === previousStable;
+  }
+
   private findPreviousVersion(): string | null {
     try {
       const result = execSync(
