@@ -234,7 +234,7 @@ Both services share the same GKE cluster and Crossplane installation but are iso
 - Test: `teardown-local.sh` removes the profile
 
 **GREEN** - Implement:
-- `local-postgresql-logto.yaml`: PG 17-alpine, user postgres, db logto (password via env var)
+- `local-postgresql-logto.yaml`: PG 17-alpine, user postgres/p0stgr3s, db logto
 - `local-postgresql-zitadel.yaml`: PG 16-alpine, user postgres/postgres, db zitadel
 - `setup-local.sh`: Create minikube profile, enable ingress addon, deploy both PGs, deploy both IAMs
 - `teardown-local.sh`: `minikube delete --profile peerlab-iam`
