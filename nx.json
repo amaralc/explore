@@ -151,7 +151,7 @@
     "version": {
       "conventionalCommits": true,
       "manifestRootsToUpdate": [
-        "{workspaceRoot}"
+        "."
       ]
     },
     "changelog": {
