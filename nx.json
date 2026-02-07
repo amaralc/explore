@@ -145,6 +145,9 @@
     }
   ],
   "release": {
+    "projects": [
+      "."
+    ],
     "git": {
       "commitMessage": "chore(release): [skip-github-pipeline]"
     },
