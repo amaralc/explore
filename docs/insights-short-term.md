@@ -80,7 +80,7 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 03:25 UTC] Lerna auto-generates version comparison links in changelogs; NX Release omits them
 - [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
 - [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
-- [2026-02-05 02:50 UTC] `nx release` (no --specifier) uses conventional commits from latest stable tag only
+- [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
 - [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
 - [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
 - [2026-02-05 02:45 UTC] NX Release `workspaceChangelog.file` configures CHANGELOG.md generation
@@ -102,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 01:00 UTC] GitHub Projects custom fields + insights charts track metrics natively
 - [2026-02-05 00:45 UTC] Toyota Kata visions separate outcome metrics from process metrics
 - [2026-02-05 00:45 UTC] MTTD and MTTR quantify vulnerability detection and remediation speed
-
