@@ -1,3 +1,10 @@
+## [0.100.4-beta.6](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.5...peerlab@0.100.4-beta.6) (2026-02-07)
+
+### 🩹 Fixes
+
+- **ci:** customize changelog avoiding eduplicats ([f857ac8](https://github.com/amaralc/explore/commit/f857ac8))
+- **ci:** rename to pre-release ([e518523](https://github.com/amaralc/explore/commit/e518523))
+
 ## [0.100.4-beta.5](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.4...peerlab@0.100.4-beta.5) (2026-02-07)
 
 ### 🩹 Fixes
