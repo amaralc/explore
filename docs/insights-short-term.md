@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-07 18:45 UTC] NX Release `projects: ["."]` fails silently without root project.json; omit for defaults
+- [2026-02-07 18:30 UTC] NX Release enforces `currentVersionResolver: "git-tag"` when using conventional commits
+- [2026-02-07 17:50 UTC] `nx release` without --specifier ignores prerelease tags; resolves from latest stable
 - [2026-02-07 00:00 UTC] GitHub Actions job-level permissions override workflow-level defaults
 - [2026-02-06 23:55 UTC] NX Release --git-push is unreliable in CI; use explicit git push commands instead
 - [2026-02-06 23:45 UTC] GitHub Actions tag filters use glob patterns (`*`), not regex (`^$`, `+`)
@@ -76,7 +79,7 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 03:25 UTC] Lerna auto-generates version comparison links in changelogs; NX Release omits them
 - [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
 - [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
-- [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
+- [2026-02-05 02:50 UTC] `nx release` (no --specifier) uses conventional commits from latest stable tag only
 - [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
 - [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
 - [2026-02-05 02:45 UTC] NX Release `workspaceChangelog.file` configures CHANGELOG.md generation
@@ -99,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 00:45 UTC] Toyota Kata visions separate outcome metrics from process metrics
 - [2026-02-05 00:45 UTC] MTTD and MTTR quantify vulnerability detection and remediation speed
 - [2026-02-05 00:30 UTC] Issue #169 sets security vision: patch vulns before external discovery
-- [2026-02-05 00:30 UTC] Toyota Kata vision label categorizes long-term target conditions in GH issues
-- [2026-02-05 00:30 UTC] Security SLA targets per severity level quantify patching urgency
-- [2026-02-05 00:15 UTC] Vitest 1.x incompatible with Vite 7.x; SSR internals changed across majors
+
