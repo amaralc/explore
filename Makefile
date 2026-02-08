@@ -71,11 +71,15 @@ clean:
 	docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml down -v
 
 # IAM Service (Logto on Kubernetes via Terraform)
+# Two-phase apply: Crossplane must be installed first so its CRDs exist
+# before Terraform can plan resources that reference them (XRD, Composition, etc.)
 iam-local-setup:
 	minikube status --profile peerlab-iam >/dev/null 2>&1 || \
 		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2 && \
 		minikube addons enable ingress --profile peerlab-iam
-	cd teams/kernel/shell-iac/local && terraform init && terraform apply -auto-approve
+	cd teams/kernel/shell-iac/local && terraform init
+	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target=module.crossplane
+	cd teams/kernel/shell-iac/local && terraform apply -auto-approve
 
 iam-local-teardown:
 	cd teams/kernel/shell-iac/local && terraform destroy -auto-approve

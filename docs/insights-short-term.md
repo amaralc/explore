@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 00:10 UTC] Crossplane provider-kubernetes needs explicit cluster-admin RBAC for cross-namespace resources
+- [2026-02-08 20:00 UTC] Makefile pre-steps ensure external deps (clusters, CRDs) exist before terraform runs
 - [2026-02-08 19:45 UTC] Terraform providers validate at plan time; create clusters before apply, not during it
 - [2026-02-08 19:15 UTC] Same Crossplane Claim selects cloud or local Composition via compositionRef switch
 - [2026-02-08 18:30 UTC] Crossplane manages cloud resources only; local envs use native K8s StatefulSets instead
@@ -100,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 02:45 UTC] NX Release `workspaceChangelog.file` configures CHANGELOG.md generation
 - [2026-02-05 02:45 UTC] `--git-commit=false --git-tag=false` creates local release without push
 - [2026-02-05 02:45 UTC] `nx release --specifier=prerelease --preid=beta` creates beta versions
-- [2026-02-05 02:45 UTC] PR #171 migrates from Lerna to NX Release, eliminating dep conflicts

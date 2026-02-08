@@ -66,11 +66,12 @@ resource "kubernetes_namespace_v1" "logto" {
 }
 
 module "logto_database" {
-  source           = "../../iac-modules/crossplane-postgresql"
-  composition_name = "postgresql-local"
-  database_name    = "logto"
-  namespace        = kubernetes_namespace_v1.logto.metadata[0].name
-  gcp_location     = "local"
+  source             = "../../iac-modules/crossplane-postgresql"
+  composition_name   = "postgresql-local"
+  database_name      = "logto"
+  namespace          = kubernetes_namespace_v1.logto.metadata[0].name
+  gcp_location       = "local"
+  kubeconfig_context = var.minikube_profile
 
   depends_on = [module.crossplane]
 }

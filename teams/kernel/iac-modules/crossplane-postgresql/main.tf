@@ -197,28 +197,47 @@ resource "kubernetes_manifest" "postgresql_local_composition" {
 # Claim -- references whichever composition is selected
 # =============================================================================
 
-resource "kubernetes_manifest" "postgresql_claim" {
-  manifest = {
-    apiVersion = "database.peerlab.io/v1alpha1"
-    kind       = "PostgreSQLInstance"
-    metadata = {
-      name      = local.instance_name
-      namespace = var.namespace
-    }
-    spec = {
-      parameters = {
-        storageGB = var.storage_gb
-        version   = var.postgresql_version
-        region    = var.gcp_location
-        tier      = var.tier
-      }
-      compositionRef = {
-        name = var.composition_name
-      }
-      writeConnectionSecretToRef = {
-        name = local.connection_secret
-      }
-    }
+# Use null_resource + kubectl to avoid plan-time CRD validation.
+# The PostgreSQLInstance CRD is created dynamically by the XRD above,
+# so it doesn't exist at plan time on fresh clusters.
+resource "null_resource" "postgresql_claim" {
+  triggers = {
+    instance_name     = local.instance_name
+    namespace         = var.namespace
+    storage_gb        = var.storage_gb
+    postgresql_version = var.postgresql_version
+    gcp_location      = var.gcp_location
+    tier              = var.tier
+    composition_name  = var.composition_name
+    connection_secret = local.connection_secret
+    context_flag      = var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""
+  }
+
+  provisioner "local-exec" {
+    command = <<-EOT
+      kubectl apply ${var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""} -f - <<'YAML'
+      apiVersion: database.peerlab.io/v1alpha1
+      kind: PostgreSQLInstance
+      metadata:
+        name: ${local.instance_name}
+        namespace: ${var.namespace}
+      spec:
+        parameters:
+          storageGB: ${var.storage_gb}
+          version: "${var.postgresql_version}"
+          region: "${var.gcp_location}"
+          tier: "${var.tier}"
+        compositionRef:
+          name: "${var.composition_name}"
+        writeConnectionSecretToRef:
+          name: "${local.connection_secret}"
+      YAML
+    EOT
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "kubectl delete postgresqlinstance ${self.triggers.instance_name} -n ${self.triggers.namespace} ${self.triggers.context_flag} --ignore-not-found || true"
   }
 
   depends_on = [

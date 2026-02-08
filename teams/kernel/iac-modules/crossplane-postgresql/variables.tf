@@ -59,3 +59,9 @@ variable "tier" {
   type        = string
   default     = "db-f1-micro"
 }
+
+variable "kubeconfig_context" {
+  description = "The kubectl context for local-exec commands (must match the target cluster)"
+  type        = string
+  default     = ""
+}
