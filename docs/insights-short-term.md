@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
+- [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
+- [2026-02-07 21:45 UTC] Revert-then-reapply isolates which changes actually matter from bundled noise
 - [2026-02-07 21:30 UTC] CI lint source map errors indicate wrong files being linted, not actual code violations
 - [2026-02-07 21:15 UTC] Confirm PR scope matches user intent before committing; over-scoping wastes review effort
 - [2026-02-07 21:00 UTC] Archived workflow files eventually cause more confusion than they prevent; prefer deletion
@@ -99,6 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 02:30 UTC] Removing Lerna eliminates its bundled nx transitive dependency conflicts
 - [2026-02-05 02:15 UTC] Sustainability vision: leanest path to value, no waste, no quality compromise
 - [2026-02-05 02:00 UTC] Catchy visions use active voice: system finds/fixes, software adapts
-- [2026-02-05 01:45 UTC] Concise vision statements fuse multiple influences into one phrase
-- [2026-02-05 01:30 UTC] Agility vision: software that flows like water and is easy to change (Beck)
-- [2026-02-05 01:15 UTC] Issue #169 reframed as 3-month target condition with current-vs-target metrics
