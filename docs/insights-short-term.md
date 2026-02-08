@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-08 18:00 UTC] Extract portable K8s resources into submodules so local and cloud share one definition
 - [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
 - [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
 - [2026-02-07 21:45 UTC] Revert-then-reapply isolates which changes actually matter from bundled noise
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 02:30 UTC] NX Release (`nx release`) replaces Lerna for versioning and changelogs
 - [2026-02-05 02:30 UTC] Removing Lerna eliminates its bundled nx transitive dependency conflicts
 - [2026-02-05 02:15 UTC] Sustainability vision: leanest path to value, no waste, no quality compromise
-- [2026-02-05 02:00 UTC] Catchy visions use active voice: system finds/fixes, software adapts

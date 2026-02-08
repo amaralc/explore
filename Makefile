@@ -70,9 +70,9 @@ kong-dbless:
 clean:
 	docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml down -v
 
-# IAM Service (Logto on Kubernetes)
+# IAM Service (Logto on Kubernetes via Terraform)
 iam-local-setup:
-	bash teams/kernel/security-iam-svc/local/setup-local.sh
+	cd teams/kernel/shell-iac/local && terraform init && terraform apply -auto-approve
 
 iam-local-teardown:
-	bash teams/kernel/security-iam-svc/local/teardown-local.sh
+	cd teams/kernel/shell-iac/local && terraform destroy -auto-approve
