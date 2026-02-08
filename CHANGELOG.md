@@ -1,3 +1,10 @@
+## [0.100.5-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.7...peerlab@0.100.5-beta.0) (2026-02-08)
+
+### 🩹 Fixes
+
+- **security:** remove docker-compose files with hardcoded credentials ([#53](https://github.com/amaralc/explore/issues/53))
+- **security:** move contents:read permission from workflow to job level ([#64](https://github.com/amaralc/explore/issues/64))
+
 ## [0.100.4](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.7...peerlab@0.100.4) (2026-02-07)
 
 This release promotes peerlab@0.100.4-beta.7 to stable.
