@@ -72,6 +72,9 @@ clean:
 
 # IAM Service (Logto on Kubernetes via Terraform)
 iam-local-setup:
+	minikube status --profile peerlab-iam >/dev/null 2>&1 || \
+		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2 && \
+		minikube addons enable ingress --profile peerlab-iam
 	cd teams/kernel/shell-iac/local && terraform init && terraform apply -auto-approve
 
 iam-local-teardown:
