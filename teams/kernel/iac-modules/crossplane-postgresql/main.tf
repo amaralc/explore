@@ -1,10 +1,11 @@
 # Crossplane PostgreSQL module
-# Deploys XRD, Composition, and a Claim for a CloudSQL PostgreSQL instance
-# Parameterized to support multiple databases (e.g., Logto PG17)
+# Deploys XRD, Composition, and a Claim for a PostgreSQL instance.
+# Supports both CloudSQL (GCP) and local (minikube) compositions.
 
 locals {
-  instance_name      = "${var.database_name}-${var.environment_name}"
-  connection_secret  = "${var.database_name}-db-connection"
+  instance_name     = "${var.database_name}-${var.environment_name}"
+  connection_secret = "${var.database_name}-db-connection"
+  is_local          = var.composition_name == "postgresql-local"
 }
 
 # CompositeResourceDefinition (XRD) for PostgreSQLInstance
@@ -71,8 +72,13 @@ resource "kubernetes_manifest" "function_patch_and_transform" {
   }
 }
 
-# Composition mapping XRD to GCP CloudSQL resources (Pipeline mode)
+# =============================================================================
+# Cloud Composition (GCP CloudSQL) -- only when composition_name == "postgresql-cloudsql"
+# =============================================================================
+
 resource "kubernetes_manifest" "postgresql_composition" {
+  count = local.is_local ? 0 : 1
+
   manifest = {
     apiVersion = "apiextensions.crossplane.io/v1"
     kind       = "Composition"
@@ -172,7 +178,25 @@ resource "kubernetes_manifest" "postgresql_composition" {
   ]
 }
 
-# Claim that provisions the actual database instance
+# =============================================================================
+# Local Composition (provider-kubernetes) -- only when composition_name == "postgresql-local"
+# =============================================================================
+
+resource "kubernetes_manifest" "postgresql_local_composition" {
+  count = local.is_local ? 1 : 0
+
+  manifest = yamldecode(file("${path.module}/compositions/postgresql-local.yaml"))
+
+  depends_on = [
+    kubernetes_manifest.postgresql_xrd,
+    kubernetes_manifest.function_patch_and_transform,
+  ]
+}
+
+# =============================================================================
+# Claim -- references whichever composition is selected
+# =============================================================================
+
 resource "kubernetes_manifest" "postgresql_claim" {
   manifest = {
     apiVersion = "database.peerlab.io/v1alpha1"
@@ -189,7 +213,7 @@ resource "kubernetes_manifest" "postgresql_claim" {
         tier      = var.tier
       }
       compositionRef = {
-        name = "postgresql-cloudsql"
+        name = var.composition_name
       }
       writeConnectionSecretToRef = {
         name = local.connection_secret
@@ -197,5 +221,8 @@ resource "kubernetes_manifest" "postgresql_claim" {
     }
   }
 
-  depends_on = [kubernetes_manifest.postgresql_composition]
+  depends_on = [
+    kubernetes_manifest.postgresql_composition,
+    kubernetes_manifest.postgresql_local_composition,
+  ]
 }

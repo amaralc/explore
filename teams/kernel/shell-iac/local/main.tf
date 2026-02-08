@@ -1,7 +1,7 @@
 # Local Environment - Terraform Root Module
-# Provisions the IAM stack locally using minikube + Kubernetes provider.
+# Provisions the IAM stack locally using minikube + Crossplane.
 # Mirrors the layered structure of the production environment module
-# but replaces GCP-specific resources with local equivalents.
+# but uses provider-kubernetes Composition instead of CloudSQL.
 #
 # Usage:
 #   terraform init
@@ -37,21 +37,20 @@ resource "null_resource" "minikube" {
 }
 
 # =============================================================================
-# Layer 2: Local PostgreSQL (StatefulSet on minikube)
+# Layer 2: Crossplane Bootstrap
 # =============================================================================
 
-resource "random_string" "pg_username" {
-  length  = 12
-  special = false
-  lower   = true
-  upper   = false
-  numeric = true
+module "crossplane" {
+  source              = "../../iac-modules/crossplane-local-bootstrap"
+  crossplane_version  = var.crossplane_version
+  kubeconfig_context  = var.minikube_profile
+
+  depends_on = [null_resource.minikube]
 }
 
-resource "random_password" "pg_password" {
-  length  = 32
-  special = false
-}
+# =============================================================================
+# Layer 3: Crossplane-managed PostgreSQL
+# =============================================================================
 
 resource "kubernetes_namespace_v1" "logto" {
   metadata {
@@ -66,136 +65,14 @@ resource "kubernetes_namespace_v1" "logto" {
   depends_on = [null_resource.minikube]
 }
 
-resource "kubernetes_secret_v1" "postgresql_credentials" {
-  metadata {
-    name      = "postgresql-credentials"
-    namespace = kubernetes_namespace_v1.logto.metadata[0].name
-  }
+module "logto_database" {
+  source           = "../../iac-modules/crossplane-postgresql"
+  composition_name = "postgresql-local"
+  database_name    = "logto"
+  namespace        = kubernetes_namespace_v1.logto.metadata[0].name
+  gcp_location     = "local"
 
-  data = {
-    POSTGRES_USER     = "pguser_${random_string.pg_username.result}"
-    POSTGRES_PASSWORD = random_password.pg_password.result
-  }
-}
-
-resource "kubernetes_stateful_set_v1" "postgresql" {
-  metadata {
-    name      = "postgresql"
-    namespace = kubernetes_namespace_v1.logto.metadata[0].name
-  }
-
-  spec {
-    service_name = "postgresql"
-    replicas     = 1
-
-    selector {
-      match_labels = {
-        app = "postgresql"
-      }
-    }
-
-    template {
-      metadata {
-        labels = {
-          app = "postgresql"
-        }
-      }
-
-      spec {
-        automount_service_account_token = false
-
-        container {
-          name  = "postgresql"
-          image = "postgres:17-alpine"
-
-          port {
-            container_port = 5432
-          }
-
-          env {
-            name = "POSTGRES_USER"
-            value_from {
-              secret_key_ref {
-                name = kubernetes_secret_v1.postgresql_credentials.metadata[0].name
-                key  = "POSTGRES_USER"
-              }
-            }
-          }
-
-          env {
-            name = "POSTGRES_PASSWORD"
-            value_from {
-              secret_key_ref {
-                name = kubernetes_secret_v1.postgresql_credentials.metadata[0].name
-                key  = "POSTGRES_PASSWORD"
-              }
-            }
-          }
-
-          env {
-            name  = "POSTGRES_DB"
-            value = "logto"
-          }
-
-          readiness_probe {
-            exec {
-              command = ["sh", "-c", "pg_isready -U $POSTGRES_USER"]
-            }
-            initial_delay_seconds = 5
-            period_seconds        = 5
-          }
-
-          resources {
-            requests = {
-              memory              = "128Mi"
-              cpu                 = "100m"
-              "ephemeral-storage" = "128Mi"
-            }
-            limits = {
-              memory              = "256Mi"
-              cpu                 = "250m"
-              "ephemeral-storage" = "256Mi"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_service_v1" "postgresql" {
-  metadata {
-    name      = "postgresql"
-    namespace = kubernetes_namespace_v1.logto.metadata[0].name
-  }
-
-  spec {
-    selector = {
-      app = "postgresql"
-    }
-
-    port {
-      port        = 5432
-      target_port = 5432
-    }
-  }
-}
-
-# =============================================================================
-# Layer 3: Credentials (Logto DB connection secret)
-# =============================================================================
-
-resource "kubernetes_secret_v1" "logto_db_credentials" {
-  metadata {
-    name      = "logto-db-credentials"
-    namespace = kubernetes_namespace_v1.logto.metadata[0].name
-  }
-
-  data = {
-    DB_URL = "postgres://pguser_${random_string.pg_username.result}:${random_password.pg_password.result}@postgresql.logto.svc.cluster.local:5432/logto"
-  }
-
-  depends_on = [kubernetes_stateful_set_v1.postgresql]
+  depends_on = [module.crossplane]
 }
 
 # =============================================================================
@@ -205,12 +82,9 @@ resource "kubernetes_secret_v1" "logto_db_credentials" {
 module "logto_k8s" {
   source         = "../../security-iam-svc/iac-logto-k8s"
   domain_name    = var.domain_name
-  db_secret_name = kubernetes_secret_v1.logto_db_credentials.metadata[0].name
-  namespace        = kubernetes_namespace_v1.logto.metadata[0].name
-  enable_ingress   = false # Use minikube service tunneling instead of GKE ingress
+  db_secret_name = "logto-db-credentials"
+  namespace      = kubernetes_namespace_v1.logto.metadata[0].name
+  enable_ingress = false # Use minikube service tunneling instead of GKE ingress
 
-  depends_on = [
-    kubernetes_secret_v1.logto_db_credentials,
-    kubernetes_service_v1.postgresql,
-  ]
+  depends_on = [module.logto_database]
 }

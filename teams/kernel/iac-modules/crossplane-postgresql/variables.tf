@@ -1,21 +1,35 @@
-variable "gcp_project_id" {
-  description = "The Google Cloud project ID"
+variable "composition_name" {
+  description = "Which Composition to apply and reference in the claim (postgresql-cloudsql or postgresql-local)"
   type        = string
+  default     = "postgresql-cloudsql"
+
+  validation {
+    condition     = contains(["postgresql-cloudsql", "postgresql-local"], var.composition_name)
+    error_message = "composition_name must be either 'postgresql-cloudsql' or 'postgresql-local'."
+  }
+}
+
+variable "gcp_project_id" {
+  description = "The Google Cloud project ID (not needed for local composition)"
+  type        = string
+  default     = ""
 }
 
 variable "gcp_location" {
-  description = "The Google Cloud project location (region)"
+  description = "The Google Cloud project location (region), or 'local' for minikube"
   type        = string
 }
 
 variable "environment_name" {
   description = "The deployment environment (branch-name, commit-hash, etc.)"
   type        = string
+  default     = "local"
 }
 
 variable "provider_config_name" {
-  description = "The Crossplane GCP ProviderConfig name"
+  description = "The Crossplane GCP ProviderConfig name (not needed for local composition)"
   type        = string
+  default     = ""
 }
 
 variable "database_name" {

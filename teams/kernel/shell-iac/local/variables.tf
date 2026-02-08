@@ -36,3 +36,9 @@ variable "domain_name" {
   type        = string
   default     = "localhost"
 }
+
+variable "crossplane_version" {
+  description = "The Crossplane Helm chart version"
+  type        = string
+  default     = "1.15.0"
+}

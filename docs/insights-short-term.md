@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-08 19:15 UTC] Same Crossplane Claim selects cloud or local Composition via compositionRef switch
+- [2026-02-08 18:30 UTC] Crossplane manages cloud resources only; local envs use native K8s StatefulSets instead
 - [2026-02-08 18:00 UTC] Extract portable K8s resources into submodules so local and cloud share one definition
 - [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
 - [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 02:45 UTC] PR #171 migrates from Lerna to NX Release, eliminating dep conflicts
 - [2026-02-05 02:45 UTC] Issue #170 tracks Lerna deprecation with Toyota Kata target condition
 - [2026-02-05 02:30 UTC] NX Release (`nx release`) replaces Lerna for versioning and changelogs
-- [2026-02-05 02:30 UTC] Removing Lerna eliminates its bundled nx transitive dependency conflicts
-- [2026-02-05 02:15 UTC] Sustainability vision: leanest path to value, no waste, no quality compromise
