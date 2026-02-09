@@ -40,5 +40,5 @@ variable "domain_name" {
 variable "crossplane_version" {
   description = "The Crossplane Helm chart version"
   type        = string
-  default     = "1.15.0"
+  default     = "2.1.4"
 }
