@@ -16,7 +16,7 @@ variable "namespace" {
 }
 
 variable "logto_image" {
-  description = "The Logto container image (pin to a semver tag, e.g. svhd/logto:1.28.0)"
+  description = "The Logto container image (pin to a semver tag, e.g. svhd/logto:1.36.0)"
   type        = string
 }
 

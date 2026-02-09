@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
+- [2026-02-09 11:30 UTC] `null_resource.triggers` + `self.triggers` bridges variable values into destroy provisioners
+- [2026-02-09 11:00 UTC] Removing a shared module variable default requires updating all callers to pass the value
 - [2026-02-09 10:45 UTC] `templatefile()` + `yamldecode()` injects credentials into Crossplane YAML at apply time
 - [2026-02-09 10:15 UTC] Destroy provisioners in local-exec must include `--context` or they target the wrong cluster
 - [2026-02-09 09:30 UTC] `chrome://flags/#allow-insecure-localhost` bypasses cert warnings for *.localhost domains
@@ -99,8 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 04:15 UTC] Unified current-vs-target tables replace separate condition sections in Kata docs
 - [2026-02-05 04:00 UTC] Milestone templates standardize Toyota Kata target conditions for reuse
 - [2026-02-05 03:45 UTC] Focus, Flow and Joy vision ties team satisfaction to Toyota Kata north stars
-- [2026-02-05 03:35 UTC] `{workspaceRoot}` interpolation resolves custom renderer paths in nx.json config
-- [2026-02-05 03:30 UTC] NX Release custom renderers extend ChangelogRenderer to add version comparison links
-- [2026-02-05 03:25 UTC] Lerna auto-generates version comparison links in changelogs; NX Release omits them
-
 
