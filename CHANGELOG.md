@@ -1,3 +1,19 @@
+## [0.100.5-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.5-beta.0...peerlab@0.100.5-beta.1) (2026-02-09)
+
+### 🚀 Features
+
+- **iac:** provision local IAM stack via single terraform apply ([#108](https://github.com/amaralc/explore/issues/108))
+- **iac:** replace Terraform-managed PostgreSQL with Crossplane for local env ([46241f1](https://github.com/amaralc/explore/commit/46241f1))
+- **iac:** add nginx-ingress with TLS for local Logto HTTPS access ([6cd6b2d](https://github.com/amaralc/explore/commit/6cd6b2d))
+- **iac:** templatize credentials and harden local IaC modules ([d7994d1](https://github.com/amaralc/explore/commit/d7994d1))
+
+### 🩹 Fixes
+
+- **iac:** create minikube cluster before terraform apply ([ce41a3a](https://github.com/amaralc/explore/commit/ce41a3a))
+- **iac:** resolve Crossplane bootstrap CRD validation and RBAC errors ([a6225ca](https://github.com/amaralc/explore/commit/a6225ca))
+- **iac:** align Logto image version to 1.36.0 across all modules ([19061fe](https://github.com/amaralc/explore/commit/19061fe))
+- **iac:** upgrade Crossplane to 2.1.4 and provider-kubernetes to v1.2.0 ([9b5a4b0](https://github.com/amaralc/explore/commit/9b5a4b0))
+
 ## [0.100.5-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.4-beta.7...peerlab@0.100.5-beta.0) (2026-02-08)
 
 ### 🩹 Fixes
