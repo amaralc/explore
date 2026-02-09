@@ -1,3 +1,9 @@
+## [0.100.6-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.5-beta.2...peerlab@0.100.6-beta.0) (2026-02-09)
+
+### Configuration
+
+- include chore and config commit types in changelog ([#230](https://github.com/amaralc/explore/issues/230))
+
 ## [0.100.5](https://github.com/amaralc/explore/compare/peerlab@0.100.5-beta.2...peerlab@0.100.5) (2026-02-09)
 
 This release promotes peerlab@0.100.5-beta.2 to stable.
