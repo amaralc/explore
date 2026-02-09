@@ -2,6 +2,16 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-10 07:00 UTC] Terraform `-target` requires full nested module path, not just the leaf module name
+- [2026-02-10 06:30 UTC] count=0 sub-modules don't isolate providers; exclude cloud modules from local tree
+- [2026-02-10 06:00 UTC] Skip `terraform destroy` for fresh clusters; `minikube delete --profile` suffices alone
+- [2026-02-10 05:45 UTC] Terraform configures ALL providers in module tree even when parent has count=0
+- [2026-02-10 05:30 UTC] Nuke local infra (minikube delete) + rm tfstate when destroy fails on missing CRDs
+- [2026-02-10 05:15 UTC] `terraform state mv` bypasses moved-block + missing-provider catch-22 locally
+- [2026-02-10 05:00 UTC] Terraform `moved` blocks must all resolve before `-target` applies succeed
+- [2026-02-10 04:45 UTC] Terraform validates module output attributes at plan time even inside count=0 modules
+- [2026-02-10 04:15 UTC] MongoDB Atlas TF provider v2.x changes `replication_specs` from block to argument syntax
+- [2026-02-10 03:30 UTC] Wrap cloud-only TF resources in count-gated sub-modules to avoid provider requirements locally
 - [2026-02-09 21:45 UTC] NX hides `chore` by default; override via `release.conventionalCommits.types` in nx.json
 - [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
@@ -92,14 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 11:45 UTC] Incremental PRs with remaining-work checklists ship partial progress without blocking
 - [2026-02-05 11:20 UTC] Issue templates for obstacle and experiment map Toyota Kata coaching cycle to GitHub
 - [2026-02-05 08:00 UTC] YAML issue templates in `.github/ISSUE_TEMPLATE/` auto-apply labels and standardize structure
-- [2026-02-05 07:30 UTC] Obstacle issues track blockers on the path to milestone target conditions
-- [2026-02-05 07:00 UTC] `gh issue delete <num> --yes` enables batch issue cleanup via shell loop
-- [2026-02-05 06:00 UTC] Skill `!` backtick syntax injects live CLI output as context at invocation time
-- [2026-02-05 05:30 UTC] `addSubIssue` GraphQL mutation links experiment issues as children of obstacles
-- [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
-- [2026-02-04 21:30 UTC] GitHub Projects iterations need manual date config for exact quarter alignment
-- [2026-02-04 21:12 UTC] `gh api graphql addProjectV2ItemById` links issues to GitHub Projects
-- [2026-02-04 21:08 UTC] Map CI/CD pain points to DORA metrics for measurable target conditions
-- [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
-- [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
 

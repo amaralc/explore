@@ -78,7 +78,7 @@ iam-local-setup:
 		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2
 	minikube addons enable ingress --profile peerlab-iam
 	cd teams/kernel/shell-iac/local && terraform init
-	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target=module.crossplane
+	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target='module.environment.module.local_iam[0].module.crossplane'
 	cd teams/kernel/shell-iac/local && terraform apply -auto-approve
 	@echo ""
 	@echo "============================================================"
