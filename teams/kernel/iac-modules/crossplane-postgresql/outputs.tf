@@ -12,3 +12,8 @@ output "instance_name" {
   description = "The Crossplane claim instance name"
   value       = local.instance_name
 }
+
+output "db_credentials_secret_name" {
+  description = "The name of the application-specific credentials secret (contains DB_URL)"
+  value       = local.db_credentials_secret_name
+}

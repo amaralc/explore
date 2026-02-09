@@ -67,8 +67,9 @@ resource "kubernetes_namespace_v1" "logto" {
 module "logto_k8s" {
   source         = "../iac-logto-k8s"
   domain_name    = var.domain_name
+  logto_image    = var.logto_image
   namespace      = kubernetes_namespace_v1.logto.metadata[0].name
-  db_secret_name = "logto-db-credentials"
+  db_secret_name = module.logto_database.db_credentials_secret_name
   enable_ingress = true
 
   depends_on = [module.logto_database]

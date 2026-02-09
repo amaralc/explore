@@ -3,9 +3,10 @@
 # Supports both CloudSQL (GCP) and local (minikube) compositions.
 
 locals {
-  instance_name     = "${var.database_name}-${var.environment_name}"
-  connection_secret = "${var.database_name}-db-connection"
-  is_local          = var.composition_name == "postgresql-local"
+  instance_name              = "${var.database_name}-${var.environment_name}"
+  connection_secret          = "${var.database_name}-db-connection"
+  db_credentials_secret_name = "${var.database_name}-db-credentials"
+  is_local                   = var.composition_name == "postgresql-local"
 }
 
 # CompositeResourceDefinition (XRD) for PostgreSQLInstance
@@ -185,7 +186,12 @@ resource "kubernetes_manifest" "postgresql_composition" {
 resource "kubernetes_manifest" "postgresql_local_composition" {
   count = local.is_local ? 1 : 0
 
-  manifest = yamldecode(file("${path.module}/compositions/postgresql-local.yaml"))
+  manifest = yamldecode(templatefile("${path.module}/compositions/postgresql-local.yaml", {
+    pg_username                = var.local_pg_username
+    pg_password                = var.local_pg_password
+    pg_database                = var.database_name
+    db_credentials_secret_name = local.db_credentials_secret_name
+  }))
 
   depends_on = [
     kubernetes_manifest.postgresql_xrd,

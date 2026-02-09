@@ -3,8 +3,8 @@
 # The namespace must be created by the caller and passed via the namespace variable.
 
 locals {
-  logto_endpoint       = "https://logto.${var.domain_name}"
-  logto_admin_endpoint = "https://logto-admin.${var.domain_name}"
+  logto_endpoint       = "${var.endpoint_scheme}://logto.${var.domain_name}"
+  logto_admin_endpoint = "${var.endpoint_scheme}://logto-admin.${var.domain_name}"
 }
 
 resource "kubernetes_config_map_v1" "logto" {

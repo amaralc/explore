@@ -141,7 +141,8 @@ data "kubernetes_service_v1" "ingress_nginx" {
 module "logto_k8s" {
   source         = "../../security-iam-svc/iac-logto-k8s"
   domain_name    = var.domain_name
-  db_secret_name = "logto-db-credentials"
+  db_secret_name = module.logto_database.db_credentials_secret_name
+  logto_image    = "svhd/logto:1.28.0"
   namespace      = kubernetes_namespace_v1.logto.metadata[0].name
 
   enable_ingress     = true

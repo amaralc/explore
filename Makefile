@@ -75,8 +75,8 @@ clean:
 # before Terraform can plan resources that reference them (XRD, Composition, etc.)
 iam-local-setup:
 	minikube status --profile peerlab-iam >/dev/null 2>&1 || \
-		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2 && \
-		minikube addons enable ingress --profile peerlab-iam
+		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2
+	minikube addons enable ingress --profile peerlab-iam
 	cd teams/kernel/shell-iac/local && terraform init
 	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target=module.crossplane
 	cd teams/kernel/shell-iac/local && terraform apply -auto-approve

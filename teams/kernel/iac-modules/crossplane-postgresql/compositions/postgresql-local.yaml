@@ -1,8 +1,12 @@
 # Local-only Composition for development on minikube.
 # Uses provider-kubernetes Objects to create PostgreSQL resources directly.
-# Credentials are static (not secret) -- this Composition must never be applied
-# to shared or production clusters.
-# Scoped to claims in the "logto" namespace (connectionDetails host is static).
+# Credentials are injected via Terraform templatefile() at apply time.
+# This Composition must never be applied to shared or production clusters.
+#
+# NOTE: connectionDetails.host is static because Crossplane connectionDetails
+# only support FromValue/FromFieldPath/FromConnectionSecretKey — not
+# CombineFromComposite. The DB_URL (Resource 4) patches the namespace
+# dynamically via CombineFromComposite, so the app connection string is correct.
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
@@ -38,9 +42,9 @@ spec:
                       name: postgresql-credentials
                       namespace: default
                     stringData:
-                      POSTGRES_USER: logto
-                      POSTGRES_PASSWORD: logto-local-dev
-                      POSTGRES_DB: logto
+                      POSTGRES_USER: ${pg_username}
+                      POSTGRES_PASSWORD: ${pg_password}
+                      POSTGRES_DB: ${pg_database}
             patches:
               - type: FromCompositeFieldPath
                 fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
@@ -88,7 +92,7 @@ spec:
                                       name: postgresql-credentials
                                       key: POSTGRES_PASSWORD
                                 - name: POSTGRES_DB
-                                  value: logto
+                                  value: ${pg_database}
                               readinessProbe:
                                 exec:
                                   command:
@@ -135,7 +139,7 @@ spec:
                 fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
                 toFieldPath: spec.forProvider.manifest.metadata.namespace
             # Static connection details for the XRD contract.
-            # Host assumes claim is in the "logto" namespace.
+            # Host is static (see NOTE at top of file).
             connectionDetails:
               - name: host
                 type: FromValue
@@ -145,10 +149,10 @@ spec:
                 value: "5432"
               - name: username
                 type: FromValue
-                value: "logto"
+                value: "${pg_username}"
               - name: password
                 type: FromValue
-                value: "logto-local-dev"
+                value: "${pg_password}"
 
           # Resource 4: Logto DB credentials secret (application-specific)
           # Constructs the postgres:// connection string that Logto expects.
@@ -162,10 +166,10 @@ spec:
                     apiVersion: v1
                     kind: Secret
                     metadata:
-                      name: logto-db-credentials
+                      name: ${db_credentials_secret_name}
                       namespace: default
                     stringData:
-                      DB_URL: "postgres://logto:logto-local-dev@postgresql.default.svc.cluster.local:5432/logto"
+                      DB_URL: "postgres://${pg_username}:${pg_password}@postgresql.default.svc.cluster.local:5432/${pg_database}"
             patches:
               - type: FromCompositeFieldPath
                 fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
@@ -176,5 +180,5 @@ spec:
                     - fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
                   strategy: string
                   string:
-                    fmt: "postgres://logto:logto-local-dev@postgresql.%s.svc.cluster.local:5432/logto"
+                    fmt: "postgres://${pg_username}:${pg_password}@postgresql.%s.svc.cluster.local:5432/${pg_database}"
                 toFieldPath: spec.forProvider.manifest.stringData.DB_URL

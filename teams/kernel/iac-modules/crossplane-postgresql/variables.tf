@@ -60,8 +60,26 @@ variable "tier" {
   default     = "db-f1-micro"
 }
 
+variable "local_pg_username" {
+  description = "PostgreSQL username for the local composition (ignored for cloud)"
+  type        = string
+  default     = "logto"
+}
+
+variable "local_pg_password" {
+  description = "PostgreSQL password for the local composition (ignored for cloud)"
+  type        = string
+  default     = "local-dev-only"
+  sensitive   = true
+}
+
 variable "kubeconfig_context" {
   description = "The kubectl context for local-exec commands (must match the target cluster)"
   type        = string
   default     = ""
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9._@/-]*$", var.kubeconfig_context))
+    error_message = "kubeconfig_context must contain only alphanumeric characters, dots, underscores, @, slashes, and hyphens."
+  }
 }

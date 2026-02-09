@@ -22,6 +22,10 @@ resource "helm_release" "crossplane" {
 # kubernetes_manifest validates GVK at plan time, but the Provider CRD only
 # exists after the Helm release installs Crossplane.
 resource "null_resource" "provider_kubernetes" {
+  triggers = {
+    context_flag = var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
       kubectl apply ${var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""} -f - <<'YAML'
@@ -37,7 +41,7 @@ resource "null_resource" "provider_kubernetes" {
 
   provisioner "local-exec" {
     when    = destroy
-    command = "kubectl delete provider provider-kubernetes --ignore-not-found || true"
+    command = "kubectl delete provider provider-kubernetes ${self.triggers.context_flag} --ignore-not-found || true"
   }
 
   depends_on = [helm_release.crossplane]
@@ -67,12 +71,20 @@ resource "null_resource" "wait_for_provider_kubernetes" {
 # arbitrary resources (StatefulSets, Services, etc.) in any namespace.
 # The SA name is dynamic (based on provider revision), so we discover it at runtime.
 resource "null_resource" "provider_kubernetes_rbac" {
+  triggers = {
+    context_flag = var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
       SA_NAME=$(kubectl get sa -n ${local.crossplane_namespace} \
         ${var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""} \
         -o jsonpath='{.items[*].metadata.name}' \
         | tr ' ' '\n' | grep provider-kubernetes | head -1)
+      if [ -z "$SA_NAME" ]; then
+        echo "ERROR: No provider-kubernetes service account found in ${local.crossplane_namespace}" >&2
+        exit 1
+      fi
       echo "Granting cluster-admin to service account: $SA_NAME"
       kubectl create clusterrolebinding provider-kubernetes-admin \
         --clusterrole=cluster-admin \
@@ -85,7 +97,7 @@ resource "null_resource" "provider_kubernetes_rbac" {
 
   provisioner "local-exec" {
     when    = destroy
-    command = "kubectl delete clusterrolebinding provider-kubernetes-admin --ignore-not-found || true"
+    command = "kubectl delete clusterrolebinding provider-kubernetes-admin ${self.triggers.context_flag} --ignore-not-found || true"
   }
 
   depends_on = [null_resource.wait_for_provider_kubernetes]
@@ -94,6 +106,10 @@ resource "null_resource" "provider_kubernetes_rbac" {
 # Configure provider-kubernetes with in-cluster identity via kubectl.
 # Named "default" so Objects in Compositions don't need explicit providerConfigRef.
 resource "null_resource" "provider_kubernetes_config" {
+  triggers = {
+    context_flag = var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
       kubectl apply ${var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""} -f - <<'YAML'
@@ -110,7 +126,7 @@ resource "null_resource" "provider_kubernetes_config" {
 
   provisioner "local-exec" {
     when    = destroy
-    command = "kubectl delete providerconfig default --ignore-not-found || true"
+    command = "kubectl delete providerconfig default ${self.triggers.context_flag} --ignore-not-found || true"
   }
 
   depends_on = [null_resource.provider_kubernetes_rbac]

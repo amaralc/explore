@@ -16,9 +16,8 @@ variable "namespace" {
 }
 
 variable "logto_image" {
-  description = "The Logto container image"
+  description = "The Logto container image (pin to a semver tag, e.g. svhd/logto:1.28.0)"
   type        = string
-  default     = "svhd/logto:latest"
 }
 
 variable "enable_ingress" {
@@ -55,6 +54,17 @@ variable "host_aliases" {
     hostnames = list(string)
   }))
   default = []
+}
+
+variable "endpoint_scheme" {
+  description = "URL scheme for Logto endpoints (http or https)"
+  type        = string
+  default     = "https"
+
+  validation {
+    condition     = contains(["http", "https"], var.endpoint_scheme)
+    error_message = "endpoint_scheme must be either 'http' or 'https'."
+  }
 }
 
 variable "extra_env" {
