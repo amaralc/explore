@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
 - [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
 - [2026-02-09 11:30 UTC] `null_resource.triggers` + `self.triggers` bridges variable values into destroy provisioners
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
 - [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
 - [2026-02-05 04:15 UTC] Unified current-vs-target tables replace separate condition sections in Kata docs
-- [2026-02-05 04:00 UTC] Milestone templates standardize Toyota Kata target conditions for reuse
 
