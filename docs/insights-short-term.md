@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 08:30 UTC] `NODE_EXTRA_CA_CERTS` failed with `server_auth`-only self-signed certs; may need CA flag
 - [2026-02-09 07:45 UTC] `.localhost` doesn't resolve inside K8s pods; use hostAliases to route through ingress
 - [2026-02-09 07:15 UTC] Terraform `tls` provider generates self-signed certs for local nginx-ingress HTTPS
 - [2026-02-09 06:45 UTC] Logto OIDC issuer in ConfigMap must match browser-accessible URL or dashboard breaks
@@ -100,5 +101,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
 - [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
 - [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
-- [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
-- [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
