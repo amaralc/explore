@@ -1,11 +1,11 @@
 output "logto_endpoint" {
   description = "The Logto application endpoint URL"
-  value       = local.logto_endpoint
+  value       = module.logto_k8s.logto_endpoint
 }
 
 output "logto_admin_endpoint" {
   description = "The Logto admin console endpoint URL"
-  value       = local.logto_admin_endpoint
+  value       = module.logto_k8s.logto_admin_endpoint
 }
 
 output "cluster_name" {

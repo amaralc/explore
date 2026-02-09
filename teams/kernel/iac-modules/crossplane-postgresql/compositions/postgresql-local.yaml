@@ -1,0 +1,184 @@
+# Local-only Composition for development on minikube.
+# Uses provider-kubernetes Objects to create PostgreSQL resources directly.
+# Credentials are injected via Terraform templatefile() at apply time.
+# This Composition must never be applied to shared or production clusters.
+#
+# NOTE: connectionDetails.host is static because Crossplane connectionDetails
+# only support FromValue/FromFieldPath/FromConnectionSecretKey — not
+# CombineFromComposite. The DB_URL (Resource 4) patches the namespace
+# dynamically via CombineFromComposite, so the app connection string is correct.
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: postgresql-local
+  labels:
+    provider: local
+    database: postgresql
+spec:
+  compositeTypeRef:
+    apiVersion: database.peerlab.io/v1alpha1
+    kind: XPostgreSQLInstance
+  writeConnectionSecretsToNamespace: crossplane-system
+  mode: Pipeline
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          # Resource 1: PostgreSQL credentials secret
+          - name: postgresql-credentials
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: v1
+                    kind: Secret
+                    metadata:
+                      name: postgresql-credentials
+                      namespace: default
+                    stringData:
+                      POSTGRES_USER: ${pg_username}
+                      POSTGRES_PASSWORD: ${pg_password}
+                      POSTGRES_DB: ${pg_database}
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                toFieldPath: spec.forProvider.manifest.metadata.namespace
+
+          # Resource 2: PostgreSQL StatefulSet
+          - name: postgresql-statefulset
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: apps/v1
+                    kind: StatefulSet
+                    metadata:
+                      name: postgresql
+                      namespace: default
+                    spec:
+                      serviceName: postgresql
+                      replicas: 1
+                      selector:
+                        matchLabels:
+                          app: postgresql
+                      template:
+                        metadata:
+                          labels:
+                            app: postgresql
+                        spec:
+                          automountServiceAccountToken: false
+                          containers:
+                            - name: postgresql
+                              image: postgres:17-alpine
+                              ports:
+                                - containerPort: 5432
+                              env:
+                                - name: POSTGRES_USER
+                                  valueFrom:
+                                    secretKeyRef:
+                                      name: postgresql-credentials
+                                      key: POSTGRES_USER
+                                - name: POSTGRES_PASSWORD
+                                  valueFrom:
+                                    secretKeyRef:
+                                      name: postgresql-credentials
+                                      key: POSTGRES_PASSWORD
+                                - name: POSTGRES_DB
+                                  value: ${pg_database}
+                              readinessProbe:
+                                exec:
+                                  command:
+                                    - sh
+                                    - -c
+                                    - pg_isready -U $POSTGRES_USER
+                                initialDelaySeconds: 5
+                                periodSeconds: 5
+                              resources:
+                                requests:
+                                  memory: "128Mi"
+                                  cpu: "100m"
+                                  ephemeral-storage: "128Mi"
+                                limits:
+                                  memory: "256Mi"
+                                  cpu: "250m"
+                                  ephemeral-storage: "256Mi"
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                toFieldPath: spec.forProvider.manifest.metadata.namespace
+
+          # Resource 3: PostgreSQL Service
+          - name: postgresql-service
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: v1
+                    kind: Service
+                    metadata:
+                      name: postgresql
+                      namespace: default
+                    spec:
+                      selector:
+                        app: postgresql
+                      ports:
+                        - port: 5432
+                          targetPort: 5432
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                toFieldPath: spec.forProvider.manifest.metadata.namespace
+            # Static connection details for the XRD contract.
+            # Host is static (see NOTE at top of file).
+            connectionDetails:
+              - name: host
+                type: FromValue
+                value: "postgresql.logto.svc.cluster.local"
+              - name: port
+                type: FromValue
+                value: "5432"
+              - name: username
+                type: FromValue
+                value: "${pg_username}"
+              - name: password
+                type: FromValue
+                value: "${pg_password}"
+
+          # Resource 4: Logto DB credentials secret (application-specific)
+          # Constructs the postgres:// connection string that Logto expects.
+          - name: logto-db-credentials
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: v1
+                    kind: Secret
+                    metadata:
+                      name: ${db_credentials_secret_name}
+                      namespace: default
+                    stringData:
+                      DB_URL: "postgres://${pg_username}:${pg_password}@postgresql.default.svc.cluster.local:5432/${pg_database}"
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                toFieldPath: spec.forProvider.manifest.metadata.namespace
+              - type: CombineFromComposite
+                combine:
+                  variables:
+                    - fromFieldPath: metadata.labels["crossplane.io/claim-namespace"]
+                  strategy: string
+                  string:
+                    fmt: "postgres://${pg_username}:${pg_password}@postgresql.%s.svc.cluster.local:5432/${pg_database}"
+                toFieldPath: spec.forProvider.manifest.stringData.DB_URL

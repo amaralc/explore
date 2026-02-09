@@ -70,9 +70,26 @@ kong-dbless:
 clean:
 	docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml down -v
 
-# IAM Service (Logto on Kubernetes)
+# IAM Service (Logto on Kubernetes via Terraform)
+# Two-phase apply: Crossplane must be installed first so its CRDs exist
+# before Terraform can plan resources that reference them (XRD, Composition, etc.)
 iam-local-setup:
-	bash teams/kernel/security-iam-svc/local/setup-local.sh
+	minikube status --profile peerlab-iam >/dev/null 2>&1 || \
+		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2
+	minikube addons enable ingress --profile peerlab-iam
+	cd teams/kernel/shell-iac/local && terraform init
+	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target=module.crossplane
+	cd teams/kernel/shell-iac/local && terraform apply -auto-approve
+	@echo ""
+	@echo "============================================================"
+	@echo "Logto IAM stack is ready!"
+	@echo "Run 'make iam-local-tunnel' in a separate terminal to access"
+	@echo "  Admin: https://logto-admin.localhost"
+	@echo "  App:   https://logto.localhost"
+	@echo "============================================================"
+
+iam-local-tunnel:
+	minikube tunnel --profile peerlab-iam
 
 iam-local-teardown:
-	bash teams/kernel/security-iam-svc/local/teardown-local.sh
+	cd teams/kernel/shell-iac/local && terraform destroy -auto-approve

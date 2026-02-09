@@ -2,6 +2,25 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
+- [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
+- [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
+- [2026-02-09 11:30 UTC] `null_resource.triggers` + `self.triggers` bridges variable values into destroy provisioners
+- [2026-02-09 11:00 UTC] Removing a shared module variable default requires updating all callers to pass the value
+- [2026-02-09 10:45 UTC] `templatefile()` + `yamldecode()` injects credentials into Crossplane YAML at apply time
+- [2026-02-09 10:15 UTC] Destroy provisioners in local-exec must include `--context` or they target the wrong cluster
+- [2026-02-09 09:30 UTC] `chrome://flags/#allow-insecure-localhost` bypasses cert warnings for *.localhost domains
+- [2026-02-09 09:15 UTC] Cross-origin fetch to untrusted self-signed certs silently fails; visit API domain first
+- [2026-02-09 08:30 UTC] `NODE_EXTRA_CA_CERTS` failed with `server_auth`-only self-signed certs; may need CA flag
+- [2026-02-09 07:45 UTC] `.localhost` doesn't resolve inside K8s pods; use hostAliases to route through ingress
+- [2026-02-09 07:15 UTC] Terraform `tls` provider generates self-signed certs for local nginx-ingress HTTPS
+- [2026-02-09 06:45 UTC] Logto OIDC issuer in ConfigMap must match browser-accessible URL or dashboard breaks
+- [2026-02-09 00:10 UTC] Crossplane provider-kubernetes needs explicit cluster-admin RBAC for cross-namespace resources
+- [2026-02-08 20:00 UTC] Makefile pre-steps ensure external deps (clusters, CRDs) exist before terraform runs
+- [2026-02-08 19:45 UTC] Terraform providers validate at plan time; create clusters before apply, not during it
+- [2026-02-08 19:15 UTC] Same Crossplane Claim selects cloud or local Composition via compositionRef switch
+- [2026-02-08 18:30 UTC] Crossplane manages cloud resources only; local envs use native K8s StatefulSets instead
+- [2026-02-08 18:00 UTC] Extract portable K8s resources into submodules so local and cloud share one definition
 - [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
 - [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
 - [2026-02-07 21:45 UTC] Revert-then-reapply isolates which changes actually matter from bundled noise
@@ -83,22 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
 - [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
 - [2026-02-05 04:15 UTC] Unified current-vs-target tables replace separate condition sections in Kata docs
-- [2026-02-05 04:00 UTC] Milestone templates standardize Toyota Kata target conditions for reuse
-- [2026-02-05 03:45 UTC] Focus, Flow and Joy vision ties team satisfaction to Toyota Kata north stars
-- [2026-02-05 03:35 UTC] `{workspaceRoot}` interpolation resolves custom renderer paths in nx.json config
-- [2026-02-05 03:30 UTC] NX Release custom renderers extend ChangelogRenderer to add version comparison links
-- [2026-02-05 03:25 UTC] Lerna auto-generates version comparison links in changelogs; NX Release omits them
-- [2026-02-05 03:20 UTC] Explicit hook instructions (ONE insight, 1-in-1-out) prevent LLM over-generation
-- [2026-02-05 03:15 UTC] Phase dep migrations: quick wins (remove/upgrade) → moderate (API changes) → major (ESLint 9)
-- [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
-- [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
-- [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
-- [2026-02-05 02:45 UTC] NX Release `workspaceChangelog.file` configures CHANGELOG.md generation
-- [2026-02-05 02:45 UTC] `--git-commit=false --git-tag=false` creates local release without push
-- [2026-02-05 02:45 UTC] `nx release --specifier=prerelease --preid=beta` creates beta versions
-- [2026-02-05 02:45 UTC] PR #171 migrates from Lerna to NX Release, eliminating dep conflicts
-- [2026-02-05 02:45 UTC] Issue #170 tracks Lerna deprecation with Toyota Kata target condition
-- [2026-02-05 02:30 UTC] NX Release (`nx release`) replaces Lerna for versioning and changelogs
-- [2026-02-05 02:30 UTC] Removing Lerna eliminates its bundled nx transitive dependency conflicts
-- [2026-02-05 02:15 UTC] Sustainability vision: leanest path to value, no waste, no quality compromise
-- [2026-02-05 02:00 UTC] Catchy visions use active voice: system finds/fixes, software adapts
+

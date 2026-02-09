@@ -1,21 +1,35 @@
-variable "gcp_project_id" {
-  description = "The Google Cloud project ID"
+variable "composition_name" {
+  description = "Which Composition to apply and reference in the claim (postgresql-cloudsql or postgresql-local)"
   type        = string
+  default     = "postgresql-cloudsql"
+
+  validation {
+    condition     = contains(["postgresql-cloudsql", "postgresql-local"], var.composition_name)
+    error_message = "composition_name must be either 'postgresql-cloudsql' or 'postgresql-local'."
+  }
+}
+
+variable "gcp_project_id" {
+  description = "The Google Cloud project ID (not needed for local composition)"
+  type        = string
+  default     = ""
 }
 
 variable "gcp_location" {
-  description = "The Google Cloud project location (region)"
+  description = "The Google Cloud project location (region), or 'local' for minikube"
   type        = string
 }
 
 variable "environment_name" {
   description = "The deployment environment (branch-name, commit-hash, etc.)"
   type        = string
+  default     = "local"
 }
 
 variable "provider_config_name" {
-  description = "The Crossplane GCP ProviderConfig name"
+  description = "The Crossplane GCP ProviderConfig name (not needed for local composition)"
   type        = string
+  default     = ""
 }
 
 variable "database_name" {
@@ -44,4 +58,28 @@ variable "tier" {
   description = "The Cloud SQL machine tier"
   type        = string
   default     = "db-f1-micro"
+}
+
+variable "local_pg_username" {
+  description = "PostgreSQL username for the local composition (ignored for cloud)"
+  type        = string
+  default     = "logto"
+}
+
+variable "local_pg_password" {
+  description = "PostgreSQL password for the local composition (ignored for cloud)"
+  type        = string
+  default     = "local-dev-only"
+  sensitive   = true
+}
+
+variable "kubeconfig_context" {
+  description = "The kubectl context for local-exec commands (must match the target cluster)"
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9._@/-]*$", var.kubeconfig_context))
+    error_message = "kubeconfig_context must contain only alphanumeric characters, dots, underscores, @, slashes, and hyphens."
+  }
 }

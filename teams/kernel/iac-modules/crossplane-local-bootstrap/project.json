@@ -1,0 +1,9 @@
+{
+  "name": "iac-modules-crossplane-local-bootstrap",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "teams/kernel/iac-modules/crossplane-local-bootstrap",
+  "projectType": "library",
+  "implicitDependencies": [],
+  "targets": {},
+  "tags": []
+}

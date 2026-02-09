@@ -1,10 +1,12 @@
 # Crossplane PostgreSQL module
-# Deploys XRD, Composition, and a Claim for a CloudSQL PostgreSQL instance
-# Parameterized to support multiple databases (e.g., Logto PG17)
+# Deploys XRD, Composition, and a Claim for a PostgreSQL instance.
+# Supports both CloudSQL (GCP) and local (minikube) compositions.
 
 locals {
-  instance_name      = "${var.database_name}-${var.environment_name}"
-  connection_secret  = "${var.database_name}-db-connection"
+  instance_name              = "${var.database_name}-${var.environment_name}"
+  connection_secret          = "${var.database_name}-db-connection"
+  db_credentials_secret_name = "${var.database_name}-db-credentials"
+  is_local                   = var.composition_name == "postgresql-local"
 }
 
 # CompositeResourceDefinition (XRD) for PostgreSQLInstance
@@ -71,8 +73,13 @@ resource "kubernetes_manifest" "function_patch_and_transform" {
   }
 }
 
-# Composition mapping XRD to GCP CloudSQL resources (Pipeline mode)
+# =============================================================================
+# Cloud Composition (GCP CloudSQL) -- only when composition_name == "postgresql-cloudsql"
+# =============================================================================
+
 resource "kubernetes_manifest" "postgresql_composition" {
+  count = local.is_local ? 0 : 1
+
   manifest = {
     apiVersion = "apiextensions.crossplane.io/v1"
     kind       = "Composition"
@@ -172,30 +179,75 @@ resource "kubernetes_manifest" "postgresql_composition" {
   ]
 }
 
-# Claim that provisions the actual database instance
-resource "kubernetes_manifest" "postgresql_claim" {
-  manifest = {
-    apiVersion = "database.peerlab.io/v1alpha1"
-    kind       = "PostgreSQLInstance"
-    metadata = {
-      name      = local.instance_name
-      namespace = var.namespace
-    }
-    spec = {
-      parameters = {
-        storageGB = var.storage_gb
-        version   = var.postgresql_version
-        region    = var.gcp_location
-        tier      = var.tier
-      }
-      compositionRef = {
-        name = "postgresql-cloudsql"
-      }
-      writeConnectionSecretToRef = {
-        name = local.connection_secret
-      }
-    }
+# =============================================================================
+# Local Composition (provider-kubernetes) -- only when composition_name == "postgresql-local"
+# =============================================================================
+
+resource "kubernetes_manifest" "postgresql_local_composition" {
+  count = local.is_local ? 1 : 0
+
+  manifest = yamldecode(templatefile("${path.module}/compositions/postgresql-local.yaml", {
+    pg_username                = var.local_pg_username
+    pg_password                = var.local_pg_password
+    pg_database                = var.database_name
+    db_credentials_secret_name = local.db_credentials_secret_name
+  }))
+
+  depends_on = [
+    kubernetes_manifest.postgresql_xrd,
+    kubernetes_manifest.function_patch_and_transform,
+  ]
+}
+
+# =============================================================================
+# Claim -- references whichever composition is selected
+# =============================================================================
+
+# Use null_resource + kubectl to avoid plan-time CRD validation.
+# The PostgreSQLInstance CRD is created dynamically by the XRD above,
+# so it doesn't exist at plan time on fresh clusters.
+resource "null_resource" "postgresql_claim" {
+  triggers = {
+    instance_name     = local.instance_name
+    namespace         = var.namespace
+    storage_gb        = var.storage_gb
+    postgresql_version = var.postgresql_version
+    gcp_location      = var.gcp_location
+    tier              = var.tier
+    composition_name  = var.composition_name
+    connection_secret = local.connection_secret
+    context_flag      = var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""
   }
 
-  depends_on = [kubernetes_manifest.postgresql_composition]
+  provisioner "local-exec" {
+    command = <<-EOT
+      kubectl apply ${var.kubeconfig_context != "" ? "--context=${var.kubeconfig_context}" : ""} -f - <<'YAML'
+      apiVersion: database.peerlab.io/v1alpha1
+      kind: PostgreSQLInstance
+      metadata:
+        name: ${local.instance_name}
+        namespace: ${var.namespace}
+      spec:
+        parameters:
+          storageGB: ${var.storage_gb}
+          version: "${var.postgresql_version}"
+          region: "${var.gcp_location}"
+          tier: "${var.tier}"
+        compositionRef:
+          name: "${var.composition_name}"
+        writeConnectionSecretToRef:
+          name: "${local.connection_secret}"
+      YAML
+    EOT
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "kubectl delete postgresqlinstance ${self.triggers.instance_name} -n ${self.triggers.namespace} ${self.triggers.context_flag} --ignore-not-found || true"
+  }
+
+  depends_on = [
+    kubernetes_manifest.postgresql_composition,
+    kubernetes_manifest.postgresql_local_composition,
+  ]
 }

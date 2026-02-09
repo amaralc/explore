@@ -22,3 +22,8 @@ variable "gcp_network_id" {
   description = "The VPC network ID (from the vpc module)"
   type        = string
 }
+
+variable "logto_image" {
+  description = "The Logto container image (pin to a semver tag, e.g. svhd/logto:1.36.0)"
+  type        = string
+}
