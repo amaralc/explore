@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 21:45 UTC] NX hides `chore` by default; override via `release.conventionalCommits.types` in nx.json
 - [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
 - [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-04 21:08 UTC] Map CI/CD pain points to DORA metrics for measurable target conditions
 - [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
 - [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
-- [2026-02-05 04:15 UTC] Unified current-vs-target tables replace separate condition sections in Kata docs
 

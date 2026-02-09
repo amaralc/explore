@@ -145,6 +145,24 @@
     }
   ],
   "release": {
+    "conventionalCommits": {
+      "types": {
+        "chore": {
+          "semverBump": "none",
+          "changelog": {
+            "hidden": false,
+            "title": "Chore"
+          }
+        },
+        "config": {
+          "semverBump": "none",
+          "changelog": {
+            "hidden": false,
+            "title": "Configuration"
+          }
+        }
+      }
+    },
     "git": {
       "commitMessage": "chore(release): [skip-github-pipeline]"
     },
