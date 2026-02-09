@@ -44,6 +44,14 @@ resource "kubernetes_deployment_v1" "logto" {
         }
       }
       spec {
+        dynamic "host_aliases" {
+          for_each = var.host_aliases
+          content {
+            ip        = host_aliases.value.ip
+            hostnames = host_aliases.value.hostnames
+          }
+        }
+
         init_container {
           name    = "logto-seed"
           image   = var.logto_image
@@ -90,6 +98,13 @@ resource "kubernetes_deployment_v1" "logto" {
           env_from {
             config_map_ref {
               name = kubernetes_config_map_v1.logto.metadata[0].name
+            }
+          }
+          dynamic "env" {
+            for_each = var.extra_env
+            content {
+              name  = env.key
+              value = env.value
             }
           }
           liveness_probe {
@@ -158,6 +173,19 @@ resource "kubernetes_ingress_v1" "logto" {
     annotations = var.ingress_annotations
   }
   spec {
+    ingress_class_name = var.ingress_class_name
+
+    dynamic "tls" {
+      for_each = var.tls_secret_name != null ? [1] : []
+      content {
+        secret_name = var.tls_secret_name
+        hosts = [
+          "logto.${var.domain_name}",
+          "logto-admin.${var.domain_name}",
+        ]
+      }
+    }
+
     rule {
       host = "logto.${var.domain_name}"
       http {

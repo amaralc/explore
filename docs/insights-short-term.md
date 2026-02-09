@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-09 07:45 UTC] `.localhost` doesn't resolve inside K8s pods; use hostAliases to route through ingress
+- [2026-02-09 07:15 UTC] Terraform `tls` provider generates self-signed certs for local nginx-ingress HTTPS
+- [2026-02-09 06:45 UTC] Logto OIDC issuer in ConfigMap must match browser-accessible URL or dashboard breaks
 - [2026-02-09 00:10 UTC] Crossplane provider-kubernetes needs explicit cluster-admin RBAC for cross-namespace resources
 - [2026-02-08 20:00 UTC] Makefile pre-steps ensure external deps (clusters, CRDs) exist before terraform runs
 - [2026-02-08 19:45 UTC] Terraform providers validate at plan time; create clusters before apply, not during it
@@ -99,6 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 02:50 UTC] `nx release` (no --specifier) auto-graduates prereleases to stable versions
 - [2026-02-05 02:45 UTC] `nx release --dry-run` validates release config without making changes
 - [2026-02-05 02:45 UTC] `releaseTagPattern` in nx.json sets custom git tag format for releases
-- [2026-02-05 02:45 UTC] NX Release `workspaceChangelog.file` configures CHANGELOG.md generation
-- [2026-02-05 02:45 UTC] `--git-commit=false --git-tag=false` creates local release without push
-- [2026-02-05 02:45 UTC] `nx release --specifier=prerelease --preid=beta` creates beta versions

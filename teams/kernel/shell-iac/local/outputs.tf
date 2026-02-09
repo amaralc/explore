@@ -16,13 +16,18 @@ output "minikube_profile" {
 output "access_instructions" {
   description = "How to access the local Logto instance"
   value       = <<-EOT
-    To open Logto:
-      minikube service logto -n logto --profile ${var.minikube_profile}
+    1. Start minikube tunnel (keep running in a separate terminal):
+         minikube tunnel --profile ${var.minikube_profile}
 
-    To check pod status:
-      kubectl get pods -A --context=${var.minikube_profile}
+    2. Access Logto (accept the self-signed certificate warning):
+         Admin Console: ${module.logto_k8s.logto_admin_endpoint}
+         Application:   ${module.logto_k8s.logto_endpoint}
 
-    To tear down:
-      terraform destroy -auto-approve
+    3. Check status:
+         kubectl get ingress -n logto --context=${var.minikube_profile}
+         kubectl get pods -n logto --context=${var.minikube_profile}
+
+    4. Tear down:
+         terraform destroy -auto-approve
   EOT
 }

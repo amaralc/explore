@@ -35,3 +35,30 @@ variable "ingress_annotations" {
     "networking.gke.io/managed-certificates"       = "logto-cert"
   }
 }
+
+variable "ingress_class_name" {
+  description = "The ingress class name (e.g. 'nginx' for minikube, null for GKE default)"
+  type        = string
+  default     = null
+}
+
+variable "tls_secret_name" {
+  description = "The name of the Kubernetes TLS secret for ingress (null to skip TLS block)"
+  type        = string
+  default     = null
+}
+
+variable "host_aliases" {
+  description = "Additional /etc/hosts entries for the Logto pod (e.g. for local ingress resolution)"
+  type = list(object({
+    ip        = string
+    hostnames = list(string)
+  }))
+  default = []
+}
+
+variable "extra_env" {
+  description = "Additional environment variables for the Logto container"
+  type        = map(string)
+  default     = {}
+}

@@ -80,6 +80,16 @@ iam-local-setup:
 	cd teams/kernel/shell-iac/local && terraform init
 	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target=module.crossplane
 	cd teams/kernel/shell-iac/local && terraform apply -auto-approve
+	@echo ""
+	@echo "============================================================"
+	@echo "Logto IAM stack is ready!"
+	@echo "Run 'make iam-local-tunnel' in a separate terminal to access"
+	@echo "  Admin: https://logto-admin.localhost"
+	@echo "  App:   https://logto.localhost"
+	@echo "============================================================"
+
+iam-local-tunnel:
+	minikube tunnel --profile peerlab-iam
 
 iam-local-teardown:
 	cd teams/kernel/shell-iac/local && terraform destroy -auto-approve
