@@ -2,6 +2,13 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-10 17:00 UTC] Local infra layers: cluster → Crossplane → service resources → app workloads (strict order)
+- [2026-02-10 16:30 UTC] Kong can be the K8s Ingress Controller or sit behind one for API-subset routing
+- [2026-02-10 16:00 UTC] K8s Ingress is an L7 reverse proxy routing external HTTP traffic to services via host/path rules
+- [2026-02-10 10:00 UTC] `moved` blocks + sibling modules cleanly split monolithic TF modules without state recreation
+- [2026-02-10 09:15 UTC] Crossplane is a platform layer on any K8s cluster (minikube, GKE, EKS), not env-specific infra
+- [2026-02-10 09:00 UTC] Separate infra provisioners (Crossplane) from service modules (IAM) so multiple services reuse them
+- [2026-02-10 08:30 UTC] Two-phase TF apply: targeted `-target` installs CRDs, then full apply plans resources needing them
 - [2026-02-10 08:00 UTC] Placeholder provider blocks with dummy tokens satisfy TF init for count=0 cloud modules
 - [2026-02-10 07:30 UTC] Cloud roots import sub-modules directly; routers can't gate providers with count=0
 - [2026-02-10 07:15 UTC] Versioned environment modules with local/cloud sub-paths enable parallel evolution
@@ -95,11 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 20:15 UTC] `gh issue edit --body` with heredoc enables batch issue updates to match templates
 - [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
 - [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
-- [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
-- [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
-- [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
-- [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
-- [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
-- [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
-- [2026-02-05 12:15 UTC] Target-condition issue templates mirror milestone descriptions as umbrella tracking issues
 

@@ -56,7 +56,7 @@ output "kernel_flag_management_admin_api_token" {
 
 output "minikube_profile" {
   description = "The minikube profile name (local only)"
-  value       = local.is_local ? module.local_iam[0].minikube_profile : null
+  value       = local.is_local ? module.local_platform[0].minikube_profile : null
 }
 
 output "access_instructions" {

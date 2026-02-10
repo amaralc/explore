@@ -3,18 +3,39 @@ locals {
 }
 
 # =============================================================================
-# Local Path: minikube + Crossplane + PostgreSQL + TLS + Logto
+# Local Path: Platform (minikube + Crossplane) → Services (IAM)
 # =============================================================================
 
-module "local_iam" {
-  source = "./modules/local-iam"
+module "local_platform" {
+  source = "./modules/local-platform"
   count  = local.is_local ? 1 : 0
 
   minikube_profile   = var.minikube_profile
   minikube_memory    = var.minikube_memory
   minikube_cpus      = var.minikube_cpus
-  domain_name        = var.domain_name
   crossplane_version = var.crossplane_version
+}
+
+module "local_iam" {
+  source = "./modules/local-iam"
+  count  = local.is_local ? 1 : 0
+
+  kubeconfig_context = var.minikube_profile
+  domain_name        = var.domain_name
+
+  depends_on = [module.local_platform]
+}
+
+# State migration: moved blocks for the platform extraction refactor.
+# minikube and crossplane moved from local_iam to local_platform.
+moved {
+  from = module.local_iam[0].null_resource.minikube
+  to   = module.local_platform[0].null_resource.minikube
+}
+
+moved {
+  from = module.local_iam[0].module.crossplane
+  to   = module.local_platform[0].module.crossplane
 }
 
 # =============================================================================

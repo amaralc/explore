@@ -1,50 +1,9 @@
 # Local IAM Sub-Module
-# Provisions the IAM stack locally using minikube + Crossplane.
-# Uses provider-kubernetes Composition instead of CloudSQL.
+# Provisions the IAM service (Logto) on a local Kubernetes cluster.
+# Expects the platform layer (minikube + Crossplane) to be provisioned first.
 
 # =============================================================================
-# Layer 1: Local Kubernetes Cluster (minikube)
-# =============================================================================
-
-resource "null_resource" "minikube" {
-  triggers = {
-    profile = var.minikube_profile
-    memory  = var.minikube_memory
-    cpus    = var.minikube_cpus
-  }
-
-  provisioner "local-exec" {
-    command = <<-EOT
-      minikube status --profile ${var.minikube_profile} >/dev/null 2>&1 || \
-        minikube start \
-          --profile ${var.minikube_profile} \
-          --driver=docker \
-          --memory=${var.minikube_memory} \
-          --cpus=${var.minikube_cpus}
-      minikube addons enable ingress --profile ${var.minikube_profile}
-    EOT
-  }
-
-  provisioner "local-exec" {
-    when    = destroy
-    command = "minikube delete --profile ${self.triggers.profile}"
-  }
-}
-
-# =============================================================================
-# Layer 2: Crossplane Bootstrap
-# =============================================================================
-
-module "crossplane" {
-  source             = "../../../../../iac-modules/crossplane-local-bootstrap"
-  crossplane_version = var.crossplane_version
-  kubeconfig_context = var.minikube_profile
-
-  depends_on = [null_resource.minikube]
-}
-
-# =============================================================================
-# Layer 3: Crossplane-managed PostgreSQL
+# Crossplane-managed PostgreSQL
 # =============================================================================
 
 resource "kubernetes_namespace_v1" "logto" {
@@ -56,8 +15,6 @@ resource "kubernetes_namespace_v1" "logto" {
       "team"                        = "kernel"
     }
   }
-
-  depends_on = [null_resource.minikube]
 }
 
 module "logto_database" {
@@ -66,13 +23,11 @@ module "logto_database" {
   database_name      = "logto"
   namespace          = kubernetes_namespace_v1.logto.metadata[0].name
   gcp_location       = "local"
-  kubeconfig_context = var.minikube_profile
-
-  depends_on = [module.crossplane]
+  kubeconfig_context = var.kubeconfig_context
 }
 
 # =============================================================================
-# Layer 3.5: Self-signed TLS for local HTTPS access
+# Self-signed TLS for local HTTPS access
 # =============================================================================
 
 resource "tls_private_key" "logto" {
@@ -114,12 +69,10 @@ resource "kubernetes_secret_v1" "logto_tls" {
     "tls.crt" = tls_self_signed_cert.logto.cert_pem
     "tls.key" = tls_private_key.logto.private_key_pem
   }
-
-  depends_on = [null_resource.minikube]
 }
 
 # =============================================================================
-# Layer 4: Logto Application (reusable submodule)
+# Logto Application (reusable submodule)
 # =============================================================================
 
 # Look up the nginx ingress controller ClusterIP so the Logto pod can
@@ -129,8 +82,6 @@ data "kubernetes_service_v1" "ingress_nginx" {
     name      = "ingress-nginx-controller"
     namespace = "ingress-nginx"
   }
-
-  depends_on = [null_resource.minikube]
 }
 
 module "logto_k8s" {
