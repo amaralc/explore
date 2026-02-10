@@ -2,6 +2,13 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-10 19:35 UTC] `gcloud org-policies describe` NOT_FOUND means no constraint is set, not missing permissions
+- [2026-02-10 19:30 UTC] GCP IAM bindings are eventually consistent; sleep after granting before using
+- [2026-02-10 19:20 UTC] Bootstrap scripts must self-grant required IAM roles before commands that need them
+- [2026-02-10 19:15 UTC] `roles/iam.workloadIdentityPoolAdmin` is required to create WIF pools and providers
+- [2026-02-10 19:00 UTC] WIF + OIDC replaces SA key files for keyless GitHub Actions to GCP authentication
+- [2026-02-10 18:15 UTC] Org policy `iam.disableServiceAccountKeyCreation` blocks SA keys; use Workload Identity Federation
+- [2026-02-10 15:30 UTC] `file <path>` reveals failed downloads saved as HTML instead of expected archives
 - [2026-02-09 21:45 UTC] NX hides `chore` by default; override via `release.conventionalCommits.types` in nx.json
 - [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
@@ -95,11 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 07:30 UTC] Obstacle issues track blockers on the path to milestone target conditions
 - [2026-02-05 07:00 UTC] `gh issue delete <num> --yes` enables batch issue cleanup via shell loop
 - [2026-02-05 06:00 UTC] Skill `!` backtick syntax injects live CLI output as context at invocation time
-- [2026-02-05 05:30 UTC] `addSubIssue` GraphQL mutation links experiment issues as children of obstacles
-- [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
-- [2026-02-04 21:30 UTC] GitHub Projects iterations need manual date config for exact quarter alignment
-- [2026-02-04 21:12 UTC] `gh api graphql addProjectV2ItemById` links issues to GitHub Projects
-- [2026-02-04 21:08 UTC] Map CI/CD pain points to DORA metrics for measurable target conditions
-- [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
-- [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
 
