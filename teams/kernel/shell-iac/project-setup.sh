@@ -351,25 +351,29 @@ echo ""
 gh repo set-default $GITHUB_USERNAME/$GITHUB_REPOSITORY > /dev/null
 echo "Set default GitHub repository."
 
-# Set GitHub Actions secrets
-gh secret set OWNER_ACCOUNT_EMAIL -b$OWNER_ACCOUNT_EMAIL > /dev/null
-gh secret set SUPPORT_ACCOUNT_EMAIL -b$GCP_SUPPORT_GROUP_EMAIL > /dev/null
-gh secret set DOMAIN_NAME -b$DOMAIN_NAME > /dev/null
-gh secret set GCP_ORGANIZATION_ID -b$GCP_ORGANIZATION_ID > /dev/null
-gh secret set GCP_PROJECT_ID -b$GCP_PROJECT_ID > /dev/null
-gh secret set GCP_BILLING_ACCOUNT_ID -b$GCP_BILLING_ACCOUNT_ID > /dev/null
-gh secret set GCP_DOCKER_ARTIFACT_REPOSITORY_NAME -b$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME > /dev/null
-gh secret set GCP_LOCATION -b$GCP_PROJECT_LOCATION > /dev/null
-gh secret set GCP_WORKLOAD_IDENTITY_PROVIDER -b"$GCP_WORKLOAD_IDENTITY_PROVIDER" > /dev/null
-gh secret set GCP_SERVICE_ACCOUNT_EMAIL -b"$GCP_SERVICE_ACCOUNT_EMAIL" > /dev/null
-gh secret set UNLEASH_API_URL -b "unleash-fake-url" > /dev/null
-gh secret set UNLEASH_AUTH_TOKEN -b "unleash-fake-token" > /dev/null
-gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID > /dev/null
-gh secret set MONGODB_ATLAS_PUBLIC_KEY -b $MONGODB_ATLAS_PUBLIC_KEY > /dev/null
-gh secret set MONGODB_ATLAS_PRIVATE_KEY -b $MONGODB_ATLAS_PRIVATE_KEY > /dev/null
-gh secret set NEON_API_KEY -b $NEON_API_KEY > /dev/null
-gh secret set NEON_PROJECT_LOCATION -b $NEON_PROJECT_LOCATION > /dev/null
-echo "Set all GitHub Actions secrets."
+# Create GitHub environment
+gh api repos/$GITHUB_USERNAME/$GITHUB_REPOSITORY/environments/main -X PUT > /dev/null
+echo "Created GitHub environment 'main'."
+
+# Set GitHub Actions secrets (scoped to 'main' environment)
+gh secret set OWNER_ACCOUNT_EMAIL --env main -b"$OWNER_ACCOUNT_EMAIL" > /dev/null
+gh secret set SUPPORT_ACCOUNT_EMAIL --env main -b"$GCP_SUPPORT_GROUP_EMAIL" > /dev/null
+gh secret set DOMAIN_NAME --env main -b"$DOMAIN_NAME" > /dev/null
+gh secret set GCP_ORGANIZATION_ID --env main -b"$GCP_ORGANIZATION_ID" > /dev/null
+gh secret set GCP_PROJECT_ID --env main -b"$GCP_PROJECT_ID" > /dev/null
+gh secret set GCP_BILLING_ACCOUNT_ID --env main -b"$GCP_BILLING_ACCOUNT_ID" > /dev/null
+gh secret set GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --env main -b"$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME" > /dev/null
+gh secret set GCP_LOCATION --env main -b"$GCP_PROJECT_LOCATION" > /dev/null
+gh secret set GCP_WORKLOAD_IDENTITY_PROVIDER --env main -b"$GCP_WORKLOAD_IDENTITY_PROVIDER" > /dev/null
+gh secret set GCP_SERVICE_ACCOUNT_EMAIL --env main -b"$GCP_SERVICE_ACCOUNT_EMAIL" > /dev/null
+gh secret set UNLEASH_API_URL --env main -b"unleash-fake-url" > /dev/null
+gh secret set UNLEASH_AUTH_TOKEN --env main -b"unleash-fake-token" > /dev/null
+gh secret set MONGODB_ATLAS_ORG_ID --env main -b"$MONGODB_ATLAS_ORG_ID" > /dev/null
+gh secret set MONGODB_ATLAS_PUBLIC_KEY --env main -b"$MONGODB_ATLAS_PUBLIC_KEY" > /dev/null
+gh secret set MONGODB_ATLAS_PRIVATE_KEY --env main -b"$MONGODB_ATLAS_PRIVATE_KEY" > /dev/null
+gh secret set NEON_API_KEY --env main -b"$NEON_API_KEY" > /dev/null
+gh secret set NEON_PROJECT_LOCATION --env main -b"$NEON_PROJECT_LOCATION" > /dev/null
+echo "Set all GitHub Actions secrets in 'main' environment."
 
 # Optional Nx Cloud setup (in use)
 NX_ACCESS_TOKEN="fake-nx-access-token"
