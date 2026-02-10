@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-10 08:00 UTC] Placeholder provider blocks with dummy tokens satisfy TF init for count=0 cloud modules
+- [2026-02-10 07:30 UTC] Cloud roots import sub-modules directly; routers can't gate providers with count=0
+- [2026-02-10 07:15 UTC] Versioned environment modules with local/cloud sub-paths enable parallel evolution
 - [2026-02-10 07:00 UTC] Terraform `-target` requires full nested module path, not just the leaf module name
 - [2026-02-10 06:30 UTC] count=0 sub-modules don't isolate providers; exclude cloud modules from local tree
 - [2026-02-10 06:00 UTC] Skip `terraform destroy` for fresh clusters; `minikube delete --profile` suffices alone
@@ -99,7 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
 - [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
 - [2026-02-05 12:15 UTC] Target-condition issue templates mirror milestone descriptions as umbrella tracking issues
-- [2026-02-05 11:45 UTC] Incremental PRs with remaining-work checklists ship partial progress without blocking
-- [2026-02-05 11:20 UTC] Issue templates for obstacle and experiment map Toyota Kata coaching cycle to GitHub
-- [2026-02-05 08:00 UTC] YAML issue templates in `.github/ISSUE_TEMPLATE/` auto-apply labels and standardize structure
 
