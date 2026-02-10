@@ -14,9 +14,6 @@ resource "null_resource" "build_or_not" {
   provisioner "local-exec" {
     command = <<EOF
 #!/bin/bash
-echo "Authenticating with Google Cloud..."
-gcloud auth activate-service-account --key-file=credentials.json
-
 echo "Navigating to root"
 cd ${path.cwd}/../../../../
 
