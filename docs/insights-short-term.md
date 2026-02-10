@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-11 11:30 UTC] Prefer create-and-check-exit-code over list-then-grep for simpler idempotency
+- [2026-02-11 11:15 UTC] Guard `create` with `list` + `grep` when resources lack a direct `describe` command
 - [2026-02-11 11:00 UTC] Environment-scoped secrets restrict CI/CD credential access to jobs that declare the environment
 - [2026-02-11 10:45 UTC] Ensure all resource creation commands have output redirection and status messages
 - [2026-02-11 10:30 UTC] Redirect verbose CLI output to /dev/null; echo status messages for clean script progress
@@ -100,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
 - [2026-02-05 20:20 UTC] `gh issue edit` accepts multiple issue numbers for batch label/title updates
 - [2026-02-05 20:15 UTC] `gh issue edit --body` with heredoc enables batch issue updates to match templates
-- [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
-- [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
 

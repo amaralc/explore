@@ -213,10 +213,10 @@ GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(pr
 # Bind the Production environment tag to the project (skip if already bound)
 if gcloud resource-manager tags bindings create \
   --tag-value="$GCP_ORGANIZATION_ID/$GCP_TAG_KEY_SHORT_NAME/$GCP_TAG_VALUE_SHORT_NAME" \
-  --parent="//cloudresourcemanager.googleapis.com/projects/$GCP_PROJECT_NUMBER"; then
+  --parent="//cloudresourcemanager.googleapis.com/projects/$GCP_PROJECT_NUMBER" 2>/dev/null; then
   echo "Bound '$GCP_TAG_VALUE_SHORT_NAME' tag to project $GCP_PROJECT_ID."
 else
-  echo "Warning: Failed to bind '$GCP_TAG_VALUE_SHORT_NAME' tag to project $GCP_PROJECT_ID."
+  echo "Tag '$GCP_TAG_VALUE_SHORT_NAME' already bound to project $GCP_PROJECT_ID."
 fi
 
 # Set project as default
