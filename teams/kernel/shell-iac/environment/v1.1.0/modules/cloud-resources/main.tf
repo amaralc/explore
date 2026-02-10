@@ -42,7 +42,7 @@ module "gcp_project" {
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
   source           = "../../../../../iac-modules/gcp-vpc"
-  count            = local.is_production_environment ? 0 : 0 # Enabled in production and preview environments
+  count            = local.is_production_environment ? 0 : 0 # Intentionally disabled
   environment_name = var.environment_name                    # Limit the name to 24 characters
   gcp_project_id   = module.gcp_project[0].project_id
   gcp_location     = var.gcp_location
@@ -51,7 +51,7 @@ module "vpc" {
 
 module "postgresql_dbms" {
   source                         = "../../../../../iac-modules/postgresql-dbms-environment"
-  count                          = local.is_production_environment ? 0 : 0
+  count                          = local.is_production_environment ? 0 : 0 # Intentionally disabled
   environment_name               = var.environment_name
   source_environment_branch_name = var.source_environment_branch_name
   dbms_provider = {
@@ -73,7 +73,7 @@ module "postgresql_dbms" {
 }
 
 module "postgresql_dbms_logs" {
-  count  = length(module.postgresql_dbms) > 0 ? 0 : 0
+  count  = length(module.postgresql_dbms) > 0 ? 0 : 0 # Intentionally disabled
   source = "../../../../../iac-modules/logger"
   log_map = {
     postgresql_dbms_provider = module.postgresql_dbms[0].provider
@@ -83,7 +83,7 @@ module "postgresql_dbms_logs" {
 }
 
 resource "mongodbatlas_project" "instance" {
-  count  = local.is_production_environment ? 0 : 0
+  count  = local.is_production_environment ? 0 : 0 # Intentionally disabled
   name   = var.environment_name
   org_id = var.mongodb_atlas_org_id
 
@@ -96,7 +96,7 @@ resource "mongodbatlas_project" "instance" {
 }
 
 resource "mongodbatlas_project_ip_access_list" "public" {
-  count      = local.is_production_environment ? 0 : 0
+  count      = local.is_production_environment ? 0 : 0 # Intentionally disabled
   project_id = mongodbatlas_project.instance[0].id
   cidr_block = "0.0.0.0/0" # Allow access from anywhere. TODO: Change this to a more secure value
   comment    = "CIDR Block to allow access from anywhere"
@@ -105,18 +105,17 @@ resource "mongodbatlas_project_ip_access_list" "public" {
 # Identity and Access Management (IAM) Service
 module "kernel-security-iam-svc" {
   source           = "../../../../../security-iam-svc/iac"
-  count            = local.is_production_environment ? 0 : 0 # Enabled in production environments only
+  count            = local.is_production_environment ? 0 : 0 # Intentionally disabled
   domain_name      = var.domain_name
   gcp_project_id   = module.gcp_project[0].project_id
   gcp_location     = var.gcp_location
   environment_name = var.environment_name
   gcp_network_id   = module.vpc[0].network_id
-  logto_image      = "svhd/logto:1.36.0"
   depends_on       = [module.gcp_project, module.vpc]
 }
 
 module "kernel-flag-management" {
-  count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Enabled in production
+  count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Intentionally disabled
   source                              = "../../../../../flag-management/iac"
   service_name                        = "kernel-flag-management"
   domain_name                         = var.domain_name
@@ -151,7 +150,7 @@ module "kernel-flag-management" {
 # Organizations Management Microservice
 module "people-organizations-management" {
   source                              = "../../../../../../people/organizations-management/iac"
-  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 0 : 0 # Disable module in preview environments
+  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
@@ -175,7 +174,7 @@ module "people-organizations-management" {
 # Assets Catalog Microservice
 module "things-assets-catalog" {
   source                              = "../../../../../../things/assets-catalog/iac"
-  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 0 : 0 # Disable module in preview environments
+  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
@@ -199,7 +198,7 @@ module "things-assets-catalog" {
 # Researchers Peers Microservice
 module "people-researchers-peers-svc" {
   source                              = "../../../../../../people/researchers-peers-svc/iac"
-  count                               = local.is_production_environment ? 0 : 0 # Disable module in preview environments
+  count                               = local.is_production_environment ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name

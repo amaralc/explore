@@ -141,7 +141,7 @@ module "kernel-security-iam-svc" {
 }
 
 module "kernel-flag-management" {
-  count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Enabled in production
+  count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Intentionally disabled
   source                              = "../../../flag-management/iac"
   service_name                        = "kernel-flag-management"
   domain_name                         = var.domain_name
@@ -235,7 +235,7 @@ module "things-assets-catalog" {
 # Researchers Peers Microservice
 module "people-researchers-peers-svc" {
   source                              = "../../../../people/researchers-peers-svc/iac"
-  count                               = local.is_production_environment ? 0 : 0 # Disable module in preview environments
+  count                               = local.is_production_environment ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
