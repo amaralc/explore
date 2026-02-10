@@ -63,17 +63,16 @@ terraform {
 }
 
 # Configure the Google Cloud Provider for Terraform
+# Authentication uses Application Default Credentials (ADC) set by Workload Identity Federation
 provider "google" {
-  credentials = file(var.gcp_credentials_file_path) # The service account key
-  project     = var.gcp_project_id                  # Your Google Cloud project ID
-  region      = var.gcp_location                    # The region where resources will be created
+  project = var.gcp_project_id # Your Google Cloud project ID
+  region  = var.gcp_location   # The region where resources will be created
 }
 
 # The google-beta provider is used for features not yet available in the google provider
 provider "google-beta" {
-  credentials = file(var.gcp_credentials_file_path) # The service account key
-  project     = var.gcp_project_id                  # Your Google Cloud project ID
-  region      = var.gcp_location                    # The region where resources will be created
+  project = var.gcp_project_id # Your Google Cloud project ID
+  region  = var.gcp_location   # The region where resources will be created
 }
 
 # # Vercel provider

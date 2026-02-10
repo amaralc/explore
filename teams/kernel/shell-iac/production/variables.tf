@@ -22,11 +22,10 @@ variable "gcp_location" {
   description = "A valid GCP location where resources will be deployed"
   type        = string
 }
-variable "gcp_credentials_file_path" {
-  description = "The path to the JSON key file for the Service Account Terraform will use to authenticate"
+variable "service_account_email" {
+  description = "The email of the Terraform admin service account"
   type        = string
   sensitive   = true
-  default     = "credentials.json"
 }
 
 variable "short_commit_sha" {
