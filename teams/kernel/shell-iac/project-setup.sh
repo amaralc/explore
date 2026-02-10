@@ -185,7 +185,8 @@ if gcloud resource-manager tags keys describe "$GCP_ORGANIZATION_ID/$GCP_TAG_KEY
 else
   gcloud resource-manager tags keys create "$GCP_TAG_KEY_SHORT_NAME" \
     --parent="organizations/$GCP_ORGANIZATION_ID" \
-    --description="Environment classification for projects"
+    --description="Environment classification for projects" > /dev/null
+  echo "Created tag key '$GCP_TAG_KEY_SHORT_NAME'."
 fi
 
 # Create 'production' tag value under the environment key (skip if it already exists)
@@ -194,14 +195,16 @@ if gcloud resource-manager tags values describe "$GCP_ORGANIZATION_ID/$GCP_TAG_K
 else
   gcloud resource-manager tags values create "$GCP_TAG_VALUE_SHORT_NAME" \
     --parent="$GCP_ORGANIZATION_ID/$GCP_TAG_KEY_SHORT_NAME" \
-    --description="Production environment"
+    --description="Production environment" > /dev/null
+  echo "Created tag value '$GCP_TAG_VALUE_SHORT_NAME'."
 fi
 
 # Create project (skip if it already exists)
 if gcloud projects describe $GCP_PROJECT_ID &>/dev/null; then
   echo "Project $GCP_PROJECT_ID already exists, skipping creation."
 else
-  gcloud projects create $GCP_PROJECT_ID
+  gcloud projects create $GCP_PROJECT_ID > /dev/null
+  echo "Created GCP project $GCP_PROJECT_ID."
 fi
 
 # Get the project number (needed for tag binding and WIF principal)
@@ -217,23 +220,27 @@ else
 fi
 
 # Set project as default
-gcloud config set project $GCP_PROJECT_ID
+gcloud config set project $GCP_PROJECT_ID > /dev/null
+echo "Set default project to $GCP_PROJECT_ID."
 
 # Enable billing
-gcloud beta billing projects link $GCP_PROJECT_ID --billing-account=$GCP_BILLING_ACCOUNT_ID
+gcloud beta billing projects link $GCP_PROJECT_ID --billing-account=$GCP_BILLING_ACCOUNT_ID > /dev/null
+echo "Linked billing account."
 
 # Enable necessary APIs
-gcloud services enable serviceusage.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable cloudbilling.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable apikeys.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable dns.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable cloudidentity.googleapis.com --project $GCP_PROJECT_ID # Necessary to create a support group email
-gcloud services enable iamcredentials.googleapis.com --project $GCP_PROJECT_ID
+gcloud services enable serviceusage.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable cloudresourcemanager.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable artifactregistry.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable cloudbilling.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable apikeys.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable dns.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable cloudidentity.googleapis.com --project $GCP_PROJECT_ID > /dev/null # Necessary to create a support group email
+gcloud services enable iamcredentials.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+echo "Enabled necessary APIs."
 
 # Label project for Firebase integration (https://firebase.google.com/docs/projects/terraform/get-started)
-gcloud alpha projects update $GCP_PROJECT_ID --update-labels firebase=enabled
+gcloud alpha projects update $GCP_PROJECT_ID --update-labels firebase=enabled > /dev/null
+echo "Added Firebase label."
 
 # Create a bucket (skip if it already exists)
 if gsutil ls -b gs://$GCP_TERRAFORM_STATE_BUCKET_NAME &>/dev/null; then
@@ -250,8 +257,9 @@ else
 fi
 
 # Enable APIs required for Workload Identity Federation
-gcloud services enable iam.googleapis.com --project $GCP_PROJECT_ID
-gcloud services enable sts.googleapis.com --project $GCP_PROJECT_ID
+gcloud services enable iam.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+gcloud services enable sts.googleapis.com --project $GCP_PROJECT_ID > /dev/null
+echo "Enabled WIF APIs."
 
 # Create Workload Identity Pool for GitHub Actions (skip if it already exists, roles/iam.workloadIdentityPoolAdmin required to owner account)
 if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" --project="$GCP_PROJECT_ID" --location="global" &>/dev/null; then
@@ -290,69 +298,28 @@ GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/global/wo
 
 # Assign roles to the service account
 echo "Assigning IAM roles to service account..."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/serviceusage.serviceUsageAdmin" > /dev/null # Necessary to list usage of APIs
-echo "Granted roles/serviceusage.serviceUsageAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectIamAdmin" > /dev/null # Necessary to enable APIs
-echo "Granted roles/resourcemanager.projectIamAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/artifactregistry.admin" > /dev/null # Necessary to create repositories
-echo "Granted roles/artifactregistry.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicemanagement.admin" > /dev/null # Necessary to enable APIs
-echo "Granted roles/servicemanagement.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.admin" > /dev/null # Necessary to access and write to buckets
-echo "Granted roles/storage.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicenetworking.networksAdmin" > /dev/null # Create and manage connections
-echo "Granted roles/servicenetworking.networksAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/secretmanager.admin" > /dev/null # Create and manage iam policies
-echo "Granted roles/secretmanager.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountAdmin" > /dev/null
-echo "Granted roles/iam.serviceAccountAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/run.admin" > /dev/null
-echo "Granted roles/run.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountUser" > /dev/null
-echo "Granted roles/iam.serviceAccountUser."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountKeyAdmin" > /dev/null
-echo "Granted roles/iam.serviceAccountKeyAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin" > /dev/null
-echo "Granted roles/iam.securityAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountTokenCreator" > /dev/null
-echo "Granted roles/iam.serviceAccountTokenCreator."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin" > /dev/null
-echo "Granted roles/cloudsql.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin" > /dev/null
-echo "Granted roles/compute.networkAdmin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin" > /dev/null
-echo "Granted roles/vpcaccess.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/firebase.admin" > /dev/null # Necessary to create firebase project
-echo "Granted roles/firebase.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/editor" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
-echo "Granted roles/editor."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.writer" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
-echo "Granted roles/source.writer."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.admin" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
-echo "Granted roles/source.admin."
-
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/dns.admin" > /dev/null # Admin DNS records
-echo "Granted roles/dns.admin."
+echo "Granted required roles to service account."
 
 # Create a support group email (skip if it already exists)
 # This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
@@ -363,14 +330,16 @@ else
   gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN_NAME --display-name="support-team" --description="Support team members will be contacted by end users to clarify doubts and help users get the most out of the platform"
 fi
 # Memberships are idempotent-safe: add ignores existing members, modify-membership-roles ignores existing roles
-gcloud identity groups memberships add --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --roles="MEMBER" 2>/dev/null || true
-gcloud identity groups memberships modify-membership-roles --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --add-roles=OWNER 2>/dev/null || true
+gcloud identity groups memberships add --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --roles="MEMBER" > /dev/null 2>&1 || true
+gcloud identity groups memberships modify-membership-roles --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --add-roles=OWNER > /dev/null 2>&1 || true
+echo "Added service account to support group."
 
 # Create artifact registry repository (skip if it already exists)
 if gcloud artifacts repositories describe $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION &>/dev/null; then
   echo "Artifact registry repository '$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME' already exists, skipping creation."
 else
-  gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION --repository-format=docker --description="Docker Repository"
+  gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION --repository-format=docker --description="Docker Repository" > /dev/null
+  echo "Created artifact registry repository."
 fi
 
 ########## 2. BASIC GITHUB SETUP
@@ -379,30 +348,33 @@ echo "Setting up GitHub actions secrets..."
 echo ""
 
 # Set default repository
-gh repo set-default $GITHUB_USERNAME/$GITHUB_REPOSITORY
+gh repo set-default $GITHUB_USERNAME/$GITHUB_REPOSITORY > /dev/null
+echo "Set default GitHub repository."
 
 # Set GitHub Actions secrets
-gh secret set OWNER_ACCOUNT_EMAIL -b$OWNER_ACCOUNT_EMAIL
-gh secret set SUPPORT_ACCOUNT_EMAIL -b$GCP_SUPPORT_GROUP_EMAIL
-gh secret set DOMAIN_NAME -b$DOMAIN_NAME
-gh secret set GCP_ORGANIZATION_ID -b$GCP_ORGANIZATION_ID
-gh secret set GCP_PROJECT_ID -b$GCP_PROJECT_ID
-gh secret set GCP_BILLING_ACCOUNT_ID -b$GCP_BILLING_ACCOUNT_ID
-gh secret set GCP_DOCKER_ARTIFACT_REPOSITORY_NAME -b$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME
-gh secret set GCP_LOCATION -b$GCP_PROJECT_LOCATION
-gh secret set GCP_WORKLOAD_IDENTITY_PROVIDER -b"$GCP_WORKLOAD_IDENTITY_PROVIDER"
-gh secret set GCP_SERVICE_ACCOUNT_EMAIL -b"$GCP_SERVICE_ACCOUNT_EMAIL"
-gh secret set UNLEASH_API_URL -b "unleash-fake-url"
-gh secret set UNLEASH_AUTH_TOKEN -b "unleash-fake-token"
-gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID
-gh secret set MONGODB_ATLAS_PUBLIC_KEY -b $MONGODB_ATLAS_PUBLIC_KEY
-gh secret set MONGODB_ATLAS_PRIVATE_KEY -b $MONGODB_ATLAS_PRIVATE_KEY
-gh secret set NEON_API_KEY -b $NEON_API_KEY
-gh secret set NEON_PROJECT_LOCATION -b $NEON_PROJECT_LOCATION
+gh secret set OWNER_ACCOUNT_EMAIL -b$OWNER_ACCOUNT_EMAIL > /dev/null
+gh secret set SUPPORT_ACCOUNT_EMAIL -b$GCP_SUPPORT_GROUP_EMAIL > /dev/null
+gh secret set DOMAIN_NAME -b$DOMAIN_NAME > /dev/null
+gh secret set GCP_ORGANIZATION_ID -b$GCP_ORGANIZATION_ID > /dev/null
+gh secret set GCP_PROJECT_ID -b$GCP_PROJECT_ID > /dev/null
+gh secret set GCP_BILLING_ACCOUNT_ID -b$GCP_BILLING_ACCOUNT_ID > /dev/null
+gh secret set GCP_DOCKER_ARTIFACT_REPOSITORY_NAME -b$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME > /dev/null
+gh secret set GCP_LOCATION -b$GCP_PROJECT_LOCATION > /dev/null
+gh secret set GCP_WORKLOAD_IDENTITY_PROVIDER -b"$GCP_WORKLOAD_IDENTITY_PROVIDER" > /dev/null
+gh secret set GCP_SERVICE_ACCOUNT_EMAIL -b"$GCP_SERVICE_ACCOUNT_EMAIL" > /dev/null
+gh secret set UNLEASH_API_URL -b "unleash-fake-url" > /dev/null
+gh secret set UNLEASH_AUTH_TOKEN -b "unleash-fake-token" > /dev/null
+gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID > /dev/null
+gh secret set MONGODB_ATLAS_PUBLIC_KEY -b $MONGODB_ATLAS_PUBLIC_KEY > /dev/null
+gh secret set MONGODB_ATLAS_PRIVATE_KEY -b $MONGODB_ATLAS_PRIVATE_KEY > /dev/null
+gh secret set NEON_API_KEY -b $NEON_API_KEY > /dev/null
+gh secret set NEON_PROJECT_LOCATION -b $NEON_PROJECT_LOCATION > /dev/null
+echo "Set all GitHub Actions secrets."
 
 # Optional Nx Cloud setup (in use)
 NX_ACCESS_TOKEN="fake-nx-access-token"
-gh secret set NX_ACCESS_TOKEN -b $NX_ACCESS_TOKEN
+gh secret set NX_ACCESS_TOKEN -b $NX_ACCESS_TOKEN > /dev/null
+echo "Set Nx Cloud token."
 
 # Optional Sonar Cloud setup (not in use)
 # We opted to integrate using "ClickOps" since it was an easy 2 clicks integration between SonarCloud and GitHub for public repositories

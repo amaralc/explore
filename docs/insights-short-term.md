@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-11 10:45 UTC] Ensure all resource creation commands have output redirection and status messages
+- [2026-02-11 10:30 UTC] Redirect verbose CLI output to /dev/null; echo status messages for clean script progress
 - [2026-02-11 04:30 UTC] Create resource first, then tag separately; atomic create+tag needs extra permissions
 - [2026-02-11 04:15 UTC] gcloud `--tags` dict flags use `ORG_ID/key=value` format, not `ORG_ID/key/value`
 - [2026-02-11 04:00 UTC] `gcloud projects create --tags` applies org-level tags at project creation time
@@ -100,6 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
 - [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
 - [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
-- [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
-- [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
 
