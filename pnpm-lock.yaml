@@ -68,7 +68,7 @@ overrides:
   fast-xml-parser@>=4.3.6 <=5.3.3: '>=5.3.4'
   validator@<13.15.22: '>=13.15.22'
   js-yaml@>=4.0.0 <4.1.1: '>=4.1.1'
-  '@nyariv/sandboxjs': '>=0.8.29'
+  '@nyariv/sandboxjs': '>=0.8.31'
   '@isaacs/brace-expansion@<=5.0.0': '>=5.0.1'
 
 importers:
@@ -8493,17 +8493,11 @@ packages:
   '@vue/compiler-core@3.5.27':
     resolution: {integrity: sha512-gnSBQjZA+//qDZen+6a2EdHqJ68Z7uybrMf3SPjEGgG4dicklwDVmMC1AeIHxtLVPT7sn6sH1KOO+tS6gwOUeQ==}
 
-  '@vue/compiler-core@3.5.28':
-    resolution: {integrity: sha512-kviccYxTgoE8n6OCw96BNdYlBg2GOWfBuOW4Vqwrt7mSKWKwFVvI8egdTltqRgITGPsTFYtKYfxIG8ptX2PJHQ==}
-
   '@vue/compiler-dom@3.4.34':
     resolution: {integrity: sha512-3PUOTS1h5cskdOJMExCu2TInXuM0j60DRPpSCJDqOCupCfUZCJoyQmKtRmA8EgDNZ5kcEE7vketamRZfrEuVDw==}
 
   '@vue/compiler-dom@3.5.27':
     resolution: {integrity: sha512-oAFea8dZgCtVVVTEC7fv3T5CbZW9BxpFzGGxC79xakTr6ooeEqmRuvQydIiDAkglZEAd09LgVf1RoDnL54fu5w==}
-
-  '@vue/compiler-dom@3.5.28':
-    resolution: {integrity: sha512-/1ZepxAb159jKR1btkefDP+J2xuWL5V3WtleRmxaT+K2Aqiek/Ab/+Ebrw2pPj0sdHO8ViAyyJWfhXXOP/+LQA==}
 
   '@vue/compiler-sfc@3.4.34':
     resolution: {integrity: sha512-x6lm0UrM03jjDXTPZgD9Ad8bIVD1ifWNit2EaWQIZB5CULr46+FbLQ5RpK7AXtDHGjx9rmvC7QRCTjsiGkAwRw==}
@@ -8549,9 +8543,6 @@ packages:
 
   '@vue/shared@3.5.27':
     resolution: {integrity: sha512-dXr/3CgqXsJkZ0n9F3I4elY8wM9jMJpP3pvRG52r6m0tu/MsAFIe6JpXVGeNMd/D9F4hQynWT8Rfuj0bdm9kFQ==}
-
-  '@vue/shared@3.5.28':
-    resolution: {integrity: sha512-cfWa1fCGBxrvaHRhvV3Is0MgmrbSCxYTXCSCau2I0a1Xw1N1pHAvkWCiXPRAqjvToILvguNyEwjevUqAuBQWvQ==}
 
   '@vueuse/core@10.11.0':
     resolution: {integrity: sha512-x3sD4Mkm7PJ+pcq3HX8PLPBadXCAlSDR/waK87dz0gQE+qJnaaFhc/dZVfJz+IUYzTMVGum2QlR7ImiJQN4s6g==}
@@ -9326,9 +9317,6 @@ packages:
 
   bowser@2.13.1:
     resolution: {integrity: sha512-OHawaAbjwx6rqICCKgSG0SAnT05bzd7ppyKLVUITZpANBaaMFBAsaNkto3LoQ31tyFP5kNujE8Cdx85G9VzOkw==}
-
-  bowser@2.14.1:
-    resolution: {integrity: sha512-tzPjzCxygAKWFOJP011oxFHs57HzIhOEracIgAePE4pqB3LikALKnSzUyU4MGs9/iCEUuHlAJTjTc5M+u7YEGg==}
 
   boxen@5.1.2:
     resolution: {integrity: sha512-9gYgQKXx+1nP8mP7CzFyaUARhg7D3n1dF/FnErWmu9l6JvGpNUN278h0aSb+QjoiKSWG+iZ3uHrcqk0qrY9RQQ==}
@@ -11524,10 +11512,6 @@ packages:
 
   fast-xml-parser@5.3.4:
     resolution: {integrity: sha512-EFd6afGmXlCx8H8WTZHhAoDaWaGyuIBoZJ2mknrNxug+aZKjkp0a0dlars9Izl+jF+7Gu1/5f/2h68cQpe0IiA==}
-    hasBin: true
-
-  fast-xml-parser@5.3.5:
-    resolution: {integrity: sha512-JeaA2Vm9ffQKp9VjvfzObuMCjUYAp5WDYhRYL5LrBPY/jUDlUtOvDfot0vKSkB9tuX885BDHjtw4fZadD95wnA==}
     hasBin: true
 
   fastq@1.17.1:
@@ -20394,7 +20378,7 @@ snapshots:
       '@smithy/smithy-client': 4.11.2
       '@smithy/types': 4.12.0
       '@smithy/util-middleware': 4.2.8
-      fast-xml-parser: 5.3.5
+      fast-xml-parser: 5.3.4
       tslib: 2.8.1
     optional: true
 
@@ -21314,7 +21298,7 @@ snapshots:
     dependencies:
       '@aws-sdk/types': 3.734.0
       '@smithy/types': 4.12.0
-      bowser: 2.14.1
+      bowser: 2.13.1
       tslib: 2.8.1
     optional: true
 
@@ -29400,7 +29384,7 @@ snapshots:
       chalk: 4.1.2
       execa: 5.1.1
       fast-glob: 3.3.3
-      fast-xml-parser: 5.3.5
+      fast-xml-parser: 5.3.4
       logkitty: 0.7.1
     transitivePeerDependencies:
       - encoding
@@ -29411,7 +29395,7 @@ snapshots:
       chalk: 4.1.2
       execa: 5.1.1
       fast-glob: 3.3.3
-      fast-xml-parser: 5.3.5
+      fast-xml-parser: 5.3.4
       ora: 5.4.1
     transitivePeerDependencies:
       - encoding
@@ -32552,15 +32536,6 @@ snapshots:
       estree-walker: 2.0.2
       source-map-js: 1.2.1
 
-  '@vue/compiler-core@3.5.28':
-    dependencies:
-      '@babel/parser': 7.29.0
-      '@vue/shared': 3.5.28
-      entities: 7.0.1
-      estree-walker: 2.0.2
-      source-map-js: 1.2.1
-    optional: true
-
   '@vue/compiler-dom@3.4.34':
     dependencies:
       '@vue/compiler-core': 3.4.34
@@ -32570,12 +32545,6 @@ snapshots:
     dependencies:
       '@vue/compiler-core': 3.5.27
       '@vue/shared': 3.5.27
-
-  '@vue/compiler-dom@3.5.28':
-    dependencies:
-      '@vue/compiler-core': 3.5.28
-      '@vue/shared': 3.5.28
-    optional: true
 
   '@vue/compiler-sfc@3.4.34':
     dependencies:
@@ -32603,8 +32572,8 @@ snapshots:
     dependencies:
       '@volar/language-core': 1.11.1
       '@volar/source-map': 1.11.1
-      '@vue/compiler-dom': 3.5.28
-      '@vue/shared': 3.5.28
+      '@vue/compiler-dom': 3.5.27
+      '@vue/shared': 3.5.27
       computeds: 0.0.1
       minimatch: 9.0.5
       muggle-string: 0.3.1
@@ -32652,9 +32621,6 @@ snapshots:
   '@vue/shared@3.4.34': {}
 
   '@vue/shared@3.5.27': {}
-
-  '@vue/shared@3.5.28':
-    optional: true
 
   '@vueuse/core@10.11.0(vue@3.4.34(typescript@5.9.3))':
     dependencies:
@@ -33747,9 +33713,6 @@ snapshots:
   boolbase@1.0.0: {}
 
   bowser@2.13.1: {}
-
-  bowser@2.14.1:
-    optional: true
 
   boxen@5.1.2:
     dependencies:
@@ -36492,11 +36455,6 @@ snapshots:
       strnum: 1.1.2
 
   fast-xml-parser@5.3.4:
-    dependencies:
-      strnum: 2.1.2
-    optional: true
-
-  fast-xml-parser@5.3.5:
     dependencies:
       strnum: 2.1.2
 
