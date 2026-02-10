@@ -175,8 +175,12 @@ GCP_WIF_PROVIDER_NAME="github-provider"
 echo "Setting up Google Cloud Platform shell project..."
 echo ""
 
-# Create project
-gcloud projects create $GCP_PROJECT_ID
+# Create project (skip if it already exists)
+if gcloud projects describe $GCP_PROJECT_ID &>/dev/null; then
+  echo "Project $GCP_PROJECT_ID already exists, skipping creation."
+else
+  gcloud projects create $GCP_PROJECT_ID
+fi
 
 # Set project as default
 gcloud config set project $GCP_PROJECT_ID
@@ -197,39 +201,52 @@ gcloud services enable iamcredentials.googleapis.com --project $GCP_PROJECT_ID
 # Label project for Firebase integration (https://firebase.google.com/docs/projects/terraform/get-started)
 gcloud alpha projects update $GCP_PROJECT_ID --update-labels firebase=enabled
 
-# Create a bucket
-gsutil mb -p $GCP_PROJECT_ID -l $GCP_PROJECT_LOCATION gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
+# Create a bucket (skip if it already exists)
+if gsutil ls -b gs://$GCP_TERRAFORM_STATE_BUCKET_NAME &>/dev/null; then
+  echo "Bucket gs://$GCP_TERRAFORM_STATE_BUCKET_NAME already exists, skipping creation."
+else
+  gsutil mb -p $GCP_PROJECT_ID -l $GCP_PROJECT_LOCATION gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
+fi
 
-# Create a service account
-gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
+# Create a service account (skip if it already exists)
+if gcloud iam service-accounts describe $GCP_SERVICE_ACCOUNT_EMAIL --project=$GCP_PROJECT_ID &>/dev/null; then
+  echo "Service account $GCP_SERVICE_ACCOUNT_EMAIL already exists, skipping creation."
+else
+  gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
+fi
 
 # Enable APIs required for Workload Identity Federation
 gcloud services enable iam.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable sts.googleapis.com --project $GCP_PROJECT_ID
 
-# Grant the owner account permission to manage Workload Identity Pools
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="user:$OWNER_ACCOUNT_EMAIL" --role="roles/iam.workloadIdentityPoolAdmin"
+# Grant the owner account permission to manage Workload Identity Pools (roles/iam.workloadIdentityPoolAdmin required to owner account)
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="user:$OWNER_ACCOUNT_EMAIL" --role="roles/iam.workloadIdentityPoolAdmin" > /dev/null
+echo "Granted roles/iam.workloadIdentityPoolAdmin."
 
-# Wait for IAM and API propagation before using WIF permissions
-echo "Waiting 60s for IAM propagation..."
-sleep 60
+# Create Workload Identity Pool for GitHub Actions (skip if it already exists, roles/iam.workloadIdentityPoolAdmin required to owner account)
+if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" --project="$GCP_PROJECT_ID" --location="global" &>/dev/null; then
+  echo "Workload Identity Pool '$GCP_WIF_POOL_NAME' already exists, skipping creation."
+else
+  gcloud iam workload-identity-pools create "$GCP_WIF_POOL_NAME" \
+    --project="$GCP_PROJECT_ID" \
+    --location="global" \
+    --display-name="GitHub Actions Pool"
+fi
 
-# Create Workload Identity Pool for GitHub Actions
-gcloud iam workload-identity-pools create "$GCP_WIF_POOL_NAME" \
-  --project="$GCP_PROJECT_ID" \
-  --location="global" \
-  --display-name="GitHub Actions Pool"
-
-# Create OIDC Provider for GitHub within the pool
+# Create OIDC Provider for GitHub within the pool (skip if it already exists)
 # Attribute condition restricts to main branch and stable semver release tags only (peerlab@X.Y.Z)
-gcloud iam workload-identity-pools providers create-oidc "$GCP_WIF_PROVIDER_NAME" \
-  --project="$GCP_PROJECT_ID" \
-  --location="global" \
-  --workload-identity-pool="$GCP_WIF_POOL_NAME" \
-  --display-name="GitHub Provider" \
-  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
-  --attribute-condition="assertion.repository=='$GITHUB_USERNAME/$GITHUB_REPOSITORY' && (assertion.ref=='refs/heads/main' || assertion.ref.matches('refs/tags/peerlab@[0-9]+\\\\.[0-9]+\\\\.[0-9]+\$'))" \
-  --issuer-uri="https://token.actions.githubusercontent.com"
+if gcloud iam workload-identity-pools providers describe "$GCP_WIF_PROVIDER_NAME" --project="$GCP_PROJECT_ID" --location="global" --workload-identity-pool="$GCP_WIF_POOL_NAME" &>/dev/null; then
+  echo "WIF Provider '$GCP_WIF_PROVIDER_NAME' already exists, skipping creation."
+else
+  gcloud iam workload-identity-pools providers create-oidc "$GCP_WIF_PROVIDER_NAME" \
+    --project="$GCP_PROJECT_ID" \
+    --location="global" \
+    --workload-identity-pool="$GCP_WIF_POOL_NAME" \
+    --display-name="GitHub Provider" \
+    --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
+    --attribute-condition="assertion.repository=='$GITHUB_USERNAME/$GITHUB_REPOSITORY' && (assertion.ref=='refs/heads/main' || assertion.ref.matches('refs/tags/peerlab@[0-9]+\\\\.[0-9]+\\\\.[0-9]+\$'))" \
+    --issuer-uri="https://token.actions.githubusercontent.com"
+fi
 
 # Get the project number for the WIF principal
 GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(projectNumber)')
@@ -238,42 +255,96 @@ GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(pr
 gcloud iam service-accounts add-iam-policy-binding "$GCP_SERVICE_ACCOUNT_EMAIL" \
   --project="$GCP_PROJECT_ID" \
   --role="roles/iam.workloadIdentityUser" \
-  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY"
+  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY" > /dev/null
+echo "Granted roles/iam.workloadIdentityUser."
 
 # Build the full WIF provider resource name for GitHub Actions
 GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/providers/$GCP_WIF_PROVIDER_NAME"
 
 # Assign roles to the service account
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/serviceusage.serviceUsageAdmin" # Necessary to list usage of APIs
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectIamAdmin" # Necessary to enable APIs
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/artifactregistry.admin" # Necessary to create repositories
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicemanagement.admin" # Necessary to enable APIs
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.admin" # Necessary to access and write to buckets
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicenetworking.networksAdmin" # Create and manage connections
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/secretmanager.admin"             # Create and manage iam policies
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountAdmin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/run.admin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountUser"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountKeyAdmin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountTokenCreator"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin"
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/firebase.admin" # Necessary to create firebase project
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/editor" # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.writer" # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.admin" # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/dns.admin" # Admin DNS records
+echo "Assigning IAM roles to service account..."
 
-# Create a support group email. This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/serviceusage.serviceUsageAdmin" > /dev/null # Necessary to list usage of APIs
+echo "Granted roles/serviceusage.serviceUsageAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectIamAdmin" > /dev/null # Necessary to enable APIs
+echo "Granted roles/resourcemanager.projectIamAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/artifactregistry.admin" > /dev/null # Necessary to create repositories
+echo "Granted roles/artifactregistry.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicemanagement.admin" > /dev/null # Necessary to enable APIs
+echo "Granted roles/servicemanagement.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/storage.admin" > /dev/null # Necessary to access and write to buckets
+echo "Granted roles/storage.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/servicenetworking.networksAdmin" > /dev/null # Create and manage connections
+echo "Granted roles/servicenetworking.networksAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/secretmanager.admin" > /dev/null # Create and manage iam policies
+echo "Granted roles/secretmanager.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountAdmin" > /dev/null
+echo "Granted roles/iam.serviceAccountAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/run.admin" > /dev/null
+echo "Granted roles/run.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountUser" > /dev/null
+echo "Granted roles/iam.serviceAccountUser."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountKeyAdmin" > /dev/null
+echo "Granted roles/iam.serviceAccountKeyAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.securityAdmin" > /dev/null
+echo "Granted roles/iam.securityAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/iam.serviceAccountTokenCreator" > /dev/null
+echo "Granted roles/iam.serviceAccountTokenCreator."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/cloudsql.admin" > /dev/null
+echo "Granted roles/cloudsql.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/compute.networkAdmin" > /dev/null
+echo "Granted roles/compute.networkAdmin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/vpcaccess.admin" > /dev/null
+echo "Granted roles/vpcaccess.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/firebase.admin" > /dev/null # Necessary to create firebase project
+echo "Granted roles/firebase.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/editor" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
+echo "Granted roles/editor."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.writer" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
+echo "Granted roles/source.writer."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.admin" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
+echo "Granted roles/source.admin."
+
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/dns.admin" > /dev/null # Admin DNS records
+echo "Granted roles/dns.admin."
+
+# Create a support group email (skip if it already exists)
+# This is necessary when creating a Identity-Aware Proxy (IAP) brand (https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/iap_brand)
 # Reference: https://cloud.google.com/sdk/gcloud/reference/identity/groups/create
-gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN_NAME --display-name="support-team" --description="Support team members will be contacted by end users to clarify doubts and help users get the most out of the platform"
-gcloud identity groups memberships add --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --roles="MEMBER"
-gcloud identity groups memberships modify-membership-roles --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --add-roles=OWNER
+if gcloud identity groups describe $GCP_SUPPORT_GROUP_EMAIL &>/dev/null; then
+  echo "Identity group $GCP_SUPPORT_GROUP_EMAIL already exists, skipping creation."
+else
+  gcloud identity groups create $GCP_SUPPORT_GROUP_EMAIL --organization=$DOMAIN_NAME --display-name="support-team" --description="Support team members will be contacted by end users to clarify doubts and help users get the most out of the platform"
+fi
+# Memberships are idempotent-safe: add ignores existing members, modify-membership-roles ignores existing roles
+gcloud identity groups memberships add --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --roles="MEMBER" 2>/dev/null || true
+gcloud identity groups memberships modify-membership-roles --group-email=$GCP_SUPPORT_GROUP_EMAIL --member-email=$GCP_SERVICE_ACCOUNT_EMAIL --add-roles=OWNER 2>/dev/null || true
 
-# Create artifact registry repository
-gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION  --repository-format=docker --description="Docker Repository"
+# Create artifact registry repository (skip if it already exists)
+if gcloud artifacts repositories describe $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION &>/dev/null; then
+  echo "Artifact registry repository '$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME' already exists, skipping creation."
+else
+  gcloud artifacts repositories create $GCP_DOCKER_ARTIFACT_REPOSITORY_NAME --location=$GCP_PROJECT_LOCATION --repository-format=docker --description="Docker Repository"
+fi
 
 ########## 2. BASIC GITHUB SETUP
 echo ""

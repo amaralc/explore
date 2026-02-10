@@ -83,7 +83,7 @@ Key insights from this repository.
 79. Tests should verify resulting state, not implementation interactions.
 80. Docker Compose provides a production-like local data layer.
 81. Tests target public APIs so internal refactors never break them.
-82. Redux Toolkit with Entity Adapter normalizes frontend state.
+82. Workload Identity Federation replaces service account keys for keyless CI/CD authentication.
 83. Real implementations are preferred over test doubles for higher fidelity.
 84. DAMP (Descriptive And Meaningful Phrases) trumps DRY in test code.
 85. Configuration changes are the leading cause of major outages at scale.
