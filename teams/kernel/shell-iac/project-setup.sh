@@ -171,15 +171,49 @@ GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN_NAME"
 GCP_WIF_POOL_NAME="github-pool"
 GCP_WIF_PROVIDER_NAME="github-provider"
 
+# Environment tag for project classification
+GCP_TAG_KEY_SHORT_NAME="environment"
+GCP_TAG_VALUE_SHORT_NAME="production"
+
 ########## 1. BASIC GOOGLE CLOUD PLATFORM SETUP
 echo "Setting up Google Cloud Platform shell project..."
 echo ""
+
+# Create environment tag key at the organization level (skip if it already exists)
+if gcloud resource-manager tags keys describe "$GCP_ORGANIZATION_ID/$GCP_TAG_KEY_SHORT_NAME" &>/dev/null; then
+  echo "Tag key '$GCP_TAG_KEY_SHORT_NAME' already exists, skipping creation."
+else
+  gcloud resource-manager tags keys create "$GCP_TAG_KEY_SHORT_NAME" \
+    --parent="organizations/$GCP_ORGANIZATION_ID" \
+    --description="Environment classification for projects"
+fi
+
+# Create 'production' tag value under the environment key (skip if it already exists)
+if gcloud resource-manager tags values describe "$GCP_ORGANIZATION_ID/$GCP_TAG_KEY_SHORT_NAME/$GCP_TAG_VALUE_SHORT_NAME" &>/dev/null; then
+  echo "Tag value '$GCP_TAG_VALUE_SHORT_NAME' already exists, skipping creation."
+else
+  gcloud resource-manager tags values create "$GCP_TAG_VALUE_SHORT_NAME" \
+    --parent="$GCP_ORGANIZATION_ID/$GCP_TAG_KEY_SHORT_NAME" \
+    --description="Production environment"
+fi
 
 # Create project (skip if it already exists)
 if gcloud projects describe $GCP_PROJECT_ID &>/dev/null; then
   echo "Project $GCP_PROJECT_ID already exists, skipping creation."
 else
   gcloud projects create $GCP_PROJECT_ID
+fi
+
+# Get the project number (needed for tag binding and WIF principal)
+GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(projectNumber)')
+
+# Bind the Production environment tag to the project (skip if already bound)
+if gcloud resource-manager tags bindings create \
+  --tag-value="$GCP_ORGANIZATION_ID/$GCP_TAG_KEY_SHORT_NAME/$GCP_TAG_VALUE_SHORT_NAME" \
+  --parent="//cloudresourcemanager.googleapis.com/projects/$GCP_PROJECT_NUMBER"; then
+  echo "Bound '$GCP_TAG_VALUE_SHORT_NAME' tag to project $GCP_PROJECT_ID."
+else
+  echo "Warning: Failed to bind '$GCP_TAG_VALUE_SHORT_NAME' tag to project $GCP_PROJECT_ID."
 fi
 
 # Set project as default
@@ -219,10 +253,6 @@ fi
 gcloud services enable iam.googleapis.com --project $GCP_PROJECT_ID
 gcloud services enable sts.googleapis.com --project $GCP_PROJECT_ID
 
-# Grant the owner account permission to manage Workload Identity Pools (roles/iam.workloadIdentityPoolAdmin required to owner account)
-gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="user:$OWNER_ACCOUNT_EMAIL" --role="roles/iam.workloadIdentityPoolAdmin" > /dev/null
-echo "Granted roles/iam.workloadIdentityPoolAdmin."
-
 # Create Workload Identity Pool for GitHub Actions (skip if it already exists, roles/iam.workloadIdentityPoolAdmin required to owner account)
 if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" --project="$GCP_PROJECT_ID" --location="global" &>/dev/null; then
   echo "Workload Identity Pool '$GCP_WIF_POOL_NAME' already exists, skipping creation."
@@ -247,9 +277,6 @@ else
     --attribute-condition="assertion.repository=='$GITHUB_USERNAME/$GITHUB_REPOSITORY' && (assertion.ref=='refs/heads/main' || assertion.ref.matches('refs/tags/peerlab@[0-9]+\\\\.[0-9]+\\\\.[0-9]+\$'))" \
     --issuer-uri="https://token.actions.githubusercontent.com"
 fi
-
-# Get the project number for the WIF principal
-GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(projectNumber)')
 
 # Allow the service account to be impersonated via the WIF pool
 gcloud iam service-accounts add-iam-policy-binding "$GCP_SERVICE_ACCOUNT_EMAIL" \

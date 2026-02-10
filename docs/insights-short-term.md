@@ -2,6 +2,10 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-11 04:30 UTC] Create resource first, then tag separately; atomic create+tag needs extra permissions
+- [2026-02-11 04:15 UTC] gcloud `--tags` dict flags use `ORG_ID/key=value` format, not `ORG_ID/key/value`
+- [2026-02-11 04:00 UTC] `gcloud projects create --tags` applies org-level tags at project creation time
+- [2026-02-11 03:45 UTC] `gcloud resource-manager tags` creates org-level key/value pairs to classify GCP projects
 - [2026-02-11 03:15 UTC] GCP tag binding needs `roles/resourcemanager.tagUser`; creation needs `tagAdmin` at org level
 - [2026-02-10 22:30 UTC] Selectively revert mixed diffs by categorizing changes before editing, not by file
 - [2026-02-10 22:00 UTC] Guard shell `create` commands with `if` to prevent false success messages on failure
@@ -98,7 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
 - [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
 - [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
-- [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
-- [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
-- [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
-- [2026-02-05 12:15 UTC] Target-condition issue templates mirror milestone descriptions as umbrella tracking issues
+

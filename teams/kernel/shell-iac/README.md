@@ -20,7 +20,7 @@
 - (gcp) Navigate to GCP console and search for "Organization". Click in "set up your foundation";
 - (gcp) Go to stp "Users & Groups" and click "create all groups". Follow default options;
   - (gcp) Check https://console.cloud.google.com/cloud-setup/users-groups to see suggested groups structure;
-- (gcp) In "Administrative access" step, add "Project Deleter" and "IAM Workload Identity Pool Admin (Beta)" roles to the group of organization administrators;
+- (gcp) In "Administrative access" step, add "Project Deleter", "IAM Workload Identity Pool Admin (Beta)", "Tag Administrator" and "Tag User" roles to the group of organization administrators;
   - (gcp) Check https://console.cloud.google.com/cloud-setup/administrator to see suggested roles for each group;
 
 ## Setup Billing
