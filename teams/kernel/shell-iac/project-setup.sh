@@ -167,8 +167,9 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # Define a support group email
 GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN_NAME"
 
-# Define where service account key will be stored
-GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY_PATH="./teams/kernel/shell-iac/production/credentials.json"
+# Workload Identity Pool and Provider names for GitHub Actions OIDC
+GCP_WIF_POOL_NAME="github-pool"
+GCP_WIF_PROVIDER_NAME="github-provider"
 
 ########## 1. BASIC GOOGLE CLOUD PLATFORM SETUP
 echo "Setting up Google Cloud Platform shell project..."
@@ -202,8 +203,45 @@ gsutil mb -p $GCP_PROJECT_ID -l $GCP_PROJECT_LOCATION gs://$GCP_TERRAFORM_STATE_
 # Create a service account
 gcloud iam service-accounts create $GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME --description="Terraform Admin" --display-name=$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME
 
-# Create a key for the service account
-gcloud iam service-accounts keys create $GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY_PATH --iam-account $GCP_SERVICE_ACCOUNT_EMAIL
+# Enable APIs required for Workload Identity Federation
+gcloud services enable iam.googleapis.com --project $GCP_PROJECT_ID
+gcloud services enable sts.googleapis.com --project $GCP_PROJECT_ID
+
+# Grant the owner account permission to manage Workload Identity Pools
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="user:$OWNER_ACCOUNT_EMAIL" --role="roles/iam.workloadIdentityPoolAdmin"
+
+# Wait for IAM and API propagation before using WIF permissions
+echo "Waiting 60s for IAM propagation..."
+sleep 60
+
+# Create Workload Identity Pool for GitHub Actions
+gcloud iam workload-identity-pools create "$GCP_WIF_POOL_NAME" \
+  --project="$GCP_PROJECT_ID" \
+  --location="global" \
+  --display-name="GitHub Actions Pool"
+
+# Create OIDC Provider for GitHub within the pool
+# Attribute condition restricts to main branch and stable semver release tags only (peerlab@X.Y.Z)
+gcloud iam workload-identity-pools providers create-oidc "$GCP_WIF_PROVIDER_NAME" \
+  --project="$GCP_PROJECT_ID" \
+  --location="global" \
+  --workload-identity-pool="$GCP_WIF_POOL_NAME" \
+  --display-name="GitHub Provider" \
+  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
+  --attribute-condition="assertion.repository=='$GITHUB_USERNAME/$GITHUB_REPOSITORY' && (assertion.ref=='refs/heads/main' || assertion.ref.matches('refs/tags/peerlab@[0-9]+\\\\.[0-9]+\\\\.[0-9]+\$'))" \
+  --issuer-uri="https://token.actions.githubusercontent.com"
+
+# Get the project number for the WIF principal
+GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(projectNumber)')
+
+# Allow the service account to be impersonated via the WIF pool
+gcloud iam service-accounts add-iam-policy-binding "$GCP_SERVICE_ACCOUNT_EMAIL" \
+  --project="$GCP_PROJECT_ID" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY"
+
+# Build the full WIF provider resource name for GitHub Actions
+GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/providers/$GCP_WIF_PROVIDER_NAME"
 
 # Assign roles to the service account
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/serviceusage.serviceUsageAdmin" # Necessary to list usage of APIs
@@ -254,7 +292,8 @@ gh secret set GCP_PROJECT_ID -b$GCP_PROJECT_ID
 gh secret set GCP_BILLING_ACCOUNT_ID -b$GCP_BILLING_ACCOUNT_ID
 gh secret set GCP_DOCKER_ARTIFACT_REPOSITORY_NAME -b$GCP_DOCKER_ARTIFACT_REPOSITORY_NAME
 gh secret set GCP_LOCATION -b$GCP_PROJECT_LOCATION
-gh secret set GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY < $GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY_PATH
+gh secret set GCP_WORKLOAD_IDENTITY_PROVIDER -b"$GCP_WORKLOAD_IDENTITY_PROVIDER"
+gh secret set GCP_SERVICE_ACCOUNT_EMAIL -b"$GCP_SERVICE_ACCOUNT_EMAIL"
 gh secret set UNLEASH_API_URL -b "unleash-fake-url"
 gh secret set UNLEASH_AUTH_TOKEN -b "unleash-fake-token"
 gh secret set MONGODB_ATLAS_ORG_ID -b $MONGODB_ATLAS_ORG_ID
@@ -288,9 +327,9 @@ cat > teams/kernel/shell-iac/production/backend.tf <<EOF
 # This block sets up what backend should be used for Terraform. In this case, we are using Google Cloud Storage.
 terraform {
   backend "gcs" {                                # The Google Cloud Storage backend
-    bucket      = "$GCP_PROJECT_ID-tfstate"      # The name of the bucket to store the state file
-    credentials = "credentials.json"             # The path to the JSON key file for the Service Account Terraform will use to manage its state
-    prefix      = "production"                   # The path to the state file within the bucket
+    bucket = "$GCP_PROJECT_ID-tfstate"           # The name of the bucket to store the state file
+    prefix = "production"                        # The path to the state file within the bucket
+    # Authentication uses Application Default Credentials (ADC) from Workload Identity Federation
   }
 }
 EOF
