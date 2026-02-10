@@ -5653,8 +5653,8 @@ packages:
   '@nx/workspace@22.4.5':
     resolution: {integrity: sha512-QGapABrqBnRpEWbnd5UpbVCBzsYD+RlC1lWShXPpCM+dosR3qkGb+pSmxeSCsKbNVtCwYyyuRW+PvlF5Q5sU9A==}
 
-  '@nyariv/sandboxjs@0.8.29':
-    resolution: {integrity: sha512-UE7lnVyi7PVM3rq1/F35aGoVXKsZjQNqoK1tzhI830zTAMpCxtCI/jK7At1HB0M86zdW7bhPx/ZnozAjHRQE/g==}
+  '@nyariv/sandboxjs@0.8.31':
+    resolution: {integrity: sha512-8au3uivZ5NUE1sbsKvuNog+wuB64LArv3H7s/xZBCkiH5v9KZB4Ttx3/VZflWJjkwiPPUSppGJZ4pPYScr0a7A==}
 
   '@opentelemetry/api@1.9.0':
     resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
@@ -27922,7 +27922,7 @@ snapshots:
     dependencies:
       '@nestjs/common': 10.4.22(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/core': 11.1.13(@nestjs/common@10.4.22(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13)(rxjs@7.8.1))(@nestjs/microservices@11.1.13)(@nestjs/platform-express@11.1.13)(reflect-metadata@0.1.13)(rxjs@7.8.1)
-      '@nyariv/sandboxjs': 0.8.29
+      '@nyariv/sandboxjs': 0.8.31
       chalk: 4.1.2
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
@@ -28886,7 +28886,7 @@ snapshots:
       - '@swc/core'
       - debug
 
-  '@nyariv/sandboxjs@0.8.29': {}
+  '@nyariv/sandboxjs@0.8.31': {}
 
   '@opentelemetry/api@1.9.0':
     optional: true
