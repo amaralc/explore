@@ -2,12 +2,12 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "4.65.2" # Adjust the version to match the latest release
+      version = "7.19.0"
     }
 
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "4.65.2" # Adjust the version to match the latest release
+      version = "7.19.0"
     }
 
     vercel = {
@@ -17,7 +17,7 @@ terraform {
 
     neon = {
       source  = "kislerdm/neon"
-      version = "0.1.0"
+      version = "0.13.0"
     }
   }
 }

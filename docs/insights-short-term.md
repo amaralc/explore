@@ -2,6 +2,30 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-11 16:00 UTC] Terraform modules must live in iac-modules; use versioned subdirs for API changes
+- [2026-02-11 14:00 UTC] Terraform modules with count = 0 skip execution but validate arguments; use length() for safety
+- [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility
+- [2026-02-10 17:30 UTC] Generalize module vars (e.g. kubeconfig_context vs minikube_profile) for cross-platform reuse
+- [2026-02-10 17:00 UTC] Local infra layers: cluster → Crossplane → service resources → app workloads (strict order)
+- [2026-02-10 16:30 UTC] Kong can be the K8s Ingress Controller or sit behind one for API-subset routing
+- [2026-02-10 16:00 UTC] K8s Ingress is an L7 reverse proxy routing external HTTP traffic to services via host/path rules
+- [2026-02-10 10:00 UTC] `moved` blocks + sibling modules cleanly split monolithic TF modules without state recreation
+- [2026-02-10 09:15 UTC] Crossplane is a platform layer on any K8s cluster (minikube, GKE, EKS), not env-specific infra
+- [2026-02-10 09:00 UTC] Separate infra provisioners (Crossplane) from service modules (IAM) so multiple services reuse them
+- [2026-02-10 08:30 UTC] Two-phase TF apply: targeted `-target` installs CRDs, then full apply plans resources needing them
+- [2026-02-10 08:00 UTC] Placeholder provider blocks with dummy tokens satisfy TF init for count=0 cloud modules
+- [2026-02-10 07:30 UTC] Cloud roots import sub-modules directly; routers can't gate providers with count=0
+- [2026-02-10 07:15 UTC] Versioned environment modules with local/cloud sub-paths enable parallel evolution
+- [2026-02-10 07:00 UTC] Terraform `-target` requires full nested module path, not just the leaf module name
+- [2026-02-10 06:30 UTC] count=0 sub-modules don't isolate providers; exclude cloud modules from local tree
+- [2026-02-10 06:00 UTC] Skip `terraform destroy` for fresh clusters; `minikube delete --profile` suffices alone
+- [2026-02-10 05:45 UTC] Terraform configures ALL providers in module tree even when parent has count=0
+- [2026-02-10 05:30 UTC] Nuke local infra (minikube delete) + rm tfstate when destroy fails on missing CRDs
+- [2026-02-10 05:15 UTC] `terraform state mv` bypasses moved-block + missing-provider catch-22 locally
+- [2026-02-10 05:00 UTC] Terraform `moved` blocks must all resolve before `-target` applies succeed
+- [2026-02-10 04:45 UTC] Terraform validates module output attributes at plan time even inside count=0 modules
+- [2026-02-10 04:15 UTC] MongoDB Atlas TF provider v2.x changes `replication_specs` from block to argument syntax
+- [2026-02-10 03:30 UTC] Wrap cloud-only TF resources in count-gated sub-modules to avoid provider requirements locally
 - [2026-02-09 21:45 UTC] NX hides `chore` by default; override via `release.conventionalCommits.types` in nx.json
 - [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
@@ -78,28 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 20:45 UTC] Use BDD scenarios in obstacles to describe current blocking state, not desired outcomes
 - [2026-02-05 20:35 UTC] Target-condition issues reference README Toyota Kata Visions for the Vision section
 - [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
-- [2026-02-05 20:20 UTC] `gh issue edit` accepts multiple issue numbers for batch label/title updates
-- [2026-02-05 20:15 UTC] `gh issue edit --body` with heredoc enables batch issue updates to match templates
-- [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
-- [2026-02-05 19:50 UTC] Convert milestones to Target-only format; current state moves to target-condition issues
-- [2026-02-05 19:45 UTC] GitHub sub-issues can only have one parent; `addSubIssue` fails if already parented
-- [2026-02-05 19:30 UTC] `gh api` fetches milestone JSON to seed target-condition issue body content
-- [2026-02-05 19:20 UTC] Target-condition issues parent obstacle issues via `addSubIssue` GraphQL mutation
-- [2026-02-05 19:15 UTC] `gh issue create --milestone` links issues to milestones directly from CLI
-- [2026-02-05 12:45 UTC] Milestone templates use Target-only tables; current state tracked in linked issues
-- [2026-02-05 12:30 UTC] Milestones define challenges (outcomes); current-vs-target metrics belong in linked issues
-- [2026-02-05 12:15 UTC] Target-condition issue templates mirror milestone descriptions as umbrella tracking issues
-- [2026-02-05 11:45 UTC] Incremental PRs with remaining-work checklists ship partial progress without blocking
-- [2026-02-05 11:20 UTC] Issue templates for obstacle and experiment map Toyota Kata coaching cycle to GitHub
-- [2026-02-05 08:00 UTC] YAML issue templates in `.github/ISSUE_TEMPLATE/` auto-apply labels and standardize structure
-- [2026-02-05 07:30 UTC] Obstacle issues track blockers on the path to milestone target conditions
-- [2026-02-05 07:00 UTC] `gh issue delete <num> --yes` enables batch issue cleanup via shell loop
-- [2026-02-05 06:00 UTC] Skill `!` backtick syntax injects live CLI output as context at invocation time
-- [2026-02-05 05:30 UTC] `addSubIssue` GraphQL mutation links experiment issues as children of obstacles
-- [2026-02-05 02:07 UTC] Kata target conditions can use 7-day horizons for tactical deployment goals
-- [2026-02-04 21:30 UTC] GitHub Projects iterations need manual date config for exact quarter alignment
-- [2026-02-04 21:12 UTC] `gh api graphql addProjectV2ItemById` links issues to GitHub Projects
-- [2026-02-04 21:08 UTC] Map CI/CD pain points to DORA metrics for measurable target conditions
-- [2026-02-04 20:48 UTC] Scope target condition issues to a single obstacle from the parent milestone
-- [2026-02-05 04:30 UTC] `gh api --method PATCH` updates GitHub milestone descriptions programmatically
 

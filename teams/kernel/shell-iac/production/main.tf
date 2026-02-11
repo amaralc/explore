@@ -81,8 +81,9 @@ module "production-environment-name" {
 
 # Production Environment
 module "production" {
-  source                              = "../environment/v1.0.0"
+  source                              = "../../iac-modules/environment/v1.1.0"
   count                               = 0
+  environment_type                    = "cloud"
   branch_name                         = "production"
   domain_name                         = var.domain_name
   environment_name                    = module.production-environment-name.value

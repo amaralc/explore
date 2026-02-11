@@ -20,27 +20,31 @@ resource "mongodbatlas_advanced_cluster" "instance" {
   project_id   = var.mongodb_atlas_project_id
   name         = var.instance_name
   cluster_type = "REPLICASET"
-  replication_specs {
-    region_configs {
-      electable_specs {
-        instance_size = "M0"
-        node_count    = 1
-      }
-      analytics_specs {
-        instance_size = "M0"
-        node_count    = 0
-      }
+  replication_specs = [
+    {
+      region_configs = [
+        {
+          electable_specs = {
+            instance_size = "M0"
+            node_count    = 1
+          }
+          analytics_specs = {
+            instance_size = "M0"
+            node_count    = 0
+          }
 
-      priority              = 1
-      backing_provider_name = "GCP"
+          priority              = 1
+          backing_provider_name = "GCP"
 
-      # The region name where the cluster will be located
-      # We have discovered that free TENANT, shared clusters have some limitations such as not being able to use UPDATE operations on the API
-      # One example of the limitation can be seen in the following action run: https://github.com/amaralc/peerlab/actions/runs/8131138607/job/22220128074
-      provider_name = "TENANT"         # See https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/cluster
-      region_name   = "WESTERN_EUROPE" # https://www.mongodb.com/docs/atlas/reference/google-gcp/
+          # The region name where the cluster will be located
+          # We have discovered that free TENANT, shared clusters have some limitations such as not being able to use UPDATE operations on the API
+          # One example of the limitation can be seen in the following action run: https://github.com/amaralc/peerlab/actions/runs/8131138607/job/22220128074
+          provider_name = "TENANT"         # See https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/cluster
+          region_name   = "WESTERN_EUROPE" # https://www.mongodb.com/docs/atlas/reference/google-gcp/
+        }
+      ]
     }
-  }
+  ]
 }
 
 locals {

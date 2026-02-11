@@ -27,6 +27,10 @@
 
 - (gcp) Follow foundation steps and download the configuration as a Terraform configuration.
 
+## Billing Account
+
+- (gcp) Create a non-free billing account (free billing account will not be enough, failing with usage limits exceeded exception);
+
 # Setup Project
 
 ## Assumptions
