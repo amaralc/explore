@@ -1,3 +1,29 @@
+## [0.100.6-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.1...peerlab@0.100.6-beta.2) (2026-02-11)
+
+### 🚀 Features
+
+- add versioned environment module for local infra provisioning ([#108](https://github.com/amaralc/explore/issues/108))
+- unify environment module for both local and cloud paths ([dddb676](https://github.com/amaralc/explore/commit/dddb676))
+
+### 🩹 Fixes
+
+- **iac-modules:** fix mongodbatlas provider version ([771e8a5](https://github.com/amaralc/explore/commit/771e8a5))
+- **iac-modules:** avoid gcp_project_id validation issue ([2eb94fe](https://github.com/amaralc/explore/commit/2eb94fe))
+- **kernel-iac:** use environment 1.1.0 ([4e9e098](https://github.com/amaralc/explore/commit/4e9e098))
+- **tf:** pin google terraform provider versions ([65074a7](https://github.com/amaralc/explore/commit/65074a7))
+
+### Chore
+
+- **kernel:** pin neon and mongodb versions ([e6606c9](https://github.com/amaralc/explore/commit/e6606c9))
+- **kernel:** pin neon provider ([46727f4](https://github.com/amaralc/explore/commit/46727f4))
+- **kernel:** remove todos ([bdb3fee](https://github.com/amaralc/explore/commit/bdb3fee))
+- **security-iam-svc:** remove image from service interface ([5f3ec70](https://github.com/amaralc/explore/commit/5f3ec70))
+- **shell-iac:** moved environment module to iac-modules lib ([5a8a108](https://github.com/amaralc/explore/commit/5a8a108))
+
+### Configuration
+
+- **kernel-iac:** disable cloud resources ([2e38940](https://github.com/amaralc/explore/commit/2e38940))
+
 ## [0.100.6-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.0...peerlab@0.100.6-beta.1) (2026-02-10)
 
 ### Chore
