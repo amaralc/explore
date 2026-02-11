@@ -1,9 +1,11 @@
 {
-  "name": "iac-modules-environment",
+  "name": "kernel-iac-modules-environment",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "teams/kernel/iac-modules/environment",
   "projectType": "library",
-  "implicitDependencies": [],
+  "implicitDependencies": [
+    "kernel-iac-modules-gcp-project"
+  ],
   "targets": {},
   "tags": []
 }

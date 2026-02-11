@@ -9,7 +9,8 @@
     "iac-modules-gcp-postgresql-dbms-environment",
     "iac-modules-environment-vercel",
     "people-researchers-peers-svc-iac",
-    "kernel-security-iam-svc"
+    "kernel-security-iam-svc",
+    "kernel-iac-modules-environment"
   ],
   "targets": {
     "production-terraform-init": {
