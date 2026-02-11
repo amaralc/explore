@@ -32,7 +32,8 @@ terraform {
       source = "hashicorp/google-beta"
     }
     neon = {
-      source = "kislerdm/neon"
+      source  = "kislerdm/neon"
+      version = "0.13.0"
     }
     mongodbatlas = {
       source = "mongodb/mongodbatlas"
