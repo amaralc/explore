@@ -5,7 +5,7 @@
 #   terraform apply -auto-approve
 
 module "environment" {
-  source             = "../environment/v1.1.0"
+  source             = "../../iac-modules/environment/v1.1.0"
   environment_type   = "local"
   domain_name        = var.domain_name
   minikube_profile   = var.minikube_profile

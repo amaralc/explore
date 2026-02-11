@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-11 16:00 UTC] Terraform modules must live in iac-modules; use versioned subdirs for API changes
 - [2026-02-11 14:00 UTC] Terraform modules with count = 0 skip execution but validate arguments; use length() for safety
 - [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility
 - [2026-02-10 17:30 UTC] Generalize module vars (e.g. kubeconfig_context vs minikube_profile) for cross-platform reuse
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 20:45 UTC] Use BDD scenarios in obstacles to describe current blocking state, not desired outcomes
 - [2026-02-05 20:35 UTC] Target-condition issues reference README Toyota Kata Visions for the Vision section
 - [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
-- [2026-02-05 20:20 UTC] `gh issue edit` accepts multiple issue numbers for batch label/title updates
 
