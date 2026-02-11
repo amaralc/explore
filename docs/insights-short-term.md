@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility
 - [2026-02-10 17:30 UTC] Generalize module vars (e.g. kubeconfig_context vs minikube_profile) for cross-platform reuse
 - [2026-02-10 17:00 UTC] Local infra layers: cluster → Crossplane → service resources → app workloads (strict order)
 - [2026-02-10 16:30 UTC] Kong can be the K8s Ingress Controller or sit behind one for API-subset routing
@@ -101,5 +102,4 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
 - [2026-02-05 20:20 UTC] `gh issue edit` accepts multiple issue numbers for batch label/title updates
 - [2026-02-05 20:15 UTC] `gh issue edit --body` with heredoc enables batch issue updates to match templates
-- [2026-02-05 20:05 UTC] Obstacle templates focus on what blocks progress; metrics belong in target conditions
 
