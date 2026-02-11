@@ -26,23 +26,28 @@ terraform {
 
     # --- Cloud path (google, neon, mongodbatlas, docker) ---
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
+      version = "7.19.0"
     }
     google-beta = {
-      source = "hashicorp/google-beta"
+      source  = "hashicorp/google-beta"
+      version = "7.19.0"
     }
     neon = {
       source  = "kislerdm/neon"
       version = "0.13.0"
     }
     mongodbatlas = {
-      source = "mongodb/mongodbatlas"
+      source  = "mongodb/mongodbatlas"
+      version = "2.6.0"
     }
     docker = {
-      source = "kreuzwerker/docker"
+      source  = "kreuzwerker/docker"
+      version = "3.6.2"
     }
     random = {
-      source = "hashicorp/random"
+      source  = "hashicorp/random"
+      version = "3.8.1"
     }
   }
 }
