@@ -35,7 +35,6 @@ module "gcp_project" {
     "eventarc.googleapis.com",       # Enable Eventarc API (allow reactions to firebase user creations)
     "cloudbuild.googleapis.com",     # Enable Cloud Build API (necessary for building the function)
     "container.googleapis.com"       # Enable GKE API (for Kubernetes cluster provisioning)
-    # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
 
@@ -57,7 +56,7 @@ module "postgresql_dbms" {
   dbms_provider = {
     # Switch back to Neon after https://github.com/kislerdm/terraform-provider-neon/issues/51 is fixed
     neon = {
-      project_id       = local.is_production_environment ? null : (length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : null) # TODO: This should refer to the Neon project ID
+      project_id       = local.is_production_environment ? null : (length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : null) # This should refer to the Neon project ID
       project_location = var.neon_project_location
     }
 
@@ -155,7 +154,7 @@ module "people-organizations-management" {
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
   gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id # Project where cloud run instances will be deployed
-  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_shell_project_id                = var.gcp_shell_project_id                                                                     # Project where builds will be executed
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
@@ -179,7 +178,7 @@ module "things-assets-catalog" {
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
   gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id # Project where cloud run instances will be deployed
-  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_shell_project_id                = var.gcp_shell_project_id                                                                     # Project where builds will be executed
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
@@ -203,7 +202,7 @@ module "people-researchers-peers-svc" {
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
   gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id # Project where cloud run instances will be deployed
-  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_shell_project_id                = var.gcp_shell_project_id                                                                     # Project where builds will be executed
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name

@@ -40,7 +40,6 @@ module "gcp_project" {
     "eventarc.googleapis.com",       # Enable Eventarc API (allow reactions to firebase user creations)
     "cloudbuild.googleapis.com",     # Enable Cloud Build API (necessary for building the function)
     "container.googleapis.com"       # Enable GKE API (for Kubernetes cluster provisioning)
-    # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
 
@@ -84,7 +83,7 @@ module "postgresql_dbms" {
   dbms_provider = {
     # Switch back to Neon after https://github.com/kislerdm/terraform-provider-neon/issues/51 is fixed
     neon = {
-      project_id       = local.is_production_environment ? null : module.gcp_project[0].project_id # TODO: This should refer to the Neon project ID
+      project_id       = local.is_production_environment ? null : module.gcp_project[0].project_id # This should refer to the Neon project ID
       project_location = var.neon_project_location
     }
 
