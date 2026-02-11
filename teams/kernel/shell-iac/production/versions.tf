@@ -15,9 +15,8 @@ terraform {
     }
 
     neon = {
-      source = "kislerdm/neon"
-      # Track following issue to decide weather to upgrade or not https://github.com/kislerdm/terraform-provider-neon/issues/51
-      version = "0.2.3"
+      source  = "kislerdm/neon"
+      version = "0.13.0"
     }
 
     random = {
@@ -32,7 +31,7 @@ terraform {
 
     mongodbatlas = {
       source  = "mongodb/mongodbatlas"
-      version = "1.15.1"
+      version = "2.6.0"
     }
 
     # auth0 = {

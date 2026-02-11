@@ -17,7 +17,7 @@ terraform {
 
     neon = {
       source  = "kislerdm/neon"
-      version = "0.1.0"
+      version = "0.13.0"
     }
 
     random = {
