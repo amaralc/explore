@@ -15,7 +15,7 @@ The project is organized into domain-based teams under `teams/`:
   - `shared-ts-utils/`: Shared TypeScript utilities and types
   - `shared-ui-components/`: Reusable UI components
   - `api-gateway/`: Kong-based API gateway configuration
-  - `iac-modules/`: Infrastructure as Code modules
+  - `iac-modules/`: Infrastructure as Code modules (and their nested modules if required)
   - `security-iam-svc/`: Identity and Access Management service
 
 - **people/**: User management and research-related services

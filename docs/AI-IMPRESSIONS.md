@@ -39,7 +39,7 @@ teams/
 └── archive/         # Deprecated/experimental code
 
 libs/
-├── iac-modules/     # Reusable Terraform modules
+├── iac-modules/     # Reusable Terraform modules (and their nested modules if required)
 ├── researchers/     # Shared domain libraries
 └── docusaurus/      # Documentation tooling
 ```
@@ -92,7 +92,7 @@ libs/
 ### 2. Infrastructure as Code Maturity
 
 **Terraform Module Architecture:**
-- Reusable modules in `libs/iac-modules/`
+- Reusable modules and their nested modules under `libs/iac-modules/`
 - Environment-specific configurations (production, preview)
 - Multi-provider support (GCP, Vercel, MongoDB Atlas, Neon)
 - Proper dependency management and state isolation
