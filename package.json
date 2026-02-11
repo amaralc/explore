@@ -1,6 +1,6 @@
 {
   "name": "peerlab",
-  "version": "0.100.6-beta.0",
+  "version": "0.100.6-beta.1",
   "license": "MIT",
   "author": {
     "name": "Calil Amaral",
@@ -369,7 +369,7 @@
       "fast-xml-parser@>=4.3.6 <=5.3.3": ">=5.3.4",
       "validator@<13.15.22": ">=13.15.22",
       "js-yaml@>=4.0.0 <4.1.1": ">=4.1.1",
-      "@nyariv/sandboxjs": ">=0.8.29",
+      "@nyariv/sandboxjs": ">=0.8.31",
       "@isaacs/brace-expansion@<=5.0.0": ">=5.0.1"
     }
   }

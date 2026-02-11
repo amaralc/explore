@@ -1,3 +1,11 @@
+## [0.100.6-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.0...peerlab@0.100.6-beta.1) (2026-02-10)
+
+### Chore
+
+- force updated transitive dependency @nyariv/sandboxjs >= 0.8.31 ([ef6e743](https://github.com/amaralc/explore/commit/ef6e743))
+- **deps:** bump @nyariv/sandboxjs ([7e03a03](https://github.com/amaralc/explore/commit/7e03a03))
+- **deps:** update pnpm-lock ([cbc2fc4](https://github.com/amaralc/explore/commit/cbc2fc4))
+
 ## [0.100.6-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.5-beta.2...peerlab@0.100.6-beta.0) (2026-02-09)
 
 ### Configuration
