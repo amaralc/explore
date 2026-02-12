@@ -1,6 +1,6 @@
 module "cs-svc-kernel-prod-svc-czzc" {
   source  = "terraform-google-modules/project-factory/google//modules/svpc_service_project"
-  version = "~> 14.2"
+  version = "18.2.0"
 
   name            = "kernel-prod-service"
   project_id      = "kernel-prod-svc-czzc"
@@ -20,7 +20,7 @@ module "cs-svc-kernel-prod-svc-czzc" {
 
 module "cs-svc-kernel-nonprod-svc-czzc" {
   source  = "terraform-google-modules/project-factory/google//modules/svpc_service_project"
-  version = "~> 14.2"
+  version = "18.2.0"
 
   name            = "kernel-nonprod-service"
   project_id      = "kernel-nonprod-svc-czzc"
@@ -40,7 +40,7 @@ module "cs-svc-kernel-nonprod-svc-czzc" {
 
 module "cs-svc-organizations-prod-svc-czzc" {
   source  = "terraform-google-modules/project-factory/google//modules/svpc_service_project"
-  version = "~> 14.2"
+  version = "18.2.0"
 
   name            = "organizations-prod-service"
   project_id      = "organizations-prod-svc-czzc"
@@ -60,7 +60,7 @@ module "cs-svc-organizations-prod-svc-czzc" {
 
 module "cs-svc-organizations-nonprod-svc-czzc" {
   source  = "terraform-google-modules/project-factory/google//modules/svpc_service_project"
-  version = "~> 14.2"
+  version = "18.2.0"
 
   name            = "organizations-nonprod-service"
   project_id      = "organizations-nonprod-svc-czzc"
