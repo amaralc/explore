@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-12 23:50 UTC] Nested module version constraints combine; parent versions.tf must satisfy all
 - [2026-02-12 23:45 UTC] Dependent deploy jobs with artifact passing enable approval gates cleanly
 - [2026-02-12 23:40 UTC] GitHub environment protection rules gate deployments without splitting workflows
 - [2026-02-12 23:30 UTC] Use git rev-parse --short=8 HEAD after push to capture release commit, not trigger SHA
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-06 23:30 UTC] `gh issue comment` adds lessons learned to experiment issues for future reference
 - [2026-02-06 23:25 UTC] Schedule-only triggers for security scans reduce CI noise without sacrificing coverage
 - [2026-02-06 23:20 UTC] Same commit triggers multiple workflows independently; check workflow name to distinguish runs
-- [2026-02-06 23:15 UTC] Add explicit `permissions: contents: read` to workflows for least-privilege security
