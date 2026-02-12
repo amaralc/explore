@@ -2,14 +2,9 @@ locals {
   is_production_environment = var.source_environment_branch_name == null ? true : false # Set feature flag to control the type of environment
 }
 
-# Output the branch name for other modules to use as source
-output "branch_name" {
-  value = var.branch_name
-}
-
 # Create child projects for each environment (downsides: more projects to manage, more billing accounts to manage)
 module "gcp_project" {
-  source                        = "../../../iac-modules/gcp-project"
+  source                        = "../../../../../iac-modules/gcp-project"
   count                         = local.is_production_environment ? 1 : 0 # Enable project creation for production environments only
   is_production_environment     = local.is_production_environment
   gcp_billing_account_id        = var.gcp_billing_account_id
@@ -40,51 +35,28 @@ module "gcp_project" {
     "eventarc.googleapis.com",       # Enable Eventarc API (allow reactions to firebase user creations)
     "cloudbuild.googleapis.com",     # Enable Cloud Build API (necessary for building the function)
     "container.googleapis.com"       # Enable GKE API (for Kubernetes cluster provisioning)
-    # "apigee.googleapis.com" # TODO: Enable this API only if we choose to use Apigee. See https://peerlab.atlassian.net/browse/PEER-549
   ]
 }
 
-# # Fake API Gateway
-# module "api-gateway" {
-#   count                               = 0
-#   source                              = "../../api-gateway-svc/iac"
-#   service_name                        = "api-gateway-svc"
-#   branch_name                         = "production"
-#   domain_name                         = var.domain_name
-#   environment_variables               = {}
-#   gcp_project_id                      = module.gcp_project[0].project_id
-#   gcp_shell_project_id                = var.gcp_shell_project_id
-#   gcp_location                        = var.gcp_location
-#   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-#   gcp_dns_managed_zone_name           = var.gcp_dns_managed_zone_name
-#   environment_name                    = var.environment_name
-#   short_commit_sha                    = var.short_commit_sha
-#   depends_on                          = [module.gcp_project]
-# }
-
 # Create the main Virtual Private Cloud (VPC)
 module "vpc" {
-  source           = "../../../iac-modules/gcp-vpc"
-  count            = local.is_production_environment ? 1 : 0 # Enabled in production and preview environments
+  source           = "../../../../../iac-modules/gcp-vpc"
+  count            = local.is_production_environment ? 0 : 0 # Intentionally disabled
   environment_name = var.environment_name                    # Limit the name to 24 characters
-  gcp_project_id   = module.gcp_project[0].project_id
+  gcp_project_id   = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
   gcp_location     = var.gcp_location
   depends_on       = [module.gcp_project]
 }
 
-output "vpc" {
-  value = module.vpc
-}
-
 module "postgresql_dbms" {
-  source                         = "../../../iac-modules/postgresql-dbms-environment"
-  count                          = local.is_production_environment ? 1 : 0
+  source                         = "../../../../../iac-modules/postgresql-dbms-environment"
+  count                          = local.is_production_environment ? 0 : 0 # Intentionally disabled
   environment_name               = var.environment_name
   source_environment_branch_name = var.source_environment_branch_name
   dbms_provider = {
     # Switch back to Neon after https://github.com/kislerdm/terraform-provider-neon/issues/51 is fixed
     neon = {
-      project_id       = local.is_production_environment ? null : module.gcp_project[0].project_id # TODO: This should refer to the Neon project ID
+      project_id       = local.is_production_environment ? null : (length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : null) # This should refer to the Neon project ID
       project_location = var.neon_project_location
     }
 
@@ -100,8 +72,8 @@ module "postgresql_dbms" {
 }
 
 module "postgresql_dbms_logs" {
-  count  = length(module.postgresql_dbms) > 0 ? 1 : 0
-  source = "../../../iac-modules/logger"
+  count  = length(module.postgresql_dbms) > 0 ? 0 : 0 # Intentionally disabled
+  source = "../../../../../iac-modules/logger"
   log_map = {
     postgresql_dbms_provider = module.postgresql_dbms[0].provider
     username                 = module.postgresql_dbms[0].root_username
@@ -110,7 +82,7 @@ module "postgresql_dbms_logs" {
 }
 
 resource "mongodbatlas_project" "instance" {
-  count  = local.is_production_environment ? 1 : 0
+  count  = local.is_production_environment ? 0 : 0 # Intentionally disabled
   name   = var.environment_name
   org_id = var.mongodb_atlas_org_id
 
@@ -123,6 +95,7 @@ resource "mongodbatlas_project" "instance" {
 }
 
 resource "mongodbatlas_project_ip_access_list" "public" {
+  count      = local.is_production_environment ? 0 : 0 # Intentionally disabled
   project_id = mongodbatlas_project.instance[0].id
   cidr_block = "0.0.0.0/0" # Allow access from anywhere. TODO: Change this to a more secure value
   comment    = "CIDR Block to allow access from anywhere"
@@ -130,69 +103,58 @@ resource "mongodbatlas_project_ip_access_list" "public" {
 
 # Identity and Access Management (IAM) Service
 module "kernel-security-iam-svc" {
-  source           = "../../../security-iam-svc/iac"
-  count            = local.is_production_environment ? 1 : 0 # Enabled in production environments only
+  source           = "../../../../../security-iam-svc/iac"
+  count            = local.is_production_environment ? 0 : 0 # Intentionally disabled
   domain_name      = var.domain_name
-  gcp_project_id   = module.gcp_project[0].project_id
+  gcp_project_id   = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
   gcp_location     = var.gcp_location
   environment_name = var.environment_name
-  gcp_network_id   = module.vpc[0].network_id
+  gcp_network_id   = length(module.vpc) > 0 ? module.vpc[0].network_id : ""
   depends_on       = [module.gcp_project, module.vpc]
 }
 
 module "kernel-flag-management" {
-  count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Enabled in production
-  source                              = "../../../flag-management/iac"
+  count                               = local.is_production_environment && length(module.postgresql_dbms) > 0 ? 0 : 0 # Intentionally disabled
+  source                              = "../../../../../flag-management/iac"
   service_name                        = "kernel-flag-management"
   domain_name                         = var.domain_name
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
-  gcp_project_id                      = module.gcp_project[0].project_id
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
   gcp_shell_project_id                = var.gcp_shell_project_id
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-  dbms_instance_host                  = module.postgresql_dbms[0].host
+  dbms_instance_host                  = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].host : ""
   nx_cloud_access_token               = var.nx_cloud_access_token
   gcp_dns_managed_zone_name           = var.gcp_dns_managed_zone_name
-  gcp_vpc_access_connector_id         = module.vpc[0].access_connector_id # Necessary to stablish connection with database
+  gcp_vpc_access_connector_id         = length(module.vpc) > 0 ? module.vpc[0].access_connector_id : "" # Necessary to stablish connection with database
   environment_path                    = var.environment_path
   dbms_provider = {
     # Switch back to Neon after https://github.com/kislerdm/terraform-provider-neon/issues/51 is fixed
     neon = {
-      project_id = module.postgresql_dbms[0].dbms_provider_project_id
-      branch_id  = module.postgresql_dbms[0].id
+      project_id = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].dbms_provider_project_id : ""
+      branch_id  = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].id : ""
     }
     # gcp = {
-    #   dbms_instance_name = module.postgresql_dbms[0].name
-    #   project_id         = module.gcp_project[0].project_id
+    #   dbms_instance_name = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].name : ""
+    #   project_id         = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
     # }
   }
   depends_on = [module.postgresql_dbms, module.gcp_project, module.vpc]
   # gcp_cloudbuildv2_repository_id      = var.gcp_cloudbuildv2_repository_id
 }
 
-output "kernel_flag_management_url" {
-  description = "The url of the kernel-flag-management service"
-  value       = length(module.kernel-flag-management) > 0 ? module.kernel-flag-management[0].url : ""
-}
-
-output "kernel_flag_management_admin_api_token" {
-  description = "The admin api token of the kernel-flag-management service"
-  value       = length(module.kernel-flag-management) > 0 ? module.kernel-flag-management[0].admin_api_token : ""
-  sensitive   = true
-}
-
 # Organizations Management Microservice
 module "people-organizations-management" {
-  source                              = "../../../../people/organizations-management/iac"
-  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 1 : 0 # Disable module in preview environments
+  source                              = "../../../../../../people/organizations-management/iac"
+  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
-  gcp_project_id                      = module.gcp_project[0].project_id # Project where cloud run instances will be deployed
-  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id # Project where cloud run instances will be deployed
+  gcp_shell_project_id                = var.gcp_shell_project_id                                                                     # Project where builds will be executed
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
@@ -202,7 +164,7 @@ module "people-organizations-management" {
   dbms_provider = {
     mongodb_atlas = {
       org_id     = var.mongodb_atlas_org_id
-      project_id = mongodbatlas_project.instance[0].id
+      project_id = length(mongodbatlas_project.instance) > 0 ? mongodbatlas_project.instance[0].id : ""
     }
   }
   depends_on = [mongodbatlas_project.instance, module.gcp_project]
@@ -210,13 +172,13 @@ module "people-organizations-management" {
 
 # Assets Catalog Microservice
 module "things-assets-catalog" {
-  source                              = "../../../../things/assets-catalog/iac"
-  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 1 : 0 # Disable module in preview environments
+  source                              = "../../../../../../things/assets-catalog/iac"
+  count                               = local.is_production_environment && length(mongodbatlas_project.instance) > 0 ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
-  gcp_project_id                      = module.gcp_project[0].project_id # Project where cloud run instances will be deployed
-  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id # Project where cloud run instances will be deployed
+  gcp_shell_project_id                = var.gcp_shell_project_id                                                                     # Project where builds will be executed
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
@@ -226,7 +188,7 @@ module "things-assets-catalog" {
   dbms_provider = {
     mongodb_atlas = {
       org_id     = var.mongodb_atlas_org_id
-      project_id = mongodbatlas_project.instance[0].id
+      project_id = length(mongodbatlas_project.instance) > 0 ? mongodbatlas_project.instance[0].id : ""
     }
   }
   depends_on = [mongodbatlas_project.instance, module.gcp_project]
@@ -234,27 +196,27 @@ module "things-assets-catalog" {
 
 # Researchers Peers Microservice
 module "people-researchers-peers-svc" {
-  source                              = "../../../../people/researchers-peers-svc/iac"
-  count                               = local.is_production_environment ? 0 : 0 # Disable module in preview environments
+  source                              = "../../../../../../people/researchers-peers-svc/iac"
+  count                               = local.is_production_environment ? 0 : 0 # Intentionally disabled
   branch_name                         = var.branch_name
   source_environment_branch_name      = var.source_environment_branch_name # Informs the type of environment in order to decide how to treat database and users
   environment_name                    = var.environment_name
-  gcp_project_id                      = module.gcp_project[0].project_id # Project where cloud run instances will be deployed
-  gcp_shell_project_id                = var.gcp_shell_project_id         # Project where builds will be executed
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id # Project where cloud run instances will be deployed
+  gcp_shell_project_id                = var.gcp_shell_project_id                                                                     # Project where builds will be executed
   gcp_location                        = var.gcp_location
   short_commit_sha                    = var.short_commit_sha
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
-  gcp_vpc_access_connector_id         = module.vpc[0].access_connector_id # Necessary to stablish connection with database
+  gcp_vpc_access_connector_id         = length(module.vpc) > 0 ? module.vpc[0].access_connector_id : "" # Necessary to stablish connection with database
   nx_cloud_access_token               = var.nx_cloud_access_token
-  dbms_instance_host                  = module.postgresql_dbms[0].host
+  dbms_instance_host                  = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].host : ""
   dbms_provider = {
     neon = {
-      project_id = module.postgresql_dbms[0].dbms_provider_project_id
-      branch_id  = module.postgresql_dbms[0].id
+      project_id = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].dbms_provider_project_id : ""
+      branch_id  = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].id : ""
     }
     # gcp = {
-    #   dbms_instance_name = module.postgresql_dbms[0].name
-    #   project_id         = module.gcp_project[0].project_id
+    #   dbms_instance_name = length(module.postgresql_dbms) > 0 ? module.postgresql_dbms[0].name : ""
+    #   project_id         = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
     # }
   }
   depends_on = [module.postgresql_dbms, module.gcp_project, mongodbatlas_project_ip_access_list.public]
@@ -263,8 +225,8 @@ module "people-researchers-peers-svc" {
 
 # Management Shell
 module "kernel-management-shell-browser" {
-  count                               = 1
-  source                              = "../../../management-shell-browser/iac"
+  count                               = 0
+  source                              = "../../../../../management-shell-browser/iac"
   docker_file_path                    = "teams/kernel/management-shell-browser/Dockerfile"
   docker_image_name                   = "kernel-management-shell-browser"
   domain_name                         = var.domain_name
@@ -272,7 +234,7 @@ module "kernel-management-shell-browser" {
   is_production_environment           = local.is_production_environment
   source_environment_branch_name      = var.source_environment_branch_name
   gcp_shell_project_id                = var.gcp_shell_project_id
-  gcp_project_id                      = module.gcp_project[0].project_id
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
   environment_name                    = var.environment_name
   branch_name                         = var.branch_name
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
@@ -282,13 +244,7 @@ module "kernel-management-shell-browser" {
   source_environment_project_id       = var.production_environment_core_platform_shell_browser_vite_vercel_project_id
 
   external_environment_variables = {
-    "VITE_FIREBASE_API_KEY"                                  = module.kernel-security-iam-svc[0].firebase_api_key
-    "VITE_FIREBASE_AUTH_DOMAIN"                              = module.kernel-security-iam-svc[0].firebase_auth_domain
-    "VITE_FIREBASE_PROJECT_ID"                               = module.kernel-security-iam-svc[0].firebase_project_id
-    "VITE_FIREBASE_STORAGE_BUCKET"                           = module.kernel-security-iam-svc[0].firebase_storage_bucket
-    "VITE_FIREBASE_MESSAGING_SENDER_ID"                      = module.kernel-security-iam-svc[0].firebase_messaging_sender_id
-    "VITE_FIREBASE_APP_ID"                                   = module.kernel-security-iam-svc[0].firebase_app_id
-    "VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL" = module.people-organizations-management[0].rest_api_url
+    "VITE_PEOPLE_ORGANIZATIONS_MANAGEMENT_REST_API_BASE_URL" = length(module.people-organizations-management) > 0 ? module.people-organizations-management[0].rest_api_url : ""
     # "VITE_UNLEASH_CLIENT_KEY"                                = "fake-client-key" # unleash_api_token.management-shell-browser.secret
     # "VITE_UNLEASH_FRONTEND_URL"                              = "${length(module.kernel-flag-management) > 0 ? module.kernel-flag-management[0].url : "https://fake-unleash-url.super.fake"}/api/frontend" # https://docs.getunleash.io/reference/sdks/react
   }
@@ -296,8 +252,8 @@ module "kernel-management-shell-browser" {
 
 # # Docs
 module "kernel-dev-docs-browser" {
-  count                               = 1
-  source                              = "../../../dev-docs-browser/iac"
+  count                               = 0
+  source                              = "../../../../../dev-docs-browser/iac"
   docker_file_path                    = "teams/kernel/dev-docs-browser/Dockerfile"
   service_name                        = "kernel-dev-docs-browser"
   domain_name                         = var.domain_name
@@ -305,7 +261,7 @@ module "kernel-dev-docs-browser" {
   is_production_environment           = local.is_production_environment
   source_environment_branch_name      = var.source_environment_branch_name
   gcp_shell_project_id                = var.gcp_shell_project_id
-  gcp_project_id                      = module.gcp_project[0].project_id
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
   environment_name                    = var.environment_name
   branch_name                         = var.branch_name
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name
@@ -314,30 +270,11 @@ module "kernel-dev-docs-browser" {
   gcp_dns_managed_zone_name           = var.gcp_dns_managed_zone_name
   source_environment_project_id       = var.production_environment_core_platform_shell_browser_vite_vercel_project_id
 }
-# module "kernel-dev-docs-browser" {
-#   source                        = "../../../dev-docs-browser/iac"
-#   is_service_enabled            = false
-#   is_production_environment     = local.is_production_environment
-#   branch_name                   = var.branch_name
-#   source_environment_project_id = var.production_environment_dx_dev_docs_browser_vercel_project_id
-#   depends_on                    = [module.people-researchers-peers-svc]
-# }
-
-# # Graph
-# module "kernel-system-graph-browser" {
-#   source                        = "../../../system-graph-browser/iac"
-#   is_service_enabled            = false
-#   is_production_environment     = local.is_production_environment
-#   branch_name                   = var.branch_name
-#   source_environment_project_id = var.production_environment_core_root_shell_graph_vercel_project_id
-#   depends_on                    = [module.people-researchers-peers-svc]
-# }
-
 
 # People Skill-Set Browser
 module "people-skill-set-browser" {
-  count                               = 1
-  source                              = "../../../../people/skill-set/browser/iac"
+  count                               = 0
+  source                              = "../../../../../../people/skill-set/browser/iac"
   docker_file_path                    = "teams/people/skill-set/browser/Dockerfile"
   docker_image_name                   = "people-skill-set-browser"
   domain_name                         = var.domain_name
@@ -345,7 +282,7 @@ module "people-skill-set-browser" {
   is_production_environment           = local.is_production_environment
   source_environment_branch_name      = var.source_environment_branch_name
   gcp_shell_project_id                = var.gcp_shell_project_id
-  gcp_project_id                      = module.gcp_project[0].project_id
+  gcp_project_id                      = length(module.gcp_project) > 0 ? module.gcp_project[0].project_id : var.gcp_shell_project_id
   environment_name                    = var.environment_name
   branch_name                         = var.branch_name
   gcp_docker_artifact_repository_name = var.gcp_docker_artifact_repository_name

@@ -1,28 +1,23 @@
 terraform {
   required_providers {
     google = {
-      source = "hashicorp/google"
-      # Test version 5.0.0 after correcting https://github.com/hashicorp/terraform-provider-google/issues/16217
-      # which is related to https://github.com/amaralc/peerlab/actions/runs/6497683905/job/17647315911
-      version = "5.22.0"
+      source  = "hashicorp/google"
+      version = "7.19.0"
     }
 
     google-beta = {
-      source = "hashicorp/google-beta"
-      # Test version 5.0.0 after correcting https://github.com/hashicorp/terraform-provider-google/issues/16217
-      # which is related to https://github.com/amaralc/peerlab/actions/runs/6497683905/job/17647315911
-      version = "5.22.0"
+      source  = "hashicorp/google-beta"
+      version = "7.19.0"
     }
 
     neon = {
-      source = "kislerdm/neon"
-      # Track following issue to decide weather to upgrade or not https://github.com/kislerdm/terraform-provider-neon/issues/51
-      version = "0.2.3"
+      source  = "kislerdm/neon"
+      version = "0.13.0"
     }
 
     random = {
       source  = "hashicorp/random"
-      version = "3.5.1"
+      version = "3.8.1"
     }
 
     # vercel = {
@@ -32,7 +27,7 @@ terraform {
 
     mongodbatlas = {
       source  = "mongodb/mongodbatlas"
-      version = "1.15.1"
+      version = "2.6.0"
     }
 
     # auth0 = {
