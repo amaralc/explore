@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 00:30 UTC] Bootstrap scripts must grant org-level folderAdmin role for Terraform folder.create
+- [2026-02-13 00:25 UTC] Terraform folder creation needs org-level folderAdmin role; project-level insufficient
 - [2026-02-13 00:18 UTC] PR experiment comments capture complete troubleshooting journey for team organizational learning
 - [2026-02-13 00:15 UTC] GitHub Actions workflow step order critical; auth must precede credential-dependent operations
 - [2026-02-13 00:12 UTC] Terraform init requires prior GCP authentication for GCS backend access in CI workflows
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-07 20:00 UTC] Renderers can detect graduation by comparing current stable version against previous prerelease tag
 - [2026-02-07 19:30 UTC] Graduating prereleases duplicates changelog entries already logged under beta versions
 - [2026-02-07 19:15 UTC] `manifestRootsToUpdate: ["."]` redirects NX Release version writes to root package.json
-- [2026-02-07 18:45 UTC] NX Release `projects: ["."]` fails silently without root project.json; omit for defaults
-- [2026-02-07 18:30 UTC] NX Release enforces `currentVersionResolver: "git-tag"` when using conventional commits
