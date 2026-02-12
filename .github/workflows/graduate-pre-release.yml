@@ -7,11 +7,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  graduate:
+  release:
     runs-on: ubuntu-latest
     environment: main
     permissions:
       contents: write
+      id-token: write
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
     env:
       NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
@@ -60,76 +64,13 @@ jobs:
           git push
           git push --tags
 
-  validate:
-    needs: [graduate]
-    runs-on: ubuntu-latest
-    environment: main
-    permissions:
-      contents: read
-    env:
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          fetch-depth: 0
-
-      - name: Install Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Cache pnpm store
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint
-        run: pnpm nx run-many --target=lint --all=true
-
-      - name: Test
-        run: pnpm nx run-many --target=test --all=true
-
-  deploy:
-    needs: [graduate, validate]
-    runs-on: ubuntu-latest
-    environment: main
-    permissions:
-      contents: read
-      id-token: write
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
-    env:
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          fetch-depth: 0
-
       - name: Get short commit hash
         run: |
           SHORT_SHA=${{ github.sha }}
           echo "short_commit_sha=${SHORT_SHA:0:8}" >> $GITHUB_ENV
 
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
+      - name: Authenticate to Google Cloud
+        id: 'auth'
         uses: 'google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed' # v2.1.13
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
@@ -150,32 +91,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@885d1462b80bc1c1c7f0b00334ad271f09369c55 # v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Cache pnpm store
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Generate Prisma client
+        run: pnpm prisma:generate:postgres
 
       - name: Build all projects
         run: |
-          pnpm prisma:generate:postgres
           NX_BRANCH=${GITHUB_REF#refs/heads/} pnpm nx run-many --target=build --all=true --parallel=3
           NX_BRANCH=${GITHUB_REF#refs/heads/} pnpm nx run-many --target=post-build --all=true --parallel=3
 
@@ -229,6 +149,6 @@ jobs:
           terraform apply -auto-approve tfplan
         working-directory: teams/kernel/shell-iac/production
 
-      - name: Emmit Compass Deployment event
-        run: |
-          bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}
+      # - name: Emmit Compass Deployment event
+      #   run: |
+      #     bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}}

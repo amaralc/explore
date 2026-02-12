@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-12 21:00 UTC] Terraform apply with saved plans doesn't need env vars; plan contains all values
+- [2026-02-12 20:00 UTC] Release workflows should reuse cached deps; validation already passed in PRs
 - [2026-02-12 19:00 UTC] Separate CI job concerns to eliminate redundant task execution in pipelines
 - [2026-02-12 18:00 UTC] Job dependencies in single workflow ensure validation runs before deployment
 - [2026-02-12 16:00 UTC] Use env: blocks for GitHub Actions secrets to auto-mask them in logs
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-06 23:00 UTC] `git reset HEAD <file>` unstages files to exclude them from commits
 - [2026-02-06 22:55 UTC] GitHub Actions jobs need `environment: <name>` to access environment-scoped secrets
 - [2026-02-06 22:50 UTC] `gh api repos/{owner}/{repo}/environments/{name} -X PUT` creates GitHub environments
-- [2026-02-06 22:45 UTC] `gh secret set --env <name>` scopes secrets to specific GitHub environments
-- [2026-02-06 22:40 UTC] `gh secret set` adds secrets to repos; PAT creation requires GitHub web UI
