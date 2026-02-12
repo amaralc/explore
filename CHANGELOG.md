@@ -1,3 +1,9 @@
+## [0.100.7-beta.8](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.7...peerlab@0.100.7-beta.8) (2026-02-12)
+
+### Chore
+
+- remove common and teams folders ([f8ec417](https://github.com/amaralc/explore/commit/f8ec417))
+
 ## [0.100.7-beta.7](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.6...peerlab@0.100.7-beta.7) (2026-02-12)
 
 ### Chore
