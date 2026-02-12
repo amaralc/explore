@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-12 16:00 UTC] Use env: blocks for GitHub Actions secrets to auto-mask them in logs
 - [2026-02-12 15:30 UTC] Environment variables auto-mask secrets; pass via TF_VAR_ instead of CLI expansion
 - [2026-02-11 11:30 UTC] Prefer create-and-check-exit-code over list-then-grep for simpler idempotency
 - [2026-02-11 11:15 UTC] Guard `create` with `list` + `grep` when resources lack a direct `describe` command
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-06 22:40 UTC] `gh secret set` adds secrets to repos; PAT creation requires GitHub web UI
 - [2026-02-06 22:35 UTC] GitHub Actions runners need `git config user.name/email` before committing
 - [2026-02-06 22:30 UTC] `[skip-github-pipeline]` in release commits prevents CI workflow infinite loops
-- [2026-02-06 20:50 UTC] Experiment expected-result tables with Aspect|Expected columns enable multi-criteria pass/fail
