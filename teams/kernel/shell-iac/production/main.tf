@@ -7,24 +7,14 @@ locals {
   service_account_email = var.service_account_email
 }
 
-module "common_folder" {
-  source  = "terraform-google-modules/folders/google"
-  version = "5.1.0"
-
-  parent = "organizations/${var.gcp_organization_id}"
-  names = [
-    "common",
-  ]
-}
-
 module "teams_folders" {
   source  = "terraform-google-modules/folders/google"
   version = "5.1.0"
 
   parent = "organizations/${var.gcp_organization_id}"
   names = [
-    "kernel",
-    "core",
+    # "kernel",
+    # "core",
   ]
 }
 
