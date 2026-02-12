@@ -98,17 +98,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Generate Prisma client
-        run: pnpm prisma:generate:postgres
-
       - name: Lint
         run: pnpm nx run-many --target=lint --all=true
 
       - name: Test
         run: pnpm nx run-many --target=test --all=true
-
-      - name: Build
-        run: pnpm nx run-many --target=build --all=true
 
   deploy:
     needs: [graduate, validate]
