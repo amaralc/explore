@@ -142,12 +142,11 @@ jobs:
           terraform plan -out=tfplan
         working-directory: teams/kernel/shell-iac/production
 
-      - name: Upload Terraform Plan
-        uses: actions/upload-artifact@v4
-        with:
-          name: tfplan
-          path: teams/kernel/shell-iac/production/tfplan
-          retention-days: 1
+      - name: Terraform Apply
+        run: |
+          echo "Running terraform apply..."
+          terraform apply -auto-approve tfplan
+        working-directory: teams/kernel/shell-iac/production
 
       - name: Emmit Compass Deployment event
         if: false # Intentionally disabled
@@ -166,51 +165,3 @@ jobs:
             --compass-external-event-source-id="$COMPASS_EXTERNAL_EVENT_SOURCE_ID" \
             --pipeline-run-id="$GITHUB_RUN_ID" \
             --repository-name="$GITHUB_REPOSITORY"
-
-  deploy:
-    needs: release
-    runs-on: ubuntu-latest
-    environment: production
-    permissions:
-      id-token: write
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-
-      - name: Download Terraform Plan
-        uses: actions/download-artifact@v4
-        with:
-          name: tfplan
-          path: teams/kernel/shell-iac/production
-
-      - name: Authenticate to Google Cloud
-        id: 'auth'
-        uses: 'google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed' # v2.1.13
-        with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
-
-      - name: Set up Cloud SDK
-        uses: 'google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f' # v2.2.1
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1 # v2
-        with:
-          terraform_version: 1.7.5
-
-      - name: Terraform init
-        run: |
-          echo "Running terraform init..."
-          echo ""
-          terraform init
-        working-directory: teams/kernel/shell-iac/production
-
-      - name: Terraform Apply
-        run: |
-          echo "Running terraform apply..."
-          terraform apply -auto-approve tfplan
-        working-directory: teams/kernel/shell-iac/production
