@@ -16,6 +16,8 @@
 # --mongodb-atlas-public-key
 # --mongodb-atlas-private-key
 # --mongodb-atlas-group-id
+# --nx-cloud-access-token-read-write
+# --nx-cloud-access-token-read
 
 # Call this script with the following command: bash teams/core/platform-shell-iac/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
 # Obs.: this script assumes that you are already authenticated with gcloud CLI.
@@ -69,6 +71,14 @@ case $i in                          # This starts a case statement, which checks
     ;;
     --neon-project-location=*)
     NEON_PROJECT_LOCATION="${i#*=}"
+    shift
+    ;;
+    --nx-cloud-access-token-read-write=*)
+    NX_CLOUD_ACCESS_TOKEN_READ_WRITE="${i#*=}"
+    shift
+    ;;
+    --nx-cloud-access-token-read=*)
+    NX_CLOUD_ACCESS_TOKEN_READ="${i#*=}"
     shift
     ;;
 esac                                # This ends the case statement.
@@ -146,6 +156,18 @@ fi
 if [ -z "$NEON_PROJECT_LOCATION" ]
 then
     echo "Error: --neon-project-location flag is required"
+    exit 1
+fi
+
+if [ -z "$NX_CLOUD_ACCESS_TOKEN_READ_WRITE" ]
+then
+    echo "Error: --nx-cloud-access_token-read-write flag is required"
+    exit 1
+fi
+
+if [ -z "$NX_CLOUD_ACCESS_TOKEN_READ" ]
+then
+    echo "Error: --nx-cloud-access-token-read flag is required"
     exit 1
 fi
 
@@ -355,6 +377,9 @@ echo "Set default GitHub repository."
 gh api repos/$GITHUB_USERNAME/$GITHUB_REPOSITORY/environments/main -X PUT > /dev/null
 echo "Created GitHub environment 'main'."
 
+gh api repos/$GITHUB_USERNAME/$GITHUB_REPOSITORY/environments/pr-open -X PUT > /dev/null
+echo "Created GitHub environment 'pr-open'."
+
 # Set GitHub Actions secrets (scoped to 'main' environment)
 gh secret set OWNER_ACCOUNT_EMAIL --env main -b"$OWNER_ACCOUNT_EMAIL" > /dev/null
 gh secret set SUPPORT_ACCOUNT_EMAIL --env main -b"$GCP_SUPPORT_GROUP_EMAIL" > /dev/null
@@ -373,12 +398,11 @@ gh secret set MONGODB_ATLAS_PUBLIC_KEY --env main -b"$MONGODB_ATLAS_PUBLIC_KEY" 
 gh secret set MONGODB_ATLAS_PRIVATE_KEY --env main -b"$MONGODB_ATLAS_PRIVATE_KEY" > /dev/null
 gh secret set NEON_API_KEY --env main -b"$NEON_API_KEY" > /dev/null
 gh secret set NEON_PROJECT_LOCATION --env main -b"$NEON_PROJECT_LOCATION" > /dev/null
+gh secret set NX_CLOUD_ACCESS_TOKEN --env main -b"$NX_CLOUD_ACCESS_TOKEN_READ_WRITE" > /dev/null
 echo "Set all GitHub Actions secrets in 'main' environment."
 
-# Optional Nx Cloud setup (in use)
-NX_ACCESS_TOKEN="fake-nx-access-token"
-gh secret set NX_ACCESS_TOKEN -b $NX_ACCESS_TOKEN > /dev/null
-echo "Set Nx Cloud token."
+gh secret set NX_CLOUD_ACCESS_TOKEN --env pr-open -b"$NX_CLOUD_ACCESS_TOKEN_READ" > /dev/null
+echo "Set all GitHub Actions secrets in 'pr-open' environment."
 
 # Optional Sonar Cloud setup (not in use)
 # We opted to integrate using "ClickOps" since it was an easy 2 clicks integration between SonarCloud and GitHub for public repositories
