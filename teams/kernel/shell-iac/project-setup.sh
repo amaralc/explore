@@ -342,6 +342,7 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.writer" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/source.admin" > /dev/null # Necessary to use google_iap_brand and client resources (https://cloud.google.com/iap/docs/programmatic-oauth-clients)
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/dns.admin" > /dev/null # Admin DNS records
+gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.organizationViewer" > /dev/null
 echo "Granted required roles to service account."
 
 # Create a support group email (skip if it already exists)
