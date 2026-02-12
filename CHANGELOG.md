@@ -1,3 +1,12 @@
+## [0.100.7-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.3...peerlab@0.100.7-beta.0) (2026-02-12)
+
+### 🩹 Fixes
+
+- **ci:** reference correct nx token env ([aaaa01c](https://github.com/amaralc/explore/commit/aaaa01c))
+- **ci:** avoid logging secrets by using environment variables ([b091a3b](https://github.com/amaralc/explore/commit/b091a3b))
+- **ci:** use newly created commit to tag image ([b8ccbee](https://github.com/amaralc/explore/commit/b8ccbee))
+- **ci:** prevent production deployment without approval ([601cab6](https://github.com/amaralc/explore/commit/601cab6))
+
 ## [0.100.6](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.3...peerlab@0.100.6) (2026-02-12)
 
 This release promotes peerlab@0.100.6-beta.3 to stable.
