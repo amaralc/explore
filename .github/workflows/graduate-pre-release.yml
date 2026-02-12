@@ -1,4 +1,4 @@
-name: Graduate Pre-Release
+name: Graduate Pre-Release and Deploy
 
 permissions:
   contents: read
@@ -7,11 +7,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  graduate:
+  release:
     runs-on: ubuntu-latest
     environment: main
     permissions:
       contents: write
+      id-token: write
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+    env:
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -57,3 +63,154 @@ jobs:
         run: |
           git push
           git push --tags
+
+      - name: Get short commit hash
+        run: |
+          echo "short_commit_sha=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
+
+      - name: Authenticate to Google Cloud
+        id: 'auth'
+        uses: 'google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed' # v2.1.13
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f' # v2.2.1
+
+      - name: Install gh CLI
+        run: |
+          type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+          && sudo apt update \
+          && sudo apt install gh -y
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@885d1462b80bc1c1c7f0b00334ad271f09369c55 # v2
+
+      - name: Generate Prisma client
+        run: pnpm prisma:generate:postgres
+
+      - name: Build all projects
+        run: |
+          NX_BRANCH=${GITHUB_REF#refs/heads/} pnpm nx run-many --target=build --all=true --parallel=3
+          NX_BRANCH=${GITHUB_REF#refs/heads/} pnpm nx run-many --target=post-build --all=true --parallel=3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1 # v2
+        with:
+          terraform_version: 1.7.5
+
+      - name: Terraform init
+        run: |
+          echo "Running terraform init..."
+          echo ""
+          terraform init
+        working-directory: teams/kernel/shell-iac/production
+
+      - name: Terraform validate
+        run: |
+          echo "Running terraform validate..."
+          terraform validate
+        working-directory: teams/kernel/shell-iac/production
+
+      - name: Terraform Plan
+        env:
+          TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
+          TF_VAR_gcp_project_id: ${{ secrets.GCP_PROJECT_ID }}
+          TF_VAR_gcp_location: ${{ secrets.GCP_LOCATION }}
+          TF_VAR_short_commit_sha: ${{ env.short_commit_sha }}
+          TF_VAR_support_account_email: ${{ secrets.SUPPORT_ACCOUNT_EMAIL }}
+          TF_VAR_owner_account_email: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+          TF_VAR_gcp_billing_account_id: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+          TF_VAR_gcp_organization_id: ${{ secrets.GCP_ORGANIZATION_ID }}
+          TF_VAR_nx_cloud_access_token: ${{ env.NX_CLOUD_ACCESS_TOKEN }}
+          TF_VAR_neon_api_key: ${{ secrets.NEON_API_KEY }}
+          TF_VAR_neon_project_location: ${{ secrets.NEON_PROJECT_LOCATION }}
+          TF_VAR_unleash_api_url: ${{ secrets.UNLEASH_API_URL }}
+          TF_VAR_unleash_auth_token: ${{ secrets.UNLEASH_AUTH_TOKEN }}
+          TF_VAR_environment_path: ${{ env.GITHUB_ENV }}
+          TF_VAR_mongodb_atlas_org_id: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+          TF_VAR_mongodb_atlas_private_key: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+          TF_VAR_mongodb_atlas_public_key: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+          TF_VAR_service_account_email: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+        run: |
+          echo "Running terraform plan..."
+          echo "Commit Hash: ${{ env.short_commit_sha }}"
+          terraform plan -out=tfplan
+        working-directory: teams/kernel/shell-iac/production
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: teams/kernel/shell-iac/production/tfplan
+          retention-days: 1
+
+      - name: Emmit Compass Deployment event
+        if: false # Intentionally disabled
+        env:
+          ATLASSIAN_DOMAIN: ${{ secrets.ATLASSIAN_DOMAIN }}
+          ATLASSIAN_CLOUD_ID: ${{ secrets.ATLASSIAN_CLOUD_ID }}
+          ATLASSIAN_USER_EMAIL: ${{ secrets.ATLASSIAN_USER_EMAIL }}
+          ATLASSIAN_USER_API_TOKEN: ${{ secrets.ATLASSIAN_USER_API_TOKEN }}
+          COMPASS_EXTERNAL_EVENT_SOURCE_ID: ${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }}
+        run: |
+          bash scripts/compass/emmit-deployment-event.sh \
+            --atlassian-domain="$ATLASSIAN_DOMAIN" \
+            --atlassian-cloud-id="$ATLASSIAN_CLOUD_ID" \
+            --atlassian-user-email="$ATLASSIAN_USER_EMAIL" \
+            --atlassian-user-api-token="$ATLASSIAN_USER_API_TOKEN" \
+            --compass-external-event-source-id="$COMPASS_EXTERNAL_EVENT_SOURCE_ID" \
+            --pipeline-run-id="$GITHUB_RUN_ID" \
+            --repository-name="$GITHUB_REPOSITORY"
+
+  deploy:
+    needs: release
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      id-token: write
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+          path: teams/kernel/shell-iac/production
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1 # v2
+        with:
+          terraform_version: 1.7.5
+
+      - name: Terraform init
+        run: |
+          echo "Running terraform init..."
+          echo ""
+          terraform init
+        working-directory: teams/kernel/shell-iac/production
+
+      - name: Authenticate to Google Cloud
+        id: 'auth'
+        uses: 'google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed' # v2.1.13
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f' # v2.2.1
+
+      - name: Terraform Apply
+        run: |
+          echo "Running terraform apply..."
+          terraform apply -auto-approve tfplan
+        working-directory: teams/kernel/shell-iac/production

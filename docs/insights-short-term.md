@@ -2,6 +2,15 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-12 23:45 UTC] Dependent deploy jobs with artifact passing enable approval gates cleanly
+- [2026-02-12 23:40 UTC] GitHub environment protection rules gate deployments without splitting workflows
+- [2026-02-12 23:30 UTC] Use git rev-parse --short=8 HEAD after push to capture release commit, not trigger SHA
+- [2026-02-12 23:00 UTC] Use if: false to conditionally disable GitHub Actions steps without deleting code
+- [2026-02-12 22:00 UTC] Pass secrets to scripts via env vars, not CLI args; GitHub auto-masks env: values
+- [2026-02-12 21:00 UTC] Terraform apply with saved plans doesn't need env vars; plan contains all values
+- [2026-02-12 20:00 UTC] Release workflows should reuse cached deps; validation already passed in PRs
+- [2026-02-12 19:00 UTC] Separate CI job concerns to eliminate redundant task execution in pipelines
+- [2026-02-12 18:00 UTC] Job dependencies in single workflow ensure validation runs before deployment
 - [2026-02-12 16:00 UTC] Use env: blocks for GitHub Actions secrets to auto-mask them in logs
 - [2026-02-12 15:30 UTC] Environment variables auto-mask secrets; pass via TF_VAR_ instead of CLI expansion
 - [2026-02-11 11:30 UTC] Prefer create-and-check-exit-code over list-then-grep for simpler idempotency
@@ -93,12 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-06 23:25 UTC] Schedule-only triggers for security scans reduce CI noise without sacrificing coverage
 - [2026-02-06 23:20 UTC] Same commit triggers multiple workflows independently; check workflow name to distinguish runs
 - [2026-02-06 23:15 UTC] Add explicit `permissions: contents: read` to workflows for least-privilege security
-- [2026-02-06 23:10 UTC] Pin GitHub Actions to full commit SHAs with `# vX` comments for supply chain security
-- [2026-02-06 23:05 UTC] GitHub Actions `create` event fires on branches too; use `push` with `tags` instead
-- [2026-02-06 23:00 UTC] `git reset HEAD <file>` unstages files to exclude them from commits
-- [2026-02-06 22:55 UTC] GitHub Actions jobs need `environment: <name>` to access environment-scoped secrets
-- [2026-02-06 22:50 UTC] `gh api repos/{owner}/{repo}/environments/{name} -X PUT` creates GitHub environments
-- [2026-02-06 22:45 UTC] `gh secret set --env <name>` scopes secrets to specific GitHub environments
-- [2026-02-06 22:40 UTC] `gh secret set` adds secrets to repos; PAT creation requires GitHub web UI
-- [2026-02-06 22:35 UTC] GitHub Actions runners need `git config user.name/email` before committing
-- [2026-02-06 22:30 UTC] `[skip-github-pipeline]` in release commits prevents CI workflow infinite loops
