@@ -1,3 +1,9 @@
+## [0.100.7-beta.7](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.6...peerlab@0.100.7-beta.7) (2026-02-12)
+
+### Chore
+
+- **shell-iac:** disable all ([ea1d3e73](https://github.com/amaralc/explore/commit/ea1d3e73))
+
 ## [0.100.7-beta.6](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.5...peerlab@0.100.7-beta.6) (2026-02-12)
 
 ### 🩹 Fixes
