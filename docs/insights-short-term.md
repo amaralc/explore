@@ -2,6 +2,15 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 00:18 UTC] PR experiment comments capture complete troubleshooting journey for team organizational learning
+- [2026-02-13 00:15 UTC] GitHub Actions workflow step order critical; auth must precede credential-dependent operations
+- [2026-02-13 00:12 UTC] Terraform init requires prior GCP authentication for GCS backend access in CI workflows
+- [2026-02-13 00:10 UTC] PR descriptions linking code fixes to issue experiments provide complete troubleshooting context
+- [2026-02-13 00:08 UTC] Comprehensive experiment comments document error progression for organizational learning
+- [2026-02-13 00:05 UTC] Bootstrap scripts grant org-level IAM via gcloud organizations; project-level insufficient
+- [2026-02-13 00:02 UTC] GCP org-level IAM roles required separately; project-level insufficient for org data access
+- [2026-02-12 23:58 UTC] GCP 403 errors on terraform data sources indicate missing service account IAM roles
+- [2026-02-12 23:55 UTC] Experiment comments following template structure create searchable issue documentation
 - [2026-02-12 23:50 UTC] Nested module version constraints combine; parent versions.tf must satisfy all
 - [2026-02-12 23:45 UTC] Dependent deploy jobs with artifact passing enable approval gates cleanly
 - [2026-02-12 23:40 UTC] GitHub environment protection rules gate deployments without splitting workflows
@@ -93,12 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-07 19:15 UTC] `manifestRootsToUpdate: ["."]` redirects NX Release version writes to root package.json
 - [2026-02-07 18:45 UTC] NX Release `projects: ["."]` fails silently without root project.json; omit for defaults
 - [2026-02-07 18:30 UTC] NX Release enforces `currentVersionResolver: "git-tag"` when using conventional commits
-- [2026-02-07 17:50 UTC] `nx release` without --specifier ignores prerelease tags; resolves from latest stable
-- [2026-02-07 00:00 UTC] GitHub Actions job-level permissions override workflow-level defaults
-- [2026-02-06 23:55 UTC] NX Release --git-push is unreliable in CI; use explicit git push commands instead
-- [2026-02-06 23:45 UTC] GitHub Actions tag filters use glob patterns (`*`), not regex (`^$`, `+`)
-- [2026-02-06 23:40 UTC] NX Release requires `git.push: true` in config or `--git-push` flag to push commits/tags
-- [2026-02-06 23:35 UTC] Verify uncommitted changes match the issue before creating a linked branch
-- [2026-02-06 23:30 UTC] `gh issue comment` adds lessons learned to experiment issues for future reference
-- [2026-02-06 23:25 UTC] Schedule-only triggers for security scans reduce CI noise without sacrificing coverage
-- [2026-02-06 23:20 UTC] Same commit triggers multiple workflows independently; check workflow name to distinguish runs
