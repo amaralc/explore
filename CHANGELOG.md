@@ -1,3 +1,9 @@
+## [0.100.7-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.1...peerlab@0.100.7-beta.2) (2026-02-12)
+
+### 🩹 Fixes
+
+- **shell-iac:** upgrade folders modules ([d781478](https://github.com/amaralc/explore/commit/d781478))
+
 ## [0.100.7-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.0...peerlab@0.100.7-beta.1) (2026-02-12)
 
 ### 🩹 Fixes
