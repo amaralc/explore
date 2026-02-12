@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-12 23:30 UTC] Use git rev-parse --short=8 HEAD after push to capture release commit, not trigger SHA
 - [2026-02-12 23:00 UTC] Use if: false to conditionally disable GitHub Actions steps without deleting code
 - [2026-02-12 22:00 UTC] Pass secrets to scripts via env vars, not CLI args; GitHub auto-masks env: values
 - [2026-02-12 21:00 UTC] Terraform apply with saved plans doesn't need env vars; plan contains all values
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-06 23:15 UTC] Add explicit `permissions: contents: read` to workflows for least-privilege security
 - [2026-02-06 23:10 UTC] Pin GitHub Actions to full commit SHAs with `# vX` comments for supply chain security
 - [2026-02-06 23:05 UTC] GitHub Actions `create` event fires on branches too; use `push` with `tags` instead
-- [2026-02-06 23:00 UTC] `git reset HEAD <file>` unstages files to exclude them from commits
