@@ -192,6 +192,7 @@ GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN_NAME"
 # Workload Identity Pool and Provider names for GitHub Actions OIDC
 GCP_WIF_POOL_NAME="github-pool"
 GCP_WIF_PROVIDER_NAME="github-provider"
+GCP_WIF_LOCATION="global"
 
 # Environment tag for project classification
 GCP_TAG_KEY_SHORT_NAME="environment"
@@ -284,23 +285,23 @@ gcloud services enable sts.googleapis.com --project $GCP_PROJECT_ID > /dev/null
 echo "Enabled WIF APIs."
 
 # Create Workload Identity Pool for GitHub Actions (skip if it already exists, roles/iam.workloadIdentityPoolAdmin required to owner account)
-if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" --project="$GCP_PROJECT_ID" --location="global" &>/dev/null; then
+if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" --project="$GCP_PROJECT_ID" --location="$GCP_WIF_LOCATION" &>/dev/null; then
   echo "Workload Identity Pool '$GCP_WIF_POOL_NAME' already exists, skipping creation."
 else
   gcloud iam workload-identity-pools create "$GCP_WIF_POOL_NAME" \
     --project="$GCP_PROJECT_ID" \
-    --location="global" \
+    --location="$GCP_WIF_LOCATION" \
     --display-name="GitHub Actions Pool"
 fi
 
 # Create OIDC Provider for GitHub within the pool (skip if it already exists)
 # Attribute condition restricts to main branch and stable semver release tags only (peerlab@X.Y.Z)
-if gcloud iam workload-identity-pools providers describe "$GCP_WIF_PROVIDER_NAME" --project="$GCP_PROJECT_ID" --location="global" --workload-identity-pool="$GCP_WIF_POOL_NAME" &>/dev/null; then
+if gcloud iam workload-identity-pools providers describe "$GCP_WIF_PROVIDER_NAME" --project="$GCP_PROJECT_ID" --location="$GCP_WIF_LOCATION" --workload-identity-pool="$GCP_WIF_POOL_NAME" &>/dev/null; then
   echo "WIF Provider '$GCP_WIF_PROVIDER_NAME' already exists, skipping creation."
 else
   gcloud iam workload-identity-pools providers create-oidc "$GCP_WIF_PROVIDER_NAME" \
     --project="$GCP_PROJECT_ID" \
-    --location="global" \
+    --location="$GCP_WIF_LOCATION" \
     --workload-identity-pool="$GCP_WIF_POOL_NAME" \
     --display-name="GitHub Provider" \
     --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
@@ -312,11 +313,11 @@ fi
 gcloud iam service-accounts add-iam-policy-binding "$GCP_SERVICE_ACCOUNT_EMAIL" \
   --project="$GCP_PROJECT_ID" \
   --role="roles/iam.workloadIdentityUser" \
-  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY" > /dev/null
+  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/$GCP_WIF_LOCATION/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY" > /dev/null
 echo "Granted roles/iam.workloadIdentityUser."
 
 # Build the full WIF provider resource name for GitHub Actions
-GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/global/workloadIdentityPools/$GCP_WIF_POOL_NAME/providers/$GCP_WIF_PROVIDER_NAME"
+GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/$GCP_WIF_LOCATION/workloadIdentityPools/$GCP_WIF_POOL_NAME/providers/$GCP_WIF_PROVIDER_NAME"
 
 # Assign roles to the service account
 echo "Assigning IAM roles to service account..."
