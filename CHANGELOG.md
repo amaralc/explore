@@ -1,3 +1,10 @@
+## [0.100.7-beta.4](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.3...peerlab@0.100.7-beta.4) (2026-02-12)
+
+### 🩹 Fixes
+
+- **shell-iac:** grant organization-level IAM role to terraform service account ([#196](https://github.com/amaralc/explore/issues/196))
+- **workflows:** authenticate to GCP before terraform init in deploy job ([6abe7b0](https://github.com/amaralc/explore/commit/6abe7b0))
+
 ## [0.100.7-beta.3](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.2...peerlab@0.100.7-beta.3) (2026-02-12)
 
 ### 🩹 Fixes
