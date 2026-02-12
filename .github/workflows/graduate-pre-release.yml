@@ -127,7 +127,7 @@ jobs:
           TF_VAR_owner_account_email: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
           TF_VAR_gcp_billing_account_id: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
           TF_VAR_gcp_organization_id: ${{ secrets.GCP_ORGANIZATION_ID }}
-          TF_VAR_nx_cloud_access_token: ${{ secrets.NX_ACCESS_TOKEN }}
+          TF_VAR_nx_cloud_access_token: ${{ env.NX_CLOUD_ACCESS_TOKEN }}
           TF_VAR_neon_api_key: ${{ secrets.NEON_API_KEY }}
           TF_VAR_neon_project_location: ${{ secrets.NEON_PROJECT_LOCATION }}
           TF_VAR_unleash_api_url: ${{ secrets.UNLEASH_API_URL }}
