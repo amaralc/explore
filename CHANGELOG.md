@@ -1,3 +1,9 @@
+## [0.100.7-beta.3](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.2...peerlab@0.100.7-beta.3) (2026-02-12)
+
+### 🩹 Fixes
+
+- **ci:** use production as environment_type ([39b5dc0](https://github.com/amaralc/explore/commit/39b5dc0))
+
 ## [0.100.7-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.1...peerlab@0.100.7-beta.2) (2026-02-12)
 
 ### 🩹 Fixes
