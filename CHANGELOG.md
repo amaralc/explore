@@ -1,3 +1,9 @@
+## [0.100.7-beta.6](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.5...peerlab@0.100.7-beta.6) (2026-02-12)
+
+### 🩹 Fixes
+
+- **iac:** grant org-level folderAdmin role in bootstrap script for Terraform folder creation ([b24d87d7](https://github.com/amaralc/explore/commit/b24d87d7))
+
 ## [0.100.7-beta.5](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.4...peerlab@0.100.7-beta.5) (2026-02-12)
 
 This was a version bump only, there were no code changes.
