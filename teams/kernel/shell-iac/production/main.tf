@@ -9,7 +9,7 @@ locals {
 
 module "common_folder" {
   source  = "terraform-google-modules/folders/google"
-  version = "4.0.1"
+  version = "5.1.0"
 
   parent = "organizations/${var.gcp_organization_id}"
   names = [
@@ -19,7 +19,7 @@ module "common_folder" {
 
 module "teams_folders" {
   source  = "terraform-google-modules/folders/google"
-  version = "4.0.1"
+  version = "5.1.0"
 
   parent = "organizations/${var.gcp_organization_id}"
   names = [
@@ -31,7 +31,7 @@ module "teams_folders" {
 module "environments_folders" {
   for_each = module.teams_folders.ids
   source   = "terraform-google-modules/folders/google"
-  version  = "4.0.1"
+  version  = "5.1.0"
 
   parent = each.value
   names = [
