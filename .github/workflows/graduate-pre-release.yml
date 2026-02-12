@@ -149,6 +149,20 @@ jobs:
           terraform apply -auto-approve tfplan
         working-directory: teams/kernel/shell-iac/production
 
-      # - name: Emmit Compass Deployment event
-      #   run: |
-      #     bash scripts/compass/emmit-deployment-event.sh --atlassian-domain=${{ secrets.ATLASSIAN_DOMAIN }} --atlassian-cloud-id=${{ secrets.ATLASSIAN_CLOUD_ID }} --atlassian-user-email=${{ secrets.ATLASSIAN_USER_EMAIL }} --atlassian-user-api-token=${{ secrets.ATLASSIAN_USER_API_TOKEN }} --compass-external-event-source-id=${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }} --pipeline-run-id=${GITHUB_RUN_ID} --repository-name=${GITHUB_REPOSITORY}}
+      - name: Emmit Compass Deployment event
+        if: false # Intentionally disabled
+        env:
+          ATLASSIAN_DOMAIN: ${{ secrets.ATLASSIAN_DOMAIN }}
+          ATLASSIAN_CLOUD_ID: ${{ secrets.ATLASSIAN_CLOUD_ID }}
+          ATLASSIAN_USER_EMAIL: ${{ secrets.ATLASSIAN_USER_EMAIL }}
+          ATLASSIAN_USER_API_TOKEN: ${{ secrets.ATLASSIAN_USER_API_TOKEN }}
+          COMPASS_EXTERNAL_EVENT_SOURCE_ID: ${{ secrets.COMPASS_EXTERNAL_EVENT_SOURCE_ID }}
+        run: |
+          bash scripts/compass/emmit-deployment-event.sh \
+            --atlassian-domain="$ATLASSIAN_DOMAIN" \
+            --atlassian-cloud-id="$ATLASSIAN_CLOUD_ID" \
+            --atlassian-user-email="$ATLASSIAN_USER_EMAIL" \
+            --atlassian-user-api-token="$ATLASSIAN_USER_API_TOKEN" \
+            --compass-external-event-source-id="$COMPASS_EXTERNAL_EVENT_SOURCE_ID" \
+            --pipeline-run-id="$GITHUB_RUN_ID" \
+            --repository-name="$GITHUB_REPOSITORY"
