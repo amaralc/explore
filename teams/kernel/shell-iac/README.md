@@ -20,8 +20,12 @@
 - (gcp) Navigate to GCP console and search for "Organization". Click in "set up your foundation";
 - (gcp) Go to stp "Users & Groups" and click "create all groups". Follow default options;
   - (gcp) Check https://console.cloud.google.com/cloud-setup/users-groups to see suggested groups structure;
-- (gcp) In "Administrative access" step, add "Project Deleter" role to the group of organization administrators;
+- (gcp) In "Administrative access" step, add "Project Deleter", "IAM Workload Identity Pool Admin (Beta)", "Tag Administrator" and "Tag User" roles to the group of organization administrators;
   - (gcp) Check https://console.cloud.google.com/cloud-setup/administrator to see suggested roles for each group;
+
+## Setup Billing
+
+- (gcp) Setup Payment method with CNPJ and Credit Card (or PIX);
 
 ## Organization Setup
 
@@ -69,14 +73,15 @@ gcloud projects get-iam-policy $GCP_PROJECT_ID --flatten="bindings[].members" --
 ```hcl
 terraform {
   backend "gcs" {
-    bucket      = "<your-project-name>-tfstate"
-    credentials = "credentials.json"               # The path to the JSON key file for the Service Account used to manage terraform
-    prefix      = "production"                     # The path to the state file within the bucket
+    bucket = "<your-project-name>-tfstate"
+    prefix = "production"
+    # Authentication uses Application Default Credentials (ADC) from Workload Identity Federation
   }
 }
 ```
 
 - (note) It is not possible to populate that file using terraform variables, but you can change those values when calling `terraform init` if you pass `-backend-config` flag (e.g. `-backend-config='prefix=path/to/folder/within/bucket`);
+- (note) Authentication uses Workload Identity Federation (WIF) via Application Default Credentials. No `credentials.json` file is needed. The `project-setup.sh` script creates a WIF pool and OIDC provider that allows GitHub Actions to impersonate the Terraform admin service account;
 
 ## Manually add Project Creator and Billing Creator roles to service account
 
@@ -141,7 +146,8 @@ Adding roles in the organization level cannot yet be accomplished using the gclo
   - GCP_LOCATION <!-- This value was populated from the setup script-->
   - GCP_ORGANIZATION_ID
   - GCP_PROJECT_ID <!-- This value was populated from the setup script-->
-  - GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY <!-- This value was populated from the setup script-->
+  - GCP_WORKLOAD_IDENTITY_PROVIDER <!-- This value was populated from the setup script-->
+  - GCP_SERVICE_ACCOUNT_EMAIL <!-- This value was populated from the setup script-->
   - GH_ACTIONS_PERSONAL_ACCESS_TOKEN
   - MONGODB_ATLAS_ORG_ID
   - MONGODB_ATLAS_PRIVATE_KEY

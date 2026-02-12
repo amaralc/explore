@@ -1,15 +1,10 @@
-data "local_file" "credentials" {
-  filename = "${path.module}/credentials.json"
-}
-
 data "google_organization" "org" {
   organization = "organizations/${var.gcp_organization_id}"
 }
 
 locals {
   sanitized_domain_name = replace(var.domain_name, "/[^a-zA-Z0-9]/", "-")
-  credentials           = jsondecode(data.local_file.credentials.content)
-  service_account_email = local.credentials.client_email
+  service_account_email = var.service_account_email
 }
 
 module "common_folder" {

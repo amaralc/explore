@@ -2,6 +2,30 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-12 16:00 UTC] Use env: blocks for GitHub Actions secrets to auto-mask them in logs
+- [2026-02-12 15:30 UTC] Environment variables auto-mask secrets; pass via TF_VAR_ instead of CLI expansion
+- [2026-02-11 11:30 UTC] Prefer create-and-check-exit-code over list-then-grep for simpler idempotency
+- [2026-02-11 11:15 UTC] Guard `create` with `list` + `grep` when resources lack a direct `describe` command
+- [2026-02-11 11:00 UTC] Environment-scoped secrets restrict CI/CD credential access to jobs that declare the environment
+- [2026-02-11 10:45 UTC] Ensure all resource creation commands have output redirection and status messages
+- [2026-02-11 10:30 UTC] Redirect verbose CLI output to /dev/null; echo status messages for clean script progress
+- [2026-02-11 04:30 UTC] Create resource first, then tag separately; atomic create+tag needs extra permissions
+- [2026-02-11 04:15 UTC] gcloud `--tags` dict flags use `ORG_ID/key=value` format, not `ORG_ID/key/value`
+- [2026-02-11 04:00 UTC] `gcloud projects create --tags` applies org-level tags at project creation time
+- [2026-02-11 03:45 UTC] `gcloud resource-manager tags` creates org-level key/value pairs to classify GCP projects
+- [2026-02-11 03:15 UTC] GCP tag binding needs `roles/resourcemanager.tagUser`; creation needs `tagAdmin` at org level
+- [2026-02-10 22:30 UTC] Selectively revert mixed diffs by categorizing changes before editing, not by file
+- [2026-02-10 22:00 UTC] Guard shell `create` commands with `if` to prevent false success messages on failure
+- [2026-02-10 21:45 UTC] Order bootstrap steps so prerequisites resolve before dependent commands warn
+- [2026-02-10 20:45 UTC] Redirect gcloud policy-binding stdout to /dev/null; echo role names for clean progress
+- [2026-02-10 20:15 UTC] Make bootstrap scripts idempotent with `describe` checks before each `create` command
+- [2026-02-10 19:35 UTC] `gcloud org-policies describe` NOT_FOUND means no constraint is set, not missing permissions
+- [2026-02-10 19:30 UTC] GCP IAM bindings are eventually consistent; sleep after granting before using
+- [2026-02-10 19:20 UTC] Bootstrap scripts must self-grant required IAM roles before commands that need them
+- [2026-02-10 19:15 UTC] `roles/iam.workloadIdentityPoolAdmin` is required to create WIF pools and providers
+- [2026-02-10 19:00 UTC] WIF + OIDC replaces SA key files for keyless GitHub Actions to GCP authentication
+- [2026-02-10 18:15 UTC] Org policy `iam.disableServiceAccountKeyCreation` blocks SA keys; use Workload Identity Federation
+- [2026-02-10 15:30 UTC] `file <path>` reveals failed downloads saved as HTML instead of expected archives
 - [2026-02-11 16:00 UTC] Terraform modules must live in iac-modules; use versioned subdirs for API changes
 - [2026-02-11 14:00 UTC] Terraform modules with count = 0 skip execution but validate arguments; use length() for safety
 - [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility
@@ -78,28 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-06 22:40 UTC] `gh secret set` adds secrets to repos; PAT creation requires GitHub web UI
 - [2026-02-06 22:35 UTC] GitHub Actions runners need `git config user.name/email` before committing
 - [2026-02-06 22:30 UTC] `[skip-github-pipeline]` in release commits prevents CI workflow infinite loops
-- [2026-02-06 20:50 UTC] Experiment expected-result tables with Aspect|Expected columns enable multi-criteria pass/fail
-- [2026-02-06 20:45 UTC] `gh issue create --milestone` requires milestone title, not number
-- [2026-02-06 00:00 UTC] Consolidate duplicate pnpm.overrides entries into single unbounded patterns
-- [2026-02-05 23:40 UTC] Batch-verify all citations before finalizing; editions and co-authors often differ
-- [2026-02-05 23:30 UTC] Verify book authors via web search before adding citations to references
-- [2026-02-05 23:25 UTC] Kata Practice Guide and Level Up Agile complement theory with hands-on exercises
-- [2026-02-05 23:20 UTC] JIT reference format: Author (Year) *Title*, Edition, Publisher: Location
-- [2026-02-05 23:15 UTC] Reference sections linking practices to foundational books ground team conventions
-- [2026-02-05 23:10 UTC] `.github/DISCUSSIONS.md` serves as the welcome README for the GitHub Discussions tab
-- [2026-02-05 23:05 UTC] Discussions host open conversations; Issues track actionable work like bugs and experiments
-- [2026-02-05 22:50 UTC] Template chooser config.yml guides contributors to the right issue template
-- [2026-02-05 22:45 UTC] `gh pr create` with heredoc body enables quick PRs from multi-commit branches
-- [2026-02-05 22:35 UTC] Experiment outcomes should compare actual vs expected and capture what surprised you
-- [2026-02-05 22:30 UTC] Experiment expected results must be specific enough to verify against actual outcomes
-- [2026-02-05 22:25 UTC] Kata experiment steps must be small, learning-focused, and actionable now
-- [2026-02-05 22:15 UTC] Pre-filled table examples in YAML forms guide users toward complete submissions
-- [2026-02-05 22:10 UTC] YAML issue forms add dropdowns, inputs, and validation over markdown templates
-- [2026-02-05 21:50 UTC] Bug templates use BDD Gherkin to contrast current (buggy) vs target (expected) behavior
-- [2026-02-05 21:45 UTC] PR templates with experiment records link Toyota Kata experiments to code changes
-- [2026-02-05 21:35 UTC] Query orphaned issues via `--json | jq 'select(.milestone == null)'` for batch triage
-- [2026-02-05 21:15 UTC] Link closed issues to target-condition parents via `addSubIssue` for hierarchical tracking
-- [2026-02-05 20:45 UTC] Use BDD scenarios in obstacles to describe current blocking state, not desired outcomes
-- [2026-02-05 20:35 UTC] Target-condition issues reference README Toyota Kata Visions for the Vision section
-- [2026-02-05 20:25 UTC] Reframe feature requests as obstacles by explaining why they block target conditions
-
