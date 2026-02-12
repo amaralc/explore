@@ -1,3 +1,9 @@
+## [0.100.7-beta.1](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.0...peerlab@0.100.7-beta.1) (2026-02-12)
+
+### 🩹 Fixes
+
+- **iac:** resolve terraform-google-modules/project-factory version constraints ([#196](https://github.com/amaralc/explore/issues/196))
+
 ## [0.100.7-beta.0](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.3...peerlab@0.100.7-beta.0) (2026-02-12)
 
 ### 🩹 Fixes
