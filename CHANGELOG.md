@@ -1,3 +1,26 @@
+## [0.100.6-beta.3](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.2...peerlab@0.100.6-beta.3) (2026-02-12)
+
+### 🩹 Fixes
+
+- replace SA key creation with Workload Identity Federation in bootstrap script ([#196](https://github.com/amaralc/explore/issues/196))
+- remove credentials.json references from Terraform production config ([4a7bbf6](https://github.com/amaralc/explore/commit/4a7bbf6))
+- remove gcloud auth activate-service-account from IaC modules ([f4662db](https://github.com/amaralc/explore/commit/f4662db))
+- migrate CI/CD workflow from SA key auth to Workload Identity Federation ([41e5d7b](https://github.com/amaralc/explore/commit/41e5d7b))
+- **ci:** use TF_VAR_ env vars instead of CLI expansion for Terraform secrets ([e6e184a](https://github.com/amaralc/explore/commit/e6e184a))
+- **shell-iac:** specify environment for secrets ([9deb188](https://github.com/amaralc/explore/commit/9deb188))
+- **shell-iac:** avoid usin secrets outside of env ([6635dd4](https://github.com/amaralc/explore/commit/6635dd4))
+- **shell-iac:** set nx cloud token from setup script ([c0e33b6](https://github.com/amaralc/explore/commit/c0e33b6))
+
+### Chore
+
+- **shell-iac:** enhance setup script logs ([eaad22b](https://github.com/amaralc/explore/commit/eaad22b))
+- **shell-iac:** avoid error message when tag assignment already exist ([3ca59c6](https://github.com/amaralc/explore/commit/3ca59c6))
+
+### Configuration
+
+- **shell-iac:** add idempotency to setup script ([b5fa935](https://github.com/amaralc/explore/commit/b5fa935))
+- **shell-iac:** define project tag ([a33506b](https://github.com/amaralc/explore/commit/a33506b))
+
 ## [0.100.6-beta.2](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.1...peerlab@0.100.6-beta.2) (2026-02-11)
 
 ### 🚀 Features
