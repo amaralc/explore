@@ -1,3 +1,7 @@
+## [0.100.6](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.3...peerlab@0.100.6) (2026-02-12)
+
+This release promotes peerlab@0.100.6-beta.3 to stable.
+
 ## [0.100.6-beta.3](https://github.com/amaralc/explore/compare/peerlab@0.100.6-beta.2...peerlab@0.100.6-beta.3) (2026-02-12)
 
 ### 🩹 Fixes
