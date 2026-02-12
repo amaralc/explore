@@ -7,21 +7,28 @@ locals {
   service_account_email = var.service_account_email
 }
 
+module "common_folder" {
+  source  = "terraform-google-modules/folders/google"
+  version = "5.1.0"
+
+  parent = "organizations/${var.gcp_organization_id}"
+  names = [
+    "common",
+  ]
+}
+
 module "teams_folders" {
-  count   = 0 # Intentionally disabled
   source  = "terraform-google-modules/folders/google"
   version = "5.1.0"
 
   parent = "organizations/${var.gcp_organization_id}"
   names = [
     "kernel",
-    "people",
-    "things"
+    "core",
   ]
 }
 
 module "environments_folders" {
-  count    = 0 # Intentionally disabled
   for_each = module.teams_folders.ids
   source   = "terraform-google-modules/folders/google"
   version  = "5.1.0"
@@ -30,12 +37,10 @@ module "environments_folders" {
   names = [
     "production",
     "preview",
-    "ci-cd"
   ]
 }
 
 module "core_platform_shell_iac_apis" {
-  count          = 0 # Intentionally disabled
   source         = "../../iac-modules/gcp-apis"
   gcp_project_id = var.gcp_project_id
   apis = [
@@ -58,7 +63,6 @@ module "core_platform_shell_iac_apis" {
 
 # DNS Zones
 resource "google_dns_managed_zone" "root_domain" {
-  count       = 0 # Intentionally disabled
   project     = var.gcp_project_id
   name        = local.sanitized_domain_name
   dns_name    = "${var.domain_name}."
@@ -66,7 +70,6 @@ resource "google_dns_managed_zone" "root_domain" {
 }
 
 module "production-environment-name" {
-  count                   = 0 # Intentionally disabled
   source                  = "../../iac-modules/environment-name"
   environment_name_prefix = "production"
 }
@@ -74,7 +77,7 @@ module "production-environment-name" {
 # Production Environment
 module "production" {
   source                              = "../../iac-modules/environment/v1.1.0"
-  count                               = 0 # Intentionally disabled
+  count                               = 0
   environment_type                    = "production"
   branch_name                         = "production"
   domain_name                         = var.domain_name
