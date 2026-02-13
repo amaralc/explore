@@ -1,5 +1,5 @@
 # Set the path to your service account key file
-export GOOGLE_APPLICATION_CREDENTIALS="teams/core/platform-shell-iac/production/credentials.json"
+export GOOGLE_APPLICATION_CREDENTIALS="teams/kernel-iac/production/credentials.json"
 
 # Authenticate to Google Cloud with the service account
 gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}

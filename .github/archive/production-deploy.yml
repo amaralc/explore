@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [check-branch]
     # environment:
-    #   name: core-platform-shell-iac-production # Requires permission to proceed
+    #   name: kernel-iac-production # Requires permission to proceed
     strategy:
       matrix:
         node-version: [18]
@@ -173,7 +173,7 @@ jobs:
     needs: [check-branch]
     runs-on: ubuntu-latest
     # environment:
-    #   name: core-platform-shell-iac-preview
+    #   name: kernel-iac-preview
     env:
       IMAGE_NAME: kernel-flag-management
     strategy:
@@ -219,7 +219,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/core/platform-shell-iac/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel-iac/credentials.json
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -327,7 +327,7 @@ jobs:
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/core/platform-shell-iac/production/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel-iac/production/credentials.json
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -346,26 +346,26 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: teams/core/platform-shell-iac/production
+        working-directory: teams/kernel-iac/production
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: teams/core/platform-shell-iac/production
+        working-directory: teams/kernel-iac/production
 
       - name: Terraform Plan
         run: |
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
           terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }}"
-        working-directory: teams/core/platform-shell-iac/production
+        working-directory: teams/kernel-iac/production
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: teams/core/platform-shell-iac/production
+        working-directory: teams/kernel-iac/production
 
       # Atlassian Compass is currently not in use. 
       # - name: Emmit Compass Deployment event

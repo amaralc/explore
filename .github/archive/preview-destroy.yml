@@ -20,7 +20,7 @@ jobs: # A workflow can have multiple jobs
   check-target:
     runs-on: ubuntu-latest # Instance type where job will run
     # environment:
-    #   name: core-platform-shell-iac-preview # Requires permission to proceed
+    #   name: kernel-iac-preview # Requires permission to proceed
     env:
       PRODUCTION_BRANCH: "production" # Set the name of your production branch here
     steps:
@@ -70,7 +70,7 @@ jobs: # A workflow can have multiple jobs
     needs: [check-target]
     runs-on: ubuntu-latest
     # environment:
-    #   name: core-platform-shell-iac-preview
+    #   name: kernel-iac-preview
     defaults:
       run:
         working-directory: ${{ github.workspace }}
@@ -105,7 +105,7 @@ jobs: # A workflow can have multiple jobs
 
       - name: Save GCP credentials to file
         run: |
-          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/core/platform-shell-iac/preview/credentials.json
+          echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel-iac/preview/credentials.json
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
@@ -124,17 +124,17 @@ jobs: # A workflow can have multiple jobs
           echo "Running terraform init..."
           echo ""
           terraform init -backend-config='prefix=${{ env.parsed_branch_name }}' # Set the backend prefix as the parsed branch name (environment name)
-        working-directory: teams/core/platform-shell-iac/preview
+        working-directory: teams/kernel-iac/preview
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: teams/core/platform-shell-iac/preview
+        working-directory: teams/kernel-iac/preview
 
       - name: Terraform Destroy
         run: |
           echo "Running terraform destroy..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
           terraform destroy -auto-approve -var "environment_name=${{ env.environment_name }}" -var "branch_name=${{ env.SOURCE_BRANCH }}" -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "core_platform_shell_browser_vite_vercel_project_id=${{ secrets.CORE_PLATFORM_SHELL_BROWSER_VITE_VERCEL_PROJECT_ID }}" -var "core_root_shell_graph_vercel_project_id=${{ secrets.CORE_ROOT_SHELL_GRAPH_VERCEL_PROJECT_ID }}" -var "dx_dev_docs_browser_vercel_project_id=${{ secrets.DX_DEV_DOCS_BROWSER_VERCEL_PROJECT_ID }}" -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}"
-        working-directory: teams/core/platform-shell-iac/preview
+        working-directory: teams/kernel-iac/preview

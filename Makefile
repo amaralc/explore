@@ -44,22 +44,22 @@ researchers-peers-svc-consumer-serve:
 	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve service-consumer
 
 terraform-init-staging:
-	cd teams/core/platform-shell-iac/staging && terraform init -upgrade
+	cd teams/kernel-iac/staging && terraform init -upgrade
 
 terraform-plan-staging:
-	cd teams/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars
+	cd teams/kernel-iac/staging && terraform plan -var-file=env.tfvars
 
 terraform-apply-staging:
-	cd teams/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars
+	cd teams/kernel-iac/staging && terraform apply -var-file=env.tfvars
 
 terraform-apply-staging-auto-approve:
-	cd teams/core/platform-shell-iac/staging && terraform apply -var-file=env.tfvars -auto-approve
+	cd teams/kernel-iac/staging && terraform apply -var-file=env.tfvars -auto-approve
 
 terraform-plan-staging-out:
-	cd teams/core/platform-shell-iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
+	cd teams/kernel-iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
 
 terraform-destroy-staging:
-	cd teams/core/platform-shell-iac/staging && terraform destroy -var-file=env.tfvars
+	cd teams/kernel-iac/staging && terraform destroy -var-file=env.tfvars
 
 kong-postgres:
 	COMPOSE_PROFILES=database KONG_DATABASE=postgres docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml up -d
@@ -77,9 +77,9 @@ iam-local-setup:
 	minikube status --profile peerlab-iam >/dev/null 2>&1 || \
 		minikube start --profile peerlab-iam --driver=docker --memory=4096 --cpus=2
 	minikube addons enable ingress --profile peerlab-iam
-	cd teams/kernel/shell-iac/local && terraform init
-	cd teams/kernel/shell-iac/local && terraform apply -auto-approve -target='module.environment.module.local_platform[0]'
-	cd teams/kernel/shell-iac/local && terraform apply -auto-approve
+	cd teams/kernel/iac/local && terraform init
+	cd teams/kernel/iac/local && terraform apply -auto-approve -target='module.environment.module.local_platform[0]'
+	cd teams/kernel/iac/local && terraform apply -auto-approve
 	@echo ""
 	@echo "============================================================"
 	@echo "Logto IAM stack is ready!"
@@ -92,4 +92,4 @@ iam-local-tunnel:
 	minikube tunnel --profile peerlab-iam
 
 iam-local-teardown:
-	cd teams/kernel/shell-iac/local && terraform destroy -auto-approve
+	cd teams/kernel/iac/local && terraform destroy -auto-approve

@@ -24,7 +24,7 @@
 #   #   runs-on: ubuntu-latest
 #   #   needs: [check-branch]
 #   #   # environment:
-#   #   #   name: core-platform-shell-iac-production # Requires permission to proceed
+#   #   #   name: kernel-iac-production # Requires permission to proceed
 #   #   strategy:
 #   #     matrix:
 #   #       node-version: [18]
@@ -176,7 +176,7 @@
 #     # needs: [check-branch]
 #     runs-on: ubuntu-latest
 #     # environment:
-#     #   name: core-platform-shell-iac-preview
+#     #   name: kernel-iac-preview
 #     env:
 #       IMAGE_NAME: kernel-flag-management
 
@@ -218,7 +218,7 @@
 
 #       - name: Save GCP credentials to file
 #         run: |
-#           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/core/platform-shell-iac/production/credentials.json
+#           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel-iac/production/credentials.json
 
 #       - id: 'auth'
 #         name: 'Authenticate to Google Cloud'
@@ -320,11 +320,11 @@
 
 #       - name: Save Zitadel credentials to file
 #         run: |
-#           echo '${{ secrets.ZITADEL_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/core/platform-shell-iac/production/zitadel-credentials.json
+#           echo '${{ secrets.ZITADEL_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel-iac/production/zitadel-credentials.json
 
 #       - name: Save GCP credentials to file
 #         run: |
-#           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/core/platform-shell-iac/production/credentials.json
+#           echo '${{ secrets.GCP_TF_ADMIN_SERVICE_ACCOUNT_KEY }}' > teams/kernel-iac/production/credentials.json
 
 #       - id: 'auth'
 #         name: 'Authenticate to Google Cloud'
@@ -340,7 +340,7 @@
 
 #       - name: Authenticate with gcloud cli
 #         run: |
-#           gcloud auth activate-service-account --key-file=teams/core/platform-shell-iac/production/credentials.json
+#           gcloud auth activate-service-account --key-file=teams/kernel-iac/production/credentials.json
 
 #       # - name: "Set up Cloud SDK"
 #       #   uses: "google-github-actions/setup-gcloud@v1"
@@ -355,26 +355,26 @@
 #           echo "Running terraform init..."
 #           echo ""
 #           terraform init
-#         working-directory: teams/core/platform-shell-iac/production
+#         working-directory: teams/kernel-iac/production
 
 #       - name: Terraform validate
 #         run: |
 #           echo "Running terraform validate..."
 #           terraform validate
-#         working-directory: teams/core/platform-shell-iac/production
+#         working-directory: teams/kernel-iac/production
 
 #       - name: Terraform Plan
 #         run: |
 #           echo "Running terraform plan..."
 #           echo "Commit Hash: ${{ env.short_commit_sha }}"
 #           terraform plan -out=tfplan -var "gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" -var  "gcp_location=${{ secrets.GCP_LOCATION }}" -var "short_commit_sha=${{ env.short_commit_sha }}" -var "vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" -var "mongodb_atlas_public_key=${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" -var "mongodb_atlas_private_key=${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" -var "mongodb_atlas_org_id=${{ secrets.MONGODB_ATLAS_ORG_ID }}" -var "support_account_email=${{ secrets.SUPPORT_ACCOUNT_EMAIL }}" -var "owner_account_email=${{ secrets.OWNER_ACCOUNT_EMAIL }}" -var "gcp_billing_account_id=${{ secrets.GCP_BILLING_ACCOUNT_ID }}" -var "gcp_organization_id=${{ secrets.GCP_ORGANIZATION_ID }}" -var "gcp_github_installation_id=${{ secrets.GCP_GITHUB_INSTALLATION_ID }}" -var "github_personal_access_token=${{ secrets.GH_ACTIONS_PERSONAL_ACCESS_TOKEN }}" -var "nx_cloud_access_token=${{ secrets.NX_ACCESS_TOKEN }}" -var "zitadel_instance_domain=${{ secrets.ZITADEL_INSTANCE_DOMAIN }}"
-#         working-directory: teams/core/platform-shell-iac/production
+#         working-directory: teams/kernel-iac/production
 
 #       - name: Terraform Apply
 #         run: |
 #           echo "Running terraform apply..."
 #           terraform apply -auto-approve tfplan
-#         working-directory: teams/core/platform-shell-iac/production
+#         working-directory: teams/kernel-iac/production
 
 #       - name: Emmit Compass Deployment event
 #         run: |

@@ -108,13 +108,13 @@ jobs:
           echo "Running terraform init..."
           echo ""
           terraform init
-        working-directory: teams/kernel/shell-iac/production
+        working-directory: teams/kernel/iac/production
 
       - name: Terraform validate
         run: |
           echo "Running terraform validate..."
           terraform validate
-        working-directory: teams/kernel/shell-iac/production
+        working-directory: teams/kernel/iac/production
 
       - name: Terraform Plan
         env:
@@ -140,13 +140,13 @@ jobs:
           echo "Running terraform plan..."
           echo "Commit Hash: ${{ env.short_commit_sha }}"
           terraform plan -out=tfplan
-        working-directory: teams/kernel/shell-iac/production
+        working-directory: teams/kernel/iac/production
 
       - name: Terraform Apply
         run: |
           echo "Running terraform apply..."
           terraform apply -auto-approve tfplan
-        working-directory: teams/kernel/shell-iac/production
+        working-directory: teams/kernel/iac/production
 
       - name: Emmit Compass Deployment event
         if: false # Intentionally disabled

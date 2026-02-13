@@ -66,10 +66,10 @@ Terraform will perform the following actions:
   # module.staging.module.postgresql_dbms.google_sql_database_instance.preview_environment[0] must be replaced
 -/+ resource "google_sql_database_instance" "preview_environment" {
       ~ available_maintenance_versions = [] -> (known after apply)
-      ~ connection_name                = "core-platform-shell-iac:europe-west3:core-platform-shell-iac-staging" -> (known after apply)
+      ~ connection_name                = "kernel-iac:europe-west3:kernel-iac-staging" -> (known after apply)
       + encryption_key_name            = (known after apply)
       ~ first_ip_address               = "<internal-ip-address-here>" -> (known after apply)
-      ~ id                             = "core-platform-shell-iac-staging" -> (known after apply)
+      ~ id                             = "kernel-iac-staging" -> (known after apply)
       ~ instance_type                  = "CLOUD_SQL_INSTANCE" -> (known after apply)
       ~ ip_address                     = [
           - {

@@ -1,4 +1,4 @@
-# Run this script: bash teams/core/platform-shell-iac/project-setup.sh
+# Run this script: bash teams/kernel-iac/project-setup.sh
 
 # This script accepts named arguments and push an image to container registry
 
@@ -19,7 +19,7 @@
 # --nx-cloud-access-token-read-write
 # --nx-cloud-access-token-read
 
-# Call this script with the following command: bash teams/core/platform-shell-iac/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
+# Call this script with the following command: bash teams/kernel-iac/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
 # Obs.: this script assumes that you are already authenticated with gcloud CLI.
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
@@ -421,11 +421,11 @@ echo "Setting up Terraform..."
 echo ""
 
 # Remove .terraform and .terraform.lock.hcl
-rm -rf teams/kernel/shell-iac/production/.terraform
-rm -rf teams/kernel/shell-iac/production/.terraform.lock.hcl
+rm -rf teams/kernel/iac/production/.terraform
+rm -rf teams/kernel/iac/production/.terraform.lock.hcl
 
 # Create a default backend.tf
-cat > teams/kernel/shell-iac/production/backend.tf <<EOF
+cat > teams/kernel/iac/production/backend.tf <<EOF
 # This block sets up what backend should be used for Terraform. In this case, we are using Google Cloud Storage.
 terraform {
   backend "gcs" {                                # The Google Cloud Storage backend

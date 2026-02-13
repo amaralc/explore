@@ -50,7 +50,7 @@
 - (terminal) Create GCP project, admin service account, resources and permissions, substituting the variables by actual values:
 
 ```bash
-bash teams/kernel/shell-iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain=$DOMAIN --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
+bash teams/kernel/iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain=$DOMAIN --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
 ```
 
 - (terminal) Verify that the project was created: `gcloud projects list`;
@@ -68,7 +68,7 @@ gcloud projects get-iam-policy $GCP_PROJECT_ID --flatten="bindings[].members" --
 
 ## Modify the name of the bucket
 
-- (terraform) Verify that the name of the bucket in `teams/kernel/shell-iac/production/backend.tf`, includes the `gcp-project-id` you defined earlier in the placeholder `<your-project-name>`.
+- (terraform) Verify that the name of the bucket in `teams/kernel/iac/production/backend.tf`, includes the `gcp-project-id` you defined earlier in the placeholder `<your-project-name>`.
 
 ```hcl
 terraform {
@@ -107,7 +107,7 @@ Adding roles in the organization level cannot yet be accomplished using the gclo
 
 6. Increase cloud build quota limits for europe-west3 (if using 2nd generation repositories and cloud build)
 
-- Access https://console.cloud.google.com/apis/api/cloudbuild.googleapis.com/quotas?project=core-platform-shell-iac
+- Access https://console.cloud.google.com/apis/api/cloudbuild.googleapis.com/quotas?project=kernel-iac
 - Select the europe-west3 region
 - Click on "Edit Quotas"
 - Define new quota limit (5)
@@ -125,7 +125,7 @@ Adding roles in the organization level cannot yet be accomplished using the gclo
 
 ## Setup GitHub Actions
 
-- (github) Add the required GitHub Actions secrets to your repository in GitHub. The required variables are described in `teams/kernel/shell-iac/production/variables.tf` and mentioned in `.github/workflows/build-and-deploy.yml`. At the moment (2023-10-08) they are listed below. Not of them are in active use, but were left as reference before we compromise on any specific provider.
+- (github) Add the required GitHub Actions secrets to your repository in GitHub. The required variables are described in `teams/kernel/iac/production/variables.tf` and mentioned in `.github/workflows/build-and-deploy.yml`. At the moment (2023-10-08) they are listed below. Not of them are in active use, but were left as reference before we compromise on any specific provider.
 
   - ATLASSIAN_CLOUD_ID
   - ATLASSIAN_DOMAIN

@@ -4,7 +4,7 @@
 # --gcp-project-id
 # --domain
 
-# Call this script with the following command: bash teams/core/platform-shell-iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --domain=$DOMAIN
+# Call this script with the following command: bash teams/kernel-iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --domain=$DOMAIN
 # Obs.: this script assumes that you are already authenticated with gcloud CLI.
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
