@@ -1,5 +1,3 @@
-# Run this script: bash teams/kernel-iac/project-setup.sh
-
 # This script accepts named arguments and push an image to container registry
 
 # Expected named arguments:
@@ -19,8 +17,8 @@
 # --nx-cloud-access-token-read-write
 # --nx-cloud-access-token-read
 
-# Call this script with the following command: bash teams/kernel-iac/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
-# Obs.: this script assumes that you are already authenticated with gcloud CLI.
+# Call this script with the following command: bash {FOLDER_PATH}/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
+# Obs.: this script assumes that you are already authenticated with gcloud CLI and gh cli.
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
 do                                  # This is the start of the loop block.

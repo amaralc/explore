@@ -1,0 +1,35 @@
+{
+  "name": "kernel-iac-preview",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "teams/kernel/iac/preview",
+  "projectType": "application",
+  "implicitDependencies": [
+    "kernel-iac-bootstrap",
+    "kernel-iac-production",
+    "kernel-iac-modules-gcp-apis",
+    "kernel-iac-modules-environment"
+  ],
+  "targets": {
+    "preview-terraform-init": {
+      "command": "cd teams/kernel/iac/preview && terraform init"
+    },
+    "preview-terraform-validate": {
+      "command": "cd teams/kernel/iac/preview && terraform validate"
+    },
+    "preview-terraform-plan": {
+      "command": "cd teams/kernel/iac/preview && terraform plan -out=tfplan -var-file=env.tfvars"
+    },
+    "preview-terraform-apply": {
+      "command": "cd teams/kernel/iac/preview && terraform apply -auto-approve tfplan && terraform output"
+    },
+    "preview-terraform-destroy": {
+      "command": "cd teams/kernel/iac/preview && terraform destroy -var-file=env.tfvars -auto-approve"
+    },
+    "preview-terraform-output": {
+      "command": "cd teams/kernel/iac/preview && terraform output"
+    },
+    "preview-terraform-graph": {
+      "command": "cd teams/kernel/iac/preview && terraform graph | dot -Tsvg > graph.svg"
+    }
+  }
+}

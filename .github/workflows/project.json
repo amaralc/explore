@@ -4,8 +4,9 @@
   "sourceRoot": ".github/workflows",
   "projectType": "application",
   "implicitDependencies": [
-    "people-researchers-peers-svc-rest-api",
-    "kernel-iac"
+    "kernel-iac-bootstrap",
+    "kernel-iac-production",
+    "kernel-iac-preview"
   ],
   "targets": {},
   "tags": []
