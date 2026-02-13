@@ -1,9 +1,10 @@
-# This script accepts named arguments and push an image to container registry
+#!/bin/sh
+
+# This script accepts named arguments and sets up a GCP project with mirrored folder hierarchy
 
 # Expected named arguments:
 # --owner-account-email
 # --gcp-organization-id
-# --gcp-project-id
 # --gcp-billing-account-id
 # --domain-name
 # --github-username
@@ -16,9 +17,11 @@
 # --mongodb-atlas-group-id
 # --nx-cloud-access-token-read-write
 # --nx-cloud-access-token-read
+# --gcp-project-id (optional: if not provided, auto-generated from script location)
+#
+# NOTE: If --gcp-project-id is not provided, it will be auto-generated from script location (e.g., bootstrap-a3f2)
 
-
-# Call this script with the following command: bash {FOLDER_PATH}/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY --neon-api-key=$NEON_API_KEY --neon-project-location=$NEON_PROJECT_LOCATION --mongodb-atlas-org-id=$MONGODB_ATLAS_ORG_ID --mongodb-atlas-public-key=$MONGODB_ATLAS_PUBLIC_KEY --mongodb-atlas-private-key=$MONGODB_ATLAS_PRIVATE_KEY --nx-cloud-access-token-read-write=$NX_CLOUD_ACCESS_TOKEN_READ_WRITE --nx-cloud-access-token-read=$NX_CLOUD_ACCESS_TOKEN_READ
+# Call this script with the following command: bash {FOLDER_PATH}/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY --neon-api-key=$NEON_API_KEY --neon-project-location=$NEON_PROJECT_LOCATION --mongodb-atlas-org-id=$MONGODB_ATLAS_ORG_ID --mongodb-atlas-public-key=$MONGODB_ATLAS_PUBLIC_KEY --mongodb-atlas-private-key=$MONGODB_ATLAS_PRIVATE_KEY --nx-cloud-access-token-read-write=$NX_CLOUD_ACCESS_TOKEN_READ_WRITE --nx-cloud-access-token-read=$NX_CLOUD_ACCESS_TOKEN_READ
 # Obs.: this script assumes that you are already authenticated with gcloud CLI and GitHub CLI.
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
@@ -32,10 +35,6 @@ case $i in                          # This starts a case statement, which checks
     GCP_ORGANIZATION_ID="${i#*=}"
     shift
     ;;
-    --gcp-project-id=*)             # This starts a new case statement pattern.
-    GCP_PROJECT_ID="${i#*=}"        # Assign the value after the equal sign, to a variable. This pattern matches any argument that starts with "--gcp-project-id=". The ${i#*=} syntax removes the prefix "--gcp-project-id=" from the argument.
-    shift                           # This removes the current argument from the list of arguments. This is necessary because the argument is no longer needed.
-    ;;                              # This ends the case statement pattern.
     --gcp-billing-account-id=*)
     GCP_BILLING_ACCOUNT_ID="${i#*=}"
     shift
@@ -80,20 +79,32 @@ case $i in                          # This starts a case statement, which checks
     NX_CLOUD_ACCESS_TOKEN_READ="${i#*=}"
     shift
     ;;
+    --gcp-project-id=*)
+    GCP_PROJECT_ID="${i#*=}"
+    shift
+    ;;
 esac                                # This ends the case statement.
 done                                # This ends the loop block.
+
+# ============================================
+# PATH DETECTION AND PROJECT ID GENERATION
+# ============================================
+
+# Detect script location and calculate relative path
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Get git repository root
+if GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null); then
+    REPO_ROOT="$GIT_ROOT"
+else
+    echo "Error: Must be run from within a git repository"
+    exit 1
+fi
 
 # Check if GCP_ORGANIZATION_ID is set
 if [ -z "$GCP_ORGANIZATION_ID" ]
 then
     echo "Error: --gcp-organization-id flag is required"
-    exit 1
-fi
-
-# Check if GCP_PROJECT_ID is set
-if [ -z "$GCP_PROJECT_ID" ]
-then
-    echo "Error: --gcp-project-id flag is required"
     exit 1
 fi
 
@@ -179,12 +190,6 @@ GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME="terraform-admin"
 # Docker artifact registry repository name
 GCP_DOCKER_ARTIFACT_REPOSITORY_NAME="docker-repository"
 
-# Set SERVICE_ACCOUNT_EMAIL
-GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com"
-
-# Define terraform bucket name
-GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
-
 # Define a support group email
 GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN_NAME"
 
@@ -196,6 +201,95 @@ GCP_WIF_LOCATION="global"
 # Environment tag for project classification
 GCP_TAG_KEY_SHORT_NAME="environment"
 GCP_TAG_VALUE_SHORT_NAME="production"
+
+# ============================================
+# FOLDER HIERARCHY CREATION
+# ============================================
+
+# Calculate relative path from repo root
+RELATIVE_PATH="${SCRIPT_DIR#$REPO_ROOT/}"
+
+# Validate relative path was calculated
+if [ -z "$RELATIVE_PATH" ] || [ "$RELATIVE_PATH" = "$SCRIPT_DIR" ]; then
+    echo "Error: Could not determine relative path from repository root"
+    echo "  SCRIPT_DIR: $SCRIPT_DIR"
+    echo "  REPO_ROOT: $REPO_ROOT"
+    exit 1
+fi
+
+# Extract basename from path (last component after final /)
+PROJECT_BASE_NAME="${RELATIVE_PATH##*/}"
+
+# Extract folder path (everything before the last /)
+FOLDER_PATH="${RELATIVE_PATH%/*}"
+
+# Validate that we have both folders and basename
+if [ -z "$FOLDER_PATH" ] || [ "$FOLDER_PATH" = "$RELATIVE_PATH" ]; then
+    echo "Error: Expected path with both folders and basename (e.g., teams/kernel/iac/bootstrap)"
+    echo "  Relative path: $RELATIVE_PATH"
+    exit 1
+fi
+
+# Parse folder components using POSIX-compatible method
+# Convert "teams/kernel/iac" to space-separated words (teams kernel iac)
+FOLDER_NAMES=$(echo "$FOLDER_PATH" | tr '/' ' ')
+
+# Validate project base name is not empty
+if [ -z "$PROJECT_BASE_NAME" ]; then
+    echo "Error: Could not extract project base name from path"
+    echo "  Relative path: $RELATIVE_PATH"
+    echo "  Folder path: $FOLDER_PATH"
+    exit 1
+fi
+
+echo "Detected path structure:"
+echo "  Folders: $FOLDER_NAMES"
+echo "  Project base: $PROJECT_BASE_NAME"
+echo ""
+
+# Generate project ID if not provided as parameter
+if [ -z "$GCP_PROJECT_ID" ]; then
+    GCP_PROJECT_ID=$(sh "$SCRIPT_DIR/generate-project-id.sh" "$PROJECT_BASE_NAME")
+    if [ -z "$GCP_PROJECT_ID" ]; then
+        echo "Error: Failed to generate project ID"
+        exit 1
+    fi
+    echo "Generated project ID: $GCP_PROJECT_ID"
+else
+    echo "Using provided project ID: $GCP_PROJECT_ID"
+fi
+echo ""
+
+# Build folder hierarchy
+echo "Creating GCP folder hierarchy..."
+CURRENT_PARENT_TYPE="organizations"
+CURRENT_PARENT_ID="$GCP_ORGANIZATION_ID"
+
+for folder_name in $FOLDER_NAMES; do
+    FOLDER_ID=$(sh "$SCRIPT_DIR/find-or-create-folder.sh" "$folder_name" "$CURRENT_PARENT_TYPE" "$CURRENT_PARENT_ID")
+    CURRENT_PARENT_TYPE="folders"
+    CURRENT_PARENT_ID="$FOLDER_ID"
+done
+
+FINAL_PARENT_FOLDER_ID="$CURRENT_PARENT_ID"
+echo "✓ Folder hierarchy complete. Leaf folder ID: $FINAL_PARENT_FOLDER_ID"
+echo ""
+
+# ============================================
+# PROJECT ID VALIDATION AND DEPENDENT VARS
+# ============================================
+
+# Validate that GCP_PROJECT_ID is now set (either from parameter or generated)
+if [ -z "$GCP_PROJECT_ID" ]; then
+    echo "Error: GCP_PROJECT_ID not set or generated"
+    exit 1
+fi
+
+# Set SERVICE_ACCOUNT_EMAIL (now that GCP_PROJECT_ID is guaranteed to be set)
+GCP_SERVICE_ACCOUNT_EMAIL="$GCP_TF_ADMIN_SERVICE_ACCOUNT_NAME@$GCP_PROJECT_ID.iam.gserviceaccount.com"
+
+# Define terraform bucket name (now that GCP_PROJECT_ID is guaranteed to be set)
+GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 
 ########## 1. BASIC GOOGLE CLOUD PLATFORM SETUP
 echo "Setting up Google Cloud Platform shell project..."
@@ -221,12 +315,14 @@ else
   echo "Created tag value '$GCP_TAG_VALUE_SHORT_NAME'."
 fi
 
-# Create project (skip if it already exists)
+# Create project under folder hierarchy (skip if it already exists)
 if gcloud projects describe $GCP_PROJECT_ID &>/dev/null; then
   echo "Project $GCP_PROJECT_ID already exists, skipping creation."
 else
-  gcloud projects create $GCP_PROJECT_ID > /dev/null
-  echo "Created GCP project $GCP_PROJECT_ID."
+  gcloud projects create $GCP_PROJECT_ID \
+    --folder="$FINAL_PARENT_FOLDER_ID" \
+    --name="$GCP_PROJECT_ID" > /dev/null
+  echo "Created GCP project $GCP_PROJECT_ID under folder $FINAL_PARENT_FOLDER_ID."
 fi
 
 # Get the project number (needed for tag binding and WIF principal)
