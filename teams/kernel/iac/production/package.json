@@ -15,9 +15,11 @@
     "terraform-providers": "cd teams/kernel/iac/production && terraform providers",
     "terraform-graph": "cd teams/kernel/iac/production && terraform graph | dot -Tsvg > graph.svg"
   },
-  "dependencies": {
-    "kernel-iac-bootstrap": "workspace:*",
-    "kernel-iac-modules-gcp-apis": "workspace:*",
-    "kernel-iac-modules-environment": "workspace:*"
+  "nx": {
+    "implicitDependencies": [
+      "kernel-iac-bootstrap",
+      "kernel-iac-modules-gcp-apis",
+      "kernel-iac-modules-environment"
+    ]
   }
 }

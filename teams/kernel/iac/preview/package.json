@@ -13,10 +13,12 @@
     "preview-terraform-output": "cd teams/kernel/iac/preview && terraform output",
     "preview-terraform-graph": "cd teams/kernel/iac/preview && terraform graph | dot -Tsvg > graph.svg"
   },
-  "dependencies": {
-    "kernel-iac-bootstrap": "workspace:*",
-    "kernel-iac-production": "workspace:*",
-    "kernel-iac-modules-gcp-apis": "workspace:*",
-    "kernel-iac-modules-environment": "workspace:*"
+  "nx": {
+    "implicitDependencies": [
+      "kernel-iac-bootstrap",
+      "kernel-iac-production",
+      "kernel-iac-modules-gcp-apis",
+      "kernel-iac-modules-environment"
+    ]
   }
 }

@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 04:35 UTC] Use nx.implicitDependencies in package.json instead of workspace:* to avoid pnpm errors
+- [2026-02-13 03:15 UTC] Use metadata fields for NX implicitDependencies when converting partial monorepo to package.json
 - [2026-02-13 03:00 UTC] Infrastructure layer migration complete: bootstrap, production, preview use npm package.json
 - [2026-02-13 02:45 UTC] NX targets → npm scripts; implicitDependencies → workspace:* dependencies for monorepos
 - [2026-02-13 02:30 UTC] Shift NX project.json to package.json for improved cross-tool compatibility in monorepos
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
 - [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
 - [2026-02-07 21:45 UTC] Revert-then-reapply isolates which changes actually matter from bundled noise
-- [2026-02-07 21:30 UTC] CI lint source map errors indicate wrong files being linted, not actual code violations
-- [2026-02-07 21:15 UTC] Confirm PR scope matches user intent before committing; over-scoping wastes review effort
