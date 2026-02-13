@@ -76,7 +76,7 @@
     "@nx/vite": "22.4.4",
     "@nx/vitest": "22.4.4",
     "@nx/web": "22.4.4",
-    "@nx/webpack": "22.4.4",
+    "@nx/webpack": "22.5.0",
     "@nx/workspace": "22.4.4",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.7",
     "@storybook/addon-docs": "10.2.4",
