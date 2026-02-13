@@ -1,3 +1,7 @@
+## [0.100.7-beta.14](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.13...peerlab@0.100.7-beta.14) (2026-02-13)
+
+This was a version bump only, there were no code changes.
+
 ## [0.100.7-beta.13](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.12...peerlab@0.100.7-beta.13) (2026-02-13)
 
 ### 🚀 Features
