@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 01:30 UTC] Branch-per-issue pattern with child obstacles enables scalable team problem-solving
 - [2026-02-13 01:15 UTC] Issue template compliance requires completing all required sections per schema design
 - [2026-02-13 01:00 UTC] Obstacle issues guide hierarchical scalability decisions via Toyota Kata systematically
 - [2026-02-13 00:30 UTC] Bootstrap scripts must grant org-level folderAdmin role for Terraform folder.create
