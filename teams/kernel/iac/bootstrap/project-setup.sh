@@ -21,7 +21,7 @@
 #
 # NOTE: If --gcp-project-id is not provided, it will be auto-generated from script location (e.g., bootstrap-a3f2)
 
-# Call this script with the following command: bash {FOLDER_PATH}/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY --neon-api-key=$NEON_API_KEY --neon-project-location=$NEON_PROJECT_LOCATION --mongodb-atlas-org-id=$MONGODB_ATLAS_ORG_ID --mongodb-atlas-public-key=$MONGODB_ATLAS_PUBLIC_KEY --mongodb-atlas-private-key=$MONGODB_ATLAS_PRIVATE_KEY --nx-cloud-access-token-read-write=$NX_CLOUD_ACCESS_TOKEN_READ_WRITE --nx-cloud-access-token-read=$NX_CLOUD_ACCESS_TOKEN_READ
+# Call this script with the following command: sh {FOLDER_PATH}/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY --neon-api-key=$NEON_API_KEY --neon-project-location=$NEON_PROJECT_LOCATION --mongodb-atlas-org-id=$MONGODB_ATLAS_ORG_ID --mongodb-atlas-public-key=$MONGODB_ATLAS_PUBLIC_KEY --mongodb-atlas-private-key=$MONGODB_ATLAS_PRIVATE_KEY --nx-cloud-access-token-read-write=$NX_CLOUD_ACCESS_TOKEN_READ_WRITE --nx-cloud-access-token-read=$NX_CLOUD_ACCESS_TOKEN_READ
 # Obs.: this script assumes that you are already authenticated with gcloud CLI and GitHub CLI.
 
 for i in "$@"                       # This starts a loop that iterates over each argument passed to the script. "$@" is a special variable in bash that holds all arguments passed to the script.
@@ -439,6 +439,9 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:
 gcloud projects add-iam-policy-binding $GCP_PROJECT_ID --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/dns.admin" > /dev/null # Admin DNS records
 gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.organizationViewer" > /dev/null
 gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.folderAdmin" > /dev/null
+gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.projectCreator" > /dev/null
+gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/resourcemanager.folderIamAdmin" > /dev/null
+gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" --member="serviceAccount:$GCP_SERVICE_ACCOUNT_EMAIL" --role="roles/billing.user" > /dev/null
 
 echo "Granted required roles to service account."
 

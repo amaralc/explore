@@ -50,7 +50,7 @@
 - (terminal) Create GCP project, admin service account, resources and permissions, substituting the variables by actual values:
 
 ```bash
-bash teams/kernel/iac/project-setup.sh --gcp-project-id=$GCP_PROJECT_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain=$DOMAIN --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY
+sh {FOLDER_PATH}/project-setup.sh --owner-account-email=$OWNER_ACCOUNT_EMAIL --gcp-organization-id=$GCP_ORGANIZATION_ID --gcp-billing-account-id=$GCP_BILLING_ACCOUNT_ID --domain-name=$DOMAIN_NAME --github-username=$GITHUB_USERNAME --github-repository=$GITHUB_REPOSITORY --neon-api-key=$NEON_API_KEY --neon-project-location=$NEON_PROJECT_LOCATION --mongodb-atlas-org-id=$MONGODB_ATLAS_ORG_ID --mongodb-atlas-public-key=$MONGODB_ATLAS_PUBLIC_KEY --mongodb-atlas-private-key=$MONGODB_ATLAS_PRIVATE_KEY --nx-cloud-access-token-read-write=$NX_CLOUD_ACCESS_TOKEN_READ_WRITE --nx-cloud-access-token-read=$NX_CLOUD_ACCESS_TOKEN_READ
 ```
 
 - (terminal) Verify that the project was created: `gcloud projects list`;
@@ -68,7 +68,7 @@ gcloud projects get-iam-policy $GCP_PROJECT_ID --flatten="bindings[].members" --
 
 ## Modify the name of the bucket
 
-- (terraform) Verify that the name of the bucket in `teams/kernel/iac/production/backend.tf`, includes the `gcp-project-id` you defined earlier in the placeholder `<your-project-name>`.
+- (terraform) Verify that the name of the bucket in `teams/kernel/iac/production/backend.tf`, includes the `gcp-project-id` defined earlier in the placeholder `<your-project-name>`.
 
 ```hcl
 terraform {
@@ -83,83 +83,19 @@ terraform {
 - (note) It is not possible to populate that file using terraform variables, but you can change those values when calling `terraform init` if you pass `-backend-config` flag (e.g. `-backend-config='prefix=path/to/folder/within/bucket`);
 - (note) Authentication uses Workload Identity Federation (WIF) via Application Default Credentials. No `credentials.json` file is needed. The `project-setup.sh` script creates a WIF pool and OIDC provider that allows GitHub Actions to impersonate the Terraform admin service account;
 
-## Manually add Project Creator and Billing Creator roles to service account
+## Organization-Level IAM Roles
 
-Adding roles in the organization level cannot yet be accomplished using the gcloud CLI and is necessary so that the service account can create projects or manage billing.
+The `project-setup.sh` script automatically grants all required organization-level IAM roles to the service account:
 
-- (gcloud console) Access https://console.cloud.google.com/cloud-resource-manager;
+- `roles/resourcemanager.organizationViewer` — View organization resources
+- `roles/resourcemanager.folderAdmin` — Create and manage folders
+- `roles/resourcemanager.projectCreator` — Create new GCP projects
+- `roles/resourcemanager.folderIamAdmin` — Manage IAM policies on folders
+- `roles/billing.user` — Link and manage billing accounts
 
-  - Select your organization;
-  - Go to permissions;
-  - Add Project Creator role to service account;
-  - Add Billing Account User role to service account;
-  - Add Folder Admin role to service account;
-  - Add Folder IAM Admin role to service account;
+These roles are granted automatically during bootstrap and are necessary for the service account to provision infrastructure, create projects, and manage billing in CI/CD workflows.
 
 - References: https://cloud.google.com/resource-manager/docs/default-access-control
-
-<!-- ## Step 04 - The following manual steps are optional depending on your need
-
-3. Add Apigee Oganization Admin role to service account
-
-- Necessary if you intend to create an apigee organization using terraform
-- References: https://cloud.google.com/apigee/docs/hybrid/v1.10/precog-provision.html
-
-6. Increase cloud build quota limits for europe-west3 (if using 2nd generation repositories and cloud build)
-
-- Access https://console.cloud.google.com/apis/api/cloudbuild.googleapis.com/quotas?project=kernel-iac
-- Select the europe-west3 region
-- Click on "Edit Quotas"
-- Define new quota limit (5)
-
-7. Manually Connect GitHub repository with Google (if using 1st generation repositories and cloud build)
-
-- Access https://console.cloud.google.com/cloud-build/triggers;region=global/connect?project=$GCP_PROJECT_ID
-- Click on "Connect Repository" and follow instructions -->
-
-<!-- ## Get Zitadel credentials
-
-- (browser) Access your Zitadel instance and create a service user as documented in https://zitadel.com/docs/guides/integrate/private-key-jwt
-- (browser) Create a personal access token to your service account as described in https://zitadel.com/docs/guides/integrate/pat
-- (browser) Add service user as org owner and get json credentials as described in https://zitadel.com/docs/guides/integrate/access-zitadel-apis -->
-
-## Setup GitHub Actions
-
-- (github) Add the required GitHub Actions secrets to your repository in GitHub. The required variables are described in `teams/kernel/iac/production/variables.tf` and mentioned in `.github/workflows/build-and-deploy.yml`. At the moment (2023-10-08) they are listed below. Not of them are in active use, but were left as reference before we compromise on any specific provider.
-
-  - ATLASSIAN_CLOUD_ID
-  - ATLASSIAN_DOMAIN
-  - ATLASSIAN_USER_API_TOKEN
-  - ATLASSIAN_USER_EMAIL
-  - AUTH0_API_TOKEN
-  - AUTH0_DEBUG
-  - AUTH0_DOMAIN
-  - CLOUDFLARE_ACCOUNT_ID
-  - CLOUDFLARE_API_TOKEN
-  - COMPASS_EXTERNAL_EVENT_SOURCE_ID
-  - CORE_PLATFORM_SHELL_BROWSER_VITE_VERCEL_PROJECT_ID
-  - CORE_ROOT_SHELL_GRAPH_VERCEL_PROJECT_ID
-  - DX_DEV_DOCS_BROWSER_VERCEL_PROJECT_ID
-  - GCP_BILLING_ACCOUNT_ID <!-- This value was populated from the setup script-->
-  - GCP_DOCKER_ARTIFACT_REPOSITORY_NAME <!-- This value was populated from the setup script-->
-  - GCP_GITHUB_INSTALLATION_ID
-  - GCP_LOCATION <!-- This value was populated from the setup script-->
-  - GCP_ORGANIZATION_ID
-  - GCP_PROJECT_ID <!-- This value was populated from the setup script-->
-  - GCP_WORKLOAD_IDENTITY_PROVIDER <!-- This value was populated from the setup script-->
-  - GCP_SERVICE_ACCOUNT_EMAIL <!-- This value was populated from the setup script-->
-  - GH_ACTIONS_PERSONAL_ACCESS_TOKEN
-  - MONGODB_ATLAS_ORG_ID
-  - MONGODB_ATLAS_PRIVATE_KEY
-  - MONGODB_ATLAS_PUBLIC_KEY
-  - NEON_API_KEY
-  - NEON_PROJECT_LOCATION
-  - NX_ACCESS_TOKEN
-  - OWNER_ACCOUNT_EMAIL
-  - SUPPORT_ACCOUNT_EMAIL
-  - VERCEL_API_TOKEN
-  - ZITADEL_INSTANCE_DOMAIN
-  - ZITADEL_TF_ADMIN_SERVICE_ACCOUNT_KEY
 
 ## Add the newly created service account email to search console
 
