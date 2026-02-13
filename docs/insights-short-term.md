@@ -2,6 +2,10 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 15:00 UTC] Idempotent logging: use section headers, suppress verbose output, and show status (○/✓)
+- [2026-02-13 14:00 UTC] Show resource status (created vs existing) in idempotent scripts for debuggability
+- [2026-02-13 13:00 UTC] Group operations under headers; suppress verbose output to improve script debuggability
+- [2026-02-13 12:45 UTC] Infrastructure bootstrap automation complete: all org-level IAM roles now auto-granted via gcloud
 - [2026-02-13 12:00 UTC] Replace bash array/C-loop syntax with POSIX equivalents across bootstrap scripts
 - [2026-02-13 11:30 UTC] Use cut/grep instead of bash substring/regex for POSIX shell compatibility
 - [2026-02-13 11:00 UTC] Link PRs to issues via comments for complete experiment traceability
@@ -97,8 +101,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
 - [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
-- [2026-02-09 11:30 UTC] `null_resource.triggers` + `self.triggers` bridges variable values into destroy provisioners
-- [2026-02-09 11:00 UTC] Removing a shared module variable default requires updating all callers to pass the value
-- [2026-02-09 10:45 UTC] `templatefile()` + `yamldecode()` injects credentials into Crossplane YAML at apply time
-- [2026-02-09 10:15 UTC] Destroy provisioners in local-exec must include `--context` or they target the wrong cluster
-- [2026-02-09 09:30 UTC] `chrome://flags/#allow-insecure-localhost` bypasses cert warnings for *.localhost domains
