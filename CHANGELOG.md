@@ -1,3 +1,13 @@
+## [0.100.7-beta.13](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.12...peerlab@0.100.7-beta.13) (2026-02-13)
+
+### 🚀 Features
+
+- **kernel-iac:** enhance cleanup logs ([8091f256](https://github.com/amaralc/explore/commit/8091f256))
+
+### Chore
+
+- **deps-dev:** bump @nx/webpack from 22.4.4 to 22.5.0 ([9fdad66e](https://github.com/amaralc/explore/commit/9fdad66e))
+
 ## [0.100.7-beta.12](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.11...peerlab@0.100.7-beta.12) (2026-02-13)
 
 ### Chore
