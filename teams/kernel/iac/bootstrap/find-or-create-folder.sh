@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # This script finds or creates a GCP folder and returns its ID
 # Parameters:
@@ -7,7 +7,7 @@
 #   $3: parent_id     - The parent organization or folder ID
 
 # Check jq dependency
-if ! command -v jq &>/dev/null; then
+if ! command -v jq >/dev/null 2>&1; then
     echo "Error: jq is required but not installed." >&2
     echo "Install: brew install jq (macOS) or apt-get install jq (Ubuntu)" >&2
     exit 1

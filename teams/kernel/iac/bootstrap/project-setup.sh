@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script accepts named arguments and sets up a GCP project with mirrored folder hierarchy
 
 # Expected named arguments:
@@ -89,7 +91,7 @@ done                                # This ends the loop block.
 # ============================================
 
 # Detect script location and calculate relative path
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Get git repository root
 if GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null); then
@@ -228,9 +230,9 @@ if [ -z "$FOLDER_PATH" ] || [ "$FOLDER_PATH" = "$RELATIVE_PATH" ]; then
     exit 1
 fi
 
-# Parse folder components as simple array (portable method)
-# Convert "teams/kernel/iac" to array (teams kernel iac)
-IFS='/' read -ra FOLDER_NAMES <<< "$FOLDER_PATH"
+# Parse folder components using POSIX-compatible method
+# Convert "teams/kernel/iac" to space-separated words (teams kernel iac)
+FOLDER_NAMES=$(echo "$FOLDER_PATH" | tr '/' ' ')
 
 # Validate project base name is not empty
 if [ -z "$PROJECT_BASE_NAME" ]; then
@@ -241,7 +243,7 @@ if [ -z "$PROJECT_BASE_NAME" ]; then
 fi
 
 echo "Detected path structure:"
-echo "  Folders: ${FOLDER_NAMES[*]}"
+echo "  Folders: $FOLDER_NAMES"
 echo "  Project base: $PROJECT_BASE_NAME"
 echo ""
 
@@ -263,7 +265,7 @@ echo "Creating GCP folder hierarchy..."
 CURRENT_PARENT_TYPE="organizations"
 CURRENT_PARENT_ID="$GCP_ORGANIZATION_ID"
 
-for folder_name in "${FOLDER_NAMES[@]}"; do
+for folder_name in $FOLDER_NAMES; do
     FOLDER_ID=$(sh "$SCRIPT_DIR/find-or-create-folder.sh" "$folder_name" "$CURRENT_PARENT_TYPE" "$CURRENT_PARENT_ID")
     CURRENT_PARENT_TYPE="folders"
     CURRENT_PARENT_ID="$FOLDER_ID"

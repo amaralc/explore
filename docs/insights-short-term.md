@@ -2,6 +2,9 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 12:00 UTC] Replace bash array/C-loop syntax with POSIX equivalents across bootstrap scripts
+- [2026-02-13 11:30 UTC] Use cut/grep instead of bash substring/regex for POSIX shell compatibility
+- [2026-02-13 11:00 UTC] Link PRs to issues via comments for complete experiment traceability
 - [2026-02-13 10:00 UTC] Define vars with dependencies only after their prerequisites are set
 - [2026-02-13 09:00 UTC] Cleanup hierarchies leaf-to-root: delete project first, then folders in reverse order
 - [2026-02-13 08:45 UTC] Prefer POSIX parameter expansion over bash arrays for cross-version shell script compatibility
@@ -99,6 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-09 10:45 UTC] `templatefile()` + `yamldecode()` injects credentials into Crossplane YAML at apply time
 - [2026-02-09 10:15 UTC] Destroy provisioners in local-exec must include `--context` or they target the wrong cluster
 - [2026-02-09 09:30 UTC] `chrome://flags/#allow-insecure-localhost` bypasses cert warnings for *.localhost domains
-- [2026-02-09 09:15 UTC] Cross-origin fetch to untrusted self-signed certs silently fails; visit API domain first
-- [2026-02-09 08:30 UTC] `NODE_EXTRA_CA_CERTS` failed with `server_auth`-only self-signed certs; may need CA flag
-- [2026-02-09 07:45 UTC] `.localhost` doesn't resolve inside K8s pods; use hostAliases to route through ingress

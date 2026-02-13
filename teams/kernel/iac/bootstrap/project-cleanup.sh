@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script accepts named arguments and cleans up a GCP project with its folder hierarchy
 
 # Expected named arguments:
@@ -52,7 +54,7 @@ fi
 # ============================================
 
 # Detect script location and calculate relative path
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Get git repository root
 if GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null); then
@@ -86,12 +88,12 @@ if [ -z "$FOLDER_PATH" ] || [ "$FOLDER_PATH" = "$RELATIVE_PATH" ]; then
     exit 1
 fi
 
-# Parse folder components as simple array (portable method)
-# Convert "teams/kernel/iac" to array (teams kernel iac)
-IFS='/' read -ra FOLDER_NAMES <<< "$FOLDER_PATH"
+# Parse folder components using POSIX-compatible method
+# Convert "teams/kernel/iac" to space-separated words (teams kernel iac)
+FOLDER_NAMES=$(echo "$FOLDER_PATH" | tr '/' ' ')
 
 echo "Detected path structure:"
-echo "  Folders: ${FOLDER_NAMES[*]}"
+echo "  Folders: $FOLDER_NAMES"
 echo "  Project base: $PROJECT_BASE_NAME"
 echo ""
 
@@ -141,10 +143,11 @@ echo "Deleting GCP folder hierarchy..."
 # We need to find the leaf folder that contains our project, then delete from leaf to root
 CURRENT_PARENT_TYPE="organizations"
 CURRENT_PARENT_ID="$GCP_ORGANIZATION_ID"
-FOLDER_IDS_TO_DELETE=()
+FOLDER_IDS_FILE=$(mktemp)
+trap "rm -f $FOLDER_IDS_FILE" EXIT
 
 # Navigate through folders to find the leaf folder
-for folder_name in "${FOLDER_NAMES[@]}"; do
+for folder_name in $FOLDER_NAMES; do
     echo "  Finding folder '$folder_name'..."
 
     # List folders under current parent
@@ -169,7 +172,7 @@ for folder_name in "${FOLDER_NAMES[@]}"; do
     fi
 
     echo "  ✓ Found folder '$folder_name' (ID: $FOLDER_ID)"
-    FOLDER_IDS_TO_DELETE+=("$FOLDER_ID")
+    echo "$FOLDER_ID" >> "$FOLDER_IDS_FILE"
 
     CURRENT_PARENT_TYPE="folders"
     CURRENT_PARENT_ID="$FOLDER_ID"
@@ -178,8 +181,7 @@ done
 # Delete folders in reverse order (leaf to root)
 echo ""
 echo "Deleting folders in reverse order (leaf to root)..."
-for ((i=${#FOLDER_IDS_TO_DELETE[@]}-1; i>=0; i--)); do
-    folder_id="${FOLDER_IDS_TO_DELETE[$i]}"
+awk '{ a[NR]=$0 } END { for(i=NR; i>=1; i--) print a[i] }' "$FOLDER_IDS_FILE" | while read folder_id; do
     echo "  Deleting folder ID: $folder_id..."
 
     # Delete the folder

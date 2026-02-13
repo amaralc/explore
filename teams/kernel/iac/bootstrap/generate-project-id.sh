@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 # Generate GCP project ID from base name + random suffix
 #
 # Usage: sh generate-project-id.sh "basename"
@@ -23,7 +24,7 @@ generate_project_id() {
     base_name=$(echo "$base_name" | tr '[:upper:]' '[:lower:]' | tr -cd 'a-z0-9-')
 
     # Validate starts with letter
-    if ! [[ "$base_name" =~ ^[a-z] ]]; then
+    if ! echo "$base_name" | grep -q '^[a-z]'; then
         echo "Error: Project base name '$base_name' must start with a letter" >&2
         exit 1
     fi
@@ -33,7 +34,7 @@ generate_project_id() {
 
     # Truncate base name if necessary (leave room for -XXXX suffix)
     if [ ${#base_name} -gt 25 ]; then
-        base_name="${base_name:0:21}"
+        base_name=$(echo "$base_name" | cut -c1-21)
         echo "Warning: Base name truncated to: $base_name" >&2
     fi
 
@@ -51,7 +52,7 @@ generate_project_id() {
 }
 
 # If executed directly (not sourced), call the function with command-line arguments
-if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
+if [ "${0##*/}" = "generate-project-id.sh" ]; then
     if [ -z "$1" ]; then
         echo "Error: Base name argument required" >&2
         echo "Usage: sh generate-project-id.sh <base-name>" >&2
