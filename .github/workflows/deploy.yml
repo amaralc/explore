@@ -1,4 +1,4 @@
-name: Graduate Pre-Release and Deploy
+name: Deploy to Production
 
 permissions:
   contents: read
