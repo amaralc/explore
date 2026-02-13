@@ -1,0 +1,7 @@
+{
+  "name": "kernel-iac-bootstrap",
+  "version": "1.0.0",
+  "description": "Bootstrap infrastructure as code for kernel IAC",
+  "private": true,
+  "type": "module"
+}

@@ -2,7 +2,7 @@
 locals {
   relative_root_path         = "../../../.."
   absolute_build_output_path = "dist/teams/people/organizations-management/functions"
-  relative_build_output_path = "${local.relative_root_path}/${local.absolute_build_output_path}" # Path relative to teams/kernel/shell-iac/production/main.tf
+  relative_build_output_path = "${local.relative_root_path}/${local.absolute_build_output_path}" # Path relative to teams/kernel/iac/production/main.tf
 }
 
 locals {

@@ -35,7 +35,7 @@ resource "google_secret_manager_secret_iam_policy" "policy" {
 # # # Restriction: repository connections cannot be used for Cloud Build in global region, which is the only we can use to build images for now
 # # # To use regional Cloud Build, we need to request quota increases to the specified region (europe-west3) to the google sales team (Monday 9AM ET - Friday 7PM ET);
 # # # There is more context in the terraform module "gcp-trigger-build-branch"
-# # # See https://console.cloud.google.com/apis/api/cloudbuild.googleapis.com/quotas?project=core-platform-shell-iac&pageState=(%22allQuotasTable%22:(%22p%22:1))
+# # # See https://console.cloud.google.com/apis/api/cloudbuild.googleapis.com/quotas?project=kernel-iac&pageState=(%22allQuotasTable%22:(%22p%22:1))
 # resource "google_cloudbuildv2_connection" "gcp_github_peerlab" {
 #   project  = var.shell_gcp_project_id
 #   location = var.gcp_location

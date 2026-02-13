@@ -821,9 +821,13 @@ importers:
         specifier: 4.0.18
         version: 4.0.18(@opentelemetry/api@1.9.0)(@types/node@18.19.31)(@vitest/ui@1.6.0)(jiti@2.4.2)(jsdom@22.1.0)(less@4.1.3)(sass-embedded@1.97.3)(sass@1.97.3)(stylus@0.59.0)(terser@5.46.0)(yaml@2.8.2)
 
-  teams/archive/platform-shell-browser: {}
-
   teams/kernel/docusaurus: {}
+
+  teams/kernel/iac/bootstrap: {}
+
+  teams/kernel/iac/preview: {}
+
+  teams/kernel/iac/production: {}
 
   teams/kernel/management-shell-browser: {}
 

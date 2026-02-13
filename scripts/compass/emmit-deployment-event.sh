@@ -1,4 +1,4 @@
-# Run this script: bash teams/core/platform-shell-iac/project-setup.sh
+# Run this script: bash teams/kernel-iac/project-setup.sh
 
 # This script accepts named arguments and push an image to container registry
 

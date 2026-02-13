@@ -1,7 +1,7 @@
 {
-  "name": "iac-modules-gcp-apis",
+  "name": "kernel-iac-modules-gcp-apis",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/iac-modules/gcp-apis",
+  "sourceRoot": "teams/kernel/iac-modules/gcp-apis",
   "projectType": "library",
   "implicitDependencies": [],
   "targets": {},

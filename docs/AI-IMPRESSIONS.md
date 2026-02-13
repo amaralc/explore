@@ -8,7 +8,7 @@
 
 ## Prompt
 
-Scan this entire repository, synthesizing your impressions in @AI-IMPRESSIONS.md file. Start from the @README.md to understand what I am trying to accomplish, than go to @teams/kernel/dev-docs-browser/blog to get a rough idea of somethings i have already synthesized, then go to @teams/kernel/shell-iac and from there you will understand how everything else is connected.
+Scan this entire repository, synthesizing your impressions in @AI-IMPRESSIONS.md file. Start from the @README.md to understand what I am trying to accomplish, than go to @teams/kernel/dev-docs-browser/blog to get a rough idea of somethings i have already synthesized, then go to @teams/kernel/iac and from there you will understand how everything else is connected.
 
 Remember to synthesize your findings on @AI-IMPRESSIONS.md.
 
@@ -50,7 +50,7 @@ libs/
 - **Mission:** "Ensure other teams can continuously deliver value with focus, flow and joy"
 - **Vision:** "Every developer should be able to spin-up or destroy a secure and compliant ephemeral production-like environment in less than 5 minutes with a single command"
 - **Key Projects:**
-  - `shell-iac` - Root infrastructure orchestration
+  - `kernel-iac` - Root infrastructure orchestration
   - `dev-docs-browser` - Docusaurus-based documentation site
   - `management-shell-browser` - Admin interface
   - `flag-management` - Feature flag service
@@ -342,7 +342,7 @@ The project successfully balances **experimentation** with **structure**, creati
 
 - README.md - Project vision and setup
 - Blog posts (2023-06-19 through 2023-07-21) - Technical decisions
-- teams/kernel/shell-iac/ - Infrastructure architecture
+- teams/kernel/iac/ - Infrastructure architecture
 - libs/iac-modules/ - Reusable Terraform patterns
 - .github/workflows/ - CI/CD implementation
 - nx.json & package.json - Build system configuration

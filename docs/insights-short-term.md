@@ -2,6 +2,14 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 04:35 UTC] Use nx.implicitDependencies in package.json instead of workspace:* to avoid pnpm errors
+- [2026-02-13 03:15 UTC] Use metadata fields for NX implicitDependencies when converting partial monorepo to package.json
+- [2026-02-13 03:00 UTC] Infrastructure layer migration complete: bootstrap, production, preview use npm package.json
+- [2026-02-13 02:45 UTC] NX targets → npm scripts; implicitDependencies → workspace:* dependencies for monorepos
+- [2026-02-13 02:30 UTC] Shift NX project.json to package.json for improved cross-tool compatibility in monorepos
+- [2026-02-13 01:30 UTC] Branch-per-issue pattern with child obstacles enables scalable team problem-solving
+- [2026-02-13 01:15 UTC] Issue template compliance requires completing all required sections per schema design
+- [2026-02-13 01:00 UTC] Obstacle issues guide hierarchical scalability decisions via Toyota Kata systematically
 - [2026-02-13 00:30 UTC] Bootstrap scripts must grant org-level folderAdmin role for Terraform folder.create
 - [2026-02-13 00:25 UTC] Terraform folder creation needs org-level folderAdmin role; project-level insufficient
 - [2026-02-13 00:18 UTC] PR experiment comments capture complete troubleshooting journey for team organizational learning
@@ -94,11 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
 - [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
 - [2026-02-07 21:45 UTC] Revert-then-reapply isolates which changes actually matter from bundled noise
-- [2026-02-07 21:30 UTC] CI lint source map errors indicate wrong files being linted, not actual code violations
-- [2026-02-07 21:15 UTC] Confirm PR scope matches user intent before committing; over-scoping wastes review effort
-- [2026-02-07 21:00 UTC] Archived workflow files eventually cause more confusion than they prevent; prefer deletion
-- [2026-02-07 20:30 UTC] Docker Compose `${VAR:?msg}` substitution removes hardcoded secrets with fail-fast validation
-- [2026-02-07 20:15 UTC] Override `renderChangesByType()` to replace duplicated commit lists with graduation summaries
-- [2026-02-07 20:00 UTC] Renderers can detect graduation by comparing current stable version against previous prerelease tag
-- [2026-02-07 19:30 UTC] Graduating prereleases duplicates changelog entries already logged under beta versions
-- [2026-02-07 19:15 UTC] `manifestRootsToUpdate: ["."]` redirects NX Release version writes to root package.json

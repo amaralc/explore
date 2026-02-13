@@ -69,7 +69,7 @@ Currently, our environment and its dependencies can be easily visualized by runn
 yarn nx graph
 ```
 
-After running the command and setting up the view, we can reason about the dependencies between the different resources and how they are connected. Figure 2 gives us a good overview of how we are currently connecting the dots in our project. A GitHub Action will call the `core-platform-shell-iac` project (our root project), which in turn will instantiate one or multiple environments.
+After running the command and setting up the view, we can reason about the dependencies between the different resources and how they are connected. Figure 2 gives us a good overview of how we are currently connecting the dots in our project. A GitHub Action will call the `kernel-iac` project (our root project), which in turn will instantiate one or multiple environments.
 
 <br/>
 

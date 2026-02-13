@@ -64,7 +64,7 @@ An automated script (`tests/ab-comparison-test.sh`) that tests health checks, OI
 
 ### Phase 8: Integration
 
-Updated the shell-iac environment module, Makefile targets, and NX project configuration to wire everything together.
+Updated the kernel-iac environment module, Makefile targets, and NX project configuration to wire everything together.
 
 ## Findings
 
