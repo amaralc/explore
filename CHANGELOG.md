@@ -1,3 +1,17 @@
+## [0.100.7-beta.11](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.10...peerlab@0.100.7-beta.11) (2026-02-13)
+
+### 🩹 Fixes
+
+- **kernel-iac-bootstrap:** generate project name and add folder structure ([38387df2](https://github.com/amaralc/explore/commit/38387df2))
+
+### Chore
+
+- **scripts:** remove archived scripts ([d5ba8311](https://github.com/amaralc/explore/commit/d5ba8311))
+
+### Configuration
+
+- **kernel-iac:** enhance bootstrap scripts ([3e25d5e3](https://github.com/amaralc/explore/commit/3e25d5e3))
+
 ## [0.100.7-beta.10](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.9...peerlab@0.100.7-beta.10) (2026-02-13)
 
 ### 🩹 Fixes
