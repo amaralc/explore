@@ -1,3 +1,25 @@
+## [0.100.7-beta.9](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.8...peerlab@0.100.7-beta.9) (2026-02-13)
+
+### 🩹 Fixes
+
+- **kernel:** use package.json with nx metadata implicit dependencies ([e7edfd98](https://github.com/amaralc/explore/commit/e7edfd98))
+- **make:** non existent path ([f1257bf1](https://github.com/amaralc/explore/commit/f1257bf1))
+
+### Chore
+
+- record project updates and improvements ([#200](https://github.com/amaralc/explore/issues/200))
+- **archive:** remove archived files ([ac60b80d](https://github.com/amaralc/explore/commit/ac60b80d))
+- **kernel:** remove archived config ([de5d200a](https://github.com/amaralc/explore/commit/de5d200a))
+- **kernel-iac:** rename project to kernel iac ([5e017ed7](https://github.com/amaralc/explore/commit/5e017ed7))
+- **kernel-iac:** remove archived files ([aa837141](https://github.com/amaralc/explore/commit/aa837141))
+- **kernel-iac:** move project targets ([58fd2490](https://github.com/amaralc/explore/commit/58fd2490))
+- **scripts:** remove mobile-report ([e15068e9](https://github.com/amaralc/explore/commit/e15068e9))
+- **scripts:** remove unused script ([6b53d3c2](https://github.com/amaralc/explore/commit/6b53d3c2))
+
+### Configuration
+
+- **kernel:** use package.json version packages ([ee4a3982](https://github.com/amaralc/explore/commit/ee4a3982))
+
 ## [0.100.7-beta.8](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.7...peerlab@0.100.7-beta.8) (2026-02-12)
 
 ### Chore
