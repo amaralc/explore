@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 15:00 UTC] Idempotent logging: use section headers, suppress verbose output, and show status (○/✓)
 - [2026-02-13 14:00 UTC] Show resource status (created vs existing) in idempotent scripts for debuggability
 - [2026-02-13 13:00 UTC] Group operations under headers; suppress verbose output to improve script debuggability
 - [2026-02-13 12:45 UTC] Infrastructure bootstrap automation complete: all org-level IAM roles now auto-granted via gcloud
@@ -100,4 +101,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
 - [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
-- [2026-02-09 11:30 UTC] `null_resource.triggers` + `self.triggers` bridges variable values into destroy provisioners

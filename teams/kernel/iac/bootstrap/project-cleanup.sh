@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # This script accepts named arguments and cleans up a GCP project with its folder hierarchy
 
@@ -109,35 +110,50 @@ GCP_TERRAFORM_STATE_BUCKET_NAME="$GCP_PROJECT_ID-tfstate"
 # Define a support group email
 GCP_SUPPORT_GROUP_EMAIL="support@$DOMAIN"
 
-########## CLEANUP GOOGLE CLOUD PLATFORM PROJECT
-echo "Cleaning up project $GCP_PROJECT_ID..."
+########## 1. CLEANING UP GCP PROJECT RESOURCES
+echo ""
+echo "Cleaning up GCP project $GCP_PROJECT_ID..."
 
 # Set project as default
-gcloud config set project $GCP_PROJECT_ID
+gcloud config set project $GCP_PROJECT_ID > /dev/null
 
-# Delete a service account
-gcloud iam service-accounts delete $GCP_SERVICE_ACCOUNT_EMAIL
+# Service account
+if gcloud iam service-accounts describe $GCP_SERVICE_ACCOUNT_EMAIL --project=$GCP_PROJECT_ID &>/dev/null; then
+  gcloud iam service-accounts delete $GCP_SERVICE_ACCOUNT_EMAIL --quiet 2>/dev/null || true
+  echo "  ✓ Service account deleted"
+else
+  echo "  ○ Service account already missing"
+fi
 
-# Remove terraform state bucket
-gsutil rm -r gs://$GCP_TERRAFORM_STATE_BUCKET_NAME
+# Terraform state bucket
+if gsutil ls -b gs://$GCP_TERRAFORM_STATE_BUCKET_NAME &>/dev/null; then
+  gsutil -m rm -r gs://$GCP_TERRAFORM_STATE_BUCKET_NAME > /dev/null 2>&1
+  echo "  ✓ Terraform state bucket deleted"
+else
+  echo "  ○ Terraform state bucket already missing"
+fi
 
-# Delete the support group
-gcloud identity groups delete $GCP_SUPPORT_GROUP_EMAIL
+# Support group
+if gcloud identity groups describe $GCP_SUPPORT_GROUP_EMAIL &>/dev/null; then
+  gcloud identity groups delete $GCP_SUPPORT_GROUP_EMAIL --quiet 2>/dev/null || true
+  echo "  ✓ Support group deleted"
+else
+  echo "  ○ Support group already missing"
+fi
 
-# Delete project
-echo "Deleting GCP project $GCP_PROJECT_ID..."
-gcloud projects delete $GCP_PROJECT_ID --quiet
-
-# Unlink project from billing account
-echo "Unlinking billing account..."
-gcloud beta billing projects unlink $GCP_PROJECT_ID 2>/dev/null || true
-
-# ============================================
-# DELETE FOLDER HIERARCHY
-# ============================================
-
+# Project
 echo ""
-echo "Deleting GCP folder hierarchy..."
+echo "Deleting GCP project $GCP_PROJECT_ID..."
+gcloud projects delete $GCP_PROJECT_ID --quiet > /dev/null 2>&1
+echo "  ✓ Project deleted"
+
+# Unlink billing account
+gcloud beta billing projects unlink $GCP_PROJECT_ID 2>/dev/null || true
+echo "  ✓ Billing account unlinked"
+
+########## 2. DELETING FOLDER HIERARCHY
+echo ""
+echo "Deleting GCP folder hierarchy (leaf to root)..."
 
 # Navigate folder hierarchy and collect parent IDs for deletion
 # We need to find the leaf folder that contains our project, then delete from leaf to root
@@ -148,8 +164,6 @@ trap "rm -f $FOLDER_IDS_FILE" EXIT
 
 # Navigate through folders to find the leaf folder
 for folder_name in $FOLDER_NAMES; do
-    echo "  Finding folder '$folder_name'..."
-
     # List folders under current parent
     if [ "$CURRENT_PARENT_TYPE" = "organizations" ]; then
         folder_json=$(gcloud resource-manager folders list \
@@ -167,11 +181,11 @@ for folder_name in $FOLDER_NAMES; do
         sed 's|folders/||')
 
     if [ -z "$FOLDER_ID" ] || [ "$FOLDER_ID" = "null" ]; then
-        echo "  Warning: Folder '$folder_name' not found, skipping..."
+        echo "  ○ Folder '$folder_name' not found (already deleted)"
         continue
     fi
 
-    echo "  ✓ Found folder '$folder_name' (ID: $FOLDER_ID)"
+    echo "  → Folder '$folder_name' (ID: $FOLDER_ID)"
     echo "$FOLDER_ID" >> "$FOLDER_IDS_FILE"
 
     CURRENT_PARENT_TYPE="folders"
@@ -180,17 +194,20 @@ done
 
 # Delete folders in reverse order (leaf to root)
 echo ""
-echo "Deleting folders in reverse order (leaf to root)..."
 awk '{ a[NR]=$0 } END { for(i=NR; i>=1; i--) print a[i] }' "$FOLDER_IDS_FILE" | while read folder_id; do
-    echo "  Deleting folder ID: $folder_id..."
-
-    # Delete the folder
-    if gcloud resource-manager folders delete "$folder_id" --quiet 2>/dev/null; then
+    if gcloud resource-manager folders delete "$folder_id" --quiet > /dev/null 2>&1; then
         echo "  ✓ Deleted folder $folder_id"
     else
         echo "  ✗ Failed to delete folder $folder_id (may have remaining contents)"
     fi
 done
 
+########## CLEANUP COMPLETE
 echo ""
-echo "✓ Cleanup complete!"
+echo "✓ Infrastructure cleanup complete!"
+echo ""
+echo "Summary:"
+echo "  - GCP project $GCP_PROJECT_ID removed"
+echo "  - Folder hierarchy deleted (leaf to root)"
+echo "  - All associated resources cleaned up"
+echo ""
