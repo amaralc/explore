@@ -1,3 +1,13 @@
+## [0.100.7-beta.10](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.9...peerlab@0.100.7-beta.10) (2026-02-13)
+
+### 🩹 Fixes
+
+- **deps:** remove unused dependencies and streamline pnpm overrides ([d0fc1e6a](https://github.com/amaralc/explore/commit/d0fc1e6a))
+
+### Chore
+
+- update lockfile ([7a845837](https://github.com/amaralc/explore/commit/7a845837))
+
 ## [0.100.7-beta.9](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.8...peerlab@0.100.7-beta.9) (2026-02-13)
 
 ### 🩹 Fixes
