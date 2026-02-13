@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 01:15 UTC] Issue template compliance requires completing all required sections per schema design
+- [2026-02-13 01:00 UTC] Obstacle issues guide hierarchical scalability decisions via Toyota Kata systematically
 - [2026-02-13 00:30 UTC] Bootstrap scripts must grant org-level folderAdmin role for Terraform folder.create
 - [2026-02-13 00:25 UTC] Terraform folder creation needs org-level folderAdmin role; project-level insufficient
 - [2026-02-13 00:18 UTC] PR experiment comments capture complete troubleshooting journey for team organizational learning
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-07 20:30 UTC] Docker Compose `${VAR:?msg}` substitution removes hardcoded secrets with fail-fast validation
 - [2026-02-07 20:15 UTC] Override `renderChangesByType()` to replace duplicated commit lists with graduation summaries
 - [2026-02-07 20:00 UTC] Renderers can detect graduation by comparing current stable version against previous prerelease tag
-- [2026-02-07 19:30 UTC] Graduating prereleases duplicates changelog entries already logged under beta versions
-- [2026-02-07 19:15 UTC] `manifestRootsToUpdate: ["."]` redirects NX Release version writes to root package.json
