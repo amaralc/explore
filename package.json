@@ -230,7 +230,7 @@
     "classnames": "2.3.2",
     "clsx": "1.2.1",
     "cobe": "0.6.3",
-    "conventional-changelog-conventionalcommits": "5.0.0",
+    "conventional-changelog-conventionalcommits": "9.1.0",
     "cors": "2.8.5",
     "d3": "6.7.0",
     "date-fns": "2.30.0",
