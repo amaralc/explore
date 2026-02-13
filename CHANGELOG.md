@@ -1,3 +1,9 @@
+## [0.100.7-beta.12](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.11...peerlab@0.100.7-beta.12) (2026-02-13)
+
+### Chore
+
+- **deps-dev:** bump @nx/plugin from 22.4.4 to 22.5.0 ([548f21f9](https://github.com/amaralc/explore/commit/548f21f9))
+
 ## [0.100.7-beta.11](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.10...peerlab@0.100.7-beta.11) (2026-02-13)
 
 ### 🩹 Fixes
