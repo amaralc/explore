@@ -1,7 +1,0 @@
-{
-  "name": "kernel-iac-bootstrap",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "teams/kernel/iac/bootstrap",
-  "projectType": "application",
-  "implicitDependencies": []
-}
