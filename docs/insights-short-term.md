@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 14:00 UTC] Show resource status (created vs existing) in idempotent scripts for debuggability
+- [2026-02-13 13:00 UTC] Group operations under headers; suppress verbose output to improve script debuggability
 - [2026-02-13 12:45 UTC] Infrastructure bootstrap automation complete: all org-level IAM roles now auto-granted via gcloud
 - [2026-02-13 12:00 UTC] Replace bash array/C-loop syntax with POSIX equivalents across bootstrap scripts
 - [2026-02-13 11:30 UTC] Use cut/grep instead of bash substring/regex for POSIX shell compatibility
@@ -99,5 +101,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
 - [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
 - [2026-02-09 11:30 UTC] `null_resource.triggers` + `self.triggers` bridges variable values into destroy provisioners
-- [2026-02-09 11:00 UTC] Removing a shared module variable default requires updating all callers to pass the value
-- [2026-02-09 10:45 UTC] `templatefile()` + `yamldecode()` injects credentials into Crossplane YAML at apply time
