@@ -44,22 +44,22 @@ researchers-peers-svc-consumer-serve:
 	cp .env.example .env && make auth-prisma-postgresql-setup && nx serve service-consumer
 
 terraform-init-staging:
-	cd teams/kernel-iac/staging && terraform init -upgrade
+	cd teams/kernel/iac/staging && terraform init -upgrade
 
 terraform-plan-staging:
-	cd teams/kernel-iac/staging && terraform plan -var-file=env.tfvars
+	cd teams/kernel/iac/staging && terraform plan -var-file=env.tfvars
 
 terraform-apply-staging:
-	cd teams/kernel-iac/staging && terraform apply -var-file=env.tfvars
+	cd teams/kernel/iac/staging && terraform apply -var-file=env.tfvars
 
 terraform-apply-staging-auto-approve:
-	cd teams/kernel-iac/staging && terraform apply -var-file=env.tfvars -auto-approve
+	cd teams/kernel/iac/staging && terraform apply -var-file=env.tfvars -auto-approve
 
 terraform-plan-staging-out:
-	cd teams/kernel-iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
+	cd teams/kernel/iac/staging && terraform plan -var-file=env.tfvars -out=tfplan
 
 terraform-destroy-staging:
-	cd teams/kernel-iac/staging && terraform destroy -var-file=env.tfvars
+	cd teams/kernel/iac/staging && terraform destroy -var-file=env.tfvars
 
 kong-postgres:
 	COMPOSE_PROFILES=database KONG_DATABASE=postgres docker compose -f teams/kernel/api-gateway/docker-compose-kong.yml up -d
