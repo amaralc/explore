@@ -2,6 +2,17 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 10:00 UTC] Define vars with dependencies only after their prerequisites are set
+- [2026-02-13 09:00 UTC] Cleanup hierarchies leaf-to-root: delete project first, then folders in reverse order
+- [2026-02-13 08:45 UTC] Prefer POSIX parameter expansion over bash arrays for cross-version shell script compatibility
+- [2026-02-13 08:30 UTC] Intermediate validation in shell scripts catches transformation failures before subprocess calls
+- [2026-02-13 08:15 UTC] Extract reusable functions to separate subprocess scripts enables composition and isolation
+- [2026-02-13 07:45 UTC] Call scripts as subprocesses instead of sourcing for process isolation and CLI reusability
+- [2026-02-13 07:30 UTC] Extract utility functions into separate modules to enable reuse in multiple bootstrap scripts
+- [2026-02-13 07:00 UTC] Path-based folder hierarchy generation automates GCP project structure from repository layout
+- [2026-02-13 05:45 UTC] GCP project IDs limited to 30 chars; validate lengths in bootstrap scripts
+- [2026-02-13 05:30 UTC] Manual cleanup removes noise before automation tooling for better signal detection
+- [2026-02-13 05:00 UTC] PR template structure with Experiment Record section captures infrastructure decisions
 - [2026-02-13 04:35 UTC] Use nx.implicitDependencies in package.json instead of workspace:* to avoid pnpm errors
 - [2026-02-13 03:15 UTC] Use metadata fields for NX implicitDependencies when converting partial monorepo to package.json
 - [2026-02-13 03:00 UTC] Infrastructure layer migration complete: bootstrap, production, preview use npm package.json
@@ -91,14 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-09 09:15 UTC] Cross-origin fetch to untrusted self-signed certs silently fails; visit API domain first
 - [2026-02-09 08:30 UTC] `NODE_EXTRA_CA_CERTS` failed with `server_auth`-only self-signed certs; may need CA flag
 - [2026-02-09 07:45 UTC] `.localhost` doesn't resolve inside K8s pods; use hostAliases to route through ingress
-- [2026-02-09 07:15 UTC] Terraform `tls` provider generates self-signed certs for local nginx-ingress HTTPS
-- [2026-02-09 06:45 UTC] Logto OIDC issuer in ConfigMap must match browser-accessible URL or dashboard breaks
-- [2026-02-09 00:10 UTC] Crossplane provider-kubernetes needs explicit cluster-admin RBAC for cross-namespace resources
-- [2026-02-08 20:00 UTC] Makefile pre-steps ensure external deps (clusters, CRDs) exist before terraform runs
-- [2026-02-08 19:45 UTC] Terraform providers validate at plan time; create clusters before apply, not during it
-- [2026-02-08 19:15 UTC] Same Crossplane Claim selects cloud or local Composition via compositionRef switch
-- [2026-02-08 18:30 UTC] Crossplane manages cloud resources only; local envs use native K8s StatefulSets instead
-- [2026-02-08 18:00 UTC] Extract portable K8s resources into submodules so local and cloud share one definition
-- [2026-02-07 22:15 UTC] One branch per code-scanning alert keeps security fixes atomic and reviewable
-- [2026-02-07 22:00 UTC] `gh api repos/{o}/{r}/code-scanning/alerts/{id}` fetches alert details for targeted fixes
-- [2026-02-07 21:45 UTC] Revert-then-reapply isolates which changes actually matter from bundled noise
