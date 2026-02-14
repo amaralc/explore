@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-14 10:00 UTC] Confirm branching strategy before creating PR from uncommitted changes on main
 - [2026-02-13 22:30 UTC] Team-owned reusable workflows under teams/*/ with entry points in .github/ for discoverability
 - [2026-02-13 21:30 UTC] Explicit script references in workflows beat symlinks; clarity and traceability matter
 - [2026-02-13 21:15 UTC] Explicit script paths via env vars avoid symlink indirection; clarity over magic
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 05:45 UTC] Terraform configures ALL providers in module tree even when parent has count=0
 - [2026-02-10 05:30 UTC] Nuke local infra (minikube delete) + rm tfstate when destroy fails on missing CRDs
 - [2026-02-10 05:15 UTC] `terraform state mv` bypasses moved-block + missing-provider catch-22 locally
-- [2026-02-10 05:00 UTC] Terraform `moved` blocks must all resolve before `-target` applies succeed
