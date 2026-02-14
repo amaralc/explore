@@ -11,13 +11,12 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-permissions:
-  contents: read
-
 jobs:
   bootstrap-kernel:
     name: Bootstrap Kernel Team
     uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    permissions:
+      contents: read
     if: |
       github.event.inputs.teams == 'all' ||
       github.event.inputs.teams == 'kernel'
@@ -43,6 +42,8 @@ jobs:
     name: Bootstrap People Team
     uses: ./teams/kernel/github-workflows/bootstrap-team.yml
     needs: bootstrap-kernel
+    permissions:
+      contents: read
     if: |
       always() && (
         github.event.inputs.teams == 'all' ||
@@ -71,6 +72,8 @@ jobs:
     name: Bootstrap Things Team
     uses: ./teams/kernel/github-workflows/bootstrap-team.yml
     needs: bootstrap-kernel
+    permissions:
+      contents: read
     if: |
       always() && (
         github.event.inputs.teams == 'all' ||

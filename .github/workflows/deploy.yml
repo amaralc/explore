@@ -1,8 +1,5 @@
 name: Deploy to Production
 
-permissions:
-  contents: read
-
 on:
   workflow_dispatch:
 

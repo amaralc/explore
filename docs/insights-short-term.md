@@ -2,6 +2,11 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-14 14:15 UTC] Add explicit job permissions after removing workflow-level for least privilege
+- [2026-02-14 14:00 UTC] Apply workflow security fixes consistently across similar files to prevent drift
+- [2026-02-14 13:45 UTC] Move GitHub Actions permissions from workflow to job level for least privilege
+- [2026-02-14 13:15 UTC] Explicit permissions blocks in workflows restrict GITHUB_TOKEN to least privilege
+- [2026-02-14 12:30 UTC] Use HEREDOC with gh pr create to preserve PR template formatting and structure
 - [2026-02-14 10:00 UTC] Confirm branching strategy before creating PR from uncommitted changes on main
 - [2026-02-13 22:30 UTC] Team-owned reusable workflows under teams/*/ with entry points in .github/ for discoverability
 - [2026-02-13 21:30 UTC] Explicit script references in workflows beat symlinks; clarity and traceability matter
@@ -97,8 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 07:30 UTC] Cloud roots import sub-modules directly; routers can't gate providers with count=0
 - [2026-02-10 07:15 UTC] Versioned environment modules with local/cloud sub-paths enable parallel evolution
 - [2026-02-10 07:00 UTC] Terraform `-target` requires full nested module path, not just the leaf module name
-- [2026-02-10 06:30 UTC] count=0 sub-modules don't isolate providers; exclude cloud modules from local tree
-- [2026-02-10 06:00 UTC] Skip `terraform destroy` for fresh clusters; `minikube delete --profile` suffices alone
-- [2026-02-10 05:45 UTC] Terraform configures ALL providers in module tree even when parent has count=0
-- [2026-02-10 05:30 UTC] Nuke local infra (minikube delete) + rm tfstate when destroy fails on missing CRDs
-- [2026-02-10 05:15 UTC] `terraform state mv` bypasses moved-block + missing-provider catch-22 locally
