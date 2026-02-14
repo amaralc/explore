@@ -101,4 +101,4 @@ Key insights from this repository.
 97. Chaos engineering reveals resilience gaps through continuous fault injection.
 98. Terraform state is managed remotely, never locally.
 99. Provider versions are pinned in each module's versions.tf file.
-100. Group operations under section headers and suppress verbose CLI output for script debuggability.
+100. Reusable workflows + NX dependencies enable independent team infrastructure bootstrap.

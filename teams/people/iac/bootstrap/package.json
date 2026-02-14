@@ -1,0 +1,10 @@
+{
+  "name": "people-iac-bootstrap",
+  "version": "1.0.0",
+  "description": "Bootstrap infrastructure for people team",
+  "private": true,
+  "type": "module",
+  "nx": {
+    "implicitDependencies": ["kernel-iac-bootstrap"]
+  }
+}

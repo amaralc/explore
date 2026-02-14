@@ -1,0 +1,93 @@
+name: Bootstrap All Team Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      teams:
+        description: 'Teams to bootstrap (all, kernel, people, things, or space-separated list)'
+        required: false
+        default: 'all'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  bootstrap-kernel:
+    name: Bootstrap Kernel Team
+    uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    if: |
+      github.event.inputs.teams == 'all' ||
+      github.event.inputs.teams == 'kernel'
+    secrets:
+      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+      GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+      OWNER_ACCOUNT_EMAIL: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+      GCP_ORGANIZATION_ID: ${{ secrets.GCP_ORGANIZATION_ID }}
+      GCP_BILLING_ACCOUNT_ID: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+      DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+      GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+      NEON_PROJECT_LOCATION: ${{ secrets.NEON_PROJECT_LOCATION }}
+      MONGODB_ATLAS_ORG_ID: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+      MONGODB_ATLAS_PUBLIC_KEY: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+      MONGODB_ATLAS_PRIVATE_KEY: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+      NX_CLOUD_ACCESS_TOKEN_READ_WRITE: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ_WRITE }}
+      NX_CLOUD_ACCESS_TOKEN_READ: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ }}
+    with:
+      team-name: kernel
+
+  bootstrap-people:
+    name: Bootstrap People Team
+    uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    needs: bootstrap-kernel
+    if: |
+      always() && (
+        github.event.inputs.teams == 'all' ||
+        github.event.inputs.teams == 'people' ||
+        contains(github.event.inputs.teams, 'people')
+      )
+    secrets:
+      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+      GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+      OWNER_ACCOUNT_EMAIL: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+      GCP_ORGANIZATION_ID: ${{ secrets.GCP_ORGANIZATION_ID }}
+      GCP_BILLING_ACCOUNT_ID: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+      DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+      GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+      NEON_PROJECT_LOCATION: ${{ secrets.NEON_PROJECT_LOCATION }}
+      MONGODB_ATLAS_ORG_ID: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+      MONGODB_ATLAS_PUBLIC_KEY: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+      MONGODB_ATLAS_PRIVATE_KEY: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+      NX_CLOUD_ACCESS_TOKEN_READ_WRITE: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ_WRITE }}
+      NX_CLOUD_ACCESS_TOKEN_READ: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ }}
+    with:
+      team-name: people
+
+  bootstrap-things:
+    name: Bootstrap Things Team
+    uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    needs: bootstrap-kernel
+    if: |
+      always() && (
+        github.event.inputs.teams == 'all' ||
+        github.event.inputs.teams == 'things' ||
+        contains(github.event.inputs.teams, 'things')
+      )
+    secrets:
+      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+      GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+      OWNER_ACCOUNT_EMAIL: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+      GCP_ORGANIZATION_ID: ${{ secrets.GCP_ORGANIZATION_ID }}
+      GCP_BILLING_ACCOUNT_ID: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+      DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+      GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+      NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+      NEON_PROJECT_LOCATION: ${{ secrets.NEON_PROJECT_LOCATION }}
+      MONGODB_ATLAS_ORG_ID: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+      MONGODB_ATLAS_PUBLIC_KEY: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+      MONGODB_ATLAS_PRIVATE_KEY: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+      NX_CLOUD_ACCESS_TOKEN_READ_WRITE: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ_WRITE }}
+      NX_CLOUD_ACCESS_TOKEN_READ: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ }}
+    with:
+      team-name: things

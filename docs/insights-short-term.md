@@ -2,6 +2,14 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-13 22:30 UTC] Team-owned reusable workflows under teams/*/ with entry points in .github/ for discoverability
+- [2026-02-13 21:30 UTC] Explicit script references in workflows beat symlinks; clarity and traceability matter
+- [2026-02-13 21:15 UTC] Explicit script paths via env vars avoid symlink indirection; clarity over magic
+- [2026-02-13 21:00 UTC] Implicit patterns need explicit documentation; README + metadata prevent confusion
+- [2026-02-13 20:45 UTC] Symlinks transparently share shell scripts; lightweight DRY alternative to npm packages
+- [2026-02-13 20:15 UTC] Symlinks for shell scripts avoid npm overhead; NX implicit deps document ordering
+- [2026-02-13 19:53 UTC] Symlinks + reusable GitHub workflows orchestrate multi-team infrastructure bootstrap
+- [2026-02-13 18:45 UTC] Reusable workflows + NX dependencies enable independent team infrastructure bootstrap
 - [2026-02-13 15:00 UTC] Idempotent logging: use section headers, suppress verbose output, and show status (○/✓)
 - [2026-02-13 14:00 UTC] Show resource status (created vs existing) in idempotent scripts for debuggability
 - [2026-02-13 13:00 UTC] Group operations under headers; suppress verbose output to improve script debuggability
@@ -94,10 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 05:30 UTC] Nuke local infra (minikube delete) + rm tfstate when destroy fails on missing CRDs
 - [2026-02-10 05:15 UTC] `terraform state mv` bypasses moved-block + missing-provider catch-22 locally
 - [2026-02-10 05:00 UTC] Terraform `moved` blocks must all resolve before `-target` applies succeed
-- [2026-02-10 04:45 UTC] Terraform validates module output attributes at plan time even inside count=0 modules
-- [2026-02-10 04:15 UTC] MongoDB Atlas TF provider v2.x changes `replication_specs` from block to argument syntax
-- [2026-02-10 03:30 UTC] Wrap cloud-only TF resources in count-gated sub-modules to avoid provider requirements locally
-- [2026-02-09 21:45 UTC] NX hides `chore` by default; override via `release.conventionalCommits.types` in nx.json
-- [2026-02-09 19:30 UTC] Fresh cluster bootstraps skip incremental upgrade paths; migrate only in-place
-- [2026-02-09 19:15 UTC] provider-kubernetes v1.2.0+ requires Crossplane 2.0+; upgrade both together
-- [2026-02-09 18:45 UTC] Pinned image versions drift across modules; grep all references before upgrading
