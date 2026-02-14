@@ -11,6 +11,9 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+permissions:
+  contents: read
+
 jobs:
   bootstrap-kernel:
     name: Bootstrap Kernel Team
