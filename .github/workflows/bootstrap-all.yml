@@ -45,7 +45,7 @@ jobs:
     permissions:
       contents: read
     if: |
-      always() && (
+      needs.bootstrap-kernel.result == 'success' && (
         github.event.inputs.teams == 'all' ||
         github.event.inputs.teams == 'people' ||
         contains(github.event.inputs.teams, 'people')
@@ -75,7 +75,7 @@ jobs:
     permissions:
       contents: read
     if: |
-      always() && (
+      needs.bootstrap-kernel.result == 'success' && (
         github.event.inputs.teams == 'all' ||
         github.event.inputs.teams == 'things' ||
         contains(github.event.inputs.teams, 'things')
