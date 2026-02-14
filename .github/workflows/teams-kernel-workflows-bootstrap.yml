@@ -14,7 +14,7 @@ env:
 jobs:
   bootstrap-kernel:
     name: Bootstrap Kernel Team
-    uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    uses: ./.github/workflows/teams-kernel-workflows-bootstrap-team.yml
     permissions:
       contents: read
     if: |
@@ -40,7 +40,7 @@ jobs:
 
   bootstrap-people:
     name: Bootstrap People Team
-    uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    uses: ./.github/workflows/teams-kernel-workflows-bootstrap-team.yml
     needs: bootstrap-kernel
     permissions:
       contents: read
@@ -70,7 +70,7 @@ jobs:
 
   bootstrap-things:
     name: Bootstrap Things Team
-    uses: ./teams/kernel/github-workflows/bootstrap-team.yml
+    uses: ./.github/workflows/teams-kernel-workflows-bootstrap-team.yml
     needs: bootstrap-kernel
     permissions:
       contents: read

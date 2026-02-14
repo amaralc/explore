@@ -76,7 +76,7 @@ jobs:
   deploy-kernel:
     name: Deploy Kernel Team
     needs: build
-    uses: ./teams/kernel/github-workflows/deploy-team.yml
+    uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
@@ -103,7 +103,7 @@ jobs:
     name: Deploy People Team
     needs: deploy-kernel
     if: needs.deploy-kernel.result == 'success'
-    uses: ./teams/kernel/github-workflows/deploy-team.yml
+    uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
@@ -130,7 +130,7 @@ jobs:
     name: Deploy Things Team
     needs: deploy-kernel
     if: needs.deploy-kernel.result == 'success'
-    uses: ./teams/kernel/github-workflows/deploy-team.yml
+    uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
