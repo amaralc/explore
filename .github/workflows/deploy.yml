@@ -102,7 +102,7 @@ jobs:
   deploy-people:
     name: Deploy People Team
     needs: deploy-kernel
-    if: always()
+    if: needs.deploy-kernel.result == 'success'
     uses: ./teams/kernel/github-workflows/deploy-team.yml
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
@@ -129,7 +129,7 @@ jobs:
   deploy-things:
     name: Deploy Things Team
     needs: deploy-kernel
-    if: always()
+    if: needs.deploy-kernel.result == 'success'
     uses: ./teams/kernel/github-workflows/deploy-team.yml
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
