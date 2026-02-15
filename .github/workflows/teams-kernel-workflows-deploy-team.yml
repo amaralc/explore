@@ -91,6 +91,22 @@ jobs:
       - name: Generate Prisma client
         run: pnpm prisma:generate:postgres
 
+      - name: Generate Terraform Backend Configuration
+        working-directory: ${{ inputs.iac-path }}
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        run: |
+          cat > backend.tf <<EOF
+          # This block sets up what backend should be used for Terraform. In this case, we are using Google Cloud Storage.
+          terraform {
+            backend "gcs" {                                # The Google Cloud Storage backend
+              bucket = "$GCP_PROJECT_ID-tfstate"           # The name of the bucket to store the state file
+              prefix = "production"                        # The path to the state file within the bucket
+              # Authentication uses Application Default Credentials (ADC) from Workload Identity Federation
+            }
+          }
+          EOF
+
       - name: Authenticate to Google Cloud
         id: auth
         uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
