@@ -1,0 +1,150 @@
+name: Deploy Team Infrastructure (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      team-name:
+        required: true
+        type: string
+        description: 'Team name (kernel, people, things)'
+      iac-path:
+        required: true
+        type: string
+        description: 'Path to team IAC directory (e.g., teams/kernel/iac/production)'
+    secrets:
+      GCP_WORKLOAD_IDENTITY_PROVIDER:
+        required: true
+      GCP_SERVICE_ACCOUNT_EMAIL:
+        required: true
+      NX_CLOUD_ACCESS_TOKEN:
+        required: true
+      DOMAIN_NAME:
+        required: false
+      GCP_PROJECT_ID:
+        required: false
+      GCP_LOCATION:
+        required: false
+      SUPPORT_ACCOUNT_EMAIL:
+        required: false
+      OWNER_ACCOUNT_EMAIL:
+        required: false
+      GCP_BILLING_ACCOUNT_ID:
+        required: false
+      GCP_ORGANIZATION_ID:
+        required: false
+      NEON_API_KEY:
+        required: false
+      NEON_PROJECT_LOCATION:
+        required: false
+      UNLEASH_API_URL:
+        required: false
+      UNLEASH_AUTH_TOKEN:
+        required: false
+      MONGODB_ATLAS_ORG_ID:
+        required: false
+      MONGODB_ATLAS_PRIVATE_KEY:
+        required: false
+      MONGODB_ATLAS_PUBLIC_KEY:
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: main
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Get short commit hash
+        run: |
+          echo "short_commit_sha=$(git rev-parse --short=8 HEAD)" >> $GITHUB_ENV
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Cache pnpm store
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm prisma:generate:postgres
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f # v2.2.1
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1 # v2
+        with:
+          terraform_version: 1.7.5
+
+      - name: Terraform init
+        working-directory: ${{ inputs.iac-path }}
+        run: |
+          echo "Running terraform init for ${{ inputs.team-name }}..."
+          terraform init
+
+      - name: Terraform validate
+        working-directory: ${{ inputs.iac-path }}
+        run: |
+          echo "Running terraform validate for ${{ inputs.team-name }}..."
+          terraform validate
+
+      - name: Terraform Plan
+        working-directory: ${{ inputs.iac-path }}
+        env:
+          TF_VAR_domain_name: ${{ secrets.DOMAIN_NAME }}
+          TF_VAR_gcp_project_id: ${{ secrets.GCP_PROJECT_ID }}
+          TF_VAR_gcp_location: ${{ secrets.GCP_LOCATION }}
+          TF_VAR_short_commit_sha: ${{ env.short_commit_sha }}
+          TF_VAR_support_account_email: ${{ secrets.SUPPORT_ACCOUNT_EMAIL }}
+          TF_VAR_owner_account_email: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+          TF_VAR_gcp_billing_account_id: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+          TF_VAR_gcp_organization_id: ${{ secrets.GCP_ORGANIZATION_ID }}
+          TF_VAR_nx_cloud_access_token: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+          TF_VAR_neon_api_key: ${{ secrets.NEON_API_KEY }}
+          TF_VAR_neon_project_location: ${{ secrets.NEON_PROJECT_LOCATION }}
+          TF_VAR_unleash_api_url: ${{ secrets.UNLEASH_API_URL }}
+          TF_VAR_unleash_auth_token: ${{ secrets.UNLEASH_AUTH_TOKEN }}
+          TF_VAR_mongodb_atlas_org_id: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+          TF_VAR_mongodb_atlas_private_key: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+          TF_VAR_mongodb_atlas_public_key: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+          TF_VAR_service_account_email: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+        run: |
+          echo "Running terraform plan for ${{ inputs.team-name }}..."
+          echo "Commit Hash: ${{ env.short_commit_sha }}"
+          terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: ${{ inputs.iac-path }}
+        run: |
+          echo "Running terraform apply for ${{ inputs.team-name }}..."
+          terraform apply -auto-approve tfplan

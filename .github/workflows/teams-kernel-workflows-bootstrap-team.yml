@@ -1,0 +1,105 @@
+name: Bootstrap Team Infrastructure (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      team-name:
+        required: true
+        type: string
+        description: 'Team name (kernel, people, things)'
+    secrets:
+      GCP_WORKLOAD_IDENTITY_PROVIDER:
+        required: true
+      GCP_SERVICE_ACCOUNT_EMAIL:
+        required: true
+      OWNER_ACCOUNT_EMAIL:
+        required: true
+      GCP_ORGANIZATION_ID:
+        required: true
+      GCP_BILLING_ACCOUNT_ID:
+        required: true
+      DOMAIN_NAME:
+        required: true
+      GITHUB_USERNAME:
+        required: true
+      NEON_API_KEY:
+        required: true
+      NEON_PROJECT_LOCATION:
+        required: true
+      MONGODB_ATLAS_ORG_ID:
+        required: true
+      MONGODB_ATLAS_PUBLIC_KEY:
+        required: true
+      MONGODB_ATLAS_PRIVATE_KEY:
+        required: true
+      NX_CLOUD_ACCESS_TOKEN_READ_WRITE:
+        required: true
+      NX_CLOUD_ACCESS_TOKEN_READ:
+        required: true
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed # v2.1.13
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f # v2.2.1
+
+      - name: Install gh CLI
+        run: |
+          type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+          && sudo apt update \
+          && sudo apt install gh -y
+
+      - name: Run bootstrap script for ${{ inputs.team-name }}
+        env:
+          OWNER_ACCOUNT_EMAIL: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+          GCP_ORGANIZATION_ID: ${{ secrets.GCP_ORGANIZATION_ID }}
+          GCP_BILLING_ACCOUNT_ID: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_LOCATION: ${{ secrets.NEON_PROJECT_LOCATION }}
+          MONGODB_ATLAS_ORG_ID: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+          MONGODB_ATLAS_PUBLIC_KEY: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+          MONGODB_ATLAS_PRIVATE_KEY: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+          NX_CLOUD_ACCESS_TOKEN_READ_WRITE: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ_WRITE }}
+          NX_CLOUD_ACCESS_TOKEN_READ: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ }}
+        run: |
+          echo "Bootstrap: Starting ${{ inputs.team-name }} team infrastructure bootstrap"
+          sh teams/kernel/iac/bootstrap/project-setup.sh \
+            --owner-account-email="$OWNER_ACCOUNT_EMAIL" \
+            --gcp-organization-id="$GCP_ORGANIZATION_ID" \
+            --gcp-billing-account-id="$GCP_BILLING_ACCOUNT_ID" \
+            --domain-name="$DOMAIN_NAME" \
+            --github-username="$GITHUB_USERNAME" \
+            --github-repository="${{ github.repository }}" \
+            --neon-api-key="$NEON_API_KEY" \
+            --neon-project-location="$NEON_PROJECT_LOCATION" \
+            --mongodb-atlas-org-id="$MONGODB_ATLAS_ORG_ID" \
+            --mongodb-atlas-public-key="$MONGODB_ATLAS_PUBLIC_KEY" \
+            --mongodb-atlas-private-key="$MONGODB_ATLAS_PRIVATE_KEY" \
+            --nx-cloud-access-token-read-write="$NX_CLOUD_ACCESS_TOKEN_READ_WRITE" \
+            --nx-cloud-access-token-read="$NX_CLOUD_ACCESS_TOKEN_READ"
+          echo "Bootstrap: Completed ${{ inputs.team-name }} team infrastructure bootstrap"
+
+      - name: Verify bootstrap success
+        run: |
+          echo "Bootstrap: Verifying ${{ inputs.team-name }} infrastructure"
+          gcloud projects list --filter="name:*${{ inputs.team-name }}*" --format="table(name,projectId)"
