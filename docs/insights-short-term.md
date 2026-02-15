@@ -2,6 +2,11 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-15 18:00 UTC] Validate required secrets before use; fail fast with error naming step and target file
+- [2026-02-15 17:45 UTC] Document infrastructure changes via PR Experiment Record for organizational learning
+- [2026-02-15 17:15 UTC] Backend config generation belongs in CI/CD workflows using secrets, not open-source bootstrap
+- [2026-02-15 16:45 UTC] Reusable workflows require calling job to grant `id-token: write` for OIDC authentication
+- [2026-02-15 15:30 UTC] Choose Terraform for simplicity & multi-cloud; Pulumi for complex logic in familiar languages
 - [2026-02-15 14:00 UTC] Move secrets from run blocks to env: to enable GitHub masking
 - [2026-02-14 14:35 UTC] Combine job needs with needs.X.result == 'success' to enforce deployment success
 - [2026-02-14 14:30 UTC] Complete security fixes end-to-end: implement, test, commit, push for compliance
@@ -97,8 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 17:00 UTC] Local infra layers: cluster → Crossplane → service resources → app workloads (strict order)
 - [2026-02-10 16:30 UTC] Kong can be the K8s Ingress Controller or sit behind one for API-subset routing
 - [2026-02-10 16:00 UTC] K8s Ingress is an L7 reverse proxy routing external HTTP traffic to services via host/path rules
-- [2026-02-10 10:00 UTC] `moved` blocks + sibling modules cleanly split monolithic TF modules without state recreation
-- [2026-02-10 09:15 UTC] Crossplane is a platform layer on any K8s cluster (minikube, GKE, EKS), not env-specific infra
-- [2026-02-10 09:00 UTC] Separate infra provisioners (Crossplane) from service modules (IAM) so multiple services reuse them
-- [2026-02-10 08:30 UTC] Two-phase TF apply: targeted `-target` installs CRDs, then full apply plans resources needing them
-- [2026-02-10 08:00 UTC] Placeholder provider blocks with dummy tokens satisfy TF init for count=0 cloud modules
