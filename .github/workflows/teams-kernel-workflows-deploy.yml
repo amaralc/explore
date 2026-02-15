@@ -75,6 +75,8 @@ jobs:
 
   deploy-kernel:
     name: Deploy Kernel Team
+    permissions:
+      contents: read
     needs: build
     uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
@@ -101,6 +103,8 @@ jobs:
 
   deploy-people:
     name: Deploy People Team
+    permissions:
+      contents: read
     needs: deploy-kernel
     if: needs.deploy-kernel.result == 'success'
     uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
@@ -129,6 +133,8 @@ jobs:
   deploy-things:
     name: Deploy Things Team
     needs: deploy-kernel
+    permissions:
+      contents: read
     if: needs.deploy-kernel.result == 'success'
     uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
@@ -155,6 +161,8 @@ jobs:
 
   emit-compass-deployment:
     name: Emit Compass Deployment Event
+    permissions:
+      contents: read
     needs: [deploy-kernel, deploy-people, deploy-things]
     if: false # Intentionally disabled
     runs-on: ubuntu-latest

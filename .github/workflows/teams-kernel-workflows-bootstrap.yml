@@ -20,7 +20,7 @@ jobs:
     if: |
       github.event.inputs.teams == 'all' ||
       github.event.inputs.teams == 'kernel' ||
-      contains(github.event.inputs.teams, 'people')
+      contains(github.event.inputs.teams, 'kernel')
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
