@@ -21,7 +21,7 @@ on:
       DOMAIN_NAME:
         required: false
       GCP_PROJECT_ID:
-        required: false
+        required: true
       GCP_LOCATION:
         required: false
       SUPPORT_ACCOUNT_EMAIL:
@@ -96,6 +96,11 @@ jobs:
         env:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
+          if [ -z "$GCP_PROJECT_ID" ]; then
+            echo "❌ Error in 'Generate Terraform Backend Configuration' step: GCP_PROJECT_ID environment variable is empty"
+            echo "   This variable is required to generate backend.tf configuration"
+            exit 1
+          fi
           cat > backend.tf <<EOF
           # This block sets up what backend should be used for Terraform. In this case, we are using Google Cloud Storage.
           terraform {
@@ -106,6 +111,7 @@ jobs:
             }
           }
           EOF
+          echo "✓ Terraform backend configuration (backend.tf) generated successfully."
 
       - name: Authenticate to Google Cloud
         id: auth
