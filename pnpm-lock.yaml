@@ -821,6 +821,8 @@ importers:
 
   teams/kernel/shared-ui-components: {}
 
+  teams/people/iac/bootstrap: {}
+
   teams/people/researchers-peers-svc/consumer: {}
 
   teams/people/researchers-peers-svc/rest-api: {}
@@ -828,6 +830,8 @@ importers:
   teams/people/researchers/peers/adapters: {}
 
   teams/people/researchers/peers/core: {}
+
+  teams/things/iac/bootstrap: {}
 
 packages:
 

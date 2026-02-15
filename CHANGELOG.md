@@ -1,3 +1,19 @@
+## [0.100.7-beta.15](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.14...peerlab@0.100.7-beta.15) (2026-02-15)
+
+### 🩹 Fixes
+
+- **ci:** add job dependencies ([a917964a](https://github.com/amaralc/explore/commit/a917964a))
+- **ci:** move workflows to .github folder ([b3c295f7](https://github.com/amaralc/explore/commit/b3c295f7))
+- **ci:** pass secrets via environment variables for proper masking ([599aba4e](https://github.com/amaralc/explore/commit/599aba4e))
+- **ci:** avoid expanding secrets in actions ([c584fc16](https://github.com/amaralc/explore/commit/c584fc16))
+- **github-actions:** scope permissions to job level for least privilege ([9f03b4ee](https://github.com/amaralc/explore/commit/9f03b4ee))
+- **workflows:** teams reuse workflows to bootstrap and deploy ([35bcbce3](https://github.com/amaralc/explore/commit/35bcbce3))
+- **workflows:** force job dependencies ([88620401](https://github.com/amaralc/explore/commit/88620401))
+
+### Configuration
+
+- potential fix for code scanning alert no. 69: Workflow does not contain permissions ([309ce534](https://github.com/amaralc/explore/commit/309ce534))
+
 ## [0.100.7-beta.14](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.13...peerlab@0.100.7-beta.14) (2026-02-13)
 
 This was a version bump only, there were no code changes.
