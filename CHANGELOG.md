@@ -1,3 +1,11 @@
+## [0.100.7-beta.16](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.15...peerlab@0.100.7-beta.16) (2026-02-15)
+
+### 🩹 Fixes
+
+- **ci:** add id-token write ([a2beb3ca](https://github.com/amaralc/explore/commit/a2beb3ca))
+- **ci:** avoid exposing project id ([c6b2e212](https://github.com/amaralc/explore/commit/c6b2e212))
+- **ci:** prevent failure due to absent secret ([c9731756](https://github.com/amaralc/explore/commit/c9731756))
+
 ## [0.100.7-beta.15](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.14...peerlab@0.100.7-beta.15) (2026-02-15)
 
 ### 🩹 Fixes
