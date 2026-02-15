@@ -1,3 +1,7 @@
+## [0.100.7](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.16...peerlab@0.100.7) (2026-02-15)
+
+This release promotes peerlab@0.100.7-beta.16 to stable.
+
 ## [0.100.7-beta.16](https://github.com/amaralc/explore/compare/peerlab@0.100.7-beta.15...peerlab@0.100.7-beta.16) (2026-02-15)
 
 ### 🩹 Fixes
