@@ -77,6 +77,7 @@ jobs:
     name: Deploy Kernel Team
     permissions:
       contents: read
+      id-token: write
     needs: build
     uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
@@ -105,6 +106,7 @@ jobs:
     name: Deploy People Team
     permissions:
       contents: read
+      id-token: write
     needs: deploy-kernel
     if: needs.deploy-kernel.result == 'success'
     uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
@@ -135,6 +137,7 @@ jobs:
     needs: deploy-kernel
     permissions:
       contents: read
+      id-token: write
     if: needs.deploy-kernel.result == 'success'
     uses: ./.github/workflows/teams-kernel-workflows-deploy-team.yml
     secrets:
