@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-15 14:00 UTC] Move secrets from run blocks to env: to enable GitHub masking
 - [2026-02-14 14:35 UTC] Combine job needs with needs.X.result == 'success' to enforce deployment success
 - [2026-02-14 14:30 UTC] Complete security fixes end-to-end: implement, test, commit, push for compliance
 - [2026-02-14 14:15 UTC] Add explicit job permissions after removing workflow-level for least privilege
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 09:00 UTC] Separate infra provisioners (Crossplane) from service modules (IAM) so multiple services reuse them
 - [2026-02-10 08:30 UTC] Two-phase TF apply: targeted `-target` installs CRDs, then full apply plans resources needing them
 - [2026-02-10 08:00 UTC] Placeholder provider blocks with dummy tokens satisfy TF init for count=0 cloud modules
-- [2026-02-10 07:30 UTC] Cloud roots import sub-modules directly; routers can't gate providers with count=0
