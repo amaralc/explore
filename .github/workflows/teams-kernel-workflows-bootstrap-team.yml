@@ -68,22 +68,35 @@ jobs:
           && sudo apt install gh -y
 
       - name: Run bootstrap script for ${{ inputs.team-name }}
+        env:
+          OWNER_ACCOUNT_EMAIL: ${{ secrets.OWNER_ACCOUNT_EMAIL }}
+          GCP_ORGANIZATION_ID: ${{ secrets.GCP_ORGANIZATION_ID }}
+          GCP_BILLING_ACCOUNT_ID: ${{ secrets.GCP_BILLING_ACCOUNT_ID }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_LOCATION: ${{ secrets.NEON_PROJECT_LOCATION }}
+          MONGODB_ATLAS_ORG_ID: ${{ secrets.MONGODB_ATLAS_ORG_ID }}
+          MONGODB_ATLAS_PUBLIC_KEY: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
+          MONGODB_ATLAS_PRIVATE_KEY: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
+          NX_CLOUD_ACCESS_TOKEN_READ_WRITE: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ_WRITE }}
+          NX_CLOUD_ACCESS_TOKEN_READ: ${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ }}
         run: |
           echo "Bootstrap: Starting ${{ inputs.team-name }} team infrastructure bootstrap"
           sh teams/kernel/iac/bootstrap/project-setup.sh \
-            --owner-account-email="${{ secrets.OWNER_ACCOUNT_EMAIL }}" \
-            --gcp-organization-id="${{ secrets.GCP_ORGANIZATION_ID }}" \
-            --gcp-billing-account-id="${{ secrets.GCP_BILLING_ACCOUNT_ID }}" \
-            --domain-name="${{ secrets.DOMAIN_NAME }}" \
-            --github-username="${{ secrets.GITHUB_USERNAME }}" \
+            --owner-account-email="$OWNER_ACCOUNT_EMAIL" \
+            --gcp-organization-id="$GCP_ORGANIZATION_ID" \
+            --gcp-billing-account-id="$GCP_BILLING_ACCOUNT_ID" \
+            --domain-name="$DOMAIN_NAME" \
+            --github-username="$GITHUB_USERNAME" \
             --github-repository="${{ github.repository }}" \
-            --neon-api-key="${{ secrets.NEON_API_KEY }}" \
-            --neon-project-location="${{ secrets.NEON_PROJECT_LOCATION }}" \
-            --mongodb-atlas-org-id="${{ secrets.MONGODB_ATLAS_ORG_ID }}" \
-            --mongodb-atlas-public-key="${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}" \
-            --mongodb-atlas-private-key="${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}" \
-            --nx-cloud-access-token-read-write="${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ_WRITE }}" \
-            --nx-cloud-access-token-read="${{ secrets.NX_CLOUD_ACCESS_TOKEN_READ }}"
+            --neon-api-key="$NEON_API_KEY" \
+            --neon-project-location="$NEON_PROJECT_LOCATION" \
+            --mongodb-atlas-org-id="$MONGODB_ATLAS_ORG_ID" \
+            --mongodb-atlas-public-key="$MONGODB_ATLAS_PUBLIC_KEY" \
+            --mongodb-atlas-private-key="$MONGODB_ATLAS_PRIVATE_KEY" \
+            --nx-cloud-access-token-read-write="$NX_CLOUD_ACCESS_TOKEN_READ_WRITE" \
+            --nx-cloud-access-token-read="$NX_CLOUD_ACCESS_TOKEN_READ"
           echo "Bootstrap: Completed ${{ inputs.team-name }} team infrastructure bootstrap"
 
       - name: Verify bootstrap success
