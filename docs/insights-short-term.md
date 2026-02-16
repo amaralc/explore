@@ -2,6 +2,8 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-16 03:20 UTC] Use package.json as explicit marker to distinguish projects from folders in cloud hierarchy
+- [2026-02-16 03:15 UTC] Path-based folder vs project determination needs explicit markers to prevent ambiguous nesting
 - [2026-02-16 03:00 UTC] Extract cloud hierarchy from repository path using path.module; repo location is source of truth
 - [2026-02-16 02:45 UTC] Shell location determines cloud hierarchy; unified provisioning reads repo structure once
 - [2026-02-16 02:15 UTC] Terraform manages folder hierarchy from repo structure; shell bootstrap creates foundation only
@@ -100,5 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 19:35 UTC] `gcloud org-policies describe` NOT_FOUND means no constraint is set, not missing permissions
 - [2026-02-10 19:30 UTC] GCP IAM bindings are eventually consistent; sleep after granting before using
 - [2026-02-10 19:20 UTC] Bootstrap scripts must self-grant required IAM roles before commands that need them
-- [2026-02-10 19:15 UTC] `roles/iam.workloadIdentityPoolAdmin` is required to create WIF pools and providers
-- [2026-02-10 19:00 UTC] WIF + OIDC replaces SA key files for keyless GitHub Actions to GCP authentication
