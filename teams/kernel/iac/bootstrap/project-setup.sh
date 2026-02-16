@@ -376,49 +376,8 @@ else
   echo "  ✓ Service account created"
 fi
 
-########## 1b. SETTING UP WORKLOAD IDENTITY FEDERATION
-echo ""
-echo "Setting up Workload Identity Federation..."
 
-# WIF Pool
-if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" \
-  --project="$GCP_PROJECT_ID" --location="$GCP_WIF_LOCATION" &>/dev/null; then
-  echo "  ○ WIF pool '$GCP_WIF_POOL_NAME' already exists"
-else
-  gcloud iam workload-identity-pools create "$GCP_WIF_POOL_NAME" \
-    --project="$GCP_PROJECT_ID" \
-    --location="$GCP_WIF_LOCATION" \
-    --display-name="GitHub Actions Pool" > /dev/null
-  echo "  ✓ WIF pool '$GCP_WIF_POOL_NAME' created"
-fi
-
-# WIF Provider
-if gcloud iam workload-identity-pools providers describe "$GCP_WIF_PROVIDER_NAME" \
-  --project="$GCP_PROJECT_ID" --location="$GCP_WIF_LOCATION" \
-  --workload-identity-pool="$GCP_WIF_POOL_NAME" &>/dev/null; then
-  echo "  ○ GitHub OIDC provider already exists"
-else
-  gcloud iam workload-identity-pools providers create-oidc "$GCP_WIF_PROVIDER_NAME" \
-    --project="$GCP_PROJECT_ID" \
-    --location="$GCP_WIF_LOCATION" \
-    --workload-identity-pool="$GCP_WIF_POOL_NAME" \
-    --display-name="GitHub Provider" \
-    --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
-    --attribute-condition="assertion.repository=='$GITHUB_USERNAME/$GITHUB_REPOSITORY' && (assertion.ref=='refs/heads/main' || assertion.ref.matches('refs/tags/peerlab@[0-9]+\\\\.[0-9]+\\\\.[0-9]+\$'))" \
-    --issuer-uri="https://token.actions.githubusercontent.com" > /dev/null
-  echo "  ✓ GitHub OIDC provider created"
-fi
-
-# WIF binding
-gcloud iam service-accounts add-iam-policy-binding "$GCP_SERVICE_ACCOUNT_EMAIL" \
-  --project="$GCP_PROJECT_ID" \
-  --role="roles/iam.workloadIdentityUser" \
-  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/$GCP_WIF_LOCATION/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY" > /dev/null 2>&1
-echo "  ✓ Service account WIF binding complete"
-
-GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/$GCP_WIF_LOCATION/workloadIdentityPools/$GCP_WIF_POOL_NAME/providers/$GCP_WIF_PROVIDER_NAME"
-
-########## 1c. GRANTING SERVICE ACCOUNT ROLES
+########## 1b. GRANTING SERVICE ACCOUNT ROLES
 echo ""
 echo "Granting service account IAM roles..."
 
@@ -506,7 +465,7 @@ gcloud organizations add-iam-policy-binding "$GCP_ORGANIZATION_ID" \
   --role="roles/billing.user" > /dev/null 2>&1
 echo "  ✓ Organization-level roles granted"
 
-########## 1d. SUPPORT GROUP & ARTIFACT REGISTRY
+########## 1c. SUPPORT GROUP & ARTIFACT REGISTRY
 echo ""
 echo "Setting up support infrastructure..."
 
@@ -532,6 +491,49 @@ else
     --description="Docker Repository" > /dev/null 2>&1
   echo "  ✓ Docker artifact registry created"
 fi
+
+########## 1d. SETTING UP WORKLOAD IDENTITY FEDERATION
+## It is important to set up workload identity last to give time for 'global' region propagation of project metadata
+echo ""
+echo "Setting up Workload Identity Federation..."
+
+# WIF Pool
+if gcloud iam workload-identity-pools describe "$GCP_WIF_POOL_NAME" \
+  --project="$GCP_PROJECT_ID" --location="$GCP_WIF_LOCATION" &>/dev/null; then
+  echo "  ○ WIF pool '$GCP_WIF_POOL_NAME' already exists"
+else
+  gcloud iam workload-identity-pools create "$GCP_WIF_POOL_NAME" \
+    --project="$GCP_PROJECT_ID" \
+    --location="$GCP_WIF_LOCATION" \
+    --display-name="GitHub Actions Pool" > /dev/null
+  echo "  ✓ WIF pool '$GCP_WIF_POOL_NAME' created"
+fi
+
+# WIF Provider
+if gcloud iam workload-identity-pools providers describe "$GCP_WIF_PROVIDER_NAME" \
+  --project="$GCP_PROJECT_ID" --location="$GCP_WIF_LOCATION" \
+  --workload-identity-pool="$GCP_WIF_POOL_NAME" &>/dev/null; then
+  echo "  ○ GitHub OIDC provider already exists"
+else
+  gcloud iam workload-identity-pools providers create-oidc "$GCP_WIF_PROVIDER_NAME" \
+    --project="$GCP_PROJECT_ID" \
+    --location="$GCP_WIF_LOCATION" \
+    --workload-identity-pool="$GCP_WIF_POOL_NAME" \
+    --display-name="GitHub Provider" \
+    --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
+    --attribute-condition="assertion.repository=='$GITHUB_USERNAME/$GITHUB_REPOSITORY' && (assertion.ref=='refs/heads/main' || assertion.ref.matches('refs/tags/peerlab@[0-9]+\\\\.[0-9]+\\\\.[0-9]+\$'))" \
+    --issuer-uri="https://token.actions.githubusercontent.com" > /dev/null
+  echo "  ✓ GitHub OIDC provider created"
+fi
+
+# WIF binding
+gcloud iam service-accounts add-iam-policy-binding "$GCP_SERVICE_ACCOUNT_EMAIL" \
+  --project="$GCP_PROJECT_ID" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/$GCP_PROJECT_NUMBER/locations/$GCP_WIF_LOCATION/workloadIdentityPools/$GCP_WIF_POOL_NAME/attribute.repository/$GITHUB_USERNAME/$GITHUB_REPOSITORY" > /dev/null 2>&1
+echo "  ✓ Service account WIF binding complete"
+
+GCP_WORKLOAD_IDENTITY_PROVIDER="projects/$GCP_PROJECT_NUMBER/locations/$GCP_WIF_LOCATION/workloadIdentityPools/$GCP_WIF_POOL_NAME/providers/$GCP_WIF_PROVIDER_NAME"
 
 ########## 2. SETTING UP GITHUB
 echo ""

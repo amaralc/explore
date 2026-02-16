@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-16 04:25 UTC] Use exponential backoff retries for transient API failures; detect permanent errors to fail fast
 - [2026-02-16 03:20 UTC] Use package.json as explicit marker to distinguish projects from folders in cloud hierarchy
 - [2026-02-16 03:15 UTC] Path-based folder vs project determination needs explicit markers to prevent ambiguous nesting
 - [2026-02-16 03:00 UTC] Extract cloud hierarchy from repository path using path.module; repo location is source of truth
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 20:15 UTC] Make bootstrap scripts idempotent with `describe` checks before each `create` command
 - [2026-02-10 19:35 UTC] `gcloud org-policies describe` NOT_FOUND means no constraint is set, not missing permissions
 - [2026-02-10 19:30 UTC] GCP IAM bindings are eventually consistent; sleep after granting before using
-- [2026-02-10 19:20 UTC] Bootstrap scripts must self-grant required IAM roles before commands that need them
