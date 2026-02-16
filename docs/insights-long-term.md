@@ -95,10 +95,10 @@ Key insights from this repository.
 91. Middleware latency tracking quantifies per-request performance.
 92. Shared UI component library ensures visual consistency.
 93. Archive directory marks deprecated code as explicitly historical.
-94. Infrastructure tool choice matters less than unified provisioning that reads source of truth once.
-95. Multiple tools managing overlapping infrastructure scope create drift risk; unified provisioning prevents desynchronization.
-96. Schema validation tests enforce backward compatibility on changes.
-97. Chaos engineering reveals resilience gaps through continuous fault injection.
-98. Terraform state is managed remotely, never locally.
-99. Provider versions are pinned in each module's versions.tf file.
+94. Target conditions should articulate cloud-agnostic patterns; implementations can start provider-specific.
+95. Cloud hierarchy patterns (folders/orgs/accounts) are cloud-agnostic; implementations lock into provider-specific tools.
+96. Infrastructure tool choice matters less than unified provisioning that reads source of truth once.
+97. Multiple tools managing overlapping infrastructure scope create drift risk; unified provisioning prevents desynchronization.
+98. Chaos engineering reveals resilience gaps through continuous fault injection.
+99. Terraform state is managed remotely, never locally.
 100. Repository folder structure is the authoritative source for cloud resource hierarchy and team IAM permissions.

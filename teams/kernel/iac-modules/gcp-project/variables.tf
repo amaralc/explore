@@ -42,6 +42,13 @@ variable "gcp_organization_id" {
   sensitive   = true
 }
 
+variable "parent_folder_id" {
+  description = "The ID of the parent folder (mutually exclusive with org_id). If provided, the project will be created under this folder instead of the organization."
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
 variable "apis" {
   description = "The list of APIs to enable"
   type        = list(string)

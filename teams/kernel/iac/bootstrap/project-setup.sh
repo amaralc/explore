@@ -204,8 +204,14 @@ GCP_TAG_KEY_SHORT_NAME="environment"
 GCP_TAG_VALUE_SHORT_NAME="production"
 
 # ============================================
-# FOLDER HIERARCHY CREATION
+# FOLDER HIERARCHY CREATION (from repository structure)
 # ============================================
+
+# Repository structure is the authoritative source of truth for cloud hierarchy.
+# This bootstrap script derives folder structure from its location in the repo,
+# creating a 1:1 mapping between code organization and cloud organization.
+#
+# Terraform will later import these folders into state for drift detection.
 
 # Calculate relative path from repo root
 RELATIVE_PATH="${SCRIPT_DIR#$REPO_ROOT/}"
@@ -232,14 +238,12 @@ if [ -z "$FOLDER_PATH" ] || [ "$FOLDER_PATH" = "$RELATIVE_PATH" ]; then
 fi
 
 # Parse folder components using POSIX-compatible method
-# Convert "teams/kernel/iac" to space-separated words (teams kernel iac)
 FOLDER_NAMES=$(echo "$FOLDER_PATH" | tr '/' ' ')
 
 # Validate project base name is not empty
 if [ -z "$PROJECT_BASE_NAME" ]; then
     echo "Error: Could not extract project base name from path"
     echo "  Relative path: $RELATIVE_PATH"
-    echo "  Folder path: $FOLDER_PATH"
     exit 1
 fi
 

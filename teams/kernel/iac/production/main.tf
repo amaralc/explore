@@ -7,27 +7,17 @@ locals {
   service_account_email = var.service_account_email
 }
 
-module "teams_folders" {
-  source  = "terraform-google-modules/folders/google"
-  version = "5.1.0"
-
-  parent = "organizations/${var.gcp_organization_id}"
-  names = [
-    # "kernel",
-    # "core",
-  ]
+# Parse repository path to extract folder hierarchy
+module "hierarchy" {
+  source = "../../iac-modules/repo-path-to-hierarchy"
 }
 
-module "environments_folders" {
-  for_each = module.teams_folders.ids
-  source   = "terraform-google-modules/folders/google"
-  version  = "5.1.0"
-
-  parent = each.value
-  names = [
-    "production",
-    "preview",
-  ]
+# Create folder hierarchy based on repository structure
+module "folder_hierarchy" {
+  source            = "../../iac-modules/gcp-folder-hierarchy"
+  organization_id   = var.gcp_organization_id
+  folder_names      = module.hierarchy.folder_names
+  depends_on        = [data.google_organization.org]
 }
 
 module "core_platform_shell_iac_apis" {

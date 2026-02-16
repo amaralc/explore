@@ -2,6 +2,11 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-16 03:00 UTC] Extract cloud hierarchy from repository path using path.module; repo location is source of truth
+- [2026-02-16 02:45 UTC] Shell location determines cloud hierarchy; unified provisioning reads repo structure once
+- [2026-02-16 02:15 UTC] Terraform manages folder hierarchy from repo structure; shell bootstrap creates foundation only
+- [2026-02-16 01:35 UTC] Target conditions should define cloud-agnostic patterns; implementations can be provider-specific initially
+- [2026-02-16 01:20 UTC] Cloud hierarchy patterns (folders→projects) are cloud-agnostic; implementations often cloud-specific
 - [2026-02-16 01:05 UTC] Infrastructure tool choice matters less than unified provisioning reading source of truth once
 - [2026-02-16 00:50 UTC] GitHub issue templates map to Toyota Kata artifacts; structured formats enable systematic team learning
 - [2026-02-16 00:35 UTC] Multiple tools managing infrastructure scope create drift risk; unify provisioning to prevent desynchronization
@@ -97,8 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-10 19:20 UTC] Bootstrap scripts must self-grant required IAM roles before commands that need them
 - [2026-02-10 19:15 UTC] `roles/iam.workloadIdentityPoolAdmin` is required to create WIF pools and providers
 - [2026-02-10 19:00 UTC] WIF + OIDC replaces SA key files for keyless GitHub Actions to GCP authentication
-- [2026-02-10 18:15 UTC] Org policy `iam.disableServiceAccountKeyCreation` blocks SA keys; use Workload Identity Federation
-- [2026-02-10 15:30 UTC] `file <path>` reveals failed downloads saved as HTML instead of expected archives
-- [2026-02-11 16:00 UTC] Terraform modules must live in iac-modules; use versioned subdirs for API changes
-- [2026-02-11 14:00 UTC] Terraform modules with count = 0 skip execution but validate arguments; use length() for safety
-- [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility

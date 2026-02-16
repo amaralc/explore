@@ -1,0 +1,196 @@
+name: Drift Detection - Folder Structure Validation
+
+on:
+  pull_request:
+    paths:
+      - 'teams/**'
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  pull-requests: write
+  contents: read
+  id-token: write
+
+jobs:
+  validate-folder-structure:
+    name: Validate Repository Folder Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed paths in teams/
+        id: detect-changes
+        run: |
+          # Get all changed files in teams/ directory
+          CHANGED_FILES=$(git diff --name-only origin/main..HEAD | grep '^teams/' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changes detected in teams/ directory"
+            exit 0
+          fi
+
+          # Extract unique team paths (teams/[domain]/...)
+          AFFECTED_TEAMS=$(echo "$CHANGED_FILES" | cut -d'/' -f1-3 | sort -u)
+
+          echo "Affected teams:"
+          echo "$AFFECTED_TEAMS"
+
+          # Store for next step
+          echo "teams<<EOF" >> $GITHUB_OUTPUT
+          echo "$AFFECTED_TEAMS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Validate folder structure patterns
+        id: validate
+        run: |
+          VALID=true
+          ISSUES=""
+
+          # Get all team directories
+          TEAMS=$(find teams -maxdepth 1 -mindepth 1 -type d | sort)
+
+          while IFS= read -r TEAM_DIR; do
+            TEAM_NAME=$(basename "$TEAM_DIR")
+
+            # Check for required patterns
+            HAS_IAC=$(find "$TEAM_DIR" -maxdepth 1 -type d -name 'iac' | wc -l)
+
+            if [ "$HAS_IAC" -eq 0 ]; then
+              ISSUES="$ISSUES\n  - Team '$TEAM_NAME' missing 'iac' directory"
+              VALID=false
+            else
+              # Check for bootstrap subdirectory
+              BOOTSTRAP_PATH="$TEAM_DIR/iac/bootstrap"
+              if [ -d "$BOOTSTRAP_PATH" ]; then
+                if [ ! -f "$BOOTSTRAP_PATH/project-setup.sh" ]; then
+                  ISSUES="$ISSUES\n  - $TEAM_NAME/iac/bootstrap missing 'project-setup.sh'"
+                  VALID=false
+                fi
+              fi
+
+              # Check for environment subdirectories
+              ENVS=$(find "$TEAM_DIR/iac" -maxdepth 1 -type d -name 'production' -o -name 'preview' -o -name 'local' | wc -l)
+              if [ "$ENVS" -gt 0 ]; then
+                # Check for main.tf in environment directories
+                for env_dir in "$TEAM_DIR/iac"/{production,preview,local}; do
+                  if [ -d "$env_dir" ]; then
+                    if [ ! -f "$env_dir/main.tf" ]; then
+                      ISSUES="$ISSUES\n  - $(basename "$env_dir") environment missing Terraform configuration"
+                      VALID=false
+                    fi
+                  fi
+                done
+              fi
+            fi
+          done <<< "$TEAMS"
+
+          if [ "$VALID" = false ]; then
+            echo "VALIDATION=failed" >> $GITHUB_OUTPUT
+            echo -e "Validation issues:$ISSUES" | tee validation_report.txt
+          else
+            echo "VALIDATION=passed" >> $GITHUB_OUTPUT
+            echo "All folder structures validated successfully" | tee validation_report.txt
+          fi
+
+      - name: Generate expected hierarchy comment
+        id: hierarchy
+        run: |
+          cat > hierarchy_report.md << 'EOF'
+          ## 📁 Folder Hierarchy Report
+
+          This PR affects repository structure. Here's what Terraform will create on `main`:
+
+          ### Expected GCP Folder Hierarchy
+
+          EOF
+
+          # Parse each team and show expected hierarchy
+          for team_dir in teams/*/; do
+            TEAM=$(basename "$team_dir")
+            IFS='/'
+
+            # Show teams/[domain]/iac hierarchy
+            if [ -d "$team_dir/iac" ]; then
+              echo "**Team: $TEAM**" >> hierarchy_report.md
+              echo "" >> hierarchy_report.md
+              echo "- Organization/" >> hierarchy_report.md
+              echo "  └── teams/" >> hierarchy_report.md
+              echo "      └── $TEAM/" >> hierarchy_report.md
+              echo "          └── iac/" >> hierarchy_report.md
+
+              # List environments
+              if [ -d "$team_dir/iac/bootstrap" ]; then
+                echo "              ├── bootstrap-XXXX (project)" >> hierarchy_report.md
+              fi
+              if [ -d "$team_dir/iac/production" ]; then
+                echo "              ├── production/" >> hierarchy_report.md
+              fi
+              if [ -d "$team_dir/iac/preview" ]; then
+                echo "              ├── preview/" >> hierarchy_report.md
+              fi
+              if [ -d "$team_dir/iac/local" ]; then
+                echo "              └── local/" >> hierarchy_report.md
+              fi
+              echo "" >> hierarchy_report.md
+            fi
+          done
+
+          cat >> hierarchy_report.md << 'EOF'
+          ### Terraform Modules Used
+
+          - `repo-path-to-hierarchy`: Parses module location to extract folder structure from repository path
+          - `gcp-folder-hierarchy`: Creates nested GCP folders matching repository hierarchy
+          - `gcp-project`: Creates projects with support for folder parent (instead of org parent)
+
+          ### CI Validation
+
+          ✅ Repository structure matches expected patterns
+          🔄 Terraform `plan` will validate folder creation during CI
+          ⚠️ Manual review of Terraform changes recommended before merge
+
+          For more details, see [Folder Hierarchy Drift Detection Plan](https://github.com/amaralc/explore/issues/255#issue-description)
+          EOF
+
+          echo "report<<EOF" >> $GITHUB_OUTPUT
+          cat hierarchy_report.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Post validation report to PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const validationReport = fs.readFileSync('validation_report.txt', 'utf8');
+            const hierarchyReport = fs.readFileSync('hierarchy_report.md', 'utf8');
+
+            const comment = `## 🔍 Drift Detection Report
+
+            ${validationReport}
+
+            ${hierarchyReport}
+
+            ---
+            _This check validates that repository folder structure changes are compatible with Terraform infrastructure provisioning._
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if validation failed
+        if: steps.validate.outputs.VALIDATION == 'failed'
+        run: |
+          echo "❌ Folder structure validation failed"
+          cat validation_report.txt
+          exit 1

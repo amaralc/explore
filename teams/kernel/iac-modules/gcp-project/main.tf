@@ -1,9 +1,10 @@
-# Create a project in the GCP organization if the environment is a preview environment
+# Create a project in the GCP organization or folder
 resource "google_project" "instance" {
   provider        = google-beta
   project_id      = var.environment_name
   name            = var.environment_name
-  org_id          = var.gcp_organization_id
+  folder_id       = var.parent_folder_id != null ? var.parent_folder_id : null
+  org_id          = var.parent_folder_id == null ? var.gcp_organization_id : null
   billing_account = var.gcp_billing_account_id
 
   # Required for the project to display in any list of Firebase projects (https://firebase.google.com/docs/projects/terraform/get-started)
