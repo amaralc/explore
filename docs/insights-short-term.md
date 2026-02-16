@@ -2,6 +2,10 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-02-16 01:05 UTC] Infrastructure tool choice matters less than unified provisioning reading source of truth once
+- [2026-02-16 00:50 UTC] GitHub issue templates map to Toyota Kata artifacts; structured formats enable systematic team learning
+- [2026-02-16 00:35 UTC] Multiple tools managing infrastructure scope create drift risk; unify provisioning to prevent desynchronization
+- [2026-02-16 00:25 UTC] Repository structure is authoritative source for cloud resource hierarchy and team IAM permissions
 - [2026-02-15 18:00 UTC] Validate required secrets before use; fail fast with error naming step and target file
 - [2026-02-15 17:45 UTC] Document infrastructure changes via PR Experiment Record for organizational learning
 - [2026-02-15 17:15 UTC] Backend config generation belongs in CI/CD workflows using secrets, not open-source bootstrap
@@ -98,7 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-11 16:00 UTC] Terraform modules must live in iac-modules; use versioned subdirs for API changes
 - [2026-02-11 14:00 UTC] Terraform modules with count = 0 skip execution but validate arguments; use length() for safety
 - [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility
-- [2026-02-10 17:30 UTC] Generalize module vars (e.g. kubeconfig_context vs minikube_profile) for cross-platform reuse
-- [2026-02-10 17:00 UTC] Local infra layers: cluster → Crossplane → service resources → app workloads (strict order)
-- [2026-02-10 16:30 UTC] Kong can be the K8s Ingress Controller or sit behind one for API-subset routing
-- [2026-02-10 16:00 UTC] K8s Ingress is an L7 reverse proxy routing external HTTP traffic to services via host/path rules
