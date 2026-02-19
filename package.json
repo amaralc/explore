@@ -283,7 +283,7 @@
     "redux": "4.2.1",
     "redux-devtools-extension": "2.13.9",
     "redux-thunk": "2.4.2",
-    "reflect-metadata": "0.1.13",
+    "reflect-metadata": "0.1.14",
     "rxjs": "7.8.1",
     "simplebar-core": "1.2.4",
     "simplebar-react": "3.2.4",
