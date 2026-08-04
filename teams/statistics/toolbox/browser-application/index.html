@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Variability Chart</title>
+<style>
+  :root {
+    --fg: #222;
+    --muted: #666;
+    --border: #d0d0d0;
+    --bg: #fafafa;
+    --panel: #fff;
+    --accent: #3b6cff;
+    --accent-2: #9333ea;
+    --grid: #eee;
+    --chip-bg: #eef2ff;
+    --chip-border: #c7d2fe;
+    --metric: #059669;
+    --nominal: #b91c1c;
+    --ordinal: #7c3aed;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+  }
+  header {
+    padding: 16px 24px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 { margin: 0; font-size: 18px; font-weight: 600; }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+  main { padding: 20px 24px; max-width: 1400px; width: 100%; margin: 0 auto; }
+  section { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 16px; }
+  section h2 { margin: 0 0 12px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    resize: vertical;
+  }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-top: 8px; }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 180px; }
+  .field label { font-size: 12px; color: var(--muted); }
+  select, button {
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--fg);
+  }
+  button {
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+  button.secondary { background: var(--panel); color: var(--fg); border-color: var(--border); font-weight: normal; }
+  button.small { padding: 2px 6px; font-size: 11px; }
+  button:hover { filter: brightness(0.95); }
+  .msg { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .msg.error { color: #c00; }
+
+  /* --- Data table --- */
+  .table-wrap {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    max-width: 100%;
+    max-height: 360px;
+  }
+  /* Sticky headers lose collapsed borders while scrolling, so paint them with a shadow. */
+  table.data thead th { position: sticky; z-index: 2; background: #fafbfc; box-shadow: inset 0 -1px 0 var(--border); }
+  table.data thead tr:first-child th { top: 0; }
+  table.data thead tr:nth-child(2) th { top: 20px; }   /* replaced by the measured height at render */
+  table.data thead th.header-cell { background: var(--panel); }
+  table.data {
+    border-collapse: collapse;
+    font-size: 12px;
+    /* Fixed layout: the first row's widths cap every column, so one long value
+       can no longer stretch its column. */
+    table-layout: fixed;
+    width: auto;
+    background: var(--panel);
+  }
+  table.data th, table.data td {
+    border-right: 1px solid var(--grid);
+    border-bottom: 1px solid var(--grid);
+    padding: 0;
+    vertical-align: middle;
+    min-width: 70px;
+  }
+  table.data th:last-child, table.data td:last-child { border-right: none; }
+  table.data th { background: #fafbfc; }
+  table.data .type-cell {
+    width: 130px;
+    padding: 1px 4px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  table.data .type-cell select {
+    border: none;
+    background: transparent;
+    padding: 0 2px;
+    font-size: 10px;
+    text-transform: lowercase;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  table.data .type-cell.metric select { color: var(--metric); }
+  table.data .type-cell.nominal select { color: var(--nominal); }
+  table.data .type-cell.ordinal select { color: var(--ordinal); }
+  table.data .header-cell {
+    padding: 2px 6px;
+    font-weight: 600;
+    text-align: right;
+    color: var(--fg);
+    border-bottom: 1px solid var(--border);
+  }
+  table.data .header-cell input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: right;
+    font-weight: 600;
+    font-size: 12px;
+    outline: none;
+  }
+  table.data .header-cell input:focus { background: #fffbea; }
+  table.data .case-col {
+    width: 36px;
+    min-width: 36px;
+    text-align: center;
+    color: var(--muted);
+    background: #fafbfc;
+    padding: 2px 4px;
+    font-size: 11px;
+    cursor: grab;
+    user-select: none;
+  }
+  table.data tr.dragging .case-col { cursor: grabbing; }
+  table.data tbody tr.drag-over-top td { border-top: 2px solid var(--accent); }
+  table.data tbody tr.drag-over-bot td { border-bottom: 2px solid var(--accent); }
+  table.data td input.cell {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 2px 6px;
+    font-size: 12px;
+    text-align: right;
+    outline: none;
+    font-family: inherit;
+  }
+  /* Empty columns/rows that pad the grid out to the full width, like a spreadsheet. */
+  table.data th.filler, table.data td.filler { background: var(--panel); }
+  table.data tbody tr.phantom .case-col { cursor: default; }
+  table.data td input.cell:focus { background: #fffbea; }
+  table.data td.numeric input.cell { text-align: right; font-variant-numeric: tabular-nums; }
+  table.data tbody tr:hover { background: #fafcff; }
+  table.data th.action-col, table.data td.action-col {
+    width: 24px; min-width: 24px; text-align: center; background: #fafbfc;
+  }
+  table.data td.action-col button { opacity: 0; }
+  table.data tr:hover td.action-col button { opacity: 1; }
+  .table-toolbar { display: flex; gap: 8px; margin-top: 8px; }
+  .data-actions { display: flex; gap: 14px; margin-bottom: 10px; }
+  .data-actions button {
+    background: none; border: none; padding: 0; color: var(--accent);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .data-actions button:hover { text-decoration: underline; }
+
+  /* --- Attribute panel (left of the chart) --- */
+  .chart-layout { display: flex; gap: 12px; align-items: flex-start; }
+  .chart-layout > * { min-width: 0; }
+  .attr-panel {
+    flex: 0 0 200px;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: #fafbfc; padding: 8px;
+  }
+  .attr-panel .panel-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--muted); font-weight: 600; margin-bottom: 6px;
+  }
+  .attr-panel .hint { font-size: 11px; color: var(--muted); margin: 8px 0 0; line-height: 1.4; }
+  .attr-item {
+    position: relative;
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 6px; margin-bottom: 4px; font-size: 12px;
+    background: var(--panel); border: 1px solid var(--chip-border);
+    border-radius: 4px; cursor: grab; user-select: none;
+  }
+  /* Tap menu: touch devices have no HTML5 drag-and-drop. */
+  .role-menu {
+    position: absolute; top: 100%; left: 0; min-width: 100%; z-index: 10;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14); padding: 4px; margin-top: 2px;
+  }
+  .role-menu button {
+    display: block; width: 100%; text-align: left;
+    background: none; border: none; color: var(--fg);
+    font-size: 12px; font-weight: normal; white-space: nowrap;
+    padding: 8px; border-radius: 4px; cursor: pointer;
+  }
+  .role-menu button:hover { background: var(--chip-bg); }
+  .role-menu button[disabled] { color: #bbb; cursor: default; }
+  .role-menu button[disabled]:hover { background: none; }
+  .level-menu { position: absolute; z-index: 10; }
+  .attr-item:active { cursor: grabbing; }
+  .attr-item.dragging { opacity: 0.4; }
+  .attr-item.assigned { border-color: var(--accent); }
+  .attr-item .attr-type { font-size: 13px; line-height: 1; }
+  .attr-item.metric .attr-type { color: var(--metric); }
+  .attr-item.nominal .attr-type { color: var(--nominal); }
+  .attr-item.ordinal .attr-type { color: var(--ordinal); }
+  .attr-item .attr-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .attr-item .role-badge {
+    margin-left: auto; font-size: 10px; font-weight: 600; color: var(--accent);
+    background: var(--chip-bg); border-radius: 3px; padding: 0 4px;
+  }
+  .attr-item .clear {
+    background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 13px; line-height: 1; padding: 0 2px;
+  }
+  /* --- Role slots under the attribute list --- */
+  .role-slots { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .slot {
+    border: 2px dashed var(--border); border-radius: 6px;
+    padding: 6px 8px; background: var(--panel);
+  }
+  .slot.drag-active { border-color: var(--accent); background: #eef4ff; }
+  .slot .slot-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--muted); font-weight: 600; margin-bottom: 4px;
+  }
+  .slot .empty { color: #bbb; font-size: 11px; font-style: italic; }
+  .slot-chip {
+    display: flex; align-items: center; gap: 6px;
+    padding: 3px 6px; margin-bottom: 3px; font-size: 12px;
+    background: var(--chip-bg); border: 1px solid var(--chip-border);
+    border-radius: 4px; cursor: grab; user-select: none;
+  }
+  .slot-chip:last-child { margin-bottom: 0; }
+  .slot-chip:active { cursor: grabbing; }
+  .slot-chip .order-idx { color: var(--muted); font-size: 10px; font-weight: 600; }
+  .slot-chip .swatch { width: 10px; height: 10px; border-radius: 2px; }
+  .slot-chip .clear {
+    margin-left: auto; background: none; border: none; color: var(--muted);
+    cursor: pointer; font-size: 13px; line-height: 1; padding: 0 2px;
+  }
+  .slot .drop-marker { height: 3px; background: var(--accent); border-radius: 2px; margin: 1px 0; }
+  .chart-main { position: relative; flex: 1 1 auto; min-width: 0; max-width: 100%; }
+  #charts.drop-active { outline: 2px dashed var(--accent); outline-offset: 2px; }
+  .chart-placeholder { display: flex; flex-direction: column; gap: 8px; }
+  .ph-zone {
+    border: 2px dashed var(--border); border-radius: 6px;
+    padding: 22px 12px; text-align: center; color: var(--muted); font-size: 13px;
+  }
+  .ph-zone.filled { border-style: solid; color: var(--fg); }
+  .ph-zone.drop-target { border-color: var(--accent); background: #eef4ff; }
+
+  /* --- Chip strip for ordinal ordering --- */
+  .order-panels { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  /* Empty it would still push the chart down and break the top alignment with the panel. */
+  .order-panels:empty { display: none; }
+  .order-panel { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .order-panel .label { font-size: 12px; color: var(--muted); }
+  .order-panel .label strong { color: var(--fg); }
+  .chip-strip {
+    display: flex; gap: 6px; flex-wrap: wrap; padding: 4px 6px;
+    border: 1px dashed var(--border); border-radius: 4px; background: #fafbfc;
+    min-height: 32px;
+  }
+  .chip {
+    padding: 3px 10px; font-size: 12px; background: var(--chip-bg);
+    border: 1px solid var(--chip-border); border-radius: 999px;
+    cursor: grab; user-select: none;
+  }
+  .chip:active { cursor: grabbing; }
+  .chip.dragging { opacity: 0.4; }
+
+  /* --- Chart --- */
+  #charts {
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #charts { position: relative; }
+  #charts svg { display: block; max-width: none; height: auto; background: var(--panel); }
+  #charts g.level-row { cursor: grab; }
+  /* touch-action is ignored on SVG children, so each label row gets an HTML overlay
+     that owns the gesture: vertical drags reorder instead of scrolling the page. */
+  .level-hit { position: absolute; z-index: 3; touch-action: none; cursor: grab; }
+  .level-hit.dragging { cursor: grabbing; background: rgba(59, 108, 255, 0.10); }
+  .level-hit.drop-target { background: rgba(59, 108, 255, 0.18); outline: 1px solid var(--accent); }
+  #charts g.level-row.dragging { opacity: 0.45; cursor: grabbing; }
+  #charts g.level-row.drop-target rect { fill: #eef4ff; stroke: var(--accent); }
+
+  /* --- Tablet: panel becomes a horizontal strip above the chart --- */
+  @media (max-width: 1023px) {
+    /* Stacked, the cross axis is horizontal: flex-start would size children to the
+       wide SVG and push the whole page sideways. */
+    .chart-layout { flex-direction: column; align-items: stretch; }
+    .chart-main { width: 100%; }
+    .attr-panel { flex: 1 1 auto; width: 100%; min-width: 0; }
+    #attr-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .attr-item { margin-bottom: 0; flex: 0 1 auto; }
+    .role-slots { flex-direction: row; flex-wrap: wrap; }
+    .role-slots .slot { flex: 1 1 260px; min-width: 0; }
+    .slot .slot-body { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+    .slot-chip { margin-bottom: 0; }
+    .slot .drop-marker { width: 3px; height: 22px; margin: 0 1px; }
+  }
+
+  /* --- Phone: back to one attribute per row, bigger touch targets --- */
+  @media (max-width: 639px) {
+    header { padding: 12px 14px; }
+    header h1 { font-size: 16px; }
+    header p { font-size: 12px; }
+    main { padding: 12px; }
+    section { padding: 10px; margin-bottom: 12px; }
+    #attr-list { flex-direction: column; flex-wrap: nowrap; gap: 4px; }
+    .attr-item { width: 100%; padding: 8px; font-size: 13px; }
+    .role-slots { flex-direction: column; }
+    .role-slots .slot { flex: 1 1 auto; }
+    .slot-chip { padding: 7px 8px; font-size: 13px; }
+    .attr-item .clear, .slot-chip .clear { font-size: 16px; padding: 0 6px; }
+    #charts { padding: 6px; }
+    .table-wrap { max-height: 260px; }
+    .data-actions { flex-wrap: wrap; gap: 10px; }
+    .table-toolbar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Variability Chart</h1>
+  <p>Edit data directly in the table. Set a scale type per column (metric / nominal / ordinal). Drag rows or ordinal chips to reorder groups.</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>1. Data</h2>
+    <div class="data-actions">
+      <button id="new-data-btn" type="button">enter new data</button>
+      <button id="clear-data-btn" type="button">clear data</button>
+    </div>
+    <div id="paste-region">
+      <textarea id="data-input" placeholder="Paste CSV or TSV here. First row = column headers."></textarea>
+      <div class="row">
+        <button id="import-btn">Import into table</button>
+        <button id="sample-btn" class="secondary" type="button">Load sample</button>
+        <button id="blank-btn" class="secondary" type="button">Start empty table</button>
+        <button id="cancel-paste-btn" class="secondary" type="button">Back to table</button>
+        <span id="parse-msg" class="msg"></span>
+      </div>
+    </div>
+    <div id="table-wrap" class="table-wrap"></div>
+    <div class="table-toolbar" id="table-toolbar">
+      <button id="add-row-btn" class="secondary" type="button">+ Add row</button>
+      <button id="add-col-btn" class="secondary" type="button">+ Add column</button>
+    </div>
+  </section>
+
+  <section id="chart-section" hidden>
+    <h2>2. Chart</h2>
+    <div class="chart-layout">
+      <aside class="attr-panel">
+        <div class="panel-title">Attributes</div>
+        <div id="attr-list"></div>
+        <div id="role-slots" class="role-slots"></div>
+        <p class="hint">Tap an attribute to pick its role, or drag it onto the chart — the plot area sets the measurement (Y), the label rows add a grouping level. Drag a label row to reorder levels.</p>
+      </aside>
+      <div class="chart-main">
+        <div id="order-panels" class="order-panels"></div>
+        <div id="charts"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const el = (id) => document.getElementById(id);
+  const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+
+  // -------- Layout constants (must match the CSS widths) --------
+  const COL_W = 130;
+  const CASE_COL_W = 36;
+  const ACTION_COL_W = 24;
+  const PHANTOM_ROWS = 3;
+  const COLOR_PALETTE = ['#3b6cff', '#e4572e', '#17a398', '#9333ea', '#f2b705', '#0b7285', '#d6336c', '#5c6b7a'];
+
+  // -------- State --------
+  let table = { headers: [], rows: [] };
+  let colTypes = {};        // header -> 'metric' | 'nominal' | 'ordinal'
+  let ordinalOrder = {};    // header -> [values] user-defined order
+  let roles = { y: '', groups: [], color: '' };   // groups: column names, outermost first
+  let showPaste = false;    // paste region wins over the table while true
+
+  // -------- CSV / TSV parser --------
+  function detectDelimiter(text) {
+    const line = text.split(/\r?\n/).find((l) => l.trim().length > 0) || '';
+    const counts = { '\t': 0, ',': 0, ';': 0 };
+    for (const ch of line) if (ch in counts) counts[ch]++;
+    let best = ',', bestCount = -1;
+    for (const d of Object.keys(counts)) if (counts[d] > bestCount) { bestCount = counts[d]; best = d; }
+    return bestCount > 0 ? best : ',';
+  }
+
+  function parseRow(line, delim) {
+    const out = []; let cur = ''; let inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (inQ) {
+        if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+        else if (ch === '"') inQ = false;
+        else cur += ch;
+      } else {
+        if (ch === '"') inQ = true;
+        else if (ch === delim) { out.push(cur); cur = ''; }
+        else cur += ch;
+      }
+    }
+    out.push(cur);
+    return out.map((s) => s.trim());
+  }
+
+  function parseTable(text) {
+    const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
+    if (lines.length < 2) throw new Error('Need at least a header row and one data row.');
+    const delim = detectDelimiter(text);
+    const headers = parseRow(lines[0], delim).map((h, i) => h || `col_${i + 1}`);
+    const rows = lines.slice(1).map((l) => {
+      const cells = parseRow(l, delim);
+      const obj = {};
+      headers.forEach((h, i) => { obj[h] = cells[i] ?? ''; });
+      return obj;
+    });
+    return { headers, rows };
+  }
+
+  // -------- Stats --------
+  const mean = (a) => a.reduce((s, x) => s + x, 0) / a.length;
+  function stddev(a) {
+    if (a.length < 2) return 0;
+    const m = mean(a);
+    return Math.sqrt(a.reduce((s, x) => s + (x - m) ** 2, 0) / (a.length - 1));
+  }
+
+  function smartCompare(a, b) {
+    const na = parseFloat(a), nb = parseFloat(b);
+    const aN = !isNaN(na) && String(na) === String(a).trim();
+    const bN = !isNaN(nb) && String(nb) === String(b).trim();
+    if (aN && bN) return na - nb;
+    return String(a).localeCompare(String(b), undefined, { numeric: true });
+  }
+
+  function detectType(header, rows) {
+    let seen = 0, numeric = 0;
+    for (const r of rows) {
+      const raw = String(r[header] ?? '').trim();
+      if (raw === '') continue;
+      seen++;
+      if (/^-?\d+(\.\d+)?(e[+-]?\d+)?$/i.test(raw)) numeric++;
+    }
+    return seen > 0 && numeric / seen >= 0.9 ? 'metric' : 'nominal';
+  }
+
+  function uniqueValues(header) {
+    const seen = new Set(), out = [];
+    for (const r of table.rows) {
+      const v = String(r[header] ?? '');
+      if (v === '' || seen.has(v)) continue;
+      seen.add(v); out.push(v);
+    }
+    return out;
+  }
+
+  // -------- Import from textarea --------
+  function importFromTextarea(quiet) {
+    const msg = el('parse-msg');
+    msg.classList.remove('error');
+    try {
+      table = parseTable(el('data-input').value);
+      ordinalOrder = {};
+      syncColumnTypes();
+      inferDefaultRoles();
+      msg.textContent = `Imported ${table.rows.length} rows.`;
+      showPaste = false;
+      refreshAll();
+    } catch (e) {
+      if (quiet) return;          // half-typed text is not an error worth shouting about
+      msg.textContent = e.message;
+      msg.classList.add('error');
+    }
+  }
+
+  el('import-btn').addEventListener('click', () => importFromTextarea(false));
+
+  // Pasting is the whole gesture: chart the data without a second click.
+  el('data-input').addEventListener('paste', () => {
+    setTimeout(() => importFromTextarea(true), 0);   // let the pasted text land first
+  });
+
+  el('sample-btn').addEventListener('click', () => {
+    el('data-input').value = SAMPLE_DATA;
+    importFromTextarea(false);
+  });
+
+  el('new-data-btn').addEventListener('click', () => {
+    showPaste = true;
+    el('data-input').value = '';        // always a blank sheet, never the last paste
+    el('parse-msg').textContent = '';
+    renderDataArea();
+    el('data-input').focus();
+  });
+
+  el('cancel-paste-btn').addEventListener('click', () => {
+    showPaste = false;
+    renderDataArea();
+  });
+
+  // Blank grid to start typing into, like a fresh spreadsheet.
+  el('blank-btn').addEventListener('click', () => {
+    if (table.rows.length && !confirm('Discard the current table and start a new empty one?')) return;
+    const headers = ['col_1', 'col_2', 'col_3'];
+    table = {
+      headers,
+      rows: Array.from({ length: 10 }, () => Object.fromEntries(headers.map((h) => [h, '']))),
+    };
+    colTypes = Object.fromEntries(headers.map((h) => [h, 'nominal']));
+    ordinalOrder = {};
+    roles = { y: '', groups: [] };
+    el('data-input').value = '';
+    el('parse-msg').textContent = '';
+    showPaste = false;
+    refreshAll();
+  });
+
+  // Keeps columns, types and roles; empties every cell.
+  el('clear-data-btn').addEventListener('click', () => {
+    if (table.rows.length === 0) return;
+    if (!confirm('Clear all values? Columns and roles are kept.')) return;
+    table.rows.forEach((r) => { table.headers.forEach((h) => { r[h] = ''; }); });
+    refreshAll();
+  });
+
+  el('add-row-btn').addEventListener('click', () => {
+    if (table.headers.length === 0) return;
+    const empty = {};
+    table.headers.forEach((h) => { empty[h] = ''; });
+    table.rows.push(empty);
+    refreshAll();
+  });
+
+  el('add-col-btn').addEventListener('click', () => {
+    let n = table.headers.length + 1;
+    let name = `col_${n}`;
+    while (table.headers.includes(name)) { n++; name = `col_${n}`; }
+    table.headers.push(name);
+    table.rows.forEach((r) => { r[name] = ''; });
+    colTypes[name] = 'nominal';
+    refreshAll();
+  });
+
+  // -------- Column type sync --------
+  function syncColumnTypes() {
+    const next = {};
+    table.headers.forEach((h) => {
+      next[h] = colTypes[h] || detectType(h, table.rows);
+    });
+    colTypes = next;
+    for (const k of Object.keys(ordinalOrder)) {
+      if (colTypes[k] !== 'ordinal') delete ordinalOrder[k];
+    }
+  }
+
+  function inferDefaultRoles() {
+    const metrics = table.headers.filter((h) => colTypes[h] === 'metric');
+    const cats = table.headers.filter((h) => colTypes[h] !== 'metric');
+    if (!table.headers.includes(roles.y) || colTypes[roles.y] !== 'metric') {
+      roles.y = metrics[metrics.length - 1] || table.headers[table.headers.length - 1] || '';
+    }
+    if (!table.headers.includes(roles.color) || roles.color === roles.y) roles.color = '';
+    roles.groups = roles.groups.filter((c) => table.headers.includes(c) && c !== roles.y);
+    if (roles.groups.length === 0) {
+      const first = cats[0] || table.headers.find((h) => h !== roles.y);
+      const second = cats.find((h) => h !== first);
+      roles.groups = [first, second].filter(Boolean);
+    }
+  }
+
+  // -------- Render everything --------
+  function refreshAll() {
+    syncColumnTypes();
+    renderDataArea();
+    renderTable();
+    renderAttrPanel();
+    renderOrderPanels();
+    rerenderChart();
+  }
+
+  // -------- Column drag tracking (shared across renders) --------
+  let draggingCol = null;
+
+  function assignY(col) {
+    if (!table.headers.includes(col)) return;
+    const at = roles.groups.indexOf(col);
+    if (at !== -1) roles.groups.splice(at, 1);
+    roles.y = col;
+    rolesChanged();
+  }
+
+  // index is the slot in the grouping strip, counted before the column is pulled out of it
+  function assignGroup(col, index) {
+    if (!table.headers.includes(col)) return;
+    if (roles.y === col) roles.y = '';
+    const at = roles.groups.indexOf(col);
+    if (at !== -1) {
+      roles.groups.splice(at, 1);
+      if (at < index) index--;
+    }
+    roles.groups.splice(Math.min(index, roles.groups.length), 0, col);
+    rolesChanged();
+  }
+
+  function assignColor(col) {
+    if (!table.headers.includes(col)) return;
+    if (roles.y === col) roles.y = '';
+    const at = roles.groups.indexOf(col);
+    if (at !== -1) roles.groups.splice(at, 1);
+    roles.color = col;
+    rolesChanged();
+  }
+
+  function rolesChanged() {
+    renderAttrPanel();
+    renderOrderPanels();
+    rerenderChart();
+  }
+
+  function clearRole(target) {
+    if (target === 'y') roles.y = '';
+    else if (target === 'color') roles.color = '';
+    else roles.groups.splice(target, 1);
+    rolesChanged();
+  }
+
+  // -------- Data area: paste region without data, table with it --------
+  function renderDataArea() {
+    const hasData = table.headers.length > 0;
+    const pasting = showPaste || !hasData;
+    el('paste-region').hidden = !pasting;
+    el('table-wrap').hidden = pasting;
+    el('table-toolbar').hidden = pasting;
+    el('cancel-paste-btn').hidden = !hasData;
+    el('clear-data-btn').hidden = !hasData;
+  }
+
+  // -------- Table rendering --------
+  function renderTable() {
+    const wrap = el('table-wrap');
+    if (table.headers.length === 0) return;
+
+    const tbl = document.createElement('table');
+    tbl.className = 'data';
+
+    // Type row
+    const thead = document.createElement('thead');
+    const typeTr = document.createElement('tr');
+    typeTr.appendChild(th('', 'case-col'));
+    table.headers.forEach((h) => {
+      const cell = th('', `type-cell ${colTypes[h]}`);
+      const sel = document.createElement('select');
+      ['metric', 'nominal', 'ordinal'].forEach((t) => {
+        const opt = document.createElement('option');
+        opt.value = t; opt.textContent = t;
+        if (t === colTypes[h]) opt.selected = true;
+        sel.appendChild(opt);
+      });
+      sel.addEventListener('change', () => {
+        colTypes[h] = sel.value;
+        if (sel.value === 'ordinal' && !ordinalOrder[h]) ordinalOrder[h] = uniqueValues(h);
+        if (sel.value !== 'ordinal') delete ordinalOrder[h];
+        cell.className = `type-cell ${sel.value}`;
+        renderAttrPanel();
+        renderOrderPanels();
+        rerenderChart();
+      });
+      cell.appendChild(sel);
+      typeTr.appendChild(cell);
+    });
+    const fillers = fillerCount(wrap);
+    for (let i = 0; i < fillers; i++) typeTr.appendChild(th('', 'type-cell filler'));
+    typeTr.appendChild(th('', 'action-col'));
+    thead.appendChild(typeTr);
+
+    // Header name row
+    const nameTr = document.createElement('tr');
+    nameTr.appendChild(th('Case', 'case-col'));
+    table.headers.forEach((h, ci) => {
+      const cell = document.createElement('th');
+      cell.className = 'header-cell';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = h;
+      input.addEventListener('change', () => {
+        const newName = input.value.trim() || h;
+        if (newName === h) return;
+        if (table.headers.includes(newName)) { input.value = h; return; }
+        table.headers[ci] = newName;
+        colTypes[newName] = colTypes[h]; delete colTypes[h];
+        if (ordinalOrder[h]) { ordinalOrder[newName] = ordinalOrder[h]; delete ordinalOrder[h]; }
+        table.rows.forEach((r) => { r[newName] = r[h]; delete r[h]; });
+        if (roles.y === h) roles.y = newName;
+        if (roles.color === h) roles.color = newName;
+        roles.groups = roles.groups.map((c) => (c === h ? newName : c));
+        refreshAll();
+      });
+      cell.appendChild(input);
+      nameTr.appendChild(cell);
+    });
+    for (let i = 0; i < fillers; i++) nameTr.appendChild(th('', 'header-cell filler'));
+    const delColTh = document.createElement('th');
+    delColTh.className = 'action-col';
+    nameTr.appendChild(delColTh);
+    thead.appendChild(nameTr);
+    tbl.appendChild(thead);
+
+    // Body
+    const tbody = document.createElement('tbody');
+    for (let ri = 0; ri < table.rows.length + PHANTOM_ROWS; ri++) {
+      const row = table.rows[ri];
+      const tr = document.createElement('tr');
+      tr.dataset.rowIndex = String(ri);
+      if (!row) tr.className = 'phantom';
+      tr.draggable = Boolean(row);
+      tr.appendChild(td(String(ri + 1), 'case-col'));
+      table.headers.forEach((h) => {
+        const tdEl = document.createElement('td');
+        const inp = document.createElement('input');
+        inp.className = 'cell';
+        inp.type = 'text';
+        inp.value = row ? (row[h] ?? '') : '';
+        if (row) {
+          inp.addEventListener('input', () => {
+            row[h] = inp.value;
+            rerenderChartDebounced();
+          });
+        } else {
+          // Typing into a trailing blank row turns it into a real row.
+          inp.addEventListener('focus', () => materializeRow(ri, h));
+        }
+        tdEl.appendChild(inp);
+        tr.appendChild(tdEl);
+      });
+      for (let i = 0; i < fillers; i++) tr.appendChild(td('', 'filler'));
+      const actionTd = document.createElement('td');
+      actionTd.className = 'action-col';
+      if (row) {
+        const del = document.createElement('button');
+        del.className = 'secondary small';
+        del.textContent = '×';
+        del.title = 'Delete row';
+        del.addEventListener('click', (e) => {
+          e.stopPropagation();
+          table.rows.splice(ri, 1);
+          refreshAll();
+        });
+        actionTd.appendChild(del);
+        attachRowDrag(tr);
+      }
+      tr.appendChild(actionTd);
+      tbody.appendChild(tr);
+    }
+    tbl.appendChild(tbody);
+
+    wrap.innerHTML = '';
+    wrap.appendChild(tbl);
+
+    // Second sticky row sits right below the first; measure instead of guessing.
+    const typeH = typeTr.getBoundingClientRect().height;
+    if (typeH) nameTr.querySelectorAll('th').forEach((c) => { c.style.top = `${typeH}px`; });
+  }
+
+  // Empty columns pad the grid out to the container width instead of leaving a gap.
+  function fillerCount(wrap) {
+    const avail = wrap.clientWidth - CASE_COL_W - ACTION_COL_W - table.headers.length * COL_W;
+    return Math.max(0, Math.floor(avail / COL_W));
+  }
+
+  function materializeRow(ri, header) {
+    while (table.rows.length <= ri) {
+      const empty = {};
+      table.headers.forEach((h) => { empty[h] = ''; });
+      table.rows.push(empty);
+    }
+    renderTable();
+    const tr = el('table-wrap').querySelector(`tbody tr[data-row-index="${ri}"]`);
+    const inp = tr && tr.querySelectorAll('td input.cell')[table.headers.indexOf(header)];
+    if (inp) inp.focus();
+  }
+
+  function th(text, className) {
+    const c = document.createElement('th');
+    if (className) c.className = className;
+    c.textContent = text;
+    return c;
+  }
+  function td(text, className) {
+    const c = document.createElement('td');
+    if (className) c.className = className;
+    c.textContent = text;
+    return c;
+  }
+
+  // -------- Row drag-and-drop --------
+  let dragRowIdx = null;
+  function attachRowDrag(tr) {
+    tr.addEventListener('dragstart', (e) => {
+      dragRowIdx = parseInt(tr.dataset.rowIndex, 10);
+      tr.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', 'row');
+    });
+    tr.addEventListener('dragend', () => {
+      tr.classList.remove('dragging');
+      document.querySelectorAll('tr.drag-over-top, tr.drag-over-bot').forEach((n) => {
+        n.classList.remove('drag-over-top', 'drag-over-bot');
+      });
+      dragRowIdx = null;
+    });
+    tr.addEventListener('dragover', (e) => {
+      if (dragRowIdx === null) return;
+      e.preventDefault();
+      const rect = tr.getBoundingClientRect();
+      const after = e.clientY > rect.top + rect.height / 2;
+      tr.classList.toggle('drag-over-top', !after);
+      tr.classList.toggle('drag-over-bot', after);
+    });
+    tr.addEventListener('dragleave', () => {
+      tr.classList.remove('drag-over-top', 'drag-over-bot');
+    });
+    tr.addEventListener('drop', (e) => {
+      if (dragRowIdx === null) return;
+      e.preventDefault();
+      const targetIdx = parseInt(tr.dataset.rowIndex, 10);
+      const rect = tr.getBoundingClientRect();
+      const after = e.clientY > rect.top + rect.height / 2;
+      let insertAt = after ? targetIdx + 1 : targetIdx;
+      const [moved] = table.rows.splice(dragRowIdx, 1);
+      if (dragRowIdx < insertAt) insertAt--;
+      table.rows.splice(insertAt, 0, moved);
+      refreshAll();
+    });
+  }
+
+  // -------- Attribute panel (drag source) --------
+  const TYPE_GLYPH = { metric: '\u25B2', nominal: '\u25CF', ordinal: '\u25A0' };
+
+  function renderAttrPanel() {
+    const list = el('attr-list');
+    list.innerHTML = '';
+    table.headers.forEach((col) => list.appendChild(makeAttrItem(col)));
+    renderRoleSlots();
+  }
+
+  function closeRoleMenu() {
+    document.querySelectorAll('.role-menu').forEach((m) => m.remove());
+    document.removeEventListener('pointerdown', onOutsidePointerDown);
+  }
+
+  function onOutsidePointerDown(e) {
+    if (e.target.closest && e.target.closest('.role-menu')) return;
+    closeRoleMenu();
+  }
+
+  function openRoleMenu(item, col) {
+    closeRoleMenu();
+    const menu = document.createElement('div');
+    menu.className = 'role-menu';
+    const add = (label, fn) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.addEventListener('click', (e) => { e.stopPropagation(); closeRoleMenu(); fn(); });
+      menu.appendChild(b);
+    };
+    add('Measurement (Y)', () => assignY(col));
+    add('Add grouping level', () => assignGroup(col, roles.groups.length));
+    add('Color', () => assignColor(col));
+    const role = roleOf(col);
+    if (role) add('Remove from chart', () => clearRole(role.target));
+    item.appendChild(menu);
+    setTimeout(() => document.addEventListener('pointerdown', onOutsidePointerDown), 0);
+  }
+
+  // -------- Grouping / Color slots --------
+  function renderRoleSlots() {
+    const container = el('role-slots');
+    container.innerHTML = '';
+    container.appendChild(makeGroupingSlot());
+    container.appendChild(makeColorSlot());
+  }
+
+  function slotShell(label) {
+    const slot = document.createElement('div');
+    slot.className = 'slot';
+    const lab = document.createElement('div');
+    lab.className = 'slot-label';
+    lab.textContent = label;
+    const body = document.createElement('div');
+    body.className = 'slot-body';
+    slot.appendChild(lab);
+    slot.appendChild(body);
+    return { slot, body };
+  }
+
+  function slotEmpty(text) {
+    const span = document.createElement('span');
+    span.className = 'empty';
+    span.textContent = text;
+    return span;
+  }
+
+  function makeSlotChip(target, col, extra) {
+    const chip = document.createElement('div');
+    chip.className = 'slot-chip';
+    chip.draggable = true;
+    if (extra) chip.appendChild(extra);
+    chip.appendChild(document.createTextNode(col));
+    chip.addEventListener('dragstart', (e) => {
+      draggingCol = col;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', col);
+    });
+    chip.addEventListener('dragend', () => { draggingCol = null; });
+    const clear = document.createElement('button');
+    clear.className = 'clear';
+    clear.textContent = '\u00d7';
+    clear.title = 'Remove from this role';
+    clear.addEventListener('click', (e) => { e.stopPropagation(); clearRole(target); });
+    clear.addEventListener('mousedown', (e) => e.stopPropagation());
+    chip.appendChild(clear);
+    return chip;
+  }
+
+  function makeGroupingSlot() {
+    const { slot, body } = slotShell('Grouping (outer \u2192 inner)');
+    const cols = roles.groups.filter((c) => table.headers.includes(c));
+    if (cols.length === 0) body.appendChild(slotEmpty('drop attributes here'));
+    cols.forEach((col, i) => {
+      const idx = document.createElement('span');
+      idx.className = 'order-idx';
+      idx.textContent = String(i + 1);
+      body.appendChild(makeSlotChip(i, col, idx));
+    });
+
+    const marker = document.createElement('div');
+    marker.className = 'drop-marker';
+    const clearMarker = () => { if (marker.parentNode) marker.remove(); };
+    // Chips stack vertically on desktop and sit in a row on narrow screens.
+    const indexAt = (clientX, clientY) => {
+      const chips = [...body.querySelectorAll('.slot-chip')];
+      const inRow = chips.length > 1
+        && Math.abs(chips[0].getBoundingClientRect().top - chips[1].getBoundingClientRect().top) < 2;
+      for (let i = 0; i < chips.length; i++) {
+        const r = chips[i].getBoundingClientRect();
+        const before = inRow ? clientX < r.left + r.width / 2 : clientY < r.top + r.height / 2;
+        if (before) return i;
+      }
+      return chips.length;
+    };
+
+    slot.addEventListener('dragover', (e) => {
+      if (draggingCol === null) return;
+      e.preventDefault();
+      slot.classList.add('drag-active');
+      const chips = [...body.querySelectorAll('.slot-chip')];
+      body.insertBefore(marker, chips[indexAt(e.clientX, e.clientY)] || null);
+    });
+    slot.addEventListener('dragleave', (e) => {
+      if (slot.contains(e.relatedTarget)) return;
+      slot.classList.remove('drag-active');
+      clearMarker();
+    });
+    slot.addEventListener('drop', (e) => {
+      if (draggingCol === null) return;
+      e.preventDefault();
+      const idx = indexAt(e.clientX, e.clientY);
+      slot.classList.remove('drag-active');
+      clearMarker();
+      assignGroup(draggingCol, idx);
+    });
+    return slot;
+  }
+
+  function makeColorSlot() {
+    const { slot, body } = slotShell('Color');
+    if (roles.color && table.headers.includes(roles.color)) {
+      const sw = document.createElement('span');
+      sw.className = 'swatch';
+      sw.style.background = COLOR_PALETTE[0];
+      body.appendChild(makeSlotChip('color', roles.color, sw));
+    } else {
+      body.appendChild(slotEmpty('drop one attribute here'));
+    }
+    slot.addEventListener('dragover', (e) => {
+      if (draggingCol === null) return;
+      e.preventDefault();
+      slot.classList.add('drag-active');
+    });
+    slot.addEventListener('dragleave', () => slot.classList.remove('drag-active'));
+    slot.addEventListener('drop', (e) => {
+      if (draggingCol === null) return;
+      e.preventDefault();
+      slot.classList.remove('drag-active');
+      assignColor(draggingCol);
+    });
+    return slot;
+  }
+
+  function roleOf(col) {
+    if (roles.y === col) return { badge: 'Y', target: 'y' };
+    if (roles.color === col) return { badge: 'C', target: 'color' };
+    const i = roles.groups.indexOf(col);
+    return i === -1 ? null : { badge: `G${i + 1}`, target: i };
+  }
+
+  function makeAttrItem(col) {
+    const type = colTypes[col] || 'nominal';
+    const role = roleOf(col);
+    const item = document.createElement('div');
+    item.className = `attr-item ${type}${role ? ' assigned' : ''}`;
+    item.draggable = true;
+    item.title = col;
+
+    const glyph = document.createElement('span');
+    glyph.className = 'attr-type';
+    glyph.textContent = TYPE_GLYPH[type];
+    const name = document.createElement('span');
+    name.className = 'attr-name';
+    name.textContent = col;
+    item.appendChild(glyph);
+    item.appendChild(name);
+
+    if (role) {
+      const badge = document.createElement('span');
+      badge.className = 'role-badge';
+      badge.textContent = role.badge;
+      item.appendChild(badge);
+      const clear = document.createElement('button');
+      clear.className = 'clear';
+      clear.textContent = '\u00d7';
+      clear.title = 'Remove from the chart';
+      clear.addEventListener('click', (e) => { e.stopPropagation(); clearRole(role.target); });
+      clear.addEventListener('mousedown', (e) => e.stopPropagation());
+      item.appendChild(clear);
+    }
+
+    // Tapping opens a menu: touch browsers have no HTML5 drag-and-drop.
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      if (item.querySelector('.role-menu')) { closeRoleMenu(); return; }
+      openRoleMenu(item, col);
+    });
+
+    item.addEventListener('dragstart', (e) => {
+      draggingCol = col;
+      item.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', col);
+    });
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+      el('charts').classList.remove('drop-active');
+      clearDropHighlights();
+      draggingCol = null;
+    });
+    return item;
+  }
+
+  // -------- Chart as drop target --------
+  function clearDropHighlights() {
+    el('charts').querySelectorAll('.drop-target').forEach((n) => n.classList.remove('drop-target'));
+  }
+
+  // Where a drop at clientY lands: the plot area sets Y, the label rows add/insert a level.
+  function dropTargetAt(clientY) {
+    const charts = el('charts');
+    const ph = charts.querySelectorAll('.ph-zone');
+    for (const zone of ph) {
+      const r = zone.getBoundingClientRect();
+      if (clientY >= r.top && clientY <= r.bottom) {
+        return { kind: zone.dataset.region, node: zone, index: roles.groups.length };
+      }
+    }
+    const rows = [...charts.querySelectorAll('g.level-row')];
+    for (const row of rows) {
+      const r = row.getBoundingClientRect();
+      if (clientY >= r.top && clientY <= r.bottom) {
+        return { kind: 'group', node: row, index: Number(row.dataset.level) };
+      }
+    }
+    const svg = charts.querySelector('svg');
+    if (!svg) return null;
+    const r = svg.getBoundingClientRect();
+    if (clientY < r.top || clientY > r.bottom) return null;
+    // Below the last label row means "innermost level", anywhere else is the plot area.
+    const last = rows[rows.length - 1];
+    if (last && clientY > last.getBoundingClientRect().bottom) {
+      return { kind: 'group', node: null, index: roles.groups.length };
+    }
+    return { kind: 'y', node: null, index: 0 };
+  }
+
+  function attachChartDrop() {
+    const charts = el('charts');
+    charts.addEventListener('dragover', (e) => {
+      if (draggingCol === null) return;
+      e.preventDefault();
+      charts.classList.add('drop-active');
+      clearDropHighlights();
+      const t = dropTargetAt(e.clientY);
+      if (t && t.node) t.node.classList.add('drop-target');
+    });
+    charts.addEventListener('dragleave', (e) => {
+      if (charts.contains(e.relatedTarget)) return;
+      charts.classList.remove('drop-active');
+      clearDropHighlights();
+    });
+    charts.addEventListener('drop', (e) => {
+      if (draggingCol === null) return;
+      e.preventDefault();
+      const t = dropTargetAt(e.clientY);
+      charts.classList.remove('drop-active');
+      clearDropHighlights();
+      if (!t) return;
+      if (t.kind === 'y') assignY(draggingCol);
+      else assignGroup(draggingCol, t.index);
+    });
+  }
+
+  // -------- Ordinal chip strips --------
+  function renderOrderPanels() {
+    const container = el('order-panels');
+    container.innerHTML = '';
+    roles.groups.forEach((col, i) => {
+      if (colTypes[col] === 'ordinal') container.appendChild(makeOrderPanel(col, `level ${i + 1}`));
+    });
+  }
+
+  function makeOrderPanel(col, tier) {
+    ensureOrder(col);
+    const panel = document.createElement('div');
+    panel.className = 'order-panel';
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.innerHTML = `${tier} order — <strong>${escapeXml(col)}</strong>: drag to reorder`;
+    panel.appendChild(label);
+    const strip = document.createElement('div');
+    strip.className = 'chip-strip';
+    ordinalOrder[col].forEach((v) => strip.appendChild(makeChip(v)));
+    attachChipDrag(strip, col);
+    panel.appendChild(strip);
+    return panel;
+  }
+
+  function ensureOrder(col) {
+    const uniq = uniqueValues(col);
+    if (!ordinalOrder[col]) { ordinalOrder[col] = uniq; return; }
+    const existing = ordinalOrder[col].filter((v) => uniq.includes(v));
+    uniq.forEach((v) => { if (!existing.includes(v)) existing.push(v); });
+    ordinalOrder[col] = existing;
+  }
+
+  function makeChip(value) {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.draggable = true;
+    chip.dataset.value = value;
+    chip.textContent = value;
+    return chip;
+  }
+
+  function attachChipDrag(strip, col) {
+    let dragging = null;
+    strip.addEventListener('dragstart', (e) => {
+      const t = e.target;
+      if (!(t instanceof HTMLElement) || !t.classList.contains('chip')) return;
+      dragging = t;
+      t.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', t.dataset.value);
+    });
+    strip.addEventListener('dragend', () => {
+      if (dragging) dragging.classList.remove('dragging');
+      dragging = null;
+      ordinalOrder[col] = [...strip.querySelectorAll('.chip')].map((c) => c.dataset.value);
+      rerenderChart();
+    });
+    strip.addEventListener('dragover', (e) => {
+      if (!dragging) return;
+      e.preventDefault();
+      const target = e.target.closest('.chip');
+      if (!target || target === dragging) return;
+      const rect = target.getBoundingClientRect();
+      const after = e.clientX > rect.left + rect.width / 2;
+      strip.insertBefore(dragging, after ? target.nextSibling : target);
+    });
+  }
+
+  // -------- Grouping --------
+  function sortKeys(keys, appearance, col, type) {
+    if (type === 'ordinal') {
+      const order = ordinalOrder[col];
+      if (order && order.length) {
+        const idx = new Map(order.map((v, i) => [v, i]));
+        return keys.slice().sort((a, b) => {
+          const ai = idx.has(a) ? idx.get(a) : order.length + appearance.indexOf(a);
+          const bi = idx.has(b) ? idx.get(b) : order.length + appearance.indexOf(b);
+          return ai - bi;
+        });
+      }
+      return appearance.slice();
+    }
+    if (type === 'metric') return keys.slice().sort((a, b) => parseFloat(a) - parseFloat(b));
+    return keys.slice().sort(smartCompare);
+  }
+
+  // Builds a tree of grouping levels, then flattens it into leaf cells plus,
+  // for each level, the contiguous bands of cells that level spans.
+  function buildCells(rows, yCol, groupCols, colorCol) {
+    const newNode = () => ({ children: new Map(), appearance: [], points: [] });
+    const root = newNode();
+
+    for (const r of rows) {
+      const y = parseFloat(r[yCol]);
+      if (isNaN(y)) continue;
+      let node = root;
+      for (const col of groupCols) {
+        const key = String(r[col] ?? '');
+        if (!node.children.has(key)) { node.children.set(key, newNode()); node.appearance.push(key); }
+        node = node.children.get(key);
+      }
+      node.points.push({ y, color: colorCol ? String(r[colorCol] ?? '') : '' });
+    }
+
+    const cells = [];
+    const bands = groupCols.map(() => []);
+
+    function walk(node, level, path) {
+      if (level === groupCols.length) {
+        const values = node.points.map((p) => p.y);
+        cells.push({
+          path, values, points: node.points,
+          mean: mean(values), sd: stddev(values),
+          min: Math.min(...values), max: Math.max(...values),
+        });
+        return values;
+      }
+      const col = groupCols[level];
+      const keys = sortKeys([...node.children.keys()], node.appearance, col, colTypes[col] || 'nominal');
+      let all = [];
+      keys.forEach((key) => {
+        const start = cells.length;
+        const values = walk(node.children.get(key), level + 1, path.concat(key));
+        all = all.concat(values);
+        bands[level].push({ key, startIdx: start, endIdx: cells.length - 1, mean: mean(values) });
+      });
+      return all;
+    }
+    walk(root, 0, []);
+
+    return { cells, bands };
+  }
+
+  // -------- Chart rendering --------
+  const rerenderChartDebounced = debounce(() => rerenderChart(), 120);
+
+  function rerenderChart() {
+    if (table.headers.length === 0) { el('chart-section').hidden = true; return; }
+    el('chart-section').hidden = false;
+    if (!roles.y || roles.groups.length === 0) { el('charts').innerHTML = placeholderHTML(); return; }
+    const groupCols = roles.groups.slice();
+    const colorCol = table.headers.includes(roles.color) ? roles.color : '';
+    const { cells, bands } = buildCells(table.rows, roles.y, groupCols, colorCol);
+    if (cells.length === 0) {
+      el('charts').innerHTML = '<p class="msg error">No numeric measurements found for the chosen Y column.</p>';
+      return;
+    }
+    const legend = colorCol
+      ? uniqueValues(colorCol).map((v, i) => ({ value: v, color: COLOR_PALETTE[i % COLOR_PALETTE.length] }))
+      : [];
+    const availW = Math.max(0, el('charts').clientWidth - 22);   // minus padding + border
+    el('charts').innerHTML = renderChartsSVG({
+      cells, bands, yLabel: roles.y, groupLabels: groupCols, colorLabel: colorCol, legend, availW,
+    });
+    attachLevelDrag();
+  }
+
+  // Drop scaffold shown until both roles are filled.
+  function placeholderHTML() {
+    const y = roles.y
+      ? `<div class="ph-zone filled" data-region="y">Measurement (Y): <strong>${escapeXml(roles.y)}</strong></div>`
+      : '<div class="ph-zone" data-region="y">Drop the measurement attribute (Y) here</div>';
+    const groups = roles.groups.length
+      ? `<div class="ph-zone filled" data-region="group">Grouping: <strong>${escapeXml(roles.groups.join(' → '))}</strong></div>`
+      : '<div class="ph-zone" data-region="group">Drop grouping attributes here</div>';
+    return `<div class="chart-placeholder">${y}${groups}</div>`;
+  }
+
+  function niceScale(min, max, ticks = 6) {
+    if (min === max) { min -= 0.5; max += 0.5; }
+    const range = max - min;
+    const rough = range / ticks;
+    const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+    const norm = rough / pow;
+    let step;
+    if (norm < 1.5) step = 1 * pow;
+    else if (norm < 3) step = 2 * pow;
+    else if (norm < 7) step = 5 * pow;
+    else step = 10 * pow;
+    const niceMin = Math.floor(min / step) * step;
+    const niceMax = Math.ceil(max / step) * step;
+    const values = [];
+    for (let v = niceMin; v <= niceMax + step * 0.5; v += step) values.push(round(v, step));
+    return { min: niceMin, max: niceMax, ticks: values };
+  }
+  function round(v, step) {
+    const decimals = Math.max(0, -Math.floor(Math.log10(step)) + 1);
+    return parseFloat(v.toFixed(decimals));
+  }
+
+  const LABEL_ROW_H = 22;
+  const ROTATED_CELL_PX = 22;
+  const textW = (str, fontPx) => String(str).length * fontPx * 0.58;
+  const clipLabel = (str, max) => (str.length > max ? `${str.slice(0, max - 1)}\u2026` : str);
+  const LABEL_ROW_GAP = 2;
+  const STAT_ROW_H = 17;
+  const STAT_ROWS = [
+    { label: 'n', get: (c) => String(c.values.length) },
+    { label: 'mean', get: (c) => fmtStat(c.mean) },
+    { label: 'std dev', get: (c) => fmtStat(c.sd) },
+  ];
+
+  function fmtStat(v) {
+    if (!Number.isFinite(v)) return '';
+    const a = Math.abs(v);
+    if (a >= 1000) return v.toFixed(0);
+    if (a >= 100) return v.toFixed(1);
+    if (a >= 1) return v.toFixed(2);
+    return v.toFixed(3);
+  }
+
+  function renderChartsSVG({ cells, bands, yLabel, groupLabels, colorLabel, legend, availW }) {
+    const levels = groupLabels.length;
+    const n = cells.length;
+    const tight = availW > 0 && availW < 520;
+
+    // Row names sit on the left so they are visible before scrolling; the axis
+    // numbers and the rotated Y title share that gutter. Narrow screens get a
+    // shorter gutter with truncated names.
+    const rowNames = groupLabels.map((l) => (tight ? clipLabel(l, 8) : l));
+    const statNames = STAT_ROWS.map((r) => r.label);
+    const longestLabel = Math.max(...rowNames.map((l) => l.length), ...statNames.map((l) => l.length));
+    const marginLeft = tight
+      ? Math.max(44, longestLabel * 6.4 + 30)
+      : Math.max(64, longestLabel * 6.8 + 54);
+    const marginRight = tight ? 8 : 24;
+    const topPlotH = tight ? 240 : 320;
+    const sdPlotH = tight ? 160 : 220;
+    const gapH = 20;
+
+    // One viewBox unit = one CSS pixel, so text keeps its size instead of shrinking.
+    // A cell only needs room for its own text; when even that does not fit the
+    // available width, the cell texts rotate instead of forcing a long scroll.
+    const cellTexts = cells.map((c) => [String(c.path[c.path.length - 1] ?? ''), ...STAT_ROWS.map((r) => r.get(c))]);
+    const widest = Math.max(...cellTexts.flat().map((t) => textW(t, 12)));
+    const flatPx = Math.max(34, widest + 12);
+    const roomFor = (px) => (availW || 0) >= n * px + marginLeft + marginRight;
+    // Rotate whenever upright text does not fit: even when the chart still has to
+    // scroll, rotated cells cut that scrolling roughly in half.
+    const rotateCells = Boolean(availW) && !roomFor(flatPx);
+    const cellPx = rotateCells ? ROTATED_CELL_PX : flatPx;
+
+    const W = Math.max(Math.round(n * cellPx + marginLeft + marginRight), availW || 0);
+    const plotW = W - marginLeft - marginRight;
+    const cellW = plotW / n;
+    const xOf = (i) => marginLeft + cellW * (i + 0.5);
+
+    // Rotated text needs the row to be as tall as the longest string is wide.
+    const statRowH = rotateCells
+      ? Math.min(70, Math.max(...cells.flatMap((c) => STAT_ROWS.map((r) => textW(r.get(c), 11)))) + 10)
+      : STAT_ROW_H;
+    const statsBandH = STAT_ROWS.length * statRowH;
+    const rowMeta = bands.map((row) => {
+      const fits = row.every((b) => textW(b.key, 12) <= (b.endIdx - b.startIdx + 1) * cellW - 6);
+      return fits
+        ? { rotate: false, h: LABEL_ROW_H }
+        : { rotate: true, h: Math.min(80, Math.max(...row.map((b) => textW(b.key, 12))) + 10) };
+    });
+    const labelBandH = rowMeta.reduce((sum, r) => sum + r.h, 0) + (levels - 1) * LABEL_ROW_GAP;
+    const legendH = legend.length ? 22 : 0;
+    const H = 20 + topPlotH + gapH + sdPlotH + 4 + statsBandH + labelBandH + legendH + 10;
+
+    const allVals = cells.flatMap((c) => c.values);
+    const yMinRaw = Math.min(...allVals);
+    const yMaxRaw = Math.max(...allVals);
+    const pad = (yMaxRaw - yMinRaw) * 0.08 || 0.5;
+    const yScale = niceScale(yMinRaw - pad, yMaxRaw + pad);
+    const yTop = 20, yBot = yTop + topPlotH;
+    const yToPx = (v) => yBot - ((v - yScale.min) / (yScale.max - yScale.min)) * (yBot - yTop);
+
+    const sdVals = cells.map((c) => c.sd);
+    const sdMax = Math.max(...sdVals, 0);
+    const sdScale = niceScale(0, sdMax * 1.1 || 1);
+    const sdTop = yBot + gapH, sdBot = sdTop + sdPlotH;
+    const sdToPx = (v) => sdBot - ((v - sdScale.min) / (sdScale.max - sdScale.min)) * (sdBot - sdTop);
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:${W}px" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">`;
+    svg += rect(marginLeft, yTop, plotW, topPlotH, '#fff', '#bbb');
+    svg += rect(marginLeft, sdTop, plotW, sdPlotH, '#fff', '#bbb');
+    svg += drawYAxis(marginLeft, plotW, yTop, yBot, yScale, yToPx, yLabel);
+    svg += drawYAxis(marginLeft, plotW, sdTop, sdBot, sdScale, sdToPx, 'Std Dev');
+
+    // Separators at every non-leaf level; outer levels drawn darker.
+    for (let lvl = 0; lvl < levels - 1; lvl++) {
+      const stroke = lvl === 0 ? '#bbb' : '#ddd';
+      bands[lvl].slice(0, -1).forEach((b) => {
+        const x = marginLeft + cellW * (b.endIdx + 1);
+        svg += `<line x1="${x}" y1="${yTop}" x2="${x}" y2="${yBot}" stroke="${stroke}"/>`;
+        svg += `<line x1="${x}" y1="${sdTop}" x2="${x}" y2="${sdBot}" stroke="${stroke}"/>`;
+      });
+    }
+
+    bands[0].forEach((b) => {
+      const x1 = marginLeft + cellW * b.startIdx;
+      const x2 = marginLeft + cellW * (b.endIdx + 1);
+      const y = yToPx(b.mean);
+      svg += `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="#9333ea" stroke-width="1.5"/>`;
+    });
+
+    if (sdScale.min <= 0 && sdScale.max >= 0) {
+      const y0 = sdToPx(0);
+      svg += `<line x1="${marginLeft}" y1="${y0}" x2="${marginLeft + plotW}" y2="${y0}" stroke="#888" stroke-dasharray="3 3"/>`;
+    }
+
+    const meanPath = cells.map((c, i) => `${i === 0 ? 'M' : 'L'}${xOf(i)},${yToPx(c.mean)}`).join(' ');
+    svg += `<path d="${meanPath}" fill="none" stroke="#7aa0ff" stroke-width="1.5"/>`;
+    const sdPath = cells.map((c, i) => `${i === 0 ? 'M' : 'L'}${xOf(i)},${sdToPx(c.sd)}`).join(' ');
+    svg += `<path d="${sdPath}" fill="none" stroke="#7aa0ff" stroke-width="1.5"/>`;
+
+    const colorOf = new Map(legend.map((l) => [l.value, l.color]));
+    cells.forEach((c, i) => {
+      const x = xOf(i);
+      if (c.values.length > 1) {
+        svg += `<line x1="${x}" y1="${yToPx(c.min)}" x2="${x}" y2="${yToPx(c.max)}" stroke="#111"/>`;
+      }
+      c.points.forEach((p) => {
+        const fill = colorOf.get(p.color) || '#111';
+        svg += `<circle cx="${x}" cy="${yToPx(p.y)}" r="2.5" fill="${fill}"/>`;
+      });
+    });
+
+    cells.forEach((c, i) => {
+      const x = xOf(i), y = sdToPx(c.sd), r = 4;
+      svg += `<line x1="${x - r}" y1="${y - r}" x2="${x + r}" y2="${y + r}" stroke="#3b6cff" stroke-width="1.5"/>`;
+      svg += `<line x1="${x - r}" y1="${y + r}" x2="${x + r}" y2="${y - r}" stroke="#3b6cff" stroke-width="1.5"/>`;
+    });
+
+    svg += drawStatRows({ cells, cellW, marginLeft, top: sdBot + 4, rowH: statRowH, rotate: rotateCells, names: statNames });
+    const labelY = sdBot + 4 + statsBandH;
+    svg += drawXLabels({ cells, bands, cellW, marginLeft, labelY, groupLabels: rowNames, rowMeta });
+    if (legend.length) {
+      svg += drawLegend({ legend, colorLabel, x: marginLeft, y: labelY + labelBandH + 6 });
+    }
+    svg += `</svg>`;
+    return svg;
+  }
+
+  function drawYAxis(x, plotW, top, bot, scale, toPx, label) {
+    let s = '';
+    scale.ticks.forEach((t) => {
+      const y = toPx(t);
+      if (y < top - 0.5 || y > bot + 0.5) return;
+      s += `<line x1="${x}" y1="${y}" x2="${x + plotW}" y2="${y}" stroke="#eee"/>`;
+      s += `<text x="${x - 6}" y="${y + 3}" text-anchor="end" fill="#444">${t}</text>`;
+    });
+    s += `<text x="${x - 44}" y="${(top + bot) / 2}" transform="rotate(-90 ${x - 44} ${(top + bot) / 2})" text-anchor="middle" fill="#333">${escapeXml(label)}</text>`;
+    return s;
+  }
+
+  function drawLegend({ legend, colorLabel, x, y }) {
+    let s = `<text x="${x}" y="${y + 10}" fill="#666" font-size="11">${escapeXml(colorLabel)}:</text>`;
+    let cursor = x + colorLabel.length * 5.5 + 14;
+    legend.forEach((l) => {
+      s += `<rect x="${cursor}" y="${y + 2}" width="9" height="9" fill="${l.color}"/>`;
+      s += `<text x="${cursor + 13}" y="${y + 10}" fill="#444" font-size="11">${escapeXml(l.value)}</text>`;
+      cursor += 13 + String(l.value).length * 5.5 + 14;
+    });
+    return s;
+  }
+
+  // n / mean / std dev per cell, sitting between the plots and the grouping labels.
+  function drawStatRows({ cells, cellW, marginLeft, top, rowH, rotate, names }) {
+    let s = '';
+    const labelX = marginLeft - 6;
+    STAT_ROWS.forEach((row, ri) => {
+      const y = top + ri * rowH;
+      cells.forEach((c, i) => {
+        const x = marginLeft + cellW * i;
+        s += rect(x, y, cellW, rowH, '#fff', '#eee');
+        s += cellText(row.get(c), x + cellW / 2, y + rowH / 2, rotate, '#444', 11);
+      });
+      s += `<text x="${labelX}" y="${y + rowH / 2}" text-anchor="end" dominant-baseline="central" fill="#666" font-size="11">${escapeXml(names[ri])}</text>`;
+    });
+    return s;
+  }
+
+  // One label row per grouping level, innermost row closest to the axis.
+  function drawXLabels({ cells, bands, cellW, marginLeft, labelY, groupLabels, rowMeta }) {
+    let s = '';
+    const labelX = marginLeft - 6;
+    let y = labelY;
+    for (let lvl = groupLabels.length - 1; lvl >= 0; lvl--) {
+      const meta = rowMeta[lvl];
+      s += `<g class="level-row" data-level="${lvl}"><title>Drag to reorder grouping levels</title>`;
+      bands[lvl].forEach((b) => {
+        const x1 = marginLeft + cellW * b.startIdx;
+        const w = cellW * (b.endIdx - b.startIdx + 1);
+        s += rect(x1, y, w, meta.h, '#f4f4f4', '#ccc');
+        s += cellText(b.key, x1 + w / 2, y + meta.h / 2, meta.rotate, '#333', 12);
+      });
+      s += `<text x="${labelX}" y="${y + meta.h / 2}" text-anchor="end" dominant-baseline="central" fill="#666">${escapeXml(groupLabels[lvl])}</text>`;
+      s += `</g>`;
+      y += meta.h + LABEL_ROW_GAP;
+    }
+    return s;
+  }
+
+  // Upright when there is room, turned a quarter clockwise when there is not.
+  function cellText(value, cx, cy, rotate, fill, fontPx) {
+    const t = escapeXml(value);
+    const transform = rotate ? ` transform="rotate(-90 ${cx} ${cy})"` : '';
+    return `<text x="${cx}" y="${cy}"${transform} text-anchor="middle" dominant-baseline="central" fill="${fill}" font-size="${fontPx}">${t}</text>`;
+  }
+
+  // -------- Reordering grouping levels straight from the chart --------
+  function attachLevelDrag() {
+    const charts = el('charts');
+    charts.querySelectorAll('.level-hit').forEach((n) => n.remove());
+    const rows = [...charts.querySelectorAll('g.level-row')];
+    if (rows.length === 0) return;
+
+    const cbox = charts.getBoundingClientRect();
+    const hits = rows.map((row) => {
+      const r = row.getBoundingClientRect();
+      const hit = document.createElement('div');
+      hit.className = 'level-hit';
+      hit.dataset.level = row.dataset.level;
+      hit.title = 'Drag to reorder grouping levels';
+      hit.style.left = `${r.left - cbox.left + charts.scrollLeft}px`;
+      hit.style.top = `${r.top - cbox.top + charts.scrollTop}px`;
+      hit.style.width = `${r.width}px`;
+      hit.style.height = `${r.height}px`;
+      charts.appendChild(hit);
+      return hit;
+    });
+
+    const over = (hit, clientY) => {
+      const r = hit.getBoundingClientRect();
+      return clientY >= r.top && clientY <= r.bottom;
+    };
+
+    hits.forEach((hit) => {
+      hit.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        e.preventDefault();                       // no page scroll, no text selection
+        const from = Number(hit.dataset.level);
+        const startY = e.clientY;
+        let moved = false;
+        hit.classList.add('dragging');
+        if (hit.setPointerCapture) hit.setPointerCapture(e.pointerId);
+
+        const onMove = (ev) => {
+          if (Math.abs(ev.clientY - startY) > 6) moved = true;
+          hits.forEach((h) => h.classList.toggle('drop-target', moved && h !== hit && over(h, ev.clientY)));
+        };
+        const cleanup = () => {
+          hit.removeEventListener('pointermove', onMove);
+          hit.removeEventListener('pointerup', finish);
+          hit.removeEventListener('pointercancel', cleanup);
+          hit.classList.remove('dragging');
+          hits.forEach((h) => h.classList.remove('drop-target'));
+        };
+        const finish = (ev) => {
+          const target = hits.find((h) => h !== hit && over(h, ev.clientY));
+          cleanup();
+          if (!moved) { openLevelMenu(hit, from, ev); return; }
+          if (target) moveGroupLevel(from, Number(target.dataset.level));
+        };
+        hit.addEventListener('pointermove', onMove);
+        hit.addEventListener('pointerup', finish);
+        hit.addEventListener('pointercancel', cleanup);
+      });
+    });
+  }
+
+  function openLevelMenu(row, level, ev) {
+    closeRoleMenu();
+    // Anchored on .chart-main, not #charts: that one scrolls and would clip the menu.
+    const host = el('charts').parentElement;
+    const menu = document.createElement('div');
+    menu.className = 'role-menu level-menu';
+    const box = host.getBoundingClientRect();
+    const rowBox = row.getBoundingClientRect();
+    menu.style.left = `${Math.max(4, Math.min(ev.clientX - box.left - 60, box.width - 170))}px`;
+    menu.style.top = `${rowBox.bottom - box.top + 2}px`;
+
+    const add = (label, enabled, fn) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      if (!enabled) b.disabled = true;
+      else b.addEventListener('click', (e) => { e.stopPropagation(); closeRoleMenu(); fn(); });
+      menu.appendChild(b);
+    };
+    const last = roles.groups.length - 1;
+    add(`Level ${level + 1}: ${roles.groups[level] || ''}`, false, () => {});
+    add('Move outward', level > 0, () => moveGroupLevel(level, level - 1));
+    add('Move inward', level < last, () => moveGroupLevel(level, level + 1));
+    add('Remove level', true, () => clearRole(level));
+
+    host.appendChild(menu);
+    setTimeout(() => document.addEventListener('pointerdown', onOutsidePointerDown), 0);
+  }
+
+  function moveGroupLevel(from, to) {
+    if (from === to) return;
+    const [col] = roles.groups.splice(from, 1);
+    roles.groups.splice(to, 0, col);
+    rolesChanged();
+  }
+
+  function rect(x, y, w, h, fill, stroke) {
+    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${stroke}"/>`;
+  }
+  function escapeXml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // -------- Sample data --------
+  const SAMPLE_DATA = [
+    'Operator,part#,Measurement',
+    'Cindy,1,0.55','Cindy,1,0.50',
+    'Cindy,2,1.00','Cindy,2,1.05',
+    'Cindy,3,0.80','Cindy,3,0.80',
+    'Cindy,4,0.80','Cindy,4,0.80',
+    'Cindy,5,0.50','Cindy,5,0.45',
+    'Cindy,6,1.00','Cindy,6,1.05',
+    'Cindy,7,0.95','Cindy,7,0.95',
+    'Cindy,8,0.80','Cindy,8,0.80',
+    'Cindy,9,1.05','Cindy,9,1.05',
+    'Cindy,10,0.85','Cindy,10,0.80',
+    'George,1,0.65','George,1,0.60',
+    'George,2,1.00','George,2,1.10',
+    'George,3,0.85','George,3,0.95',
+    'George,4,0.85','George,4,0.95',
+    'George,5,0.55','George,5,0.45',
+    'George,6,0.65','George,6,1.00',
+    'George,7,0.75','George,7,0.90',
+    'George,8,0.70','George,8,0.85',
+    'George,9,0.85','George,9,1.00',
+    'George,10,0.70','George,10,0.85',
+    'Tom,1,0.55','Tom,1,0.55',
+    'Tom,2,1.00','Tom,2,1.05',
+    'Tom,3,0.80','Tom,3,0.75',
+    'Tom,4,0.75','Tom,4,0.80',
+    'Tom,5,0.40','Tom,5,0.40',
+    'Tom,6,1.05','Tom,6,1.00',
+    'Tom,7,0.90','Tom,7,0.95',
+    'Tom,8,0.70','Tom,8,0.75',
+    'Tom,9,0.95','Tom,9,1.00',
+    'Tom,10,0.50','Tom,10,0.55',
+  ].join('\n');
+
+  // Filler column count depends on the container width.
+  window.addEventListener('resize', debounce(() => {
+    if (table.headers.length) renderTable();
+    // The chart is laid out in real pixels, so a width change means a re-render.
+    rerenderChart();
+  }, 150));
+
+  // -------- Boot --------
+  attachChartDrop();
+  renderDataArea();
+  renderTable();
+
+})();
+</script>
+</body>
+</html>

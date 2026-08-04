@@ -2,6 +2,47 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-08-04 00:04 UTC] When a new affordance replaces an old one, delete the old path and its orphaned CSS
+- [2026-08-04 00:00 UTC] Act on paste directly; keep auto-import silent on bad input so typing stays undisturbed
+- [2026-08-03 23:57 UTC] Entry forms reopened for new input must reset their fields, not show the last paste
+- [2026-08-03 23:55 UTC] Let layout pick itself: measure available width, rotate labels only when they overflow
+- [2026-08-03 23:48 UTC] A fixed SVG viewBox scales text with the container; size it in real pixels instead
+- [2026-08-03 23:44 UTC] Size chart cells from their own label text, not a fixed constant, to cut scrolling
+- [2026-08-03 23:40 UTC] touch-action is ignored on SVG children; overlay HTML hit areas to own the gesture
+- [2026-08-03 23:33 UTC] Pointer events plus touch-action pan-x split scrolling from dragging on one element
+- [2026-08-03 23:28 UTC] Flex column flips the cross axis: align-items flex-start sizes children to content
+- [2026-08-03 23:22 UTC] Size charts from content (min px per cell) and scroll; never let the viewport squash them
+- [2026-08-02 18:26 UTC] Safari iOS has no HTML5 drag-and-drop; drag-only UIs need a tap path to work at all
+- [2026-08-02 18:18 UTC] Drop-index logic must read layout at runtime: measure chip rects to pick the axis
+- [2026-08-02 18:11 UTC] Aggregate nodes should keep raw points, not just values, so encodings like color survive
+- [2026-08-02 18:04 UTC] Drop onto the visualization itself; region under the pointer decides the role assigned
+- [2026-08-02 17:53 UTC] Put per-cell stats in chart rows beside the axis instead of a separate summary table
+- [2026-08-02 17:46 UTC] SVG elements ignore HTML5 draggable; use mousedown/move/up plus getBoundingClientRect
+- [2026-08-02 17:42 UTC] Derive which panel shows from state (empty vs filled) instead of a collapsible toggle
+- [2026-08-02 17:37 UTC] Layout constants duplicated in CSS and JS must be changed together or spacing drifts
+- [2026-08-02 17:33 UTC] Phantom trailing rows materialize on focus, then restore the caret to the clicked cell
+- [2026-08-02 17:27 UTC] table-layout fixed caps column widths from row one; content can no longer stretch columns
+- [2026-08-02 17:24 UTC] Sticky table headers need measured offsets and shadow borders; collapsed borders vanish
+- [2026-08-02 17:17 UTC] One ordered drop zone beats one zone per level; chip position encodes hierarchy order
+- [2026-08-02 17:12 UTC] Replace fixed outer/inner tiers with an array plus recursive tree for N nesting levels
+- [2026-08-02 17:03 UTC] Load behavior skills up front so style and coding guardrails apply before work starts
+- [2026-08-02 16:58 UTC] Drag-and-drop role assignment feels more direct than dropdowns for pairing data with visual roles
+- [2026-08-02 16:53 UTC] HTML5 drag-drop insert preview: compare pointer to target midpoint on dragover for before/after
+- [2026-08-02 16:46 UTC] Debounce textarea input to auto-parse; skip explicit Parse/Plot buttons for live editing UX
+- [2026-08-02 16:39 UTC] Single-file HTML with inline SVG delivers interactive analytics tools without build steps or deps
+- [2026-08-01 21:26 UTC] Answer short translation asks directly; tooling and analysis add cost without value
+- [2026-02-16 04:25 UTC] Use exponential backoff retries for transient API failures; detect permanent errors to fail fast
+- [2026-02-16 03:20 UTC] Use package.json as explicit marker to distinguish projects from folders in cloud hierarchy
+- [2026-02-16 03:15 UTC] Path-based folder vs project determination needs explicit markers to prevent ambiguous nesting
+- [2026-02-16 03:00 UTC] Extract cloud hierarchy from repository path using path.module; repo location is source of truth
+- [2026-02-16 02:45 UTC] Shell location determines cloud hierarchy; unified provisioning reads repo structure once
+- [2026-02-16 02:15 UTC] Terraform manages folder hierarchy from repo structure; shell bootstrap creates foundation only
+- [2026-02-16 01:35 UTC] Target conditions should define cloud-agnostic patterns; implementations can be provider-specific initially
+- [2026-02-16 01:20 UTC] Cloud hierarchy patterns (folders→projects) are cloud-agnostic; implementations often cloud-specific
+- [2026-02-16 01:05 UTC] Infrastructure tool choice matters less than unified provisioning reading source of truth once
+- [2026-02-16 00:50 UTC] GitHub issue templates map to Toyota Kata artifacts; structured formats enable systematic team learning
+- [2026-02-16 00:35 UTC] Multiple tools managing infrastructure scope create drift risk; unify provisioning to prevent desynchronization
+- [2026-02-16 00:25 UTC] Repository structure is authoritative source for cloud resource hierarchy and team IAM permissions
 - [2026-02-15 18:00 UTC] Validate required secrets before use; fail fast with error naming step and target file
 - [2026-02-15 17:45 UTC] Document infrastructure changes via PR Experiment Record for organizational learning
 - [2026-02-15 17:15 UTC] Backend config generation belongs in CI/CD workflows using secrets, not open-source bootstrap
@@ -61,44 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-13 00:02 UTC] GCP org-level IAM roles required separately; project-level insufficient for org data access
 - [2026-02-12 23:58 UTC] GCP 403 errors on terraform data sources indicate missing service account IAM roles
 - [2026-02-12 23:55 UTC] Experiment comments following template structure create searchable issue documentation
-- [2026-02-12 23:50 UTC] Nested module version constraints combine; parent versions.tf must satisfy all
-- [2026-02-12 23:45 UTC] Dependent deploy jobs with artifact passing enable approval gates cleanly
-- [2026-02-12 23:40 UTC] GitHub environment protection rules gate deployments without splitting workflows
-- [2026-02-12 23:30 UTC] Use git rev-parse --short=8 HEAD after push to capture release commit, not trigger SHA
-- [2026-02-12 23:00 UTC] Use if: false to conditionally disable GitHub Actions steps without deleting code
-- [2026-02-12 22:00 UTC] Pass secrets to scripts via env vars, not CLI args; GitHub auto-masks env: values
-- [2026-02-12 21:00 UTC] Terraform apply with saved plans doesn't need env vars; plan contains all values
-- [2026-02-12 20:00 UTC] Release workflows should reuse cached deps; validation already passed in PRs
-- [2026-02-12 19:00 UTC] Separate CI job concerns to eliminate redundant task execution in pipelines
-- [2026-02-12 18:00 UTC] Job dependencies in single workflow ensure validation runs before deployment
-- [2026-02-12 16:00 UTC] Use env: blocks for GitHub Actions secrets to auto-mask them in logs
-- [2026-02-12 15:30 UTC] Environment variables auto-mask secrets; pass via TF_VAR_ instead of CLI expansion
-- [2026-02-11 11:30 UTC] Prefer create-and-check-exit-code over list-then-grep for simpler idempotency
-- [2026-02-11 11:15 UTC] Guard `create` with `list` + `grep` when resources lack a direct `describe` command
-- [2026-02-11 11:00 UTC] Environment-scoped secrets restrict CI/CD credential access to jobs that declare the environment
-- [2026-02-11 10:45 UTC] Ensure all resource creation commands have output redirection and status messages
-- [2026-02-11 10:30 UTC] Redirect verbose CLI output to /dev/null; echo status messages for clean script progress
-- [2026-02-11 04:30 UTC] Create resource first, then tag separately; atomic create+tag needs extra permissions
-- [2026-02-11 04:15 UTC] gcloud `--tags` dict flags use `ORG_ID/key=value` format, not `ORG_ID/key/value`
-- [2026-02-11 04:00 UTC] `gcloud projects create --tags` applies org-level tags at project creation time
-- [2026-02-11 03:45 UTC] `gcloud resource-manager tags` creates org-level key/value pairs to classify GCP projects
-- [2026-02-11 03:15 UTC] GCP tag binding needs `roles/resourcemanager.tagUser`; creation needs `tagAdmin` at org level
-- [2026-02-10 22:30 UTC] Selectively revert mixed diffs by categorizing changes before editing, not by file
-- [2026-02-10 22:00 UTC] Guard shell `create` commands with `if` to prevent false success messages on failure
-- [2026-02-10 21:45 UTC] Order bootstrap steps so prerequisites resolve before dependent commands warn
-- [2026-02-10 20:45 UTC] Redirect gcloud policy-binding stdout to /dev/null; echo role names for clean progress
-- [2026-02-10 20:15 UTC] Make bootstrap scripts idempotent with `describe` checks before each `create` command
-- [2026-02-10 19:35 UTC] `gcloud org-policies describe` NOT_FOUND means no constraint is set, not missing permissions
-- [2026-02-10 19:30 UTC] GCP IAM bindings are eventually consistent; sleep after granting before using
-- [2026-02-10 19:20 UTC] Bootstrap scripts must self-grant required IAM roles before commands that need them
-- [2026-02-10 19:15 UTC] `roles/iam.workloadIdentityPoolAdmin` is required to create WIF pools and providers
-- [2026-02-10 19:00 UTC] WIF + OIDC replaces SA key files for keyless GitHub Actions to GCP authentication
-- [2026-02-10 18:15 UTC] Org policy `iam.disableServiceAccountKeyCreation` blocks SA keys; use Workload Identity Federation
-- [2026-02-10 15:30 UTC] `file <path>` reveals failed downloads saved as HTML instead of expected archives
-- [2026-02-11 16:00 UTC] Terraform modules must live in iac-modules; use versioned subdirs for API changes
-- [2026-02-11 14:00 UTC] Terraform modules with count = 0 skip execution but validate arguments; use length() for safety
-- [2026-02-11 12:00 UTC] Terraform module version.tf constraints ensure all consumers inherit provider compatibility
-- [2026-02-10 17:30 UTC] Generalize module vars (e.g. kubeconfig_context vs minikube_profile) for cross-platform reuse
-- [2026-02-10 17:00 UTC] Local infra layers: cluster → Crossplane → service resources → app workloads (strict order)
-- [2026-02-10 16:30 UTC] Kong can be the K8s Ingress Controller or sit behind one for API-subset routing
-- [2026-02-10 16:00 UTC] K8s Ingress is an L7 reverse proxy routing external HTTP traffic to services via host/path rules

@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "variability-chart-preview",
+      "url": "http://127.0.0.1:8934",
+      "port": 8934
+    }
+  ]
+}
