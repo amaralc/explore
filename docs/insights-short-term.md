@@ -2,6 +2,7 @@
 
 Latest 100 insights derived from recent project activity, newest first.
 
+- [2026-08-04 00:23 UTC] Two commands with one meaning should share one function, and clear stale DOM with it
 - [2026-08-04 00:04 UTC] When a new affordance replaces an old one, delete the old path and its orphaned CSS
 - [2026-08-04 00:00 UTC] Act on paste directly; keep auto-import silent on bad input so typing stays undisturbed
 - [2026-08-03 23:57 UTC] Entry forms reopened for new input must reset their fields, not show the last paste
@@ -101,4 +102,3 @@ Latest 100 insights derived from recent project activity, newest first.
 - [2026-02-13 00:05 UTC] Bootstrap scripts grant org-level IAM via gcloud organizations; project-level insufficient
 - [2026-02-13 00:02 UTC] GCP org-level IAM roles required separately; project-level insufficient for org data access
 - [2026-02-12 23:58 UTC] GCP 403 errors on terraform data sources indicate missing service account IAM roles
-- [2026-02-12 23:55 UTC] Experiment comments following template structure create searchable issue documentation

@@ -528,13 +528,22 @@
     importFromTextarea(false);
   });
 
-  el('new-data-btn').addEventListener('click', () => {
-    showPaste = true;
-    el('data-input').value = '';        // always a blank sheet, never the last paste
+  // 'enter new data' and 'clear data' are the same gesture: back to an empty sheet.
+  function startBlank() {
+    if (table.headers.length && !confirm('Discard the current data and start over?')) return;
+    table = { headers: [], rows: [] };
+    colTypes = {};
+    ordinalOrder = {};
+    roles = { y: '', groups: [], color: '' };
+    showPaste = false;
+    el('data-input').value = '';
     el('parse-msg').textContent = '';
-    renderDataArea();
+    refreshAll();
     el('data-input').focus();
-  });
+  }
+
+  el('new-data-btn').addEventListener('click', startBlank);
+  el('clear-data-btn').addEventListener('click', startBlank);
 
   el('cancel-paste-btn').addEventListener('click', () => {
     showPaste = false;
@@ -551,18 +560,10 @@
     };
     colTypes = Object.fromEntries(headers.map((h) => [h, 'nominal']));
     ordinalOrder = {};
-    roles = { y: '', groups: [] };
+    roles = { y: '', groups: [], color: '' };
     el('data-input').value = '';
     el('parse-msg').textContent = '';
     showPaste = false;
-    refreshAll();
-  });
-
-  // Keeps columns, types and roles; empties every cell.
-  el('clear-data-btn').addEventListener('click', () => {
-    if (table.rows.length === 0) return;
-    if (!confirm('Clear all values? Columns and roles are kept.')) return;
-    table.rows.forEach((r) => { table.headers.forEach((h) => { r[h] = ''; }); });
     refreshAll();
   });
 
@@ -681,7 +682,7 @@
   // -------- Table rendering --------
   function renderTable() {
     const wrap = el('table-wrap');
-    if (table.headers.length === 0) return;
+    if (table.headers.length === 0) { wrap.innerHTML = ''; return; }
 
     const tbl = document.createElement('table');
     tbl.className = 'data';
